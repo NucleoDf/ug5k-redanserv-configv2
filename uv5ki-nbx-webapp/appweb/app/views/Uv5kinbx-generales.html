@@ -1,20 +1,65 @@
-    <h3>Estado General</h3>
-    <section id="_tabs">
-      <ul class="nav nav-tabs" >
-        <li data-ng-class="{'active': pagina==0}">
-            <a href="" data-ng-click="pagina=0" >Estado Global</a>
+<h3>Generales</h3>
+<section id="_tabs">
+    <ul class="nav nav-tabs">
+        <li data-ng-class="{'active': ctrl.pagina==0}">
+            <a href="" data-ng-click="ctrl.pagina=0">Estado Global</a>
         </li>
-        <li data-ng-class="{'active': pagina==1}">
-            <a href="" data-ng-click="pagina=1" >Configuracion</a>
+        <li data-ng-class="{'active': ctrl.pagina==1}">
+            <a href="" data-ng-click="ctrl.pagina=1">Preconfiguraciones</a>
         </li>
-      </ul>
-    </section>
-    <section id="_contenido">
-	<div id="stdGlobal" data-ng-show="pagina==0">
-		Pagina {{pagina}}		
-	</div>
-	<div id="cfConfiguracion" data-ng-show="pagina==1">
-		Pagina {{pagina}}
-	</div>
-    </section>
- 
+    </ul>
+</section>
+<section id="_contenido">
+    <div id="stdGlobal" data-ng-show="ctrl.pagina==0">
+        <h1><strong>Estado Global</strong></h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Servicio</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-class="ctrl.colorEstado(ctrl.std.cfg)">
+                    <td class="text-primary"><strong>Configuracion Puestos</strong></td>
+                    <td>{{ctrl.txtEstado(ctrl.std.cfg)}}</td>
+                </tr>
+                <tr data-ng-class="ctrl.colorEstado(ctrl.std.rad)">
+                    <td class="text-primary"><strong>Radio</strong></td>
+                    <td>{{ctrl.txtEstado(ctrl.std.rad)}}</td>
+                </tr>
+                <tr data-ng-class="ctrl.colorEstado(ctrl.std.ifx)">
+                    <td class="text-primary"><strong>Interfaces Analogicas</strong></td>
+                    <td>{{ctrl.txtEstado(ctrl.std.ifx)}}</td>
+                </tr>
+                <tr data-ng-class="ctrl.colorEstado(ctrl.std.pbx)">
+                    <td class="text-primary"><strong>Pabx</strong></td>
+                    <td>{{ctrl.txtEstado(ctrl.std.pbx)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="cfConfiguracion" data-ng-show="ctrl.pagina==1">
+        <h1><strong>Preconfiguraciones</strong></h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="pre in ctrl.preconf">
+                    <td>{{pre.fecha}}</td>
+                    <td>{{pre.nombre}}</td>
+                    <td ><button class="btn btn-default" data-ng-click="ctrl.activar_pre(pre)">Activar</button></td>
+                    <td ><button class="btn btn-warning" data-ng-click="ctrl.eliminar_pre(pre)">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="salvar" class="btn btn-primary" data-ng-click="ctrl.salvar_como()">Salvar Activa Como</button>
+
+    </div>
+</section>

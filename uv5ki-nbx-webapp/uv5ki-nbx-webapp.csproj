@@ -50,6 +50,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="appweb\scripts\angular\angular.min.js.map" />
+    <None Include="appweb\scripts\angular\smart-table.min.js.map" />
+    <None Include="appweb\simulate\std.json" />
+    <None Include="appweb\styles\bootstrap\bootstrap-theme.css.map" />
+    <None Include="appweb\styles\bootstrap\bootstrap.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appweb\app\controllers\Uv5kinbx-generales-ctrl.js" />
+    <Content Include="appweb\app\controllers\Uv5kinbx-global-ctrl.js" />
+    <Content Include="appweb\app\modules\Uv5kinbx.js" />
+    <Content Include="appweb\app\routes\Uv5kiRoutes.js" />
+    <Content Include="appweb\app\services\Uv5kinbx-CommService.js" />
+    <Content Include="appweb\app\views\Uv5kinbx-generales.html" />
+    <Content Include="appweb\images\nucleo-df-new.jpg" />
+    <Content Include="appweb\index.html" />
+    <Content Include="appweb\login.html" />
+    <Content Include="appweb\mongoose-free-5.6.exe" />
+    <Content Include="appweb\mongoose-free-6.1.exe" />
+    <Content Include="appweb\scripts\angular\angular-route.js" />
+    <Content Include="appweb\scripts\angular\angular.min.js" />
+    <Content Include="appweb\scripts\bootsstrap\ui-bootstrap-tpls-0.13.4.min.js" />
+    <Content Include="appweb\scripts\jquery\jquery-2.1.3.min.js" />
+    <Content Include="appweb\styles\bootstrap\bootstrap-theme.css" />
+    <Content Include="appweb\styles\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="appweb\styles\bootstrap\bootstrap.css" />
+    <Content Include="appweb\styles\bootstrap\bootstrap.min.css" />
+    <Content Include="appweb\styles\uv5ki-styles.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="appweb\app\templates\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

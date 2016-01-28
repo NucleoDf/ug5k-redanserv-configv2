@@ -7,7 +7,8 @@ function config($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'app/views/Uv5kinbx-generales.html',
-            controller:  'uv5kiGeneralesCtrl'
+            controller: 'uv5kiGeneralesCtrl',
+            controllerAs: 'ctrl'
 			})
 		// .when(routeForUnauthorizedAccess, {
 		    // templateUrl: 'app/views/session-expired.html'
@@ -15,3 +16,4 @@ function config($routeProvider) {
             // }
 		// );
 }
+

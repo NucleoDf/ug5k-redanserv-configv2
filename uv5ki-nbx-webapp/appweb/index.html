@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./styles/uv5ki-styles.css" />
 </head>
 <body>
-    <div id="agrupar" data-ng-controller="uv5kiGlobalCtrl as gvm">
+    <div id="agrupar" data-ng-controller="uv5kiGlobalCtrl as ctrl">
         <header id="cabecera">
             <div id="_contSupIzq">
                 <div id="_logo">
@@ -24,10 +24,10 @@
             </div>
             <div id="_contSupDrcha">
                 <div id="_usuario">
-                    Usuario: <b>{{gvm.user}}</b>
+                    Usuario: <b>{{ctrl.user}}</b>
                 </div>
-                <div id="_hfecha">{{gvm.date}}</div>
-                <div id="_hsolohora">{{gvm.hora}}</div>
+                <div id="_hfecha" >{{ctrl.date}}</div>
+                <div id="_hsolohora">{{ctrl.hora}}</div>
             </div>
         </header>
         <!--<section id="_separador"></section>-->
@@ -41,7 +41,7 @@
                     <a href="#/hist">Radio</a>
                 </li>
                 <li>
-                    <a href="#/conf">Configuracion</a>
+                    <a href="#/conf">Config. Local</a>
                 </li>
                 <li style="margin-top: 60px;">
                     <a href="#" i data-ng-click="gvm.logout()">Logout</a>
@@ -67,7 +67,6 @@
     <script src="./app/modules/Uv5kinbx.js"></script>
     <script src="./app/routes/uv5kiRoutes.js"></script>	
 <!-- 
-    <script src="./app/services/uv5kCommService.js"></script>
     <script src="./app/services/uv5kMantService.js"></script>
     <script src="./app/services/ug5kValidationService.js"></script>
     <script src="./app/services/Simulador.js"></script>
@@ -76,6 +75,8 @@
     <script src="./scripts/u5k-prog.js"></script>
 	
  -->
+    <script src="./app/services/Uv5kinbx-CommService.js"></script>
+
 	<script src="./app/controllers/Uv5kinbx-global-ctrl.js"></script>
 	<script src="./app/controllers/Uv5kinbx-generales-ctrl.js"></script>
 

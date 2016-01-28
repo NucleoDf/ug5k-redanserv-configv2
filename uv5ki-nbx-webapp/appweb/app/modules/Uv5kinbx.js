@@ -16,6 +16,15 @@ Uv5kinbx.directive('fileModel', ['$parse', function ($parse) {
     };
 }]);
 
+/** Variables Globales */
+var Simulate = true;
+var pollingTime = 3000;
+var maxPreconf = 8;
+
+/** Peticiones REST */
+var rest_url_std = "/std";
+var rest_url_preconf = "/preconf";
+
 /** */
 var roles = {
 	ADMIN_PROFILE: 64,
