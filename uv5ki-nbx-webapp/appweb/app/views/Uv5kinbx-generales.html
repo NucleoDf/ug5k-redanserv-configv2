@@ -1,0 +1,20 @@
+    <h3>Estado General</h3>
+    <section id="_tabs">
+      <ul class="nav nav-tabs" >
+        <li data-ng-class="{'active': pagina==0}">
+            <a href="" data-ng-click="pagina=0" >Estado Global</a>
+        </li>
+        <li data-ng-class="{'active': pagina==1}">
+            <a href="" data-ng-click="pagina=1" >Configuracion</a>
+        </li>
+      </ul>
+    </section>
+    <section id="_contenido">
+	<div id="stdGlobal" data-ng-show="pagina==0">
+		Pagina {{pagina}}		
+	</div>
+	<div id="cfConfiguracion" data-ng-show="pagina==1">
+		Pagina {{pagina}}
+	</div>
+    </section>
+ 

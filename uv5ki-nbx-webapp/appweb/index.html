@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" data-ng-app="Uv5kinbx">
+<head>
+    <meta name="generator"
+        content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="windows-1252" />
+    <meta name="description" content="Plantilla Ulises 5000" />
+    <meta name="keywords" content="HTML5, CSS3, JavaScript" />
+    <title>UV5KI. Nodebox</title>
+    <!-- Estilos  -->
+    <link rel="stylesheet" href="./styles/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="./styles/uv5ki-styles.css" />
+</head>
+<body>
+    <div id="agrupar" data-ng-controller="uv5kiGlobalCtrl as gvm">
+        <header id="cabecera">
+            <div id="_contSupIzq">
+                <div id="_logo">
+                    <img src="./images/nucleo-df-new.jpg" />
+                </div>
+            </div>
+            <div id="_tit_ppal">
+                ULISES V 5000 I. Nodebox
+            </div>
+            <div id="_contSupDrcha">
+                <div id="_usuario">
+                    Usuario: <b>{{gvm.user}}</b>
+                </div>
+                <div id="_hfecha">{{gvm.date}}</div>
+                <div id="_hsolohora">{{gvm.hora}}</div>
+            </div>
+        </header>
+        <!--<section id="_separador"></section>-->
+        <nav id="_menu">
+            <h3>Opciones</h3>
+            <ul>
+                <li>
+                    <a href="#/">Generales</a>
+                </li>
+                <li>
+                    <a href="#/hist">Radio</a>
+                </li>
+                <li>
+                    <a href="#/conf">Configuracion</a>
+                </li>
+                <li style="margin-top: 60px;">
+                    <a href="#" i data-ng-click="gvm.logout()">Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <section id="_ppal">
+            <div data-ng-view></div>
+        </section>
+        <footer id="_pie">DF Nucleo Copyright @2016. Todos los Derechos Reservados.</footer>
+    </div>
+
+    <!-- inject-vendor:js -->
+    <script src="./scripts/jquery/jquery-2.1.3.min.js"></script>
+    <script src="./scripts/angular/angular.min.js"></script>
+    <script src="./scripts/angular/angular-route.js"></script>
+    <script src="./scripts/bootsstrap/ui-bootstrap-tpls-0.13.4.min.js"></script>
+
+
+    <!-- inject-app:js -->
+	
+    <script src="./app/modules/Uv5kinbx.js"></script>
+    <script src="./app/routes/uv5kiRoutes.js"></script>	
+<!-- 
+    <script src="./app/services/uv5kCommService.js"></script>
+    <script src="./app/services/uv5kMantService.js"></script>
+    <script src="./app/services/ug5kValidationService.js"></script>
+    <script src="./app/services/Simulador.js"></script>
+    <script src="./app/services/logger.js"></script>
+
+    <script src="./scripts/u5k-prog.js"></script>
+	
+ -->
+	<script src="./app/controllers/Uv5kinbx-global-ctrl.js"></script>
+	<script src="./app/controllers/Uv5kinbx-generales-ctrl.js"></script>
+
+ </body>
+</html>
