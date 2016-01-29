@@ -44,7 +44,7 @@ angular
         function normalizeUrl(url) {
             if (Simulate == false)
                 return url;
-            return "/simulate" + url + ".json";
+            return "./simulate" + url + ".json";
         }
 
     });
