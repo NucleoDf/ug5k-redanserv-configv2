@@ -52,16 +52,20 @@
     <None Include="app.config" />
     <None Include="appweb\scripts\angular\angular.min.js.map" />
     <None Include="appweb\scripts\angular\smart-table.min.js.map" />
+    <None Include="appweb\simulate\lconfig.json" />
+    <None Include="appweb\simulate\preconf.json" />
     <None Include="appweb\simulate\std.json" />
     <None Include="appweb\styles\bootstrap\bootstrap-theme.css.map" />
     <None Include="appweb\styles\bootstrap\bootstrap.css.map" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="appweb\app\controllers\Uv5kinbx-config-ctrl.js" />
     <Content Include="appweb\app\controllers\Uv5kinbx-generales-ctrl.js" />
     <Content Include="appweb\app\controllers\Uv5kinbx-global-ctrl.js" />
     <Content Include="appweb\app\modules\Uv5kinbx.js" />
     <Content Include="appweb\app\routes\Uv5kiRoutes.js" />
     <Content Include="appweb\app\services\Uv5kinbx-CommService.js" />
+    <Content Include="appweb\app\views\Uv5kinbx-config.html" />
     <Content Include="appweb\app\views\Uv5kinbx-generales.html" />
     <Content Include="appweb\images\nucleo-df-new.jpg" />
     <Content Include="appweb\index.html" />

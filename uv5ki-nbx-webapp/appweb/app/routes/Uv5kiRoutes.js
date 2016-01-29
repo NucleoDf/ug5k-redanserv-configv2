@@ -5,12 +5,17 @@ angular
 
 function config($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when(routeDefault, {
             templateUrl: 'app/views/Uv5kinbx-generales.html',
             controller: 'uv5kiGeneralesCtrl',
             controllerAs: 'ctrl'
 			})
-		// .when(routeForUnauthorizedAccess, {
+        .when(routeConfig, {
+            templateUrl: 'app/views/Uv5kinbx-config.html',
+            controller: 'uv5kiConfigCtrl',
+            controllerAs: 'ctrl'
+        })
+    // .when(routeForUnauthorizedAccess, {
 		    // templateUrl: 'app/views/session-expired.html'
 		    // // templateUrl: 'session-expired.html'
             // }

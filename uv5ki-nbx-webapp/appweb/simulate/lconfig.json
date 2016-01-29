@@ -1,0 +1,8 @@
+{
+        "pgn": { "name": "Parametros Generales", "par": [] }
+        , "pif": { "name": "Parametros Infraestructura", "par": [] }
+        , "prd": { "name": "Parametros Servicio Radio", "par": [] }
+        , "pcf": { "name": "Parametros Servicio Configuracion", "par": [] }
+        , "pit": { "name": "Parametros Servicio Interfaces", "par": [] }
+        , "ppx": { "name": "Parámetros Pabx", "par": [] }
+    }

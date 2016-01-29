@@ -21,9 +21,15 @@ var Simulate = true;
 var pollingTime = 3000;
 var maxPreconf = 8;
 
+/** Rutas de Aplicacion */
+var routeDefault = "/";
+var routeConfig = "/config";
+var routeRadio = "/radio";
+
 /** Peticiones REST */
 var rest_url_std = "/std";
 var rest_url_preconf = "/preconf";
+var rest_url_local_config = "/lconfig";
 
 /** */
 var roles = {

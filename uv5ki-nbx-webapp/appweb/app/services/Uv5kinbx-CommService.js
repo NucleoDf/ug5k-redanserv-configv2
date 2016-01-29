@@ -18,6 +18,12 @@ angular
             , preconf_saveas: function (name) {
                 return remotePut(rest_url_preconf);
             }
+            , lconfig_get: function () {
+                return remoteGet(rest_url_local_config);
+            }
+            , lconfig_set: function (data) {
+                return remotePost(rest_url_local_config, data);
+            }
         };
 
         //
