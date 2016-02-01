@@ -1,21 +1,13 @@
 angular.module("Uv5kinbx")
-.controller("uv5kiConfigCtrl", function ($scope, $interval, $serv) {
+.controller("uv5kiConfigCtrl", function ($scope, $interval, $serv, $lserv) {
     /** Inicializacion */
     var ctrl = this;
     ctrl.pagina = 0;
 
     /** */
-    ctrl.lc = {
-        // pgn: { name: "Parametros Generales", par: [] }
-        // , pif: { name: "Parametros Infraestructura", par: [] }
-        // , prd: { name: "Parametros Servicio Radio", par: [] }
-        // , pcf: { name: "Parametros Servicio Configuracion", par: [] }
-        // , pit: { name: "Parametros Servicio Interfaces", par: [] }
-        // , ppx: { name: "Parametros Pabx", par: [] }
-    };
+    ctrl.lc = {};
     lconfig_load();
-    /*ctrl.lp = lp_get();*/
-    
+   
     /** */
     /** */
     ctrl.change_pagina = function (new_pagina) {
@@ -39,8 +31,14 @@ angular.module("Uv5kinbx")
     
     }
     
+    /** */
     ctrl.autosave = function () {
         // body...
+    }
+
+    /** */
+    ctrl.validate = function (par) {
+        return $lserv.validate(par.validar, par.valor, par.margenes.max, par.margenes.min);
     }
 
     /** Obtiene la lista seg�n la p�gina*/
@@ -94,7 +92,8 @@ angular.module("Uv5kinbx")
         $serv.lconfig_get().then(function(response) {
             ctrl.lc = response.data;
             ctrl.lp = lp_get();
-        }, function(response) {
+        }, function (response) {
+            // TODO...
             
         });
     }
@@ -103,7 +102,8 @@ angular.module("Uv5kinbx")
     function lconfig_save() {
         $serv.lconfig_set(ctrl.lc).then(function(response) {
             
-        }, function(response) {
+        }, function (response) {
+            // TODO.
             
         });
     }

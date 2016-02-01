@@ -17,7 +17,7 @@ Uv5kinbx.directive('fileModel', ['$parse', function ($parse) {
 }]);
 
 /** Variables Globales */
-var Simulate = true;
+var Simulate = false;
 var pollingTime = 3000;
 var maxPreconf = 8;
 

@@ -92,6 +92,7 @@ angular.module("Uv5kinbx")
                 load_preconf();
             }
             , function (response) {
+                console.log(response);
             });
 
     }
@@ -103,7 +104,7 @@ angular.module("Uv5kinbx")
             ctrl.std = response.data;
         }
         , function (response) {
-            alert("Error en load_std");
+            console.log(response);
         });
     }
 
@@ -115,7 +116,7 @@ angular.module("Uv5kinbx")
             console.log(ctrl.preconf);
         }
         , function (response) {
-            alert("Error en load_preconf");
+            console.log(response);
         });
     }
 
