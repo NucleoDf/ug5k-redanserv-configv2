@@ -274,7 +274,23 @@ section#_ppal #_tabs
         margin-bottom: 10px;
     }
  
+     #_contenido #cfLocalConfig table
+     {
+        width: 90%;
+        margin-left: 5%;
+     }
  
+    #_contenido #cfLocalConfig #salvar
+    {
+        float: right;
+        margin-right: 5%;
+        margin-bottom: 10px;
+    }
+    
+    #_contenido #cfLocalConfig input {
+        float: right;
+    }
+
  /*** BORRAR ***/
 
 

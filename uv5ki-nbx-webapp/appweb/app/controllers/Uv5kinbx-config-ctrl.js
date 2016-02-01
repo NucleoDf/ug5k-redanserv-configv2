@@ -6,15 +6,16 @@ angular.module("Uv5kinbx")
 
     /** */
     ctrl.lc = {
-        pgn: { name: "Parametros Generales", par: [] }
-        , pif: { name: "Parametros Infraestructura", par: [] }
-        , prd: { name: "Parametros Servicio Radio", par: [] }
-        , pcf: { name: "Parametros Servicio Configuracion", par: [] }
-        , pit: { name: "Parametros Servicio Interfaces", par: [] }
-        , ppx: { name: "Parámetros Pabx", par: [] }
+        // pgn: { name: "Parametros Generales", par: [] }
+        // , pif: { name: "Parametros Infraestructura", par: [] }
+        // , prd: { name: "Parametros Servicio Radio", par: [] }
+        // , pcf: { name: "Parametros Servicio Configuracion", par: [] }
+        // , pit: { name: "Parametros Servicio Interfaces", par: [] }
+        // , ppx: { name: "Parametros Pabx", par: [] }
     };
-    ctrl.lp = lp_get();
-
+    lconfig_load();
+    /*ctrl.lp = lp_get();*/
+    
     /** */
     /** */
     ctrl.change_pagina = function (new_pagina) {
@@ -26,8 +27,23 @@ angular.module("Uv5kinbx")
         ctrl.pagina = new_pagina;
         ctrl.lp = lp_get();
     }
+    
+    /** */
+    ctrl.SalvarCambios = function() {
+        /** Salvar los cambios locales */
+        lp_set(ctrl.lp);
+        
+        if (confirm("Â¿ Desea Salvar los cambios efectuados ?")==true) {
+            lconfig_save();    
+        }
+    
+    }
+    
+    ctrl.autosave = function () {
+        // body...
+    }
 
-    /** Obtiene la lista según la página*/
+    /** Obtiene la lista segï¿½n la pï¿½gina*/
     function lp_get() {
         switch (ctrl.pagina) {
             case 0:
@@ -75,9 +91,21 @@ angular.module("Uv5kinbx")
 
     /** */
     function lconfig_load() {
-        //$serv.lconfig_get().then(function(response
+        $serv.lconfig_get().then(function(response) {
+            ctrl.lc = response.data;
+            ctrl.lp = lp_get();
+        }, function(response) {
+            
+        });
     }
-
-
+    
+    /** */
+    function lconfig_save() {
+        $serv.lconfig_set(ctrl.lc).then(function(response) {
+            
+        }, function(response) {
+            
+        });
+    }
     
 });
