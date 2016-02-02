@@ -20,10 +20,6 @@ namespace uv5ki_nbx_webapp.AppServer
         string _fileName = string.Empty;
         string _idioma = "es";
 
-        /** Para las traducciones */
-        protected Dictionary<string, string> _display2key = new Dictionary<string, string>();
-        protected Dictionary<string, string> _key2display = new Dictionary<string, string>();
-
         /** */
         Dictionary<string, Dictionary<string, string>> _settings = new Dictionary<string, Dictionary<string, string>>();
 
@@ -44,24 +40,23 @@ namespace uv5ki_nbx_webapp.AppServer
         public Dictionary<string, string> SectionProperties(string sName)
         {
             return _settings[sName];
-            // return GetSettings(sName);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="query"></param>
-        public void PropertieSet(string sName, string query)
-        {
-            string[] val = normalize(query);
+        //public void PropertieSet(string sName, string query)
+        //{
+        //    string[] val = normalize(query);
 
-            if (val != null && val.Length > 1)
-            {
-                SetSetting(sName, val[0], val[1]);
-                Save();
-                Reload();
-            }
-        }
+        //    if (val != null && val.Length > 1)
+        //    {
+        //        SetSetting(sName, val[0], val[1]);
+        //        Save();
+        //        Reload();
+        //    }
+        //}
 
         #endregion
 
@@ -80,11 +75,13 @@ namespace uv5ki_nbx_webapp.AppServer
         {
             if (File.Exists(path))
             {
+
+                xdoc.Load(path);
+
                 _fileName = path;
                 _idioma = idioma;
 
-                xdoc.Load(path);
-                LoadStringDisplay(idioma);
+                //LoadStringDisplay(idioma);
             }
             else
             {
@@ -129,13 +126,15 @@ namespace uv5ki_nbx_webapp.AppServer
                                         {
                                             if (val.Name == "value")
                                             {
-                                                string strdisplay = GetStringDisplay(xAttr.Value);
+                                                // string strdisplay = GetStringDisplay(xAttr.Value);
 
-                                                // _section_settings.Add(xAttr.Value, val.InnerText);
-                                                _section_settings.Add(strdisplay, val.InnerText);
+                                                // TODO...
+                                                //// _section_settings.Add(xAttr.Value, val.InnerText);
+                                                //_section_settings.Add(strdisplay, val.InnerText);
 
-                                                if (_display2key.ContainsKey(strdisplay)==false)
-                                                    _display2key.Add(strdisplay, xAttr.Value);
+                                                //if (_display2key.ContainsKey(strdisplay)==false)
+                                                //    _display2key.Add(strdisplay, xAttr.Value);
+                                                _section_settings.Add(xAttr.Value, val.InnerText);
                                             }
                                         }
                                     }
@@ -154,19 +153,19 @@ namespace uv5ki_nbx_webapp.AppServer
         /// <param name="strApl"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        protected string GetSetting(string strApl, string name)
-        {
-            XmlNode nodo = Nodo(strApl, name);
-            if (nodo != null)
-            {
-                foreach (XmlNode val in nodo.ChildNodes)
-                {
-                    if (val.Name == "value")
-                        return val.InnerText;
-                }
-            }
-            return "¡¡¡ERROR!!!";
-        }
+        //protected string GetSetting(string strApl, string name)
+        //{
+        //    XmlNode nodo = Nodo(strApl, name);
+        //    if (nodo != null)
+        //    {
+        //        foreach (XmlNode val in nodo.ChildNodes)
+        //        {
+        //            if (val.Name == "value")
+        //                return val.InnerText;
+        //        }
+        //    }
+        //    return "¡¡¡ERROR!!!";
+        //}
 
 
         /// <summary>
@@ -176,27 +175,27 @@ namespace uv5ki_nbx_webapp.AppServer
         /// <param name="name"></param>
         /// <param name="valor"></param>
         /// <returns></returns>
-        protected bool SetSetting(string strApl, string name, string valor)
-        {
-            /** Salvarlo en listas locales. */
-            Dictionary<string, string> _sec_settings = _settings[strApl];
-            _sec_settings[name] = valor;
+        //protected bool SetSetting(string strApl, string name, string valor)
+        //{
+        //    /** Salvarlo en listas locales. */
+        //    Dictionary<string, string> _sec_settings = _settings[strApl];
+        //    _sec_settings[name] = valor;
 
-            /** Salvarlo en el fichero */
-            XmlNode nodo = Nodo(strApl, _display2key[name]);
-            if (nodo != null)
-            {
-                foreach (XmlNode val in nodo.ChildNodes)
-                {
-                    if (val.Name == "value")
-                    {
-                        val.InnerText=valor;
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+        //    /** Salvarlo en el fichero */
+        //    XmlNode nodo = Nodo(strApl, name/* TODO _display2key[name]*/);
+        //    if (nodo != null)
+        //    {
+        //        foreach (XmlNode val in nodo.ChildNodes)
+        //        {
+        //            if (val.Name == "value")
+        //            {
+        //                val.InnerText=valor;
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    return false;
+        //}
 
         /// <summary>
         /// 
@@ -236,61 +235,96 @@ namespace uv5ki_nbx_webapp.AppServer
         /// <summary>
         /// 
         /// </summary>
-        protected void Save()
+        public void Save()
         {
             xdoc.Save(FileName);
+            xdoc.Save("c:\\pedro.txt");
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        protected string[] normalize(string query)
-        {
-            /** Quito el ? inicial */
-            query = query.Replace("?", "");
+        //protected string[] normalize(string query)
+        //{
+        //    /** Quito el ? inicial */
+        //    query = query.Replace("?", "");
 
-            /** Subtituyo + por espacios */
-            query = query.Replace("+", " ");
+        //    /** Subtituyo + por espacios */
+        //    query = query.Replace("+", " ");
 
-            /** Obtengo el comando y el valor */
-            string[] val = query.Split('=');
-            return val;
-        }
+        //    /** Obtengo el comando y el valor */
+        //    string[] val = query.Split('=');
+        //    return val;
+        //}
 
         /// <summary>
-        /// TODO...
+        /// 
         /// </summary>
-        protected void LoadStringDisplay(string idioma)
-        {
-            //CultureInfo culture = new CultureInfo(idioma);
-            //ResourceSet rs = Properties.Resources.items_config. ..GetResourceSet(culture, true, true);
+        //protected void LoadStringDisplay(string idioma)
+        //{
+        //    //CultureInfo culture = new CultureInfo(idioma);
+        //    //ResourceSet rs = Properties.Resources.items_config. ..GetResourceSet(culture, true, true);
 
-            //    IDictionaryEnumerator id = rs.GetEnumerator();
-            //    while (id.MoveNext())
-            //    {
-            //        try
-            //        {
-            //            string _key = (string)id.Key;
-            //            if (!_key2display.ContainsKey(_key))
-            //                _key2display[(string)id.Key] = (string)id.Value;
-            //        }
-            //        catch (Exception )
-            //        {
-            //        }
-            //    }
-        }
+        //    //    IDictionaryEnumerator id = rs.GetEnumerator();
+        //    //    while (id.MoveNext())
+        //    //    {
+        //    //        try
+        //    //        {
+        //    //            string _key = (string)id.Key;
+        //    //            if (!_key2display.ContainsKey(_key))
+        //    //                _key2display[(string)id.Key] = (string)id.Value;
+        //    //        }
+        //    //        catch (Exception )
+        //    //        {
+        //    //        }
+        //    //    }
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        protected string GetStringDisplay(string key)
+        public string GetStringDisplay(string key)
         {
-            if (_key2display.ContainsKey(key))
-                return _key2display[key];
-            return key;
+            string val = Resources.GetString(key);
+            return val == null ? key : val;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        System.Resources.ResourceManager Resources
+        {
+            get
+            {
+                return _idioma == "fr" ? Properties.Resources_fr.ResourceManager : Properties.Resources.ResourceManager;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="apl"></param>
+        /// <param name="name"></param>
+        /// <param name="valor"></param>
+        /// <returns></returns>
+        public bool PropertySet(string apl, string name, string valor)
+        {
+            XmlNode nodo = Nodo(apl, name);
+            if (nodo != null)
+            {
+                foreach (XmlNode val in nodo.ChildNodes)
+                {
+                    if (val.Name == "value")
+                    {
+                        val.InnerText = valor;
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         #endregion

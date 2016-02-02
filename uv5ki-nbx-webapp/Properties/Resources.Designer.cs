@@ -59,5 +59,14 @@ namespace uv5ki_nbx_webapp.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Habilitar Gestion Web ?.
+        /// </summary>
+        internal static string ControlRemoto {
+            get {
+                return ResourceManager.GetString("ControlRemoto", resourceCulture);
+            }
+        }
     }
 }

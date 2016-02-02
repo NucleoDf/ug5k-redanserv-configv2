@@ -77,6 +77,133 @@ namespace uv5ki_nbx_webapp.AppServer
         public lparGroup pcf { get; set; }
         public lparGroup pit { get; set; }
         public lparGroup ppx { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void LoadFromFile() 
+        {
+            string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            NodeBoxConfig LocalConfig = new NodeBoxConfig(Path.GetDirectoryName(exePath), "es");
+
+            pgn = new lparGroup();
+            pgn.name = "Parametros Generales";
+            pgn.par = new List<lparData>();
+            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cNbxSectionName))
+            {
+                pgn.par.Add(new lparData()
+                {
+                    nombre = prop.Key,
+                    mostrar = LocalConfig.GetStringDisplay(prop.Key),
+                    tipo = 0,
+                    validar = 0,
+                    margenes = new margenData() { max = 0, min = 0 },
+                    opciones = new List<string>() { "", "" },
+                    valor = prop.Value
+                });
+            }
+
+            pif = new lparGroup();
+            pif.name = "Parametros de Infraestructura";
+            pif.par = new List<lparData>();
+            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cInfraSectionName))
+            {
+                pif.par.Add(new lparData()
+                {
+                    nombre = prop.Key,
+                    mostrar = LocalConfig.GetStringDisplay(prop.Key),
+                    tipo = 0,
+                    validar = 0,
+                    margenes = new margenData() { max = 0, min = 0 },
+                    opciones = new List<string>() { "", "" },
+                    valor = prop.Value
+                });
+            }
+
+            prd = new lparGroup();
+            prd.name = "Parametros de Servicio Radio";
+            prd.par = new List<lparData>();
+            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cRadioSectionName))
+            {
+                prd.par.Add(new lparData()
+                {
+                    nombre = prop.Key,
+                    mostrar = LocalConfig.GetStringDisplay(prop.Key),
+                    tipo = 0,
+                    validar = 0,
+                    margenes = new margenData() { max = 0, min = 0 },
+                    opciones = new List<string>() { "", "" },
+                    valor = prop.Value
+                });
+            }
+
+            pcf = new lparGroup();
+            pcf.name = "Parametros de Servicio Configuracion";
+            pcf.par = new List<lparData>();
+            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cConfigSectionName))
+            {
+                pcf.par.Add(new lparData()
+                {
+                    nombre = prop.Key,
+                    mostrar = LocalConfig.GetStringDisplay(prop.Key),
+                    tipo = 0,
+                    validar = 0,
+                    margenes = new margenData() { max = 0, min = 0 },
+                    opciones = new List<string>() { "", "" },
+                    valor = prop.Value
+                });
+            }
+
+            pit = new lparGroup();
+            pit.name = "Parametros de Servicio Interfaces";
+            pit.par = new List<lparData>();
+            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cTifxSectionName))
+            {
+                pit.par.Add(new lparData()
+                {
+                    nombre = prop.Key,
+                    mostrar = LocalConfig.GetStringDisplay(prop.Key),
+                    tipo = 0,
+                    validar = 0,
+                    margenes = new margenData() { max = 0, min = 0 },
+                    opciones = new List<string>() { "", "" },
+                    valor = prop.Value
+                });
+            }
+
+            ppx = new lparGroup();
+            ppx.name = "Parametros de Servicio de PABX";
+            ppx.par = new List<lparData>();
+            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cPabxSectionName))
+            {
+                ppx.par.Add(new lparData()
+                {
+                    nombre = prop.Key,
+                    mostrar = LocalConfig.GetStringDisplay(prop.Key),
+                    tipo = 0,
+                    validar = 0,
+                    margenes = new margenData() { max = 0, min = 0 },
+                    opciones = new List<string>() { "", "" },
+                    valor = prop.Value
+                });
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SaveToFile()
+        {
+            string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            NodeBoxConfig LocalConfig = new NodeBoxConfig(Path.GetDirectoryName(exePath), "es");
+
+            foreach (lparData par in pgn.par)
+            {
+                LocalConfig.PropertySet(NodeBoxConfig.cNbxSectionName, par.nombre, par.valor);
+            }
+
+            LocalConfig.Save();
+        }
     }
 
     /// <summary>
@@ -136,6 +263,7 @@ namespace uv5ki_nbx_webapp.AppServer
             _listener.BeginGetContext(new AsyncCallback(GetContextCallback), null);
 
             _rtData = rtData;
+            _rtData.lcf.LoadFromFile();
         }
 
         /// <summary>
@@ -279,11 +407,11 @@ namespace uv5ki_nbx_webapp.AppServer
         {
             _Logger.Debug("POST {0}", request.Url.LocalPath);
 
-            if (request.Url.LocalPath.StartsWith(rest_url_preconf))
+            if (request.Url.LocalPath.StartsWith("/" + rest_url_preconf))
             {
                 processPreconfiguracionesPost(request, response, sb);
             }
-            else if (request.Url.LocalPath.StartsWith(rest_url_local_config))
+            else if (request.Url.LocalPath.StartsWith("/" + rest_url_local_config))
             {
                 processLocalConfigPost(request, response, sb);
             }
@@ -424,6 +552,7 @@ namespace uv5ki_nbx_webapp.AppServer
             string data = JsonConvert.SerializeObject(_rtData.std);
             sb.Append(data);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -480,7 +609,6 @@ namespace uv5ki_nbx_webapp.AppServer
         /// <param name="sb"></param>
         private void processLocalConfigGet(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
         {
-            GetLocalConfig();
             response.ContentType = "application/json";
             string data = JsonConvert.SerializeObject(_rtData.lcf);
             sb.Append(data);
@@ -494,8 +622,14 @@ namespace uv5ki_nbx_webapp.AppServer
         private void processLocalConfigPost(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
         {
             response.ContentType = "application/json";
-            // TODO
-            // sb.Append(_rtData.jEstadoPuestos());
+            string text;
+            using (var reader = new StreamReader(request.InputStream,
+                                                 request.ContentEncoding))
+            {
+                text = reader.ReadToEnd();
+                _rtData.lcf = JsonConvert.DeserializeObject<nbxLocalConfig>(text);
+                _rtData.lcf.SaveToFile();
+            }
         }
 
         /// <summary>
@@ -520,6 +654,7 @@ namespace uv5ki_nbx_webapp.AppServer
             _rtData.std.rad = 1;
             _rtData.std.pbx = 2;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -530,117 +665,6 @@ namespace uv5ki_nbx_webapp.AppServer
             _rtData.pcf.Add(new pcfData() { fecha = "20/11/2015 08:00", nombre = "Preconfig Server...1" });
             _rtData.pcf.Add(new pcfData() { fecha = "20/01/2016 18:20", nombre = "Preconfig Server...2" });
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void GetLocalConfig()
-        {
-            NodeBoxConfig LocalConfig = new NodeBoxConfig("../", "es");
-
-            _rtData.lcf.pgn = new lparGroup();
-            _rtData.lcf.pgn.name = "Parametros Generales";
-            _rtData.lcf.pgn.par = new List<lparData>();
-            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cNbxSectionName))
-            {
-                _rtData.lcf.pgn.par.Add(new lparData()
-                {
-                    nombre = prop.Key,
-                    mostrar = prop.Key,
-                    tipo = 0,
-                    validar = 0,
-                    margenes = new margenData() { max = 0, min = 0 },
-                    opciones = new List<string>() { "", "" },
-                    valor = prop.Value
-                });
-            }
-
-            _rtData.lcf.pif = new lparGroup();
-            _rtData.lcf.pif.name = "Parametros de Infraestructura";
-            _rtData.lcf.pif.par = new List<lparData>();
-            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cInfraSectionName))
-            {
-                _rtData.lcf.pif.par.Add(new lparData()
-                {
-                    nombre = prop.Key,
-                    mostrar = prop.Key,
-                    tipo = 0,
-                    validar = 0,
-                    margenes = new margenData() { max = 0, min = 0 },
-                    opciones = new List<string>() { "", "" },
-                    valor = prop.Value
-                });
-            }
-
-            _rtData.lcf.prd = new lparGroup();
-            _rtData.lcf.prd.name = "Parametros de Servicio Radio";
-            _rtData.lcf.prd.par = new List<lparData>();
-            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cRadioSectionName))
-            {
-                _rtData.lcf.prd.par.Add(new lparData()
-                {
-                    nombre = prop.Key,
-                    mostrar = prop.Key,
-                    tipo = 0,
-                    validar = 0,
-                    margenes = new margenData() { max = 0, min = 0 },
-                    opciones = new List<string>() { "", "" },
-                    valor = prop.Value
-                });
-            }
-
-            _rtData.lcf.pcf = new lparGroup();
-            _rtData.lcf.pcf.name = "Parametros de Servicio Configuracion";
-            _rtData.lcf.pcf.par = new List<lparData>();
-            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cConfigSectionName))
-            {
-                _rtData.lcf.pcf.par.Add(new lparData()
-                {
-                    nombre = prop.Key,
-                    mostrar = prop.Key,
-                    tipo = 0,
-                    validar = 0,
-                    margenes = new margenData() { max = 0, min = 0 },
-                    opciones = new List<string>() { "", "" },
-                    valor = prop.Value
-                });
-            }
-
-            _rtData.lcf.pit = new lparGroup();
-            _rtData.lcf.pit.name = "Parametros de Servicio Interfaces";
-            _rtData.lcf.pit.par = new List<lparData>();
-            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cTifxSectionName))
-            {
-                _rtData.lcf.pit.par.Add(new lparData()
-                {
-                    nombre = prop.Key,
-                    mostrar = prop.Key,
-                    tipo = 0,
-                    validar = 0,
-                    margenes = new margenData() { max = 0, min = 0 },
-                    opciones = new List<string>() { "", "" },
-                    valor = prop.Value
-                });
-            }
-
-            _rtData.lcf.ppx = new lparGroup();
-            _rtData.lcf.ppx.name = "Parametros de Servicio de PABX";
-            _rtData.lcf.ppx.par = new List<lparData>();
-            foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(NodeBoxConfig.cPabxSectionName))
-            {
-                _rtData.lcf.ppx.par.Add(new lparData()
-                {
-                    nombre = prop.Key,
-                    mostrar = prop.Key,
-                    tipo = 0,
-                    validar = 0,
-                    margenes = new margenData() { max = 0, min = 0 },
-                    opciones = new List<string>() { "", "" },
-                    valor = prop.Value
-                });
-            }
-        }
-
     }
 
 }
