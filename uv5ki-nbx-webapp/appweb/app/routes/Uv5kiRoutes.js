@@ -15,6 +15,11 @@ function config($routeProvider) {
             controller: 'uv5kiConfigCtrl',
             controllerAs: 'ctrl'
         })
+        .when(routeRadio, {
+            templateUrl: 'app/views/Uv5kinbx-radio.html',
+            controller: 'uv5kiRadioCtrl',
+            controllerAs: 'ctrl'
+        })
     // .when(routeForUnauthorizedAccess, {
 		    // templateUrl: 'app/views/session-expired.html'
 		    // // templateUrl: 'session-expired.html'

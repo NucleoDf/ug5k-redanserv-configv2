@@ -81,7 +81,20 @@ namespace uv5ki_nbx_webapp.AppServer
         /// <summary>
         /// 
         /// </summary>
-        public void LoadFromFile() 
+        public nbxLocalConfig()
+        {
+            pgn = new lparGroup();
+            pif = new lparGroup();
+            prd = new lparGroup();
+            pcf = new lparGroup();
+            pit = new lparGroup();
+            ppx = new lparGroup();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void LoadFromFile1() 
         {
             string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
             NodeBoxConfig LocalConfig = new NodeBoxConfig(Path.GetDirectoryName(exePath), "es");
@@ -102,6 +115,7 @@ namespace uv5ki_nbx_webapp.AppServer
                     valor = prop.Value
                 });
             }
+            pgn.par = pgn.par.OrderBy(o => o.mostrar).ToList();
 
             pif = new lparGroup();
             pif.name = "Parametros de Infraestructura";
@@ -119,6 +133,7 @@ namespace uv5ki_nbx_webapp.AppServer
                     valor = prop.Value
                 });
             }
+            pif.par = pif.par.OrderBy(o => o.mostrar).ToList();
 
             prd = new lparGroup();
             prd.name = "Parametros de Servicio Radio";
@@ -136,6 +151,7 @@ namespace uv5ki_nbx_webapp.AppServer
                     valor = prop.Value
                 });
             }
+            prd.par = prd.par.OrderBy(o => o.mostrar).ToList();
 
             pcf = new lparGroup();
             pcf.name = "Parametros de Servicio Configuracion";
@@ -153,6 +169,7 @@ namespace uv5ki_nbx_webapp.AppServer
                     valor = prop.Value
                 });
             }
+            pcf.par = pcf.par.OrderBy(o => o.mostrar).ToList();
 
             pit = new lparGroup();
             pit.name = "Parametros de Servicio Interfaces";
@@ -170,6 +187,7 @@ namespace uv5ki_nbx_webapp.AppServer
                     valor = prop.Value
                 });
             }
+            pit.par = pit.par.OrderBy(o => o.mostrar).ToList();
 
             ppx = new lparGroup();
             ppx.name = "Parametros de Servicio de PABX";
@@ -187,8 +205,45 @@ namespace uv5ki_nbx_webapp.AppServer
                     valor = prop.Value
                 });
             }
+            ppx.par = ppx.par.OrderBy(o => o.mostrar).ToList();
         }
 
+        public void LoadFromFile() 
+        {
+            string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            NodeBoxConfig LocalConfig = new NodeBoxConfig(Path.GetDirectoryName(exePath), "es");
+
+            List<Tuple<string, string, lparGroup>> grupos = new List<Tuple<string, string, lparGroup>>() {
+                new Tuple<string, string, lparGroup> (NodeBoxConfig.cNbxSectionName, "Parametros Generales", pgn),
+                new Tuple<string, string, lparGroup> (NodeBoxConfig.cInfraSectionName, "Parametros de Infraestructura", pif),
+                new Tuple<string, string, lparGroup> (NodeBoxConfig.cRadioSectionName, "Parametros de Servicio Radio", prd),
+                new Tuple<string, string, lparGroup> (NodeBoxConfig.cConfigSectionName, "Parametros de Servicio Configuracion", pcf),
+                new Tuple<string, string, lparGroup> (NodeBoxConfig.cTifxSectionName, "Parametros de Servicio Interfaces", pit),
+                new Tuple<string, string, lparGroup> (NodeBoxConfig.cPabxSectionName, "Parametros de Servicio de PABX", ppx)
+            };
+
+            foreach (Tuple<string, string, lparGroup> sec in grupos)
+            {
+                sec.Item3.name = sec.Item2;
+                sec.Item3.par = new List<lparData>();
+                foreach (KeyValuePair<string, string> prop in LocalConfig.SectionProperties(sec.Item1))
+                {
+                    sec.Item3.par.Add(new lparData()
+                    {
+                        nombre = prop.Key,
+                        mostrar = LocalConfig.GetStringDisplay(prop.Key),
+                        tipo = 0,
+                        validar = 0,
+                        margenes = new margenData() { max = 0, min = 0 },
+                        opciones = new List<string>() { "", "" },
+                        valor = prop.Value
+                    });
+                }
+                sec.Item3.par = sec.Item3.par.OrderBy(o => o.mostrar).ToList();
+            }        
+
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -197,9 +252,22 @@ namespace uv5ki_nbx_webapp.AppServer
             string exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
             NodeBoxConfig LocalConfig = new NodeBoxConfig(Path.GetDirectoryName(exePath), "es");
 
-            foreach (lparData par in pgn.par)
+            List<Tuple<string, lparGroup>> grupos = new List<Tuple<string, lparGroup>>() {
+                new Tuple<string, lparGroup> (NodeBoxConfig.cNbxSectionName, pgn),
+                new Tuple<string, lparGroup> (NodeBoxConfig.cInfraSectionName, pif),
+                new Tuple<string, lparGroup> (NodeBoxConfig.cRadioSectionName, prd),
+                new Tuple<string, lparGroup> (NodeBoxConfig.cConfigSectionName, pcf),
+                new Tuple<string, lparGroup> (NodeBoxConfig.cTifxSectionName, pit),
+                new Tuple<string, lparGroup> (NodeBoxConfig.cPabxSectionName, ppx)
+            };
+
+            //
+            foreach (Tuple<string, lparGroup> grp in grupos)
             {
-                LocalConfig.PropertySet(NodeBoxConfig.cNbxSectionName, par.nombre, par.valor);
+                foreach (lparData par in grp.Item2.par)
+                {
+                    LocalConfig.PropertySet(grp.Item1, par.nombre, par.valor);
+                }
             }
 
             LocalConfig.Save();

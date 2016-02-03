@@ -17,7 +17,7 @@ Uv5kinbx.directive('fileModel', ['$parse', function ($parse) {
 }]);
 
 /** Variables Globales */
-var Simulate = false;
+var Simulate = true;
 var pollingTime = 3000;
 var maxPreconf = 8;
 
@@ -30,6 +30,8 @@ var routeRadio = "/radio";
 var rest_url_std = "/std";
 var rest_url_preconf = "/preconf";
 var rest_url_local_config = "/lconfig";
+var rest_url_radio_sessions = "/rdsessions";
+var rest_url_radio_gestormn = "/gestormn";
 
 /** */
 var roles = {

@@ -1,0 +1,120 @@
+<h3>Servidor Radio</h3>
+<section id="_tabs">
+    <ul class="nav nav-tabs">
+        <li data-ng-class="{'active': ctrl.pagina==0}">
+            <a href="" data-ng-click="ctrl.pagina=0">Sesiones Activas</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina==1}">
+            <a href="" data-ng-click="ctrl.pagina=1">Gestor N+M (VHF)</a>
+        </li>
+        <li data-ng-class="{'active': ctrl.pagina==2}">
+            <a href="" data-ng-click="ctrl.pagina=2">Gestor N+M (UHF)</a>
+        </li>
+    </ul>
+</section>
+<section id="_contenido">
+    <div id="stdSesiones" data-ng-show="ctrl.pagina==0">
+    <h1><strong>Sesiones Radio</strong></h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Frecuencia</th>
+                    <th>URI</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="ses in ctrl.sessions" data-ng-class="ctrl.colorEstado(ses.std)">
+                    <td>{{ses.frec}}</td>
+                    <td>{{ses.uri}}</td>
+                    <td>{{ctrl.txtTipo(ses.tipo)}}</td>
+                    <td>{{ctrl.txtEstado(ses.std)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="setVhf" data-ng-show="ctrl.pagina==1">
+    <h1><strong>Equipos Radio VHF</strong></h1>
+        <div class="TX">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Tipo</th>
+                    <th>Frecuencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="eq in ctrl.gestormn | filter: { grp: 0, mod:0 }" data-ng-class="ctrl.colorEstado(eq.std)" >
+                    <td>{{eq.equ}}</td>
+                    <td>{{ctrl.txtTipoEquipo(eq.tip)}}</td>
+                    <td>{{eq.frec}}</td>
+                    <td><button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="RX">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Tipo</th>
+                    <th>Frecuencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="eq in ctrl.gestormn | filter: { grp: 0, mod:1 }" data-ng-class="ctrl.colorEstado(eq.std)" >
+                    <td>{{eq.equ}}</td>
+                    <td>{{ctrl.txtTipoEquipo(eq.tip)}}</td>
+                    <td>{{eq.frec}}</td>
+                    <td><button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div id="setUhf" data-ng-show="ctrl.pagina==2">
+    <h1><strong>Equipos Radio UHF</strong></h1>
+        <div class="TX">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Tipo</th>
+                    <th>Frecuencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="eq in ctrl.gestormn | filter: { grp: 1, mod:0 }" data-ng-class="ctrl.colorEstado(eq.std)" >
+                    <td>{{eq.equ}}</td>
+                    <td>{{ctrl.txtTipoEquipo(eq.tip)}}</td>
+                    <td>{{eq.frec}}</td>
+                    <td><button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="RX">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Tipo</th>
+                    <th>Frecuencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="eq in ctrl.gestormn | filter: { grp: 1, mod:1 }" data-ng-class="ctrl.colorEstado(eq.std)" >
+                    <td>{{eq.equ}}</td>
+                    <td>{{ctrl.txtTipoEquipo(eq.tip)}}</td>
+                    <td>{{eq.frec}}</td>
+                    <td><button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+    </div>
+</section>

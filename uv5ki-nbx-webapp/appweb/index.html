@@ -31,17 +31,17 @@
             </div>
         </header>
         <!--<section id="_separador"></section>-->
-        <nav id="_menu">
+        <nav id="_menu" class="container">
             <h3>Opciones</h3>
-            <ul>
-                <li>
-                    <a href="#/">Generales</a>
+            <ul class="nav nav-pills nav-stacked">
+                <li data-ng-class="{'active': ctrl.pagina==0}">
+                    <a href="#/" data-ng-click="ctrl.pagina=0">Generales</a>
                 </li>
-                <li>
-                    <a href="#/radio">Radio</a>
+                <li data-ng-class="{'active': ctrl.pagina==1}">
+                    <a href="#/radio" data-ng-click="ctrl.pagina=1">Radio</a>
                 </li>
-                <li>
-                    <a href="#/config">Config. Local</a>
+                <li data-ng-class="{'active': ctrl.pagina==2}">
+                    <a href="#/config" data-ng-click="ctrl.pagina=2">Config. Local</a>
                 </li>
                 <li style="margin-top: 60px;">
                     <a href="#" i data-ng-click="gvm.logout()">Logout</a>
@@ -81,6 +81,7 @@
 	<script src="./app/controllers/Uv5kinbx-global-ctrl.js"></script>
 	<script src="./app/controllers/Uv5kinbx-generales-ctrl.js"></script>
 	<script src="./app/controllers/Uv5kinbx-config-ctrl.js"></script>
+	<script src="./app/controllers/Uv5kinbx-radio-ctrl.js"></script>
 
  </body>
 </html>

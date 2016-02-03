@@ -16,6 +16,7 @@ namespace uv5ki_nbx_webapp
 
             server.Start(1023, data);
 
+            Console.WriteLine("Programa Arrancado. ESC para Salir.");
             ConsoleKeyInfo result;
             do
             {

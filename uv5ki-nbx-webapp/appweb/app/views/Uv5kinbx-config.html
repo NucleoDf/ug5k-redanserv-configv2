@@ -37,7 +37,7 @@
                     <td data-ng-switch on="par.tipo">
                         <span data-ng-switch-when="0">
                             <span class="error" ng-show="ctrl.validate(par)==false" translate>Error de Formato</span>
-                            <input type="text" data-ng-model="par.valor" data-ng-disabled="false" data-ng-blur="ctrl.autosave()" />
+                            <input type="text" class="form-control" data-ng-model="par.valor" data-ng-disabled="false" data-ng-blur="ctrl.autosave()" />
                         </span>
                         <select data-ng-switch-when="1" data-ng-model="par.valor" data-ng-disabled="false" data-ng-blur="ctrl.autosave()">
                             <option data-ng-repeat="valor in par.opciones" data-ng-selected="{{$index==par.valor}}" value="{{$index}}">{{valor}}</option>

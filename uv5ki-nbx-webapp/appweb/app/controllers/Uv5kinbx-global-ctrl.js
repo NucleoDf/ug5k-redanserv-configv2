@@ -3,6 +3,7 @@ angular.module("Uv5kinbx")
 .controller("uv5kiGlobalCtrl", function ($scope, $interval) {
     /** Inicializacion */
     var ctrl = this;
+    ctrl.pagina = 0;
 
     ctrl.user="agl1";
     ctrl.date = (new Date()).toLocaleDateString();

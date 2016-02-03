@@ -71,11 +71,15 @@
     <None Include="app.config" />
     <None Include="appweb\scripts\angular\angular.min.js.map" />
     <None Include="appweb\scripts\angular\smart-table.min.js.map" />
+    <None Include="appweb\simulate\gestormn.json" />
+    <None Include="appweb\simulate\rdsessions.json" />
     <None Include="appweb\simulate\lconfig.json" />
     <None Include="appweb\simulate\preconf.json" />
     <None Include="appweb\simulate\std.json" />
     <None Include="appweb\styles\bootstrap\bootstrap-theme.css.map" />
     <None Include="appweb\styles\bootstrap\bootstrap.css.map" />
+    <Content Include="appweb\app\controllers\Uv5kinbx-radio-ctrl.js" />
+    <Content Include="appweb\app\views\Uv5kinbx-radio.html" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -84,7 +88,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="U5ki.NodeBox.exe.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

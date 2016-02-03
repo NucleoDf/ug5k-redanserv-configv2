@@ -24,6 +24,12 @@ angular
             , lconfig_set: function (data) {
                 return remotePost(rest_url_local_config, data);
             }
+            , radio_sessions_get: function () {
+                return remoteGet(rest_url_radio_sessions);
+            }
+            , radio_gestormn_get: function () {
+                return remoteGet(rest_url_radio_gestormn);
+            }
         };
 
         //
