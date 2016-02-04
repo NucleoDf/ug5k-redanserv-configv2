@@ -86,7 +86,7 @@ angular.module("Uv5kinbx")
         if (confirm("¿Quiere salvar la configuracion actual como " + name + " ?") == false)
             return;
 
-        $serv.preconf_saveas(name).then(
+        $serv.preconf_saveas("", name).then(
             function (response) {
                 alert("Preconfiguración "  + name + " guardada correctamente.");
                 load_preconf();

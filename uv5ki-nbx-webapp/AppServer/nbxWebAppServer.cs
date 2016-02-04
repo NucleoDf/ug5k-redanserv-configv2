@@ -277,11 +277,46 @@ namespace uv5ki_nbx_webapp.AppServer
     /// <summary>
     /// 
     /// </summary>
+    class radioSessionData
+    {
+        public string frec { get; set; }
+        public string uri { get; set; }
+        public int tipo { get; set; }       // 0: TX, 1: RX, 2: RXTX
+        public int std { get; set; }        // 0: Desconectado, 1: Conectado.
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    class equipoMNData
+    {
+        // {"equ": "TX VM-01", "grp": 0, "mod": 0, "tip": 0, "std": 1, "frec": "118.05"},
+        public string equ { get; set; }
+        public int grp { get; set; }    // 0: VHF, 1: UHF
+        public int mod { get; set; }    // 0: TX, 1: RX
+        public int tip { get; set; }    // 0: MAIN, 1: RSVA
+        public int std { get; set; }    // 0: Desconectado, 1: Conectado, 2: Desahabilitado
+        public string frec { get; set; }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    class equipoMNAsigna
+    {
+        // { equ: item.equ, cmd: 1, frec: frec };
+        public string equ { get; set; }
+        public string frec { get; set; }
+        public int cmd { get; set; }        // 0: Desasignar. 1: Asignar.
+    }
+    /// <summary>
+    /// 
+    /// </summary>
     class nbxPublicData
     {
         public stdGlobal std = new stdGlobal();
         public List<pcfData> pcf = new List<pcfData>();
         public nbxLocalConfig lcf = new nbxLocalConfig();
+        public List<radioSessionData> ses = new List<radioSessionData>();
+        public List<equipoMNData> mnd = new List<equipoMNData>();
     }
 
 
@@ -294,6 +329,11 @@ namespace uv5ki_nbx_webapp.AppServer
         const string rest_url_std = "std";
         const string rest_url_preconf = "preconf";
         const string rest_url_local_config = "lconfig";
+        const string rest_url_radio_sessions = "rdsessions";
+        const string rest_url_radio_gestormn = "gestormn";
+        const string rest_url_radio_gestormn_habilita = "gestormn/enable";
+        const string rest_url_radio_gestormn_asigna = "gestormn/assign";
+
 
         /// <summary>
         /// 
@@ -455,6 +495,12 @@ namespace uv5ki_nbx_webapp.AppServer
                         case rest_url_local_config:
                             processLocalConfigGet(request, response, sb);
                             break;
+                        case rest_url_radio_sessions:
+                            processRadioSessionsGet(request, response, sb);
+                            break;
+                        case rest_url_radio_gestormn:
+                            processGestorMNDataGet(request, response, sb);
+                            break;
                         default:
                             sb.Append(webappError(0));
                             response.StatusCode = 404;          // No Implementado...
@@ -483,6 +529,14 @@ namespace uv5ki_nbx_webapp.AppServer
             {
                 processLocalConfigPost(request, response, sb);
             }
+            else if (request.Url.LocalPath.StartsWith("/" + rest_url_radio_gestormn_habilita))
+            {
+                processGestorMNEnable(request, response, sb);
+            }
+            else if (request.Url.LocalPath.StartsWith("/" + rest_url_radio_gestormn_asigna))
+            {
+                processGestorMNAsigna(request, response, sb);
+            }
             else
             {
                 sb.Append(webappError(0));
@@ -499,7 +553,7 @@ namespace uv5ki_nbx_webapp.AppServer
         {
             _Logger.Debug("PUT {0}", request.Url.LocalPath);
 
-            if (request.Url.LocalPath.StartsWith(rest_url_preconf))
+            if (request.Url.LocalPath.StartsWith("/" + rest_url_preconf))
             {
                 processPreconfiguracionesPut(request, response, sb);
             }
@@ -518,9 +572,13 @@ namespace uv5ki_nbx_webapp.AppServer
         {
             _Logger.Debug("DELETE {0}", request.Url.LocalPath);
 
-            if (request.Url.LocalPath.StartsWith(rest_url_preconf))
+            if (request.Url.LocalPath.StartsWith("/" + rest_url_preconf))
             {
                 processPreconfiguracionesDelete(request, response, sb);
+            }
+            if (request.Url.LocalPath.StartsWith("/" + rest_url_radio_gestormn))
+            {
+                processGestorMNDelete(request, response, sb);
             }
             else
             {
@@ -635,7 +693,7 @@ namespace uv5ki_nbx_webapp.AppServer
             sb.Append(data);
         }
         /// <summary>
-        /// 
+        /// Activar Preconfiguracion
         /// </summary>
         /// <param name="request"></param>
         /// <param name="response"></param>
@@ -643,11 +701,19 @@ namespace uv5ki_nbx_webapp.AppServer
         private void processPreconfiguracionesPost(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
         {
             response.ContentType = "application/json";
-            // TODO.
+            using (var reader = new StreamReader(request.InputStream,
+                                                 request.ContentEncoding))
+            {
+                string strData = reader.ReadToEnd();
+                pcfData cfg = JsonConvert.DeserializeObject<pcfData>(strData);                
+                // TODO.
+                _Logger.Debug("Activando Preconfiguracion : ({0})", cfg.nombre);
+ 
+            }
         }
 
         /// <summary>
-        /// 
+        /// Guardar Configuracion activa como ...
         /// </summary>
         /// <param name="request"></param>
         /// <param name="response"></param>
@@ -655,11 +721,17 @@ namespace uv5ki_nbx_webapp.AppServer
         private void processPreconfiguracionesPut(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
         {
             response.ContentType = "application/json";
-            // TODO.
+            using (var reader = new StreamReader(request.InputStream,
+                                                 request.ContentEncoding))
+            {
+                pcfData cfg = JsonConvert.DeserializeObject<pcfData>(reader.ReadToEnd());
+                // TODO. 
+                _Logger.Debug("Guardando Configuracion Activa como ({0})", cfg.nombre);
+            }
         }
 
         /// <summary>
-        /// 
+        /// Borrar preconfiguracion.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="response"></param>
@@ -667,7 +739,10 @@ namespace uv5ki_nbx_webapp.AppServer
         private void processPreconfiguracionesDelete(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
         {
             response.ContentType = "application/json";
-            // TODO.
+            string cfg_name = Path.GetFileName(request.Url.LocalPath);
+
+            // TODO. Borrar la Preconfiguracion 
+            _Logger.Debug("Borrando Preconfiguracion {0}", cfg_name);
         }
         /// <summary>
         /// 
@@ -703,6 +778,79 @@ namespace uv5ki_nbx_webapp.AppServer
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <param name="sb"></param>
+        private void processRadioSessionsGet(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
+        {
+            GetListaSesiones();
+            response.ContentType = "application/json";
+            string data = JsonConvert.SerializeObject(_rtData.ses);
+            sb.Append(data);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <param name="sb"></param>
+        private void processGestorMNDataGet(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
+        {
+            GetListaEquiposMN();
+            response.ContentType = "application/json";
+            string data = JsonConvert.SerializeObject(_rtData.mnd);
+            sb.Append(data);
+        }
+        /// <summary>
+        /// Reset del Servicio
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <param name="sb"></param>
+        private void processGestorMNDelete(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
+        {
+            response.ContentType = "application/json";
+
+            // TODO. Borrar la Preconfiguracion 
+            _Logger.Debug("Reseteando Servicio M+N");
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <param name="sb"></param>
+        private void processGestorMNEnable(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
+        {
+            response.ContentType = "application/json";
+            using (var reader = new StreamReader(request.InputStream,
+                                                 request.ContentEncoding))
+            {                    
+                equipoMNData equ = JsonConvert.DeserializeObject<equipoMNData>(reader.ReadToEnd());
+                // TODO.            
+                _Logger.Debug("Cambiando el estado de habilitacion en equipo ({0})", equ.equ);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <param name="sb"></param>
+        private void processGestorMNAsigna(HttpListenerRequest request, HttpListenerResponse response, StringBuilder sb)
+        {
+            response.ContentType = "application/json";
+            using (var reader = new StreamReader(request.InputStream,
+                                                 request.ContentEncoding))
+            {
+                equipoMNAsigna equ = JsonConvert.DeserializeObject<equipoMNAsigna>(reader.ReadToEnd());
+                // TODO.            
+                _Logger.Debug("{0} el equipo ({1}) en frecuencia ({2})", equ.cmd==0 ? "Desasignando" : "Asignando", equ.equ, equ.frec);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="nError"></param>
         /// <returns></returns>
         private string webappError(int nError)
@@ -717,10 +865,7 @@ namespace uv5ki_nbx_webapp.AppServer
         private void GetEstadoGeneral()
         {
             // TODO. Obtener los datos de Verdad...
-            _rtData.std.cfg = 0;
-            _rtData.std.ifx = 1;
-            _rtData.std.rad = 1;
-            _rtData.std.pbx = 2;
+            _rtData.std = JsonConvert.DeserializeObject<stdGlobal>(File.ReadAllText(@"./simulate/std.json"));
         }
 
         /// <summary>
@@ -729,9 +874,25 @@ namespace uv5ki_nbx_webapp.AppServer
         private void GetListaPreconfiguraciones()
         {
             // TODO.... Inicializo los datos de verdad...
-            _rtData.pcf.Clear();
-            _rtData.pcf.Add(new pcfData() { fecha = "20/11/2015 08:00", nombre = "Preconfig Server...1" });
-            _rtData.pcf.Add(new pcfData() { fecha = "20/01/2016 18:20", nombre = "Preconfig Server...2" });
+            _rtData.pcf = JsonConvert.DeserializeObject<List<pcfData>>(File.ReadAllText(@"./simulate/preconf.json"));
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GetListaSesiones()
+        {
+            _rtData.ses.Clear();
+            // TODO. Obtener los datos Reales.
+            _rtData.ses = JsonConvert.DeserializeObject<List<radioSessionData>>(File.ReadAllText(@"./simulate/rdsessions.json"));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GetListaEquiposMN()
+        {
+            // TODO. Obtener los datos Reales...
+            _rtData.mnd = JsonConvert.DeserializeObject<List<equipoMNData>>(File.ReadAllText(@"./simulate/gestormn.json"));
         }
     }
 

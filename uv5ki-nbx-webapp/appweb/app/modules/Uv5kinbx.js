@@ -17,7 +17,7 @@ Uv5kinbx.directive('fileModel', ['$parse', function ($parse) {
 }]);
 
 /** Variables Globales */
-var Simulate = true;
+var Simulate = false;
 var pollingTime = 3000;
 var maxPreconf = 8;
 
@@ -32,6 +32,8 @@ var rest_url_preconf = "/preconf";
 var rest_url_local_config = "/lconfig";
 var rest_url_radio_sessions = "/rdsessions";
 var rest_url_radio_gestormn = "/gestormn";
+var rest_url_radio_gestormn_habilita = "/gestormn/enable";
+var rest_url_radio_gestormn_asigna = "/gestormn/assign";
 
 /** */
 var roles = {
@@ -55,3 +57,5 @@ var regx_urlval = /^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:
 var regx_ipportval = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:[\d]{1,5})?$/;
 var regx_urival = /^sip:(.+)@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:[\d]{1,5})?$/;
 var regx_fid = /^(1|2|3)[0-9]{2}\.[0-9]{2}(0|5)$/;
+var regx_fid_vhf = /^(1)(1|2|3)([0-9]{1})\.([0-9]{1})(0|5)$/;   /** 118.00 137.00 */
+var regx_fid_uhf = /^(2|3|4)([0-9]{2})\.([0-9]{1})(0|5)$/;      /** 225.00 400.00 */

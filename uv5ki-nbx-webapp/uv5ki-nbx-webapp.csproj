@@ -72,6 +72,8 @@
     <None Include="appweb\scripts\angular\angular.min.js.map" />
     <None Include="appweb\scripts\angular\smart-table.min.js.map" />
     <None Include="appweb\simulate\gestormn.json" />
+    <None Include="appweb\simulate\gestormn\assign.json" />
+    <None Include="appweb\simulate\gestormn\enable.json" />
     <None Include="appweb\simulate\rdsessions.json" />
     <None Include="appweb\simulate\lconfig.json" />
     <None Include="appweb\simulate\preconf.json" />

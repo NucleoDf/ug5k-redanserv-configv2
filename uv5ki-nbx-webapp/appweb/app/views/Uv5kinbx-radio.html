@@ -35,7 +35,13 @@
         </table>
     </div>
     <div id="setVhf" data-ng-show="ctrl.pagina==1">
-    <h1><strong>Equipos Radio VHF</strong></h1>
+        <table class="tradio">
+            <tr>
+                <td><div class="lradio led" data-ng-class="ctrl.led()"></div></td>
+                <td><h1><strong>Equipos Radio VHF</strong></h1></td>
+            </tr>
+        </table>
+
         <div class="TX">
         <table class="table table-bordered table-striped">
             <thead>
@@ -50,7 +56,10 @@
                     <td>{{eq.equ}}</td>
                     <td>{{ctrl.txtTipoEquipo(eq.tip)}}</td>
                     <td>{{eq.frec}}</td>
-                    <td><button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button></td>
+                    <td>
+                        <button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button>
+                        <button class="btn btn-default" data-ng-click="ctrl.Asignar(eq)" data-ng-show="eq.tip==1">Asignar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -69,14 +78,23 @@
                     <td>{{eq.equ}}</td>
                     <td>{{ctrl.txtTipoEquipo(eq.tip)}}</td>
                     <td>{{eq.frec}}</td>
-                    <td><button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button></td>
+                    <td>
+                        <button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button>
+                        <button class="btn btn-default" data-ng-click="ctrl.Asignar(eq)" data-ng-show="eq.tip==1">Asignar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
         </div>
+        <button class="reset btn btn-primary" data-ng-click="ctrl.ResetServicio()">RESET SERVICIO</button>
     </div>
     <div id="setUhf" data-ng-show="ctrl.pagina==2">
-    <h1><strong>Equipos Radio UHF</strong></h1>
+        <table class="tradio">
+            <tr>
+                <td><div class="lradio led" data-ng-class="ctrl.led()"></div></td>
+                <td><h1><strong>Equipos Radio UHF</strong></h1></td>
+            </tr>
+        </table>
         <div class="TX">
         <table class="table table-bordered table-striped">
             <thead>
@@ -91,7 +109,10 @@
                     <td>{{eq.equ}}</td>
                     <td>{{ctrl.txtTipoEquipo(eq.tip)}}</td>
                     <td>{{eq.frec}}</td>
-                    <td><button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button></td>
+                    <td>
+                        <button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button>
+                        <button class="btn btn-default" data-ng-click="ctrl.Asignar(eq)" data-ng-show="eq.tip==1">Asignar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -110,11 +131,14 @@
                     <td>{{eq.equ}}</td>
                     <td>{{ctrl.txtTipoEquipo(eq.tip)}}</td>
                     <td>{{eq.frec}}</td>
-                    <td><button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button></td>
+                    <td>
+                        <button class="btn btn-default" data-ng-click="ctrl.EnableDisable(eq)">{{ctrl.txtHabilitar(eq)}}</button>
+                        <button class="btn btn-default" data-ng-click="ctrl.Asignar(eq)" data-ng-show="eq.tip==1">Asignar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
         </div>
-
+        <button class="reset btn btn-primary" data-ng-click="ctrl.ResetServicio()">RESET SERVICIO</button>
     </div>
 </section>
