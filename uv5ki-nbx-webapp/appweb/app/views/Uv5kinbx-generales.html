@@ -13,6 +13,17 @@
     <div id="stdGlobal" data-ng-show="ctrl.pagina==0">
         <h1><strong>Estado Global</strong></h1>
         <table class="table table-bordered table-striped">
+            <tr>
+                <td><strong>Version del Servicio</strong></td>
+                <td>{{ctrl.std.nbx_version}}</td>
+            </tr>
+            <tr>
+                <td><strong>Configuracion Activa</strong></td>
+                <td>{{ctrl.std.cfg_activa}}</td>
+            </tr>
+        </table>
+        <h1><strong>Estado de Servicios</strong></h1>
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Servicio</th>

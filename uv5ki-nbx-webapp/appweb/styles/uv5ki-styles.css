@@ -270,6 +270,16 @@ section#_ppal
         margin-left: 10%;
     }
 
+    #_contenido #stdGlobal table tr td:first-child
+    {
+        width: 50%;
+    }
+
+    #_contenido #stdGlobal table tr td:nth-child(2)
+    {
+        text-align: right;
+    }
+
     #_contenido #cfConfiguracion table
     {
         width: 90%;
@@ -397,16 +407,15 @@ section#_ppal
 
 /*** BORRAR ***/
 
-
-input[type="text"]:disabled
+/*input[type="text"]:disabled
 {
     background: white;
-}
-
-
-/*#_separador{
-  clear: both;
 }*/
+
+
+#_separador{
+  clear: both;
+}
 
 /** */
 
@@ -424,7 +433,7 @@ input[type="text"]:disabled
 
 
 /* para los botones */
-.button
+/*.button
 {
     border: 1px solid #dedede;
     border-radius: 3px;
@@ -434,7 +443,7 @@ input[type="text"]:disabled
     padding: 8px 11px;
     text-decoration: none;
     margin-top: 1em;
-}
+}*/
 
 /** */
 #_pie

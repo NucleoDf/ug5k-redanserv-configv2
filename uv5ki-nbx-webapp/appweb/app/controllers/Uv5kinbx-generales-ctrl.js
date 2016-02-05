@@ -38,29 +38,32 @@ angular.module("Uv5kinbx")
             $("body").css("cursor", "progress");
             $serv.preconf_delete(pre.nombre)
             .then(
-            function (response) {
-                $("body").css("cursor", "default");
-                load_preconf();
-            }
-            , function (response) {
-                $("body").css("cursor", "default");
+                function (response) {
+                    $("body").css("cursor", "default");
+                    alert("Operacion Ejecutada.");
+                    load_preconf();
+                }
+                , function (response) {
+                    $("body").css("cursor", "default");
+                    alert("No se ha podido ejecutar la operacion.");
             });
         }
     }
     /** */
     ctrl.activar_pre = function (pre) {
-        var pregunta = "¿Quiere activar la Preconfiguracion " + pre.nombre + "?";
+        var pregunta = "¿ Quiere activar la Preconfiguracion " + pre.nombre + " ?";
         if (confirm(pregunta)) {
             $("body").css("cursor", "progress");
             $serv.preconf_activate(pre.fecha, pre.nombre)
             .then(
-            function (response) {
-
-                $("body").css("cursor", "default");
-            }
-            , function (response) {
-
-                $("body").css("cursor", "default");
+                function (response) {
+                    $("body").css("cursor", "default");
+                    alert("Operacion Ejecutada: " + response.data.res);
+                }
+                , function (response) {
+                    $("body").css("cursor", "default");
+                    console.log(response);
+                    alert("No se ha podido ejecutar la operacion.");
             });
         }
     }
@@ -88,13 +91,14 @@ angular.module("Uv5kinbx")
 
         $serv.preconf_saveas("", name).then(
             function (response) {
-                alert("Preconfiguración "  + name + " guardada correctamente.");
+                //alert("Preconfiguración "  + name + " guardada correctamente.");
+                alert("Operacion ejecutada: " + response.data.res);
                 load_preconf();
             }
             , function (response) {
                 console.log(response);
+                alert("No se ha podido ejecutar la operacion.");
             });
-
     }
 
     /** */
@@ -124,6 +128,7 @@ angular.module("Uv5kinbx")
     var timer = $interval(function () {
         
         load_std();
+        load_preconf();
 
     }, pollingTime);
 
