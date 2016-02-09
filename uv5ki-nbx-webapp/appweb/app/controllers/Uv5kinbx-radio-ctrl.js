@@ -10,8 +10,8 @@ angular.module("Uv5kinbx")
     ctrl.pagina = 0;
     ctrl.leds = led_std.Off;
     ctrl.sessions = [];
-    ctrl.gestormn = [];
 
+    ctrl.gestormn = [];
 
     rdSessionsGet();
     rdGestormnGet();
@@ -136,11 +136,11 @@ angular.module("Uv5kinbx")
     }
     /** Funcion Periodica del controlador */
     var timer = $interval(function () {
-        if (ctrl.pagina == 0)
-            rdSessionsGet();
-        else {
-            rdGestormnGet();
-        }
+        //if (ctrl.pagina == 0)
+        //    rdSessionsGet();
+        //else {
+        //    rdGestormnGet();
+        //}
     }, pollingTime);
 
     /** Salida del Controlador. Borrado de Variables */

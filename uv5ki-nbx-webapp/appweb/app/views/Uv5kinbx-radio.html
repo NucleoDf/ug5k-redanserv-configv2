@@ -18,17 +18,18 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Frecuencia</th>
+                    <th>Recurso</th>
                     <th>URI</th>
                     <th>Tipo</th>
                     <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="ses in ctrl.sessions" data-ng-class="ctrl.colorEstado(ses.std)">
+<!--                <tr data-ng-repeat="ses in ctrl.sessions" data-ng-class="ctrl.colorEstado(ses.std)">-->
+                <tr data-ng-repeat="ses in ctrl.sessions">
                     <td>{{ses.frec}}</td>
                     <td>{{ses.uri}}</td>
-                    <td>{{ctrl.txtTipo(ses.tipo)}}</td>
+                    <td>{{ses.tipo}}</td>
                     <td>{{ctrl.txtEstado(ses.std)}}</td>
                 </tr>
             </tbody>
