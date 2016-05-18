@@ -16,8 +16,19 @@ Uv5kinbx.directive('fileModel', ['$parse', function ($parse) {
     };
 }]);
 
+// 
+// We already have a limitTo filter built-in to angular,
+// let's make a startFrom filter
+Uv5kinbx.filter('startFrom', function () {
+    return function (input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+});
+
+
 /** Variables Globales */
-var Simulate = false;
+var Simulate = true;
 var pollingTime = 3000;
 var maxPreconf = 8;
 

@@ -98,7 +98,7 @@ div#agrupar
         display: inline;
         margin-top: 2px;
         width: 100%;
-        text-align: center;
+        text-align: right;
     }
 
     #cabecera div#_contSupDrcha div#_hsolohora
@@ -107,7 +107,7 @@ div#agrupar
         display: inline;
         margin-top: 2px;
         width: 100%;
-        text-align: center;
+        text-align: right;
     }
 
     #cabecera div#_contSupDrcha div#_usuario

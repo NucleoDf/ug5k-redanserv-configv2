@@ -7,12 +7,20 @@ angular.module("Uv5kinbx")
     var equ_types = { Main: 0, Reserva: 1 };
     var led_std = { Off: 0, On1: 1, On2: 2 };
 
+    var cp_ps = 3;              // Control Paginado. Tamaño de la Pagina.
+
     ctrl.pagina = 0;
     ctrl.leds = led_std.Off;
     ctrl.sessions = [];
+    ctrl.scp_current = 0;               // Current Page en Sesiones.
+    
+    ctrl.scp_nop = function () {        // Número de Paginas en Sesiones.
+        return Math.ceil(ctrl.sessions.length / cp_ps);
+    }
 
     ctrl.gestormn = [];
 
+    /** */
     rdSessionsGet();
     rdGestormnGet();
 
