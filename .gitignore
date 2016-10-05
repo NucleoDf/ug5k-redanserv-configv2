@@ -1,3 +1,9 @@
 /bin
 /uv5ki-nbx-webapp/bin
 /uv5ki-nbx-webapp/obj
+Debug
+Release
+*.ipch
+*.sdf
+*.user
+
