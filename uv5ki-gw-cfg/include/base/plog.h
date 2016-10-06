@@ -1231,6 +1231,9 @@ namespace plog
 	class NetUdpAppender : public IAppender
 	{
 	public:
+		NetUdpAppender() 
+		{
+		}
 		NetUdpAppender(const char* ipTo, int udpPort, const char* ipFrom) 
 		{
 			m_socket=-1;

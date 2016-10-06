@@ -6,4 +6,5 @@ Release
 *.ipch
 *.sdf
 *.user
+*.opensdf
 

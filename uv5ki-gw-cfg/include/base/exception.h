@@ -32,7 +32,7 @@ private:
     unsigned long m_error;
     mutable string m_msg;
 public:
-	int Code(void);
+	unsigned long Code(void);
 	virtual const char *what();
 };
 

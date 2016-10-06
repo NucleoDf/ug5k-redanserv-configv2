@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "..\..\include\base\exception.h"
 
 /** */
@@ -17,7 +16,7 @@ Exception::~Exception(void)
 }
 
 /** */
-int Exception::Code(void)
+unsigned long Exception::Code(void)
 {
 	return m_error;
 }

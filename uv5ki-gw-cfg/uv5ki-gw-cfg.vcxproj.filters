@@ -18,9 +18,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -30,68 +27,32 @@
     <ClInclude Include="include\base\exception.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="plog\Appenders\AndroidAppender.h">
+    <ClInclude Include="include\base\plog.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="plog\Appenders\ConsoleAppender.h">
+    <ClInclude Include="include\pthreads\include\pthread.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="plog\Appenders\IAppender.h">
+    <ClInclude Include="include\pthreads\include\sched.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="plog\Appenders\NetUdpAppender.h">
+    <ClInclude Include="include\pthreads\include\semaphore.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="plog\Appenders\RollingFileAppender.h">
+    <ClInclude Include="include\base\thread.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="plog\Converters\UTF8Converter.h">
+    <ClInclude Include="include\base\socket.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="plog\Formatters\ConsoleFormatter.h">
+    <ClInclude Include="include\websrv\mongoose.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="plog\Formatters\CsvFormatter.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Formatters\FuncMessageFormatter.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Formatters\Log4viewFormatter.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Formatters\TxtFormatter.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Compatibility.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Init.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Log.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\LogConfig.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Logger.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Record.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Severity.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plog\Util.h">
+    <ClInclude Include="include\websrv\web-app-server.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="uv5ki-gw-cfg.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -101,5 +62,23 @@
     <ClCompile Include="src\base\exception.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="src\base\thread.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="src\base\socket.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="src\websrv\mongoose.c">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="src\websrv\web-app-server.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wlib\pthreadVC2.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="wlib\pthreadVC2.lib" />
   </ItemGroup>
 </Project>
