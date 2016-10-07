@@ -1,7 +1,6 @@
 // uv5ki-gw-cfg.cpp: define el punto de entrada de la aplicación de consola.
 //
-
-#include "include\base\code-base.h"
+#include ".\include\websrv\uv5kigwcfg-web-app.h"
 
 #define VRS_ID_SOFTWARE			"UV5KI-GW CFG-SERVER"
 #define VRS_VERSION_MAYOR		1
@@ -56,7 +55,9 @@ void U5kiGwCfg::Run()
 		PLOG_INFO("UG5k-APPSERVER: (%s) Iniciado en \"%s\". ENTER para SALIR.", acBuildString, WORKING_DIR);
 
 		/** Inicializacion Comun */
+		Uv5kiGwCfgWebApp webApp;
 
+		webApp.Start();
 
 #ifdef _WIN32
 			/** Lazo de Windows */				
@@ -66,6 +67,7 @@ void U5kiGwCfg::Run()
 #endif
 
 		/** Finalizacion Comun */
+		webApp.Dispose();
 
 		PLOG_INFO("UG5k-APPSERVER Finalizado.");
 		plogDispose();

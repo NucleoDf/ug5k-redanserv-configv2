@@ -50,6 +50,10 @@ using namespace std;
 #define PLOG_DEBUG(format, ...)		LogDebug(__FILENAME__, __LINE__, format,__VA_ARGS__)
 #define PLOG_EXCEP(x, format, ...)	LogException(__FILENAME__, __LINE__, x, format,__VA_ARGS__)
 
+#ifdef _WIN32
+#	define LOCAL_TEST		1
+#endif
+
 /** */
 class CodeBase
 {
@@ -68,12 +72,12 @@ public:
 	static void plogDispose();
 
 private:
-	void _Log(plog::Severity level, const char *fmt, va_list args);
-	void _FormatLog(plog::Severity level, const char *file, int line, const char *fmt, va_list args );
-	void _FormatLog(plog::Severity level, const char *file, int line, const char *fmt, ... );
+	static void _Log(plog::Severity level, const char *fmt, va_list args);
+	static void _FormatLog(plog::Severity level, const char *file, int line, const char *fmt, va_list args );
+	static void _FormatLog(plog::Severity level, const char *file, int line, const char *fmt, ... );
 
 protected:	
-	void LogException(const char *file, int line, Exception x, const char *fmt, ... )
+	static void LogException(const char *file, int line, Exception x, const char *fmt, ... )
 	{
 		va_list args;
 		std::stringstream ss;
@@ -82,21 +86,21 @@ protected:
 		_FormatLog(error, file, line, ss.str().c_str(), args);
 		va_end(args);
 	}
-	void LogError(const char *file, int line, const char *fmt, ... ) 
+	static void LogError(const char *file, int line, const char *fmt, ... ) 
 	{
 		va_list args;
 		va_start ( args, fmt );
 		_FormatLog(error, file, line, fmt, args);
 		va_end(args);
 	}
-	void LogInfo(const char *file, int line, const char *fmt, ... )
+	static void LogInfo(const char *file, int line, const char *fmt, ... )
 	{
 		va_list args;
 		va_start ( args, fmt );
 		_FormatLog(info, file, line, fmt, args);
 		va_end(args);
 	}
-	void LogDebug(const char *file, int line, const char *fmt, ... )
+	static void LogDebug(const char *file, int line, const char *fmt, ... )
 	{
 		va_list args;
 		va_start ( args, fmt );

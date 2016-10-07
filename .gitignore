@@ -8,3 +8,4 @@ Release
 *.user
 *.opensdf
 
+/uv5ki-gw-cfg/plog.csv

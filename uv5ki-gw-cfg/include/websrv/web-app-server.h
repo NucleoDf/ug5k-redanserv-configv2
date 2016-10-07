@@ -14,14 +14,7 @@ typedef struct
 typedef void (*webCallback)(struct mg_connection *conn, string user, web_response *resp);
 typedef map<string, webCallback> restHandler;
 typedef restHandler::iterator restHandler_iterator;
-typedef bool (*webAccessRoutine)(string name, string pwd);
-
-typedef struct
-{
-	string						login_uri;			// "/login.html";
-	vector<string>				sec_uris;			// Lista de URIS que no se ven afectadas por la seguridad. Dependen de la aplicacion.
-	webAccessRoutine			access_control;		// Rutina que permite el acceso o no en función de los usuarios.
-} web_config;
+typedef bool (*webAccessRoutine)(string name, string pwd, int *profile);
 
 /** */
 class SessionControl
@@ -65,21 +58,38 @@ private:
 	time_t _last;
 };
 
+typedef struct
+{
+	string				web_port;
+	string				document_root;
+	string				default_page;
+	string				login_uri;			// "/login.html";
+	string				bad_user_uri;		//
+	string				closed_session_uri;	//
+	string				secret;				// Clave para encriptado...
+	int					session_time;		// Duracion de las Sesiones.
+	bool				enable_login;
+	vector<string>		sec_uris;			// Lista de URIS que no se ven afectadas por la seguridad. Dependen de la aplicacion.
+	webAccessRoutine	access_control;		// Rutina que permite el acceso o no en función de los usuarios.
+	SessionControl		session_control;
+} web_config;
+
+
 /** */
 class WebAppServer :
 	public CThread
 {
 public:
 	WebAppServer(void);
-	WebAppServer(string defaultDir, string defaultUrl, bool htmlEncode=true);
 	~WebAppServer(void);
 
 public:
-	void Start(string port, restHandler *pHandlers, web_config *pCfg);
+	void Start();
 	void Dispose();
 
 protected:
 	void Run();
+	int  WebHandler(struct mg_connection *conn, enum mg_event ev);
 	int ProcessRequest(struct mg_connection * conn);
 	webCallback FindRest(string url);
 	string current_user(struct mg_connection *conn);
@@ -87,16 +97,18 @@ protected:
 	int check_auth(struct mg_connection *conn) ;
 	void generate_ssid(const char *user_name, int profile, const char *expiration_date,
                           char *ssid, size_t ssid_size);
+	string CookieTime(char *buffer, struct tm stime);
+	bool Check4SecureUri(string uri);
 
 private:
-	static int  WebHandler(struct mg_connection *conn, enum mg_event ev);
-	restHandler *p_handlers;
-	string document_root;
-	string default_page;
-	bool enable_login;
+	static int  stWebHandler(struct mg_connection *conn, enum mg_event ev);
+
+private:
+	virtual restHandler *handlers()=0;
+	virtual web_config *config()=0;
+
+private:
 	struct mg_server *server;
-	SessionControl session_control;
-	web_config *p_cfg;
 };
 
 #endif

@@ -95,6 +95,8 @@
     <ClInclude Include="include\pthreads\include\sched.h" />
     <ClInclude Include="include\pthreads\include\semaphore.h" />
     <ClInclude Include="include\websrv\mongoose.h" />
+    <ClInclude Include="include\websrv\uv5kigwcfg-web-app-data.h" />
+    <ClInclude Include="include\websrv\uv5kigwcfg-web-app.h" />
     <ClInclude Include="include\websrv\web-app-server.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -104,6 +106,8 @@
     <ClCompile Include="src\base\socket.cpp" />
     <ClCompile Include="src\base\thread.cpp" />
     <ClCompile Include="src\websrv\mongoose.c" />
+    <ClCompile Include="src\websrv\uv5kigwcfg-web-app-data.cpp" />
+    <ClCompile Include="src\websrv\uv5kigwcfg-web-app.cpp" />
     <ClCompile Include="src\websrv\web-app-server.cpp" />
     <ClCompile Include="uv5ki-gw-cfg.cpp" />
   </ItemGroup>
