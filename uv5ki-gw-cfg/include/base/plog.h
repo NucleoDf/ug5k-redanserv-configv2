@@ -945,7 +945,8 @@ namespace plog
     public:
         static util::nstring header()
         {
-            return PLOG_NSTR("Date;Time;Severity;TID;This;Function;Message\n");
+            //return PLOG_NSTR("Date;Time;Severity;TID;This;Function;Message\n");
+            return PLOG_NSTR("Date;Time;Severity;Message\n");
         }
 
         static util::nstring format(const Record& record)
@@ -957,9 +958,9 @@ namespace plog
             ss << t.tm_year + 1900 << "/" << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_mon + 1 << "/" << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_mday << ";";
             ss << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_hour << ":" << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_min << ":" << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_sec << "." << std::setfill(PLOG_NSTR('0')) << std::setw(3) << record.getTime().millitm << ";";
             ss << getSeverityName(record.getSeverity()) << ";";
-            ss << record.getTid() << ";";
-            ss << record.getObject() << ";";
-            ss << record.getFunc().c_str() << "@" << record.getLine() << ";";
+            //ss << record.getTid() << ";";
+            //ss << record.getObject() << ";";
+            //ss << record.getFunc().c_str() << "@" << record.getLine() << ";";
 
             util::nstring message = record.getMessage();
 

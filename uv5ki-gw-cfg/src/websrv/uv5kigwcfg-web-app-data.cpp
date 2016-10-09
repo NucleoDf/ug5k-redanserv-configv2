@@ -1,30 +1,55 @@
 #include "..\..\include\websrv\uv5kigwcfg-web-app-data.h"
 
 /** */
-webData_tses::webData_tses(void)
-{
-	// TODO. Enlazar con la configuracion...
-	std = 1;
-	idc = "Datos Config";
-	tim = "Time Config";
+webData_tses::webData_tses(int parStd, string parIdc, string parTim)
+{	
+	std = parStd;
+	idc = parIdc;
+	tim = parTim;
+
+	val_prueba1.push_back("Valor-1");
+	val_prueba1.push_back("Valor-2");
+
+	val_prueba2.push_back(0);
+	val_prueba2.push_back(2);
+	val_prueba2.push_back(1000);
+	val_prueba2.push_back(-23);
+
+	val_prueba3.push_back(new webData_msg());
+	val_prueba3.push_back(new webData_msg("hola"));
 }
 
 /** */
-string webData_tses::JSerialize()
+void webData_tses::jwrite(Writer<StringBuffer> &writer)
 {
-	Writer<StringBuffer> writer(s);
-
-	writer.StartObject(); 
-
-	writer.Key("lconfig"); writer.StartObject(); 
-	writer.Key("std"); writer.Uint(std);
-	writer.Key("idc"); writer.String(idc.c_str());
-	writer.Key("tim"); writer.String(tim.c_str());
-	writer.EndObject();
-
-	writer.EndObject();
-
-	return s.GetString();
+	write_key/*_uint*/(writer, "std", (unsigned int)std);
+	write_key/*_object*/(writer, "msg", msg);
+	write_key/*_string*/(writer, "idc", idc);
+	write_key/*_string*/(writer, "tim", tim);
+	write_array(writer, "ArrayPrueba1", val_prueba1);
+	write_array(writer, "ArrayPrueba2", val_prueba2);
+	write_array(writer, "ArrayPrueba3", val_prueba3);
 }
+
+/**----------------------------------------------------------------------------------*/
+/** */
+webData_preconfs::webData_preconfs()
+{
+	// TODO. Leer la lista de Preconfiguraciones
+	preconfs.push_back(new webData_preconf_id("preconf-01", "10/10/2015, 08:09:09"));
+	preconfs.push_back(new webData_preconf_id("preconf-02", "11/10/2015, 09:09:09"));
+	preconfs.push_back(new webData_preconf_id("preconf-03", "12/10/2015, 10:09:09"));
+}
+
+/** */
+webData_preconfs::~webData_preconfs()
+{
+	vector<webData_preconf_id *>::iterator it;
+	for (it = preconfs.begin(); it != preconfs.end(); it++)
+		delete (*it);
+	preconfs.clear();
+}
+
+
 
 

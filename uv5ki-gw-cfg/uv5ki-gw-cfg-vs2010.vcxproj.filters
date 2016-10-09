@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\base\code-base.cpp" />
+    <ClCompile Include="src\base\exception.cpp" />
+    <ClCompile Include="src\base\socket.cpp" />
+    <ClCompile Include="src\base\thread.cpp" />
+    <ClCompile Include="src\websrv\mongoose.c" />
+    <ClCompile Include="src\websrv\uv5kigwcfg-web-app-data.cpp" />
+    <ClCompile Include="src\websrv\uv5kigwcfg-web-app.cpp" />
+    <ClCompile Include="src\websrv\web-app-server.cpp" />
+    <ClCompile Include="uv5ki-gw-cfg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\base\code-base.h" />
+    <ClInclude Include="include\base\exception.h" />
+    <ClInclude Include="include\base\plog.h" />
+    <ClInclude Include="include\base\socket.h" />
+    <ClInclude Include="include\base\thread.h" />
+    <ClInclude Include="include\pthreads\include\pthread.h" />
+    <ClInclude Include="include\pthreads\include\sched.h" />
+    <ClInclude Include="include\pthreads\include\semaphore.h" />
+    <ClInclude Include="include\websrv\mongoose.h" />
+    <ClInclude Include="include\websrv\uv5kigwcfg-web-app-data.h" />
+    <ClInclude Include="include\websrv\uv5kigwcfg-web-app.h" />
+    <ClInclude Include="include\websrv\web-app-server.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wlib\pthreadVC2.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="wlib\pthreadVC2.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Include">
+      <UniqueIdentifier>{b95506dd-af17-4776-9420-84fd2d6648f8}</UniqueIdentifier>
+      <Extensions>*.h</Extensions>
+    </Filter>
+  </ItemGroup>
+</Project>

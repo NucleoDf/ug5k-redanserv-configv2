@@ -2,6 +2,7 @@
 
 #define NOT_IMPLEMENTED_RESP(r)				{r->code=404; r->data="{\"res\":\"Operacion no Implementada\"}";}
 #define OK200_RESP(r, d)					{r->code=200; r->data=d;}
+#define IERROR_RESP(r, d)					{r->code=500; r->data=d;}
 
 /** */
 restHandler Uv5kiGwCfgWebApp::_handlers_list;
@@ -24,8 +25,8 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 {
 	_handlers_list["/tses"]=stCb_tses;			// GET					TICK de Sesssion
 	_handlers_list["/logout"]=stCb_logout;		// POST					LOGOUT.
-	_handlers_list["/config"]=stCb_;			// GET, POST			Configuracion
-	_handlers_list["/preconf"]=stCb_;			// GET, POST, PUT, DEL	Preconfiguraciones
+	_handlers_list["/config"]=stCb_config;		// GET, POST			Configuracion
+	_handlers_list["/preconf"]=stCb_preconfig;	// GET, POST, PUT, DEL	Preconfiguraciones
 	_handlers_list["/export"]=stCb_;			// GET					EXPORTAR CFG
 	_handlers_list["/import"]=stCb_;			// POST					IMPORTAR CFG
 	_handlers_list["/uploadcfg"]=stCb_;			// POST					Subir CONFIG.
@@ -88,6 +89,7 @@ void Uv5kiGwCfgWebApp::stCb_tses(struct mg_connection *conn, string user, web_re
 	resp->actividad=false;
 	if (string(conn->request_method)=="GET") 
 	{
+		// TODO. Enlazar con los datos reales en el constructor...
 		webData_tses data;
 		OK200_RESP(resp, data.JSerialize());
 		return;
@@ -115,6 +117,87 @@ void Uv5kiGwCfgWebApp::stCb_logout(struct mg_connection *conn, string user, web_
 		_web_config.session_control.Reset();
 		webData_msg ok("OK");
 		OK200_RESP(resp, ok.JSerialize());
+		return;
+	}
+	NOT_IMPLEMENTED_RESP(resp);
+}
+
+/** */
+void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_response *resp)
+{
+	resp->actividad=true;
+	if (string(conn->request_method)=="GET")
+	{
+		// TODO..
+		OK200_RESP(resp, webData_msg("En construccion").JSerialize());
+		return;
+	}
+	else if (string(conn->request_method)=="POST") 
+	{
+		// TODO..
+		OK200_RESP(resp, webData_msg("En construccion").JSerialize());
+		return;
+	}
+	NOT_IMPLEMENTED_RESP(resp);
+}
+
+/** */
+void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, web_response *resp)
+{
+	resp->actividad=true;
+	if (string(conn->request_method)=="GET")
+	{
+		OK200_RESP(resp, webData_preconfs().JSerialize());
+		return;
+	}
+	else if (string(conn->request_method)=="POST") 
+	{
+		webData_preconf_id preconf;
+		string data_in = string(conn->content, conn->content_len );
+		preconf.JDeserialize(data_in);
+		if (preconf.Error() == "")
+		{
+			// TODO.. Ejecutar Salvar como
+			bool res = true;
+			if (res)
+			{
+				OK200_RESP(resp, webData_preconfs().JSerialize());
+				return;
+			}
+			IERROR_RESP(resp, webData_msg("Error al Salvar Preconfiguracion").JSerialize());
+			return;
+		}
+		IERROR_RESP(resp, webData_msg("Error de formato: " + preconf.Error()).JSerialize());
+		return;
+	}
+	else if (string(conn->request_method)=="PUT") 
+	{
+		webData_preconf_id preconf;
+		string data_in = string(conn->content, conn->content_len );
+		preconf.JDeserialize(data_in);
+		// TODO.. Ejecutar Activar preconf
+		bool res = true;
+		if (res)
+		{
+			OK200_RESP(resp, webData_preconfs().JSerialize());
+			return;
+		}
+		IERROR_RESP(resp, webData_msg("Error al Activar Preconfiguracion").JSerialize());
+		return;
+	}
+	else if (string(conn->request_method)=="DELETE") 
+	{
+		webData_preconf_id preconf;
+		string data_in = string(conn->content, conn->content_len );
+		preconf.JDeserialize(data_in);
+		// TODO.. Ejecutar Eliminar preconf
+		bool res = true;
+		if (res)
+		{
+			OK200_RESP(resp, webData_preconfs().JSerialize());
+			return;
+		}
+		IERROR_RESP(resp, webData_msg("Error al Eliminar Preconfiguracion").JSerialize());
 		return;
 	}
 	NOT_IMPLEMENTED_RESP(resp);

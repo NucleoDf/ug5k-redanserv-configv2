@@ -17,6 +17,7 @@ protected:
 	static void stCb_tses(struct mg_connection *conn, string user, web_response *resp);
 	static void stCb_logout(struct mg_connection *conn, string user, web_response *resp);
 	static void stCb_config(struct mg_connection *conn, string user, web_response *resp);
+	static void stCb_preconfig(struct mg_connection *conn, string user, web_response *resp);
 
 	static bool stAccessControl(string name, string pwd, int *profile);
 

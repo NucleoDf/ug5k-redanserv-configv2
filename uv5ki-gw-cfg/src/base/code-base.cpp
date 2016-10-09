@@ -87,7 +87,7 @@ void CodeBase::_FormatLog(plog::Severity level, const char *file, int line, cons
 	try
 	{
 		std::stringstream ss;
-		ss << file << " (L: " << line << "): " << fmt;
+		ss << file << " (L:" << line << "): " << fmt;
 		_Log(level, ss.str().c_str(), args);
 	}
 	catch(...)
