@@ -1,4 +1,4 @@
-#include "..\..\include\websrv\web-app-server.h"
+#include "../../include/websrv/web-app-server.h"
 
 #define _LOGIN_				0
 #define _UPLOAD_			0
@@ -156,7 +156,7 @@ int WebAppServer::ProcessRequest(struct mg_connection * conn)
 		{
 			wb(conn, user, &response);
 #if _SESSION_SUP_
-			if (response.actividad=true)
+			if (response.actividad==true)
 				config()->session_control.RegActividad();
 #endif
 			mg_send_status(conn, response.code);

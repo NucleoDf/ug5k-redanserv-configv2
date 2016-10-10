@@ -1,0 +1,546 @@
+[33;01m--  Compiling src/local-config.cpp[0m
+[33;01m--  Compiling src/local-config.cpp[0m
+/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o: In function `_start':
+(.text+0x18): undefined reference to `main'
+obj/local-config.o: In function `LocalConfig::LocalConfig()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:8: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::string::operator=(char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:15: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:15: undefined reference to `LoadIni(char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:8: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::LocalConfig(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:21: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:27: undefined reference to `std::string::operator=(std::string const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:28: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:28: undefined reference to `LoadIni(char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:21: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::~LocalConfig()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:33: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:33: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::LoadStrings()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:47: undefined reference to `std::string::operator=(std::string const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:48: undefined reference to `std::string::operator=(std::string const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::KeyToIdent(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:56: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+obj/local-config.o: In function `LocalConfig::IdentToKey(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:63: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+obj/local-config.o: In function `LocalConfig::GetKeyConfigLocal(std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >&)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::SetKeyConfigLocal(std::string, std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::save()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:87: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:87: undefined reference to `SaveIni(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*)'
+obj/local-config.o: In function `LocalConfig::sync()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:97: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:97: undefined reference to `LoadIni(char const*)'
+obj/local-config.o: In function `LocalConfig::PuertoEscucha(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:109: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:109: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:111: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::TiempoSesion(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:122: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:122: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:124: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::PathToIniRam(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:135: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:135: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:137: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::PathToIniFlash(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:148: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:148: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:150: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::ConfigFile()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:161: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::ConfigTsup()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:172: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::PathToRCSH(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:184: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:184: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:186: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::PathToVersiones()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:196: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::Log()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:205: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::Login()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:214: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::ServerURL()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:223: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o:/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:232: more undefined references to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)' follow
+obj/local-config.o: In function `LocalConfig::LastRouteDest(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:272: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:272: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:274: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::LastRouteVia(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:286: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:286: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:288: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::LastRouteSource(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:300: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:300: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:302: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::onram(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::onflash(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::onswrep(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::getString(std::string, std::string, std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::setString(std::string, std::string, std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::getInt(std::string, std::string, std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::setInt(std::string, std::string, int)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::getSection(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::deleteSection(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `__static_initialization_and_destruction_0':
+/usr/include/c++/4.7/iostream:75: undefined reference to `std::ios_base::Init::Init()'
+/usr/include/c++/4.7/iostream:75: undefined reference to `std::ios_base::Init::~Init()'
+obj/local-config.o: In function `StlIniCompareStringNoCase::operator()(std::string const&, std::string const&) const':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/../include/./tools/stlini.h:37: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/../include/./tools/stlini.h:38: undefined reference to `std::string::c_str() const'
+obj/local-config.o: In function `bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)':
+/usr/include/c++/4.7/bits/basic_string.h:2518: undefined reference to `std::string::compare(char const*) const'
+obj/local-config.o: In function `std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
+/usr/include/c++/4.7/bits/basic_string.h:2365: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/basic_string.h:2366: undefined reference to `std::string::append(std::string const&)'
+/usr/include/c++/4.7/bits/basic_string.h:2367: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::~pair()':
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::string> >::operator++(int)':
+/usr/include/c++/4.7/bits/stl_tree.h:196: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base*)'
+obj/local-config.o: In function `std::pair<std::string const, std::string>::~pair()':
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::map<std::string, std::string, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::operator[](std::string const&)':
+/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
+/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)':
+/usr/include/c++/4.7/bits/basic_string.h:2402: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/basic_string.h:2403: undefined reference to `std::string::append(char const*)'
+/usr/include/c++/4.7/bits/basic_string.h:2404: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::pair(std::string const&, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > const&)':
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::pair<std::string const, std::string>::pair(std::string const&, std::string const&)':
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_copy(std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > const*, std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >*)':
+/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_end_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:1068: undefined reference to `__cxa_rethrow'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >::_M_copy(std::_Rb_tree_node<std::pair<std::string const, std::string> > const*, std::_Rb_tree_node<std::pair<std::string const, std::string> >*)':
+/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_end_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:1068: undefined reference to `__cxa_rethrow'
+obj/local-config.o: In function `bool std::operator< <char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
+/usr/include/c++/4.7/bits/basic_string.h:2568: undefined reference to `std::string::compare(std::string const&) const'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_insert_(std::_Rb_tree_node_base const*, std::_Rb_tree_node_base const*, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:981: undefined reference to `std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)'
+obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator--()':
+/usr/include/c++/4.7/bits/stl_tree.h:284: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base const*)'
+obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator++()':
+/usr/include/c++/4.7/bits/stl_tree.h:269: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base const*)'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::_M_insert_(std::_Rb_tree_node_base const*, std::_Rb_tree_node_base const*, std::pair<std::string const, std::string> const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:981: undefined reference to `std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)'
+obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::string> >::operator--()':
+/usr/include/c++/4.7/bits/stl_tree.h:284: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base const*)'
+obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::string> >::operator++()':
+/usr/include/c++/4.7/bits/stl_tree.h:269: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base const*)'
+obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >*, unsigned int)':
+/usr/include/c++/4.7/ext/new_allocator.h:100: undefined reference to `operator delete(void*)'
+obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::string> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, std::string> >*, unsigned int)':
+/usr/include/c++/4.7/ext/new_allocator.h:100: undefined reference to `operator delete(void*)'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_create_node(std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
+obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator--()':
+/usr/include/c++/4.7/bits/stl_tree.h:203: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base*)'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >::_M_create_node(std::pair<std::string const, std::string> const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::_M_create_node(std::pair<std::string const, std::string> const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
+obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::string> >::operator--()':
+/usr/include/c++/4.7/bits/stl_tree.h:203: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base*)'
+obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::pair(std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::pair<std::string const, std::string>::pair(std::pair<std::string const, std::string> const&)':
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::allocate(unsigned int, void const*)':
+/usr/include/c++/4.7/ext/new_allocator.h:92: undefined reference to `std::__throw_bad_alloc()'
+/usr/include/c++/4.7/ext/new_allocator.h:94: undefined reference to `operator new(unsigned int)'
+obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::string> > >::allocate(unsigned int, void const*)':
+/usr/include/c++/4.7/ext/new_allocator.h:92: undefined reference to `std::__throw_bad_alloc()'
+/usr/include/c++/4.7/ext/new_allocator.h:94: undefined reference to `operator new(unsigned int)'
+obj/local-config.o:(.eh_frame+0x12f): undefined reference to `__gxx_personality_v0'
+collect2: error: ld returned 1 exit status
+make: *** [obj/local-config] Error 1
+
+[33;01m--  Compiling src/local-config.cpp[0m
+/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o: In function `_start':
+(.text+0x18): undefined reference to `main'
+obj/local-config.o: In function `LocalConfig::LocalConfig()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:8: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::string::operator=(char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:15: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:15: undefined reference to `LoadIni(char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:8: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::LocalConfig(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:21: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:27: undefined reference to `std::string::operator=(std::string const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:28: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:28: undefined reference to `LoadIni(char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:21: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::~LocalConfig()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:33: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:33: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::LoadStrings()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:47: undefined reference to `std::string::operator=(std::string const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:48: undefined reference to `std::string::operator=(std::string const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::KeyToIdent(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:56: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+obj/local-config.o: In function `LocalConfig::IdentToKey(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:63: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+obj/local-config.o: In function `LocalConfig::GetKeyConfigLocal(std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >&)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::SetKeyConfigLocal(std::string, std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::save()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:87: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:87: undefined reference to `SaveIni(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*)'
+obj/local-config.o: In function `LocalConfig::sync()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:97: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:97: undefined reference to `LoadIni(char const*)'
+obj/local-config.o: In function `LocalConfig::PuertoEscucha(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:109: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:109: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:111: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::TiempoSesion(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:122: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:122: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:124: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::PathToIniRam(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:135: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:135: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:137: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::PathToIniFlash(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:148: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:148: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:150: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::ConfigFile()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:161: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::ConfigTsup()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:172: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::PathToRCSH(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:184: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:184: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:186: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::PathToVersiones()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:196: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::Log()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:205: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::Login()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:214: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::ServerURL()':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:223: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o:/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:232: more undefined references to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)' follow
+obj/local-config.o: In function `LocalConfig::LastRouteDest(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:272: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:272: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:274: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::LastRouteVia(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:286: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:286: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:288: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::LastRouteSource(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:300: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:300: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:302: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::onram(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::onflash(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::onswrep(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::getString(std::string, std::string, std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::setString(std::string, std::string, std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::getInt(std::string, std::string, std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `LocalConfig::setInt(std::string, std::string, int)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
+obj/local-config.o: In function `LocalConfig::getSection(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `LocalConfig::deleteSection(std::string)':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::~allocator()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::~allocator()'
+obj/local-config.o: In function `__static_initialization_and_destruction_0':
+/usr/include/c++/4.7/iostream:75: undefined reference to `std::ios_base::Init::Init()'
+/usr/include/c++/4.7/iostream:75: undefined reference to `std::ios_base::Init::~Init()'
+obj/local-config.o: In function `StlIniCompareStringNoCase::operator()(std::string const&, std::string const&) const':
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/../include/./tools/stlini.h:37: undefined reference to `std::string::c_str() const'
+/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/../include/./tools/stlini.h:38: undefined reference to `std::string::c_str() const'
+obj/local-config.o: In function `bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)':
+/usr/include/c++/4.7/bits/basic_string.h:2518: undefined reference to `std::string::compare(char const*) const'
+obj/local-config.o: In function `std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
+/usr/include/c++/4.7/bits/basic_string.h:2365: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/basic_string.h:2366: undefined reference to `std::string::append(std::string const&)'
+/usr/include/c++/4.7/bits/basic_string.h:2367: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::~pair()':
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::string> >::operator++(int)':
+/usr/include/c++/4.7/bits/stl_tree.h:196: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base*)'
+obj/local-config.o: In function `std::pair<std::string const, std::string>::~pair()':
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::map<std::string, std::string, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::operator[](std::string const&)':
+/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
+/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)':
+/usr/include/c++/4.7/bits/basic_string.h:2402: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/basic_string.h:2403: undefined reference to `std::string::append(char const*)'
+/usr/include/c++/4.7/bits/basic_string.h:2404: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::pair(std::string const&, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > const&)':
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::pair<std::string const, std::string>::pair(std::string const&, std::string const&)':
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_copy(std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > const*, std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >*)':
+/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_end_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:1068: undefined reference to `__cxa_rethrow'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >::_M_copy(std::_Rb_tree_node<std::pair<std::string const, std::string> > const*, std::_Rb_tree_node<std::pair<std::string const, std::string> >*)':
+/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_end_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:1068: undefined reference to `__cxa_rethrow'
+obj/local-config.o: In function `bool std::operator< <char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
+/usr/include/c++/4.7/bits/basic_string.h:2568: undefined reference to `std::string::compare(std::string const&) const'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_insert_(std::_Rb_tree_node_base const*, std::_Rb_tree_node_base const*, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:981: undefined reference to `std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)'
+obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator--()':
+/usr/include/c++/4.7/bits/stl_tree.h:284: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base const*)'
+obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator++()':
+/usr/include/c++/4.7/bits/stl_tree.h:269: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base const*)'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::_M_insert_(std::_Rb_tree_node_base const*, std::_Rb_tree_node_base const*, std::pair<std::string const, std::string> const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:981: undefined reference to `std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)'
+obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::string> >::operator--()':
+/usr/include/c++/4.7/bits/stl_tree.h:284: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base const*)'
+obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::string> >::operator++()':
+/usr/include/c++/4.7/bits/stl_tree.h:269: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base const*)'
+obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >*, unsigned int)':
+/usr/include/c++/4.7/ext/new_allocator.h:100: undefined reference to `operator delete(void*)'
+obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::string> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, std::string> >*, unsigned int)':
+/usr/include/c++/4.7/ext/new_allocator.h:100: undefined reference to `operator delete(void*)'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_create_node(std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
+obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator--()':
+/usr/include/c++/4.7/bits/stl_tree.h:203: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base*)'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >::_M_create_node(std::pair<std::string const, std::string> const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
+obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::_M_create_node(std::pair<std::string const, std::string> const&)':
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
+/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
+/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
+obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::string> >::operator--()':
+/usr/include/c++/4.7/bits/stl_tree.h:203: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base*)'
+obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::pair(std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `std::pair<std::string const, std::string>::pair(std::pair<std::string const, std::string> const&)':
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
+/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
+obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::allocate(unsigned int, void const*)':
+/usr/include/c++/4.7/ext/new_allocator.h:92: undefined reference to `std::__throw_bad_alloc()'
+/usr/include/c++/4.7/ext/new_allocator.h:94: undefined reference to `operator new(unsigned int)'
+obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::string> > >::allocate(unsigned int, void const*)':
+/usr/include/c++/4.7/ext/new_allocator.h:92: undefined reference to `std::__throw_bad_alloc()'
+/usr/include/c++/4.7/ext/new_allocator.h:94: undefined reference to `operator new(unsigned int)'
+obj/local-config.o:(.eh_frame+0x12f): undefined reference to `__gxx_personality_v0'
+collect2: error: ld returned 1 exit status
+make: *** [obj/local-config] Error 1

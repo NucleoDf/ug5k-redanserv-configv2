@@ -2,12 +2,14 @@
 #define _DFN_EXCEPTION_
 
 #ifdef _WIN32
- #include <windows.h>
+#	include <windows.h>
 #else
+#	include <errno.h>
 #endif
 
 #include <stdexcept> 
 #include <string> 
+#include <cstring>
 #include <iostream>
 #include <sstream>
 
@@ -17,7 +19,7 @@ class Exception : public runtime_error
 {
 public:
 	Exception(const char *s="");
-	~Exception(void);
+	~Exception(void) throw(){}
 protected:
     virtual const char *Prefix()
     {
@@ -35,6 +37,5 @@ public:
 	unsigned long Code(void);
 	virtual const char *what();
 };
-
 
 #endif

@@ -7,7 +7,7 @@
 	#include <stdlib.h>
 	#include <crtdbg.h>
 	#include <tchar.h>
-	#include "..\..\include\pthreads\include\pthread.h"
+	#include "../../include/pthreads/include/pthread.h"
 	#define WORKING_DIR		"./"
 	#define __FILENAME__			(strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 #else
@@ -20,6 +20,8 @@
 		#define WORKING_DIR		"./"
 		#define _SIGACTION_		1
 	#endif
+	#include <stdarg.h>
+	#include <stdlib.h>
 	#include <pthread.h>
 	#define __FILENAME__			(strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 #endif
@@ -45,10 +47,10 @@
 using namespace plog;
 using namespace std;
 
-#define PLOG_INFO(format, ...)		LogInfo(__FILENAME__, __LINE__, format, __VA_ARGS__)
-#define PLOG_ERROR(format, ...)		LogError(__FILENAME__, __LINE__, format,__VA_ARGS__)
-#define PLOG_DEBUG(format, ...)		LogDebug(__FILENAME__, __LINE__, format,__VA_ARGS__)
-#define PLOG_EXCEP(x, format, ...)	LogException(__FILENAME__, __LINE__, x, format,__VA_ARGS__)
+#define PLOG_INFO(format, ...)		LogInfo(__FILENAME__, __LINE__, format, ##__VA_ARGS__)
+#define PLOG_ERROR(format, ...)		LogError(__FILENAME__, __LINE__, format,##__VA_ARGS__)
+#define PLOG_DEBUG(format, ...)		LogDebug(__FILENAME__, __LINE__, format,##__VA_ARGS__)
+#define PLOG_EXCEP(x, format, ...)	LogException(__FILENAME__, __LINE__, x, format, ##__VA_ARGS__)
 
 #ifdef _WIN32
 #	define LOCAL_TEST		1

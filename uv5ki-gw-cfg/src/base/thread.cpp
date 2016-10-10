@@ -1,7 +1,7 @@
 // Thread.cpp: implementation of the CThread class.
 //
 //////////////////////////////////////////////////////////////////////
-#include "..\..\include\base\thread.h"
+#include "../../include/base/thread.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -108,7 +108,7 @@ void CThread::Stop()
 //
 void *CThread::sRun(void *pParam)
 {	
-    CThread *pTh = (CThread *)pParam;
+    // CThread *pTh = (CThread *)pParam;
 	((CThread *)pParam)->m_Dead.Start();
 	((CThread *)pParam)->m_bLive = true;
 	try

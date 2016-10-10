@@ -12,6 +12,10 @@ using namespace rapidjson;
 class jData : public CodeBase
 {
 public:
+	jData(){}
+	virtual ~jData(){}
+
+public:
 	string JSerialize() 
 	{
 		StringBuffer s;
@@ -60,9 +64,9 @@ protected:
 	{
 		writer.Key(key.c_str());writer.String(val.c_str());
 	}
-	void write_key/*_uint*/(Writer<StringBuffer> &writer, string key, unsigned int val)
+	void write_key/*_int*/(Writer<StringBuffer> &writer, string key, int val)
 	{
-		writer.Key(key.c_str());writer.Uint(val);
+		writer.Key(key.c_str());writer.Int(val);
 	}
 	void write_array(Writer<StringBuffer> &writer, string key, vector<string> &val) 
 	{
@@ -79,14 +83,14 @@ protected:
 		writer.StartArray();
 		vector<int>::iterator it;
 		for (it=val.begin(); it!=val.end();it++)
-			writer.Uint((*it));
+			writer.Int((*it));
 		writer.EndArray();
 	}
-	template <class T> void write_array(Writer<StringBuffer> &writer, string key, vector<T *> &val) 
+	template <typename T> void write_array(Writer<StringBuffer> &writer, string key, vector<T *> &val) 
 	{
 		writer.Key(key.c_str());
 		writer.StartArray();
-		vector<T *>::iterator it;
+		typename vector<T *>::iterator it;
 		for (it=val.begin(); it!=val.end();it++)
 		{
 			writer.StartObject();
@@ -152,6 +156,12 @@ protected:
 			   is_string(base,indice) ? base[indice].GetString() :
 			   is_null(base,indice) ? "NULL" : "Error de Tipo";
 	}
+	void to_obj(Value &base, const char *indice, jData &obj) {
+		error="";
+		if (has_member(base, indice)==true) {
+			obj.jread(base[indice]);
+		}
+	}
 	/** */
 	void to_array(Value &base, const char *indice, vector<string> &arr)
 	{
@@ -160,7 +170,7 @@ protected:
 		if (is_array(base,indice)==true)
 		{
 			Value &varr = base[indice];
-			Value::ConstValueIterator itr;
+			Value::ValueIterator itr;
 			for (itr=varr.Begin(); itr!=varr.End(); itr++)
 			{
 				if ((*itr).IsString())
@@ -175,7 +185,7 @@ protected:
 		if (is_array(base,indice)==true)
 		{
 			Value &varr = base[indice];
-			Value::ConstValueIterator itr;
+			Value::ValueIterator itr;
 			for (itr=varr.Begin(); itr!=varr.End(); itr++)
 			{
 				if ((*itr).IsInt())
@@ -183,14 +193,14 @@ protected:
 			}
 		}
 	}
-	template <class T> void to_array(Value &base, const char *indice, vector<T *> &arr)
+	template <typename T> void to_array(Value &base, const char *indice, vector<T *> &arr)
 	{
 		error="";
 		arr.clear();
 		if (is_array(base,indice)==true)
 		{
 			Value &varr = base[indice];
-			Value::ConstValueIterator itr;
+			Value::ValueIterator itr;
 			for (itr=varr.Begin(); itr!=varr.End(); itr++)
 			{
 				T *obj = new T();
@@ -199,27 +209,35 @@ protected:
 			}
 		}
 	}
+	template <typename T> void clear_array(vector<T *> &arr) {
+		if (arr.size() > 0) {
+			typename vector<T *>::iterator it;
+			for (it=arr.begin(); it!=arr.end(); it++)
+				delete (*it);
+			arr.clear();
+		}
+	}
 private:
 	string error;
 };
 
 /** */
-class webData_msg : public jData
+class webData_line : public jData
 {
 public:
-	webData_msg(string msg="OK") {mensaje=msg;}
+	webData_line(string msg="OK") {line=msg;}
 
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
 	{
-		write_key/*_string*/(writer, "res", mensaje);
+		write_key/*_string*/(writer, "res", line);
 	}
 	virtual void jread(Value &base){}
 
 protected:
-	string mensaje;
-
+	string line;
 };
+
 
 /** */
 class webData_tses : public jData
@@ -243,10 +261,10 @@ private:
 	string idc;
 	string tim;
 #if LOCAL_TEST
-	webData_msg msg;
+	webData_line msg;
 	vector<string> val_prueba1;
 	vector<int> val_prueba2;
-	vector<webData_msg *> val_prueba3;
+	vector<webData_line *> val_prueba3;
 #endif
 };
 
@@ -270,6 +288,8 @@ public:
 		name=Name;
 		fecha=Fecha;
 	}
+	~webData_preconf_id(){}
+
 public:
 	virtual void jread(Value &base){
 		name = to_string(base, "name");

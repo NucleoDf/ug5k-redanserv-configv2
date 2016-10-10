@@ -87,24 +87,46 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\base\code-base.h" />
+    <ClInclude Include="include\base\sqlite3++.h" />
     <ClInclude Include="include\base\exception.h" />
     <ClInclude Include="include\base\plog.h" />
+    <ClInclude Include="include\base\sistema.h" />
     <ClInclude Include="include\base\socket.h" />
+    <ClInclude Include="include\base\sqlite3.h" />
     <ClInclude Include="include\base\thread.h" />
+    <ClInclude Include="include\config\comm-config.h" />
+    <ClInclude Include="include\config\comm-gen-config.h" />
+    <ClInclude Include="include\config\local-config.h" />
+    <ClInclude Include="include\config\users-config.h" />
+    <ClInclude Include="include\his-proc.h" />
+    <ClInclude Include="include\man-proc.h" />
     <ClInclude Include="include\pthreads\include\pthread.h" />
     <ClInclude Include="include\pthreads\include\sched.h" />
     <ClInclude Include="include\pthreads\include\semaphore.h" />
+    <ClInclude Include="include\tools\base64.h" />
+    <ClInclude Include="include\tools\stlini.h" />
+    <ClInclude Include="include\tools\tools.h" />
+    <ClInclude Include="include\versiones.h" />
     <ClInclude Include="include\websrv\mongoose.h" />
     <ClInclude Include="include\websrv\uv5kigwcfg-web-app-data.h" />
     <ClInclude Include="include\websrv\uv5kigwcfg-web-app.h" />
     <ClInclude Include="include\websrv\web-app-server.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base\code-base.cpp" />
+    <ClCompile Include="src\base\sqlite3++.cpp" />
     <ClCompile Include="src\base\exception.cpp" />
+    <ClCompile Include="src\base\sistema.cpp" />
     <ClCompile Include="src\base\socket.cpp" />
+    <ClCompile Include="src\base\sqlite3.c" />
     <ClCompile Include="src\base\thread.cpp" />
+    <ClCompile Include="src\config\local-config.cpp" />
+    <ClCompile Include="src\his-proc.cpp" />
+    <ClCompile Include="src\man-proc.cpp" />
+    <ClCompile Include="src\tools\base64.cpp" />
+    <ClCompile Include="src\tools\stlini.cpp" />
+    <ClCompile Include="src\tools\tools.cpp" />
+    <ClCompile Include="src\versiones.cpp" />
     <ClCompile Include="src\websrv\mongoose.c" />
     <ClCompile Include="src\websrv\uv5kigwcfg-web-app-data.cpp" />
     <ClCompile Include="src\websrv\uv5kigwcfg-web-app.cpp" />

@@ -1,4 +1,4 @@
-#include "..\..\include\websrv\uv5kigwcfg-web-app-data.h"
+#include "../../include/websrv/uv5kigwcfg-web-app-data.h"
 
 /** */
 webData_tses::webData_tses(int parStd, string parIdc, string parTim)
@@ -7,6 +7,7 @@ webData_tses::webData_tses(int parStd, string parIdc, string parTim)
 	idc = parIdc;
 	tim = parTim;
 
+#if LOCAL_TEST
 	val_prueba1.push_back("Valor-1");
 	val_prueba1.push_back("Valor-2");
 
@@ -15,20 +16,23 @@ webData_tses::webData_tses(int parStd, string parIdc, string parTim)
 	val_prueba2.push_back(1000);
 	val_prueba2.push_back(-23);
 
-	val_prueba3.push_back(new webData_msg());
-	val_prueba3.push_back(new webData_msg("hola"));
+	val_prueba3.push_back(new webData_line());
+	val_prueba3.push_back(new webData_line("hola"));
+#endif
 }
 
 /** */
 void webData_tses::jwrite(Writer<StringBuffer> &writer)
 {
 	write_key/*_uint*/(writer, "std", (unsigned int)std);
-	write_key/*_object*/(writer, "msg", msg);
 	write_key/*_string*/(writer, "idc", idc);
 	write_key/*_string*/(writer, "tim", tim);
+#if LOCAL_TEST
+	write_key/*_object*/(writer, "msg", msg);
 	write_array(writer, "ArrayPrueba1", val_prueba1);
 	write_array(writer, "ArrayPrueba2", val_prueba2);
 	write_array(writer, "ArrayPrueba3", val_prueba3);
+#endif
 }
 
 /**----------------------------------------------------------------------------------*/

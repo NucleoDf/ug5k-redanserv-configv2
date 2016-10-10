@@ -1,4 +1,4 @@
-#include "..\..\include\base\exception.h"
+#include "../../include/base/exception.h"
 
 /** */
 Exception::Exception(const char *s)
@@ -7,11 +7,6 @@ Exception::Exception(const char *s)
 #else
 	:runtime_error(s), m_error(errno)		// Obtener ultimo error en linux
 #endif
-{
-}
-
-/** */
-Exception::~Exception(void)
 {
 }
 

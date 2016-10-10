@@ -1299,7 +1299,7 @@ typedef struct stat file_stat_t;
 typedef pid_t process_id_t;
 #endif                  //////// End of platform-specific defines and includes
 
-#include "..\..\include\websrv\mongoose.h"
+#include "../../include/websrv/mongoose.h"
 
 #define MAX_REQUEST_SIZE 16384
 #define IOBUF_SIZE 8192

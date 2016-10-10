@@ -1,4 +1,5 @@
-#include "..\..\include\websrv\uv5kigwcfg-web-app.h"
+#include "../../include/websrv/uv5kigwcfg-web-app.h"
+#include "../../include/man-proc.h"
 
 #define NOT_IMPLEMENTED_RESP(r)				{r->code=404; r->data="{\"res\":\"Operacion no Implementada\"}";}
 #define OK200_RESP(r, d)					{r->code=200; r->data=d;}
@@ -31,15 +32,17 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 	_handlers_list["/import"]=stCb_;			// POST					IMPORTAR CFG
 	_handlers_list["/uploadcfg"]=stCb_;			// POST					Subir CONFIG.
 
-	_handlers_list["/mant/std"]=stCb_;			// GET					.
-	_handlers_list["/mant/ver"]=stCb_;			// GET					.
-	_handlers_list["/mant/lver"]=stCb_;			// GET					.
-	_handlers_list["/mant/bite"]=stCb_;			// GET					.
-	_handlers_list["/mant/reset"]=stCb_;		// RESET de UNIDAD		POST
-	_handlers_list["/mant/swactiva"]=stCb_;		// ACTIVAR SW-VER		POST
-	_handlers_list["/mant/swrestore"]=stCb_;	// RETAURAR SW-VER		POST
+	_handlers_list["/mant/std"]=stCb_mtto;		// GET					.
+	_handlers_list["/mant/ver"]=stCb_mtto;		// GET					.
+	_handlers_list["/mant/lver"]=stCb_mtto;		// GET					.
+	_handlers_list["/mant/bite"]=stCb_mtto;		// GET					.
+	_handlers_list["/mant/reset"]=stCb_mtto;	// RESET de UNIDAD		POST
+	_handlers_list["/mant/swactiva"]=stCb_mtto;	// ACTIVAR SW-VER		POST
+	_handlers_list["/mant/swrestore"]=stCb_mtto;// RETAURAR SW-VER		POST
 
 	_handlers_list["/cpu2cpu"]=stCb_;			// PUT.					COMUNICACIONES INTERNAS
+
+	_handlers_list["/test"]=stCb_;				// GET, POST.			PARA PRUEBAS...
 }
 
 /** */
@@ -76,11 +79,28 @@ bool Uv5kiGwCfgWebApp::stAccessControl(string name, string pwd, int *profile)
 /** */
 void Uv5kiGwCfgWebApp::stCb_(struct mg_connection *conn, string user, web_response *resp)
 {
+#if LOCAL_TEST		
+	resp->actividad=false;
+	if (string(conn->request_method)=="GET") 
+	{
+		CommConfig cfg(".", "comm-config.json");
+		OK200_RESP(resp, cfg.JSerialize());
+		return;
+	}
+	else if (string(conn->request_method)=="POST") 
+	{
+		webData_line ok("OK");
+		OK200_RESP(resp, ok.JSerialize());
+		return;
+	}
+	NOT_IMPLEMENTED_RESP(resp);
+#else
 	string strdata = "{\"res\":\"Handler por Defecto\"}";
 	
 	resp->actividad=true;
 	resp->code=200;
 	resp->data=strdata;
+#endif
 }
 
 /** */
@@ -115,7 +135,7 @@ void Uv5kiGwCfgWebApp::stCb_logout(struct mg_connection *conn, string user, web_
 	if (string(conn->request_method)=="POST") 
 	{
 		_web_config.session_control.Reset();
-		webData_msg ok("OK");
+		webData_line ok("OK");
 		OK200_RESP(resp, ok.JSerialize());
 		return;
 	}
@@ -129,13 +149,13 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 	if (string(conn->request_method)=="GET")
 	{
 		// TODO..
-		OK200_RESP(resp, webData_msg("En construccion").JSerialize());
+		OK200_RESP(resp, webData_line("En construccion").JSerialize());
 		return;
 	}
 	else if (string(conn->request_method)=="POST") 
 	{
 		// TODO..
-		OK200_RESP(resp, webData_msg("En construccion").JSerialize());
+		OK200_RESP(resp, webData_line("En construccion").JSerialize());
 		return;
 	}
 	NOT_IMPLEMENTED_RESP(resp);
@@ -164,10 +184,10 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 				OK200_RESP(resp, webData_preconfs().JSerialize());
 				return;
 			}
-			IERROR_RESP(resp, webData_msg("Error al Salvar Preconfiguracion").JSerialize());
+			IERROR_RESP(resp, webData_line("Error al Salvar Preconfiguracion").JSerialize());
 			return;
 		}
-		IERROR_RESP(resp, webData_msg("Error de formato: " + preconf.Error()).JSerialize());
+		IERROR_RESP(resp, webData_line("Error de formato: " + preconf.Error()).JSerialize());
 		return;
 	}
 	else if (string(conn->request_method)=="PUT") 
@@ -182,7 +202,7 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 			OK200_RESP(resp, webData_preconfs().JSerialize());
 			return;
 		}
-		IERROR_RESP(resp, webData_msg("Error al Activar Preconfiguracion").JSerialize());
+		IERROR_RESP(resp, webData_line("Error al Activar Preconfiguracion").JSerialize());
 		return;
 	}
 	else if (string(conn->request_method)=="DELETE") 
@@ -197,7 +217,63 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 			OK200_RESP(resp, webData_preconfs().JSerialize());
 			return;
 		}
-		IERROR_RESP(resp, webData_msg("Error al Eliminar Preconfiguracion").JSerialize());
+		IERROR_RESP(resp, webData_line("Error al Eliminar Preconfiguracion").JSerialize());
+		return;
+	}
+	NOT_IMPLEMENTED_RESP(resp);
+}
+
+/** */
+void Uv5kiGwCfgWebApp::stCb_mtto(struct mg_connection *conn, string user, web_response *resp)
+{
+	resp->actividad=true;
+	vector<string> levels = parse_uri(string(conn->uri));
+	if (levels.size() != 3)
+	{
+		NOT_IMPLEMENTED_RESP(resp);
+		return;
+	}
+	if (string(conn->request_method)=="GET") {
+		if (levels[2]=="std") {
+			OK200_RESP(resp, ManProc::p_man->jestado());
+			return;
+		}
+		else if (levels[2]=="ver") {
+			// TODO.
+			OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			return;
+		}
+		else if (levels[2]=="lver") {
+			// TODO.
+			OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			return;
+		}
+		else if (levels[2]=="bite") {
+			// TODO.
+			// HistClient::hist.SetEvent(INCI_BITE, user, "");
+			OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			return;
+		}
+		NOT_IMPLEMENTED_RESP(resp);
+		return;
+	}
+	else if (string(conn->request_method)=="POST") {
+		if (levels[2]=="reset") {
+			// TODO.
+			OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			return;
+		}
+		else if (levels[2]=="swactiva") {
+			// TODO.
+			OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			return;
+		}
+		else if (levels[2]=="swrestore") {
+			// TODO.
+			OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			return;
+		}
+		NOT_IMPLEMENTED_RESP(resp);
 		return;
 	}
 	NOT_IMPLEMENTED_RESP(resp);

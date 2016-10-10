@@ -1,7 +1,7 @@
 #ifndef _WEB_APP_SERVER_H_
 #define _WEB_APP_SERVER_H_
 
-#include "..\..\include\base\thread.h"
+#include "../../include/base/thread.h"
 #include "mongoose.h"
 
 typedef struct

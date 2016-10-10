@@ -30,6 +30,10 @@
 #   include <sys/syscall.h>
 #   include <sys/time.h>
 #   include <pthread.h>
+#	include <netinet/in.h>
+#	include <sys/socket.h>
+#	include <arpa/inet.h>
+#	include <errno.h>
 #   ifndef __ANDROID__
 #       include <iconv.h>
 #   endif

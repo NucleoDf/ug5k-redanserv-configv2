@@ -1,4 +1,4 @@
-#include "..\..\include\base\code-base.h"
+#include "../../include/base/code-base.h"
 
 /** MACROS */
 #define LOGCONF	ON_WORKING_DIR("plog.conf")
@@ -44,7 +44,7 @@ void CodeBase::plogInit()
 	pthread_create(&plog_thread_id, NULL, plog_thread_routine, NULL);
 #ifndef _WIN32
 #ifndef _PPC82xx_
-			pthread_setname_np(m_hThread, id.c_str());
+			pthread_setname_np(plog_thread_id, id.c_str());
 #endif // !_PPC82xx_
 #endif // !_WIN32
 }

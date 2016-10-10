@@ -3,6 +3,7 @@
 
 #include "web-app-server.h"
 #include "uv5kigwcfg-web-app-data.h"
+#include "../tools/tools.h"
 
 /** */
 class Uv5kiGwCfgWebApp :
@@ -18,12 +19,20 @@ protected:
 	static void stCb_logout(struct mg_connection *conn, string user, web_response *resp);
 	static void stCb_config(struct mg_connection *conn, string user, web_response *resp);
 	static void stCb_preconfig(struct mg_connection *conn, string user, web_response *resp);
+	static void stCb_mtto(struct mg_connection *conn, string user, web_response *resp);
 
 	static bool stAccessControl(string name, string pwd, int *profile);
 
 	void GetHandlers();
 	void GetConfig();
 
+protected:
+	static vector<string> parse_uri(string uri)
+	{
+		vector<string> _levels;	
+		Tools::split(_levels, uri, '/');
+		return _levels;
+	}
 private:
 	virtual restHandler *handlers(){return &_handlers_list;}
 	virtual web_config *config(){return &_web_config;}
