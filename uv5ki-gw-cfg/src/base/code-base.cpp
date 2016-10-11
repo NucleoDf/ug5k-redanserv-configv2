@@ -62,7 +62,7 @@ void CodeBase::plogDispose()
 }
 
 /** */
-void CodeBase::_Log(plog::Severity level, const char *fmt, va_list args)
+void CodeBase::_Log(plog::Severity level, const char *from, int line, const char *fmt, va_list args)
 {
 	if (_plog_iniciado == false)
 		plogInit();
@@ -76,7 +76,7 @@ void CodeBase::_Log(plog::Severity level, const char *fmt, va_list args)
 	vsnprintf ( textString, sizeof(textString), fmt, args );
 #endif
 
-	std::pair<plog::Severity, string> evento(level, textString);
+	PLogEvent evento(level, from, line, textString);
 	util::MutexLock lock(plog_mutex);
 	plog_queue.push(evento);
 }
@@ -86,20 +86,21 @@ void CodeBase::_FormatLog(plog::Severity level, const char *file, int line, cons
 {
 	try
 	{
-		std::stringstream ss;
-		ss << file << " (L:" << line << "): " << fmt;
-		_Log(level, ss.str().c_str(), args);
+		//std::stringstream ss;
+		//ss << file << " (L:" << line << "): " << fmt;
+		//ss << file << " (L:" << line << ")";
+		_Log(level, file, line, fmt, args);
 	}
 	catch(...)
 	{
-		_Log(fatal, "Error en _FormatLog", args);
+		_Log(fatal, "", 0, "Error en _FormatLog", args);
 		return;
 	}
 }
 
 /** */
 pthread_t CodeBase::plog_thread_id;
-std::queue<std::pair<plog::Severity, string> > CodeBase::plog_queue;
+std::queue<PLogEvent > CodeBase::plog_queue;
 util::Mutex CodeBase::plog_mutex;
 void *CodeBase::plog_thread_routine(void *arg) 
 {
@@ -108,15 +109,16 @@ void *CodeBase::plog_thread_routine(void *arg)
 		if (!plog_queue.empty())
 		{
 			util::MutexLock lock(plog_mutex);
-			std::pair<plog::Severity, string> evento = plog_queue.front();
+			cfg.TestCfgChange(); 
+			PLogEvent evento = plog_queue.front();
 			plog_queue.pop();
 
-			if (plog::pLogProfiles[(int)evento.first].toFile)
-				LOG_(plogFile, evento.first) << evento.second;
-			if (plog::pLogProfiles[(int)evento.first].toConsole)
-				LOG_(plogConsole, evento.first) << evento.second;
-			if (plog::pLogProfiles[(int)evento.first].toNetwork)
-				LOG_(plogNetwork, evento.first) << evento.second;
+			if (plog::pLogProfiles[(int)evento.sev].toFile)
+				NDFLOG_(plogFile, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
+			if (plog::pLogProfiles[(int)evento.sev].toConsole)
+				NDFLOG_(plogConsole, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
+			if (plog::pLogProfiles[(int)evento.sev].toNetwork)
+				NDFLOG_(plogNetwork, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
 		}
 	}
 	return NULL;

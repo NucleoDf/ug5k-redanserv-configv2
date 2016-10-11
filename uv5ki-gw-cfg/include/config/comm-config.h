@@ -7,8 +7,6 @@
 #include <queue>
 #include <algorithm>
 
-#define _NUM_HW_ITFS_		16
-
 #include "../base/code-base.h"
 #include "../base/thread.h"
 #include "../base/socket.h"
@@ -20,6 +18,9 @@
 
 #include "./users-config.h"
 #include "./comm-gen-config.h"
+#include "./comm-ser-config.h"
+#include "./comm-har-config.h"
+#include "./comm-res-config.h"
 
 
 /** Estructura de CONFIGURACION. Se parte de REDAN */
@@ -34,29 +35,42 @@ public:
 	}
 	CommConfig(string path, string file) {
 		string data,linea;
-		ifstream f(path + "/" + file, ios_base::in);
+		ifstream f((path + "/" + file).c_str(), ios_base::in);
 		while (std::getline(f, linea))
 			data += linea;
 		JDeserialize(data);
+	}
+	~CommConfig() {
+		clear_array(users);
+		clear_array(recursos);
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {
 		write_key(writer, "idConf", idConf);
 		write_key(writer, "fechaHora", fechaHora);
-		users.jwrite(writer);
 		write_key(writer, "general", general);
+		write_key(writer, "hardware", hardware);
+		write_key(writer, "recursos", recursos);
+		write_key(writer, "users", users);
+		write_key(writer, "servicios", servicios);
 	}
 	virtual void jread(Value &base) {
-		idConf = to_string(base, "idConf");
-		fechaHora = to_string(base, "fechaHora");
-		users.jread(base);
-		to_obj(base, "general", general);
+		read_key(base, "idConf", idConf);
+		read_key(base, "fechaHora", fechaHora);
+		read_key(base, "users", users);
+		read_key(base, "general", general);
+		read_key(base, "servicios", servicios);
+		read_key(base, "hardware", hardware);
+		read_key(base, "recursos", recursos);
 	}
-protected:
+public:
 	string idConf;
 	string fechaHora;
-	UsersConfig users;
+	vector<UserData *> users;
 	CommGenConfig general;
+	CommSerConfig servicios;
+	CommHarConfig hardware;
+	vector<CommResConfig *> recursos;
 };
 
 #endif

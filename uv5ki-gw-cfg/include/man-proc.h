@@ -80,7 +80,7 @@ public:
 		write_key(writer, "st_col", st_col);
 		write_key(writer, "stdn", stdn);
 		write_key(writer, "sync", sync);
-		write_array(writer, "itfs", itfs);
+		write_key(writer, "itfs", itfs);
 	}
 	virtual void jread(Value &base){}
 
@@ -128,7 +128,7 @@ public:
 		write_key(writer, "cpu0", cpu0);
 		write_key(writer, "cpu1", cpu1);
 
-		write_array(writer, "itf", itf);
+		write_key(writer, "itf", itf);
 	}
 	virtual void jread(Value &base){}
 
@@ -159,7 +159,7 @@ public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
 	{
 		write_key(writer, "res", res);
-		write_array(writer, "msg", msg);
+		write_key(writer, "msg", msg);
 	}
 	virtual void jread(Value &base){}
 	void setMsg(string msg);

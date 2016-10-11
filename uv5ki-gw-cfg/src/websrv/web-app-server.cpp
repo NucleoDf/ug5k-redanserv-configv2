@@ -178,7 +178,7 @@ webCallback WebAppServer::FindRest(string url)
 {
 	for (restHandler_iterator hit=handlers()->begin(); hit != handlers()->end(); ++hit)
 	{
-		if (hit->first == url)
+		if (url.find(hit->first) != string::npos)
 			return hit->second;
 	}
 	return NULL;

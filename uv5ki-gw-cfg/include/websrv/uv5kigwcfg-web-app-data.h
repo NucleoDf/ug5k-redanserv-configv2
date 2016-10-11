@@ -51,7 +51,11 @@ protected:
 			error = Error;
 		}
 	}
-	bool validate(string data_in) {return true;}	// TODO...
+	bool validate(string data_in) {
+		Document valid;
+		valid.Parse<kParseValidateEncodingFlag>(data_in.c_str());
+		return !valid.HasParseError();
+	}
 	/** */
 	void write_key/*_object*/(Writer<StringBuffer> &writer, string key, jData &obj)
 	{
@@ -59,6 +63,10 @@ protected:
 		writer.StartObject();
 		obj.jwrite(writer);
 		writer.EndObject();
+	}
+	void write_key/*_string*/(Writer<StringBuffer> &writer, string key, bool val)
+	{
+		writer.Key(key.c_str());writer.Bool(val);
 	}
 	void write_key/*_string*/(Writer<StringBuffer> &writer, string key, string val)
 	{
@@ -68,7 +76,7 @@ protected:
 	{
 		writer.Key(key.c_str());writer.Int(val);
 	}
-	void write_array(Writer<StringBuffer> &writer, string key, vector<string> &val) 
+	void write_key(Writer<StringBuffer> &writer, string key, vector<string> &val) 
 	{
 		writer.Key(key.c_str());
 		writer.StartArray();
@@ -77,7 +85,7 @@ protected:
 			writer.String((*it).c_str());
 		writer.EndArray();
 	}
-	void write_array(Writer<StringBuffer> &writer, string key, vector<int> &val) 
+	void write_key(Writer<StringBuffer> &writer, string key, vector<int> &val) 
 	{
 		writer.Key(key.c_str());
 		writer.StartArray();
@@ -86,7 +94,7 @@ protected:
 			writer.Int((*it));
 		writer.EndArray();
 	}
-	template <typename T> void write_array(Writer<StringBuffer> &writer, string key, vector<T *> &val) 
+	template <typename T> void write_key(Writer<StringBuffer> &writer, string key, vector<T *> &val) 
 	{
 		writer.Key(key.c_str());
 		writer.StartArray();
@@ -122,6 +130,12 @@ protected:
 		if (error=="") SetError("Tipo NULO: (" + string(indice) + ").");
 		return true;
 	}
+	bool is_bool(Value &base, const char *indice) {
+		if (has_member(base, indice)==true && base[indice].IsBool()==true)
+			return true;
+		if (error=="") SetError("Tipo incorrecto: (" + string(indice) + "). Se esperaba Boolean");
+		return false;
+	}
 	bool is_int(Value &base, const char *indice) {
 		if (has_member(base, indice)==true && base[indice].IsInt()==true)
 			return true;
@@ -141,29 +155,31 @@ protected:
 		return false;
 	}
 	/** */
-	int to_int(Value &base, const char *indice)
-	{
+	void read_key(Value &base, const char *indice, bool &val) {
 		error = "";
-		return is_null(base, indice) ? -1 :
+		val = is_null(base, indice) ? false :
+			   is_bool(base, indice) ? base[indice].GetBool() : false; 			   
+	}
+	void read_key(Value &base, const char *indice, int &val) {
+		error = "";
+		val = is_null(base, indice) ? -1 :
 			   is_int(base, indice) ? base[indice].GetInt() : 			   
 			   is_string(base, indice) ? atoi(base[indice].GetString()) : -2;
-	}	
-	/** */
-	string to_string(Value &base, const char *indice)
-	{
-		error="";
-		return has_member(base, indice)==false ? "Indice Desconocido" :
+	}
+	void read_key(Value &base, const char *indice, string &val) {
+		error = "";
+		val = has_member(base, indice)==false ? "Indice Desconocido" :
 			   is_string(base,indice) ? base[indice].GetString() :
 			   is_null(base,indice) ? "NULL" : "Error de Tipo";
 	}
-	void to_obj(Value &base, const char *indice, jData &obj) {
+	void read_key(Value &base, const char *indice, jData &obj) {
 		error="";
 		if (has_member(base, indice)==true) {
 			obj.jread(base[indice]);
 		}
 	}
 	/** */
-	void to_array(Value &base, const char *indice, vector<string> &arr)
+	void read_key(Value &base, const char *indice, vector<string> &arr)
 	{
 		error="";
 		arr.clear();
@@ -178,7 +194,7 @@ protected:
 			}
 		}
 	}
-	void to_array(Value &base, const char *indice, vector<int> &arr)
+	void read_key(Value &base, const char *indice, vector<int> &arr)
 	{
 		error="";
 		arr.clear();
@@ -193,7 +209,7 @@ protected:
 			}
 		}
 	}
-	template <typename T> void to_array(Value &base, const char *indice, vector<T *> &arr)
+	template <typename T> void read_key(Value &base, const char *indice, vector<T *> &arr)
 	{
 		error="";
 		arr.clear();
@@ -249,9 +265,9 @@ public:
 	virtual void jread(Value &base)
 	{
 #if LOCAL_TEST
-		std = to_int(base, "std");
-		idc = to_string(base, "idc");
-		tim = to_string(base, "tim");
+		read_key(base, "std", std);
+		read_key(base, "idc", idc);
+		read_key(base, "tim", tim);
 #endif
 	}
 	virtual void jwrite(Writer<StringBuffer> &writer);
@@ -268,59 +284,6 @@ private:
 #endif
 };
 
-/** */
-class webData_config : public jData
-{
-public:
-	webData_config(){}
-	~webData_config(){}
-
-public:
-	virtual void jread(Value &base){}
-	virtual void jwrite(Writer<StringBuffer> &writer){}
-};
-
-/** */
-class webData_preconf_id : public jData
-{
-public:
-	webData_preconf_id(string Name="", string Fecha="") {
-		name=Name;
-		fecha=Fecha;
-	}
-	~webData_preconf_id(){}
-
-public:
-	virtual void jread(Value &base){
-		name = to_string(base, "name");
-		fecha= to_string(base, "fecha");
-	}
-	virtual void jwrite(Writer<StringBuffer> &writer){
-		write_key(writer, "name", name);
-		write_key(writer, "fecha", fecha);
-	}
-	
-private:
-	string name;
-	string fecha;
-};
-
-/** */
-class webData_preconfs : public jData
-{
-public:
-	webData_preconfs();
-	~webData_preconfs();
-public:
-	virtual void jread(Value &base){
-	}
-	virtual void jwrite(Writer<StringBuffer> &writer){
-		write_array(writer, "preconfs", preconfs);
-	}
-
-private:
-	vector<webData_preconf_id *> preconfs;
-};
 
 #endif
 

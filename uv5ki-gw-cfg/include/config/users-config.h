@@ -7,8 +7,6 @@
 #include <queue>
 #include <algorithm>
 
-#define _NUM_HW_ITFS_		16
-
 #include "../base/code-base.h"
 #include "../base/thread.h"
 #include "../base/socket.h"
@@ -33,38 +31,15 @@ public:
 	}
 	virtual void jread(Value &base)
 	{
-		perfil = to_int(base, "perfil");
-		clave = to_string(base, "clave");
-		name = to_string(base, "name");
+		read_key(base, "perfil", perfil);
+		read_key(base, "clave", clave);
+		read_key(base, "name", name);
 	}
 
-protected:
+public:
 	string name;
 	string clave;
 	int perfil;
-};
-
-/** */
-class UsersConfig : public jData
-{
-public:
-	UsersConfig() {
-	}
-	~UsersConfig() {
-		clear_array(users);
-	}
-public:
-	virtual void jwrite(Writer<StringBuffer> &writer)
-	{
-		write_array(writer, "users", users);
-	}
-	virtual void jread(Value &base)
-	{
-		to_array(base, "users", users);
-	}
-
-protected:
-	vector<UserData *> users;
 };
 
 #endif

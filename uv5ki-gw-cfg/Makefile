@@ -15,7 +15,7 @@ OBJ01 = obj/uv5ki-gw-cfg.o
 OBJ02 = obj/code-base.o obj/exception.o obj/sistema.o obj/socket.o obj/thread.o obj/sqlite3.o obj/sqlite3++.o
 OBJ03 = obj/mongoose.o obj/web-app-server.o obj/uv5kigwcfg-web-app.o obj/uv5kigwcfg-web-app-data.o 
 OBJ04 = obj/stlini.o obj/base64.o obj/tools.o
-OBJ05 = obj/man-proc.o obj/his-proc.o obj/local-config.o obj/versiones.o
+OBJ05 = obj/man-proc.o obj/his-proc.o obj/comm-preconf.o obj/local-config.o obj/versiones.o
 
 OBJS  = $(OBJ01) $(OBJ02) $(OBJ03) $(OBJ04) $(OBJ05) obj/buildstring.o
 CC    = $(CROSS_COMPILE)gcc

@@ -5,6 +5,10 @@
 #include "uv5kigwcfg-web-app-data.h"
 #include "../tools/tools.h"
 
+#define CPU2CPU_MSG_CAMBIO_CONFIG	((const char *)"CambioConfig")
+#define CPU2CPU_MSG_REMOTE_LOCK		((const char *)"RemoteLock")
+#define CPU2CPU_MSG_REMOTE_UNLOCK	((const char *)"RemoteUnlock") 
+
 /** */
 class Uv5kiGwCfgWebApp :
 	public WebAppServer
@@ -19,7 +23,9 @@ protected:
 	static void stCb_logout(struct mg_connection *conn, string user, web_response *resp);
 	static void stCb_config(struct mg_connection *conn, string user, web_response *resp);
 	static void stCb_preconfig(struct mg_connection *conn, string user, web_response *resp);
+	static void stCb_importexport(struct mg_connection *conn, string user, web_response *resp);
 	static void stCb_mtto(struct mg_connection *conn, string user, web_response *resp);
+	static void stCb_internos(struct mg_connection *conn, string user, web_response *resp);
 
 	static bool stAccessControl(string name, string pwd, int *profile);
 

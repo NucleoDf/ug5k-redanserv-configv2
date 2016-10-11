@@ -32,17 +32,17 @@ public:
 	}
 	virtual void jread(Value &base)
 	{
-		tlan = to_int(base, "tlan");
-		ip0 = to_string(base, "ip0");
-		ms0 = to_string(base, "ms0");
-		ip1 = to_string(base, "ip1");
-		ms1 = to_string(base, "ms1");
-		ipb = to_string(base, "ipb");
-		msb = to_string(base, "msb");
-		ipg = to_string(base, "ipg");
+		read_key(base, "tlan", tlan);
+		read_key(base, "ip0", ip0);
+		read_key(base, "ms0", ms0);
+		read_key(base, "ip1", ip1);
+		read_key(base, "ms1", ms1);
+		read_key(base, "ipb", ipb);
+		read_key(base, "msb", msb);
+		read_key(base, "ipg", ipg);
 	}
 
-protected:
+public:
 	int tlan;
 	string ip0;
 	string ip1;
@@ -73,22 +73,22 @@ public:
 		write_key(writer, "nivelconsola", nivelconsola);
 		write_key(writer, "puertoconsola", puertoconsola);
 		write_key(writer, "nivelIncidencias", nivelIncidencias);
-		write_array(writer, "cpus", cpus);
+		write_key(writer, "cpus", cpus);
 	}
 	virtual void jread(Value &base)
 	{
-		name = to_string(base, "name");
-		emplazamiento = to_string(base, "emplazamiento");
-		ipv = to_string(base, "ipv");
-		ips = to_string(base, "ips");
-		dualidad = to_int(base,"dualidad");
-		nivelconsola = to_int(base,"nivelconsola");
-		puertoconsola = to_int(base,"puertoconsola");
-		nivelIncidencias = to_int(base,"nivelIncidencias");
-		to_array(base, "cpus", cpus);
+		read_key(base, "name", name);
+		read_key(base, "emplazamiento", emplazamiento);
+		read_key(base,"dualidad", dualidad);
+		read_key(base, "ipv", ipv);
+		read_key(base, "ips", ips);
+		read_key(base,"nivelconsola", nivelconsola);
+		read_key(base,"puertoconsola", puertoconsola);
+		read_key(base,"nivelIncidencias", nivelIncidencias);
+		read_key(base, "cpus", cpus);
 	}
 
-protected:
+public:
 	string name;
 	string emplazamiento;
 	int dualidad;

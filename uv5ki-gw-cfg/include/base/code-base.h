@@ -26,6 +26,11 @@
 	#define __FILENAME__			(strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 #endif
 
+#ifndef _PPC82xx_
+#	define LOCAL_TEST		1
+#endif
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -52,9 +57,21 @@ using namespace std;
 #define PLOG_DEBUG(format, ...)		LogDebug(__FILENAME__, __LINE__, format,##__VA_ARGS__)
 #define PLOG_EXCEP(x, format, ...)	LogException(__FILENAME__, __LINE__, x, format, ##__VA_ARGS__)
 
-#ifdef _WIN32
-#	define LOCAL_TEST		1
-#endif
+/** */
+class PLogEvent {
+public:
+	PLogEvent(plog::Severity sevIn=info, string fromIn="", int lineIn=0, string msgIn="") {
+		sev = sevIn;
+		from = fromIn;
+		msg = msgIn;
+		line = lineIn;
+	}
+public:
+	plog::Severity	sev;
+	string from;
+	int line;
+	string msg;
+};
 
 /** */
 class CodeBase
@@ -74,7 +91,7 @@ public:
 	static void plogDispose();
 
 private:
-	static void _Log(plog::Severity level, const char *fmt, va_list args);
+	static void _Log(plog::Severity level, const char *from, int line, const char *fmt, va_list args);
 	static void _FormatLog(plog::Severity level, const char *file, int line, const char *fmt, va_list args );
 	static void _FormatLog(plog::Severity level, const char *file, int line, const char *fmt, ... );
 
@@ -118,7 +135,7 @@ private:
 	static bool _plog_iniciado;
 	static pthread_t plog_thread_id;
 	static void *plog_thread_routine(void *arg);
-	static std::queue<std::pair<plog::Severity, string> > plog_queue;
+	static std::queue<PLogEvent> plog_queue;
 	static util::Mutex plog_mutex;
 };
 

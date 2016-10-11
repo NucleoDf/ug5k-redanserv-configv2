@@ -83,7 +83,8 @@ namespace plog
             return "NONE";
         }
     }
-// #include "Util.h"
+
+	// #include "Util.h"
     namespace util
     {
 #ifdef _WIN32
@@ -205,19 +206,20 @@ namespace plog
 #if defined(_WIN32) || defined(__OBJC__)
             return std::string(func);
 #else
-            const char* funcBegin = func;
-            const char* funcEnd = ::strchr(funcBegin, '(');
+            //const char* funcBegin = func;
+            //const char* funcEnd = ::strchr(funcBegin, '(');
 
-            for (const char* i = funcEnd - 1; i >= funcBegin; --i)
-            {
-                if (*i == ' ')
-                {
-                    funcBegin = i + 1;
-                    break;
-                }
-            }
+            //for (const char* i = funcEnd - 1; i >= funcBegin; --i)
+            //{
+            //    if (*i == ' ')
+            //    {
+            //        funcBegin = i + 1;
+            //        break;
+            //    }
+            //}
 
-            return std::string(funcBegin, funcEnd);
+            //return std::string(funcBegin, funcEnd);
+            return std::string(func);
 #endif
         }
 
@@ -950,7 +952,7 @@ namespace plog
         static util::nstring header()
         {
             //return PLOG_NSTR("Date;Time;Severity;TID;This;Function;Message\n");
-            return PLOG_NSTR("Date;Time;Severity;Message\n");
+            return PLOG_NSTR("Date;Time;Severity;From;Line;Message\n");
         }
 
         static util::nstring format(const Record& record)
@@ -965,6 +967,8 @@ namespace plog
             //ss << record.getTid() << ";";
             //ss << record.getObject() << ";";
             //ss << record.getFunc().c_str() << "@" << record.getLine() << ";";
+			ss << record.getFunc().c_str() << ";";
+			ss << record.getLine() << ";";
 
             util::nstring message = record.getMessage();
 
@@ -1010,7 +1014,7 @@ namespace plog
             ss << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_hour << ":" << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_min << ":" << std::setfill(PLOG_NSTR('0')) << std::setw(2) << t.tm_sec << "." << std::setfill(PLOG_NSTR('0')) << std::setw(3) << record.getTime().millitm << " ";
             ss << std::setfill(PLOG_NSTR(' ')) << std::setw(5) << std::left << getSeverityName(record.getSeverity()) << " ";
             ss << "[" << record.getTid() << "] ";
-            // ss << "[" << record.getFunc().c_str() << "@" << record.getLine() << "] ";
+            ss << "[" << record.getFunc().c_str() << "@" << record.getLine() << "] ";
             ss << record.getMessage().c_str() << "\n";
 
             return ss.str();
@@ -1038,6 +1042,7 @@ namespace plog
             ss << std::setfill(PLOG_NSTR(' ')) << std::setw(5) << std::left << getSeverityName(record.getSeverity()) << " ";
 //            ss << "[" << record.getTid() << "] ";
 //            ss << "[" << record.getFunc().c_str() << "@" << record.getLine() << "] ";
+//			ss << record.getFunc().c_str();
             ss << record.getMessage().c_str() << "\n";
             return ss.str();
         }
@@ -1453,6 +1458,8 @@ namespace plog
 //////////////////////////////////////////////////////////////////////////// Main logging macros
 
 #define LOG_(instance, severity)        IF_LOG_(instance, severity) (*plog::get<instance>()) += plog::Record(severity, PLOG_GET_FUNC(), __LINE__, PLOG_GET_THIS())
+/** */
+#define NDFLOG_(instance, severity, from, line)    IF_LOG_(instance, severity) (*plog::get<instance>()) += plog::Record(severity, from, line, PLOG_GET_THIS())
 #define LOG(severity)                   LOG_(0, severity)
 
 #define LOG_VERBOSE                     LOG(plog::verbose)

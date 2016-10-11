@@ -10,7 +10,7 @@ Release
 *.o
 *.map
 *.cxx
-
+nbproject
 /uv5ki-gw-cfg/plog.csv
 /uv5k-tools-vs2010.suo
 /uv5ki-gw-cfg/logs
