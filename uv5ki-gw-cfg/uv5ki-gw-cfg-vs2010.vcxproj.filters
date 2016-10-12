@@ -1,41 +1,203 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\base\code-base.cpp" />
-    <ClCompile Include="src\base\exception.cpp" />
-    <ClCompile Include="src\base\socket.cpp" />
-    <ClCompile Include="src\base\thread.cpp" />
-    <ClCompile Include="src\websrv\mongoose.c" />
-    <ClCompile Include="src\websrv\uv5kigwcfg-web-app-data.cpp" />
-    <ClCompile Include="src\websrv\uv5kigwcfg-web-app.cpp" />
-    <ClCompile Include="src\websrv\web-app-server.cpp" />
-    <ClCompile Include="uv5ki-gw-cfg.cpp" />
+    <ClCompile Include="src\base\code-base.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\base\exception.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\base\socket.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\base\sqlite3++.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\base\sqlite3.c">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\base\thread.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config\comm-preconf.cpp">
+      <Filter>src\config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config\local-config.cpp">
+      <Filter>src\config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config\working-config.cpp">
+      <Filter>src\config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\base64.cpp">
+      <Filter>src\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\stlini.cpp">
+      <Filter>src\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\tools.cpp">
+      <Filter>src\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\websrv\uv5kigwcfg-web-app-data.cpp">
+      <Filter>src\web</Filter>
+    </ClCompile>
+    <ClCompile Include="src\websrv\uv5kigwcfg-web-app.cpp">
+      <Filter>src\web</Filter>
+    </ClCompile>
+    <ClCompile Include="src\websrv\web-app-server.cpp">
+      <Filter>src\web</Filter>
+    </ClCompile>
+    <ClCompile Include="src\his-proc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\man-proc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\websrv\mongoose.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\versiones.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="uv5ki-gw-cfg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\base\sistema.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\base\code-base.h" />
-    <ClInclude Include="include\base\exception.h" />
-    <ClInclude Include="include\base\plog.h" />
-    <ClInclude Include="include\base\socket.h" />
-    <ClInclude Include="include\base\thread.h" />
-    <ClInclude Include="include\pthreads\include\pthread.h" />
-    <ClInclude Include="include\pthreads\include\sched.h" />
-    <ClInclude Include="include\pthreads\include\semaphore.h" />
-    <ClInclude Include="include\websrv\mongoose.h" />
-    <ClInclude Include="include\websrv\uv5kigwcfg-web-app-data.h" />
-    <ClInclude Include="include\websrv\uv5kigwcfg-web-app.h" />
-    <ClInclude Include="include\websrv\web-app-server.h" />
-    <ClInclude Include="targetver.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="wlib\pthreadVC2.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="wlib\pthreadVC2.lib" />
+    <ClInclude Include="include\websrv\mongoose.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\base\code-base.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\base\exception.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\base\plog.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pthreads\include\pthread.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pthreads\include\sched.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pthreads\include\semaphore.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\base\socket.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\base\thread.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\websrv\uv5kigwcfg-web-app-data.h">
+      <Filter>Include\web</Filter>
+    </ClInclude>
+    <ClInclude Include="include\websrv\uv5kigwcfg-web-app.h">
+      <Filter>Include\web</Filter>
+    </ClInclude>
+    <ClInclude Include="include\websrv\web-app-server.h">
+      <Filter>Include\web</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\cfgpasa.hpp">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-gen-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-har-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-preconf.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-res-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-res-radio-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-res-telef-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-ser-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\local-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\users-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\working-config.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tools\base64.h">
+      <Filter>Include\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tools\stlini.h">
+      <Filter>Include\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tools\tools.h">
+      <Filter>Include\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\base\sistema.h">
+      <Filter>Include\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Include">
       <UniqueIdentifier>{b95506dd-af17-4776-9420-84fd2d6648f8}</UniqueIdentifier>
-      <Extensions>*.h</Extensions>
+      <Extensions>h</Extensions>
     </Filter>
+    <Filter Include="Include\base">
+      <UniqueIdentifier>{4c50cb1c-bf32-4efe-b1a6-ab34b9405d74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\web">
+      <UniqueIdentifier>{1b84b76b-0bba-4b8e-b490-c081a29c0429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib">
+      <UniqueIdentifier>{be50ba59-0ae5-43cb-97b6-a7fa399779bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{c90afb9f-200b-465f-add1-b71785d52a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\config">
+      <UniqueIdentifier>{4c8ceab6-c518-47be-beb7-8377ccf31bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\tools">
+      <UniqueIdentifier>{20d414fb-3161-4e10-96b6-753bc6a0d804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\base">
+      <UniqueIdentifier>{8a40740b-80af-4f0c-b085-a1e99a0fda18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\config">
+      <UniqueIdentifier>{3237ce7b-7564-42f6-b41d-82021664157c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\tools">
+      <UniqueIdentifier>{b2145549-44dc-45e6-bff3-3ab5eeebbe10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\web">
+      <UniqueIdentifier>{5329b1af-b80d-4d80-b435-2e08c0a135f3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wlib\pthreadVC2.dll">
+      <Filter>Lib</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="wlib\pthreadVC2.lib">
+      <Filter>Lib</Filter>
+    </Library>
   </ItemGroup>
 </Project>
