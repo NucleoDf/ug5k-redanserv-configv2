@@ -21,21 +21,43 @@ public:
 	Exception(const char *s="");
 	~Exception(void) throw(){}
 protected:
+
+#if defined _WIN32
     virtual const char *Prefix()
     {
-#ifdef _WIN32
         return "WIN32";
+	}
+#elif defined __APPLE__
+    virtual const char *Prefix()
+    {
+        return "APPLE";
+	}
+#elif defined _PPC82xx_
+    virtual const char *Prefix()
+    {
+        return "PPC";
+	}
 #else
-		return "LINUX";
+    virtual const char *Prefix()
+    {
+        return "LINUX";
+	}
 #endif
-    }
 
 private:
     unsigned long m_error;
     mutable string m_msg;
 public:
 	unsigned long Code(void);
+#if defined _WIN32
 	virtual const char *what();
+#elif defined __APPLE__
+	virtual const char *what();
+#elif defined _PPC82xx_
+	virtual const char *what();
+#else
+	virtual const char *what();
+#endif
 };
 
 #endif

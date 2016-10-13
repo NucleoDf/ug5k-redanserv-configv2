@@ -202,6 +202,14 @@ void HistClient::SetEstadoCpu(string local, string remoto)
 	avisos.set(aviso);
 }
 
+/** */
+void HistClient::SetEventosHistoricos(string user, EventosHistoricos *eventos)
+{
+	// TODO.
+	CCSLock lock(_acceso);
+}
+
+
 /** Rutinas Protected.... **/
 /** */
 void HistClient::Dispose()

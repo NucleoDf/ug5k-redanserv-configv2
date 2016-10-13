@@ -1,6 +1,14 @@
 #ifndef _DFN_CODEBASE_
 #define _DFN_CODEBASE_
 
+/*
+#if defined _WIN32
+#elif defined __APPLE__
+#elif defined _PPC82xx_
+#else
+#endif
+*/
+
 #ifdef _WIN32
 	#define _CRTDBG_MAP_ALLOC		// Para el Debugger de Memory leaks...
 	#include <Windows.h>
@@ -14,8 +22,11 @@
 	#include <unistd.h>
 	#include <signal.h>
 	#define Sleep(m)	usleep(1000*m)
-	#ifdef _PPC82xx_
+
+	#if defined _PPC82xx_
 		#define WORKING_DIR		"/home/serv/"
+	#elif defined __APPLE__
+		#define WORKING_DIR		"./"
 	#else
 		#define WORKING_DIR		"./"
 		#define _SIGACTION_		1

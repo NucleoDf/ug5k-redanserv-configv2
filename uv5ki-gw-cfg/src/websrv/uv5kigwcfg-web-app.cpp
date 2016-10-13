@@ -85,7 +85,7 @@ void Uv5kiGwCfgWebApp::stCb_(struct mg_connection *conn, string user, web_respon
 	resp->actividad=false;
 	if (string(conn->request_method)=="GET") 
 	{
-		CommConfig cfg(".", "comm-config.json");
+		CommConfig cfg(ifstream("./comm-config.json", ios_base::in));
 		RETURN_OK200_RESP(resp, cfg.JSerialize());
 	}
 	else if (string(conn->request_method)=="POST") 
@@ -146,7 +146,7 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 	if (string(conn->request_method)=="GET")
 	{
 		// TODO. Leer la configuracion activa de RAM.
-		CommConfig cfg(".", "comm-config.json");
+		CommConfig cfg(ifstream("./comm-config.json", ios_base::in));
 		RETURN_OK200_RESP(resp, cfg.JSerialize());
 	}
 	else if (string(conn->request_method)=="POST") 
@@ -193,7 +193,7 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 			if (string(conn->request_method)=="POST")	// Salvar Preconfiguracion activa como...
 			{
 				// TODO. Obtener la Configuracion activa...
-				CommPreconf activa(preconf_id.name, Tools::Ahora(), CommConfig(".", "comm-config.json").JSerialize());
+				CommPreconf activa(preconf_id.name, Tools::Ahora(), CommConfig(ifstream("./comm-config.json", ios_base::in)).JSerialize());
 				res = preconfs.pos(preconf_id.name, activa);
 				if (res == false) {
 					RETURN_IERROR_RESP(resp, webData_line("Error al Salvar Preconfiguracion: " + preconf_id.name).JSerialize());
@@ -261,7 +261,7 @@ void Uv5kiGwCfgWebApp::stCb_importexport(struct mg_connection *conn, string user
 			preconfs.Exist(levels[2]) ? Tools::FileUniqueName(levels[2]) : levels[2];
 
 		// TODO. Obtener la Configuracion activa...
-		CommPreconf activa(pcfg_name, Tools::Ahora(), CommConfig(".", "comm-config.json").JSerialize());
+		CommPreconf activa(pcfg_name, Tools::Ahora(), CommConfig(ifstream("./comm-config.json", ios_base::in)).JSerialize());
 		bool res = preconfs.pos(pcfg_name, activa);
 		if (res == false) {
 			RETURN_IERROR_RESP(resp, webData_line("Error al Salvar Preconfiguracion: " + pcfg_name).JSerialize());

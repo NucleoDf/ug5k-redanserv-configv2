@@ -15,20 +15,49 @@
 #include "../config/local-config.h"
 #include "../versiones.h"
 #include "./comm-config.h"
+#include "./comm-conversor.h"
 
 #include "./cfgpasa.hpp"
 
+/** La configuracion en memoria */
+typedef struct cfgConfigPasarela ug5k_mem_config ;
+enum WorkingConfigMode { cfgRedan, cfgSoap };
 
 /** Estructura de CONFIGURACION. Se parte de REDAN */
 class WorkingConfig : public CodeBase
 {
 public:
-	WorkingConfig() {
-	}
-	~WorkingConfig() {
-	}
+	WorkingConfig(WorkingConfigMode mode);
+	~WorkingConfig();
+
 public:
+	EventosHistoricos *set(CommConfig &redanConfig);
+	void load_from(string file);
+	void save_to(string file);
+
 public:
+	void TimeStamp();
+	void ResourcesClear();
+
+public:
+	bool DualCpu();
+	bool IpColateral(string &ipCol);
+	bool IdConfig(string &idConfig);
+	string TimeStamp(CommConfig &remota);
+
+	/** */
+	int cpu1cpu2();
+	string ipcpu(int cpu);
+	int UserAccess(string user, string pwd);
+
+protected:
+	void init();
+	void dispose();
+
+private:
+	WorkingConfigMode cfg_mode;
+	ug5k_mem_config *p_mem_config;
+	CommConfig redanConfig;
 };
 
 #endif

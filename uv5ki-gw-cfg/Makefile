@@ -28,7 +28,8 @@ else
 endif
 ##CFLAGS	= -Wall -Wno-unknown-pragmas -ggdb -I. -I./mongoose -I./Parse -I./rapidjson
 LIBS	=-lpthread -lstdc++ -ldl
-LDFLAGS	=-Wl,-Map=ug5kser.map
+LDFLAGS	=-Wl
+##,-Map=ug5kser.map
 
 all: uvki-gwser
 

@@ -624,7 +624,7 @@ namespace plog
 		std::vector<std::string> split(std::string text, char sep)
 		{
 			std::vector<std::string> tokens;
-			unsigned int start = 0, end = 0;
+			/*unsigned int*/size_t start = 0, end = 0;
 
 			while ((end = text.find(sep, start)) != std::string::npos) 
 			{

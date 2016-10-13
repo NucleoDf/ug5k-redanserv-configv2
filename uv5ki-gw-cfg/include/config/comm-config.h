@@ -33,9 +33,8 @@ public:
 	CommConfig(string jstring) {
 		JDeserialize(jstring);
 	}
-	CommConfig(string path, string file) {
+	CommConfig(ifstream f) {
 		string data,linea;
-		ifstream f((path + "/" + file).c_str(), ios_base::in);
 		while (std::getline(f, linea))
 			data += linea;
 		JDeserialize(data);
@@ -44,6 +43,23 @@ public:
 		clear_array(users);
 		clear_array(recursos);
 	}
+public:
+	bool operator == ( CommConfig &otra) {
+		return (idConf == otra.idConf && fechaHora == otra.fechaHora) ? true : false;
+	}
+	bool operator < (  CommConfig &otra) {
+		struct tm time_l,time_o;
+		time_t loctime,othtime;
+
+		Tools::DateString2time(fechaHora, time_l);
+		Tools::DateString2time(otra.fechaHora, time_o);
+
+		loctime = mktime(&time_l);
+		othtime = mktime(&time_o);
+
+		return loctime < othtime;	
+	}
+
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {
 		write_key(writer, "idConf", idConf);

@@ -66,6 +66,7 @@ public:
 		write_key(writer, "colateral_scv", colateral_scv);
 		write_key(writer, "ats_rangos_dst", ats_rangos_dst);
 		write_key(writer, "ats_rangos_org", ats_rangos_org);
+		write_key(writer, "iT_Int_Warning", iT_Int_Warning);
 	}
 	virtual void jread(Value &base)
 	{
@@ -88,6 +89,7 @@ public:
 		read_key(base, "colateral_scv", colateral_scv);
 		read_key(base, "ats_rangos_dst", ats_rangos_dst);
 		read_key(base, "ats_rangos_org", ats_rangos_org);
+		read_key(base, "iT_Int_Warning", iT_Int_Warning);
 	}
 
 public:
@@ -110,6 +112,7 @@ public:
 	int colateral_scv;
 	vector<CommResTelefAtsRange *> ats_rangos_dst;
 	vector<CommResTelefAtsRange *> ats_rangos_org;
+	int iT_Int_Warning;
 };
 
 #endif

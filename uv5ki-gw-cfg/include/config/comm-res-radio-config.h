@@ -111,6 +111,7 @@ public:
 		write_key(writer, "iSesionPrio", iSesionPrio);
 		write_key(writer, "iPttPrio", iPttPrio);
 		write_key(writer, "colateral", colateral);
+		write_key(writer, "iPrecisionAudio", iPrecisionAudio);
 	}
 	virtual void jread(Value &base)
 	{
@@ -139,6 +140,7 @@ public:
 		read_key(base,"iSesionPrio", iSesionPrio);
 		read_key(base,"iPttPrio", iPttPrio);
 		read_key(base,"colateral", colateral);
+		read_key(base,"iPrecisionAudio", iPrecisionAudio);
 	}
 
 public:
@@ -167,6 +169,7 @@ public:
 	int iSesionPrio;
 	int iPttPrio;
 	CommResRadioColateral colateral;
+	int iPrecisionAudio;
 };
 
 #endif

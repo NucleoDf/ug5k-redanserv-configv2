@@ -9,16 +9,16 @@
 #define VRS_VERSION_MENOR_A		0
 #define VRS_VERSION_MENOR_B		2
 
-#ifdef _WIN32
-char acBuildString[] =		"Version WIN";
-
+#if defined _WIN32
+ char acBuildString[] =		"Version WIN";
 #else
-
-#include <mcheck.h>
-#include <execinfo.h>
-extern char acBuildString[]; 
+#	if !defined __APPLE__
+#		include <mcheck.h>
+#	endif
+#	include <execinfo.h>
+	extern char acBuildString[]; 
 /** */ 
-static int salida = 0;
+	static int salida = 0;
 #endif
 
 /** */
@@ -69,8 +69,9 @@ public:
 			int iDescPerro=pipe_name==NULL ? -1 :  atoi(pipe_name);
 			unsigned char ucPerro=0;			// Envio al Perro...		
 
+	#if !defined __APPLE__
 			mtrace();
-
+	#endif
 			/* Capturar las Señales */
 			setAllSignalCatch();
 			while(salida==0) 

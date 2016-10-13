@@ -5,7 +5,7 @@ Exception::Exception(const char *s)
 #ifdef _WIN32
 	:runtime_error(s), m_error(GetLastError())
 #else
-	:runtime_error(s), m_error(errno)		// Obtener ultimo error en linux
+	:runtime_error(s), m_error(errno)		// Obtener ultimo error en linux/mac
 #endif
 {
 }
@@ -17,7 +17,15 @@ unsigned long Exception::Code(void)
 }
 
 /** */
+#if defined _WIN32
 const char *Exception::what()
+#elif defined __APPLE__
+const char *Exception::what()
+#elif defined _PPC82xx_
+const char *Exception::what()
+#else
+const char *Exception::what()
+#endif
 {
 	try
 	{

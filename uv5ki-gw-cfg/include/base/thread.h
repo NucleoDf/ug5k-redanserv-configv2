@@ -110,7 +110,7 @@ public:
 	CThread();
 	virtual ~CThread();
 
-	virtual void Start(int nPriority = THREAD_PRIORITY_NORMAL);
+	virtual void Start(/*int nPriority = THREAD_PRIORITY_NORMAL*/);
 	virtual void Stop();
 	bool IsLive();
 public:

@@ -36,6 +36,26 @@ using namespace std;
 #define INCI_SELPR		2100	// SP-Radio	Selección Principal/Reserva							*/ USER:REC=RECURSO /
 
 /** */
+class CommConvertEvent 
+{
+public:
+	CommConvertEvent(int Evento, string Res="", string Name="", string Data="")
+	{
+		evento = Evento;
+		res = Res;
+		name = Name;
+		data = Data;
+	}
+public:
+	int evento;
+	string res;
+	string name;
+	string data;
+};
+/** */
+typedef vector<CommConvertEvent> EventosHistoricos;
+
+/** */
 class HistClientException
 {
 public:
@@ -96,6 +116,8 @@ public:
 
 	void Signal(int toPort = 65000);
 	void SetEstadoCpu(string local, string remoto);
+
+	void SetEventosHistoricos(string user, EventosHistoricos *eventos);
 
 protected:
 	ColaAventos<stHistAviso> avisos;

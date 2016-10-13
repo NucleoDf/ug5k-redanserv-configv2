@@ -91,7 +91,7 @@ CThread::~CThread()
 
 //////////////////////////////////////////////////////////////////////
 //
-void CThread::Start(int nPriority)
+void CThread::Start(/*int nPriority*/)
 {
 	int res = pthread_create(&m_hThread, NULL, sRun, this);
 	assert( res == 0);

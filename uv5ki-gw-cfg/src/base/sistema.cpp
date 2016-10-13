@@ -89,8 +89,10 @@ bool sistema::GetIpAddress(char *szIf, string &ip)
 /** */
 void sistema::GetMacAddress(char *lan, char *mac)
 {
-#ifdef _WIN32
+#if defined _WIN32
 	strcpy_s(mac,16,"11:11:11:11:11");
+#elif defined __APPLE__
+	strcpy(mac, "11:11:11:11:11");
 #else
     int iSocket;
     struct ifreq sIfr;
