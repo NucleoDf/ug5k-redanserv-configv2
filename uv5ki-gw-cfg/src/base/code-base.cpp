@@ -42,11 +42,9 @@ void CodeBase::plogInit()
 
 	_plog_iniciado = true;
 	pthread_create(&plog_thread_id, NULL, plog_thread_routine, NULL);
-#ifndef _WIN32
-#ifndef _PPC82xx_
-			pthread_setname_np(plog_thread_id, id.c_str());
-#endif // !_PPC82xx_
-#endif // !_WIN32
+#if !defined(_WIN32) && !defined(__APPLE__) && !defined(_PPC82xx_)
+	pthread_setname_np(plog_thread_id, id.c_str());
+#endif 
 }
 
 /** */

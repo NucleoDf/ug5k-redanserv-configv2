@@ -1,7 +1,7 @@
 ################################################################
 .SILENT:
-SHELL     := /bin/bash
-
+SHELL  := /bin/bash
+OSNAME := $(shell uname -s)
 ################################################################
 ## Colordefinition
 ################################################################
@@ -29,7 +29,14 @@ else
 endif
 ##CFLAGS	= -Wall -Wno-unknown-pragmas -ggdb -I. -I./mongoose -I./Parse -I./rapidjson
 LIBS	=-lpthread -lstdc++ -ldl
-LDFLAGS	=-Wl,-Map=ug5kser.map
+ifeq ($(OSNAME),Linux)
+    LDFLAGS=-Wl,-Map=uvki-gwser.map
+endif
+ifeq ($(OSNAME),Darwin)
+    LDFLAGS=
+endif
+
+##LDFLAGS	=-Wl,-Map=ug5kser.map
 
 all: uvki-gwser
 
@@ -87,7 +94,8 @@ obj/%.o: ./%.cpp
 
 uvki-gwser: $(OBJS)
 	#@echo --------------------------------------------------------------------------------
-	echo   -e "$(OK_COLOR)--  Linking $@$(NO_COLOR)"
+	echo  -e "$(OK_COLOR)--  OS=$(OSNAME)$(NO_COLOR)"
+	echo  -e "$(OK_COLOR)--  Linking $@$(NO_COLOR)"
 	# @echo --------------------------------------------------------------------------------
 	$(CC) $(LIBS) $(LDFLAGS) -o $@ $(OBJS)
 	#$(CROSS_COMPILE)strip uvki-gwser

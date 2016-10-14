@@ -1,4 +1,4 @@
-// uv5ki-gw-cfg.cpp: define el punto de entrada de la aplicación de consola.
+// uv5ki-gw-cfg.cpp: define el punto de entrada de la aplicaciï¿½n de consola.
 //
 #include "./include/websrv/uv5kigwcfg-web-app.h"
 #include "./include/cfg-proc.h"
@@ -54,7 +54,7 @@ public:
 			/** Inicializacion Comun */
 			Uv5kiGwCfgWebApp webApp;
 
-			/** TODO. Crearlo según el entorno */
+			/** TODO. Crearlo segï¿½n el entorno */
 			CfgProc::p_cfg_proc = new HttpClientProc();
 
 			HistClient::p_hist = new HistClient();
@@ -79,7 +79,7 @@ public:
 	#if !defined __APPLE__
 			mtrace();
 	#endif
-			/* Capturar las Señales */
+			/* Capturar las Seï¿½ales */
 			setAllSignalCatch();
 			while(salida==0) 
 			{
@@ -235,7 +235,9 @@ private:
 		signal(SIGPIPE, &catchAllSignal);    // 		13	/* Broken pipe (POSIX).  */
 		signal(SIGALRM, &catchAllSignal);    // 		14	/* Alarm clock (POSIX).  */
 		signal(SIGTERM, &catchAllSignal);    // 		15	/* Termination (ANSI).  */
+#ifndef __APPLE__
 		signal(SIGSTKFLT, &catchAllSignal);    // 		16	/* Stack fault.  */
+#endif
 							//#define	SIGCLD		SIGCHLD	/* Same as SIGCHLD (System V).  */
 		signal(SIGCHLD, &catchAllSignal);    // 		17	/* Child status has changed (POSIX).  */
 		signal(SIGCONT, &catchAllSignal);    // 		18	/* Continue (POSIX).  */
@@ -247,13 +249,21 @@ private:
 		signal(SIGXCPU, &catchAllSignal);    // 		24	/* CPU limit exceeded (4.2 BSD).  */
 		signal(SIGXFSZ, &catchAllSignal);    // 		25	/* File size limit exceeded (4.2 BSD).  */
 		signal(SIGVTALRM, &catchAllSignal);    // 		26	/* Virtual alarm clock (4.2 BSD).  */
+#ifndef __APPLE__
 		signal(SIGPROF, &catchAllSignal);    // 		27	/* Profiling alarm clock (4.2 BSD).  */
+#endif                
 		signal(SIGWINCH, &catchAllSignal);    // 		28	/* Window size change (4.3 BSD, Sun).  */
+#ifndef __APPLE__
 		signal(SIGPOLL, &catchAllSignal);    // 		SIGIO	/* Pollable event occurred (System V).  */
+#endif                
 		signal(SIGIO, &catchAllSignal);    // 		29	/* I/O now possible (4.2 BSD).  */
+#ifndef __APPLE__
 		signal(SIGPWR, &catchAllSignal);    // 		30	/* Power failure restart (System V).  */
+#endif
 		signal(SIGSYS, &catchAllSignal);    // 		31	/* Bad system call.  */
+#ifndef __APPLE__
 		signal(SIGUNUSED, &catchAllSignal);    // 			31
+#endif
 #endif
    
     PLOG_INFO("setAllSignalCatch. PID=%d...", getpid());

@@ -268,7 +268,7 @@ bool ParseResponse::Parse(string response)
 /** */
 vector<string> ParseResponse::Split(string entrada, string sep)
 {
-	unsigned int start = 0, end = 0;
+	size_t start = 0, end = 0;
 	vector<string> tokens; 
 
 	while ((end = entrada.find(sep, start)) != std::string::npos) 

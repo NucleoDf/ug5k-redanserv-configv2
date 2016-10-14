@@ -28,7 +28,7 @@ protected:
         return "WIN32";
 	}
 #elif defined __APPLE__
-    virtual const char *Prefix()
+    virtual const char *Prefix() const
     {
         return "APPLE";
 	}
@@ -52,7 +52,7 @@ public:
 #if defined _WIN32
 	virtual const char *what();
 #elif defined __APPLE__
-	virtual const char *what();
+	virtual const char *what() const _NOEXCEPT;
 #elif defined _PPC82xx_
 	virtual const char *what();
 #else

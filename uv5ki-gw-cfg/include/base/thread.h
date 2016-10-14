@@ -117,11 +117,9 @@ public:
 	void SetId(std::string id) 
 	{ 
 		m_id=id; 
-#ifndef _WIN32
-#ifndef _PPC82xx_
+#if !defined(_WIN32) && !defined(__APPLE__) && !defined(_PPC82xx_)
 		pthread_setname_np(m_hThread, id.c_str());
-#endif // !_PPC82xx_
-#endif // !_WIN32
+#endif
 
 	}
 	std::string GetId(void)  { return m_id; }

@@ -20,7 +20,7 @@ unsigned long Exception::Code(void)
 #if defined _WIN32
 const char *Exception::what()
 #elif defined __APPLE__
-const char *Exception::what()
+const char *Exception::what() const _NOEXCEPT
 #elif defined _PPC82xx_
 const char *Exception::what()
 #else
