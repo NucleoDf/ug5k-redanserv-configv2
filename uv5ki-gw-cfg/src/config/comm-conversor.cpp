@@ -199,8 +199,13 @@ void CommConversor::ParametrosGlobales()
 	strcpy(mcfg->acIdConfig,"");
 	mcfg->iModoSincronizacion = 2;
 
-	SetString(mcfg->szDirCPU0, p_cfg_in->general.cpus[0]->ipb, INCI_MPGP, "IP CPU0", CFG_MAX_LONG_URL);
-	SetString(mcfg->szDirCPU1, p_cfg_in->general.cpus[1]->ipb, INCI_MPGP, "IP CPU1", CFG_MAX_LONG_URL);
+	for (size_t icpu=0; icpu<p_cfg_in->general.cpus.size() && icpu < 2; icpu++)
+	{
+		if (icpu==0)
+			SetString(mcfg->szDirCPU0, p_cfg_in->general.cpus[0]->ipb, INCI_MPGP, "IP CPU0", CFG_MAX_LONG_URL);
+		else if (icpu==1)
+			SetString(mcfg->szDirCPU1, p_cfg_in->general.cpus[1]->ipb, INCI_MPGP, "IP CPU1", CFG_MAX_LONG_URL);
+	}
 
 	/** Tipo de Slots */
 	for (size_t slv=0; slv < p_cfg_in->hardware.slv.size() && slv < MAX_SLOTS_PASARELA; slv++)

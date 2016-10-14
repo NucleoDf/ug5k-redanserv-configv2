@@ -62,8 +62,20 @@ void WorkingConfig::load_from(string file)
 {
 	if (cfg_mode == cfgRedan)
 	{
-		CommConfig cfg(ifstream(file.c_str(), ios_base::in));
-		set(cfg);
+		try 
+		{
+			ifstream f(file.c_str(), ios_base::in);
+			CommConfig cfg(f);
+			set(cfg);
+		}
+		catch(Exception x)
+		{
+			PLOG_EXCEP(x, "Error cargando fichero de configuracion: %s", file.c_str());
+			// Poner configuracion por defecto.
+			CommConfig cfg;
+			set(cfg);
+		}
+
 		return;
 	}
 	throw Exception("Modo de Configuracion no implementado leyendo desde fichero...");
@@ -94,6 +106,17 @@ void WorkingConfig::TimeStamp()
 }
 
 /** */
+void WorkingConfig::TimeStamp(CommConfig &remota)
+{
+	if (cfg_mode == cfgRedan) 
+	{
+		redanConfig.fechaHora = remota.fechaHora;
+		return;
+	}
+	throw Exception("Modo de Configuracion no implementado obteniendo timestamp...");
+}
+
+/** */
 void WorkingConfig::ResourcesClear()
 {
 	if (cfg_mode == cfgRedan) 
@@ -102,6 +125,14 @@ void WorkingConfig::ResourcesClear()
 		return;
 	}
 	throw Exception("Modo de Configuracion no implementado borrando recursos...");
+}
+
+/** */
+string WorkingConfig::JConfig()
+{
+	if (cfg_mode == cfgRedan)
+		return redanConfig.JSerialize();
+	throw Exception("Modo de Configuracion no implementado obteniendo configuracion...");
 }
 
 

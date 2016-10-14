@@ -24,6 +24,8 @@ class CommHarConfigPos : public jData
 {
 public:
 	CommHarConfigPos() {
+		tp=0;
+		cfg=0;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
@@ -46,6 +48,7 @@ class CommHarConfigSlv : public jData
 {
 public:
 	CommHarConfigSlv() {
+		tp=0;
 	}
 	~CommHarConfigSlv() {
 		clear_array(pos);

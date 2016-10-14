@@ -1,6 +1,13 @@
 #ifndef __WORKING_CONFIG_H__
 #define __WORKING_CONFIG_H__
 
+#ifdef _WIN32
+#else
+	#include <sys/types.h>
+	#include <sys/ipc.h>
+	#include <sys/shm.h>
+#endif 
+
 #include <string>       // std::string
 #include <iostream>     // std::cout
 #include <sstream>      // std::stringstream#include <utility>
@@ -37,13 +44,14 @@ public:
 
 public:
 	void TimeStamp();
+	void TimeStamp(CommConfig &remota);
 	void ResourcesClear();
+	string JConfig();
 
 public:
 	bool DualCpu();
 	bool IpColateral(string &ipCol);
 	bool IdConfig(string &idConfig);
-	string TimeStamp(CommConfig &remota);
 
 	/** */
 	int cpu1cpu2();
@@ -58,6 +66,11 @@ private:
 	WorkingConfigMode cfg_mode;
 	ug5k_mem_config *p_mem_config;
 	CommConfig redanConfig;
+#ifdef _WIN32
+#else
+	key_t key_mem;
+	int  shmid;
+#endif 
 };
 
 #endif

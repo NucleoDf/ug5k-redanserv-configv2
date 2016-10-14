@@ -29,11 +29,13 @@ class CommConfig : public jData
 {
 public:
 	CommConfig() {
+		idConf="defecto";
+		fechaHora = Tools::Ahora_Servidor();
 	}
 	CommConfig(string jstring) {
 		JDeserialize(jstring);
 	}
-	CommConfig(ifstream f) {
+	CommConfig(ifstream &f) {
 		string data,linea;
 		while (std::getline(f, linea))
 			data += linea;
@@ -59,6 +61,12 @@ public:
 
 		return loctime < othtime;	
 	}
+	//CommConfig & operator= (CommConfig &cfg) {
+	//	idConf = cfg.idConf;
+	//	fechaHora = cfg.fechaHora;
+
+	//	return *this;
+	//}
 
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {

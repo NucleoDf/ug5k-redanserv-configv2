@@ -39,6 +39,11 @@ class CommSerSip : public jData
 {
 public:
 	CommSerSip() {
+		PuertoLocalSIP=5060;
+		KeepAlivePeriod=200;
+		KeepAliveMultiplier=10;
+		SupresionSilencio=0;
+		PeriodoSupervisionSIP=100;
 	}
 	~CommSerSip() {
 		clear_array(proxys);
@@ -80,6 +85,8 @@ class CommSerWeb : public jData
 {
 public:
 	CommSerWeb() {
+		wport=8080;
+		stime=0;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {
@@ -101,6 +108,13 @@ class CommSerSnmp : public jData
 {
 public:
 	CommSerSnmp() {
+		sport=65000;
+		snmpp=161;
+		agcomm = "public";
+		agcont = "NUCLEO-DF DT. MADRID. SPAIN";
+		agloc = "NUCLEO-DF LABS";
+		agname = "ULISESG5000i";
+		agv2 = 1;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {
@@ -140,6 +154,8 @@ class CommSerGrab : public jData
 {
 public:
 	CommSerGrab() {
+		sport = 65001;
+		rtsp_ip = "127.0.0.1";
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {
@@ -176,6 +192,7 @@ class CommSerSincr : public jData
 {
 public:
 	CommSerSincr() {
+		ntp = 2;
 	}
 	~CommSerSincr() {
 		clear_array(servidores);

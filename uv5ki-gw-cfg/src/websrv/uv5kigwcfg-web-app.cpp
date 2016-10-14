@@ -1,12 +1,17 @@
 #include "../../include/websrv/uv5kigwcfg-web-app.h"
 #include "../../include/config/comm-config.h"
 #include "../../include/config/comm-preconf.h"
+#include "../../include/cfg-proc.h"
 #include "../../include/man-proc.h"
 #include "../../include/his-proc.h"
 
 #define RETURN_NOT_IMPLEMENTED_RESP(r)			{r->code=404; r->data="{\"res\":\"Operacion no Implementada\"}";return;}
 #define RETURN_OK200_RESP(r, d)					{r->code=200; r->data=d;return;}
 #define RETURN_IERROR_RESP(r, d)				{r->code=500; r->data=d;PLOG_ERROR(d.c_str());return;}
+
+#define P_HIS_PROC								(HistClient::p_hist)
+#define P_CFG_PROC								(CfgProc::p_cfg_proc)
+#define P_WORKING_CONFIG						(P_CFG_PROC->p_working_config)
 
 /** */
 restHandler Uv5kiGwCfgWebApp::_handlers_list;
@@ -85,7 +90,8 @@ void Uv5kiGwCfgWebApp::stCb_(struct mg_connection *conn, string user, web_respon
 	resp->actividad=false;
 	if (string(conn->request_method)=="GET") 
 	{
-		CommConfig cfg(ifstream("./comm-config.json", ios_base::in));
+		ifstream f((const char *)"./comm-config.json", ios_base::in);
+		CommConfig cfg(f);
 		RETURN_OK200_RESP(resp, cfg.JSerialize());
 	}
 	else if (string(conn->request_method)=="POST") 
@@ -145,28 +151,28 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 	resp->actividad=true;
 	if (string(conn->request_method)=="GET")
 	{
-		// TODO. Leer la configuracion activa de RAM.
-		CommConfig cfg(ifstream("./comm-config.json", ios_base::in));
-		RETURN_OK200_RESP(resp, cfg.JSerialize());
+		// Leer la configuracion activa de RAM.
+		RETURN_OK200_RESP(resp, P_WORKING_CONFIG->JConfig());
 	}
 	else if (string(conn->request_method)=="POST") 
 	{
+		// Activar la Configuracion...
 		string data_in = string(conn->content, conn->content_len );
-		CommPreconf preconf_in(data_in);
-		if (preconf_in.Error()!="") {
-			RETURN_IERROR_RESP(resp, webData_line("Error de formato en Configuracion: " + preconf_in.Error()).JSerialize());
-		}
-		// TODO. Activar la Configuracion...
+		CommConfig cfg;
+		cfg.JDeserialize(data_in);
+		P_WORKING_CONFIG->set(cfg);
+		P_WORKING_CONFIG->save_to(LAST_CFG);
+											 // TODO. Sincronizar Fichero....
 		RETURN_OK200_RESP(resp, webData_line("Configuracion Activada...").JSerialize());
 	}
 	else if (string(conn->request_method)=="PUT") 
 	{
-		// TODO. Mirar si esta aislado...
-		bool aislado = false;
-		if (aislado == true) {
+		// Mirar si esta aislado...	
+		if (P_CFG_PROC->IsIdle()){
 			RETURN_IERROR_RESP(resp, webData_line("Error de UPLOAD. La Unidad esta aislada.").JSerialize());
 		}
-		// TODO. Dar aviso de carga de configuracion...
+		// Dar aviso de carga de configuracion...
+		P_CFG_PROC->AvisaSubirConfiguracion();
 		RETURN_OK200_RESP(resp, webData_line("Peticion de Subida cursada...").JSerialize());
 	}
 	RETURN_NOT_IMPLEMENTED_RESP(resp);
@@ -192,20 +198,19 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 			bool res = true;
 			if (string(conn->request_method)=="POST")	// Salvar Preconfiguracion activa como...
 			{
-				// TODO. Obtener la Configuracion activa...
-				CommPreconf activa(preconf_id.name, Tools::Ahora(), CommConfig(ifstream("./comm-config.json", ios_base::in)).JSerialize());
+				// Obtener la Configuracion activa...
+				CommPreconf activa(preconf_id.name, Tools::Ahora(), P_WORKING_CONFIG->JConfig());
 				res = preconfs.pos(preconf_id.name, activa);
 				if (res == false) {
 					RETURN_IERROR_RESP(resp, webData_line("Error al Salvar Preconfiguracion: " + preconf_id.name).JSerialize());
 				}
 				/** HIST 154 */
-				HistClient::p_hist->SetEvent(INCI_GCFG, user, /*"CFG", */activa.name);
+				P_HIS_PROC->SetEvent(INCI_GCFG, user, /*"CFG", */activa.name);
 			}
 			else if (string(conn->request_method)=="PUT") // Activar Configuracion..
 			{
-					// TODO.. comprobar estado AISLADO...
-				bool aislado = true;
-				if (aislado==false) {
+					// Comprobar estado AISLADO...
+				if (P_CFG_PROC->IsIdle()==false) {
 					RETURN_IERROR_RESP(resp, webData_line("Preconfiguracion No Activada. Pasarela NO AISLADA.").JSerialize());
 				}
 				CommPreconf activa;
@@ -217,8 +222,14 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 				if (correcta == false) {
 					RETURN_IERROR_RESP(resp, webData_line("Error al Activar Preconfiguracion: " + preconf_id.name + ". Formato de Configuraicon incorrecto").JSerialize());
 				}
-				HistClient::p_hist->SetEvent(INCI_ACFG, user, /*"CFG", */activa.name);
-					// TODO. Activar la configuracion...
+				P_HIS_PROC->SetEvent(INCI_ACFG, user, /*"CFG", */activa.name);
+
+					// Activar la configuracion...
+				CommConfig cfg;
+				cfg.JDeserialize(activa.data);
+				P_WORKING_CONFIG->set(cfg);
+				P_WORKING_CONFIG->save_to(LAST_CFG);
+													// TODO. Sincronizar Fichero....
 			}
 			else if (string(conn->request_method)=="DELETE")		// Borra preconfiguracion.
 			{
@@ -226,7 +237,7 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 					RETURN_IERROR_RESP(resp, webData_line("Preconfiguracion No Eliminada. Error en BDT.").JSerialize());
 				}
 					/** HIST 156 */
-				HistClient::p_hist->SetEvent(INCI_DCFG, user, preconf_id.name);
+				P_HIS_PROC->SetEvent(INCI_DCFG, user, preconf_id.name);
 			}
 
 			RETURN_OK200_RESP(resp, CommPreconfs().JSerialize());
@@ -259,9 +270,8 @@ void Uv5kiGwCfgWebApp::stCb_importexport(struct mg_connection *conn, string user
 	{
 		string pcfg_name = levels[2]=="" ? Tools::FileUniqueName("IMPORT") : 
 			preconfs.Exist(levels[2]) ? Tools::FileUniqueName(levels[2]) : levels[2];
-
-		// TODO. Obtener la Configuracion activa...
-		CommPreconf activa(pcfg_name, Tools::Ahora(), CommConfig(ifstream("./comm-config.json", ios_base::in)).JSerialize());
+		// Obtener la Configuracion activa...
+		CommPreconf activa(pcfg_name, Tools::Ahora(), P_WORKING_CONFIG->JConfig());
 		bool res = preconfs.pos(pcfg_name, activa);
 		if (res == false) {
 			RETURN_IERROR_RESP(resp, webData_line("Error al Salvar Preconfiguracion: " + pcfg_name).JSerialize());

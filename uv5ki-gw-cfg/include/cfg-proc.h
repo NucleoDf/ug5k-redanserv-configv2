@@ -6,21 +6,17 @@
 #include "./base/socket.h"
 #include "./tools/tools.h"
 #include "./config/local-config.h"
+#include "./websrv/uv5kigwcfg-web-app.h"
 #include "./config/working-config.h"
 #include "./config/comm-preconf.h"
-#include "./tools/Parse.h"
+#include "./tools/parse.h"
 
 using namespace std;
 
 #define MAIN_PIDE_CONFIG			((const char *)"pideconfig")
 #define MAIN_TEST_CONFIG			((const char *)"testconfig")
 #define MAIN_SUBIR_CONFIG			((const char *)"subirconfig")
-#define CPU2CPU_MSG					((const char *)"cpu2cpu")
-#define CPU2CPU_MSG_CAMBIO_CONFIG	((const char *)"1")
-#define CPU2CPU_MSG_REMOTE_LOCK		((const char *)"2")
-#define CPU2CPU_MSG_REMOTE_UNLOCK	((const char *)"3")
 #define LAST_CONFIG_ONLINE			((const char *)"Ultima Configuracion online")
-
 
 
 /** Estado de la Configuracion respecto a la Base de Datos */
@@ -45,6 +41,7 @@ public:
 	{
 		_msg = "Socket Error: " + string(error.what());
 	}
+	~HttpClientException() throw() {}
 
 private:
 	string _msg;
@@ -68,10 +65,14 @@ public:
 
 public:
 	static CfgProc *p_cfg_proc;
+	WorkingConfig *p_working_config;
 
 public:
 	void AvisaCambioConfiguracion(string host);
 	void AvisaSubirConfiguracion();
+	bool IsIdle() {
+		return (_stdLocalConfig==slcAislado || _stdLocalConfig==slcNoInicializado);
+	}
 	eStdLocalConfig GetStdLocalConfig()
 	{
 		CCSLock _lock(m_lock);
@@ -89,7 +90,6 @@ protected:
 	int _cntticks;
 	int _maxticks;
 	bool _bconflicto;
-	WorkingConfig *p_working_config;
 };
 
 
@@ -101,7 +101,7 @@ public:
 	HttpClientProc(void) {
 		p_working_config = new WorkingConfig(cfgRedan);
 	}
-	~HttpClientProc(void);
+	~HttpClientProc(void){};
 
 protected:
 	void Run();

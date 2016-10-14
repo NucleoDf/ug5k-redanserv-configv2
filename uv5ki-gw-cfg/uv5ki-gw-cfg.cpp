@@ -1,6 +1,7 @@
 // uv5ki-gw-cfg.cpp: define el punto de entrada de la aplicación de consola.
 //
 #include "./include/websrv/uv5kigwcfg-web-app.h"
+#include "./include/cfg-proc.h"
 #include "./include/man-proc.h"
 #include "./include/his-proc.h"
 
@@ -52,12 +53,18 @@ public:
 
 			/** Inicializacion Comun */
 			Uv5kiGwCfgWebApp webApp;
+
+			/** TODO. Crearlo según el entorno */
+			CfgProc::p_cfg_proc = new HttpClientProc();
+
 			HistClient::p_hist = new HistClient();
 			ManProc::p_man = new ManProc();
 
 			/** Arranque de Threads */
 			HistClient::p_hist->Start();
 			ManProc::p_man->Start();
+			CfgProc::p_cfg_proc->Start();
+
 			webApp.Start();
 
 	#ifdef _WIN32
@@ -86,9 +93,11 @@ public:
 
 			/** Parada de Threads */
 			webApp.Dispose();
+			CfgProc::p_cfg_proc->Stop();
 			ManProc::p_man->Dispose();
 			HistClient::p_hist->Dispose();
 
+			delete CfgProc::p_cfg_proc;
 			delete ManProc::p_man;
 			delete HistClient::p_hist;
 

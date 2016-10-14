@@ -18,7 +18,7 @@
 #ifndef INCLUIDO_CFGPASA_PUNTOHACHE
 #define INCLUIDO_CFGPASA_PUNTOHACHE
 
-#include "../pthreads/include/pthread.h"
+// #include "../pthreads/include/pthread.h"
 
 //------------------------------------------------------------
 //  Definiciones

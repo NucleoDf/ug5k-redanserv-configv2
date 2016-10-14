@@ -5,9 +5,10 @@
 #include "uv5kigwcfg-web-app-data.h"
 #include "../tools/tools.h"
 
-#define CPU2CPU_MSG_CAMBIO_CONFIG	((const char *)"CambioConfig")
-#define CPU2CPU_MSG_REMOTE_LOCK		((const char *)"RemoteLock")
-#define CPU2CPU_MSG_REMOTE_UNLOCK	((const char *)"RemoteUnlock") 
+#define CPU2CPU_MSG					((const char *)"cpu2cpu")
+#define CPU2CPU_MSG_CAMBIO_CONFIG	((const char *)"1")
+#define CPU2CPU_MSG_REMOTE_LOCK		((const char *)"2")
+#define CPU2CPU_MSG_REMOTE_UNLOCK	((const char *)"3")
 
 /** */
 class Uv5kiGwCfgWebApp :

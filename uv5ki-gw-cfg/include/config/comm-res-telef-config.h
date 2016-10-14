@@ -17,6 +17,7 @@ class CommResTelefAtsRange : public jData
 {
 public:
 	CommResTelefAtsRange() {
+		inicial = final = "";
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
@@ -39,6 +40,24 @@ class CommResTelef : public jData
 {
 public:
 	CommResTelef() {
+		tipo = 0;
+		lado = 1;
+		t_eym = 0;
+		h2h4 = 0;
+		ladoeym = 0;
+		modo = 0;
+		r_automatica = 1;
+		no_test_local = no_test_remoto = "";
+		it_release = 5;
+		uri_remota = "";
+		detect_vox = 0;
+		umbral_vox = -10;
+		tm_inactividad = 2;
+		superv_options = 1;
+		tm_superv_options = 2;
+		colateral_scv = 0;
+		iT_Int_Warning = 5;
+
 	}
 	~CommResTelef() {
 		clear_array(ats_rangos_dst);

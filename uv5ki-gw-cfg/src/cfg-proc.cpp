@@ -1,12 +1,6 @@
 #include "../include/cfg-proc.h"
 #include "../include/his-proc.h"
 
-//#include "stdafx.h"
-//#include "http-client.h"
-//#include "hist-client.h"
-//#include "std-client.h"
-//#include "local-config.h"
-
 #define SCK_RECV_TIMEOUT	(LocalConfig::cfg.HttpGenTimeout())
 
 /** */
@@ -113,14 +107,6 @@ void HttpClientProc::Run()
 
 	p_working_config->load_from(LAST_CFG);
 
-	// TODO....
-	//if (jgw_config::cfg.load(LAST_CFG, false)==false)
-	//{
-	//	NLOG_ERROR("Ultima Configuracion almacenada tiene Error de Formato.");
-	//	jgw_config::cfg.load_default();
-	//	NLOG_ERROR("Se carga y Activa la configuracion por defecto.");
-	//}
-
 	// TODO...
 	//StdClient::std.NotificaCambioConfig();
 
@@ -159,20 +145,10 @@ void HttpClientProc::Run()
 
 				if (aviso.ip==SERVER_URL)
 				{
-					p_working_config->load_from(LAST_CFG);
 					// TODO
 					//	StdClient::std.NotificaCambioConfig();
 
-					//if (jgw_config::cfg.Filename()=="")
-					//{
-					//	if (jgw_config::cfg.load(LAST_CFG, false)==false)
-					//	{
-					//		NLOG_ERROR("Ultima Configuracion almacenada tiene Error de Formato.");
-					//		jgw_config::cfg.load_default();
-					//		NLOG_ERROR("Se carga y Activa la configuracion por defecto.");
-					//	}
-					//	StdClient::std.NotificaCambioConfig();
-					//}
+					//p_working_config->load_from(LAST_CFG);
 
 					/** Estado Sincronizacion=slcAislado */
 					StdSincrSet(slcAislado);
@@ -279,21 +255,6 @@ void HttpClientProc::PedirConfiguracion(string cfg)
 
 	/** EstadoSicronizacion=slcSincronizado */
 	StdSincrSet(slcSincronizado);
-
-	//jgw_config::cfg.Filename(LAST_CFG);
-	//if (jgw_config::cfg.set_document(response.Body()))
-	//{
-	//	/** Salvar Configuracion Recibida */
-	//	jgw_config::cfg.activar("");
-	//	NLOG_INFO("Configuracion Recibida Activada ...");
-
-	//	/** EstadoSicronizacion=slcSincronizado */
-	//	StdSincrSet(slcSincronizado/*, jgw_config::cfg*/);
-	//}
-	//else
-	//{
-	//	NLOG_ERROR("Recibida Configuracion con Error de Formato.");
-	//}
 }
 
 /** */
@@ -318,101 +279,28 @@ void HttpClientProc::ChequearConfiguracion()
 		AvisaPideConfiguracion(cfgRemota.idConf);
 	else
 		StdSincrSet(slcConflicto);
-
-	///** */
-	//jgw_config local, remota;
-	//if (jgw_config::cfg.Filename()=="")
-	//{
-	//	if (local.load(LAST_CFG, false)==false)
-	//	{
-	//		NLOG_ERROR("Ultima Configuracion almacenada tiene Error de Formato.");
-	//		jgw_config::cfg.load_default();
-	//		NLOG_ERROR("Se carga y Activa la configuracion por defecto.");
-	//	}
-	//	StdClient::std.NotificaCambioConfig();
-	//}
-	//else
-	//	local = jgw_config::cfg;
-
-	//if (remota.set_document(response.Body(), false) )
-	//{
-	//	// NLOG_DEBUG(response.Body().c_str());
-
-	//	if (remota.IdConfig()=="-1"/* .StdConfig()==slcNoBdt*/)				// La pasarela no esta en Base de Datos.
-	//	{
-	//		if (!(local==jgw_config::cfg))
-	//			jgw_config::cfg = local;
-
-	//		/** Subir la Configuracion Local... */
-	//		// 20160504. Se decide que en este estado la pasarela no suba la configuracion....
-	//		// AvisaSubirConfiguracion();
-
-	//		/** Historico Sincronizacion=slcNoBdt */
-	//		StdSincrSet(slcNoBdt/*, jgw_config::cfg*/);
-	//	}
-	//	else if (remota.IdConfig()=="-2"/* .StdConfig()==slcNoActiveCfg*/)	// La pasarela esta en Base de Datos, pero no en la Configuracion Activa.
-	//	{
-	//		if (!(local==jgw_config::cfg))
-	//			jgw_config::cfg = local;
-
-	//		/** Historico. Estado Sincronizacion=slcNoActCfg */
-	//		StdSincrSet(slcNoActiveCfg/*, jgw_config::cfg*/);
-	//	}
-	//	else if (local == remota)
-	//	{
-	//		if (!(local==jgw_config::cfg))
-	//			jgw_config::cfg = local;
-
-	//		// GestionaConflicto(false, local);
-	//		/** Estado Sincronizacion=slcSincronizado */
-	//		StdSincrSet(slcSincronizado/*, jgw_config::cfg*/);
-	//	}
-	//	else
-	//	{
-	//		if (local < remota)
-	//		{
-	//			AvisaPideConfiguracion(remota.IdConfig());
-	//			//GestionaConflicto(false, local);
-	//		}
-	//		else
-	//		{
-	//			//GestionaConflicto(true, local);
-	//			/** Estado Sincronizacion=slcConflicto */
-	//			StdSincrSet(slcConflicto/*, jgw_config::cfg*/);
-	//		}
-	//	}
-	//}
-	//else
-	//{
-	//	NLOG_ERROR("Error General en Configuracion Recibida!!! ");
-	//}
 }
 
 /** */
 void HttpClientProc::SubirConfiguracion()
 {
-	string cfgname = cfg_redan.idConf;				// jgw_config::cfg.IdConfig();
-	string cfg = cfg_redan.JSerialize();				// jgw_config::cfg.get_document();
+	string cfgname = cfg_redan.idConf;
+	string cfg = cfg_redan.JSerialize();
 
 	string path = "/configurations/" + cfgname + "/gateways/" + _ip_propia + "/all";
 	string request = "POST " + path + " HTTP/1.1\r\nHost: " + SERVER_URL/*_host_config*/ + "\r\nContent-Type: application/json; charset=utf-8\r\n" +
 		"Content-Length: " + Tools::Int2String((int )cfg.size()) + "\r\n\r\n" + 	cfg + "\r\n";
 	ParseResponse response = SendHttpCmd(SERVER_URL/*_host_config*/, request);
-	if (response.Status() == "200")
-	{
-		//jgw_config remota;
-		//if (remota.set_document(response.Body()))
-		//{
-		//	NLOG_INFO("Configuracion Enviada (%s)=>(%s)", response.Body().c_str(), jgw_config::cfg.TimeStamp(remota).c_str());
-		//	jgw_config::cfg.save();
-		//}
-		PLOG_INFO("Configuracion Enviada Correctamente...");
-	}
-	else
+	if (response.Status() != "200")
 	{
 		throw HttpClientException("REQUEST ERROR: POST " + path + 
 			" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.Status() + ":" + response.StatusText());
 	}
+
+	CommConfig cfgRemota(response.Body());
+	p_working_config->TimeStamp(cfgRemota);
+	p_working_config->save_to(LAST_CFG);
+	PLOG_INFO("Configuracion Enviada Correctamente (%s).", cfgRemota.fechaHora.c_str());
 }
 
 /** */
@@ -456,7 +344,6 @@ void HttpClientProc::StdSincrSet(eStdLocalConfig nstd)
 
 		switch(nstd) 
 		{
-			//case slcAislado:			// TODO. QUITAR !!!!!
 		case slcNoBdt:
 		case slcNoActiveCfg:
 			ResourcesConfigClear();

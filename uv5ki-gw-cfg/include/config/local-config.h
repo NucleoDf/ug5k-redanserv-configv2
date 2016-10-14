@@ -70,6 +70,7 @@ using namespace std;
 #define ON_RAM(p)						(LocalConfig::onram(p).c_str())
 #define ON_FLASH(p)						(LocalConfig::onflash(p).c_str())
 #define ON_SWREP(p)						(LocalConfig::onswrep(p).c_str())
+
 /** */
 #define LAST_CFG						(LocalConfig::cfg.ConfigFile().c_str())
 #define LAST_CFG_PRUEBA					"gw_config_prueba.json"

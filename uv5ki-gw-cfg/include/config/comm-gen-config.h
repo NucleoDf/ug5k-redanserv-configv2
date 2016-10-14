@@ -17,6 +17,7 @@ class CommGenCpu : public jData
 {
 public:
 	CommGenCpu() {
+		tlan=0;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
@@ -58,10 +59,19 @@ class CommGenConfig : public jData
 {
 public:
 	CommGenConfig() {
+		name="defecto";
+		emplazamiento="defecto";
+		dualidad = 1;
+		ipv = "127.0.0.1";
+		ips = "127.0.0.1";
+		nivelconsola = 0;
+		puertoconsola = 0;
+		nivelIncidencias = 0;
 	}
 	~CommGenConfig() {
 		clear_array(cpus);
 	}
+public:
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
 	{

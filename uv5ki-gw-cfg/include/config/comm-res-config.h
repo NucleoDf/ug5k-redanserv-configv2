@@ -19,6 +19,7 @@ class CommResBJitter : public jData
 {
 public:
 	CommResBJitter() {
+		max = min = 0;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
@@ -41,6 +42,8 @@ class CommResHardware : public jData
 {
 public:
 	CommResHardware() {
+		AD_AGC = DA_AGC = 0;
+		AD_Gain = DA_Gain = 0;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
@@ -69,6 +72,17 @@ class CommResConfig : public jData
 {
 public:
 	CommResConfig() {
+		IdRecurso = "Vacio";
+		Radio_o_Telefonia = 1;
+		SlotPasarela = 0;
+		NumDispositivoSlot = 0;
+		TamRTP = 20;
+		Codec = 0;
+		Uri_Local = "sip:"+IdRecurso+"@127.0.0.1";
+		enableRegistro = 0;
+		szClave = "";
+		LlamadaAutomatica=0;
+		restriccion=0;
 	}
 	~CommResConfig() {
 		//clear_array(cpus);

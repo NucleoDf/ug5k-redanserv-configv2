@@ -17,6 +17,9 @@ class CommResRadioEmplazamiento : public jData
 {
 public:
 	CommResRadioEmplazamiento() {
+		activoTx=0;
+		activoRx=0;
+		uriTxA = uriTxB = uriRxA = uriRxB = "";
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
@@ -51,6 +54,8 @@ class CommResRadioColateral : public jData
 {
 public:
 	CommResRadioColateral() {
+		name = "default";
+		tipoConmutacion = 0;
 	}
 	~CommResRadioColateral() {
 		clear_array(emplazamientos);
@@ -79,9 +84,32 @@ class CommResRadio : public jData
 {
 public:
 	CommResRadio() {
+		tipo=0;
+		sq=0;
+		ptt=0;
+		bss=0;
+		modoConfPtt=0;
+		repSqBss=1;
+		desactivacionSq=1;
+		timeoutPtt=200;
+		metodoBss=0;
+		umbralVad=-33;
+		numFlujosAudio=1;
+		tiempoPtt=0;
+		tmVentanaRx=100;
+		climaxDelay=1;
+		tmRetardoFijo=100;
+		bssRtp=0;
+		retrasoSqOff=50;
+		evtPTT=0;
+		tjbd=20;
+		tGRSid=10;
+		iEnableGI=0;
+		iSesionPrio=0;
+		iPttPrio=0;
+		iPrecisionAudio=1;
 	}
 	~CommResRadio() {
-		//clear_array(cpus);
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)

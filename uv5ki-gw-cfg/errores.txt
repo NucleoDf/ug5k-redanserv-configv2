@@ -1,546 +1,688 @@
-[33;01m--  Compiling src/local-config.cpp[0m
-[33;01m--  Compiling src/local-config.cpp[0m
-/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o: In function `_start':
-(.text+0x18): undefined reference to `main'
-obj/local-config.o: In function `LocalConfig::LocalConfig()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:8: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::string::operator=(char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:15: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:15: undefined reference to `LoadIni(char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:8: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::LocalConfig(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:21: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:27: undefined reference to `std::string::operator=(std::string const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:28: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:28: undefined reference to `LoadIni(char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:21: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::~LocalConfig()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:33: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:33: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::LoadStrings()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:47: undefined reference to `std::string::operator=(std::string const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:48: undefined reference to `std::string::operator=(std::string const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::KeyToIdent(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:56: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-obj/local-config.o: In function `LocalConfig::IdentToKey(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:63: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-obj/local-config.o: In function `LocalConfig::GetKeyConfigLocal(std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >&)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::SetKeyConfigLocal(std::string, std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::save()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:87: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:87: undefined reference to `SaveIni(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*)'
-obj/local-config.o: In function `LocalConfig::sync()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:97: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:97: undefined reference to `LoadIni(char const*)'
-obj/local-config.o: In function `LocalConfig::PuertoEscucha(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:109: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:109: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:111: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::TiempoSesion(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:122: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:122: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:124: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::PathToIniRam(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:135: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:135: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:137: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::PathToIniFlash(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:148: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:148: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:150: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::ConfigFile()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:161: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::ConfigTsup()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:172: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::PathToRCSH(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:184: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:184: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:186: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::PathToVersiones()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:196: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::Log()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:205: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::Login()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:214: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::ServerURL()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:223: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o:/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:232: more undefined references to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)' follow
-obj/local-config.o: In function `LocalConfig::LastRouteDest(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:272: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:272: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:274: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::LastRouteVia(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:286: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:286: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:288: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::LastRouteSource(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:300: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:300: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:302: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::onram(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::onflash(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::onswrep(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::getString(std::string, std::string, std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::setString(std::string, std::string, std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::getInt(std::string, std::string, std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::setInt(std::string, std::string, int)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::getSection(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::deleteSection(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `__static_initialization_and_destruction_0':
-/usr/include/c++/4.7/iostream:75: undefined reference to `std::ios_base::Init::Init()'
-/usr/include/c++/4.7/iostream:75: undefined reference to `std::ios_base::Init::~Init()'
-obj/local-config.o: In function `StlIniCompareStringNoCase::operator()(std::string const&, std::string const&) const':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/../include/./tools/stlini.h:37: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/../include/./tools/stlini.h:38: undefined reference to `std::string::c_str() const'
-obj/local-config.o: In function `bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)':
-/usr/include/c++/4.7/bits/basic_string.h:2518: undefined reference to `std::string::compare(char const*) const'
-obj/local-config.o: In function `std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
-/usr/include/c++/4.7/bits/basic_string.h:2365: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/basic_string.h:2366: undefined reference to `std::string::append(std::string const&)'
-/usr/include/c++/4.7/bits/basic_string.h:2367: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::~pair()':
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::string> >::operator++(int)':
-/usr/include/c++/4.7/bits/stl_tree.h:196: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base*)'
-obj/local-config.o: In function `std::pair<std::string const, std::string>::~pair()':
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::map<std::string, std::string, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::operator[](std::string const&)':
-/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
-/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)':
-/usr/include/c++/4.7/bits/basic_string.h:2402: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/basic_string.h:2403: undefined reference to `std::string::append(char const*)'
-/usr/include/c++/4.7/bits/basic_string.h:2404: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::pair(std::string const&, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > const&)':
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::pair<std::string const, std::string>::pair(std::string const&, std::string const&)':
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_copy(std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > const*, std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >*)':
-/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_end_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:1068: undefined reference to `__cxa_rethrow'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >::_M_copy(std::_Rb_tree_node<std::pair<std::string const, std::string> > const*, std::_Rb_tree_node<std::pair<std::string const, std::string> >*)':
-/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_end_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:1068: undefined reference to `__cxa_rethrow'
-obj/local-config.o: In function `bool std::operator< <char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
-/usr/include/c++/4.7/bits/basic_string.h:2568: undefined reference to `std::string::compare(std::string const&) const'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_insert_(std::_Rb_tree_node_base const*, std::_Rb_tree_node_base const*, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:981: undefined reference to `std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)'
-obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator--()':
-/usr/include/c++/4.7/bits/stl_tree.h:284: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base const*)'
-obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator++()':
-/usr/include/c++/4.7/bits/stl_tree.h:269: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base const*)'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::_M_insert_(std::_Rb_tree_node_base const*, std::_Rb_tree_node_base const*, std::pair<std::string const, std::string> const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:981: undefined reference to `std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)'
-obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::string> >::operator--()':
-/usr/include/c++/4.7/bits/stl_tree.h:284: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base const*)'
-obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::string> >::operator++()':
-/usr/include/c++/4.7/bits/stl_tree.h:269: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base const*)'
-obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >*, unsigned int)':
-/usr/include/c++/4.7/ext/new_allocator.h:100: undefined reference to `operator delete(void*)'
-obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::string> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, std::string> >*, unsigned int)':
-/usr/include/c++/4.7/ext/new_allocator.h:100: undefined reference to `operator delete(void*)'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_create_node(std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
-obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator--()':
-/usr/include/c++/4.7/bits/stl_tree.h:203: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base*)'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >::_M_create_node(std::pair<std::string const, std::string> const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::_M_create_node(std::pair<std::string const, std::string> const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
-obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::string> >::operator--()':
-/usr/include/c++/4.7/bits/stl_tree.h:203: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base*)'
-obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::pair(std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::pair<std::string const, std::string>::pair(std::pair<std::string const, std::string> const&)':
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::allocate(unsigned int, void const*)':
-/usr/include/c++/4.7/ext/new_allocator.h:92: undefined reference to `std::__throw_bad_alloc()'
-/usr/include/c++/4.7/ext/new_allocator.h:94: undefined reference to `operator new(unsigned int)'
-obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::string> > >::allocate(unsigned int, void const*)':
-/usr/include/c++/4.7/ext/new_allocator.h:92: undefined reference to `std::__throw_bad_alloc()'
-/usr/include/c++/4.7/ext/new_allocator.h:94: undefined reference to `operator new(unsigned int)'
-obj/local-config.o:(.eh_frame+0x12f): undefined reference to `__gxx_personality_v0'
-collect2: error: ld returned 1 exit status
-make: *** [obj/local-config] Error 1
-
-[33;01m--  Compiling src/local-config.cpp[0m
-/usr/lib/gcc/i486-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o: In function `_start':
-(.text+0x18): undefined reference to `main'
-obj/local-config.o: In function `LocalConfig::LocalConfig()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:8: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::string::operator=(char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:15: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:15: undefined reference to `LoadIni(char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:14: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:8: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::LocalConfig(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:21: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:27: undefined reference to `std::string::operator=(std::string const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:28: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:28: undefined reference to `LoadIni(char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:21: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::~LocalConfig()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:33: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:33: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::LoadStrings()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:47: undefined reference to `std::string::operator=(std::string const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:48: undefined reference to `std::string::operator=(std::string const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:45: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::KeyToIdent(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:56: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-obj/local-config.o: In function `LocalConfig::IdentToKey(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:63: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-obj/local-config.o: In function `LocalConfig::GetKeyConfigLocal(std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >&)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:70: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::SetKeyConfigLocal(std::string, std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:76: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::save()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:87: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:87: undefined reference to `SaveIni(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*)'
-obj/local-config.o: In function `LocalConfig::sync()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:97: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:97: undefined reference to `LoadIni(char const*)'
-obj/local-config.o: In function `LocalConfig::PuertoEscucha(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:109: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:109: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:111: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::TiempoSesion(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:122: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:122: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:124: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::PathToIniRam(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:135: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:135: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:137: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::PathToIniFlash(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:148: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:148: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:150: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::ConfigFile()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:161: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::ConfigTsup()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:172: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:173: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::PathToRCSH(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:184: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:184: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:186: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::PathToVersiones()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:196: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::Log()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:205: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::Login()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:214: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::ServerURL()':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:223: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o:/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:232: more undefined references to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)' follow
-obj/local-config.o: In function `LocalConfig::LastRouteDest(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:272: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:272: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:274: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::LastRouteVia(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:286: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:286: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:288: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::LastRouteSource(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:300: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:300: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:302: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::onram(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:311: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::onflash(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:321: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::onswrep(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:330: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::getString(std::string, std::string, std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:342: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::setString(std::string, std::string, std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:353: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::getInt(std::string, std::string, std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `GetIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:364: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `LocalConfig::setInt(std::string, std::string, int)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:380: undefined reference to `PutIniSetting(std::map<std::string, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >&, char const*, char const*, char const*)'
-obj/local-config.o: In function `LocalConfig::getSection(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:391: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `LocalConfig::deleteSection(std::string)':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::~allocator()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/local-config.cpp:403: undefined reference to `std::allocator<char>::~allocator()'
-obj/local-config.o: In function `__static_initialization_and_destruction_0':
-/usr/include/c++/4.7/iostream:75: undefined reference to `std::ios_base::Init::Init()'
-/usr/include/c++/4.7/iostream:75: undefined reference to `std::ios_base::Init::~Init()'
-obj/local-config.o: In function `StlIniCompareStringNoCase::operator()(std::string const&, std::string const&) const':
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/../include/./tools/stlini.h:37: undefined reference to `std::string::c_str() const'
-/media/sf_Empresa/Visual Studio 2010/Projects/uv5ki/uv5ki-gw-cfg/src/../include/./tools/stlini.h:38: undefined reference to `std::string::c_str() const'
-obj/local-config.o: In function `bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)':
-/usr/include/c++/4.7/bits/basic_string.h:2518: undefined reference to `std::string::compare(char const*) const'
-obj/local-config.o: In function `std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
-/usr/include/c++/4.7/bits/basic_string.h:2365: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/basic_string.h:2366: undefined reference to `std::string::append(std::string const&)'
-/usr/include/c++/4.7/bits/basic_string.h:2367: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::~pair()':
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::string> >::operator++(int)':
-/usr/include/c++/4.7/bits/stl_tree.h:196: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base*)'
-obj/local-config.o: In function `std::pair<std::string const, std::string>::~pair()':
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::map<std::string, std::string, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::operator[](std::string const&)':
-/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()'
-/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-/usr/include/c++/4.7/bits/stl_map.h:458: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)':
-/usr/include/c++/4.7/bits/basic_string.h:2402: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/basic_string.h:2403: undefined reference to `std::string::append(char const*)'
-/usr/include/c++/4.7/bits/basic_string.h:2404: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::pair(std::string const&, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > const&)':
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::pair<std::string const, std::string>::pair(std::string const&, std::string const&)':
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:105: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_copy(std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > const*, std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >*)':
-/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_end_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:1068: undefined reference to `__cxa_rethrow'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >::_M_copy(std::_Rb_tree_node<std::pair<std::string const, std::string> > const*, std::_Rb_tree_node<std::pair<std::string const, std::string> >*)':
-/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_end_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:1065: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:1068: undefined reference to `__cxa_rethrow'
-obj/local-config.o: In function `bool std::operator< <char, std::char_traits<char>, std::allocator<char> >(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
-/usr/include/c++/4.7/bits/basic_string.h:2568: undefined reference to `std::string::compare(std::string const&) const'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_insert_(std::_Rb_tree_node_base const*, std::_Rb_tree_node_base const*, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:981: undefined reference to `std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)'
-obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator--()':
-/usr/include/c++/4.7/bits/stl_tree.h:284: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base const*)'
-obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator++()':
-/usr/include/c++/4.7/bits/stl_tree.h:269: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base const*)'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::_M_insert_(std::_Rb_tree_node_base const*, std::_Rb_tree_node_base const*, std::pair<std::string const, std::string> const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:981: undefined reference to `std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)'
-obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::string> >::operator--()':
-/usr/include/c++/4.7/bits/stl_tree.h:284: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base const*)'
-obj/local-config.o: In function `std::_Rb_tree_const_iterator<std::pair<std::string const, std::string> >::operator++()':
-/usr/include/c++/4.7/bits/stl_tree.h:269: undefined reference to `std::_Rb_tree_increment(std::_Rb_tree_node_base const*)'
-obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >*, unsigned int)':
-/usr/include/c++/4.7/ext/new_allocator.h:100: undefined reference to `operator delete(void*)'
-obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::string> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, std::string> >*, unsigned int)':
-/usr/include/c++/4.7/ext/new_allocator.h:100: undefined reference to `operator delete(void*)'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >, std::_Select1st<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::_M_create_node(std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
-obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > >::operator--()':
-/usr/include/c++/4.7/bits/stl_tree.h:203: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base*)'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > >::_M_create_node(std::pair<std::string const, std::string> const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
-obj/local-config.o: In function `std::_Rb_tree<std::string, std::pair<std::string const, std::string>, std::_Select1st<std::pair<std::string const, std::string> >, std::less<std::string>, std::allocator<std::pair<std::string const, std::string> > >::_M_create_node(std::pair<std::string const, std::string> const&)':
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_begin_catch'
-/usr/include/c++/4.7/bits/stl_tree.h:386: undefined reference to `__cxa_rethrow'
-/usr/include/c++/4.7/bits/stl_tree.h:383: undefined reference to `__cxa_end_catch'
-obj/local-config.o: In function `std::_Rb_tree_iterator<std::pair<std::string const, std::string> >::operator--()':
-/usr/include/c++/4.7/bits/stl_tree.h:203: undefined reference to `std::_Rb_tree_decrement(std::_Rb_tree_node_base*)'
-obj/local-config.o: In function `std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > >::pair(std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > const&)':
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `std::pair<std::string const, std::string>::pair(std::pair<std::string const, std::string> const&)':
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::string const&)'
-/usr/include/c++/4.7/bits/stl_pair.h:88: undefined reference to `std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()'
-obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::map<std::string, std::string, StlIniCompareStringNoCase, std::allocator<std::pair<std::string const, std::string> > > > > >::allocate(unsigned int, void const*)':
-/usr/include/c++/4.7/ext/new_allocator.h:92: undefined reference to `std::__throw_bad_alloc()'
-/usr/include/c++/4.7/ext/new_allocator.h:94: undefined reference to `operator new(unsigned int)'
-obj/local-config.o: In function `__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, std::string> > >::allocate(unsigned int, void const*)':
-/usr/include/c++/4.7/ext/new_allocator.h:92: undefined reference to `std::__throw_bad_alloc()'
-/usr/include/c++/4.7/ext/new_allocator.h:94: undefined reference to `operator new(unsigned int)'
-obj/local-config.o:(.eh_frame+0x12f): undefined reference to `__gxx_personality_v0'
-collect2: error: ld returned 1 exit status
-make: *** [obj/local-config] Error 1
+[33;01m--  Compiling src/config/working-config.cpp[0m
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:108:0: warning: "PTW32_LEVEL" redefined [enabled by default]
+src/config/../../include/config/./../pthreads/include/pthread.h:95:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:541:3: error: #error Please upgrade your GNU compiler to one that supports __declspec.
+src/config/../../include/config/./../pthreads/include/pthread.h:665:0: warning: "PTHREAD_CANCELED" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:205:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:675:0: warning: "PTHREAD_ONCE_INIT" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:209:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:693:0: warning: "PTHREAD_MUTEX_INITIALIZER" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:100:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:700:0: warning: "PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:103:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:701:0: warning: "PTHREAD_ERRORCHECK_MUTEX_INITIALIZER_NP" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:105:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:703:0: warning: "PTHREAD_COND_INITIALIZER" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:178:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:705:0: warning: "PTHREAD_RWLOCK_INITIALIZER" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:124:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:782:0: warning: "pthread_cleanup_push" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:559:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:788:0: warning: "pthread_cleanup_pop" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:565:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:320:8: error: redefinition of ‘struct timespec’
+In file included from /usr/include/sched.h:34:0,
+                 from /usr/include/pthread.h:25,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/time.h:120:8: error: previous definition of ‘struct timespec’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:585:24: error: conflicting declaration ‘typedef struct ptw32_handle_t pthread_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:36:27: error: ‘pthread_t’ has a previous declaration as ‘typedef long unsigned int pthread_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:586:34: error: conflicting declaration ‘typedef struct pthread_attr_t_* pthread_attr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:43:3: error: ‘pthread_attr_t’ has a previous declaration as ‘typedef union pthread_attr_t pthread_attr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:587:32: error: conflicting declaration ‘typedef struct pthread_once_t_ pthread_once_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:113:13: error: ‘pthread_once_t’ has a previous declaration as ‘typedef int pthread_once_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:588:33: error: conflicting declaration ‘typedef struct pthread_key_t_* pthread_key_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:109:22: error: ‘pthread_key_t’ has a previous declaration as ‘typedef unsigned int pthread_key_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:589:35: error: conflicting declaration ‘typedef struct pthread_mutex_t_* pthread_mutex_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:73:3: error: ‘pthread_mutex_t’ has a previous declaration as ‘typedef union pthread_mutex_t pthread_mutex_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:590:39: error: conflicting declaration ‘typedef struct pthread_mutexattr_t_* pthread_mutexattr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:79:3: error: ‘pthread_mutexattr_t’ has a previous declaration as ‘typedef union pthread_mutexattr_t pthread_mutexattr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:591:34: error: conflicting declaration ‘typedef struct pthread_cond_t_* pthread_cond_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:99:3: error: ‘pthread_cond_t’ has a previous declaration as ‘typedef union pthread_cond_t pthread_cond_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:592:38: error: conflicting declaration ‘typedef struct pthread_condattr_t_* pthread_condattr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:105:3: error: ‘pthread_condattr_t’ has a previous declaration as ‘typedef union pthread_condattr_t pthread_condattr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:594:36: error: conflicting declaration ‘typedef struct pthread_rwlock_t_* pthread_rwlock_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:139:3: error: ‘pthread_rwlock_t’ has a previous declaration as ‘typedef union pthread_rwlock_t pthread_rwlock_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:595:40: error: conflicting declaration ‘typedef struct pthread_rwlockattr_t_* pthread_rwlockattr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:145:3: error: ‘pthread_rwlockattr_t’ has a previous declaration as ‘typedef union pthread_rwlockattr_t pthread_rwlockattr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:596:38: error: conflicting declaration ‘typedef struct pthread_spinlock_t_* pthread_spinlock_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:151:22: error: ‘pthread_spinlock_t’ has a previous declaration as ‘typedef volatile int pthread_spinlock_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:597:37: error: conflicting declaration ‘typedef struct pthread_barrier_t_* pthread_barrier_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:160:3: error: ‘pthread_barrier_t’ has a previous declaration as ‘typedef union pthread_barrier_t pthread_barrier_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:598:41: error: conflicting declaration ‘typedef struct pthread_barrierattr_t_* pthread_barrierattr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:166:3: error: ‘pthread_barrierattr_t’ has a previous declaration as ‘typedef union pthread_barrierattr_t pthread_barrierattr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:612:35: error: conflicting declaration ‘PTHREAD_CREATE_JOINABLE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:36:3: error: ‘PTHREAD_CREATE_JOINABLE’ has a previous declaration as ‘<anonymous enum> PTHREAD_CREATE_JOINABLE’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:613:35: error: conflicting declaration ‘PTHREAD_CREATE_DETACHED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:38:3: error: ‘PTHREAD_CREATE_DETACHED’ has a previous declaration as ‘<anonymous enum> PTHREAD_CREATE_DETACHED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:618:35: error: conflicting declaration ‘PTHREAD_INHERIT_SCHED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:149:3: error: ‘PTHREAD_INHERIT_SCHED’ has a previous declaration as ‘<anonymous enum> PTHREAD_INHERIT_SCHED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:619:35: error: conflicting declaration ‘PTHREAD_EXPLICIT_SCHED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:151:3: error: ‘PTHREAD_EXPLICIT_SCHED’ has a previous declaration as ‘<anonymous enum> PTHREAD_EXPLICIT_SCHED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:624:35: error: conflicting declaration ‘PTHREAD_SCOPE_PROCESS’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:161:3: error: ‘PTHREAD_SCOPE_PROCESS’ has a previous declaration as ‘<anonymous enum> PTHREAD_SCOPE_PROCESS’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:625:35: error: conflicting declaration ‘PTHREAD_SCOPE_SYSTEM’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:159:3: error: ‘PTHREAD_SCOPE_SYSTEM’ has a previous declaration as ‘<anonymous enum> PTHREAD_SCOPE_SYSTEM’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:630:35: error: conflicting declaration ‘PTHREAD_CANCEL_ENABLE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:193:3: error: ‘PTHREAD_CANCEL_ENABLE’ has a previous declaration as ‘<anonymous enum> PTHREAD_CANCEL_ENABLE’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:631:35: error: conflicting declaration ‘PTHREAD_CANCEL_DISABLE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:195:3: error: ‘PTHREAD_CANCEL_DISABLE’ has a previous declaration as ‘<anonymous enum> PTHREAD_CANCEL_DISABLE’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:636:35: error: conflicting declaration ‘PTHREAD_CANCEL_ASYNCHRONOUS’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:202:3: error: ‘PTHREAD_CANCEL_ASYNCHRONOUS’ has a previous declaration as ‘<anonymous enum> PTHREAD_CANCEL_ASYNCHRONOUS’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:637:35: error: conflicting declaration ‘PTHREAD_CANCEL_DEFERRED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:200:3: error: ‘PTHREAD_CANCEL_DEFERRED’ has a previous declaration as ‘<anonymous enum> PTHREAD_CANCEL_DEFERRED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:643:35: error: conflicting declaration ‘PTHREAD_PROCESS_PRIVATE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:169:3: error: ‘PTHREAD_PROCESS_PRIVATE’ has a previous declaration as ‘<anonymous enum> PTHREAD_PROCESS_PRIVATE’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:644:35: error: conflicting declaration ‘PTHREAD_PROCESS_SHARED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:171:3: error: ‘PTHREAD_PROCESS_SHARED’ has a previous declaration as ‘<anonymous enum> PTHREAD_PROCESS_SHARED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:649:35: error: conflicting declaration ‘PTHREAD_MUTEX_STALLED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:68:3: error: ‘PTHREAD_MUTEX_STALLED’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_STALLED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:650:35: error: conflicting declaration ‘PTHREAD_MUTEX_ROBUST’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:70:3: error: ‘PTHREAD_MUTEX_ROBUST’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_ROBUST’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:655:3: error: expected identifier before ‘-’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:655:3: error: expected ‘}’ before ‘-’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:655:3: error: expected unqualified-id before ‘-’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:716:3: error: conflicting declaration ‘PTHREAD_MUTEX_FAST_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:59:5: error: ‘PTHREAD_MUTEX_FAST_NP’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_FAST_NP’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:717:3: error: conflicting declaration ‘PTHREAD_MUTEX_RECURSIVE_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:47:3: error: ‘PTHREAD_MUTEX_RECURSIVE_NP’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_RECURSIVE_NP’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:718:3: error: conflicting declaration ‘PTHREAD_MUTEX_ERRORCHECK_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:48:3: error: ‘PTHREAD_MUTEX_ERRORCHECK_NP’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_ERRORCHECK_NP’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:719:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_TIMED_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:46:3: error: ‘<anonymous enum> PTHREAD_MUTEX_TIMED_NP’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:720:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_ADAPTIVE_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:49:3: error: ‘<anonymous enum> PTHREAD_MUTEX_ADAPTIVE_NP’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:722:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_NORMAL’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:52:3: error: ‘<anonymous enum> PTHREAD_MUTEX_NORMAL’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:723:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_RECURSIVE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:53:3: error: ‘<anonymous enum> PTHREAD_MUTEX_RECURSIVE’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:724:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_ERRORCHECK’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:54:3: error: ‘<anonymous enum> PTHREAD_MUTEX_ERRORCHECK’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:725:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_DEFAULT’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:55:3: error: ‘<anonymous enum> PTHREAD_MUTEX_DEFAULT’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:736:29: error: expected ‘)’ before ‘ptw32_cleanup_callback_t’
+src/config/../../include/config/./../pthreads/include/pthread.h:744:3: error: ‘ptw32_cleanup_callback_t’ does not name a type
+src/config/../../include/config/./../pthreads/include/pthread.h:891:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:893:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:895:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:898:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:901:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:904:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:907:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:910:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:913:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:916:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:919:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:922:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:925:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:928:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:931:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:934:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:940:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:945:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:947:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:950:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:952:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:955:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:957:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:959:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:962:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:965:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:967:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:971:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:973:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:981:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:984:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:986:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:989:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:995:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:997:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:999:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1003:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1006:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1007:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1009:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1012:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1019:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1021:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1023:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1027:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1033:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1036:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1038:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1040:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1043:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1045:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1047:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1052:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1054:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1056:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1058:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1060:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1065:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1069:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1071:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1076:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1078:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1080:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1083:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1089:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1092:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1094:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1097:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1101:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1103:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1108:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1112:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1116:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1118:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1123:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1126:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1128:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1130:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1132:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1134:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1137:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1139:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1142:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1144:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1146:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1148:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1151:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1160:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1169:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1171:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1177:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1178:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1179:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1185:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1186:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1187:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1188:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1193:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1207:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1216:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1220:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1238:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1239:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1285:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1353:1: error: expected declaration before ‘}’ token
+make: *** [obj/working-config.o] Error 1
