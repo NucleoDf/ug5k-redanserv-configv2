@@ -76,8 +76,13 @@ public:
 	int KeepAliveMultiplier;
 	int SupresionSilencio;
 	int PeriodoSupervisionSIP;
+#if __POR_REFERENCIA__
+	vector<CommSerServidor &> proxys;
+	vector<CommSerServidor &> registrars;
+#else
 	vector<CommSerServidor *> proxys;
 	vector<CommSerServidor *> registrars;
+#endif
 };
 
 /** */
@@ -210,7 +215,11 @@ public:
 
 public:
 	int ntp;
+#if __POR_REFERENCIA__
+	vector<CommSerServidor &> servidores;
+#else
 	vector<CommSerServidor *> servidores;
+#endif
 };
 
 /** */

@@ -81,7 +81,11 @@ protected:
 	void read();
 
 public:
+#if __POR_REFERENCIA__
+	vector<CommPreconf &> preconfs;
+#else
 	vector<CommPreconf *> preconfs;
+#endif
 };
 
 #endif

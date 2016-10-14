@@ -90,11 +90,16 @@ public:
 public:
 	string idConf;
 	string fechaHora;
-	vector<UserData *> users;
 	CommGenConfig general;
 	CommSerConfig servicios;
 	CommHarConfig hardware;
+#if __POR_REFERENCIA__
+	vector<UserData &> users;
+	vector<CommResConfig &> recursos;
+#else
+	vector<UserData *> users;
 	vector<CommResConfig *> recursos;
+#endif
 };
 
 #endif

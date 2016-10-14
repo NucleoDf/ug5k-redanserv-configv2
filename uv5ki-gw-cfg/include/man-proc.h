@@ -63,7 +63,14 @@ public:
 		ip = "";
 		stdg = stdf = stl1 = stl2 = st_cpu = st_col = stdn = sync = -1;
 		for (int i=0; i<_NUM_HW_ITFS_; i++)
+		{
+#if __POR_REFERENCIA__
+			jInterface ift;
+			itfs.push_back(ift);
+#else
 			itfs.push_back(new jInterface());
+#endif
+		}
 	}
 	~jCpu() {
 		clear_array(itfs);
@@ -94,7 +101,11 @@ public:
 	int stdn;
 	int sync;
 	string ip;
+#if __POR_REFERENCIA__
+	vector<jInterface &> itfs;
+#else
 	vector<jInterface *> itfs;
+#endif
 };
 
 /** */
@@ -142,7 +153,11 @@ public:
 	int		stdn;
 	jCpu	cpu0;
 	jCpu	cpu1;
+#if __POR_REFERENCIA__
+	vector<jInterface &> itf;
+#else
 	vector<jInterface *> itf;
+#endif
 };
 
 /** */
@@ -165,8 +180,12 @@ public:
 	void setMsg(string msg);
 
 public:
-	string res;			// 0: NoInicializado, 1: OK, 2: Error
+	string res;						// 0: NoInicializado, 1: OK, 2: Error
+#if __POR_REFERENCIA__
+	vector<webData_line &> msg;
+#else
 	vector<webData_line *> msg;
+#endif
 };
 
 /** */

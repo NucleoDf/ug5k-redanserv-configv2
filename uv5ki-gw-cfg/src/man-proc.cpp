@@ -142,11 +142,19 @@ void ManProc::setEstadoCpu(ePRIdentity quien, jCpu &cpu, int len, void *data, bo
 				Tools::split(nivel3, nivel2[8+ift],':');
 				if (nivel3.size()==5)
 				{
+#if __POR_REFERENCIA__
+					cpu.itfs[ift].id = nivel3[0];
+					cpu.itfs[ift].tp = atoi(nivel3[1].c_str());
+					cpu.itfs[ift].st = atoi(nivel3[2].c_str());
+					cpu.itfs[ift].md = atoi(nivel3[3].c_str());
+					cpu.itfs[ift].bc = atoi(nivel3[4].c_str());
+#else
 					cpu.itfs[ift]->id = nivel3[0];
 					cpu.itfs[ift]->tp = atoi(nivel3[1].c_str());
 					cpu.itfs[ift]->st = atoi(nivel3[2].c_str());
 					cpu.itfs[ift]->md = atoi(nivel3[3].c_str());
 					cpu.itfs[ift]->bc = atoi(nivel3[4].c_str());
+#endif
 				}				
 				else
 				{
@@ -336,7 +344,11 @@ void jDataBite::setMsg(string msgIn)
 		if (line=="") continue;
 
 		line.erase(std::remove_if(line.begin(), line.end(), &Tools::IsNoAscii), line.end());
-
+#if __POR_REFERENCIA__
+		webData_line wline(line);
+		msg.push_back(wline);
+#else
 		msg.push_back(new webData_line(line));
+#endif
 	}
 }

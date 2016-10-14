@@ -6,7 +6,10 @@
 #include "../rapidjson/writer.h"
 #include "../rapidjson/stringbuffer.h"
 
+#define __POR_REFERENCIA__		0	
+
 using namespace rapidjson;
+
 
 /** */
 class jData : public CodeBase
@@ -94,6 +97,21 @@ protected:
 			writer.Int((*it));
 		writer.EndArray();
 	}
+#if __POR_REFERENCIA__
+	template <typename T> void write_key(Writer<StringBuffer> &writer, string key, vector<T &> &val) 
+	{
+		writer.Key(key.c_str());
+		writer.StartArray();
+		typename vector<T *>::iterator it;
+		for (it=val.begin(); it!=val.end();it++)
+		{
+			writer.StartObject();
+			(*it).jwrite(writer);
+			writer.EndObject();
+		}
+		writer.EndArray();
+	}
+#else
 	template <typename T> void write_key(Writer<StringBuffer> &writer, string key, vector<T *> &val) 
 	{
 		writer.Key(key.c_str());
@@ -107,6 +125,7 @@ protected:
 		}
 		writer.EndArray();
 	}
+#endif
 
 	/** */
 	bool has_member(Value &base, const char *indice)
@@ -209,6 +228,29 @@ protected:
 			}
 		}
 	}
+#if __POR_REFERENCIA__
+	template <typename T> void read_key(Value &base, const char *indice, vector<T &> &arr)
+	{
+		error="";
+		arr.clear();
+		if (is_array(base,indice)==true)
+		{
+			Value &varr = base[indice];
+			Value::ValueIterator itr;
+			for (itr=varr.Begin(); itr!=varr.End(); itr++)
+			{
+				T obj;
+				obj.jread((*itr));
+				arr.push_back(obj);
+			}
+		}
+	}
+	template <typename T> void clear_array(vector<T &> &arr) {
+		if (arr.size() > 0) {
+			arr.clear();
+		}
+	}
+#else
 	template <typename T> void read_key(Value &base, const char *indice, vector<T *> &arr)
 	{
 		error="";
@@ -233,6 +275,7 @@ protected:
 			arr.clear();
 		}
 	}
+#endif
 private:
 	string error;
 };
