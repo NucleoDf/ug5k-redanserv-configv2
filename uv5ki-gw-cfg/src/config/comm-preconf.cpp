@@ -16,8 +16,12 @@ void CommPreconfs::read()
 		CppSQLite3Query q = db.execQuery("select * from tbpc;");
 		while (!q.eof())
 		{
+#if __POR_REFERENCIA__
+			preconfs.push_back(CommPreconf(q.fieldValue("name"), q.fieldValue("fecha"), q.fieldValue("data")));
+#else
 			CommPreconf *p_preconf = new CommPreconf(q.fieldValue("name"), q.fieldValue("fecha"), q.fieldValue("data"));
 			preconfs.push_back(p_preconf);
+#endif
 
 			q.nextRow();
 		}
@@ -33,6 +37,17 @@ void CommPreconfs::read()
 /** */
 bool CommPreconfs::get(string name, CommPreconf &item)
 {
+#if __POR_REFERENCIA__
+	vector<CommPreconf>::iterator it;
+	for (it=preconfs.begin(); it!=preconfs.end(); it++)
+	{
+		if ((*it).name == name)
+		{
+			item = (*it);
+			return true;
+		}
+	}
+#else
 	vector<CommPreconf *>::iterator it;
 	for (it=preconfs.begin(); it!=preconfs.end(); it++)
 	{
@@ -42,6 +57,7 @@ bool CommPreconfs::get(string name, CommPreconf &item)
 			return true;
 		}
 	}
+#endif
 	return false;
 }
 

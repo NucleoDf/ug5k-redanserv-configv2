@@ -165,12 +165,21 @@ vector<CommConvertEvent> *CommConversor::convierte(CommConfig &cfgIn, void *p_mc
 	for (int irec=0; irec<mcfg->iNumRecursos; irec++)
 	{
 		/** Los localizadores de recursos */
+#if __POR_REFERENCIA__
+		mcfg->asLocRec[irec].iSlot = p_cfg_in->recursos[irec].SlotPasarela;	
+		mcfg->asLocRec[irec].iDispositivo = p_cfg_in->recursos[irec].NumDispositivoSlot;
+		
+		/** El identificador global del recurso */
+		int igrec = mcfg->asLocRec[irec].iSlot*4 + mcfg->asLocRec[irec].iDispositivo;
+		Recurso(&p_cfg_in->recursos[irec], &mcfg->sRecurso[igrec]);
+#else
 		mcfg->asLocRec[irec].iSlot = p_cfg_in->recursos[irec]->SlotPasarela;	
 		mcfg->asLocRec[irec].iDispositivo = p_cfg_in->recursos[irec]->NumDispositivoSlot;
 		
 		/** El identificador global del recurso */
 		int igrec = mcfg->asLocRec[irec].iSlot*4 + mcfg->asLocRec[irec].iDispositivo;
 		Recurso(p_cfg_in->recursos[irec], &mcfg->sRecurso[igrec]);
+#endif
 	}
 
 	/** Actualizar datos en INI's */
@@ -201,16 +210,27 @@ void CommConversor::ParametrosGlobales()
 
 	for (size_t icpu=0; icpu<p_cfg_in->general.cpus.size() && icpu < 2; icpu++)
 	{
+#if __POR_REFERENCIA__
+		if (icpu==0)
+			SetString(mcfg->szDirCPU0, p_cfg_in->general.cpus[0].ipb, INCI_MPGP, "IP CPU0", CFG_MAX_LONG_URL);
+		else if (icpu==1)
+			SetString(mcfg->szDirCPU1, p_cfg_in->general.cpus[1].ipb, INCI_MPGP, "IP CPU1", CFG_MAX_LONG_URL);
+#else
 		if (icpu==0)
 			SetString(mcfg->szDirCPU0, p_cfg_in->general.cpus[0]->ipb, INCI_MPGP, "IP CPU0", CFG_MAX_LONG_URL);
 		else if (icpu==1)
 			SetString(mcfg->szDirCPU1, p_cfg_in->general.cpus[1]->ipb, INCI_MPGP, "IP CPU1", CFG_MAX_LONG_URL);
+#endif
 	}
 
 	/** Tipo de Slots */
 	for (size_t slv=0; slv < p_cfg_in->hardware.slv.size() && slv < MAX_SLOTS_PASARELA; slv++)
 	{
+#if __POR_REFERENCIA__
+		mcfg->acTipoSlot[slv] = (char )p_cfg_in->hardware.slv[slv].tp;
+#else
 		mcfg->acTipoSlot[slv] = (char )p_cfg_in->hardware.slv[slv]->tp;
+#endif
 	}
 
 	SetInt(&mcfg->iSipPuertoLocal, p_cfg_in->servicios.sip.PuertoLocalSIP, INCI_MPGP, "PUERTO-SIP");
@@ -230,19 +250,31 @@ void CommConversor::Servidores()
 	/** SIP Proxy */
 	for (i=0; i<p_cfg_in->servicios.sip.proxys.size(); i++)
 	{
+#if __POR_REFERENCIA__
+		memcpy(mcfg->szDirSipProxy[i], p_cfg_in->servicios.sip.proxys[i].ip.c_str(), MAX_LONG_DIRIP);
+#else
 		memcpy(mcfg->szDirSipProxy[i], p_cfg_in->servicios.sip.proxys[i]->ip.c_str(), MAX_LONG_DIRIP);
+#endif
 	}
 
 	/** SIP Registrars */
 	for (i=0; i< p_cfg_in->servicios.sip.registrars.size(); i++)
 	{
+#if __POR_REFERENCIA__
+		memcpy(mcfg->szDirSipRegistrar[i], p_cfg_in->servicios.sip.registrars[i].ip.c_str(), MAX_LONG_DIRIP);
+#else
 		memcpy(mcfg->szDirSipRegistrar[i], p_cfg_in->servicios.sip.registrars[i]->ip.c_str(), MAX_LONG_DIRIP);
+#endif
 	}
 
 	/** NTP Master */
 	for (i=0; i<p_cfg_in->servicios.sincr.servidores.size() && i<2; i++)
 	{
+#if __POR_REFERENCIA__
+		memcpy(mcfg->szDirSrvNtp[i], p_cfg_in->servicios.sincr.servidores[i].ip.c_str(),MAX_LONG_DIRIP);
+#else
 		memcpy(mcfg->szDirSrvNtp[i], p_cfg_in->servicios.sincr.servidores[i]->ip.c_str(),MAX_LONG_DIRIP);
+#endif
 	}
 				// El tercer servidor siempre apunta al servidor de configuracion.
 	memcpy(mcfg->szDirSrvNtp[2], mcfg->szDirSrvConfig, CFG_MAX_LONG_URL);
@@ -439,6 +471,15 @@ void CommConversor::ColateralesRadio(CommResRadioColateral *p_col, struct cfgCol
 	for (size_t emp=0; emp<p_col->emplazamientos.size() && emp<MAX_NUM_EMPL; emp++) 
 	{		
 		/** No genero historico de esto */
+#if __POR_REFERENCIA__
+		memcpy(mcol->asEmpl[emp].UriTxA, p_col->emplazamientos[emp].uriTxA.c_str(),MAX_LONG_DIR_URI);
+		memcpy(mcol->asEmpl[emp].UriTxB, p_col->emplazamientos[emp].uriTxB.c_str(),MAX_LONG_DIR_URI);
+		mcol->asEmpl[emp].cActivoRx = p_col->emplazamientos[emp].activoTx==0 ? 'A' : 'B';
+
+		memcpy(mcol->asEmpl[emp].UriRxA, p_col->emplazamientos[emp].uriRxA.c_str(),MAX_LONG_DIR_URI);
+		memcpy(mcol->asEmpl[emp].UriRxB, p_col->emplazamientos[emp].uriRxB.c_str(),MAX_LONG_DIR_URI);
+		mcol->asEmpl[emp].cActivoRx = p_col->emplazamientos[emp].activoRx==0 ? 'A' : 'B';
+#else
 		memcpy(mcol->asEmpl[emp].UriTxA, p_col->emplazamientos[emp]->uriTxA.c_str(),MAX_LONG_DIR_URI);
 		memcpy(mcol->asEmpl[emp].UriTxB, p_col->emplazamientos[emp]->uriTxB.c_str(),MAX_LONG_DIR_URI);
 		mcol->asEmpl[emp].cActivoRx = p_col->emplazamientos[emp]->activoTx==0 ? 'A' : 'B';
@@ -446,6 +487,7 @@ void CommConversor::ColateralesRadio(CommResRadioColateral *p_col, struct cfgCol
 		memcpy(mcol->asEmpl[emp].UriRxA, p_col->emplazamientos[emp]->uriRxA.c_str(),MAX_LONG_DIR_URI);
 		memcpy(mcol->asEmpl[emp].UriRxB, p_col->emplazamientos[emp]->uriRxB.c_str(),MAX_LONG_DIR_URI);
 		mcol->asEmpl[emp].cActivoRx = p_col->emplazamientos[emp]->activoRx==0 ? 'A' : 'B';
+#endif
 	}
 }
 
@@ -551,13 +593,23 @@ void CommConversor::RecursoTelefoniaR2N5(CommResConfig *p_rec, struct cfgConfigI
 	/** */
 	for (size_t i=0; i<p_rec->telefonia.ats_rangos_dst.size() && i<N_MAX_RANGOS_ATS; i++)
 	{
+#if __POR_REFERENCIA__
+		memcpy(mr2n5->rangos_dst[i].inicial, p_rec->telefonia.ats_rangos_dst[i].inicial.c_str(),LONG_AB_ATS);
+		memcpy(mr2n5->rangos_dst[i].final, p_rec->telefonia.ats_rangos_dst[i].final.c_str(),LONG_AB_ATS);
+#else
 		memcpy(mr2n5->rangos_dst[i].inicial, p_rec->telefonia.ats_rangos_dst[i]->inicial.c_str(),LONG_AB_ATS);
 		memcpy(mr2n5->rangos_dst[i].final, p_rec->telefonia.ats_rangos_dst[i]->final.c_str(),LONG_AB_ATS);
+#endif
 	}
 	for (size_t i=0; i<p_rec->telefonia.ats_rangos_org.size() && i<N_MAX_RANGOS_ATS; i++)
 	{
+#if __POR_REFERENCIA__
+		memcpy(mr2n5->rangos_org[i].inicial, p_rec->telefonia.ats_rangos_org[i].inicial.c_str(),LONG_AB_ATS);
+		memcpy(mr2n5->rangos_org[i].final, p_rec->telefonia.ats_rangos_org[i].final.c_str(),LONG_AB_ATS);
+#else
 		memcpy(mr2n5->rangos_org[i].inicial, p_rec->telefonia.ats_rangos_org[i]->inicial.c_str(),LONG_AB_ATS);
 		memcpy(mr2n5->rangos_org[i].final, p_rec->telefonia.ats_rangos_org[i]->final.c_str(),LONG_AB_ATS);
+#endif
 	}
 
 }
@@ -606,7 +658,11 @@ void CommConversor::RecursosBorrados()
 		for (int jirec=0; jirec<jnrec; jirec++)
 		{
 			//Value &jrec = jrecs[jirec];
+#if __POR_REFERENCIA__
+			int jgrec = p_cfg_in->recursos[jirec].SlotPasarela*4 + p_cfg_in->recursos[jirec].NumDispositivoSlot;
+#else
 			int jgrec = p_cfg_in->recursos[jirec]->SlotPasarela*4 + p_cfg_in->recursos[jirec]->NumDispositivoSlot;
+#endif
 			if (jgrec == grec)
 			{
 				borrado = false;
@@ -631,7 +687,11 @@ void CommConversor::RecursosAnadidos()
 	for (int jirec=0; jirec<jnrec; jirec++)
 	{
 		//Value &jrec = jrecs[jirec];
+#if __POR_REFERENCIA__
+		int jgrec = p_cfg_in->recursos[jirec].SlotPasarela*4 + p_cfg_in->recursos[jirec].NumDispositivoSlot;
+#else
 		int jgrec = p_cfg_in->recursos[jirec]->SlotPasarela*4 + p_cfg_in->recursos[jirec]->NumDispositivoSlot;
+#endif
 		bool anadido = true;
 		for (int irec=0; irec<mcfg->iNumRecursos; irec++)
 		{
@@ -644,9 +704,14 @@ void CommConversor::RecursosAnadidos()
 		}
 		if (anadido)
 		{
-			int tipo = p_cfg_in->recursos[jirec]->Radio_o_Telefonia;
-			int evento = tipo==1 ? INCI_ARCR : INCI_ARCT;
+#if __POR_REFERENCIA__
+			string srec = p_cfg_in->recursos[jirec].IdRecurso;
+			int tipo = p_cfg_in->recursos[jirec].Radio_o_Telefonia;
+#else
 			string srec = p_cfg_in->recursos[jirec]->IdRecurso;
+			int tipo = p_cfg_in->recursos[jirec]->Radio_o_Telefonia;
+#endif
+			int evento = tipo==1 ? INCI_ARCR : INCI_ARCT;
 			eventos.push_back(CommConvertEvent(evento, srec,"En Posicion ",
 				Tools::Int2String(jgrec/4)+"-"+Tools::Int2String(jgrec%4)));
 			recadd.push_back(jgrec);

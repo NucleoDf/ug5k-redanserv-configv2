@@ -108,7 +108,7 @@ public:
 	int puertoconsola;
 	int nivelIncidencias;
 #if __POR_REFERENCIA__
-	vector<CommGenCpu &> cpus;
+	vector<CommGenCpu> cpus;
 #else
 	vector<CommGenCpu *> cpus;
 #endif

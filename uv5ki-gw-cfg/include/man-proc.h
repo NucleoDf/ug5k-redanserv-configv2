@@ -65,8 +65,7 @@ public:
 		for (int i=0; i<_NUM_HW_ITFS_; i++)
 		{
 #if __POR_REFERENCIA__
-			jInterface ift;
-			itfs.push_back(ift);
+			itfs.push_back(jInterface());
 #else
 			itfs.push_back(new jInterface());
 #endif
@@ -102,7 +101,7 @@ public:
 	int sync;
 	string ip;
 #if __POR_REFERENCIA__
-	vector<jInterface &> itfs;
+	vector<jInterface> itfs;
 #else
 	vector<jInterface *> itfs;
 #endif
@@ -154,7 +153,7 @@ public:
 	jCpu	cpu0;
 	jCpu	cpu1;
 #if __POR_REFERENCIA__
-	vector<jInterface &> itf;
+	vector<jInterface> itf;
 #else
 	vector<jInterface *> itf;
 #endif
@@ -182,7 +181,7 @@ public:
 public:
 	string res;						// 0: NoInicializado, 1: OK, 2: Error
 #if __POR_REFERENCIA__
-	vector<webData_line &> msg;
+	vector<webData_line> msg;
 #else
 	vector<webData_line *> msg;
 #endif

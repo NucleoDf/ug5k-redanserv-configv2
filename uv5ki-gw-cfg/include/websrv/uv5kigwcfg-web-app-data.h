@@ -6,7 +6,7 @@
 #include "../rapidjson/writer.h"
 #include "../rapidjson/stringbuffer.h"
 
-#define __POR_REFERENCIA__		0	
+#define __POR_REFERENCIA__		1	
 
 using namespace rapidjson;
 
@@ -98,11 +98,11 @@ protected:
 		writer.EndArray();
 	}
 #if __POR_REFERENCIA__
-	template <typename T> void write_key(Writer<StringBuffer> &writer, string key, vector<T &> &val) 
+	template <typename T> void write_key(Writer<StringBuffer> &writer, string key, vector<T> &val) 
 	{
 		writer.Key(key.c_str());
 		writer.StartArray();
-		typename vector<T *>::iterator it;
+		typename vector<T>::iterator it;
 		for (it=val.begin(); it!=val.end();it++)
 		{
 			writer.StartObject();
@@ -229,7 +229,7 @@ protected:
 		}
 	}
 #if __POR_REFERENCIA__
-	template <typename T> void read_key(Value &base, const char *indice, vector<T &> &arr)
+	template <typename T> void read_key(Value &base, const char *indice, vector<T> &arr)
 	{
 		error="";
 		arr.clear();
@@ -245,7 +245,7 @@ protected:
 			}
 		}
 	}
-	template <typename T> void clear_array(vector<T &> &arr) {
+	template <typename T> void clear_array(vector<T> &arr) {
 		if (arr.size() > 0) {
 			arr.clear();
 		}
@@ -319,11 +319,11 @@ private:
 	int std;
 	string idc;
 	string tim;
-#if LOCAL_TEST
+#if LOCAL_TEST_1
 	webData_line msg;
 	vector<string> val_prueba1;
 	vector<int> val_prueba2;
-	vector<webData_line *> val_prueba3;
+	vector<webData_line> val_prueba3;
 #endif
 };
 

@@ -131,8 +131,8 @@ public:
 	int colateral_scv;
 	int iT_Int_Warning;
 #if __POR_REFERENCIA__
-	vector<CommResTelefAtsRange &> ats_rangos_dst;
-	vector<CommResTelefAtsRange &> ats_rangos_org;
+	vector<CommResTelefAtsRange> ats_rangos_dst;
+	vector<CommResTelefAtsRange> ats_rangos_org;
 #else
 	vector<CommResTelefAtsRange *> ats_rangos_dst;
 	vector<CommResTelefAtsRange *> ats_rangos_org;

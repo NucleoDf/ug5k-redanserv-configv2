@@ -345,8 +345,7 @@ void jDataBite::setMsg(string msgIn)
 
 		line.erase(std::remove_if(line.begin(), line.end(), &Tools::IsNoAscii), line.end());
 #if __POR_REFERENCIA__
-		webData_line wline(line);
-		msg.push_back(wline);
+		msg.push_back(webData_line(line));
 #else
 		msg.push_back(new webData_line(line));
 #endif

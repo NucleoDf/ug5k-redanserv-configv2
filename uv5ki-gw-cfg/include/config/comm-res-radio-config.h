@@ -77,7 +77,7 @@ public:
 	string name;
 	int tipoConmutacion;
 #if __POR_REFERENCIA__
-	vector<CommResRadioEmplazamiento &> emplazamientos;
+	vector<CommResRadioEmplazamiento> emplazamientos;
 #else
 	vector<CommResRadioEmplazamiento *> emplazamientos;
 #endif

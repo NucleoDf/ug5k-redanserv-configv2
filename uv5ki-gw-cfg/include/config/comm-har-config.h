@@ -67,7 +67,7 @@ public:
 public:
 	int tp;
 #if __POR_REFERENCIA__
-	vector<CommHarConfigPos &> pos;
+	vector<CommHarConfigPos> pos;
 #else
 	vector<CommHarConfigPos *> pos;
 #endif
@@ -94,7 +94,7 @@ public:
 
 public:
 #if __POR_REFERENCIA__
-	vector<CommHarConfigSlv &> slv;
+	vector<CommHarConfigSlv> slv;
 #else
 	vector<CommHarConfigSlv *> slv;
 #endif

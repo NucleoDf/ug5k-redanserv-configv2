@@ -94,8 +94,8 @@ public:
 	CommSerConfig servicios;
 	CommHarConfig hardware;
 #if __POR_REFERENCIA__
-	vector<UserData &> users;
-	vector<CommResConfig &> recursos;
+	vector<UserData> users;
+	vector<CommResConfig> recursos;
 #else
 	vector<UserData *> users;
 	vector<CommResConfig *> recursos;

@@ -7,7 +7,7 @@ webData_tses::webData_tses(int parStd, string parIdc, string parTim)
 	idc = parIdc;
 	tim = parTim;
 
-#if LOCAL_TEST
+#if LOCAL_TEST_1
 	val_prueba1.push_back("Valor-1");
 	val_prueba1.push_back("Valor-2");
 
@@ -27,7 +27,7 @@ void webData_tses::jwrite(Writer<StringBuffer> &writer)
 	write_key/*_uint*/(writer, "std", std);
 	write_key/*_string*/(writer, "idc", idc);
 	write_key/*_string*/(writer, "tim", tim);
-#if LOCAL_TEST
+#if LOCAL_TEST_1
 	write_key/*_object*/(writer, "msg", msg);
 	write_key(writer, "ArrayPrueba1", val_prueba1);
 	write_key(writer, "ArrayPrueba2", val_prueba2);

@@ -82,7 +82,7 @@ protected:
 
 public:
 #if __POR_REFERENCIA__
-	vector<CommPreconf &> preconfs;
+	vector<CommPreconf> preconfs;
 #else
 	vector<CommPreconf *> preconfs;
 #endif
