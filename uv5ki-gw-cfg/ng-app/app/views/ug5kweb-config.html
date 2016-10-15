@@ -1,0 +1,141 @@
+<h1 translate>CFG_TITULO</h1>
+<section id="_tabs">
+    <ul class="tabs" data-persist="true">
+        <li>
+            <a href="" data-ng-click="vm.Pagina(1)" data-ng-class="{&#39;tabsel&#39;: vm.pagina==1}" translate>CFG_PG00</a>
+        </li>
+    </ul>
+</section>
+<section id="_contenido">
+
+    <!--    <div id="ntp" class="_tablarec" data-ng-show="vm.pagina==0">
+        <table class="ug5ktb">
+            <tr>
+                <td class="_cab" translate>CFG_LIT00</td>
+                <td>
+                    <button class="button" data-ng-click="vm.salvar()" data-ng-disabled="gvm.enable(32)==0">...</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="_cab" translate>CFG_LIT01</td>
+                <td>
+                    <button class="button" data-ng-click="vm.descartar()" data-ng-disabled="gvm.enable(32)==0">...</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="_cab" translate>CFG_LIT02</td>
+                <td>
+                    <input data-ng-model="vm.preconfname" data-ng-disabled="gvm.enable(32)==0" />
+                    <button class="button" data-ng-click="vm.salvarcomo()" data-ng-disabled="gvm.enable(32)==0">...</button>
+                </td>
+            </tr>
+
+        </table>
+    </div>-->
+
+    <!--    <table class="ug5ktbPreOpts" data-ng-show=" vm.pagina==1">
+        <tr>
+            <td translate>CFG_LIT03</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="_cab">
+                <input data-ng-model="vm.preconfname" data-ng-disabled="gvm.enable(32)==0"
+                    onfocus="if(this.value=='Introduzca nombre')this.value='';"
+                    onblur="if(this.value=='')this.value='Introduzca nombre'" />
+            </td>
+            <td>
+                <button class="buttonLargo" data-ng-click="vm.salvarcomo()" data-ng-disabled="gvm.enable(32)==0" translate>CFG_LIT04</button>
+            </td>
+        </tr>
+    </table>-->
+
+    <!--    <table class="ug5ktbPreOpts" data-ng-show=" vm.pagina==1">
+        <tr>
+            <td translate>CFG_LIT08</td>
+            <td></td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td >
+                <input style="display:none;" id="openDialog4Import" type="file" accept=".json"/>
+                <button class="buttonLargo" data-ng-click="vm.import()" data-ng-disabled="gvm.enable(32)==0" translate>CFG_LIT09</button>
+            </td>
+            <td>
+                <input style="display:none;" id="openDialog4Export" type="file" />
+                <button class="buttonLargo" data-ng-click="vm.export()" data-ng-disabled="gvm.enable(32)==0" translate>CFG_LIT10</button>
+            </td>
+        </tr>
+    </table>-->
+
+    <!--    <div id="Div1">
+        <table class="ug5ktbPre" data-ng-show=" vm.pagina==1">
+            <tr>
+                <th>Fecha</th>
+                <th translate>CFG_LIT05</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr data-ng-repeat="pre in vm.preconf.preconfs">
+                <td class="_cab">{{pre.date}}</td>
+                <td class="_cab1">{{pre.name}}</td>
+                <td>
+                    <button class="buttonMedio" data-ng-disabled="gvm.enable(32)==0" data-ng-click="vm.eliminar(pre.name, pre.date )" translate>CFG_LIT06</button></td>
+                <td>
+                    <button class="buttonMedio" data-ng-disabled="gvm.enable(32)==0" data-ng-click="vm.activar(pre.name)" translate>CFG_LIT07</button></td>
+            </tr>
+        </table>
+    </div>-->
+
+    <div id="div2">
+        <table class="ug5ktbPre" id="ug5ktbPre" data-ng-show=" vm.pagina==1">
+            <tr>
+                <th translate>MAN_PG04_L02</th>
+                <th translate>CFG_LIT05</th>
+                <th>SEL</th>
+            </tr>
+            <tr data-ng-repeat="pre in vm.preconf.preconfs">
+                <td class="_cab">{{pre.date}}</td>
+                <td>{{pre.name}}</td>
+                <td>
+                    <input type="radio" name="pcfgNumber" ng-model="vm.pcfgNumber" ng-value="pre" />
+                </td>
+            </tr>
+        </table>
+
+        <!--        <table data-ng-show=" vm.pagina==1">
+            <tr >
+            <td>
+                <button class="buttonLargo" data-ng-click="vm.salvarcomo()" data-ng-disabled="gvm.enable(32)==0" translate>CFG_LIT04</button>
+            </td>
+                <td>
+                    <input style="display:none;" id="openDialog4Import" type="file" accept=".json"/>
+                    <button class="buttonMedio" data-ng-click="vm.import()" data-ng-disabled="gvm.enable(32)==0" translate>CFG_LIT09</button>
+                </td>
+                <td>
+                    <input style="display:none;" id="openDialog4Export" type="file" />
+                    <button class="buttonMedio" data-ng-click="vm.export()" data-ng-disabled="gvm.enable(32)==0" translate>CFG_LIT10</button>
+                </td>
+                <td>
+                    <button class="buttonMedio" data-ng-disabled="gvm.enable(32)==0" data-ng-click="vm.activar()" translate>CFG_LIT07</button></td>
+                </td>
+                <td>
+                    <button class="buttonMedio" data-ng-disabled="gvm.enable(32)==0" data-ng-click="vm.eliminar()" translate>CFG_LIT06</button></td>
+                </td>
+            </tr>
+        </table>-->
+        <div class="botones">
+            <button class="buttonMedio" data-ng-show="vm.mostrar(4)" data-ng-click="vm.eliminar()" translate>CFG_LIT06</button>
+            <button class="buttonMedio" data-ng-show="vm.mostrar(3)" data-ng-click="vm.activar()" translate>CFG_LIT07</button>
+            <button class="buttonMedio" data-ng-click="vm.salvarcomo()" data-ng-show="vm.mostrar(2)" translate>CFG_LIT04</button>
+            <input style="display: none;" id="openDialog4Import" type="file" accept=".json" />
+            <button class="buttonMedio" data-ng-click="vm.import()" data-ng-show="vm.mostrar(1)" translate>CFG_LIT09</button>
+            <input style="display: none;" id="openDialog4Export" type="file" />
+            <button class="buttonMedio" data-ng-click="vm.export()" data-ng-show="vm.mostrar(0)" translate>CFG_LIT10</button>
+        </div>
+    </div>
+
+</section>
+<!--</body>
+</html>-->
+<!--añadido`parametro fecha en borrrar para borrar solo el señalado y no todos los que compartan nombre-->

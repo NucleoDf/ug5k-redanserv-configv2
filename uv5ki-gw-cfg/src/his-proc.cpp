@@ -204,9 +204,12 @@ void HistClient::SetEstadoCpu(string local, string remoto)
 
 /** */
 void HistClient::SetEventosHistoricos(string user, EventosHistoricos *eventos)
-{
-	// TODO.
-	CCSLock lock(_acceso);
+{	
+	EventosHistoricos::iterator it;
+	for (it=eventos->begin(); it!=eventos->end(); it++)
+	{
+		SetEvent(it->evento, user, it->res, it->name, it->data);
+	}
 }
 
 

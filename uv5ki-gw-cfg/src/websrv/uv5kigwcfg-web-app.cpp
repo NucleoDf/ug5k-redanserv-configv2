@@ -55,15 +55,16 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 /** */
 void Uv5kiGwCfgWebApp::GetConfig() 
 {
-	_web_config.web_port = "8080";
+	_web_config.web_port = "9090";
 	_web_config.document_root = "ng-app";
 	_web_config.default_page = "ug5kweb-index.html";
 	_web_config.login_uri = "/login.html";
 	_web_config.bad_user_uri = "/error1.html";
 	_web_config.closed_session_uri = "/error2.html";
 	_web_config.secret = ":-)";
+	_web_config.enable_login = false;
+	_web_config.enable_ssession = false;
 	_web_config.session_time = 0;
-	_web_config.enable_login = true;
 
 	_web_config.sec_uris.push_back(_web_config.login_uri);
 	_web_config.sec_uris.push_back(_web_config.bad_user_uri);
@@ -116,7 +117,10 @@ void Uv5kiGwCfgWebApp::stCb_tses(struct mg_connection *conn, string user, web_re
 	if (string(conn->request_method)=="GET") 
 	{
 		// TODO. Enlazar con los datos reales en el constructor...
-		webData_tses data;
+		int std;
+		string cfg_name, cfg_time;
+		P_CFG_PROC->IdConfig(std, cfg_name, cfg_time);
+		webData_tses data(std, cfg_name, cfg_time);
 		RETURN_OK200_RESP(resp, data.JSerialize());
 	}
 #if LOCAL_TEST
@@ -160,9 +164,11 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 		string data_in = string(conn->content, conn->content_len );
 		CommConfig cfg;
 		cfg.JDeserialize(data_in);
-		P_WORKING_CONFIG->set(cfg);
+		EventosHistoricos *ev = P_WORKING_CONFIG->set(cfg);
+		P_WORKING_CONFIG->TimeStamp();
 		P_WORKING_CONFIG->save_to(LAST_CFG);
-											 // TODO. Sincronizar Fichero....
+		P_HIS_PROC->SetEventosHistoricos(user, ev);	// Generar los historicos de cambios.
+			// TODO. Sincronizar Fichero....
 		RETURN_OK200_RESP(resp, webData_line("Configuracion Activada...").JSerialize());
 	}
 	else if (string(conn->request_method)=="PUT") 
@@ -227,7 +233,7 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 					// Activar la configuracion...
 				CommConfig cfg;
 				cfg.JDeserialize(activa.data);
-				P_WORKING_CONFIG->set(cfg);
+				P_WORKING_CONFIG->set(cfg);			// TODO. Historicos de cambios ???
 				P_WORKING_CONFIG->save_to(LAST_CFG);
 													// TODO. Sincronizar Fichero....
 			}

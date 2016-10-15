@@ -1,0 +1,85 @@
+﻿/* Tab Content - menucool.com */
+ul.tabs
+{
+    padding: 6px 0;
+  
+      font-size: 0;
+    margin:0;
+    margin-top:6px;
+    list-style-type:  upper-alpha;
+    text-align: left; /*set to left, center, or right to align the tabs as desired*/
+
+
+}
+        
+ul.tabs li
+{
+    display: inline;
+    margin: 0;
+    margin-right:4px; /*distance between tabs*/
+    
+    padding-bottom:8px;
+
+
+
+
+}
+        
+ul.tabs li a
+{
+    font: normal 12px Verdana;
+    text-decoration: none;
+    position: relative;
+    padding: 10px 14px 6px;
+    /** color: #000; */
+	color: #C1022C;
+    border:1px solid #C1022C;
+    /** background: #F7F7F7 url(tabbg2.gif) repeat-x 0 0; */
+	/** background-color: #C1022C; */
+    border-radius: 3px 3px 0 0;
+    outline:none;
+}
+        
+/*ul.tabs li a:visited
+{
+    color: #C1022C;
+	background-color: white;
+}*/
+
+    
+        
+ul.tabs li.selected a, ul.tabs li.selected a:hover
+{
+    position: relative;
+    top: 0;
+    font-weight:bold;
+    background: white url('data:image/gif;base64,R0lGODlhCAAeAJEAAP////n5+e7u7t3d3SH5BAQUAP8ALAAAAAAIAB4AAAIVnG+iq+HvgJy02ouz3rz7D4biSFoFADs=') /*tabbg.gif*/ 0 0 repeat-x;
+    border-bottom-color: white;
+}
+        
+        
+ul.tabs li.selected a:hover
+{
+    text-decoration: none;
+}
+
+ul.tabs li a:hover
+{
+    text-decoration: none;
+ 
+}
+   
+   
+
+div.tabcontents
+{
+    border-top: 3px groove #B7B7B7; padding:30px 16px;
+}
+
+ul.tabs li a.tabsel {
+    font-weight: bold;
+    /*background-color:#f2cad2;*/
+    background: rgba(192,2,43,0.21);
+    border-bottom:1px solid  #f2cad3;
+ 
+}

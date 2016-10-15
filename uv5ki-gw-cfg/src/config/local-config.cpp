@@ -316,7 +316,7 @@ string LocalConfig::onram(string filename) {
 string LocalConfig::onflash(string filename) {
 //    const char* env_p = std::getenv("PATH");
 #ifdef _WIN32
-	return "./wflash/" + filename;
+	return /*"./wflash/"*/"./" + filename;
 #else
     return LocalConfig::cfg.PathToIniFlash() + filename;
 #endif

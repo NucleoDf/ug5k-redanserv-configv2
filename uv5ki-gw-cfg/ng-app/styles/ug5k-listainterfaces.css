@@ -1,0 +1,7 @@
+﻿/*estilos para las listas de interfaces*/
+
+._listaifaces{
+    float:left;        
+    display:inline;
+    border:1px solid #C1012C;
+}

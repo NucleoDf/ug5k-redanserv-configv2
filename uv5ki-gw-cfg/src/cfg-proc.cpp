@@ -28,6 +28,14 @@ CfgProc::CfgProc(void) {
 CfgProc::~CfgProc(void) {
 }
 
+bool CfgProc::IdConfig(int &std, string &id, string &tim)
+{
+	std = (int)GetStdLocalConfig();
+	id = p_working_config->IdConfig();
+	tim= p_working_config->TimConfig();
+	return true;
+}
+
 /** */
 void CfgProc::AvisaCambioConfiguracion(string ip) 
 {
@@ -247,8 +255,7 @@ void HttpClientProc::PedirConfiguracion(string cfg)
 	cfg_redan.JDeserialize(response.Body());
 	
 	/** Activa la configuracion recibida */
- 	EventosHistoricos *ev = p_working_config->set(cfg_redan);
-	HistClient::p_hist->SetEventosHistoricos("", ev);
+ 	p_working_config->set(cfg_redan);
 
 	/** Actualiza la configuracion recibida... TODO. Comprobar los PATH */
 	p_working_config->save_to(LAST_CFG);

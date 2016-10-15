@@ -69,6 +69,7 @@ typedef struct
 	string				secret;				// Clave para encriptado...
 	int					session_time;		// Duracion de las Sesiones.
 	bool				enable_login;
+	bool				enable_ssession;		
 	vector<string>		sec_uris;			// Lista de URIS que no se ven afectadas por la seguridad. Dependen de la aplicacion.
 	webAccessRoutine	access_control;		// Rutina que permite el acceso o no en función de los usuarios.
 	SessionControl		session_control;

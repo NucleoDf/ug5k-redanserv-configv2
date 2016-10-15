@@ -52,23 +52,27 @@
     <ClCompile Include="src\man-proc.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\websrv\mongoose.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\versiones.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="uv5ki-gw-cfg.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\base\sistema.cpp">
       <Filter>src\base</Filter>
     </ClCompile>
+    <ClCompile Include="src\config\comm-conversor.cpp">
+      <Filter>src\config</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools\parse.cpp">
+      <Filter>src\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\websrv\mongoose.c">
+      <Filter>src\web</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cfg-proc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="uv5ki-gw-cfg.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\websrv\mongoose.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -152,6 +156,15 @@
     </ClInclude>
     <ClInclude Include="include\base\sistema.h">
       <Filter>Include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-conversor.h">
+      <Filter>Include\config</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tools\parse.h">
+      <Filter>Include\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\websrv\mongoose.h">
+      <Filter>Include\web</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

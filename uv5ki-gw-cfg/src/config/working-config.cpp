@@ -1,5 +1,4 @@
 #include "../../include/config/working-config.h"
-#include "../../include/config/comm-conversor.h"
 
 /** */
 WorkingConfig::WorkingConfig(WorkingConfigMode mode)
@@ -54,7 +53,7 @@ EventosHistoricos *WorkingConfig::set(CommConfig &redanCfg)
 	redanConfig = redanCfg;
 
 	/** Actualizar la memoria y los ficheros INI */
-	return CommConversor().convierte(redanConfig, p_mem_config);
+	return redanConv.convierte(redanConfig, p_mem_config);
 }
 
 /** */

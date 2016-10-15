@@ -1,0 +1,219 @@
+/** */
+.ug5ktb, .ug5ktbPre, .ug5ktbPreOpts {
+    margin: 0;
+    padding: 10px;    
+    width: 98%;             /*90% */
+    margin-left: 1%;        /* 5% */
+    margin-top: 10px;
+    float:left;
+}
+.ug5ktbPre{
+    width:95%;  
+}
+.ug5ktbPre tr{
+  
+}
+.ug5ktbPre tr:hover{  
+	font-weight:bold;
+}
+
+.ug5ktbPreOpts{
+    width:77%;
+    border:1px white solid;    
+    margin-left: 2%;  
+    padding:5px;  
+    padding-right:30px;
+}
+
+#ug5ktbPre td:nth-child(2)
+{
+    text-align: left;
+}
+
+.ug5ktb td, .ug5ktbPre td{
+	margin: 40px;
+	text-align: right;              /*right*/
+    border:5px groove grey;
+	border-width:0 0 1px 0;
+	padding:0.5em;    
+    background-color:white;
+}
+.ug5ktbPre td {
+/*padding-right:5%;*/
+/*width:25%;*/
+}
+.ug5ktb td._cab{
+	text-align: left;
+    margin-left:10px;
+    width:40%;                  /*35%*/
+    background-color:white;
+    /*font-weight:bold;*/
+}
+
+.ug5ktbPre td._cab {
+     width:30%;
+     text-align: left;
+}
+.ug5ktbPre td._cab1 {
+     width:40%;
+     text-align: left;
+}
+
+.ug5ktb tr {  
+	text-align:right;
+	padding:1px;
+    padding-left:20px;
+	font-size:13px;
+	font-family:Verdana;
+	color: #C1012C;    
+    background-color: white;
+    padding-right:10px;
+    margin-top:5px;   
+}
+.ug5ktb input, .ug5ktbPreOpts input {
+	text-align: right;
+	border: none;
+	padding: 5px;   
+	width: 26em;
+    border:1px solid grey;
+    border-bottom:2px solid grey;   
+    margin-right:10px;
+}
+
+.ug5ktb ol li
+{
+    width: 31em;
+}
+
+.ug5ktbPreOpts input {
+    width:40%;
+    text-align:left;
+}  
+
+.ug5ktbPreOpts td #izqTd {
+    width:50%;
+    text-align:left;
+} 
+.ug5ktb input:focus, .ug5ktbPreOpts input:focus{
+        border:1px solid #C1022C;
+        border-bottom:2px solid #C1022C;   
+        color:#C1022C;                  
+ }
+.ug5ktb input:hover,  .ug5ktbPreOpts input:hover{
+        border:1px solid #C1022C;
+        border-bottom:2px solid #C1022C;
+        color:#C1022C; 
+       box-shadow:rgba(192,2,43,0.4) 1px 3px 1px 1px;          
+ }
+.ug5ktb #selectCorto {
+	width:80px;
+      border:1px solid grey;
+     border-bottom:2px solid grey;
+     padding: 2px 5px 2px 5px;
+   
+}
+.ug5ktb #selectCorto:hover {                
+                color: #C1022C;
+                border:1px solid #C1022C;
+                border-bottom:2px solid #C1022C;            
+                box-shadow:rgba(192,2,43,0.4) 1px 3px 1px 1px;          
+            }
+.ug5ktb #selectCorto:focus {                
+                color: #C1022C;
+                border:1px solid #C1022C;
+                border-bottom:2px solid #C1022C;            
+            }
+    
+.ug5ktb select {
+	width:140px;
+    margin-right:10px;
+  padding: 3px;
+     border:1px solid grey;
+   border-bottom:2px solid grey;   
+}
+.ug5ktb select:hover {                
+                color: #C1022C;
+                border:1px solid #C1022C;
+                border-bottom:2px solid #C1022C;            
+               box-shadow:rgba(192,2,43,0.4) 1px 3px 1px 1px;          
+            }
+.ug5ktb select :focus{
+        color: #C1022C;
+        border:1px solid #C1022C;
+        border-bottom:2px solid #C1022C;        
+ }
+.ug5ktb #selectLargo {
+	width:140px;
+    margin-right:10px;
+    padding-left:5px;
+     border:1px solid grey;
+   border-bottom:2px solid grey;   
+}
+.ug5ktb #selectLargo:hover {                
+                color: #C1022C;
+                border:1px solid #C1022C;
+                border-bottom:2px solid #C1022C;            
+                 box-shadow:rgba(192,2,43,0.4) 1px 3px 1px 1px;          
+            }
+.ug5ktb #selectLargo :focus{
+        color: #C1022C;
+        border:1px solid #C1022C;
+        border-bottom:2px solid #C1022C;        
+ }
+
+.ug5ktb input.ian {
+	width: 20em;
+}
+.tbBotones{
+    padding:10px;
+    margin:10px;
+    margin-top:0;
+	margin-left:20px;
+    background-color:white;
+    width:620px;
+    float:left;  
+}
+
+div._tablarec{
+    width:95%;
+    float:left;
+    display:inline;
+    margin-top:5px;
+    margin-left:17px;
+    border:1px solid white;
+}
+
+.tbBotones:hover {                
+       color: #C1022C;      
+    }
+
+div._listaifaces{
+    width:40%;
+    height: 48px;
+    float:left;
+    display:inline;
+    margin-top:17px;
+    margin-left:17px;
+    border:1px solid white;
+}
+._textLista{
+    text-align:left;
+    margin-left:10px;
+    padding-top:2px;
+    font-weight:bold;
+}
+.selectList {
+    margin-left:5px;
+    width: 180px    ;
+    margin-top:6px;
+}
+ p
+{
+    margin:0;   
+    padding-top:2px;
+    margin-top: 6px;
+    margin-bottom: 3px;
+    margin-left:0;
+    text-align:center;
+}
+

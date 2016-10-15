@@ -1,10 +1,7 @@
 #include "../../include/websrv/web-app-server.h"
 
-#define _LOGIN_				0
 #define _UPLOAD_			0
-#define _SESSION_SUP_		1
-#define _NO_EXPIRE_			0
-
+#define _NO_EXPIRE_			1
 #define TIEMPO_SESSION_DEFAULT	(30*60)
 
 /** */
@@ -56,15 +53,12 @@ void WebAppServer::Run()
 		{
 			this->sleep(10);
 			mg_poll_server(server, 1000);
-#if _SESSION_SUP_
-#if _NO_EXPIRE_
-			int t_inact = p_cfg->SessionTime==0 ? TIEMPO_SESSION_DEFAULT : p_cfg->SessionTime;
-#else
-			int t_inact = 30*60;
-#endif
-			if (config()->session_control.Inactivo(t_inact)==true)      // Supervision de Tiempo de Inactividad.
-				config()->session_control.Reset();
-#endif
+			if (config()->enable_ssession==true)
+			{
+				int t_inact = config()->session_time==0 ? TIEMPO_SESSION_DEFAULT : config()->session_time;
+				if (config()->session_control.Inactivo(t_inact)==true)      // Supervision de Tiempo de Inactividad.
+					config()->session_control.Reset();
+			}
 		}
 		catch(...)
 		{
@@ -89,13 +83,9 @@ int WebAppServer::WebHandler(struct mg_connection *conn, enum mg_event ev)
 		{
 		case MG_AUTH:
 
-#if _LOGIN_
 			if (config()->enable_login==false)
 				return MG_TRUE;
 			return check_auth(conn);	  // return MG_TRUE;  
-#else
-			return MG_TRUE;
-#endif
 
 		case MG_RECV:
 #if _UPLOAD_
@@ -116,8 +106,7 @@ int WebAppServer::WebHandler(struct mg_connection *conn, enum mg_event ev)
 			if (_hup.HandleRequest(conn, result))
 				return result;
 #endif
-
-#if _LOGIN_
+			// TODO. Chequear si esto esta bien...
 			if (config()->enable_login==true)
 			{
 				if (Check4SecureUri(conn->uri) == true && 
@@ -126,7 +115,6 @@ int WebAppServer::WebHandler(struct mg_connection *conn, enum mg_event ev)
 					return check_login_form_submission(conn);		
 				}	  	
 			}
-#endif
 			return ProcessRequest(conn);
 
 		default:
@@ -146,19 +134,16 @@ int WebAppServer::ProcessRequest(struct mg_connection * conn)
 	try 
 	{
 		web_response response;
-#if _LOGIN_
-		string user = current_user(conn);
-#else
-		string user = "";
-#endif
+
+		string user = config()->enable_login==true ? current_user(conn) : "";
 		webCallback wb = FindRest(conn->uri);
 		if (wb != NULL) 
 		{
 			wb(conn, user, &response);
-#if _SESSION_SUP_
-			if (response.actividad==true)
+
+			if (config()->enable_ssession==true && response.actividad==true)
 				config()->session_control.RegActividad();
-#endif
+
 			mg_send_status(conn, response.code);
 			mg_send_header(conn, "Content-type", "application/json");
 			mg_send_data(conn, response.data.c_str(), response.data.length());
@@ -230,6 +215,10 @@ int WebAppServer::check_auth(struct mg_connection *conn)
 		}
 #endif
 	}
+	config()->session_control.Reset();
+
+	// Auth failed, do NOT authenticate, redirect to login page
+	mg_printf(conn, "HTTP/1.1 302 Moved\r\nLocation: %s\r\n\r\n",config()->login_uri);
 	return MG_FALSE;
 }
 
@@ -254,7 +243,6 @@ int WebAppServer::check_login_form_submission(struct mg_connection *conn)
 {
 	char name[100], password[100], ssid[100], expire_epoch[100];
 	int profile=64;
-
 #if _NO_EXPIRE_
 #else
 	char expire[100];
@@ -263,14 +251,12 @@ int WebAppServer::check_login_form_submission(struct mg_connection *conn)
 	mg_get_var(conn, "name", name, sizeof(name));
 	mg_get_var(conn, "password", password, sizeof(password));
 
-#if _LOGIN_
-	bool acceso = config()->access_control(name, password, &profile);
-	if (acceso==true || config()->session_control.Get()==false)
-#endif
+	bool acceso = config()->enable_login==true ? config()->access_control(name, password, &profile) : true;
+	bool session= config()->enable_ssession==true ? config()->session_control.Get() : false;
+	if (acceso == true || session == false)
 	{
-#if _LOGIN_
-		if (profile != 0)
-#endif
+		bool cprofile = config()->enable_login==true ? (profile != 0) : true;
+		if (cprofile==true)
 		{
 #if _NO_EXPIRE_
 			// Tiempo Sesion infinito.
@@ -315,19 +301,17 @@ int WebAppServer::check_login_form_submission(struct mg_connection *conn)
 			config()->session_control.Set(name);
 			return MG_TRUE;
 		}
-#if _LOGIN_
 		else
 		{
-			mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->bad_user_uri.c_str());
+			if (config()->enable_login==true)
+				mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->bad_user_uri.c_str());
 		}
-#endif
 	}
-#if _LOGIN_
 	else
 	{
-		mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->closed_session_uri.c_str());
+		if (config()->enable_login==true)
+			mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->closed_session_uri.c_str());
 	}
-#endif
 	return MG_FALSE;
 }
 
@@ -352,7 +336,7 @@ void WebAppServer::generate_ssid(const char *user_name, int profile, const char 
 {
 	char hash[33];  
 #if _NO_EXPIRE_
-	mg_md5(hash, user_name, p_cfg->secret.c_str(), NULL);
+	mg_md5(hash, user_name, config()->secret.c_str(), NULL);
 #ifdef _WIN32  
 	_snprintf_s(ssid, ssid_size, _TRUNCATE, "%s|%d|%s", user_name, profile, hash);
 #else

@@ -47,11 +47,17 @@ public:
 	void TimeStamp(CommConfig &remota);
 	void ResourcesClear();
 	string JConfig();
+	string IdConfig() {
+		return redanConfig.idConf;
+	}
+	string TimConfig() {
+		return redanConfig.fechaHora;
+	}
 
 public:
 	bool DualCpu();
 	bool IpColateral(string &ipCol);
-	bool IdConfig(string &idConfig);
+	bool IdConfig(string &idConfig, string &fechaHora);
 
 	/** */
 	int cpu1cpu2();
@@ -66,6 +72,7 @@ private:
 	WorkingConfigMode cfg_mode;
 	ug5k_mem_config *p_mem_config;
 	CommConfig redanConfig;
+	CommConversor redanConv;
 #ifdef _WIN32
 #else
 	key_t key_mem;
