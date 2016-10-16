@@ -170,7 +170,7 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
                     var text = reader.result;
                     try {
                         var obj = JSON.parse(text);
-                        $http.post("/import/"+filename, obj).then(function (response) {
+                        $http.post("/impexp/"+filename, obj).then(function (response) {
                             if (response.data.res === "ok") {
                                 alert(/*"Preconfiguración "*/transerv.translate('CCTRL_MSG_06') + /*" guardada correctamente."*/transerv.translate('CCTRL_MSG_07'));
                                 vm.get_preconf();
@@ -209,7 +209,7 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
             if (Confirma(transerv.translate('CCTRL_MSG_13')/*"¿Desea Exportar la preconfiguracion "*/ + name + "?") == false)
                 return;
 
-            $http.get("/export/" + name).then(function (response) {
+            $http.get("/impexp/" + name).then(function (response) {
                 download(name + ".json", JSON.stringify(response.data));
                 alert(transerv.translate('CCTRL_MSG_14')/*"Preconfiguración exportada correctamente"*/);
             }, function (response) {

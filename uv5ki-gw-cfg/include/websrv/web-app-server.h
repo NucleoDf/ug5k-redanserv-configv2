@@ -4,6 +4,8 @@
 #include "../../include/base/thread.h"
 #include "mongoose.h"
 
+#define ROOT_PROFILE	256
+
 typedef struct
 {
 	bool actividad;

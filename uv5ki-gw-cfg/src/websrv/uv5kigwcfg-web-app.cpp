@@ -62,7 +62,7 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.bad_user_uri = "/error1.html";
 	_web_config.closed_session_uri = "/error2.html";
 	_web_config.secret = ":-)";
-	_web_config.enable_login = false;
+	_web_config.enable_login = true;
 	_web_config.enable_ssession = false;
 	_web_config.session_time = 0;
 
@@ -78,10 +78,13 @@ void Uv5kiGwCfgWebApp::GetConfig()
 /** */
 bool Uv5kiGwCfgWebApp::stAccessControl(string name, string pwd, int *profile)
 {
-	if (profile != NULL)
-		*profile = 64;
+	if (name=="root" && pwd=="dfnucleo") {
+		if (profile != NULL)
+			*profile = ROOT_PROFILE;
+		return true;
+	}
 
-	return true;
+	return P_WORKING_CONFIG->UserAccess(name, pwd, profile);
 }
 
 /** */
@@ -197,58 +200,56 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 			 string(conn->request_method)=="PUT"  || 
 			 string(conn->request_method)=="DELETE" ) 
 	{
-		string data_in = string(conn->content, conn->content_len );
-		CommPreconf preconf_id(data_in);
-		if (preconf_id.Error() == "")
+		vector<string> levels = parse_uri(string(conn->uri));
+		if (levels.size() < 3 ) {
+			RETURN_IERROR_RESP(resp, webData_line("Error en Preconfiguracion. Id no presente en peticion.").JSerialize());
+		}
+		bool res = true;
+		string pcfg_name = levels[2];
+		if (string(conn->request_method)=="POST")		// Salvar Preconfiguracion activa como...
 		{
-			bool res = true;
-			if (string(conn->request_method)=="POST")	// Salvar Preconfiguracion activa como...
-			{
-				// Obtener la Configuracion activa...
-				CommPreconf activa(preconf_id.name, Tools::Ahora(), P_WORKING_CONFIG->JConfig());
-				res = preconfs.pos(preconf_id.name, activa);
-				if (res == false) {
-					RETURN_IERROR_RESP(resp, webData_line("Error al Salvar Preconfiguracion: " + preconf_id.name).JSerialize());
-				}
-				/** HIST 154 */
-				P_HIS_PROC->SetEvent(INCI_GCFG, user, /*"CFG", */activa.name);
+			// Obtener la Configuracion activa...
+			CommPreconf activa(pcfg_name, Tools::Ahora(), P_WORKING_CONFIG->JConfig());
+			res = preconfs.pos(pcfg_name, activa);
+			if (res == false) {
+				RETURN_IERROR_RESP(resp, webData_line("Error al Salvar Preconfiguracion: " + pcfg_name).JSerialize());
 			}
-			else if (string(conn->request_method)=="PUT") // Activar Configuracion..
-			{
+			/** HIST 154 */
+			P_HIS_PROC->SetEvent(INCI_GCFG, user, /*"CFG", */activa.name);
+		}
+		else if (string(conn->request_method)=="PUT") // Activar Configuracion.
+		{
 					// Comprobar estado AISLADO...
-				if (P_CFG_PROC->IsIdle()==false) {
-					RETURN_IERROR_RESP(resp, webData_line("Preconfiguracion No Activada. Pasarela NO AISLADA.").JSerialize());
-				}
-				CommPreconf activa;
-				if (preconfs.get(preconf_id.name, activa)==false) {
-					RETURN_IERROR_RESP(resp, webData_line("Error al Activar Preconfiguracion: " + preconf_id.name + ". No esta en BDT.").JSerialize());
-				}
-					// TODO. Comprobar formato de configuracion...
-				bool correcta = true;
-				if (correcta == false) {
-					RETURN_IERROR_RESP(resp, webData_line("Error al Activar Preconfiguracion: " + preconf_id.name + ". Formato de Configuraicon incorrecto").JSerialize());
-				}
-				P_HIS_PROC->SetEvent(INCI_ACFG, user, /*"CFG", */activa.name);
+			if (P_CFG_PROC->IsIdle()==false) {
+				RETURN_IERROR_RESP(resp, webData_line("Preconfiguracion No Activada. Pasarela NO AISLADA.").JSerialize());
+			}
+			CommPreconf activa;
+			if (preconfs.get(pcfg_name, activa)==false) {
+				RETURN_IERROR_RESP(resp, webData_line("Error al Activar Preconfiguracion: " + pcfg_name + ". No esta en BDT.").JSerialize());
+			}
+				// TODO. Comprobar formato de configuracion...
+			bool correcta = true;
+			if (correcta == false) {
+				RETURN_IERROR_RESP(resp, webData_line("Error al Activar Preconfiguracion: " + pcfg_name + ". Formato de Configuraicon incorrecto").JSerialize());
+			}
+			P_HIS_PROC->SetEvent(INCI_ACFG, user, /*"CFG", */activa.name);
 
 					// Activar la configuracion...
-				CommConfig cfg;
-				cfg.JDeserialize(activa.data);
-				P_WORKING_CONFIG->set(cfg);			// TODO. Historicos de cambios ???
-				P_WORKING_CONFIG->save_to(LAST_CFG);
-													// TODO. Sincronizar Fichero....
-			}
-			else if (string(conn->request_method)=="DELETE")		// Borra preconfiguracion.
-			{
-				if (preconfs.del(preconf_id.name)==false) {
-					RETURN_IERROR_RESP(resp, webData_line("Preconfiguracion No Eliminada. Error en BDT.").JSerialize());
-				}
-					/** HIST 156 */
-				P_HIS_PROC->SetEvent(INCI_DCFG, user, preconf_id.name);
-			}
-
-			RETURN_OK200_RESP(resp, CommPreconfs().JSerialize());
+			CommConfig cfg;
+			cfg.JDeserialize(activa.data);
+			P_WORKING_CONFIG->set(cfg);			// TODO. Historicos de cambios ???
+			P_WORKING_CONFIG->save_to(LAST_CFG);
+												// TODO. Sincronizar Fichero....
 		}
-		RETURN_IERROR_RESP(resp, webData_line("Error de formato: " + preconf_id.Error()).JSerialize());
+		else if (string(conn->request_method)=="DELETE")		// Borra preconfiguracion.
+		{
+			if (preconfs.del(pcfg_name)==false) {
+				RETURN_IERROR_RESP(resp, webData_line("Preconfiguracion No Eliminada. Error en BDT.").JSerialize());
+			}
+					/** HIST 156 */
+			P_HIS_PROC->SetEvent(INCI_DCFG, user, pcfg_name);
+		}
+		RETURN_OK200_RESP(resp, CommPreconfs().JSerialize());
 	}
 	RETURN_NOT_IMPLEMENTED_RESP(resp);
 }
@@ -284,7 +285,7 @@ void Uv5kiGwCfgWebApp::stCb_importexport(struct mg_connection *conn, string user
 		}
 		/** HIST 154 */
 		HistClient::p_hist->SetEvent(INCI_GCFG, user, /*"CFG", */activa.name);
-		RETURN_OK200_RESP(resp, preconfs.JSerialize());
+		RETURN_OK200_RESP(resp, webData_line("ok").JSerialize());
 	}
 	RETURN_NOT_IMPLEMENTED_RESP(resp);
 }

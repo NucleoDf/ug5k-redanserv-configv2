@@ -187,7 +187,7 @@ int WebAppServer::check_auth(struct mg_connection *conn)
 
 #if _NO_EXPIRE_
 #ifdef _WIN32
-		if (sscanf_s(ssid, "%[^|]|%[^|]|", name, str_profile) == 2) 
+		if (sscanf_s(ssid, "%[^|]|%[^|]|", name, sizeof(name), str_profile, sizeof(str_profile)) == 2) 
 #else
 		if (sscanf(ssid, "%[^|]|%[^|]|", name, str_profile) == 2) 
 #endif
@@ -201,7 +201,7 @@ int WebAppServer::check_auth(struct mg_connection *conn)
 		}
 #else
 #ifdef _WIN32
-		if (sscanf_s(ssid, "%[^|]|%[^|]|%[^|]|", name, str_profile, expire) == 3) 
+		if (sscanf_s(ssid, "%[^|]|%[^|]|%[^|]|", name, sizeof(name), str_profile, sizeof(str_profile), expire, sizeof(expire)) == 3) 
 #else
 		if (sscanf(ssid, "%[^|]|%[^|]|%[^|]|", name, str_profile, expire) == 3) 
 #endif
@@ -218,7 +218,7 @@ int WebAppServer::check_auth(struct mg_connection *conn)
 	config()->session_control.Reset();
 
 	// Auth failed, do NOT authenticate, redirect to login page
-	mg_printf(conn, "HTTP/1.1 302 Moved\r\nLocation: %s\r\n\r\n",config()->login_uri);
+	mg_printf(conn, "HTTP/1.1 302 Moved\r\nLocation: %s\r\n\r\n",config()->login_uri.c_str());
 	return MG_FALSE;
 }
 
@@ -226,9 +226,10 @@ int WebAppServer::check_auth(struct mg_connection *conn)
 string WebAppServer::current_user(struct mg_connection *conn)
 {
 	char ssid[100], name[100], str_profile[16];
-	mg_parse_header(mg_get_header(conn, "Cookie"), "ssid", ssid, sizeof(ssid));
+	const char *cookies = mg_get_header(conn, "Cookie");
+	mg_parse_header(cookies, "ssid", ssid, sizeof(ssid));
 #ifdef _WIN32
-	if (sscanf_s(ssid, "%[^|]|%[^|]|", name, str_profile) == 2) 
+	if (sscanf_s(ssid, "%[^|]|%[^|]|", name, sizeof(name), str_profile, sizeof(str_profile)) == 2) 
 #else
 	if (sscanf(ssid, "%[^|]|%[^|]|", name, str_profile) == 2) 
 #endif
@@ -253,11 +254,11 @@ int WebAppServer::check_login_form_submission(struct mg_connection *conn)
 
 	bool acceso = config()->enable_login==true ? config()->access_control(name, password, &profile) : true;
 	bool session= config()->enable_ssession==true ? config()->session_control.Get() : false;
-	if (acceso == true || session == false)
+	if (profile == ROOT_PROFILE || session == false)
 	{
-		bool cprofile = config()->enable_login==true ? (profile != 0) : true;
-		if (cprofile==true)
+		if (acceso == true)
 		{
+			profile = profile==ROOT_PROFILE ? 64 : profile;
 #if _NO_EXPIRE_
 			// Tiempo Sesion infinito.
 #ifdef _WIN32

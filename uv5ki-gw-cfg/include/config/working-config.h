@@ -53,6 +53,7 @@ public:
 	string TimConfig() {
 		return redanConfig.fechaHora;
 	}
+	bool UserAccess(string user, string pwd, int *profile);
 
 public:
 	bool DualCpu();
@@ -61,8 +62,7 @@ public:
 
 	/** */
 	int cpu1cpu2();
-	string ipcpu(int cpu);
-	int UserAccess(string user, string pwd);
+	string ipcpu(int cpu);	
 
 protected:
 	void init();

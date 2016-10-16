@@ -1,4 +1,5 @@
 #include "../../include/config/working-config.h"
+#include "../../include/tools/base64.h"
 
 /** */
 WorkingConfig::WorkingConfig(WorkingConfigMode mode)
@@ -132,6 +133,26 @@ string WorkingConfig::JConfig()
 	if (cfg_mode == cfgRedan)
 		return redanConfig.JSerialize();
 	throw Exception("Modo de Configuracion no implementado obteniendo configuracion...");
+}
+
+/** */
+bool WorkingConfig::UserAccess(string user, string pwd, int *profile)
+{
+	if (cfg_mode == cfgRedan) 
+	{
+		string cpwd = base64_encode((const unsigned char *)pwd.c_str(), pwd.length());
+		vector<UserData>::iterator it;
+		for (it=redanConfig.users.begin(); it!=redanConfig.users.end(); it++)
+		{
+			if (it->name==user && it->clave==cpwd) 
+			{
+				if (profile != NULL) *profile=it->perfil;
+				return true;
+			}
+		}
+		return false;
+	}
+	throw Exception("Modo de Configuracion no implementado borrando recursos...");
 }
 
 
