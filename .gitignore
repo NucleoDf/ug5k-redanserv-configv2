@@ -15,4 +15,5 @@ nbproject
 /uv5k-tools-vs2010.suo
 /uv5ki-gw-cfg/logs
 /uv5ki-gw-cfg/uvki-gwser
-
+/uv5ki-gw-cfg/*.xml
+/uv5ki-gw-cfg/last_gw_config_0.json

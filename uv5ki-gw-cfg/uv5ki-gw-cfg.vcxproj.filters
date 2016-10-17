@@ -290,6 +290,9 @@
     <ClCompile Include="src\tools\Parse.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="src\config\comm-config.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="wlib\pthreadVC2.dll" />

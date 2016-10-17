@@ -162,6 +162,7 @@
     <ClCompile Include="src\base\sqlite3.c" />
     <ClCompile Include="src\base\thread.cpp" />
     <ClCompile Include="src\cfg-proc.cpp" />
+    <ClCompile Include="src\config\comm-config.cpp" />
     <ClCompile Include="src\config\comm-conversor.cpp" />
     <ClCompile Include="src\config\comm-preconf.cpp" />
     <ClCompile Include="src\config\local-config.cpp" />

@@ -51,16 +51,21 @@ void WorkingConfig::dispose()
 /** */
 EventosHistoricos *WorkingConfig::set(CommConfig &redanCfg) 
 {
-	redanConfig = redanCfg;
+	config = redanCfg;
 
 	/** Actualizar la memoria y los ficheros INI */
-	return redanConv.convierte(redanConfig, p_mem_config);
+	return redanConv.convierte(config, p_mem_config);
+}
+
+/** */
+void WorkingConfig::set() {
+	set(config);
 }
 
 /** */
 void WorkingConfig::load_from(string file)
 {
-	if (cfg_mode == cfgRedan)
+	if (cfg_mode == cfgRedan || cfg_mode==cfgSoap)
 	{
 		try 
 		{
@@ -85,9 +90,9 @@ void WorkingConfig::load_from(string file)
 void WorkingConfig::save_to(string file)
 {
 	ofstream ff(ON_FLASH(file));	
-	if (cfg_mode == cfgRedan) 
+	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) 
 	{
-		string data = redanConfig.JSerialize();
+		string data = config.JSerialize();
 		ff.write(data.c_str(), data.length());
 		return;
 	}
@@ -97,9 +102,9 @@ void WorkingConfig::save_to(string file)
 /** */
 void WorkingConfig::TimeStamp()
 {
-	if (cfg_mode == cfgRedan) 
+	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) 
 	{
-		redanConfig.fechaHora = Tools::Ahora_Servidor();
+		config.fechaHora = Tools::Ahora_Servidor();
 		return;
 	}
 	throw Exception("Modo de Configuracion no implementado obteniendo timestamp...");
@@ -108,9 +113,9 @@ void WorkingConfig::TimeStamp()
 /** */
 void WorkingConfig::TimeStamp(CommConfig &remota)
 {
-	if (cfg_mode == cfgRedan) 
+	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) 
 	{
-		redanConfig.fechaHora = remota.fechaHora;
+		config.fechaHora = remota.fechaHora;
 		return;
 	}
 	throw Exception("Modo de Configuracion no implementado obteniendo timestamp...");
@@ -119,7 +124,7 @@ void WorkingConfig::TimeStamp(CommConfig &remota)
 /** */
 void WorkingConfig::ResourcesClear()
 {
-	if (cfg_mode == cfgRedan) 
+	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) 
 	{
 		// TODO...
 		return;
@@ -130,19 +135,19 @@ void WorkingConfig::ResourcesClear()
 /** */
 string WorkingConfig::JConfig()
 {
-	if (cfg_mode == cfgRedan)
-		return redanConfig.JSerialize();
+	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap)
+		return config.JSerialize();
 	throw Exception("Modo de Configuracion no implementado obteniendo configuracion...");
 }
 
 /** */
 bool WorkingConfig::UserAccess(string user, string pwd, int *profile)
 {
-	if (cfg_mode == cfgRedan) 
+	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) 
 	{
 		string cpwd = base64_encode((const unsigned char *)pwd.c_str(), pwd.length());
 		vector<UserData>::iterator it;
-		for (it=redanConfig.users.begin(); it!=redanConfig.users.end(); it++)
+		for (it=config.users.begin(); it!=config.users.end(); it++)
 		{
 			if (it->name==user && it->clave==cpwd) 
 			{

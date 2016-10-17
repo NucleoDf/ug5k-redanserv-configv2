@@ -41,6 +41,9 @@ public:
 			data += linea;
 		JDeserialize(data);
 	}
+	CommConfig(vector<string> &soap_strings) {
+		soap_parse(soap_strings);
+	}
 	~CommConfig() {
 		clear_array(users);
 		clear_array(recursos);
@@ -87,6 +90,16 @@ public:
 		read_key(base, "hardware", hardware);
 		read_key(base, "recursos", recursos);
 	}
+
+public:
+	bool soap_parse(vector<string> &soap_strings);
+	static bool soap_parse_idconfig(string str_xml,  string &version);
+	static bool soap_parse_multicast(string str_xml, string &ip, int &port);
+
+	static bool soap_parse_idconfig(string str_xml,  CommConfig &cfg);
+	static bool soap_parse_gwconfig(string str_xml,  CommConfig &cfg);
+
+
 public:
 	string idConf;
 	string fechaHora;
