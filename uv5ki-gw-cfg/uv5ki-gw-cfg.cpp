@@ -55,7 +55,11 @@ public:
 			Uv5kiGwCfgWebApp webApp;
 
 			/** TODO. Crearlo seg�n el entorno */
-			CfgProc::p_cfg_proc = new HttpClientProc();
+			int mode = 1;
+			if (mode==0)
+				CfgProc::p_cfg_proc = new JsonClientProc();
+			else
+				CfgProc::p_cfg_proc = new SoapClientProc();
 
 			HistClient::p_hist = new HistClient();
 			ManProc::p_man = new ManProc();

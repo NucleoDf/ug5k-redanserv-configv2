@@ -16,6 +16,7 @@
 #include "../config/local-config.h"
 #include "../versiones.h"
 
+#include "./soap-config.h"
 #include "./users-config.h"
 #include "./comm-gen-config.h"
 #include "./comm-ser-config.h"
@@ -41,15 +42,16 @@ public:
 			data += linea;
 		JDeserialize(data);
 	}
+	CommConfig(soap_config &sConfig);
 	~CommConfig() {
 		clear_array(users);
 		clear_array(recursos);
 	}
 public:
-	bool operator == ( CommConfig &otra) {
+	bool operator == (CommConfig &otra) {
 		return (idConf == otra.idConf && fechaHora == otra.fechaHora) ? true : false;
 	}
-	bool operator < (  CommConfig &otra) {
+	bool operator < (CommConfig &otra) {
 		struct tm time_l,time_o;
 		time_t loctime,othtime;
 
@@ -87,6 +89,16 @@ public:
 		read_key(base, "hardware", hardware);
 		read_key(base, "recursos", recursos);
 	}
+
+public:
+	//bool soap_parse(vector<string> &soap_strings);
+	//static bool soap_parse_idconfig(string str_xml,  string &version);
+	//static bool soap_parse_multicast(string str_xml, string &ip, int &port);
+
+	//static bool soap_parse_idconfig(string str_xml,  CommConfig &cfg);
+	//static bool soap_parse_gwconfig(string str_xml,  CommConfig &cfg);
+
+
 public:
 	string idConf;
 	string fechaHora;

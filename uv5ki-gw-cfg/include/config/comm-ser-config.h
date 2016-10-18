@@ -16,7 +16,9 @@
 class CommSerServidor : public jData
 {
 public:
-	CommSerServidor() {
+	CommSerServidor(string Ip="", int Selected=0) {
+		ip=Ip;
+		selected = Selected;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)

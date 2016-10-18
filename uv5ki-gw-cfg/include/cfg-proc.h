@@ -70,6 +70,11 @@ public:
 public:
 	void AvisaCambioConfiguracion(string host);
 	void AvisaSubirConfiguracion();
+	void AvisaPideConfiguracion(string cfg="");
+	void AvisaChequearConfiguracion();
+	bool Get(stAviso &aviso);
+
+public:
 	bool IsIdle() {
 		return (_stdLocalConfig==slcAislado || _stdLocalConfig==slcNoInicializado);
 	}
@@ -80,7 +85,14 @@ public:
 		return _stdLocalConfig;
 	}
 	//ParseResponse Public_SendHttpCmd(string host, string cmd);
+protected:
+	void StdSincrSet(eStdLocalConfig nstd/*, jgw_config &local*/);
+	void GeneraAvisosCpu(string host, string cmd);
+	void ResourcesConfigClear();
 
+protected:
+	static void ParseHost(string host, string &ip, int &port);
+	static ParseResponse SendHttpCmd(string host, string cmd);
 
 protected:
 	CCritSec m_lock;
@@ -95,36 +107,53 @@ protected:
 
 
 /** */
-class HttpClientProc : public CfgProc
+class JsonClientProc : public CfgProc
 {
-
 public:
-	HttpClientProc(void) {
+	JsonClientProc(void) {
 		p_working_config = new WorkingConfig(cfgRedan);
 	}
-	~HttpClientProc(void){};
+	~JsonClientProc(void){};
 
 protected:
 	void Run();
 	void Dispose();
-	bool Get(stAviso &aviso);
 
 	void SupervisaProcesoConfiguracion();
 	void ChequearConfiguracion();
 	void PedirConfiguracion(string cfg);
 	void SubirConfiguracion();
 
-	void GeneraAvisosCpu(string host, string cmd);
-	void ParseHost(string host, string &ip, int &port);
-	void StdSincrSet(eStdLocalConfig nstd/*, jgw_config &local*/);
-	ParseResponse SendHttpCmd(string host, string cmd);
-
-	void AvisaPideConfiguracion(string cfg);
-	void AvisaChequearConfiguracion();
-
-	void ResourcesConfigClear();
 private:
 	CommConfig cfg_redan;
+};
+
+/** */
+class SoapClientProc : public CfgProc
+{
+public:
+	SoapClientProc() {
+		p_working_config = new WorkingConfig(cfgSoap);
+	}
+	~SoapClientProc() {}
+
+protected:
+	void Run();
+	void Dispose();
+
+	void SupervisaProcesoConfiguracion();
+	void ChequearConfiguracion();
+	void PedirConfiguracion(string cfg);
+	void SubirConfiguracion();
+
+protected:
+	static string getXml(string rtName, string p1="", string p2="", string p3="");
+	static string hwName;
+	static string hwServer;
+
+private:
+	CommConfig cfg_soap;
+	vector<string> xml_resp;
 };
 
 #endif

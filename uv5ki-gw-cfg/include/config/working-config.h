@@ -22,6 +22,7 @@
 #include "../config/local-config.h"
 #include "../versiones.h"
 #include "./comm-config.h"
+#include "./soap-config.h"
 #include "./comm-conversor.h"
 
 #include "./cfgpasa.hpp"
@@ -39,19 +40,24 @@ public:
 
 public:
 	EventosHistoricos *set(CommConfig &redanConfig);
+	void set(soap_config &sConfig);
+	void set();
 	void load_from(string file);
 	void save_to(string file);
 
 public:
 	void TimeStamp();
 	void TimeStamp(CommConfig &remota);
+	bool HasResources() {
+		return (config.recursos.size() != 0);
+	}
 	void ResourcesClear();
 	string JConfig();
 	string IdConfig() {
-		return redanConfig.idConf;
+		return config.idConf;
 	}
 	string TimConfig() {
-		return redanConfig.fechaHora;
+		return config.fechaHora;
 	}
 	bool UserAccess(string user, string pwd, int *profile);
 
@@ -67,11 +73,12 @@ public:
 protected:
 	void init();
 	void dispose();
+	static void *DelayedSignal(void *arg);
 
 private:
 	WorkingConfigMode cfg_mode;
 	ug5k_mem_config *p_mem_config;
-	CommConfig redanConfig;
+	CommConfig config;
 	CommConversor redanConv;
 #ifdef _WIN32
 #else
