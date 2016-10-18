@@ -91,8 +91,8 @@ protected:
 	void ResourcesConfigClear();
 
 protected:
-	void ParseHost(string host, string &ip, int &port);
-	ParseResponse SendHttpCmd(string host, string cmd);
+	static void ParseHost(string host, string &ip, int &port);
+	static ParseResponse SendHttpCmd(string host, string cmd);
 
 protected:
 	CCritSec m_lock;
@@ -147,13 +147,13 @@ protected:
 	void SubirConfiguracion();
 
 protected:
-	string getXml(string rtName, string p1="", string p2="", string p3="");
+	static string getXml(string rtName, string p1="", string p2="", string p3="");
+	static string hwName;
+	static string hwServer;
 
 private:
 	CommConfig cfg_soap;
 	vector<string> xml_resp;
-	string hwName;
-	string hwServer;
 };
 
 #endif

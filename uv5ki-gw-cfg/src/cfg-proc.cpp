@@ -400,6 +400,8 @@ void JsonClientProc::SupervisaProcesoConfiguracion()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // SoapClientProc
+string SoapClientProc::hwName;
+string SoapClientProc::hwServer;
 /** */
 void SoapClientProc::Run()
 {
@@ -471,7 +473,7 @@ void SoapClientProc::Dispose()
 string SoapClientProc::getXml(string proc, string p1, string p2, string p3)
 {
 	string path = "/NucleoDF/U5kCfg/InterfazSOAPConfiguracion/InterfazSOAPConfiguracion.asmx/" + proc;
-	string data = "id_sistema=departamento";
+	string data = "";		// "id_sistema=departamento";
 	if (p1 != "") {
 		data += ("&"+p1);
 		if (p2 != "")
@@ -489,7 +491,7 @@ string SoapClientProc::getXml(string proc, string p1, string p2, string p3)
 		" Host: " + /*SERVER_URL*/hwServer +  ". " + response.Status() + ":" + response.StatusText());
 
 #ifdef _WIN32 
-	sistema::DataSaveAs(response.Body(), proc+".xml");
+	sistema::DataSaveAs(response.Body(), proc+"_" + p2 + "_" + p3 + ".xml");
 #endif
 	
 	return response.Body();
@@ -526,27 +528,14 @@ void SoapClientProc::ChequearConfiguracion()
 /** */
 void SoapClientProc::PedirConfiguracion(string cfg)
 {
-	xml_resp.clear();
-	xml_resp.push_back(getXml("GetVersionConfiguracion"));
-	xml_resp.push_back(getXml("GetParametrosMulticast"));
-	xml_resp.push_back(getXml("GetCfgPasarela","id_hw=" + hwName));
-	xml_resp.push_back(getXml("GetParametrosGenerales"));
-	xml_resp.push_back(getXml("GetPlanNumeracionATS"));
-	xml_resp.push_back(getXml("GetPlanDireccionamientoIP"));
-	xml_resp.push_back(getXml("GetPlanTroncales"));
-	xml_resp.push_back(getXml("GetPlanRedes"));
-	xml_resp.push_back(getXml("GetPlanAsignacionUsuarios"));
-	xml_resp.push_back(getXml("GetPlanAsignacionRecursos"));
-	xml_resp.push_back(getXml("GetPlanDireccionamientoSIP"));
+	/** Lee la configuracion recibida */
+	soap_config sConfig(getXml, hwName);
 
 	/** Salva ultima configuracion */
 	p_working_config->save_to(LAST_SAVE(Tools::Int2String(_lastcfg++ & 3)));
 
-	/** Lee la configuracion recibida */
-	cfg_soap.soap_parse(xml_resp);
-
 	/** Activa la configuracion recibida */
- 	p_working_config->set(cfg_soap);
+ 	p_working_config->set(sConfig);
 
 	/** Actualiza la configuracion recibida... TODO. Comprobar los PATH */
 	p_working_config->save_to(LAST_CFG);

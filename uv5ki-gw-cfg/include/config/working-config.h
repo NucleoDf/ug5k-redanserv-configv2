@@ -22,6 +22,7 @@
 #include "../config/local-config.h"
 #include "../versiones.h"
 #include "./comm-config.h"
+#include "./soap-config.h"
 #include "./comm-conversor.h"
 
 #include "./cfgpasa.hpp"
@@ -39,6 +40,7 @@ public:
 
 public:
 	EventosHistoricos *set(CommConfig &redanConfig);
+	void set(soap_config &sConfig);
 	void set();
 	void load_from(string file);
 	void save_to(string file);
@@ -71,6 +73,7 @@ public:
 protected:
 	void init();
 	void dispose();
+	static void *DelayedSignal(void *arg);
 
 private:
 	WorkingConfigMode cfg_mode;

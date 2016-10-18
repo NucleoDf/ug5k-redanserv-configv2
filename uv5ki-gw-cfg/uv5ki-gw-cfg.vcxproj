@@ -106,6 +106,7 @@
     <ClInclude Include="include\config\comm-res-telef-config.h" />
     <ClInclude Include="include\config\comm-ser-config.h" />
     <ClInclude Include="include\config\local-config.h" />
+    <ClInclude Include="include\config\soap-config.h" />
     <ClInclude Include="include\config\users-config.h" />
     <ClInclude Include="include\config\working-config.h" />
     <ClInclude Include="include\his-proc.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="src\config\comm-conversor.cpp" />
     <ClCompile Include="src\config\comm-preconf.cpp" />
     <ClCompile Include="src\config\local-config.cpp" />
+    <ClCompile Include="src\config\soap-config.cpp" />
     <ClCompile Include="src\config\working-config.cpp" />
     <ClCompile Include="src\his-proc.cpp" />
     <ClCompile Include="src\man-proc.cpp" />

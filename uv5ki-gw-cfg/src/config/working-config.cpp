@@ -54,7 +54,20 @@ EventosHistoricos *WorkingConfig::set(CommConfig &redanCfg)
 	config = redanCfg;
 
 	/** Actualizar la memoria y los ficheros INI */
-	return redanConv.convierte(config, p_mem_config);
+	EventosHistoricos *his = redanConv.convierte(config, p_mem_config);
+
+	/** Mandar el SIGNAL USR2 */
+	WorkingThread(WorkingConfig::DelayedSignal, this).Do();
+
+	return his;
+}
+
+/** */
+void WorkingConfig::set(soap_config &sConfig)
+{
+	/** Parse */
+	CommConfig newConfig(sConfig);
+	set(newConfig);
 }
 
 /** */
@@ -160,7 +173,16 @@ bool WorkingConfig::UserAccess(string user, string pwd, int *profile)
 	throw Exception("Modo de Configuracion no implementado borrando recursos...");
 }
 
-
+/** */
+void *WorkingConfig::DelayedSignal(void *arg)
+{
+	Sleep(2000);
+	sistema::SignalNuevaConfiguracion(LocalConfig::cfg.NucleoProcName());
+#ifndef _NO_WORKING_THREAD_
+	pthread_exit(NULL);
+#endif
+	return NULL;
+}
 
 
 
