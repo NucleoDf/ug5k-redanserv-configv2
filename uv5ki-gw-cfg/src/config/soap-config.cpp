@@ -1,4 +1,4 @@
-#include "..\..\include\config\soap-config.h"
+#include "../../include/config/soap-config.h"
 
 /** */
 remoteGetXdataFunc xml_data::remote_get_xdata_func;
