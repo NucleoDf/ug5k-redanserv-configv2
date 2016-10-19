@@ -84,6 +84,7 @@ public:
 		LlamadaAutomatica=0;
 		restriccion=0;
 	}
+	CommResConfig(soap_config &sc, int irec);
 	~CommResConfig() {
 		//clear_array(cpus);
 	}

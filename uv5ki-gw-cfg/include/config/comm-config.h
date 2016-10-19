@@ -72,6 +72,7 @@ public:
 
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {
+		write_key(writer, "tipo", tipo);
 		write_key(writer, "idConf", idConf);
 		write_key(writer, "fechaHora", fechaHora);
 		write_key(writer, "general", general);
@@ -81,6 +82,7 @@ public:
 		write_key(writer, "servicios", servicios);
 	}
 	virtual void jread(Value &base) {
+		read_key(base, "tipo", tipo);
 		read_key(base, "idConf", idConf);
 		read_key(base, "fechaHora", fechaHora);
 		read_key(base, "users", users);
@@ -91,15 +93,7 @@ public:
 	}
 
 public:
-	//bool soap_parse(vector<string> &soap_strings);
-	//static bool soap_parse_idconfig(string str_xml,  string &version);
-	//static bool soap_parse_multicast(string str_xml, string &ip, int &port);
-
-	//static bool soap_parse_idconfig(string str_xml,  CommConfig &cfg);
-	//static bool soap_parse_gwconfig(string str_xml,  CommConfig &cfg);
-
-
-public:
+	int tipo;
 	string idConf;
 	string fechaHora;
 	CommGenConfig general;

@@ -25,11 +25,11 @@ typedef string (*remoteGetXdataFunc)(string proc, string p1, string p2, string p
 enum TI_ {TI_Radio=0, TI_LCEN=1, TI_BC=2, TI_BL=3, TI_AB=4, TI_ATS_R2=5, TI_ATS_N5=6, TI_ATS_QSIG=7, TI_ISDN_2BD=8, TI_ISDN_30BD=9, TI_I_O=10, TI_DATOS=11};
 
 /** */
-class xml_data
+class xml_data : public CodeBase
 {
 public:
 	xml_data(){};
-	~xml_data(){};
+	virtual ~xml_data(){};
 public:
 	void XDeserialize(string xml_string, string rootNodeStr)
 	{
@@ -44,7 +44,8 @@ public:
 
 protected:
 	void read_key(xml_node<> * xnode, const char *indice, bool &val) {
-		val = RAPID_XML_NODE_VALUE(xnode, indice)=="false" ? false : true;
+		string sval = string(RAPID_XML_NODE_VALUE(xnode, indice));
+		val = sval == "false" ? false : true;
 	}
 	void read_key(xml_node<> * xnode, const char *indice, int &val) {
 		val = atoi(RAPID_XML_NODE_VALUE(xnode, indice));
@@ -52,14 +53,14 @@ protected:
 	void read_key(xml_node<> * xnode, const char *indice, TI_ &val) {
 		string str_val = RAPID_XML_NODE_VALUE(xnode, indice);
 		val = (TI_)(
-			  str_val=="TI_Radio" ? TI_Radio :
-			  str_val=="TI_LCEN" ? TI_LCEN :
-			  str_val=="TI_BC" ? TI_BC :
-			  str_val=="TI_BL" ? TI_BL :
-			  str_val=="TI_AB" ? TI_AB :
-			  str_val=="TI_ATS_R2" ? TI_ATS_R2 :
-			  str_val=="TI_ATS_N5" ? TI_ATS_N5 :
-			  -1);
+			str_val=="TI_Radio" ? TI_Radio :
+			str_val=="TI_LCEN" ? TI_LCEN :
+			str_val=="TI_BC" ? TI_BC :
+			str_val=="TI_BL" ? TI_BL :
+			str_val=="TI_AB" ? TI_AB :
+			str_val=="TI_ATS_R2" ? TI_ATS_R2 :
+			str_val=="TI_ATS_N5" ? TI_ATS_N5 :
+			-1);
 	}
 	void read_key(xml_node<> * xnode, const char *indice, string &val) {
 		val = RAPID_XML_NODE_VALUE(xnode, indice);
@@ -89,10 +90,25 @@ protected:
 			val.push_back(obj);
 		}
 	}
-	template <typename T> void read_key(string data, const char *root, const char *name, vector<T> &val) {
-		xml_document<> doc;
-		xml_node<> * root_node;
-		doc.parse<0>((char *)data.c_str());
+	//template <typename T> void read_key(string data, const char *root, const char *name, vector<T> &val) {
+	//	xml_document<> doc1;
+	//	xml_node<> * root_node;
+	//	
+	//	doc1.parse<0>((char *)data.c_str());
+	//	root_node = doc1.first_node((char *)root);
+	//	val.clear();
+	//	if (root_node==NULL)
+	//		return;
+	//	for (xml_node<> * res_node = root_node->first_node(name); res_node; res_node = res_node->next_sibling())
+	//	{
+	//		T obj;
+	//		obj.xread(res_node);
+	//		val.push_back(obj);
+	//	}
+	//}
+	template <typename T> void read_key(xml_document<> &doc, const char *root, const char *name, vector<T> &val) {
+		xml_node<> * root_node;		
+		
 		root_node = doc.first_node((char *)root);
 		val.clear();
 		if (root_node==NULL)
@@ -147,10 +163,10 @@ public:
 	~soap_ParametrosMulticast(){}
 
 public:
-		void xread(xml_node<> * xnode) {
-			read_key(xnode, "GrupoMulticastConfiguracion", GrupoMulticastConfiguracion);
-			read_key(xnode, "PuertoMulticastConfiguracion",PuertoMulticastConfiguracion);
-		}
+	void xread(xml_node<> * xnode) {
+		read_key(xnode, "GrupoMulticastConfiguracion", GrupoMulticastConfiguracion);
+		read_key(xnode, "PuertoMulticastConfiguracion",PuertoMulticastConfiguracion);
+	}
 
 public:
 	string GrupoMulticastConfiguracion;
@@ -389,181 +405,183 @@ public:
 };
 
 /** */
+class soap_ResourceInfo : public xml_data
+{
+public:
+	soap_ResourceInfo(){}
+	~soap_ResourceInfo(){}
+public:
+	void xread(xml_node<> * xnode) {
+		read_key(xnode, "GananciaAGCTX", GananciaAGCTX);
+		read_key(xnode, "GananciaAGCTXdBm", GananciaAGCTXdBm);
+		read_key(xnode, "GananciaAGCRX", GananciaAGCRX);
+		read_key(xnode, "GananciaAGCRXdBm", GananciaAGCRXdBm);
+		read_key(xnode, "SupresionSilencio", SupresionSilencio);
+		read_key(xnode, "TamRTP", TamRTP);
+		read_key(xnode, "Codec", Codec);
+		read_key(xnode, "GrabacionEd137", GrabacionEd137);
+		read_key(xnode, "TipoDestino", TipoDestino);
+		read_key(xnode, "IdDestino", IdDestino);
+		read_key(xnode, "FrqTonoSQ", FrqTonoSQ);
+		read_key(xnode, "UmbralTonoSQ", UmbralTonoSQ);
+		read_key(xnode, "FrqTonoPTT", FrqTonoPTT);
+		read_key(xnode, "UmbralTonoPTT", UmbralTonoPTT);
+
+		/** Telefonia */
+		read_key(xnode, "ListaEnlacesInternos", telef.ListaEnlacesInternos);
+		read_key(xnode, "IdPrefijo", telef.IdPrefijo);
+
+		read_key(xnode, "RefrescoEstados", telef.RefrescoEstados);
+		read_key(xnode, "Timeout", telef.Timeout);
+		read_key(xnode, "LongRafagas", telef.LongRafagas);
+
+		read_key(xnode, "Lado", telef.Lado);
+		read_key(xnode, "Modo", telef.Modo);
+		read_key(xnode, "TipoEM", telef.TipoEM);
+		read_key(xnode, "IdRed", telef.IdRed);
+		read_key(xnode, "IdTroncal", telef.IdTroncal);
+
+		/** Radio */
+		read_key(xnode, "EM", radio.EM);
+		read_key(xnode, "SQ", radio.SQ);
+		read_key(xnode, "PTT", radio.PTT);
+		read_key(xnode, "FrqTonoE", radio.FrqTonoE);
+
+		read_key(xnode, "UmbralTonoE", radio.UmbralTonoE);
+		read_key(xnode, "FrqTonoM", radio.FrqTonoM);
+		read_key(xnode, "UmbralTonoM", radio.UmbralTonoM);
+		read_key(xnode, "BSS", radio.BSS);
+
+		read_key(xnode, "NTZ", radio.NTZ);
+		read_key(xnode, "TipoNTZ", radio.TipoNTZ);
+		read_key(xnode, "Cifrado", radio.Cifrado);
+		read_key(xnode, "SupervPortadoraTx", radio.SupervPortadoraTx);
+
+		read_key(xnode, "SupervModuladoraTx", radio.SupervModuladoraTx);
+		read_key(xnode, "ModoConfPTT", radio.ModoConfPTT);
+		read_key(xnode, "RepSQyBSS", radio.RepSQyBSS);
+		read_key(xnode, "DesactivacionSQ", radio.DesactivacionSQ);
+
+		read_key(xnode, "TimeoutPTT", radio.TimeoutPTT);
+		read_key(xnode, "MetodoBSS", radio.MetodoBSS);
+		read_key(xnode, "UmbralVAD", radio.UmbralVAD);
+		read_key(xnode, "TiempoPTT", radio.TiempoPTT);
+
+		read_key(xnode, "NumFlujosAudio", radio.NumFlujosAudio);
+		read_key(xnode, "KeepAlivePeriod", radio.KeepAlivePeriod);
+		read_key(xnode, "KeepAliveMultiplier", radio.KeepAliveMultiplier);
+		read_key(xnode, "IdEmplazamiento", radio.IdEmplazamiento);
+		read_key(xnode, "Tipo", radio.Tipo);
+	}
+public:
+	/** Comunes */
+	int GananciaAGCTX;
+	int GananciaAGCTXdBm;
+	int GananciaAGCRX;
+	int GananciaAGCRXdBm;
+	bool SupresionSilencio;
+	int TamRTP;
+	int Codec;
+	bool GrabacionEd137;
+	int TipoDestino;
+	string IdDestino;
+	int FrqTonoSQ;
+	int UmbralTonoSQ;
+	int FrqTonoPTT;
+	int UmbralTonoPTT;
+	struct {
+		/** Telefonia */
+		vector<string> ListaEnlacesInternos;
+		int IdPrefijo;
+		/** LC */
+		int RefrescoEstados;
+		int Timeout;
+		int LongRafagas;
+		/** BC/BL/AB */
+		int Lado;
+		string Modo;
+		string TipoEM;
+		/** AB */
+		string IdRed;
+		/** R2/N5 */
+		string IdTroncal;
+	} telef;
+	struct {
+		bool EM;
+		string SQ;
+		string PTT;
+		int FrqTonoE;
+		int UmbralTonoE;
+		int FrqTonoM;
+		int UmbralTonoM;
+		bool BSS;
+		bool NTZ;
+		int TipoNTZ;
+		bool Cifrado;
+		bool SupervPortadoraTx;
+		bool SupervModuladoraTx;
+		int ModoConfPTT;
+		int RepSQyBSS;
+		int DesactivacionSQ;
+		int TimeoutPTT;
+		int MetodoBSS;
+		int UmbralVAD;
+		int TiempoPTT;
+		int NumFlujosAudio;
+		int KeepAlivePeriod;
+		int KeepAliveMultiplier;
+		string IdEmplazamiento;
+		int Tipo;
+	} radio;
+};
+
+/** */
+class soap_RecursosSCV : public xml_data
+{
+public:
+	soap_RecursosSCV(){}
+	~soap_RecursosSCV(){}
+public:
+	void xread(xml_node<> * xnode) {	
+		read_key(xnode, "IdRecurso", IdRecurso);
+		read_key(xnode, "Tipo", Tipo);
+		read_key(xnode, "Interface", Interface);
+		read_key(xnode, "SlotPasarela", SlotPasarela);
+		read_key(xnode, "NumDispositivoSlot", NumDispositivoSlot);
+		read_key(xnode, "ServidorSIP", ServidorSIP);
+		read_key(xnode, "Diffserv", Diffserv);
+		read_key(xnode, "IdSistema", IdSistema);
+		read_key(xnode, "TipoRecurso", TipoRecurso);
+		read_key(xnode, "IdTifX", IdTifX);
+
+		xdata_ResourceInfo = remote_get_xdata_func("GetParametrosRecursoById",
+			"idSistema=departamento", 
+			"idRecurso="+IdRecurso, 
+			"tipo=" + Tools::Int2String((int)Interface));
+
+		read_key(xdata_ResourceInfo, "Tablas", info);
+	}
+
+public:
+	string IdRecurso;
+	int Tipo;
+	TI_ Interface;
+	int SlotPasarela;
+	int NumDispositivoSlot;
+	string ServidorSIP;
+	bool Diffserv;
+	string IdSistema;
+	int TipoRecurso;
+	string IdTifX;
+	soap_ResourceInfo info;
+
+protected:
+	string xdata_ResourceInfo;
+};
+
+/** */
 class soap_CfgPasarela : public xml_data
 {
-	class soap_ResourceInfo : public xml_data
-	{
-	public:
-		soap_ResourceInfo(){}
-		~soap_ResourceInfo(){}
-	public:
-		void xread(xml_node<> * xnode) {
-			read_key(xnode, "GananciaAGCTX", GananciaAGCTX);
-			read_key(xnode, "GananciaAGCTXdBm", GananciaAGCTXdBm);
-			read_key(xnode, "GananciaAGCRX", GananciaAGCRX);
-			read_key(xnode, "GananciaAGCRXdBm", GananciaAGCRXdBm);
-			read_key(xnode, "SupresionSilencio", SupresionSilencio);
-			read_key(xnode, "TamRTP", TamRTP);
-			read_key(xnode, "Codec", Codec);
-			read_key(xnode, "GrabacionEd137", GrabacionEd137);
-			read_key(xnode, "TipoDestino", TipoDestino);
-			read_key(xnode, "IdDestino", IdDestino);
-			read_key(xnode, "FrqTonoSQ", FrqTonoSQ);
-			read_key(xnode, "UmbralTonoSQ", UmbralTonoSQ);
-			read_key(xnode, "FrqTonoPTT", FrqTonoPTT);
-			read_key(xnode, "UmbralTonoPTT", UmbralTonoPTT);
-
-			/** Telefonia */
-			read_key(xnode, "ListaEnlacesInternos", telef.ListaEnlacesInternos);
-			read_key(xnode, "IdPrefijo", telef.IdPrefijo);
-
-			read_key(xnode, "RefrescoEstados", telef.RefrescoEstados);
-			read_key(xnode, "Timeout", telef.Timeout);
-			read_key(xnode, "LongRafagas", telef.LongRafagas);
-
-			read_key(xnode, "Lado", telef.Lado);
-			read_key(xnode, "Modo", telef.Modo);
-			read_key(xnode, "TipoEM", telef.TipoEM);
-			read_key(xnode, "IdRed", telef.IdRed);
-			read_key(xnode, "IdTroncal", telef.IdTroncal);
-
-			/** Radio */
-			read_key(xnode, "EM", radio.EM);
-			read_key(xnode, "SQ", radio.SQ);
-			read_key(xnode, "PTT", radio.PTT);
-			read_key(xnode, "FrqTonoE", radio.FrqTonoE);
-
-			read_key(xnode, "UmbralTonoE", radio.UmbralTonoE);
-			read_key(xnode, "FrqTonoM", radio.FrqTonoM);
-			read_key(xnode, "UmbralTonoM", radio.UmbralTonoM);
-			read_key(xnode, "BSS", radio.BSS);
-
-			read_key(xnode, "NTZ", radio.NTZ);
-			read_key(xnode, "TipoNTZ", radio.TipoNTZ);
-			read_key(xnode, "Cifrado", radio.Cifrado);
-			read_key(xnode, "SupervPortadoraTx", radio.SupervPortadoraTx);
-
-			read_key(xnode, "SupervModuladoraTx", radio.SupervModuladoraTx);
-			read_key(xnode, "ModoConfPTT", radio.ModoConfPTT);
-			read_key(xnode, "RepSQyBSS", radio.RepSQyBSS);
-			read_key(xnode, "DesactivacionSQ", radio.DesactivacionSQ);
-
-			read_key(xnode, "TimeoutPTT", radio.TimeoutPTT);
-			read_key(xnode, "MetodoBSS", radio.MetodoBSS);
-			read_key(xnode, "UmbralVAD", radio.UmbralVAD);
-			read_key(xnode, "TiempoPTT", radio.TiempoPTT);
-
-			read_key(xnode, "NumFlujosAudio", radio.NumFlujosAudio);
-			read_key(xnode, "KeepAlivePeriod", radio.KeepAlivePeriod);
-			read_key(xnode, "KeepAliveMultiplier", radio.KeepAliveMultiplier);
-			read_key(xnode, "IdEmplazamiento", radio.IdEmplazamiento);
-			read_key(xnode, "Tipo", radio.Tipo);
-		}
-	public:
-		/** Comunes */
-		int GananciaAGCTX;
-		int GananciaAGCTXdBm;
-		int GananciaAGCRX;
-		int GananciaAGCRXdBm;
-		bool SupresionSilencio;
-		int TamRTP;
-		int Codec;
-		bool GrabacionEd137;
-		int TipoDestino;
-		string IdDestino;
-		int FrqTonoSQ;
-		int UmbralTonoSQ;
-		int FrqTonoPTT;
-		int UmbralTonoPTT;
-		struct {
-			/** Telefonia */
-			vector<string> ListaEnlacesInternos;
-			int IdPrefijo;
-				/** LC */
-			int RefrescoEstados;
-			int Timeout;
-			int LongRafagas;
-				/** BC/BL/AB */
-			int Lado;
-			string Modo;
-			string TipoEM;
-				/** AB */
-			string IdRed;
-				/** R2/N5 */
-			string IdTroncal;
-		} telef;
-		struct {
-			bool EM;
-			string SQ;
-			string PTT;
-			int FrqTonoE;
-			int UmbralTonoE;
-			int FrqTonoM;
-			int UmbralTonoM;
-			bool BSS;
-			bool NTZ;
-			int TipoNTZ;
-			bool Cifrado;
-			bool SupervPortadoraTx;
-			bool SupervModuladoraTx;
-			int ModoConfPTT;
-			int RepSQyBSS;
-			int DesactivacionSQ;
-			int TimeoutPTT;
-			int MetodoBSS;
-			int UmbralVAD;
-			int TiempoPTT;
-			int NumFlujosAudio;
-			int KeepAlivePeriod;
-			int KeepAliveMultiplier;
-			string IdEmplazamiento;
-			int Tipo;
-		} radio;
-	};
-
-	class soap_RecursosSCV : public xml_data
-	{
-	public:
-		soap_RecursosSCV(){}
-		~soap_RecursosSCV(){}
-	public:
-		void xread(xml_node<> * xnode) {	
-			read_key(xnode, "IdRecurso", IdRecurso);
-			read_key(xnode, "Tipo", Tipo);
-			read_key(xnode, "Interface", Interface);
-			read_key(xnode, "SlotPasarela", SlotPasarela);
-			read_key(xnode, "NumDispositivoSlot", NumDispositivoSlot);
-			read_key(xnode, "ServidorSIP", ServidorSIP);
-			read_key(xnode, "Diffserv", Diffserv);
-			read_key(xnode, "IdSistema", IdSistema);
-			read_key(xnode, "TipoRecurso", TipoRecurso);
-			read_key(xnode, "IdTifX", IdTifX);
-
-			xdata_ResourceInfo = remote_get_xdata_func("GetParametrosRecursoById",
-				"idSistema=departamento", 
-				"idRecurso="+IdRecurso, 
-				"tipo=" + Tools::Int2String((int)Interface));
-
-			read_key(xdata_ResourceInfo, "Tablas", info);
-		}
-
-	public:
-		string IdRecurso;
-		int Tipo;
-		TI_ Interface;
-		int SlotPasarela;
-		int NumDispositivoSlot;
-		string ServidorSIP;
-		bool Diffserv;
-		string IdSistema;
-		int TipoRecurso;
-		string IdTifX;
-		soap_ResourceInfo info;
-
-	protected:
-		string xdata_ResourceInfo;
-	};
-
 public:
 	soap_CfgPasarela(){}
 	~soap_CfgPasarela(){}
@@ -599,21 +617,39 @@ public:
 class soap_config : public xml_data
 {
 public:
-	soap_config(remoteGetXdataFunc remoteFunc, string hwName);
+	soap_config(remoteGetXdataFunc remoteFunc, string ip, string hwName, string ipServer);
 	~soap_config(void);
 
 public:
 	void xread(xml_node<> * xnode) {
+		xml_document<> doc;
+
 		IdConfig = xnode->value();
 		read_key(xdata_ParametrosGeneralesSistema, "ParametrosGeneralesSistema", ParametrosGeneralesSistema);
 		read_key(xdata_ParametrosMulticast, "ParametrosMulticast", ParametrosMulticast);
-		read_key(xdata_ArrayOfAsignacionRecursosGW, "ArrayOfAsignacionRecursosGW", "AsignacionRecursosGW", ArrayOfAsignacionRecursosGW);
-		read_key(xdata_ArrayOfAsignacionUsuariosTV, "ArrayOfAsignacionUsuariosTV", "AsignacionUsuariosTV", ArrayOfAsignacionUsuariosTV);
-		read_key(xdata_ArrayOfDireccionamientoIP, "ArrayOfDireccionamientoIP", "DireccionamientoIP", ArrayOfDireccionamientoIP);
-		read_key(xdata_ArrayOfDireccionamientoSIP, "ArrayOfDireccionamientoSIP", "DireccionamientoSIP", ArrayOfDireccionamientoSIP);
-		read_key(xdata_ArrayOfListaRedes, "ArrayOfListaRedes", "ListaRedes", ArrayOfListaRedes);
-		read_key(xdata_ArrayOfListaTroncales, "ArrayOfListaTroncales", "ListaTroncales", ArrayOfListaTroncales);
-		read_key(xdata_ArrayOfNumeracionATS, "ArrayOfNumeracionATS", "NumeracionATS", ArrayOfNumeracionATS);
+
+		//read_key(xdata_ArrayOfAsignacionRecursosGW, "ArrayOfAsignacionRecursosGW", "AsignacionRecursosGW", ArrayOfAsignacionRecursosGW);
+		doc.parse<0>((char *)xdata_ArrayOfAsignacionRecursosGW.c_str());
+		read_key(doc, "ArrayOfAsignacionRecursosGW", "AsignacionRecursosGW", ArrayOfAsignacionRecursosGW);
+		//read_key(xdata_ArrayOfAsignacionUsuariosTV, "ArrayOfAsignacionUsuariosTV", "AsignacionUsuariosTV", ArrayOfAsignacionUsuariosTV);
+		doc.parse<0>((char *)xdata_ArrayOfAsignacionUsuariosTV.c_str());
+		read_key(doc, "ArrayOfAsignacionUsuariosTV", "AsignacionUsuariosTV", ArrayOfAsignacionUsuariosTV);
+		//read_key(xdata_ArrayOfDireccionamientoIP, "ArrayOfDireccionamientoIP", "DireccionamientoIP", ArrayOfDireccionamientoIP);
+		doc.parse<0>((char *)xdata_ArrayOfDireccionamientoIP.c_str());
+		read_key(doc, "ArrayOfDireccionamientoIP", "DireccionamientoIP", ArrayOfDireccionamientoIP);
+		//read_key(xdata_ArrayOfDireccionamientoSIP, "ArrayOfDireccionamientoSIP", "DireccionamientoSIP", ArrayOfDireccionamientoSIP);
+		doc.parse<0>((char *)xdata_ArrayOfDireccionamientoSIP.c_str());
+		read_key(doc, "ArrayOfDireccionamientoSIP", "DireccionamientoSIP", ArrayOfDireccionamientoSIP);
+		//read_key(xdata_ArrayOfListaRedes, "ArrayOfListaRedes", "ListaRedes", ArrayOfListaRedes);
+		doc.parse<0>((char *)xdata_ArrayOfListaRedes.c_str());
+		read_key(doc, "ArrayOfListaRedes", "ListaRedes", ArrayOfListaRedes);
+		//read_key(xdata_ArrayOfListaTroncales, "ArrayOfListaTroncales", "ListaTroncales", ArrayOfListaTroncales);
+		doc.parse<0>((char *)xdata_ArrayOfListaTroncales.c_str());
+		read_key(doc, "ArrayOfListaTroncales", "ListaTroncales", ArrayOfListaTroncales);
+		//read_key(xdata_ArrayOfNumeracionATS, "ArrayOfNumeracionATS", "NumeracionATS", ArrayOfNumeracionATS);
+		doc.parse<0>((char *)xdata_ArrayOfNumeracionATS.c_str());
+		read_key(doc, "ArrayOfNumeracionATS", "NumeracionATS", ArrayOfNumeracionATS);
+
 		read_key(xdata_CfgPasarela, "CfgPasarela", CfgPasarela);
 	}
 
@@ -629,7 +665,10 @@ public:
 	vector<soap_ListaTroncales> ArrayOfListaTroncales;
 	vector<soap_NumeracionATS> ArrayOfNumeracionATS;
 	soap_CfgPasarela CfgPasarela;
-	
+
+public:
+	string Ip;
+	string Server;	
 public:
 	string xdata_idConfig;
 	string xdata_ParametrosGeneralesSistema;
@@ -643,6 +682,10 @@ public:
 	string xdata_ArrayOfNumeracionATS;
 	string xdata_CfgPasarela;
 
+public:
+	void sip_servers(vector<string> &sipservers);
+	void firstRadioParams(int &kap, int &kam, int &sm);
+	void TipoTelefonia(int stipo, int &jtipo);
 };
 
 #endif

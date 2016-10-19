@@ -170,7 +170,6 @@ private:
 	/** */
 	string KeyToIdent(string key);
 	string IdentToKey(string ident);
-
 	/** */
 	void GetKeyConfigLocal(INISection &config);
 	void SetKeyConfigLocal(string key, string data);

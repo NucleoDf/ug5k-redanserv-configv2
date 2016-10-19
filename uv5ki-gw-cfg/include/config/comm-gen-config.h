@@ -17,7 +17,14 @@ class CommGenCpu : public jData
 {
 public:
 	CommGenCpu() {
-		tlan=0;
+		tlan=1;
+	}
+	CommGenCpu(string ip, string msc, string gw) {
+		tlan=1;
+		ip0 = ip1 = ms0 = ms1 = "";
+		ipb = ip;
+		msb = msc;
+		ipg = gw;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
@@ -68,6 +75,7 @@ public:
 		puertoconsola = 0;
 		nivelIncidencias = 0;
 	}
+	CommGenConfig(soap_config &sc);
 	~CommGenConfig() {
 		clear_array(cpus);
 	}

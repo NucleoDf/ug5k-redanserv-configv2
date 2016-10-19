@@ -401,6 +401,7 @@ void JsonClientProc::SupervisaProcesoConfiguracion()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // SoapClientProc
 string SoapClientProc::hwName;
+string SoapClientProc::hwIp;
 string SoapClientProc::hwServer;
 /** */
 void SoapClientProc::Run()
@@ -409,6 +410,7 @@ void SoapClientProc::Run()
 
 	hwName = "CGW1";								// TODO.
 	hwServer = "192.168.0.212";						// TODO.
+	hwIp = "192.168.0.71";							// TODO.
 
 	_maxticks = (LocalConfig::cfg.ConfigTsup()*1000)/HTTP_CLIENT_TICK;
 	sistema::GetIpAddress((char *)LocalConfig::cfg.NetworkInterfaceActiva().c_str(), _ip_propia);
@@ -430,8 +432,9 @@ void SoapClientProc::Run()
 					if (aviso.main == MAIN_TEST_CONFIG) {
 						ChequearConfiguracion();
 					} else if (aviso.main == MAIN_PIDE_CONFIG) {
-						PLOG_INFO("Solicitando Configuracion a: %s", aviso.ip.c_str());
+						PLOG_INFO("Solicitando Configuracion a: %s...", aviso.ip.c_str());
 						PedirConfiguracion(aviso.cmd);
+						PLOG_INFO("Configuración Recibido...");
 					} else if (aviso.main == CPU2CPU_MSG) {
 						PLOG_INFO("Avisando de cambio de Configuracion a: %s", aviso.ip.c_str());
 						GeneraAvisosCpu(aviso.ip, aviso.cmd);
@@ -529,7 +532,7 @@ void SoapClientProc::ChequearConfiguracion()
 void SoapClientProc::PedirConfiguracion(string cfg)
 {
 	/** Lee la configuracion recibida */
-	soap_config sConfig(getXml, hwName);
+	soap_config sConfig(getXml, hwIp, hwName, hwServer);
 
 	/** Salva ultima configuracion */
 	p_working_config->save_to(LAST_SAVE(Tools::Int2String(_lastcfg++ & 3)));

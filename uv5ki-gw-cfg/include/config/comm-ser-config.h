@@ -230,6 +230,7 @@ class CommSerConfig : public jData
 public:
 	CommSerConfig() {
 	}
+	CommSerConfig(soap_config &sc);
 	~CommSerConfig() {
 	}
 public:

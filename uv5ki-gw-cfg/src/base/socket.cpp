@@ -652,7 +652,7 @@ int CSocket::Select(fd_set *fr, fd_set *fw, fd_set *fe, int timeout/*=0*/) const
 		pt = &t;
 	}
 
-	int res = select(0, fr, fw, fe, pt);
+	int res = select(m_socket+1, fr, fw, fe, pt);
 	TestSocket(res, "select");
 	return res;
 }

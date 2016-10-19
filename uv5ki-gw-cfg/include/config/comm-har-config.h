@@ -79,6 +79,7 @@ class CommHarConfig : public jData
 public:
 	CommHarConfig() {
 	}
+	CommHarConfig(soap_config &sc);
 	~CommHarConfig() {
 		clear_array(slv);
 	}
