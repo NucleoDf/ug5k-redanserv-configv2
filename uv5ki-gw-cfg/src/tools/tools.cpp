@@ -18,7 +18,6 @@ bool Tools::FileExist(const char *filename)
 	return ret;
 }
 
-
 /**
 */
 static char _fecha[40]={0};
@@ -297,4 +296,13 @@ std::string Tools::CookieTime(char *buffer, struct tm stime)
 bool Tools::IsNoAscii(char c)
 {
 	return ((int)c >= 32 && (int)c<128) ? false : true;
+}
+
+/** */
+string Tools::read_txt_file(string name)
+{
+	ifstream infile(name.c_str());
+	vector<char> buffer((istreambuf_iterator<char>(infile)), istreambuf_iterator<char>());
+	buffer.push_back('\0');
+	return string(&buffer[0]);
 }

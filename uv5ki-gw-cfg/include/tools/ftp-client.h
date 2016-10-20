@@ -1,0 +1,77 @@
+#ifndef _FTP_CLIENT_
+#define _FTP_CLIENT_
+#include <string>
+#include <stdio.h>
+#include "../base/code-base.h"
+#include "../base/thread.h"
+#include "../base/socket.h"
+#include "../config/local-config.h"
+
+using namespace std;
+
+/** Excepcion especifica para FTP... */
+class FtpClientException : public Exception
+{
+public:
+	FtpClientException(string msg, string data="")		
+	{
+		char buff[256];
+#ifdef _WIN32
+		_snprintf_s(buff, sizeof(buff), "%s%s (Network Error: %d)", msg.c_str(), data.c_str(), WSAGetLastError());
+#else
+		snprintf(buff, sizeof(buff), "%s%s (Network Error: %d)", msg.c_str(), data.c_str(), errno);
+#endif	
+		_msg=string(buff);
+	}
+	FtpClientException(socket_error error)
+	{
+		_msg = "Socket Error: " + string(error.what());
+	}
+
+private:
+	string _msg;
+public:
+	const char * what(){return _msg.c_str();}
+
+};
+
+/** */
+class FtpClient : public CodeBase
+{
+public:
+	FtpClient(string host="localhost", string user="anonymous", string pwd="anonymous@anonymous.net", int port = 21);
+	~FtpClient(void);
+
+public:
+	void Login();
+	void Close();
+	void Donwload(string rFile, string lFile);
+	void Upload(string lFile, string rFile);
+	void Delete(string rFile);
+	void ChangeDir(string rDir);
+
+protected:
+	int  readResponse(string &data);
+	void readLine(string &line);
+	bool sendCommand(string cmd, int &rcode, string &response);
+	bool createDataSocket();
+	void cleanup();
+	void sendFile(string filename);
+
+private:
+	string server;
+	int port;
+	string username;
+	string password;
+
+private:
+	CTCPSocket *pCtrl_Sck;
+	CTCPServerSocket *pData_Sck;
+	bool loggedin;
+
+private:
+	string respuesta;
+	int retcode;
+};
+
+#endif

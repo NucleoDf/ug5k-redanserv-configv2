@@ -6,12 +6,12 @@
 #include "./include/his-proc.h"
 
 #define VRS_ID_SOFTWARE			"UV5KI-GW CFG-SERVER"
-#define VRS_VERSION_MAYOR		1
+#define VRS_VERSION_MAYOR		2
 #define VRS_VERSION_MENOR_A		0
-#define VRS_VERSION_MENOR_B		2
+#define VRS_VERSION_MENOR_B		0
 
 #if defined _WIN32
- char acBuildString[] =		"Version WIN";
+ char acBuildString[] =		"WIN-VER";
 #else
 #	if !defined __APPLE__
 #		include <mcheck.h>
@@ -49,14 +49,18 @@ public:
 		try 
 		{
 			plogInit();
-			PLOG_INFO("UG5k-APPSERVER: (%s) Iniciado en \"%s\". ENTER para SALIR.", acBuildString, WORKING_DIR);
+			bool mode = LocalConfig::cfg.ModoUlises();
+
+			PLOG_INFO("%s (%s) CfgServer: (%s) Iniciado en \"%s\". ", 
+				Tools::read_txt_file(ON_WORKING_DIR("Version.txt")).c_str(),  
+				mode==false ? "REDAN" : "ULISES", acBuildString, WORKING_DIR);
+			PLOG_INFO("ENTER para SALIR.");
 
 			/** Inicializacion Comun */
 			Uv5kiGwCfgWebApp webApp;
 
 			/** TODO. Crearlo seg�n el entorno */
-			int mode = 1;
-			if (mode==0)
+			if (mode==false)
 				CfgProc::p_cfg_proc = new JsonClientProc();
 			else
 				CfgProc::p_cfg_proc = new SoapClientProc();

@@ -50,6 +50,10 @@ using namespace std;
 #define strItemExeSnmp					((const char *)"SNMP-EXE-FILE")
 #define strItemExeGrabador				((const char *)"GRAB-EXE-FILE")
 
+#define strUlises						((const char *)"ULISES-V5000")
+#define strItemUlisesModo				((const char *)"MODO-ULISES")
+
+
 #define strFilesSupervidor				((const char *)"FILESUPERVISOR")
 #ifdef _WIN32
  #define strKeySupervisedFile			((const char *)"WFILE")
@@ -108,6 +112,11 @@ public:
 	LocalConfig(string strfile);
 	~LocalConfig(void);
 
+	string getString(string section, string item, string def="");
+	int getInt(string section, string item, string def="");
+	void setString(string section, string item, string valor);
+	void setInt(string section, string item, int valor);
+
 public:
 	void save(void);
 	void sync();
@@ -124,7 +133,6 @@ public:
 	int FtpGenTimeout() {return atoi(getString(strSection, strItemFtpGenTimeout,"5").c_str());}
 	int FtpSendTimeout(){return atoi(getString(strSection, strItemFtpSendTimeout,"6000").c_str());}
 	int HttpGenTimeout(){return atoi(getString(strSection, strItemHttpGenTimeout,"5").c_str());}
-
 	int ClearResourcesOnBdt(){return atoi(getString(strSection, strItemClearResourcesOnBdt,"1").c_str());}
 
 	string Log();
@@ -142,11 +150,13 @@ public:
 	string LastRouteVia(string ip="GetIp");
 	string LastRouteSource(string ip="GetIp");
 
-	string getString(string section, string item, string def="");
-	int getInt(string section, string item, string def="");
-	void setString(string section, string item, string valor);
-	void setInt(string section, string item, int valor);
+	/** SECCION ULISES */
+	bool ModoUlises() {
+		int md = getInt(strUlises, strItemUlisesModo, "0");
+		return md==1 ? true : false;
+	}
 
+	/** */
 	static string onram(string filename);
 	static string onflash(string filename);
 	static string onswrep(string filename);

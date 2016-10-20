@@ -548,6 +548,40 @@ int CSocket::Recv(void *buf, int sz, int _flags)
 
 ////////////////////////////////////////////////////////////////////////////////
 //
+int CSocket::Recv_text(string &text, int timeout/*=0*/)
+{
+	text = "";
+	if (this->IsReadable(timeout))
+	{
+		char leido;
+		do 
+		{
+			this->Recv(&leido, 1);
+			text.push_back(leido);
+		} while (this->IsReadable(10));
+	}
+	return text.length();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+int CSocket::Recv_bin(vector<byte> &buff, int timeout/*=0*/)
+{
+	buff.clear();
+	if (this->IsReadable(timeout))
+	{
+		byte leido;
+		do 
+		{
+			this->Recv(&leido, 1);
+			buff.push_back(leido);
+		} while (this->IsReadable(10));
+	}
+	return buff.size();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
 const CIPAddress &CSocket::GetLocalAddress() const
 {
 	if (!m_localAddr.IsAssigned())
@@ -709,6 +743,29 @@ void CSocket::SetRecvTimeout(int sec)
 #endif
 
 	setsockopt(m_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+void CSocket::SetReusable()
+{
+	int yes = 1;
+	SetSockOpt(SOL_SOCKET, SO_REUSEADDR, (const char *)&yes, sizeof(yes));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+void CSocket::JoinMulticastGroup(CIPAddress grupo, CIPAddress itf)
+{
+	ip_mreq mreq;
+#ifdef _WIN32
+	mreq.imr_multiaddr.S_un.S_addr = ((sockaddr_in *)grupo)->sin_addr.S_un.S_addr;
+	mreq.imr_interface.S_un.S_addr = ((sockaddr_in *)itf)->sin_addr.S_un.S_addr;
+#else
+	mreq.imr_multiaddr.s_addr = ((sockaddr_in *)grupo)->sin_addr.s_addr;
+	mreq.imr_interface.s_addr = ((sockaddr_in *)itf)->sin_addr.s_addr;
+#endif
+	SetSockOpt(IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

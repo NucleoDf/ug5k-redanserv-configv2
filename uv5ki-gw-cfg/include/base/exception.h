@@ -19,6 +19,7 @@ class Exception : public runtime_error
 {
 public:
 	Exception(const char *s="");
+	Exception(string s);
 	~Exception(void) throw(){}
 protected:
 

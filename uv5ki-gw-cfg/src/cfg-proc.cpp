@@ -28,6 +28,7 @@ CfgProc::CfgProc(void) {
 CfgProc::~CfgProc(void) {
 }
 
+/** */
 bool CfgProc::IdConfig(int &std, string &id, string &tim)
 {
 	std = (int)GetStdLocalConfig();
@@ -142,7 +143,7 @@ void CfgProc::GeneraAvisosCpu(string host, string cmd)
 	ParseResponse response = SendHttpCmd(host, request);
 	if (response.Status() != "200")
 	{
-		throw HttpClientException("REQUEST ERROR: PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " Host: " + host +  ". " + response.Status());
+		throw Exception("REQUEST ERROR: PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " Host: " + host +  ". " + response.Status());
 	}
 }
 
@@ -206,31 +207,31 @@ ParseResponse CfgProc::SendHttpCmd(string _host, string cmd)
 	try 
 	{
 		if (!sck.Connect(host))
-			throw HttpClientException("No puedo conectarme al HOST: " + _host);
+			throw Exception("No puedo conectarme al HOST: " + _host);
 		if (sck.Send(cmd.c_str(), cmd.length()) != (int) cmd.length())
-			throw HttpClientException("Error al Enviar request: " + cmd);
+			throw Exception("Error al Enviar request: " + cmd);
 
 		string respuesta;
-		char leido;
+		sck.Recv_text(respuesta, SCK_RECV_TIMEOUT);
 
-		if (sck.IsReadable(SCK_RECV_TIMEOUT))
-		{
-			do 
-			{
-				sck.Recv(&leido, 1);
-				respuesta.push_back(leido);
-			} while (sck.IsReadable(10));
+		//char leido;
+		//if (sck.IsReadable(SCK_RECV_TIMEOUT))
+		//{
+		//	do 
+		//	{
+		//		sck.Recv(&leido, 1);
+		//		respuesta.push_back(leido);
+		//	} while (sck.IsReadable(10));
 
-		}
+		//}
 
 		sck.Close();
-
 		return ParseResponse(respuesta.c_str());
 
 	} 
 	catch (socket_error e) 
 	{
-		throw HttpClientException(e);
+		throw Exception(e);
 	}
 }
 
@@ -249,8 +250,8 @@ void JsonClientProc::Run()
 	SetId("JsonClientProc");
 
 	_maxticks = (LocalConfig::cfg.ConfigTsup()*1000)/HTTP_CLIENT_TICK;
-	sistema::GetIpAddress((char *)LocalConfig::cfg.NetworkInterfaceActiva().c_str(), _ip_propia);
 	_cntticks = 0;
+	sistema::GetIpAddress(_ip_propia);
 
 	p_working_config->load_from(LAST_CFG);
 
@@ -268,7 +269,6 @@ void JsonClientProc::Run()
 			try {
 				if (SERVER_URL!="")		// Si me han borrado el servidor no hago POLLING a EL...
 				{
-
 					if (aviso.main == MAIN_TEST_CONFIG) {
 						ChequearConfiguracion();
 					} else if (aviso.main == MAIN_PIDE_CONFIG) {
@@ -286,17 +286,15 @@ void JsonClientProc::Run()
 				{
 					StdSincrSet(slcAislado/*, jgw_config::cfg*/);
 				}
-			} catch (HttpClientException e) {
+			} catch (Exception e) {
 
-				PLOG_EXCEP(e, "Excepcion en HttpClient::Run: %s", e.what());
+				PLOG_EXCEP(e/*, "Excepcion en HttpClient::Run: %s", e.what()*/,"");
 
 				if (aviso.ip==SERVER_URL)
 				{
 					// TODO
 					//	StdClient::std.NotificaCambioConfig();
-
 					//p_working_config->load_from(LAST_CFG);
-
 					/** Estado Sincronizacion=slcAislado */
 					StdSincrSet(slcAislado);
 				}
@@ -322,7 +320,7 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 	ParseResponse response = SendHttpCmd(SERVER_URL/*_host_config*/, request);
 	if (response.Status() != "200")
 	{
-		throw HttpClientException("REQUEST ERROR: GET " + path + 
+		throw Exception("REQUEST ERROR: GET " + path + 
 			" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.StatusText());
 	}
 
@@ -349,7 +347,7 @@ void JsonClientProc::ChequearConfiguracion()
 	ParseResponse response = SendHttpCmd(SERVER_URL/*_host_config*/, request);
 	if (response.Status() != "200")
 	{
-		throw HttpClientException("REQUEST ERROR: GET /" + _ip_propia + "/" + MAIN_TEST_CONFIG + 
+		throw Exception("REQUEST ERROR: GET /" + _ip_propia + "/" + MAIN_TEST_CONFIG + 
 			" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.Status() + ":" + response.StatusText());
 	}
 
@@ -378,7 +376,7 @@ void JsonClientProc::SubirConfiguracion()
 	ParseResponse response = SendHttpCmd(SERVER_URL/*_host_config*/, request);
 	if (response.Status() != "200")
 	{
-		throw HttpClientException("REQUEST ERROR: POST " + path + 
+		throw Exception("REQUEST ERROR: POST " + path + 
 			" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.Status() + ":" + response.StatusText());
 	}
 
@@ -408,13 +406,11 @@ void SoapClientProc::Run()
 {
 	SetId("SoapClientProc");
 
-	hwName = "CGW1";								// TODO.
-	hwServer = "192.168.0.212";						// TODO.
-	hwIp = "192.168.0.71";							// TODO.
-
 	_maxticks = (LocalConfig::cfg.ConfigTsup()*1000)/HTTP_CLIENT_TICK;
-	sistema::GetIpAddress((char *)LocalConfig::cfg.NetworkInterfaceActiva().c_str(), _ip_propia);
 	_cntticks = 0;
+
+	sistema::GetWorkingIpAddressAndName(_ip_propia, hwServer, hwName);
+	hwIp = _ip_propia;
 
 	p_working_config->load_from(LAST_CFG);
 
@@ -424,17 +420,17 @@ void SoapClientProc::Run()
 		this->sleep(HTTP_CLIENT_TICK);
 		stAviso aviso;
 
-		// _host_config = SERVER_URL;
 		if (avisos.get(aviso)) {
 			try {
 				if (SERVER_URL!="")		// Si me han borrado el servidor no hago POLLING a EL...
 				{
 					if (aviso.main == MAIN_TEST_CONFIG) {
+						PLOG_DEBUG("Chequeando Configuracion en: %s...", aviso.ip.c_str());
 						ChequearConfiguracion();
 					} else if (aviso.main == MAIN_PIDE_CONFIG) {
 						PLOG_INFO("Solicitando Configuracion a: %s...", aviso.ip.c_str());
 						PedirConfiguracion(aviso.cmd);
-						PLOG_INFO("Configuración Recibido...");
+						PLOG_INFO("Configuraciï¿½n Recibida...");
 					} else if (aviso.main == CPU2CPU_MSG) {
 						PLOG_INFO("Avisando de cambio de Configuracion a: %s", aviso.ip.c_str());
 						GeneraAvisosCpu(aviso.ip, aviso.cmd);
@@ -445,24 +441,16 @@ void SoapClientProc::Run()
 				}
 				else
 				{
-					StdSincrSet(slcAislado/*, jgw_config::cfg*/);
-				}
-			} catch (HttpClientException e) {
-
-				PLOG_EXCEP(e, "Excepcion en SoapClient::Run: %s", e.what());
-
-				if (aviso.ip==SERVER_URL)
-				{
-					// TODO
-					//	StdClient::std.NotificaCambioConfig();
-					/** Estado Sincronizacion=slcAislado */
 					StdSincrSet(slcAislado);
 				}
+			} catch (Exception e) {
+				PLOG_EXCEP(e, /*"Excepcion en SoapClient::Run: %s", e.what()*/"");
 			} catch (...) {
-				PLOG_ERROR("Excepcion en HttpClient::Run");
+				PLOG_ERROR("Excepcion en SoapClient::Run");
 			}
 		}
 		SupervisaProcesoConfiguracion();
+		McastTest();
 	}
 }
 
@@ -470,6 +458,7 @@ void SoapClientProc::Run()
 void SoapClientProc::Dispose()
 {
 	Stop();
+	if (p_mcast_socket != NULL) delete p_mcast_socket;
 }
 
 /** */
@@ -490,7 +479,7 @@ string SoapClientProc::getXml(string proc, string p1, string p2, string p3)
 		"\r\n\r\n" + 	data /*+ "\r\n"*/;
 	ParseResponse response = SendHttpCmd(/*SERVER_URL*/hwServer, request);
 	if (response.Status() != "200")
-		throw HttpClientException("REQUEST ERROR: POST " + path + 
+		throw Exception("REQUEST ERROR: POST " + path + 
 		" Host: " + /*SERVER_URL*/hwServer +  ". " + response.Status() + ":" + response.StatusText());
 
 #ifdef _WIN32 
@@ -500,54 +489,131 @@ string SoapClientProc::getXml(string proc, string p1, string p2, string p3)
 	return response.Body();
 }
 
-
 /** */
 void SoapClientProc::SupervisaProcesoConfiguracion()
 {
+	if (++_cntticks >= _maxticks)	
+	{
+		AvisaChequearConfiguracion();
+		_cntticks = 0;
+	}
 }
 
 /** */
 void SoapClientProc::ChequearConfiguracion()
 {
-	string version = getXml("GetVersionConfiguracion");
-
-/*
-
-	CommConfig cfgRemota(response.Body());
-	if (cfgRemota.idConf == "-1")
-		StdSincrSet(slcNoBdt);
-	else if (cfgRemota.idConf == "-2")
-		StdSincrSet(slcNoActiveCfg);
-	else if (cfg_redan == cfgRemota) 
-		StdSincrSet(slcSincronizado);
-	else if (cfg_redan < cfgRemota)
-		AvisaPideConfiguracion(cfgRemota.idConf);
-	else
-		StdSincrSet(slcConflicto);
-
-*/		
+	try 
+	{
+		xml_document<> doc;
+		string xml_data = getXml("GetVersionConfiguracion","id_sistema=departamento");
+		doc.parse<0>((char *)xml_data.c_str());
+		string version = doc.first_node("string")->value();
+		if (version == p_working_config->TimConfig())
+		{	// Evento CFG-OK
+			if (_stdLocalConfig != slcSincronizado) {
+				// Pido la configuracion
+				AvisaPideConfiguracion();
+			}
+		}
+		else
+		{	// Evento CFG-NOOK
+			if (_stdLocalConfig == slcSincronizado)
+				StdSincrSet(slcConflicto);
+			else {
+				AvisaPideConfiguracion();
+			}
+		}
+	}
+	catch(...)
+	{	// Evento CFG-A
+		// Cierra si procede el puerto de Escucha MCAST.
+		McastActivateOrDeactivate(false);
+		StdSincrSet(slcAislado);
+		throw;
+	}
 }
 
 /** */
 void SoapClientProc::PedirConfiguracion(string cfg)
 {
-	/** Lee la configuracion recibida */
-	soap_config sConfig(getXml, hwIp, hwName, hwServer);
+	try
+	{
+		/** Lee la configuracion recibida */
+		soap_config sConfig(getXml, hwIp, hwName, hwServer);
 
-	/** Salva ultima configuracion */
-	p_working_config->save_to(LAST_SAVE(Tools::Int2String(_lastcfg++ & 3)));
+		/** Salva ultima configuracion */
+		p_working_config->save_to(LAST_SAVE(Tools::Int2String(_lastcfg++ & 3)));
 
-	/** Activa la configuracion recibida */
- 	p_working_config->set(sConfig);
+		/** Activa la configuracion recibida */
+ 		p_working_config->set(sConfig);
 
-	/** Actualiza la configuracion recibida... TODO. Comprobar los PATH */
-	p_working_config->save_to(LAST_CFG);
+		/** Actualiza la configuracion recibida... TODO. Comprobar los PATH */
+		p_working_config->save_to(LAST_CFG);
 
-	/** EstadoSicronizacion=slcSincronizado */
-	StdSincrSet(slcSincronizado);
+		/** Abre si procede el puerto de Escucha MCAST */
+		McastActivateOrDeactivate(true, 
+			sConfig.ParametrosMulticast.GrupoMulticastConfiguracion, 
+			sConfig.ParametrosMulticast.PuertoMulticastConfiguracion);
+
+		/** EstadoSicronizacion=slcSincronizado */
+		StdSincrSet(slcSincronizado);
+	}
+	catch(...)
+	{
+		// Evento CFG-A
+		McastActivateOrDeactivate(false);
+		StdSincrSet(slcAislado);
+		throw;
+	}
 }
 
 /** */
 void SoapClientProc::SubirConfiguracion()
 {
+}
+
+/** */
+void SoapClientProc::McastActivateOrDeactivate(bool activate, string ipmcast, int port)
+{
+	try {
+		if (activate==true) {
+			if (p_mcast_socket!=NULL) {
+				// Por si cambia la configuracion del puerto...
+				p_mcast_socket->Close();
+				delete p_mcast_socket;
+				p_mcast_socket = NULL;
+			}
+			CIPAddress mcast_group(ipmcast);
+                        CIPAddress mcast_itf(_ip_propia);
+			p_mcast_socket = new CUDPSocket();
+			p_mcast_socket->SetReusable();
+			p_mcast_socket->Bind(port);
+			p_mcast_socket->JoinMulticastGroup(mcast_group, mcast_itf);
+		}
+		else if (activate==false && p_mcast_socket!=NULL) {
+			p_mcast_socket->Close();
+			delete p_mcast_socket;
+			p_mcast_socket = NULL;
+		}
+	}
+	catch(socket_error x) 
+	{
+		PLOG_EXCEP(x, "McastActivateOrDeactivate(%s:%d): %s", ipmcast.c_str(), port, x.what());		
+	}
+}
+
+/** */
+void SoapClientProc::McastTest()
+{
+	if (p_mcast_socket == NULL)
+		return;
+
+	vector<byte> buff;
+	if (p_mcast_socket->Recv_bin(buff, 10)>0)
+	{
+		PLOG_INFO("Mensaje MCAST: ");
+		if (buff[0]==0x31) {
+			AvisaPideConfiguracion();
+		}
+	}
 }

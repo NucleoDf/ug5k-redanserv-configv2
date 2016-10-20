@@ -50,8 +50,9 @@ public:
 	//static void GetRouteDelCommand(char *cmd, const char *dest);
 	//static void GetRouteGet(char *cmd);
 
-	static bool GetIpAddress(char *lan, string &ip);
+	static bool GetIpAddress(string &ip);
 	static void GetMacAddress(char *lan, char *mac);
+	static void GetWorkingIpAddressAndName(string &ip, string &ipserv, string &name);
 
 	static void SignalNuevaConfiguracion(string npid);
 	static int  pidof(string name);

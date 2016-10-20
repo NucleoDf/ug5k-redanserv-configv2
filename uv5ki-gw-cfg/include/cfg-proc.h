@@ -30,23 +30,6 @@ enum eStdLocalConfig
 	slcNoInicializado=-5
 };
 
-class HttpClientException : public Exception
-{
-public:
-	HttpClientException(string msg)		
-	{
-		_msg="HttpClientException: " + msg;
-	}
-	HttpClientException(socket_error error)
-	{
-		_msg = "Socket Error: " + string(error.what());
-	}
-	~HttpClientException() throw() {}
-
-private:
-	string _msg;
-};
-
 /** */
 typedef struct
 {
@@ -134,8 +117,10 @@ class SoapClientProc : public CfgProc
 public:
 	SoapClientProc() {
 		p_working_config = new WorkingConfig(cfgSoap);
+		p_mcast_socket = NULL;
 	}
-	~SoapClientProc() {}
+	~SoapClientProc() {
+	}
 
 protected:
 	void Run();
@@ -146,15 +131,18 @@ protected:
 	void PedirConfiguracion(string cfg);
 	void SubirConfiguracion();
 
+	void McastActivateOrDeactivate(bool activate, string ipmcast="", int port=0);
+	void McastTest();
+
 protected:
-	static string getXml(string rtName, string p1="", string p2="", string p3="");
+	static string getXml(string rtName, string p1, string p2="", string p3="");
 	static string hwIp;
 	static string hwName;
 	static string hwServer;
 
 private:
 	CommConfig cfg_soap;
-	vector<string> xml_resp;
+	CUDPSocket *p_mcast_socket;
 };
 
 #endif

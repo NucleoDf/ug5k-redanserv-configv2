@@ -8,7 +8,6 @@
 #else
 #endif
 */
-
 #ifdef _WIN32
 	#define _CRTDBG_MAP_ALLOC		// Para el Debugger de Memory leaks...
 	#include <Windows.h>
@@ -35,6 +34,8 @@
 	#include <stdlib.h>
 	#include <pthread.h>
 	#define __FILENAME__			(strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+
+	typedef unsigned char byte;
 #endif
 
 #ifndef _PPC82xx_

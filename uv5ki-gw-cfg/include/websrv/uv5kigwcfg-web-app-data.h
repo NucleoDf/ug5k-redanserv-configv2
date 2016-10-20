@@ -2,6 +2,7 @@
 #define _UV5KIGWCFG_WEB_DATA_H_
 
 #include "../base/code-base.h"
+#include "../tools/tools.h"
 #include "../rapidjson/document.h"
 #include "../rapidjson/writer.h"
 #include "../rapidjson/stringbuffer.h"
@@ -311,6 +312,7 @@ public:
 		read_key(base, "std", std);
 		read_key(base, "idc", idc);
 		read_key(base, "tim", tim);
+		read_key(base, "ver", ver);
 #endif
 	}
 	virtual void jwrite(Writer<StringBuffer> &writer);
@@ -319,6 +321,7 @@ private:
 	int std;
 	string idc;
 	string tim;
+	string ver;
 #if LOCAL_TEST_1
 	webData_line msg;
 	vector<string> val_prueba1;

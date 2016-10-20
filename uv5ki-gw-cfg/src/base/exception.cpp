@@ -11,6 +11,16 @@ Exception::Exception(const char *s)
 }
 
 /** */
+Exception::Exception(string s)
+#ifdef _WIN32
+	:runtime_error(s.c_str() ), m_error(GetLastError())
+#else
+	:runtime_error(s.c_str()), m_error(errno)		// Obtener ultimo error en linux/mac
+#endif
+{
+}
+
+/** */
 unsigned long Exception::Code(void)
 {
 	return m_error;

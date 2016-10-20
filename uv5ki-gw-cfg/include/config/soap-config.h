@@ -90,22 +90,6 @@ protected:
 			val.push_back(obj);
 		}
 	}
-	//template <typename T> void read_key(string data, const char *root, const char *name, vector<T> &val) {
-	//	xml_document<> doc1;
-	//	xml_node<> * root_node;
-	//	
-	//	doc1.parse<0>((char *)data.c_str());
-	//	root_node = doc1.first_node((char *)root);
-	//	val.clear();
-	//	if (root_node==NULL)
-	//		return;
-	//	for (xml_node<> * res_node = root_node->first_node(name); res_node; res_node = res_node->next_sibling())
-	//	{
-	//		T obj;
-	//		obj.xread(res_node);
-	//		val.push_back(obj);
-	//	}
-	//}
 	template <typename T> void read_key(xml_document<> &doc, const char *root, const char *name, vector<T> &val) {
 		xml_node<> * root_node;		
 		

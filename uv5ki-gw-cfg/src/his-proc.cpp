@@ -36,11 +36,11 @@ void HistClient::Run()
 			try
 			{
 				// sck.Recv(buffer, BUFSIZ-1, MSG_DONTWAIT);
-				PLOG_DEBUG("HistClient::Run: TO-SNMP-SERVICE (%s:%d): %s", aviso.dst.GetHostName().c_str(), aviso.dst.GetPort(), aviso.datos.c_str());
+				PLOG_DEBUG("TO-SNMP-SERVICE (%s:%d): %s", aviso.dst.GetHostName().c_str(), aviso.dst.GetPort(), aviso.datos.c_str());
 				if (sck.SendTo(aviso.datos.c_str(), aviso.datos.size(), aviso.dst) == (int )aviso.datos.size())
 				{
 					if (aviso.respuesta != (callback )NULL)
-					{						
+					{	
 						int leidos = sck.RecvFrom(buffer, BUFSIZ, &from);
 						if (leidos > 0)
 						{
@@ -60,8 +60,7 @@ void HistClient::Run()
 			}
 			catch(socket_error e)
 			{
-				//NLOG_ERROR("Excepcion en HistClient::Run: %s. Src=%s:%d", e.what(), sck.GetLocalAddress().GetHostName().c_str(), sck.GetLocalAddress().GetPort());
-				PLOG_ERROR("Excepcion en HistClient::Run: %s.", e.what(), sck.GetLocalAddress().GetHostName().c_str(), sck.GetLocalAddress().GetPort());
+				PLOG_EXCEP(e, "Local=%d, Remoto:%d", sck.GetLocalAddress().GetPort(), aviso.dst.GetPort());
 				/** Si se esta esperando una respuesta, la genero con error */
 				if (aviso.respuesta != (callback )NULL)
 				{

@@ -13,9 +13,50 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="appweb">
+      <UniqueIdentifier>{4a0d28f3-5586-4cbc-900e-c418ad86f8e9}</UniqueIdentifier>
+      <Extensions>html</Extensions>
+    </Filter>
+    <Filter Include="Lib">
+      <UniqueIdentifier>{2a04ef1c-422b-481f-997a-d380996de52a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\app">
+      <UniqueIdentifier>{fe3ea867-7fe0-4b4d-b413-eb15f5b6eca2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\images">
+      <UniqueIdentifier>{558e7db2-bd74-4cef-ae17-b92efb147a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\languages">
+      <UniqueIdentifier>{2c83f836-7ada-4b74-90a3-81e15040d034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\scripts">
+      <UniqueIdentifier>{cb26e35d-9c1a-4088-8c73-2398303da1a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\styles">
+      <UniqueIdentifier>{15712cb1-a5ed-4481-a861-41192cf11c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\app\controllers">
+      <UniqueIdentifier>{64bcd69b-835c-49c6-b430-fa34c8a48441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\app\modules">
+      <UniqueIdentifier>{05d57d15-f745-4b38-9264-afc445630178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\app\routes">
+      <UniqueIdentifier>{ff1eb117-fccd-448e-b0e6-69426a20bcf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\app\services">
+      <UniqueIdentifier>{c2da233a-a0dd-4f09-84e3-e03a2311c1a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\app\templates">
+      <UniqueIdentifier>{ef29b016-da6e-49ed-ad40-b61adef01163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appweb\app\views">
+      <UniqueIdentifier>{1da33c8a-9220-45f3-8ccc-4452d6de3df3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="VERSION.TXT" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\base\code-base.h">
@@ -219,6 +260,9 @@
     <ClInclude Include="include\config\soap-config.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="include\tools\ftp-client.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="uv5ki-gw-cfg.cpp">
@@ -299,11 +343,220 @@
     <ClCompile Include="src\config\soap-config.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="src\tools\ftp-client.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="wlib\pthreadVC2.dll" />
+    <None Include="wplog.conf" />
+    <None Include="ug5k.db" />
+    <None Include="u5kweb-config.ini" />
+    <None Include="plog.conf" />
+    <None Include="Makefile" />
+    <None Include="ng-app\error.html">
+      <Filter>appweb</Filter>
+    </None>
+    <None Include="ng-app\error1.html">
+      <Filter>appweb</Filter>
+    </None>
+    <None Include="ng-app\error2.html">
+      <Filter>appweb</Filter>
+    </None>
+    <None Include="ng-app\login.html">
+      <Filter>appweb</Filter>
+    </None>
+    <None Include="wlib\pthreadVC2.dll">
+      <Filter>Lib</Filter>
+    </None>
+    <None Include="ng-app\session-expired.html">
+      <Filter>appweb</Filter>
+    </None>
+    <None Include="ng-app\app\views\session-expired.html">
+      <Filter>appweb</Filter>
+    </None>
+    <None Include="ng-app\languages\en_US.json">
+      <Filter>appweb\languages</Filter>
+    </None>
+    <None Include="ng-app\languages\es_ES.json">
+      <Filter>appweb\languages</Filter>
+    </None>
+    <None Include="ng-app\languages\fr_FR.json">
+      <Filter>appweb\languages</Filter>
+    </None>
+    <None Include="ng-app\scripts\angular-route.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\scripts\angular-translate-loader-static-files.min.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\scripts\angular-translate-loader-url.min.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\scripts\angular-translate.min.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\scripts\angular.min.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\scripts\jquery-2.1.3.min.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\scripts\tabcontent.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\scripts\tmhDynamicLocale.min.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\scripts\ngDialog.min.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\scripts\u5k-prog.js">
+      <Filter>appweb\scripts</Filter>
+    </None>
+    <None Include="ng-app\styles\ngDialog-theme-default.min.css">
+      <Filter>appweb\styles</Filter>
+    </None>
+    <None Include="ng-app\styles\ngDialog-theme-nucleo.css">
+      <Filter>appweb\styles</Filter>
+    </None>
+    <None Include="ng-app\styles\ngDialog.css">
+      <Filter>appweb\styles</Filter>
+    </None>
+    <None Include="ng-app\styles\tabcontent.css">
+      <Filter>appweb\styles</Filter>
+    </None>
+    <None Include="ng-app\styles\u5k-styles.css">
+      <Filter>appweb\styles</Filter>
+    </None>
+    <None Include="ng-app\styles\ug5k-listainterfaces.css">
+      <Filter>appweb\styles</Filter>
+    </None>
+    <None Include="ng-app\styles\ug5k-table.css">
+      <Filter>appweb\styles</Filter>
+    </None>
+    <None Include="ng-app\app\controllers\ug5kConfCtrl.js">
+      <Filter>appweb\app\controllers</Filter>
+    </None>
+    <None Include="ng-app\app\controllers\ug5kGlobalCtrl.js">
+      <Filter>appweb\app\controllers</Filter>
+    </None>
+    <None Include="ng-app\app\controllers\ug5kHardCtrl.js">
+      <Filter>appweb\app\controllers</Filter>
+    </None>
+    <None Include="ng-app\app\controllers\ug5kInicioCtrl.js">
+      <Filter>appweb\app\controllers</Filter>
+    </None>
+    <None Include="ng-app\app\controllers\ug5kMantCtrl.js">
+      <Filter>appweb\app\controllers</Filter>
+    </None>
+    <None Include="ng-app\app\controllers\ug5kRecrCtrl.js">
+      <Filter>appweb\app\controllers</Filter>
+    </None>
+    <None Include="ng-app\app\controllers\ug5kRectCtrl.js">
+      <Filter>appweb\app\controllers</Filter>
+    </None>
+    <None Include="ng-app\app\controllers\ug5kServCtrl.js">
+      <Filter>appweb\app\controllers</Filter>
+    </None>
+    <None Include="ng-app\app\modules\ug5kweb.js">
+      <Filter>appweb\app\modules</Filter>
+    </None>
+    <None Include="ng-app\app\routes\ug5kRoutes.js">
+      <Filter>appweb\app\routes</Filter>
+    </None>
+    <None Include="ng-app\app\services\ug5kAuthService.js">
+      <Filter>appweb\app\services</Filter>
+    </None>
+    <None Include="ng-app\app\services\ug5kCfgService.js">
+      <Filter>appweb\app\services</Filter>
+    </None>
+    <None Include="ng-app\app\services\ug5kCommService.js">
+      <Filter>appweb\app\services</Filter>
+    </None>
+    <None Include="ng-app\app\services\ug5kMantService.js">
+      <Filter>appweb\app\services</Filter>
+    </None>
+    <None Include="ng-app\app\services\ug5kTranslateService.js">
+      <Filter>appweb\app\services</Filter>
+    </None>
+    <None Include="ng-app\app\services\ug5kValidationService.js">
+      <Filter>appweb\app\services</Filter>
+    </None>
+    <None Include="ng-app\app\services\logger.js">
+      <Filter>appweb\app\services</Filter>
+    </None>
+    <None Include="ng-app\app\services\Simulador.js">
+      <Filter>appweb\app\services</Filter>
+    </None>
+    <None Include="ng-app\app\templates\ug5kweb-bite-templ.html">
+      <Filter>appweb\app\templates</Filter>
+    </None>
+    <None Include="ng-app\app\templates\ug5kweb-swload-templ.html">
+      <Filter>appweb\app\templates</Filter>
+    </None>
+    <None Include="ng-app\app\views\ug5kweb-config.html">
+      <Filter>appweb\app\views</Filter>
+    </None>
+    <None Include="ng-app\app\views\ug5kweb-hardware.html">
+      <Filter>appweb\app\views</Filter>
+    </None>
+    <None Include="ng-app\ug5kweb-index.html">
+      <Filter>appweb\app\views</Filter>
+    </None>
+    <None Include="ng-app\app\views\ug5kweb-inicio.html">
+      <Filter>appweb\app\views</Filter>
+    </None>
+    <None Include="ng-app\app\views\ug5kweb-mant.html">
+      <Filter>appweb\app\views</Filter>
+    </None>
+    <None Include="ng-app\app\views\ug5kweb-recr.html">
+      <Filter>appweb\app\views</Filter>
+    </None>
+    <None Include="ng-app\app\views\ug5kweb-rect.html">
+      <Filter>appweb\app\views</Filter>
+    </None>
+    <None Include="ng-app\app\views\ug5kweb-servicios.html">
+      <Filter>appweb\app\views</Filter>
+    </None>
+    <None Include="ng-app\hojaExterna.css">
+      <Filter>appweb</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="wlib\pthreadVC2.lib" />
+    <Image Include="ng-app\images\bkg-image.jpg">
+      <Filter>appweb\images</Filter>
+    </Image>
+    <Image Include="ng-app\styles\bkg-image.jpg">
+      <Filter>appweb\styles</Filter>
+    </Image>
+    <Image Include="ng-app\styles\nucleo-df-new.jpg">
+      <Filter>appweb\styles</Filter>
+    </Image>
+    <Image Include="ng-app\images\nucleo-df-new.jpg">
+      <Filter>appweb\images</Filter>
+    </Image>
+    <Image Include="ng-app\nucleo-df-new.jpg">
+      <Filter>appweb</Filter>
+    </Image>
+    <Image Include="ng-app\favicon.ico">
+      <Filter>appweb</Filter>
+    </Image>
+    <Image Include="ng-app\styles\tabbg.gif">
+      <Filter>appweb\styles</Filter>
+    </Image>
+    <Image Include="ng-app\images\tabbg.gif">
+      <Filter>appweb\images</Filter>
+    </Image>
+    <Image Include="ng-app\styles\tabbg2.gif">
+      <Filter>appweb\styles</Filter>
+    </Image>
+    <Image Include="ng-app\images\tabbg2.gif">
+      <Filter>appweb\images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="wlib\pthreadVC2.lib">
+      <Filter>Lib</Filter>
+    </Library>
   </ItemGroup>
 </Project>

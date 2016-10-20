@@ -59,8 +59,9 @@ string sistema::ResultExecuteCommand(char* cmd)
 }
 
 /** */
-bool sistema::GetIpAddress(char *szIf, string &ip)
+bool sistema::GetIpAddress(/*char *szIf, */string &ip)
 {
+	char *szIf = (char *)LocalConfig::cfg.NetworkInterfaceActiva().c_str();
 #ifdef _WIN32
 	ip = LocalConfig::cfg.ipWindows();
 	return true;
@@ -104,6 +105,22 @@ void sistema::GetMacAddress(char *lan, char *mac)
         if ( -1 != ioctl( iSocket, SIOCGIFHWADDR, &sIfr ) )
            memcpy( mac, sIfr.ifr_hwaddr.sa_data, 8);
         }    
+#endif
+}
+
+/** */
+void sistema::GetWorkingIpAddressAndName(string &ip, string &ipserv, string &name)
+{
+	GetIpAddress(ip);
+#if defined _WIN32
+	ipserv = LocalConfig::cfg.ServerURL();
+	name = "CGW1";							// TODO.
+#elif defined __APPLE__
+	ipserv = LocalConfig::cfg.ServerURL();
+	name = "CGW1";							// TODO.	
+#else
+	ipserv = LocalConfig::cfg.ServerURL();	// TODO.
+	name = "CGW1";							// TODO.
 #endif
 }
 

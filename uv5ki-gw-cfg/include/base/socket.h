@@ -7,7 +7,9 @@
 
 #ifdef _WIN32
  #include <winsock.h>
- #pragma comment(lib, "ws2_32.lib")
+ //#include <winsock2.h>
+ //#include <ws2tcpip.h>
+#pragma comment(lib, "ws2_32.lib")
 	#define SD_RECEIVE      0x00
 	#define SD_SEND         0x01
 	#define SD_BOTH         0x02
@@ -171,6 +173,9 @@ public:
 
     int Send(const void *buf, int sz);
     int Recv(void *buf, int sz, int _flags=0);
+	// AGL.
+	int Recv_text(string &text, int timeout=0);
+	int Recv_bin(vector<byte> &buffer, int timeout=0);
 
     const CIPAddress &GetLocalAddress() const;
     const CIPAddress GetRemoteAddress() const;
@@ -189,6 +194,9 @@ public:
     bool IsReadable(int timeout=0) const; 
     bool IsWritable(int timeout=0) const;
     bool IsException(int timeout=0) const;
+	// AGL.
+	void SetReusable();
+	void JoinMulticastGroup(CIPAddress grupo, CIPAddress itf=CIPAddress::ANY);
 
     int GetHandle()
     { return m_socket; }

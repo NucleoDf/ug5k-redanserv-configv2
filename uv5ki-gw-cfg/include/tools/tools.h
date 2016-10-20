@@ -58,7 +58,7 @@ public:
 	static std::string FileUniqueName(std::string fname);
 	static std::string CookieTime(char *buffer, struct tm stime);
 	static bool IsNoAscii(char c);
-
+	static string read_txt_file(string name);
 };
 
 #endif

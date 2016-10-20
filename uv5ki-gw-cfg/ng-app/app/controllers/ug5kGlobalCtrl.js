@@ -217,6 +217,7 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 
                         var ant = vm.lcfg;
                         vm.lcfg = data/*.lconfig*/;
+                        vm.version = data.ver;
 
                         if (ant.tim != data/*.lconfig*/.tim) {
 
