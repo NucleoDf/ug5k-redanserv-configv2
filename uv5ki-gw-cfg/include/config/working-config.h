@@ -60,10 +60,15 @@ public:
 		return config.fechaHora;
 	}
 	bool UserAccess(string user, string pwd, int *profile);
+	bool IpColateral(string &ipCol) {
+		return config.IpColateral(ipCol);
+	}
+	bool DualCpu() {
+		return config.general.dualidad==1;
+	}
+
 
 public:
-	bool DualCpu();
-	bool IpColateral(string &ipCol);
 	bool IdConfig(string &idConfig, string &fechaHora);
 
 	/** */

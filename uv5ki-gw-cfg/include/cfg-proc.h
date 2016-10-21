@@ -5,11 +5,11 @@
 #include "./base/thread.h"
 #include "./base/socket.h"
 #include "./tools/tools.h"
+#include "./tools/http-client.h"
 #include "./config/local-config.h"
 #include "./websrv/uv5kigwcfg-web-app.h"
 #include "./config/working-config.h"
 #include "./config/comm-preconf.h"
-#include "./tools/parse.h"
 
 using namespace std;
 
@@ -67,15 +67,11 @@ public:
 		CCSLock _lock(m_lock);
 		return _stdLocalConfig;
 	}
-	//ParseResponse Public_SendHttpCmd(string host, string cmd);
+
 protected:
 	void StdSincrSet(eStdLocalConfig nstd/*, jgw_config &local*/);
 	void GeneraAvisosCpu(string host, string cmd);
 	void ResourcesConfigClear();
-
-protected:
-	static void ParseHost(string host, string &ip, int &port);
-	static ParseResponse SendHttpCmd(string host, string cmd);
 
 protected:
 	CCritSec m_lock;

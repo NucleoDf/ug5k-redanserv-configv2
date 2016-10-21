@@ -4,6 +4,7 @@
 #include "./include/cfg-proc.h"
 #include "./include/man-proc.h"
 #include "./include/his-proc.h"
+#include "./include/file-supervisor.h"
 
 #define VRS_ID_SOFTWARE			"UV5KI-GW CFG-SERVER"
 #define VRS_VERSION_MAYOR		2
@@ -64,14 +65,15 @@ public:
 				CfgProc::p_cfg_proc = new JsonClientProc();
 			else
 				CfgProc::p_cfg_proc = new SoapClientProc();
-
 			HistClient::p_hist = new HistClient();
 			ManProc::p_man = new ManProc();
+			FileSupervisor::p_fspv = new FileSupervisor();
 
 			/** Arranque de Threads */
 			HistClient::p_hist->Start();
 			ManProc::p_man->Start();
 			CfgProc::p_cfg_proc->Start();
+			FileSupervisor::p_fspv->Start();		
 
 			webApp.Start();
 
@@ -101,6 +103,8 @@ public:
 
 			/** Parada de Threads */
 			webApp.Dispose();
+
+			FileSupervisor::p_fspv->Stop();
 			CfgProc::p_cfg_proc->Stop();
 			ManProc::p_man->Dispose();
 			HistClient::p_hist->Dispose();

@@ -140,7 +140,7 @@ void CfgProc::GeneraAvisosCpu(string host, string cmd)
 {
 	/** Generar el comando y Espera Respuesta... */
 	string request = "PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " HTTP/1.1\r\nHost: " + host + "\r\nContent-Type: application/json\r\n\r\n";
-	ParseResponse response = SendHttpCmd(host, request);
+	ParseResponse response = HttpClient(host).SendHttpCmd(request);
 	if (response.Status() != "200")
 	{
 		throw Exception("REQUEST ERROR: PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " Host: " + host +  ". " + response.Status());
@@ -182,72 +182,10 @@ void CfgProc::ResourcesConfigClear()
 }
 
 /** */
-void CfgProc::ParseHost(string host, string &ip, int &port) 
-{
-	vector<string> partes;
-	Tools::split(partes, host, ':');
-	if (partes.size() == 1) {
-		ip = host;
-		port = 80;
-	} else {
-		ip = partes[0];
-		port = atoi(partes[1].c_str());
-	}
-}
-
-/** */
-ParseResponse CfgProc::SendHttpCmd(string _host, string cmd) 
-{
-	string ip;
-	int port;
-	ParseHost(_host, ip, port);
-	CIPAddress host(ip, port);
-	CTCPSocket sck;
-
-	try 
-	{
-		if (!sck.Connect(host))
-			throw Exception("No puedo conectarme al HOST: " + _host);
-		if (sck.Send(cmd.c_str(), cmd.length()) != (int) cmd.length())
-			throw Exception("Error al Enviar request: " + cmd);
-
-		string respuesta;
-		sck.Recv_text(respuesta, SCK_RECV_TIMEOUT);
-
-		//char leido;
-		//if (sck.IsReadable(SCK_RECV_TIMEOUT))
-		//{
-		//	do 
-		//	{
-		//		sck.Recv(&leido, 1);
-		//		respuesta.push_back(leido);
-		//	} while (sck.IsReadable(10));
-
-		//}
-
-		sck.Close();
-		return ParseResponse(respuesta.c_str());
-
-	} 
-	catch (socket_error e) 
-	{
-		throw Exception(e);
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// JsonClientProc
-///** */
-//ParseResponse HttpClient::Public_SendHttpCmd(string host, string cmd)
-//{
-//	CCSLock _lock(m_lock);
-//	return SendHttpCmd(host, cmd);
-//}
-
-/** */
 void JsonClientProc::Run() 
 {
 	SetId("JsonClientProc");
+	PLOG_INFO("JsonClientProc running...");
 
 	_maxticks = (LocalConfig::cfg.ConfigTsup()*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;
@@ -304,6 +242,7 @@ void JsonClientProc::Run()
 		}
 		SupervisaProcesoConfiguracion();
 	}
+	PLOG_INFO("JsonClientProc leaving...");
 }
 
 /** */
@@ -317,7 +256,7 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 {
 	string path = "/configurations/" + cfg + "/gateways/" + _ip_propia + "/all";
 	string request = "GET " + path + " HTTP/1.1\r\nHost: " + SERVER_URL /*_host_config*/ + "\r\nContent-Type: application/json\r\n\r\n";
-	ParseResponse response = SendHttpCmd(SERVER_URL/*_host_config*/, request);
+	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request);
 	if (response.Status() != "200")
 	{
 		throw Exception("REQUEST ERROR: GET " + path + 
@@ -344,7 +283,7 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 void JsonClientProc::ChequearConfiguracion() 
 {
 	string request = "GET /gateways/" + _ip_propia + "/" + MAIN_TEST_CONFIG + " HTTP/1.1\r\nHost: " + SERVER_URL/*_host_config*/ + "\r\nContent-Type: application/json\r\n\r\n";
-	ParseResponse response = SendHttpCmd(SERVER_URL/*_host_config*/, request);
+	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request);
 	if (response.Status() != "200")
 	{
 		throw Exception("REQUEST ERROR: GET /" + _ip_propia + "/" + MAIN_TEST_CONFIG + 
@@ -373,7 +312,7 @@ void JsonClientProc::SubirConfiguracion()
 	string path = "/configurations/" + cfgname + "/gateways/" + _ip_propia + "/all";
 	string request = "POST " + path + " HTTP/1.1\r\nHost: " + SERVER_URL/*_host_config*/ + "\r\nContent-Type: application/json; charset=utf-8\r\n" +
 		"Content-Length: " + Tools::Int2String((int )cfg.size()) + "\r\n\r\n" + 	cfg + "\r\n";
-	ParseResponse response = SendHttpCmd(SERVER_URL/*_host_config*/, request);
+	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request);
 	if (response.Status() != "200")
 	{
 		throw Exception("REQUEST ERROR: POST " + path + 
@@ -405,6 +344,7 @@ string SoapClientProc::hwServer;
 void SoapClientProc::Run()
 {
 	SetId("SoapClientProc");
+	PLOG_INFO("SoapClientProc running...");
 
 	_maxticks = (LocalConfig::cfg.ConfigTsup()*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;
@@ -452,6 +392,7 @@ void SoapClientProc::Run()
 		SupervisaProcesoConfiguracion();
 		McastTest();
 	}
+	PLOG_INFO("SoapClientProc leaving...");
 }
 
 /** */
@@ -477,7 +418,7 @@ string SoapClientProc::getXml(string proc, string p1, string p2, string p3)
 		"\r\nContent-Type: application/x-www-form-urlencoded\r\n" +
 		"Content-Length: " + Tools::Int2String((int )data.size()) + 
 		"\r\n\r\n" + 	data /*+ "\r\n"*/;
-	ParseResponse response = SendHttpCmd(/*SERVER_URL*/hwServer, request);
+	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request);
 	if (response.Status() != "200")
 		throw Exception("REQUEST ERROR: POST " + path + 
 		" Host: " + /*SERVER_URL*/hwServer +  ". " + response.Status() + ":" + response.StatusText());

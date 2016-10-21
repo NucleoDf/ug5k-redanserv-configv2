@@ -110,6 +110,7 @@
     <ClInclude Include="include\config\soap-config.h" />
     <ClInclude Include="include\config\users-config.h" />
     <ClInclude Include="include\config\working-config.h" />
+    <ClInclude Include="include\file-supervisor.h" />
     <ClInclude Include="include\his-proc.h" />
     <ClInclude Include="include\man-proc.h" />
     <ClInclude Include="include\pthreads\include\pthread.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="include\rapidjson\writer.h" />
     <ClInclude Include="include\tools\base64.h" />
     <ClInclude Include="include\tools\ftp-client.h" />
+    <ClInclude Include="include\tools\http-client.h" />
     <ClInclude Include="include\tools\Parse.h" />
     <ClInclude Include="include\tools\stlini.h" />
     <ClInclude Include="include\tools\tools.h" />
@@ -171,10 +173,12 @@
     <ClCompile Include="src\config\local-config.cpp" />
     <ClCompile Include="src\config\soap-config.cpp" />
     <ClCompile Include="src\config\working-config.cpp" />
+    <ClCompile Include="src\file-supervisor.cpp" />
     <ClCompile Include="src\his-proc.cpp" />
     <ClCompile Include="src\man-proc.cpp" />
     <ClCompile Include="src\tools\base64.cpp" />
     <ClCompile Include="src\tools\ftp-client.cpp" />
+    <ClCompile Include="src\tools\http-client.cpp" />
     <ClCompile Include="src\tools\Parse.cpp" />
     <ClCompile Include="src\tools\stlini.cpp" />
     <ClCompile Include="src\tools\tools.cpp" />

@@ -4,6 +4,7 @@
 #include "web-app-server.h"
 #include "uv5kigwcfg-web-app-data.h"
 #include "../tools/tools.h"
+#include "../tools/ftp-client.h"
 
 #define CPU2CPU_MSG					((const char *)"cpu2cpu")
 #define CPU2CPU_MSG_CAMBIO_CONFIG	((const char *)"1")

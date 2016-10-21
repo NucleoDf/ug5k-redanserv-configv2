@@ -22,6 +22,7 @@ void HistClient::Run()
 	stHistAviso aviso;
 
 	SetId("HistClient");
+	PLOG_INFO("HistClient running...");
 
 	default_dst = CIPAddress("127.0.0.1", snmpconfig.getInt("SERVICIO","UDP_PORT_IN_AGSNMP","65000"));
 	default_port = snmpconfig.getInt("SERVICIO","UDP_PORT_IN_AGSNMP","65000");
@@ -73,6 +74,7 @@ void HistClient::Run()
 			}
 		}
 	}
+	PLOG_INFO("HistClient leaving...");
 }
 
 /** Rutinas Publicas... */

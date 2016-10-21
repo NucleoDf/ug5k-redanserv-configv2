@@ -27,7 +27,8 @@ public:
 	{
 		_msg = "Socket Error: " + string(error.what());
 	}
-
+        ~FtpClientException(void)throw(){}
+        
 private:
 	string _msg;
 public:
@@ -49,10 +50,14 @@ public:
 	void Upload(string lFile, string rFile);
 	void Delete(string rFile);
 	void ChangeDir(string rDir);
+#if !defined(_PPC82xx_)
+	void Test();
+	static void *ftpTest(void *arg);
+#endif
 
 protected:
-	int  readResponse(string &data);
-	void readLine(string &line);
+	int  readResponse(string &data, int timeout=1000);
+	void readLine(string &line, int timeout);
 	bool sendCommand(string cmd, int &rcode, string &response);
 	bool createDataSocket();
 	void cleanup();

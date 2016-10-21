@@ -706,11 +706,11 @@ bool CSocket::IsReadable(int timeout/*=0*/) const
 //
 bool CSocket::IsWritable(int timeout/*=0*/) const
 {
-	fd_set fs;
-	FD_ZERO(&fs);
-	FD_SET(m_socket, &fs);
+	fd_set fw;
+	FD_ZERO(&fw);
+	FD_SET(m_socket, &fw);
 
-	return Select(&fs, NULL, NULL, timeout)!=0;
+	return Select(NULL, &fw, NULL, timeout)!=0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

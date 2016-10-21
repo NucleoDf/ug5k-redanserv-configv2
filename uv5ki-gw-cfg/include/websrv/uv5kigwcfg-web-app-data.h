@@ -304,6 +304,9 @@ class webData_tses : public jData
 {
 public:
 	webData_tses(int parStd=0, string parIdc="IDC_IDC", string parTim="TIM_TIM");
+	webData_tses(string jData) {
+		JDeserialize(jData);
+	}
 	~webData_tses(void){}
 public:
 	virtual void jread(Value &base)

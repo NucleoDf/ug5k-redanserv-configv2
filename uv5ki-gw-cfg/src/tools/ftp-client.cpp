@@ -1,14 +1,42 @@
-//#include "ftp-client.h"
-//#include "local-config.h"
-//#include "Thread.h"
-//#include "Utilidades.h"
-//#include "NLOG.h"
 #include "../../include/tools/ftp-client.h"
 
-//#define MIBUFSIZE			(1024*16)
-//#define SEND_KSEG_TIMEOUT	(LocalConfig::cfg.FtpSendTimeout())
-//#define DBG_VERBOSE
 #define SCK_RECV_TIMEOUT	(LocalConfig::cfg.FtpGenTimeout())
+
+#if !defined(_PPC82xx_)
+/** */
+void *FtpClient::ftpTest(void *arg)
+{
+	string _srcpath="./ug5kser.map";
+	string _dstpath="./ug5kser.map";
+	string _user = "nucleocc";
+	string _pwd = "nucleo";
+	try 
+	{
+		FtpClient ftp("192.168.0.212", _user, _pwd);	// Los errores saldran por excepciones.
+
+		ftp.Login();
+		PLOG_INFO("SupervisedFile (%s). FTP Log In (%s,%s)", _srcpath.c_str(), _user.c_str(), _pwd.c_str());
+		ftp.Upload(_srcpath, _dstpath);
+		PLOG_INFO("SupervisedFile (%s). FTP SENT...", _srcpath.c_str());
+		ftp.Close(); 
+	}
+	catch(FtpClientException x)
+	{
+		PLOG_EXCEP(x,"");
+	}
+#ifndef _NO_WORKING_THREAD_
+	pthread_exit(NULL);
+#endif
+	return NULL;
+}
+
+/** */
+void FtpClient::Test()
+{
+	WorkingThread(ftpTest, this).Do();
+}
+
+#endif
 
 /** */
 FtpClient::FtpClient(string host, string user, string pwd, int port) 
@@ -32,15 +60,15 @@ FtpClient::~FtpClient(void)
  * Procedimientos Internos.
  **/
 /** */
-int FtpClient::readResponse(string &data) 
+int FtpClient::readResponse(string &data, int timeout) 
 {
     int resultcode;
     string linea;
     data = "";
     do 
 	{
-        readLine(linea);
-        if (linea.length() <= 3)
+        readLine(linea, timeout);
+        if (linea.length() <= 1)
             throw FtpClientException(string("Error. Linea de Respuesta demasiado corta: "), linea);
         // Formato Linea. CCC-texto -> hay mas lineas.
         //				  CCC texto -> Linea final con el resultado global de la aplicacion...
@@ -54,29 +82,27 @@ int FtpClient::readResponse(string &data)
 }
 
 /** */
-void FtpClient::readLine(string &line) 
+void FtpClient::readLine(string &line, int timeout) 
 {
-    //char leido;
-    //int leidos;
-
     if (pCtrl_Sck == NULL)
         throw FtpClientException(string("Error. El Socket de control no esta inicializado..."));
 
     line = "";
-	pCtrl_Sck->Recv_text(line, SCK_RECV_TIMEOUT);
+	if (pCtrl_Sck->IsReadable(timeout))
+	{
+		char leido;
+		do 
+		{
+			pCtrl_Sck->Recv(&leido, 1);
+            if (leido == '\n')
+                break;
+			line.push_back(leido);
+		} while (pCtrl_Sck->IsReadable(10));
 
-    //pCtrl_Sck->SetRecvTimeout(SCK_RECV_TIMEOUT);
-    //do {
-    //    leidos = pCtrl_Sck->Recv(&leido, 1);
-    //    if (leidos > 0) {
-		  //  pCtrl_Sck->SetRecvTimeout(1);
-    //        line.push_back((char) leido);
-    //        if (leido == '\n')
-    //            break;
-    //    }
-    //} while (leidos > 0);
-
-	PLOG_DEBUG("FTP-READ : %s", line.c_str());
+		PLOG_DEBUG("FTP-READ : %s", line.c_str());
+		return;
+	}
+	throw FtpClientException("FTP-READ: TIMEOUT!!!","");
 }
 
 /** */
@@ -159,58 +185,32 @@ void FtpClient::cleanup()
 /** */
 void FtpClient::sendFile(string filename) 
 {
-	PLOG_DEBUG("FTP-SEND : %s", filename.c_str());
+	PLOG_DEBUG("FTP-SENDING : %s", filename.c_str());
 
-	ifstream file(filename.c_str());
+	ifstream file(filename.c_str(), ios::binary);
 	if (file.good())
 	{
-		char Byte;
-
 	    CTCPSocket sck;
 		pData_Sck->Accept(sck, 1);
+
+#if !defined(_PPC82xx_)
+		vector<char> buffer((std::istreambuf_iterator<char>(file)), (std::istreambuf_iterator<char>()));
+#else
+		char Byte;
+		vector<char> buffer;
 		while (file.get(Byte))
-		{
-			if (sck.IsWritable(100)==false)
-				throw FtpClientException("No se puede escribir el fichero remoto","");
-			sck.Write(&Byte, 1);
-		} 
+			buffer.push_back(Byte);			
+#endif
+		sck.Write(&buffer[0], buffer.size());
+		if (sck.IsWritable(1000)==false)
+			throw FtpClientException("No se puede escribir el fichero remoto","");
 
 	    sck.Close();
 		PLOG_DEBUG("FTP-SENT : %s", filename.c_str());
-		///** TODO... Timeout de espera segun el tamaño del fichero. 1 SEG por 6K. */
-		//int nseg = (tlen/SEND_KSEG_TIMEOUT) +  1;
-		//CThread::sleep(1000*nseg);
-		//PLOG_DEBUG("FTP-END : %s", filename.c_str());
 		return;
 	}
    throw FtpClientException(string("Error. No se puede abrir el fichero local: "), filename);
 
- //   char buf[MIBUFSIZE];
- //   int len, rlen,tlen=0;
-	//    CTCPSocket sck;
-
- //   FILE *src = fopen(filename.c_str(), "rb");
- //   if (src == NULL)
- //       throw FtpClientException(string("Error. No se puede abrir el fichero local: "), filename);
-
- //   pData_Sck->Accept(sck, 1);
- //   while ((rlen = fread(buf, 1, MIBUFSIZE, src)) > 0) {
- //       if (rlen > 0) {
- //           len = sck.Send(buf, rlen);
- //           if (len < 0) {
-	//	        throw FtpClientException(string("Error enviando bloque de datos. "), filename);
- //           }
-	//		tlen += len;
- //       }
- //   }
-	//fclose(src);
- //   sck.Close();
-
-	//PLOG_DEBUG("FTP-SENT : %s", filename.c_str());
-	///** TODO... Timeout de espera segun el tamaño del fichero. 1 SEG por 6K. */
- //   int nseg = (tlen/SEND_KSEG_TIMEOUT) +  1;
-	//CThread::sleep(1000*nseg);
-	//PLOG_DEBUG("FTP-END : %s", filename.c_str());
 }
 
 /***
@@ -231,20 +231,25 @@ void FtpClient::Login()
             throw FtpClientException(string("Error. No me puedo conectar al Servidor: "), remote.GetStringAddress());
 
         /** */
-        retcode = readResponse(respuesta);
+		PLOG_DEBUG("Ftp-Client::Login => ");
+        retcode = readResponse(respuesta, 10000);
         if (retcode != 220)
             throw FtpClientException(string("Error. Servidor no Responde: "), respuesta);
 
         /** */
+		PLOG_DEBUG("Ftp-Client::Login => USER");
         sendCommand(string("USER ") + username, retcode, respuesta);
         if (!(retcode == 331 || retcode == 230))
             throw FtpClientException(string("Error. Enviando Comando USER: "), respuesta);
 
         if (retcode != 230) {
+			PLOG_DEBUG("Ftp-Client::Login => PASS");
             sendCommand(string("PASS ") + password, retcode, respuesta);
             if (!(retcode == 230 || retcode == 202))
                 throw FtpClientException(string("Error. Acceso no permitido: "), respuesta);
         }
+
+		PLOG_DEBUG("Ftp-Client::Login-END");
         loggedin = true;
     } 
 	catch (socket_error x) 

@@ -80,6 +80,22 @@ public:
 		clear_array(cpus);
 	}
 public:
+	bool IpColateral(string ipPropia, string &ip) {
+		if (cpus.size() < 2)
+			return false;
+		if (ipPropia==cpus[0].ipb)
+		{
+			ip = cpus[1].ipb;
+			return true;
+		}
+		else if (ipPropia==cpus[1].ipb)
+		{
+			ip = cpus[0].ipb;
+			return true;
+		}		
+		PLOG_ERROR("CommGenConfig::IpColateral: ERROR. NO IP PROPIA!!!");
+		return false;
+	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
 	{

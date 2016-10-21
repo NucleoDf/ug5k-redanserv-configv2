@@ -69,6 +69,16 @@ public:
 
 	//	return *this;
 	//}
+public:
+	bool IpColateral(string &ip) {
+		string ippropia;
+		if (sistema::GetIpAddress(ippropia))
+		{
+			return general.IpColateral(ippropia, ip);
+		}	
+		PLOG_ERROR("CommConfig::IpColateral: ERROR. NO IP PROPIA !!!");
+		return false;
+	}
 
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {
