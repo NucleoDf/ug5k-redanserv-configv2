@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="generator"
+        content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="windows-1252" />
+    <meta name="description" content="Plantilla Ulises 5000" />
+    <meta name="keywords" content="HTML5, CSS3, JavaScript" />
+    <title>ULISES G 5000 I.</title>
+    <!-- Estilos  -->
+    <link rel="stylesheet" href="./styles/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="./styles/uv5ki-styles.css" />
+</head>
+<body>
+    <div id="agrupar">
+        <header id="cabecera">
+            <div id="_contSupIzq">
+                <div id="_logo">
+                    <img src="./images/nucleo-df-new.jpg" />
+                </div>
+            </div>
+            <div id="_tit_ppal">
+                <p>ULISES G 5000.</p>
+            </div>
+            <div id="_contSupDrcha">
+                <div id="_hfecha"></div>
+				<div id="_hsolohora"></div>
+                <div id="_usuario"></div>
+            </div>
+        </header>
+		
+        <nav id="_menu" class="container">
+		</nav>
+
+        <section id="_ppallog">
+            <form class="form-horizontal" role="form" method="POST" id="login">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Usuario:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="user" placeholder="Introduzca Usuario">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="pwd">Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="pwd" placeholder="Introduzca password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Login</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <footer id="_pie">DF Nucleo Copyright @2016. Todos los Derechos Reservados</footer>
+    </div>
+
+        <script src="./scripts/jquery/jquery-2.1.3.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                var userLang = navigator.languages[0];
+                var language = userLang.indexOf("en") == 0 ? "en" : userLang.indexOf("fr") == 0 ? "fr" : "es";
+
+                $("[lang]").each(function () {
+                    if ($(this).attr("lang") == language)
+                        $(this).show();
+                    else
+                        $(this).hide();
+                });
+				
+				$("#_menu").css('border-width', '0');
+				
+				$("#_hfecha").text((new Date()).toLocaleDateString());				
+				$("#_hsolohora").text((new Date()).toLocaleTimeString());
+				setInterval(function() {
+					$("#_hfecha").text((new Date()).toLocaleDateString());				
+					$("#_hsolohora").text((new Date()).toLocaleTimeString());
+					}, 1000);
+				
+            });
+        </script>
+</body>
+</html>
+

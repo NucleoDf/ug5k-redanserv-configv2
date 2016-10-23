@@ -1,0 +1,69 @@
+<h1 translate>RADIO_TITULO</h1>
+
+<section id="_tabs">
+    <ul class="tabs" data-persist="true">
+        <li>
+            <a href="" data-ng-click="vm.set_pagina(0)" data-ng-class="{'tabsel': vm.pagina==0}" translate>RADIO_PG00</a>
+        </li>
+        <li>
+            <a href="" data-ng-click="vm.set_pagina(1)" data-ng-class="{'tabsel': vm.pagina==1}" translate>RADIO_PG01</a>
+        </li>
+        <li>
+            <a href="" data-ng-click="vm.set_pagina(2)" data-ng-class="{'tabsel': vm.pagina==2}" translate>RADIO_PG02</a>
+        </li>
+        <li>
+            <a href="" data-ng-click="vm.set_pagina(3)" data-ng-class="{'tabsel': vm.pagina==3}" data-ng-show="vm.pcol_show()" translate>RADIO_PG03</a>
+        </li>
+        <li>
+            <a href="" data-ng-click="vm.set_pagina(4)" data-ng-class="{'tabsel': vm.pagina==4}" data-ng-show="vm.pbn_show()" translate>RADIO_PG04</a>
+        </li>
+    </ul>
+</section>
+<section id="_contenido">
+    <div>
+        <div class="_listaifaces">
+            <p class="_textLista">
+                <b translate>RADIO_REC</b>
+                <select class="selectList" data-ng-model="vm.radiosel" data-ng-change="vm.update_radio()">
+                    <option data-ng-repeat="radio in vm.lradios" data-ng-model="radio.id" data-ng-selected="{{vm.radiosel==$index}}" value="{{$index}}">{{radio.hw + " " + radio.id}}</option>
+                </select>
+            </p>
+        </div>
+        <div class="_tablarec">
+            <table class="ug5ktb">
+                <tr data-ng-repeat="item in vm.vdata" data-ng-show="item.Show({{$index}})">
+                    <td class="_cab">{{item.Name}}</td>
+                    <td data-ng-switch on="item.Input">
+                        <span data-ng-switch-when="0">
+                            <span class="error" ng-show="item.Val(item.Value)==false" translate>RADIO_ERROR</span>
+                            <input type="text" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
+                        </span>
+                        <select data-ng-switch-when="1" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()">
+                            <option data-ng-repeat="valor in item.Inputs" data-ng-selected="{{$index==item.Value}}" value="{{$index}}">{{valor}}</option>
+                        </select>
+                        <ol data-ng-switch-when="2" data-ng-disabled="item.Enable==false">
+                            <li data-ng-repeat="item1 in item.Value track by $index" style="list-style-type: none">
+                                <span class="error" ng-show="item.Val(item.Value[$index])==false" translate>RADIO_ERROR</span>
+                                <input type="text" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()" />
+                            </li>
+                        </ol>
+                        <span data-ng-switch-when="3">
+                            <span class="error" ng-show="item.Val(item.Value)==false" translate>RADIO_ERROR</span>
+                            <span class="sip" >Sip:</span>
+                            <input type="text" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
+                        </span>
+                        <ol data-ng-switch-when="4" data-ng-disabled="item.Enable==false">
+                            <li data-ng-repeat="item1 in item.Value track by $index" style="list-style-type: none">
+                                <span class="error" ng-show="item.Val(item.Value[$index])==false" translate>RADIO_ERROR</span>
+                                <span class="sip" >Sip:</span>
+                                <input type="text" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()" />
+                            </li>
+                        </ol>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+
