@@ -1,17 +1,17 @@
-<h1 translate>TELEF_TITULO</h1>
+<h3 translate>TELEF_TITULO</h3>
 <section id="_tabs">
-    <ul class="tabs" data-persist="true">
-        <li>
-            <a href="" data-ng-click="vm.set_pagina(0)" data-ng-class="{'tabsel': vm.pagina==0}" translate>TELEF_PG00</a>
+    <ul class="nav nav-tabs" data-persist="true">
+        <li data-ng-class="{'active': vm.pagina==0}">
+            <a href="" data-ng-click="vm.set_pagina(0)" translate>TELEF_PG00</a>
         </li>
-        <li>
-            <a href="" data-ng-click="vm.set_pagina(1)" data-ng-class="{'tabsel': vm.pagina==1}" translate>TELEF_PG01</a>
+        <li data-ng-class="{'active': vm.pagina==1}">
+            <a href="" data-ng-click="vm.set_pagina(1)" translate>TELEF_PG01</a>
         </li>
-        <li>
-            <a href="" data-ng-click="vm.set_pagina(2)" data-ng-class="{'tabsel': vm.pagina==2}" translate>TELEF_PG02</a>
+        <li data-ng-class="{'active': vm.pagina==2}">
+            <a href="" data-ng-click="vm.set_pagina(2)" translate>TELEF_PG02</a>
         </li>
-        <li>
-            <a href="" data-ng-click="vm.set_pagina(3)" data-ng-class="{'tabsel': vm.pagina==3}" data-ng-show="vm.show_plbn()">{{vm.bnorats()}}</a>
+        <li data-ng-class="{'active': vm.pagina==3}" >
+            <a href="" data-ng-click="vm.set_pagina(3)" data-ng-show="vm.show_plbn()">{{vm.bnorats()}}</a>
         </li>
     </ul>
 </section>
@@ -20,39 +20,41 @@
         <div class="_listaifaces">
             <p class="_textLista">
                 <b translate>TELEF_REC</b>
-                <select class="selectList" data-ng-model="vm.selected" data-ng-change="vm.update_telef()">
+                <select class="form-control" data-ng-model="vm.selected" data-ng-change="vm.update_telef()">
                     <option data-ng-repeat="telef in vm.ltelef" data-ng-selected="{{vm.selected==$index}}" value="{{$index}}">{{telef.hw + ' ' + telef.id}}</option>
                 </select>
             </p>
         </div>
         <div class="_tablarec">
-            <table class="ug5ktb">
+            <table class="table table-striped ug5ktb">
                 <tr data-ng-repeat="item in vm.vdata" data-ng-show="item.Show({{$index}})">
-                    <td class="_cab">{{item.Name}}</td>
+                    <td class="_cab"><label class="control-label">{{item.Name}}</label></td>
                     <td data-ng-switch on="item.Input">
                         <span data-ng-switch-when="0">
                             <span class="error" ng-show="item.Val(item.Value)==false" translate>TELEF_ERROR</span>
-                            <input type="text" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
+                            <input type="text" class="form-control" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
                         </span>
-                        <select data-ng-switch-when="1" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()">
+                        <select data-ng-switch-when="1" class="form-control" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()">
                             <option data-ng-repeat="valor in item.Inputs" data-ng-selected="{{$index==item.Value}}" value="{{$index}}">{{valor}}</option>
                         </select>
                         <ol data-ng-switch-when="2" data-ng-disabled="item.Enable==false">
                             <li data-ng-repeat="item1 in item.Value track by $index" style="list-style-type: none">
                                 <span class="error" ng-show="item.Val(item.Value[$index])==false" translate>TELEF_ERROR</span>
-                                <input type="text" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()"></input>
+                                <input type="text" class="form-control" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()"></input>
                             </li>
                         </ol>
                         <span data-ng-switch-when="3">
                             <span class="error" ng-show="item.Val(item.Value)==false" translate>TELEF_ERROR</span>
-                            <span class="sip" >Sip:</span>
-                            <input type="text" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
+                            <label class="control-label col-sm-1">Sip:</label>
+                            <div class="col-sm-11">
+                                <input type="text" class="form-control" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
+                            </div>
                         </span>
                         <ol data-ng-switch-when="4" data-ng-disabled="item.Enable==false">
                             <li data-ng-repeat="item1 in item.Value track by $index" style="list-style-type: none">
                                 <span class="error" ng-show="item.Val(item.Value[$index])==false" translate>TELEF_ERROR</span>
                                 <span class="sip" >Sip:</span>
-                                <input type="text" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()"></input>
+                                <input type="text" class="form-control" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()"></input>
                             </li>
                         </ol>
                     </td>

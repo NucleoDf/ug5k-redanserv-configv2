@@ -18,7 +18,7 @@
 			<table st-table="vm.v_data" class="table table-striped ug5ktb">
               <tr data-ng-repeat="item in vm.v_data | filter: { Show: true }" 
 					data-ng-show="vm.show({{$index}})" class="ug5ktb_row">
-                  <td>{{item.Name}}</td>
+                  <td><label class="control-label">{{item.Name}}</label></td>
                   <td data-ng-switch on="item.Input">
                       <span data-ng-switch-when="0">
                         <span class="error" ng-show="item.Val(item.Value)==false" translate>INICIO_ERROR_FORMATO</span>

@@ -16,10 +16,16 @@ function ug5kHardCtrl(CfgService, authservice, transerv, $scope, $location) {
 	/** Get Data */
 	vm.get_data = function (slv) {
 	    vm.jslv = CfgService.hw_data_get(slv);
+	    vm.jslv.pos.forEach(function(pos){
+	    	pos.cfg = pos.cfg.toString();
+	    });
 	}
 
 	/** Post Data. */
 	vm.post_data = function (slv) {
+		vm.jslv.pos.forEach(function(pos){
+			pos.cfg = parseInt(pos.cfg);
+		});
 	    CfgService.hw_data_set(slv, vm.jslv);
 	}
 
@@ -40,9 +46,8 @@ function ug5kHardCtrl(CfgService, authservice, transerv, $scope, $location) {
     /** */
 	vm.pos_change = function (pos) {
 	    if (authservice.Confirma(Mensaje(pos)))
-	        vm.post_data(vm.slv);
-	    else
-	        vm.get_data(vm.slv);
+	        vm.post_data(vm.slv);	        
+	    vm.get_data(vm.slv);
 	}
 
     /** */
