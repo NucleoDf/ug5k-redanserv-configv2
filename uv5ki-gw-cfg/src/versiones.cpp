@@ -215,7 +215,7 @@ bool Versiones::RestoreLastVersion()
 /** */
 bool Versiones::PreRegistra(string idSistema, string idVersion, string path, string verbose)
 {
-	/** TODO. Controlar que no haya un Preregistro previo */
+	/** TODO: Controlar que no haya un Preregistro previo */
 
 	stringstream  qry;
 	qry << "INSERT INTO swrep (idPos,fecha,idSistema,idVersion,path,strVersiones) VALUES (-1,";

@@ -34,6 +34,16 @@ soap_config::soap_config(remoteGetXdataFunc remoteFunc, string iphw, string hwNa
 	XDeserialize(xdata_idConfig, "string");
 
 	this->Ip = iphw;
+
+	for (vector<soap_DireccionamientoIP>::iterator host=ArrayOfDireccionamientoIP.begin();
+		host != ArrayOfDireccionamientoIP.end(); host++)
+	{
+		if (host->IdHost == CfgPasarela.Nombre) {
+			this->Ip = host->IpRed1;
+			break;
+		}
+	}
+	
 	this->Server = ipServer;
 }
 

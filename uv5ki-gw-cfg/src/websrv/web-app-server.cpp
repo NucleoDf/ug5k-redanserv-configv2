@@ -18,6 +18,11 @@ WebAppServer::~WebAppServer(void)
 void WebAppServer::Start()
 {
 	const char *ret;
+	
+	PLOG_INFO("WebAppServer. Starting (%s) (%s) (%s)...",
+		config()->web_port.c_str(),
+		config()->document_root.c_str(),
+		config()->default_page.c_str());
 
 	if ((server = mg_create_server(this, stWebHandler))==NULL)
 		throw Exception("Error al Crear Servidor HTTP");
@@ -29,6 +34,7 @@ void WebAppServer::Start()
 		throw Exception("Error en mg_set_option: index_files");
 
 	CThread::Start();
+	PLOG_INFO("WebAppServer. Started...");
 }
 
 /** */
@@ -42,11 +48,9 @@ void WebAppServer::Dispose()
 void WebAppServer::Run()
 {
 	SetId("WebAppServer");
-
-#if _SESSION_SUP_
 	config()->session_control.Reset();
-#endif
 
+	PLOG_INFO("WebAppServer running...");
 	while(IsRunning())
 	{
 		try
@@ -65,6 +69,7 @@ void WebAppServer::Run()
 			PLOG_ERROR("WebAppServer::Run Excepcion en Lazo... ");
 		}
 	}
+	PLOG_INFO("WebAppServer leaving...");
 }
 
 /** */
@@ -106,7 +111,7 @@ int WebAppServer::WebHandler(struct mg_connection *conn, enum mg_event ev)
 			if (_hup.HandleRequest(conn, result))
 				return result;
 #endif
-			// TODO. Chequear si esto esta bien...
+			// TODO: Chequear si esto esta bien...
 			if (config()->enable_login==true)
 			{
 				if (Check4SecureUri(conn->uri) == true && 

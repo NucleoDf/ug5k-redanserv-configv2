@@ -6,7 +6,9 @@
 #include <queue>
 #include <algorithm>
 
-#define _NUM_HW_ITFS_		16
+#define _NUM_HW_ITFS_			16
+#define P_MAN_PROC				(ManProc::p_man)
+
 
 #include "./base/code-base.h"
 #include "./base/thread.h"

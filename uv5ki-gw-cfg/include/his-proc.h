@@ -12,6 +12,9 @@
 //#include "http-client.h"
 
 using namespace std;
+
+#define P_HIS_PROC								(HistClient::p_hist)
+
 //#define _EVENTONPAIR_
 
 /** Codigos de Eventos */

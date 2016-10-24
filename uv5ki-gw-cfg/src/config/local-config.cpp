@@ -126,29 +126,29 @@ string LocalConfig::TiempoSesion(string segundos) {
 
 /**
  */
-string LocalConfig::PathToIniRam(string path) {
-
-#ifdef _LOCAL_LOCK_
-	CCSLock _lock(_lock);
-#endif
-    if (path != "NoPath")
-        PutIniSetting(ini, strSection, strItemPath2Ini, path.c_str());
-
-    return GetIniSetting(ini, strSection, strItemPath2Ini, "./");
-}
+//string LocalConfig::PathToIniRam(string path) {
+//
+//#ifdef _LOCAL_LOCK_
+//	CCSLock _lock(_lock);
+//#endif
+//    if (path != "NoPath")
+//        PutIniSetting(ini, strSection, strItemPath2Ini, path.c_str());
+//
+//    return GetIniSetting(ini, strSection, strItemPath2Ini, "./");
+//}
 
 /**
  */
-string LocalConfig::PathToIniFlash(string path) {
-
-#ifdef _LOCAL_LOCK_
-	CCSLock _lock(_lock);
-#endif
-    if (path != "NoPath")
-        PutIniSetting(ini, strSection, strItemPath2IniFlash, path.c_str());
-
-    return GetIniSetting(ini, strSection, strItemPath2IniFlash, "./");
-}
+//string LocalConfig::PathToIniFlash(string path) {
+//
+//#ifdef _LOCAL_LOCK_
+//	CCSLock _lock(_lock);
+//#endif
+//    if (path != "NoPath")
+//        PutIniSetting(ini, strSection, strItemPath2IniFlash, path.c_str());
+//
+//    return GetIniSetting(ini, strSection, strItemPath2IniFlash, "./");
+//}
 
 /**
 */
@@ -175,16 +175,16 @@ int LocalConfig::ConfigTsup()
 
 /**
  */
-string LocalConfig::PathToRCSH(string path) {
-#ifdef _LOCAL_LOCK_
-	CCSLock _lock(_lock);
-#endif
-
-	if (path != "NoPath")
-        PutIniSetting(ini, strSection, strItemPath2RCSH, path.c_str());
-
-    return GetIniSetting(ini, strSection, strItemPath2RCSH, "./");
-}
+//string LocalConfig::PathToRCSH(string path) {
+//#ifdef _LOCAL_LOCK_
+//	CCSLock _lock(_lock);
+//#endif
+//
+//	if (path != "NoPath")
+//        PutIniSetting(ini, strSection, strItemPath2RCSH, path.c_str());
+//
+//    return GetIniSetting(ini, strSection, strItemPath2RCSH, "./");
+//}
 
 /** */
 string LocalConfig::PathToVersiones()
@@ -193,7 +193,7 @@ string LocalConfig::PathToVersiones()
 	CCSLock _lock(_lock);
 #endif
 
-	return GetIniSetting(ini, strSection, strItemPath2Versiones, "./versiones.txt");
+	return onfs(GetIniSetting(ini, strSection, strItemPath2Versiones, "./versiones.txt"));
 }
 
 /** */
@@ -303,32 +303,33 @@ string LocalConfig::LastRouteSource(string ip) {
 }
 
 /** */
-string LocalConfig::onram(string filename) {
-#ifdef _WIN32
-	return "./wram/" + filename;
-#else
-
-	return LocalConfig::cfg.PathToIniRam() + filename;
-#endif
-}
+//string LocalConfig::onram(string filename) {
+//#ifdef _WIN32
+//	return "./wram/" + filename;
+//#else
+//
+//	return LocalConfig::cfg.PathToIniRam() + filename;
+//#endif
+//}
 
 /** */
-string LocalConfig::onflash(string filename) {
-//    const char* env_p = std::getenv("PATH");
-#ifdef _WIN32
-	return /*"./wflash/"*/"./" + filename;
-#else
-    return LocalConfig::cfg.PathToIniFlash() + filename;
-#endif
-}
+//string LocalConfig::onflash(string filename) {
+////    const char* env_p = std::getenv("PATH");
+//#ifdef _WIN32
+//	return /*"./wflash/"*/"./" + filename;
+//#else
+//    return LocalConfig::cfg.PathToIniFlash() + filename;
+//#endif
+//}
 
 /** */
 string LocalConfig::onswrep(string filename) {
-#ifdef _WIN32
-	return "./wflash/swrep/" + filename;
-#else
-    return LocalConfig::cfg.PathToIniFlash() + "swrep/" + filename;
-#endif
+//#ifdef _WIN32
+//	return "./wflash/swrep/" + filename;
+//#else
+//    return onflash("swrep/" + filename);
+//#endif
+    return onflash("swrep/" + filename);
 }
 
 /**

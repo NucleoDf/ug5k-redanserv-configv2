@@ -60,7 +60,7 @@ public:
 			/** Inicializacion Comun */
 			Uv5kiGwCfgWebApp webApp;
 
-			/** TODO. Crearlo seg�n el entorno */
+			/** Crearlo seg�n el entorno */
 			if (mode==false)
 				CfgProc::p_cfg_proc = new JsonClientProc();
 			else

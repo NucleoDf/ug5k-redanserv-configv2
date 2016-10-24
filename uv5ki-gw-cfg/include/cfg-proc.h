@@ -13,6 +13,9 @@
 
 using namespace std;
 
+#define P_CFG_PROC					(CfgProc::p_cfg_proc)
+#define P_WORKING_CONFIG			(P_CFG_PROC->p_working_config)
+
 #define MAIN_PIDE_CONFIG			((const char *)"pideconfig")
 #define MAIN_TEST_CONFIG			((const char *)"testconfig")
 #define MAIN_SUBIR_CONFIG			((const char *)"subirconfig")

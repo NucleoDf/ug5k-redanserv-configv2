@@ -61,6 +61,10 @@
 #define _PARAMS_IN_INI_
 #define ON_WORKING_DIR(m)		(((std::string)WORKING_DIR)+((std::string)m)).c_str()
 
+#define ON_RAM(p)				(onram(p).c_str())
+#define ON_FLASH(p)				(onflash(p).c_str())
+
+
 using namespace plog;
 using namespace std;
 
@@ -137,6 +141,22 @@ protected:
 		va_start ( args, fmt );
 		_FormatLog(debug, file, line, fmt, args);
 		va_end(args);
+	}
+	/** */
+	static string onfs(string filename) {
+#if defined(_WIN32)
+		return "./fs-win" + filename;
+#elif defined(_PPC82xx_)
+		return filename;
+#else
+		return "./fs-lnx" + filename;
+#endif
+	}
+	static string onram(string filename) {
+		return onfs("/mnt/ramfs/" + filename);
+	}
+	static string onflash(string filename) {
+		return onfs("/home/serv/" + filename);
 	}
 
 private:

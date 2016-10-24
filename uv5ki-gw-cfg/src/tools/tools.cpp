@@ -173,7 +173,7 @@ bool Tools::StrContains(std::string texto, std::string valor) {
 
 /** */
 std::string Tools::StrFormat(const char *fmt, ...) {
-    char textString[1024] = {'\0'}; // todo. Revisar este limite...
+    char textString[1024] = {'\0'}; // TODO: Revisar este limite...
 
     // -- empty the buffer properly to ensure no leaks.
     memset(textString, '\0', sizeof (textString));
@@ -181,9 +181,9 @@ std::string Tools::StrFormat(const char *fmt, ...) {
     va_list args;
     va_start(args, fmt);
 #ifdef _WIN32
-    vsnprintf_s(textString, 1024, fmt, args); // todo. Tambien esta aqui el limite...
+    vsnprintf_s(textString, 1024, fmt, args); // TODO: Tambien esta aqui el limite...
 #else
-    vsnprintf(textString, 1024, fmt, args); // todo. Tambien esta aqui el limite...
+    vsnprintf(textString, 1024, fmt, args); // TODO: Tambien esta aqui el limite...
 #endif
     va_end(args);
     std::string retStr = textString;

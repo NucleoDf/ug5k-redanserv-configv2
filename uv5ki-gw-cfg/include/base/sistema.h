@@ -1,6 +1,8 @@
 #ifndef _SISTEMA_
 #define _SISTEMA_
 
+#include "./code-base.h"
+
 #include <time.h>
 
 #ifdef _WIN32
@@ -27,7 +29,7 @@
 #include <string>
 using namespace std;
 
-class sistema
+class sistema : CodeBase
 {
 public:
 	sistema(void);

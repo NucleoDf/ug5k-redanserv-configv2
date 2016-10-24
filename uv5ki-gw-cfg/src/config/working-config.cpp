@@ -102,7 +102,7 @@ void WorkingConfig::load_from(string file)
 /** */
 void WorkingConfig::save_to(string file)
 {
-	ofstream ff(ON_FLASH(file));	
+	ofstream ff(file.c_str());	
 	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) 
 	{
 		string data = config.JSerialize();
@@ -139,7 +139,7 @@ void WorkingConfig::ResourcesClear()
 {
 	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) 
 	{
-		// TODO...
+		// TODO: 
 		return;
 	}
 	throw Exception("Modo de Configuracion no implementado borrando recursos...");

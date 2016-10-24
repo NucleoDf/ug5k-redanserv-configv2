@@ -73,15 +73,18 @@ void FileSupervisor::Run()
 					PLOG_INFO("FileSupervisor. Detectado Cambio en Fichero: %s", (*file).srcPaht().c_str());
 					try 
 					{
-						string ipColateral;
-						if (P_WORKING_CONFIG->IpColateral(ipColateral)==true)
+						if (P_WORKING_CONFIG->DualCpu() == true)
 						{
-							(*file).SyncToRemote(ipColateral);
-							PLOG_INFO("FileSupervisor. Fichero: %s Sincronizado...", (*file).srcPaht().c_str());
-						}
-						else
-						{
-							PLOG_ERROR("Error en FileSupervisor. Fichero: %s. Ip Colateral no Encontrada.", (*file).srcPaht().c_str());
+							string ipColateral;
+							if (P_WORKING_CONFIG->IpColateral(ipColateral)==true)
+							{
+								(*file).SyncToRemote(ipColateral);
+								PLOG_INFO("FileSupervisor. Fichero: %s Sincronizado...", (*file).srcPaht().c_str());
+							}
+							else
+							{
+								PLOG_ERROR("Error en FileSupervisor. Fichero: %s. Ip Colateral no Encontrada.", (*file).srcPaht().c_str());
+							}
 						}
 					}
 					catch(FtpClientException e)

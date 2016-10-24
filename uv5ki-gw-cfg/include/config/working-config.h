@@ -66,6 +66,9 @@ public:
 	bool DualCpu() {
 		return config.general.dualidad==1;
 	}
+	bool TestConfig() {
+		return config.test();
+	}
 
 
 public:

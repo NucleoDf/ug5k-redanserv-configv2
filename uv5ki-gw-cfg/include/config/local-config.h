@@ -18,9 +18,6 @@ using namespace std;
 #define strSection						((const char *)"U5KWEB")
 #define strItemWebPort					((const char *)"WEB-PORT")
 #define strItemSessionTime				((const char *)"SESSION-TIME")
-#define strItemPath2Ini					((const char *)"PATH-INI")
-#define strItemPath2IniFlash			((const char *)"PATH-INI-FLASH")
-#define strItemPath2RCSH				((const char *)"PATH-RCSH")
 #define strItemPath2Versiones			((const char *)"PATH-VERSIONES")
 #define strItemLog						((const char *)"LOG")
 #define strItemLogin					((const char *)"LOGIN")
@@ -55,11 +52,12 @@ using namespace std;
 
 
 #define strFilesSupervidor				((const char *)"FILESUPERVISOR")
-#ifdef _WIN32
- #define strKeySupervisedFile			((const char *)"WFILE")
-#else
- #define strKeySupervisedFile			((const char *)"FILE")
-#endif
+#define strKeySupervisedFile			((const char *)"FILE")
+//#ifdef _WIN32
+// #define strKeySupervisedFile			((const char *)"WFILE")
+//#else
+// #define strKeySupervisedFile			((const char *)"FILE")
+//#endif
 #define strSupervisedFileUnlockTime		((const char *)"UNLOCKTIME")
 
 #ifdef _WIN32
@@ -70,15 +68,12 @@ using namespace std;
  #define strItemWindowsTestServidor		((const char *)"SINCR-SERV")
 #endif
 
-/** */
-#define ON_RAM(p)						(LocalConfig::onram(p).c_str())
-#define ON_FLASH(p)						(LocalConfig::onflash(p).c_str())
 #define ON_SWREP(p)						(LocalConfig::onswrep(p).c_str())
 
 /** */
-#define LAST_CFG						(LocalConfig::cfg.ConfigFile().c_str())
-#define LAST_CFG_PRUEBA					"gw_config_prueba.json"
-#define LAST_SAVE(n)					(string("last_gw_config_")+string(n)+string(".json"))
+#define LAST_CFG						(onflash(LocalConfig::cfg.ConfigFile().c_str()))
+#define LAST_CFG_PRUEBA					(onflash("gw_config_prueba.json"))
+#define LAST_SAVE(n)					(onflash(string("last_gw_config_")+string(n)+string(".json")))
 
 /** */
 typedef map<string,string> MapString;
@@ -92,7 +87,7 @@ class stStrings
 };
 
 /** */
-class LocalConfig
+class LocalConfig : CodeBase
 {
 public:
 	static LocalConfig cfg;
@@ -125,9 +120,6 @@ public:
 	string TiempoSesion(string segundos="NoSegundos");
 	string ServerURL();
 
-	string PathToIniRam(string path="NoPath");
-	string PathToIniFlash(string path="NoPath");
-	string PathToRCSH(string path="NoPath");
 	string PathToPreconf(string path="NoPath");
 	string PathToVersiones();
 	int FtpGenTimeout() {return atoi(getString(strSection, strItemFtpGenTimeout,"5").c_str());}
@@ -157,14 +149,12 @@ public:
 	}
 
 	/** */
-	static string onram(string filename);
-	static string onflash(string filename);
 	static string onswrep(string filename);
-	static string snmpModule()	{return LocalConfig::cfg.getString(strModulos, strItemModuloSnmp,"./ug5ksnmp-config.ini");} 
-	static string recModule()	{return LocalConfig::cfg.getString(strModulos, strItemModuloGrabador, "./ug5krec-config.ini");} 
+	static string snmpModule()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemModuloSnmp,"./ug5ksnmp-config.ini"));} 
+	static string recModule()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemModuloGrabador, "./ug5krec-config.ini"));} 
 	/** */
-	static string snmpExe()	{return LocalConfig::cfg.getString(strModulos, strItemExeSnmp,"/home/snmp/ug5ksnmp");} 
-	static string recExe()	{return LocalConfig::cfg.getString(strModulos, strItemExeGrabador, "/home/rec/UG5KEd137b4Service");} 
+	static string snmpExe()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemExeSnmp,"/home/snmp/ug5ksnmp"));} 
+	static string recExe()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemExeGrabador, "/home/rec/UG5KEd137b4Service"));} 
 
 	static int SupervisedFileUnlocktime() {
 		return LocalConfig::cfg.getInt(strFilesSupervidor, strSupervisedFileUnlockTime, "10");

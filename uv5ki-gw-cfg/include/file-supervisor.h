@@ -18,8 +18,8 @@ class SupervisedFile : public CodeBase
 public:
 	SupervisedFile(string src_path, string dst_path="", string user="", string pwd="")
 	{
-		_srcpath=src_path;
-		_dstpath=dst_path;
+		_srcpath=onfs(src_path);
+		_dstpath=onfs(dst_path);
 		_user=user;
 		_pwd=pwd;
 		_lock=0;

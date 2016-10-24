@@ -44,6 +44,9 @@ public:
 	}
 	virtual void jwrite(Writer<StringBuffer> &writer)=0;
 	virtual void jread(Value &base)=0;
+	virtual bool test() {
+		return true;
+	}
 	string Error() {
 		return error;
 	}

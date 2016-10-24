@@ -114,13 +114,13 @@ void sistema::GetWorkingIpAddressAndName(string &ip, string &ipserv, string &nam
 	GetIpAddress(ip);
 #if defined _WIN32
 	ipserv = LocalConfig::cfg.ServerURL();
-	name = "CGW1";							// TODO.
+	name = "CGW1";							// TODO: 
 #elif defined __APPLE__
 	ipserv = LocalConfig::cfg.ServerURL();
-	name = "CGW1";							// TODO.	
+	name = "CGW1";							// TODO: 	
 #else
-	ipserv = LocalConfig::cfg.ServerURL();	// TODO.
-	name = "CGW1";							// TODO.
+	ipserv = LocalConfig::cfg.ServerURL();	// TODO: 
+	name = "CGW1";							// TODO: 
 #endif
 }
 
@@ -214,8 +214,8 @@ void sistema::DataSaveAs(string data, string filename)
  */
 bool sistema::MainOrStandby()
 {
-	string filepath = LocalConfig::cfg.getString("M-S-CONTROL", "PATH", "/mnt/ramfs/cpumode");
-	string isMain = LocalConfig::cfg.getString("M-S-CONTROL", "MAIN", "PRINCIPAL");
+	string filepath = onfs(LocalConfig::cfg.getString("M-S-CONTROL", "PATH", "/mnt/ramfs/cpumode"));
+	string isMain = onfs(LocalConfig::cfg.getString("M-S-CONTROL", "MAIN", "PRINCIPAL"));
 	ifstream ff(filepath.c_str());
 
 	if (ff.good())

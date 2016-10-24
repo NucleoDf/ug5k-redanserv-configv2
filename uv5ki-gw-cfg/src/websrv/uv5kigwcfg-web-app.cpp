@@ -1,18 +1,7 @@
 #include "../../include/websrv/uv5kigwcfg-web-app.h"
-#include "../../include/config/comm-config.h"
-#include "../../include/config/comm-preconf.h"
-#include "../../include/cfg-proc.h"
-#include "../../include/man-proc.h"
-#include "../../include/his-proc.h"
-#include "../../include/file-supervisor.h"
 
-#define RETURN_NOT_IMPLEMENTED_RESP(r)			{r->code=404; r->data="{\"res\":\"Operacion no Implementada\"}";return;}
-#define RETURN_OK200_RESP(r, d)					{r->code=200; r->data=d;return;}
-#define RETURN_IERROR_RESP(r, d)				{r->code=500; r->data=d;PLOG_ERROR(d.c_str());return;}
-
-#define P_HIS_PROC								(HistClient::p_hist)
-#define P_CFG_PROC								(CfgProc::p_cfg_proc)
-#define P_WORKING_CONFIG						(P_CFG_PROC->p_working_config)
+/** */
+BiteControl *BiteControl::This = NULL;
 
 /** */
 restHandler Uv5kiGwCfgWebApp::_handlers_list;
@@ -55,8 +44,8 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 /** */
 void Uv5kiGwCfgWebApp::GetConfig() 
 {
-	_web_config.web_port = "9090";
-	_web_config.document_root = "ng-app";
+	_web_config.web_port = LocalConfig::cfg.PuertoEscucha();
+	_web_config.document_root = ON_WORKING_DIR("ng-app");
 	_web_config.default_page = "ug5kweb-index.html";
 	_web_config.login_uri = "/login.html";
 	_web_config.bad_user_uri = "/error1.html";
@@ -173,23 +162,20 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 		// Activar la Configuracion...
 		string data_in = string(conn->content, conn->content_len );
 		CommConfig cfg(data_in);
-		EventosHistoricos *ev = P_WORKING_CONFIG->set(cfg);
-		P_WORKING_CONFIG->TimeStamp();
-		P_WORKING_CONFIG->save_to(LAST_CFG);
-		P_HIS_PROC->SetEventosHistoricos(user, ev);				// Generar los historicos de cambios.
-			// Sincronizar Fichero....
-		if (P_CFG_PROC->GetStdLocalConfig() != slcAislado && P_WORKING_CONFIG->DualCpu())
+		if (cfg.test()==true) 
 		{
-			string ipColateral; 
-			if (P_WORKING_CONFIG->IpColateral(ipColateral)==true)
+			EventosHistoricos *ev = P_WORKING_CONFIG->set(cfg);
+			P_WORKING_CONFIG->TimeStamp();
+			P_WORKING_CONFIG->save_to(LAST_CFG);
+			P_HIS_PROC->SetEventosHistoricos(user, ev);				// Generar los historicos de cambios.
+				// Sincronizar Fichero....
+			if (P_CFG_PROC->GetStdLocalConfig() != slcAislado && P_WORKING_CONFIG->DualCpu())
 			{
-				ParseResponse resp = HttpClient(ipColateral).SendHttpCmd("PUT", 
-					string(CPU2CPU_MSG)+ "/" + string(CPU2CPU_MSG_CAMBIO_CONFIG), data_in);
-				if (resp.Status() != "200")
-					PLOG_ERROR("Uv5kiGwCfgWebApp::stCb_config. HTTP-ERROR %s: <%s>", resp.Status().c_str(), resp.Body().c_str());
+				WorkingThread(Uv5kiGwCfgWebApp::ConfigSync, NULL).Do();
 			}
-			else
-				PLOG_ERROR("Uv5kiGwCfgWebApp::stCb_config. NO IP-COLATERAL!!!");
+		}
+		else {
+			RETURN_IERROR_RESP(resp, webData_line("Formato de Configuracion incorrecto").JSerialize());
 		}
 		
 		RETURN_OK200_RESP(resp, webData_line("Configuracion Activada...").JSerialize());
@@ -247,8 +233,8 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 			if (preconfs.get(pcfg_name, activa)==false) {
 				RETURN_IERROR_RESP(resp, webData_line("Error al Activar Preconfiguracion: " + pcfg_name + ". No esta en BDT.").JSerialize());
 			}
-				// TODO. Comprobar formato de configuracion...
-			bool correcta = true;
+				// Comprobar formato de configuracion...
+			bool correcta = P_WORKING_CONFIG->TestConfig();
 			if (correcta == false) {
 				RETURN_IERROR_RESP(resp, webData_line("Error al Activar Preconfiguracion: " + pcfg_name + ". Formato de Configuraicon incorrecto").JSerialize());
 			}
@@ -256,9 +242,13 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 
 					// Activar la configuracion...
 			CommConfig cfg(activa.data);
-			P_WORKING_CONFIG->set(cfg);			// TODO. Historicos de cambios ???
+			P_WORKING_CONFIG->set(cfg);			// Historicos de cambios ???
 			P_WORKING_CONFIG->save_to(LAST_CFG);
-												// TODO. Sincronizar Fichero....
+												// Sincronizar Fichero....
+			if (P_CFG_PROC->GetStdLocalConfig() != slcAislado && P_WORKING_CONFIG->DualCpu())
+			{
+				WorkingThread(Uv5kiGwCfgWebApp::ConfigSync, NULL).Do();
+			}
 		}
 		else if (string(conn->request_method)=="DELETE")		// Borra preconfiguracion.
 		{
@@ -322,31 +312,32 @@ void Uv5kiGwCfgWebApp::stCb_mtto(struct mg_connection *conn, string user, web_re
 			RETURN_OK200_RESP(resp, ManProc::p_man->jestado());
 		}
 		else if (levels[2]=="ver") {
-			// TODO.
+			// TODO: 
 			RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
 		}
 		else if (levels[2]=="lver") {
-			// TODO.
+			// TODO: 
 			RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
 		}
 		else if (levels[2]=="bite") {
-			// TODO.
-			// HistClient::hist.SetEvent(INCI_BITE, user, "");
-			RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			P_HIS_PROC->SetEvent(INCI_BITE, user, "");
+			string jBite = BiteControl().get();
+			RETURN_OK200_RESP(resp, jBite);
 		}
 		RETURN_NOT_IMPLEMENTED_RESP(resp);
 	}
 	else if (string(conn->request_method)=="POST") {
 		if (levels[2]=="reset") {
-			// TODO.
+			WorkingThread(Uv5kiGwCfgWebApp::DelayedReset, NULL).Do();
+			P_HIS_PROC->SetEvent(INCI_RESET, user, "");
 			RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
 		}
 		else if (levels[2]=="swactiva") {
-			// TODO.
+			// TODO: 
 			RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
 		}
 		else if (levels[2]=="swrestore") {
-			// TODO.
+			// TODO: 
 			RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
 		}
 		RETURN_NOT_IMPLEMENTED_RESP(resp);
@@ -391,6 +382,40 @@ void Uv5kiGwCfgWebApp::stCb_internos(struct mg_connection *conn, string user, we
 	RETURN_NOT_IMPLEMENTED_RESP(resp);
 }
 
+/** Working Thread */
+/** */
+void *Uv5kiGwCfgWebApp::DelayedReset(void* arg)
+{
+	/** */
+	Sleep(2000);
+	/** */
+	P_HIS_PROC->SetReset();
+
+#ifndef _NO_WORKING_THREAD_
+	pthread_exit(NULL);
+#endif
+	return NULL;
+}
+
+/** */
+void *Uv5kiGwCfgWebApp::ConfigSync(void* arg)
+{
+	string ipColateral;									// Sincronizar el fichero...
+	if (P_WORKING_CONFIG->IpColateral(ipColateral)==true)
+	{
+		ParseResponse resp = HttpClient(ipColateral).SendHttpCmd("PUT", 
+			string(CPU2CPU_MSG)+ "/" + string(CPU2CPU_MSG_CAMBIO_CONFIG), P_WORKING_CONFIG->JConfig());
+		if (resp.Status() != "200")
+			PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. HTTP-ERROR %s: <%s>", resp.Status().c_str(), resp.Body().c_str());
+	}
+	else
+		PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. NO IP-COLATERAL!!!");
+
+#ifndef _NO_WORKING_THREAD_
+	pthread_exit(NULL);
+#endif
+	return NULL;
+}
 
 
 

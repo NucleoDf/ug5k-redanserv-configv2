@@ -1,10 +1,6 @@
 #include "../../include/config/comm-preconf.h"
 
-#ifdef _WIN32
-#	define _DBNAME ("./ug5k.db")
-#else
-#	define _DBNAME (ON_FLASH("ug5k.db"))
-#endif
+#define _DBNAME (ON_FLASH("ug5k.db"))
 
 /** */
 void CommPreconfs::read()

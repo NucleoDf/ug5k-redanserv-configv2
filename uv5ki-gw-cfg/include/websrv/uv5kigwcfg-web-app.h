@@ -5,11 +5,56 @@
 #include "uv5kigwcfg-web-app-data.h"
 #include "../tools/tools.h"
 #include "../tools/ftp-client.h"
+#include "../../include/config/comm-config.h"
+#include "../../include/config/comm-preconf.h"
+#include "../../include/cfg-proc.h"
+#include "../../include/man-proc.h"
+#include "../../include/his-proc.h"
+#include "../../include/file-supervisor.h"
 
-#define CPU2CPU_MSG					((const char *)"cpu2cpu")
-#define CPU2CPU_MSG_CAMBIO_CONFIG	((const char *)"1")
-#define CPU2CPU_MSG_REMOTE_LOCK		((const char *)"2")
-#define CPU2CPU_MSG_REMOTE_UNLOCK	((const char *)"3")
+#define RETURN_NOT_IMPLEMENTED_RESP(r)			{r->code=404; r->data="{\"res\":\"Operacion no Implementada\"}";return;}
+#define RETURN_OK200_RESP(r, d)					{r->code=200; r->data=d;return;}
+#define RETURN_IERROR_RESP(r, d)				{r->code=500; r->data=d;PLOG_ERROR(d.c_str());return;}
+
+#define CPU2CPU_MSG								((const char *)"cpu2cpu")
+#define CPU2CPU_MSG_CAMBIO_CONFIG				((const char *)"1")
+#define CPU2CPU_MSG_REMOTE_LOCK					((const char *)"2")
+#define CPU2CPU_MSG_REMOTE_UNLOCK				((const char *)"3")
+
+/** */
+class BiteControl : public CodeBase
+{
+public:
+	BiteControl() {
+		This = this;
+		P_HIS_PROC->SetBite(BiteControl::st_bite_rsp);
+	}
+	string get() {
+		wait.Wait();
+		return jdata;
+	}
+protected:
+	static void st_bite_rsp(bool res, int len, void *data) {
+		This->bite_rsp(res, len, data);
+	}
+	void bite_rsp(bool res, int len, void *data) {
+		PLOG_DEBUG("Recibida Respuesta a comando BITE...");
+		if (res==true)
+		{
+			P_MAN_PROC->setBite(len, data);
+			jdata = P_MAN_PROC->jbite();
+		}
+		else
+		{
+			jdata="{\"res\": \"Error en Ejecucion comando BITE\"}";
+		}
+		wait.Signal();
+	}
+private:
+	CDead wait;
+	string jdata;
+	static BiteControl *This;
+};
 
 /** */
 class Uv5kiGwCfgWebApp :
@@ -33,6 +78,10 @@ protected:
 
 	void GetHandlers();
 	void GetConfig();
+
+protected:
+	static void *DelayedReset(void* arg);
+	static void *ConfigSync(void* arg);
 
 protected:
 	static vector<string> parse_uri(string uri)

@@ -16,7 +16,10 @@ nbproject
 /uv5ki-gw-cfg/logs
 /uv5ki-gw-cfg/uvki-gwser
 /uv5ki-gw-cfg/*.xml
+/uv5ki-gw-cfg/fs-win/home/serv/*.xml
+/uv5ki-gw-cfg/fs-lnx/home/serv/*.xml
 /uv5ki-gw-cfg/last_gw_config_0.json
 /uv5ki-gw-cfg/last_gw_config_1.json
 /*.suo
 /uv5ki-gw-cfg/last_gw_config_2.json
+/uv5ki-gw-cfg/fs-win/home/serv/last_gw_config_0.json
