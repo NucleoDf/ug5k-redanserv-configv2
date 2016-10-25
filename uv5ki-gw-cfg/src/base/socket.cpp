@@ -556,7 +556,8 @@ int CSocket::Recv_text(string &text, int timeout/*=0*/)
 		char leido;
 		do 
 		{
-			this->Recv(&leido, 1);
+			if (this->Recv(&leido, 1) != 1)
+				break;			
 			text.push_back(leido);
 		} while (this->IsReadable(10));
 	}

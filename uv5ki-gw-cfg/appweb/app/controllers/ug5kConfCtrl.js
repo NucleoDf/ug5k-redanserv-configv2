@@ -8,6 +8,8 @@ ug5kConfCtrl.$inject = ['dataservice', 'authservice', 'CfgService', 'transerv', 
 function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope, $http) {
     var vm = this;
 
+    CfgService.opcion(5);
+
     /** */
     function post(url, data) {
         var deferred = $q.defer();

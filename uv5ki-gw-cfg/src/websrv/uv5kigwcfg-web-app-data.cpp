@@ -6,7 +6,7 @@ webData_tses::webData_tses(int parStd, string parIdc, string parTim)
 	std = parStd;
 	idc = parIdc;
 	tim = parTim;
-	ver = Tools::read_txt_file(ON_WORKING_DIR("Version.txt"));
+	ver = Tools::read_txt_file(ON_WORKING_DIR("VERSION.TXT"));
 
 #if LOCAL_TEST_1
 	val_prueba1.push_back("Valor-1");

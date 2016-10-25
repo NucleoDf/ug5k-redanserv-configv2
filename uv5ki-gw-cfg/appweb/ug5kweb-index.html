@@ -37,8 +37,8 @@
     <script src="./scripts/angular/angular-translate.min.js"></script>
     <script src="./scripts/angular/angular-translate-loader-static-files.min.js"></script>
 
-    <script src="./scripts/bootsstrap/bootstrap.min.js"></script>
-    <script src="./scripts/bootsstrap/ui-bootstrap-tpls-1.2.4.min.js"></script>
+    <script src="./scripts/bootstrap/bootstrap.min.js"></script>
+    <script src="./scripts/bootstrap/ui-bootstrap-tpls-1.2.4.min.js"></script>
     <script src="./scripts/smart-table.js"></script>
 
 
@@ -96,42 +96,42 @@
 <!--             <h3 translate>INDEX_OPCIONES</h3>
  -->			
             <ul class="nav nav-pills nav-stacked">
-                <li data-ng-class="{'active': gvm.opcion==0}" 
+                <li data-ng-class="{'active': gvm.get_opcion()==0}" 
 					data-ng-show="gvm.mostrar_opcion(0)" >
-                    <a href="#/" data-ng-click="gvm.opcion=0" translate >INDEX_OPC_GENERALES</a>
+                    <a href="#/" data-ng-click="gvm.set_opcion(0)" translate >INDEX_OPC_GENERALES</a>
                 </li>
-                <li data-ng-class="{'active': gvm.opcion==1}"
+                <li data-ng-class="{'active': gvm.get_opcion()==1}"
 					data-ng-show="gvm.mostrar_opcion(1)">
-                    <a href="#/hard" data-ng-click="gvm.opcion=1" translate>INDEX_OPC_HARDWARE</a>
+                    <a href="#/hard" data-ng-click="gvm.set_opcion(1)" translate>INDEX_OPC_HARDWARE</a>
                 </li>
-                <li data-ng-class="{'active': gvm.opcion==2}"
+                <li data-ng-class="{'active': gvm.get_opcion()==2}"
 					data-ng-show="gvm.mostrar_opcion(2)">
-                    <a href="#/precr/-1" data-ng-click="gvm.opcion=2" translate>INDEX_OPC_RADIO</a>
-                <li data-ng-class="{'active': gvm.opcion==3}"
+                    <a href="#/precr/-1" data-ng-click="gvm.set_opcion(2)" translate>INDEX_OPC_RADIO</a>
+                </li>
+                <li data-ng-class="{'active': gvm.get_opcion()==3}"
 					data-ng-show="gvm.mostrar_opcion(3)">
-                    <a href="#/prect/-1" data-ng-click="gvm.opcion=3" translate>INDEX_OPC_TELEF</a>
+                    <a href="#/prect/-1" data-ng-click="gvm.set_opcion(3)" translate>INDEX_OPC_TELEF</a>
                 </li>
-                <li data-ng-class="{'active': gvm.opcion==4}"
+                <li data-ng-class="{'active': gvm.get_opcion()==4}"
 					data-ng-show="gvm.mostrar_opcion(4)">
-                    <a href="#/serv" data-ng-click="gvm.opcion=4" translate>INDEX_OPC_SERVICIOS</a>
+                    <a href="#/serv" data-ng-click="gvm.set_opcion(4)" translate>INDEX_OPC_SERVICIOS</a>
                 </li>
-                <li data-ng-class="{'active': gvm.opcion==5}"
+                <li data-ng-class="{'active': gvm.get_opcion()==5}"
 					data-ng-show="gvm.mostrar_opcion(5)">
-                    <a href="#/pconf" data-ng-click="gvm.opcion=5" translate>INDEX_OPC_CONFIG</a>
+                    <a href="#/pconf" data-ng-click="gvm.set_opcion(5)" translate>INDEX_OPC_CONFIG</a>
                 </li>
-                <li data-ng-class="{'active': gvm.opcion==6}"
+                <li data-ng-class="{'active': gvm.get_opcion()==6}"
 					data-ng-show="gvm.mostrar_opcion(6)">
-                    <a href="/#pmant" data-ng-click="gvm.opcion=6" translate>INDEX_OPC_MANT</a>
+                    <a href="/#pmant" data-ng-click="gvm.set_opcion(6)" translate>INDEX_OPC_MANT</a>
                 </li>
-                <li data-ng-class="{'active': gvm.opcion==7}"
-					data-ng-show="gvm.mostrar_opcion(7)"  >
-                    <a href="" data-ng-click="gvm.save()" data-ng-click="gvm.opcion=7" translate>INDEX_OPC_APLICAR</a>
+
+                <li	data-ng-show="gvm.mostrar_opcion(7)"  >
+                    <a href="" data-ng-click="gvm.save()" translate>INDEX_OPC_APLICAR</a>
                 </li>
-                <li data-ng-class="{'active': gvm.opcion==8}"
-					data-ng-show="gvm.mostrar_opcion(8)">
-                    <a href="" data-ng-click="gvm.restore()" data-ng-click="gvm.opcion=8" translate>INDEX_OPC_DESCARTAR</a>
+                <li data-ng-show="gvm.mostrar_opcion(8)">
+                    <a href="" data-ng-click="gvm.restore()" translate>INDEX_OPC_DESCARTAR</a>
                 </li>
-                <li data-ng-class="{'active': gvm.opcion==9}">
+                <li>
                     <a href="#" i data-ng-click="gvm.logout()" translate>INDEX_OPC_LOGOUT</a>
                 </li>
             </ul>

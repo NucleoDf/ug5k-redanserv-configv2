@@ -25,6 +25,9 @@ CommConfig::CommConfig(soap_config &sConfig)
 
 	/** En Ulises no hay usuarios */
 	this->users.clear();
+
+	/** Configuracion especifica de ULISES */
+	this->ulises = CommUv5Config(sConfig);
 }
 
 /** */
@@ -175,7 +178,7 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->radio.iPttPrio=0;											// 
 			this->radio.iPrecisionAudio=1;									// Normal.
 
-			this->radio.colateral.name="";									// Frecuencia. Solo REDAN
+			this->radio.colateral.name=sres.info.IdDestino;					// Frecuencia. Solo REDAN
 			this->radio.colateral.tipoConmutacion=0;
 			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
 			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
@@ -214,3 +217,11 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 	}
 }
 
+/** */
+CommUv5Config::CommUv5Config(soap_config &sc)
+{
+	this->MulticastGroup = sc.ParametrosMulticast.GrupoMulticastConfiguracion;
+	this->MulticastPort = sc.ParametrosMulticast.PuertoMulticastConfiguracion;
+
+	// TODO: Resto de la configruacion.
+}

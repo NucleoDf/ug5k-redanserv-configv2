@@ -10,7 +10,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
     var simul = true;
 
     /** Modelo */
-    vm.selected = 0
+    vm.selected = "0";
     vm.current = -1;
     vm.ltelef = [];
     vm.tdata = {};
@@ -18,6 +18,8 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
     vm.vdata = [];
     vm.autosave = v2jdata;
     vm.dval = function () { return true; }
+
+    CfgService.opcion(3);
 
     /** Validador de IdRecurso. Actualiza a la ver la URI Local */
     vm.id_val = function (value) {
@@ -132,7 +134,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
     vm.update_telef = function () {
         if (vm.current != -1)
             set_telef_data(vm.current);
-        get_telef_data(vm.selected);
+        get_telef_data(parseInt(vm.selected));
 
         vm.set_pagina(0);   
     }
@@ -204,7 +206,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
     vm.restore = function () {
         CfgService.restore().then(function () {
             get_telef();
-            get_telef_data(vm.selected);
+            get_telef_data(parseInt(vm.selected));
         });
     }
 
@@ -215,7 +217,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 
     /** */
     function get_telef_data(telef) {
-        vm.selected = telef;
+        vm.selected = telef.toString();
         vm.current = telef;
         vm.tdata = CfgService.telef_data_get(telef);
         j2vdata();
@@ -258,7 +260,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'Tipo de Interfaz Telefonico:'*/transerv.translate('TCTRL_P00_ITF'),
-					    Value: vm.tdata.telefonia.tipo,
+					    Value: vm.tdata.telefonia.tipo.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [
@@ -286,7 +288,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
                     {
                         Name: /*'Enable Registro ?:'*/transerv.translate('TCTRL_P00_REG'),
-                        Value: vm.tdata.enableRegistro,
+                        Value: vm.tdata.enableRegistro.toString(),
                         Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
                         Input: 1,
                         Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
@@ -308,7 +310,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 vm.vdata = [
 					{
 					    Name: /*'CODEC :'*/transerv.translate('TCTRL_P01_COD'),
-					    Value: vm.tdata.Codec,
+					    Value: vm.tdata.Codec.toString(),
 					    Enable: authservice.ProfilePermission(false, []),
 					    Input: 1,
 					    Inputs: ["G711-A", "G711-U", "G729"],
@@ -317,7 +319,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'AGC en A/D ?:'*/transerv.translate('TCTRL_P01_AGCAD'),
-					    Value: vm.tdata.hardware.AD_AGC,
+					    Value: vm.tdata.hardware.AD_AGC.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
@@ -335,7 +337,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'AGC en D/A ?:'*/transerv.translate('TCTRL_P01_AGCDA'),
-					    Value: vm.tdata.hardware.DA_AGC,
+					    Value: vm.tdata.hardware.DA_AGC.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
@@ -357,7 +359,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 vm.vdata = [
 					{
 					    Name: /*'Tipo de Interfaz Telefonico:'*/transerv.translate('TCTRL_P00_ITF'),
-					    Value: vm.tdata.telefonia.tipo,
+					    Value: vm.tdata.telefonia.tipo.toString(),
 					    Enable: authservice.ProfilePermission(false, []),
 					    Input: 1,
 					    Inputs: [
@@ -384,7 +386,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'Respuesta Automatica Simulada ?:'*/transerv.translate('TCTRL_P02_ARSP'),
-					    Value: vm.tdata.telefonia.r_automatica,
+					    Value: vm.tdata.telefonia.r_automatica.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
@@ -402,7 +404,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'Lado:'*/transerv.translate('TCTRL_P02_LADO'),
-					    Value: vm.tdata.telefonia.lado,
+					    Value: vm.tdata.telefonia.lado.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"Lado A"*/transerv.translate('TCTRL_P02_LADOA'), /*"Lado B"*/transerv.translate('TCTRL_P02_LADOB')],
@@ -429,7 +431,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
     				{
     				    Name: /*'Supervisa Colateral ?:'*/transerv.translate('TCTRL_P02_CSUP'),
-    				    Value: vm.tdata.telefonia.superv_options,
+    				    Value: vm.tdata.telefonia.superv_options.toString(),
     				    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
     				    Input: 1,
     				    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
@@ -447,7 +449,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
     				{
     				    Name: /*'Deteccion Vox ?:'*/transerv.translate('TCTRL_P02_VOX'),
-    				    Value: vm.tdata.telefonia.detect_vox,
+    				    Value: vm.tdata.telefonia.detect_vox.toString(),
     				    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
     				    Input: 1,
     				    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
@@ -487,7 +489,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 vm.vdata = [
                     {
                         Name: /*'Tipo de Restriccion:'*/transerv.translate('TCTRL_P03_RES'),
-                        Value: vm.tdata.restriccion,
+                        Value: vm.tdata.restriccion.toString(),
                         Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
                         Input: 1,
                         Inputs: [
@@ -568,29 +570,29 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
         switch (vm.pagina) {
             case 0:
                 vm.tdata.IdRecurso = vm.vdata[0].Value;
-                vm.tdata.telefonia.tipo = vm.vdata[2].Value;
+                vm.tdata.telefonia.tipo = parseInt(vm.vdata[2].Value);
                 vm.tdata.Uri_Local = jamp_no_sip == 1 ? CfgService.poner_sip(vm.vdata[3].Value) : vm.vdata[3].Value;
-                vm.tdata.enableRegistro = vm.vdata[4].Value;
+                vm.tdata.enableRegistro = parseInt(vm.vdata[4].Value);
                 vm.tdata.szClave = vm.vdata[5].Value;
                 break;
             case 1:
-                vm.tdata.Codec = vm.vdata[0].Value;
-                vm.tdata.hardware.AD_AGC = vm.vdata[1].Value;
+                vm.tdata.Codec = parseInt(vm.vdata[0].Value);
+                vm.tdata.hardware.AD_AGC = parseInt(vm.vdata[1].Value);
                 vm.tdata.hardware.AD_Gain = vm.vdata[2].Value*10;
-                vm.tdata.hardware.DA_AGC = vm.vdata[3].Value;
+                vm.tdata.hardware.DA_AGC = parseInt(vm.vdata[3].Value);
                 vm.tdata.hardware.DA_Gain = vm.vdata[4].Value*10;
                 break;
             case 2:
                 vm.tdata.telefonia.tipo = vm.vdata[0].Value;
                 vm.tdata.telefonia.uri_remota = jamp_no_sip == 1 ? CfgService.poner_sip(vm.vdata[1].Value) : vm.vdata[1].Value;
-                vm.tdata.telefonia.r_automatica = vm.vdata[2].Value;
+                vm.tdata.telefonia.r_automatica = parseInt(vm.vdata[2].Value);
                 vm.tdata.telefonia.it_release = vm.vdata[3].Value;
-                vm.tdata.telefonia.lado = vm.vdata[4].Value;
+                vm.tdata.telefonia.lado = parseInt(vm.vdata[4].Value);
                 vm.tdata.telefonia.no_test_remoto = vm.vdata[5].Value;
                 vm.tdata.telefonia.no_test_local = vm.vdata[6].Value;
-                vm.tdata.telefonia.superv_options = vm.vdata[7].Value;          //Supervisa Colateral ???
+                vm.tdata.telefonia.superv_options = parseInt(vm.vdata[7].Value);          //Supervisa Colateral ???
                 vm.tdata.telefonia.tm_superv_options = vm.vdata[8].Value;       //Tiempo Supervision Colateral
-                vm.tdata.telefonia.detect_vox = vm.vdata[9].Value;              //VOX en BL ???
+                vm.tdata.telefonia.detect_vox = parseInt(vm.vdata[9].Value);              //VOX en BL ???
                 vm.tdata.telefonia.umbral_vox = vm.vdata[10].Value;             //Umbral VOX en BL
                 vm.tdata.telefonia.tm_inactividad = vm.vdata[11].Value;         //Cola VOX
                 vm.tdata.telefonia.iT_Int_Warning = vm.vdata[12].Value;         // Periodo Interrupt Warning.
@@ -602,7 +604,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
                     console.log("Salvo ATS");
                 }
                 else {
-                    vm.tdata.restriccion = vm.vdata[0].Value;
+                    vm.tdata.restriccion = parseInt(vm.vdata[0].Value);
                     vm.tdata.blanca = jamp_no_sip == 1 ? CfgService.poner_sip(vm.vdata[1].Value) : vm.vdata[1].Value;
                     vm.tdata.negra = jamp_no_sip == 1 ? CfgService.poner_sip(vm.vdata[2].Value) : vm.vdata[2].Value;
                     console.log("Salvo BN");
@@ -718,7 +720,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
 
     /** */
     function Init() {
-        vm.selected = 0
+        vm.selected = "0";
         vm.current = -1;
         vm.pagina = 0;
     }
@@ -726,7 +728,8 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
     /** */
     CfgService.init().then(function () {
         get_telef();
-        vm.selected = $routeParams.recId == -1 ? CfgService.telef_last_get() : CfgService.telef_index_get(Math.floor($routeParams.recId / 4), $routeParams.recId % 4);;
+        vm.selected = $routeParams.recId == -1 ? CfgService.telef_last_get().toString() :
+                CfgService.telef_index_get(Math.floor($routeParams.recId / 4), $routeParams.recId % 4).toString();
         vm.update_telef();
     });
 
@@ -737,7 +740,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
             event.preventDefault();
         }
         else
-            set_telef_data(vm.selected);
+            set_telef_data(parseInt(vm.selected));
     });
 
     /** Se ha pulsado el boton -aplicar- */
@@ -758,7 +761,7 @@ function ug5kRectCtrl(authservice, CfgService, ValidateService, transerv, $scope
     $scope.$on('loadcfg', function (data) {
         Init();
         get_telef();
-        vm.selected = CfgService.telef_last_get();
+        vm.selected = CfgService.telef_last_get().toString();
         vm.update_telef();
     });
 }

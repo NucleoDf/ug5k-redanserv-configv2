@@ -106,6 +106,7 @@
     <ClInclude Include="include\config\comm-res-radio-config.h" />
     <ClInclude Include="include\config\comm-res-telef-config.h" />
     <ClInclude Include="include\config\comm-ser-config.h" />
+    <ClInclude Include="include\config\comm-uv5-config.h" />
     <ClInclude Include="include\config\local-config.h" />
     <ClInclude Include="include\config\soap-config.h" />
     <ClInclude Include="include\config\users-config.h" />
@@ -190,6 +191,44 @@
     <ClCompile Include="uv5ki-gw-cfg.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="appweb\app\controllers\ug5kConfCtrl.js" />
+    <None Include="appweb\app\controllers\ug5kGlobalCtrl.js" />
+    <None Include="appweb\app\controllers\ug5kHardCtrl.js" />
+    <None Include="appweb\app\controllers\ug5kInicioCtrl.js" />
+    <None Include="appweb\app\controllers\ug5kMantCtrl.js" />
+    <None Include="appweb\app\controllers\ug5kRecrCtrl.js" />
+    <None Include="appweb\app\controllers\ug5kRectCtrl.js" />
+    <None Include="appweb\app\controllers\ug5kServCtrl.js" />
+    <None Include="appweb\app\modules\ug5kweb.js" />
+    <None Include="appweb\app\routes\ug5kRoutes.js" />
+    <None Include="appweb\app\services\logger.js" />
+    <None Include="appweb\app\services\Simulador.js" />
+    <None Include="appweb\app\services\ug5kAuthService.js" />
+    <None Include="appweb\app\services\ug5kCfgService.js" />
+    <None Include="appweb\app\services\ug5kCommService.js" />
+    <None Include="appweb\app\services\ug5kMantService.js" />
+    <None Include="appweb\app\services\ug5kTranslateService.js" />
+    <None Include="appweb\app\services\ug5kValidationService.js" />
+    <None Include="appweb\app\templates\ug5kweb-bite-templ.html" />
+    <None Include="appweb\app\templates\ug5kweb-swload-templ.html" />
+    <None Include="appweb\app\views\ug5kweb-config.html" />
+    <None Include="appweb\app\views\ug5kweb-hardware.html" />
+    <None Include="appweb\app\views\ug5kweb-inicio.html" />
+    <None Include="appweb\app\views\ug5kweb-mant.html" />
+    <None Include="appweb\app\views\ug5kweb-recr.html" />
+    <None Include="appweb\app\views\ug5kweb-rect.html" />
+    <None Include="appweb\app\views\ug5kweb-servicios.html" />
+    <None Include="appweb\error1.html" />
+    <None Include="appweb\error2.html" />
+    <None Include="appweb\languages\en_US.json" />
+    <None Include="appweb\languages\es_ES.json" />
+    <None Include="appweb\languages\fr_FR.json" />
+    <None Include="appweb\login.html" />
+    <None Include="appweb\session-expired.html" />
+    <None Include="appweb\simulate\config.json" />
+    <None Include="appweb\simulate\tses.json" />
+    <None Include="appweb\styles\uv5ki-styles.css" />
+    <None Include="appweb\ug5kweb-index.html" />
     <None Include="Makefile" />
     <None Include="ng-app\app\controllers\ug5kConfCtrl.js" />
     <None Include="ng-app\app\controllers\ug5kGlobalCtrl.js" />
@@ -258,6 +297,8 @@
     <Library Include="wlib\pthreadVC2.lib" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="appweb\images\noaccess.jpg" />
+    <Image Include="appweb\images\nucleo-df-new.jpg" />
     <Image Include="ng-app\favicon.ico" />
     <Image Include="ng-app\images\bkg-image.jpg" />
     <Image Include="ng-app\images\nucleo-df-new.jpg" />

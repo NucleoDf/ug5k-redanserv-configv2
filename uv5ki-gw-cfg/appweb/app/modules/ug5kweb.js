@@ -51,7 +51,7 @@ var CRTL_PROFILE = 2;
 var VIS_PROFILE = 1;
 
 /** Variables Globales */
-var Simulate = true;
+var Simulate = false;
 var pollingTime = 5000;
 var maxPreconf = 8;
 var InciPoll = 10;

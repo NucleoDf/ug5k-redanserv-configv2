@@ -18,6 +18,8 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
     vm.noshow = function () { return false; };
     vm.v2commshow = function () { return vm.data[3].Value == 1 ? true : false; }
 
+    CfgService.opcion(4);
+
     /** */
     vm.validate_trap = function (value) {
         return value == "" ? true : value.match(regx_trpval) != null ? true : false;

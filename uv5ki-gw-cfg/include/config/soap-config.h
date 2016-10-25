@@ -652,7 +652,8 @@ public:
 
 public:
 	string Ip;
-	string Server;	
+	string Server;
+
 public:
 	string xdata_idConfig;
 	string xdata_ParametrosGeneralesSistema;

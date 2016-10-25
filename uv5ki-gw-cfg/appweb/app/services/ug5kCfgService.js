@@ -21,6 +21,9 @@ function CfgService(dataservice, $q, $rootScope, transerv) {
     var last_tf_rec = 0;
 
     /** */
+    var global_opt=0;
+
+    /** */
     function Cfg2RadioTelef() {
 
         lradios = [];
@@ -425,6 +428,12 @@ function CfgService(dataservice, $q, $rootScope, transerv) {
                 }
                 return ret;
             }
+        }
+        , opcion: function (opt) {
+            if (opt != undefined)
+                global_opt = opt;
+            return global_opt;
+                
         }
     };
 }

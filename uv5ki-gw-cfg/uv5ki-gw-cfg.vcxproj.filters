@@ -18,7 +18,8 @@
     </Filter>
     <Filter Include="webapp-0">
       <UniqueIdentifier>{4a0d28f3-5586-4cbc-900e-c418ad86f8e9}</UniqueIdentifier>
-      <Extensions>html</Extensions>
+      <Extensions>
+      </Extensions>
     </Filter>
     <Filter Include="webapp-0\app">
       <UniqueIdentifier>{fe3ea867-7fe0-4b4d-b413-eb15f5b6eca2}</UniqueIdentifier>
@@ -52,6 +53,33 @@
     </Filter>
     <Filter Include="webapp-0\styles">
       <UniqueIdentifier>{15712cb1-a5ed-4481-a861-41192cf11c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webapp-1">
+      <UniqueIdentifier>{fb30d2d5-331c-4e8f-a461-40059b51cd08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webapp-1\app">
+      <UniqueIdentifier>{7de292d6-b8f5-41f0-8f98-f9485e1d7e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webapp-1\scripts">
+      <UniqueIdentifier>{0dc30324-2ec4-42f7-b80d-b47c27f7d601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webapp-1\styles">
+      <UniqueIdentifier>{2a7b20e9-c98e-450d-a03e-ab4552b52046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webapp-1\languages">
+      <UniqueIdentifier>{63bfee38-c84f-4d38-af52-cf508c95aaaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webapp-1\simulate">
+      <UniqueIdentifier>{befde517-64ed-4345-9932-505bd4463646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webapp-1\app\controllers">
+      <UniqueIdentifier>{17c9d0da-597a-4560-8633-567e6dcb6b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webapp-1\app\services">
+      <UniqueIdentifier>{506fc116-17c8-4c66-87d6-3dd4f1a1aaf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="webapp-1\app\views">
+      <UniqueIdentifier>{2d02d88f-4643-4d84-8b74-34aad97d21db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +295,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="include\tools\http-client.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config\comm-uv5-config.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -533,6 +564,120 @@
     <None Include="ng-app\hojaExterna.css">
       <Filter>webapp-0</Filter>
     </None>
+    <None Include="appweb\styles\uv5ki-styles.css">
+      <Filter>webapp-1\styles</Filter>
+    </None>
+    <None Include="appweb\languages\en_US.json">
+      <Filter>webapp-1\languages</Filter>
+    </None>
+    <None Include="appweb\languages\es_ES.json">
+      <Filter>webapp-1\languages</Filter>
+    </None>
+    <None Include="appweb\languages\fr_FR.json">
+      <Filter>webapp-1\languages</Filter>
+    </None>
+    <None Include="appweb\simulate\config.json">
+      <Filter>webapp-1\simulate</Filter>
+    </None>
+    <None Include="appweb\simulate\tses.json">
+      <Filter>webapp-1\simulate</Filter>
+    </None>
+    <None Include="appweb\app\controllers\ug5kConfCtrl.js">
+      <Filter>webapp-1\app\controllers</Filter>
+    </None>
+    <None Include="appweb\app\controllers\ug5kGlobalCtrl.js">
+      <Filter>webapp-1\app\controllers</Filter>
+    </None>
+    <None Include="appweb\app\controllers\ug5kHardCtrl.js">
+      <Filter>webapp-1\app\controllers</Filter>
+    </None>
+    <None Include="appweb\app\controllers\ug5kInicioCtrl.js">
+      <Filter>webapp-1\app\controllers</Filter>
+    </None>
+    <None Include="appweb\app\controllers\ug5kMantCtrl.js">
+      <Filter>webapp-1\app\controllers</Filter>
+    </None>
+    <None Include="appweb\app\controllers\ug5kRecrCtrl.js">
+      <Filter>webapp-1\app\controllers</Filter>
+    </None>
+    <None Include="appweb\app\controllers\ug5kRectCtrl.js">
+      <Filter>webapp-1\app\controllers</Filter>
+    </None>
+    <None Include="appweb\app\services\logger.js">
+      <Filter>webapp-1\app\services</Filter>
+    </None>
+    <None Include="appweb\app\services\Simulador.js">
+      <Filter>webapp-1\app\services</Filter>
+    </None>
+    <None Include="appweb\app\services\ug5kAuthService.js">
+      <Filter>webapp-1\app\services</Filter>
+    </None>
+    <None Include="appweb\app\services\ug5kCfgService.js">
+      <Filter>webapp-1\app\services</Filter>
+    </None>
+    <None Include="appweb\app\services\ug5kCommService.js">
+      <Filter>webapp-1\app\services</Filter>
+    </None>
+    <None Include="appweb\app\services\ug5kMantService.js">
+      <Filter>webapp-1\app\services</Filter>
+    </None>
+    <None Include="appweb\app\services\ug5kTranslateService.js">
+      <Filter>webapp-1\app\services</Filter>
+    </None>
+    <None Include="appweb\app\services\ug5kValidationService.js">
+      <Filter>webapp-1\app\services</Filter>
+    </None>
+    <None Include="appweb\app\controllers\ug5kServCtrl.js">
+      <Filter>webapp-1\app\controllers</Filter>
+    </None>
+    <None Include="appweb\app\routes\ug5kRoutes.js">
+      <Filter>webapp-1\app</Filter>
+    </None>
+    <None Include="appweb\app\modules\ug5kweb.js">
+      <Filter>webapp-1\app</Filter>
+    </None>
+    <None Include="appweb\error1.html">
+      <Filter>webapp-1</Filter>
+    </None>
+    <None Include="appweb\error2.html">
+      <Filter>webapp-1</Filter>
+    </None>
+    <None Include="appweb\login.html">
+      <Filter>webapp-1</Filter>
+    </None>
+    <None Include="appweb\session-expired.html">
+      <Filter>webapp-1</Filter>
+    </None>
+    <None Include="appweb\app\templates\ug5kweb-bite-templ.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\app\views\ug5kweb-config.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\app\views\ug5kweb-hardware.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\ug5kweb-index.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\app\views\ug5kweb-inicio.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\app\views\ug5kweb-mant.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\app\views\ug5kweb-recr.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\app\views\ug5kweb-rect.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\app\views\ug5kweb-servicios.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\app\templates\ug5kweb-swload-templ.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="ng-app\images\bkg-image.jpg">
@@ -564,6 +709,12 @@
     </Image>
     <Image Include="ng-app\images\tabbg2.gif">
       <Filter>webapp-0\images</Filter>
+    </Image>
+    <Image Include="appweb\images\noaccess.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="appweb\images\nucleo-df-new.jpg">
+      <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

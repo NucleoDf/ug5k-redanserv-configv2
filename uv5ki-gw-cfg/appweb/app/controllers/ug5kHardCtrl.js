@@ -11,7 +11,8 @@ function ug5kHardCtrl(CfgService, authservice, transerv, $scope, $location) {
 	/** */
 	vm.jslv = {};
 	vm.slv = 0;
-	
+	CfgService.opcion(1);
+
 	/** Funciones AJAX */
 	/** Get Data */
 	vm.get_data = function (slv) {

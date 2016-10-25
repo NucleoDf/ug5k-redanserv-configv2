@@ -96,13 +96,13 @@ function ug5kInicioCtrl(CfgService, authservice, ValidateService, $q, $scope, tr
 					},
 					{
 					    Name: /*'Modo:'*/transerv.translate('ICTRL_01_MD'),
-					    Value: vm.j_data.dualidad,
+					    Value: vm.j_data.dualidad.toString(),
 					    Enable: authservice.ProfilePermission(false),
 					    Input: 1,
 					    Inputs: [
                             /*"Simple"*/transerv.translate('ICTRL_01_SIMPLE'),
                             /*"Dual"*/transerv.translate('ICTRL_01_DUAL')],
-					    Show: false,
+					    Show: true, // TODO: Depende del modo...
 					    Val: ValidateService.def_val
 					},
 					{
@@ -129,7 +129,7 @@ function ug5kInicioCtrl(CfgService, authservice, ValidateService, $q, $scope, tr
 				vm.v_data = [
 					{
 					    Name: /*'LAN Dual:'*/transerv.translate('ICTRL_02_LDUAL'),
-					    Value: vm.j_data.cpus[0].tlan,
+					    Value: vm.j_data.cpus[0].tlan.toString(),
 					    Enable: authservice.ProfilePermission(false),
 					    Input: 1,
 					    Inputs: [
@@ -207,7 +207,7 @@ function ug5kInicioCtrl(CfgService, authservice, ValidateService, $q, $scope, tr
 				vm.v_data = [
 					{
 					    Name: /*'LAN Dual:'*/transerv.translate('ICTRL_02_LDUAL'),
-					    Value: vm.j_data.cpus[1].tlan,
+					    Value: vm.j_data.cpus[1].tlan.toString(),
 					    Enable: authservice.ProfilePermission(false),
 					    Input: 1,
 					    Inputs: [
@@ -294,12 +294,12 @@ function ug5kInicioCtrl(CfgService, authservice, ValidateService, $q, $scope, tr
 			case 0: // General
 			    vm.j_data.emplazamiento = vm.v_data[0].Value;
 			    vm.j_data.name = vm.v_data[1].Value;
-				vm.j_data.dualidad = vm.v_data[2].Value;
+				vm.j_data.dualidad = parseInt(vm.v_data[2].Value);
 				vm.j_data.ipv = vm.v_data[3].Value;
 				vm.j_data.ips = vm.v_data[4].Value;
 				break;
 			case 1: //CPU0
-			    vm.j_data.cpus[0].tlan = vm.v_data[0].Value;
+			    vm.j_data.cpus[0].tlan = parseInt(vm.v_data[0].Value);
 			    vm.j_data.cpus[0].ip0 = vm.v_data[1].Value;
 			    vm.j_data.cpus[0].ms0 = vm.v_data[2].Value;
 			    vm.j_data.cpus[0].ip1 = vm.v_data[3].Value;
@@ -309,7 +309,7 @@ function ug5kInicioCtrl(CfgService, authservice, ValidateService, $q, $scope, tr
 			    vm.j_data.cpus[0].ipg = vm.v_data[7].Value;
 				break;
 			case 2: //CPU1
-				vm.j_data.cpus[1].tlan = vm.v_data[0].Value;
+				vm.j_data.cpus[1].tlan = parseInt(vm.v_data[0].Value);
 				vm.j_data.cpus[1].ip0 = vm.v_data[1].Value;
 				vm.j_data.cpus[1].ms0 = vm.v_data[2].Value;
 				vm.j_data.cpus[1].ip1 = vm.v_data[3].Value;

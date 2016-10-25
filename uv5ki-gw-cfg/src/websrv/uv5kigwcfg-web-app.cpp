@@ -45,7 +45,7 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 void Uv5kiGwCfgWebApp::GetConfig() 
 {
 	_web_config.web_port = LocalConfig::cfg.PuertoEscucha();
-	_web_config.document_root = ON_WORKING_DIR("ng-app");
+	_web_config.document_root = "appweb";
 	_web_config.default_page = "ug5kweb-index.html";
 	_web_config.login_uri = "/login.html";
 	_web_config.bad_user_uri = "/error1.html";
@@ -55,6 +55,11 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.enable_ssession = false;
 	_web_config.session_time = 0;
 
+	_web_config.sec_uris.push_back("/styles/bootstrap/bootstrap.min.css");
+	_web_config.sec_uris.push_back("/styles/uv5ki-styles.css");
+	_web_config.sec_uris.push_back("/scripts/jquery/jquery-2.1.3.min.js");
+	_web_config.sec_uris.push_back("/images/nucleo-df-new.jpg");
+	_web_config.sec_uris.push_back("/images/noaccess.jpg");
 	_web_config.sec_uris.push_back(_web_config.login_uri);
 	_web_config.sec_uris.push_back(_web_config.bad_user_uri);
 	_web_config.sec_uris.push_back(_web_config.closed_session_uri);

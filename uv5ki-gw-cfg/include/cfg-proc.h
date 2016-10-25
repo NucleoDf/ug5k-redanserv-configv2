@@ -130,7 +130,7 @@ protected:
 	void PedirConfiguracion(string cfg);
 	void SubirConfiguracion();
 
-	void McastActivateOrDeactivate(bool activate, string ipmcast="", int port=0);
+	void McastActivateOrDeactivate(bool activate);
 	void McastTest();
 
 protected:

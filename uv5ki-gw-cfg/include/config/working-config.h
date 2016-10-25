@@ -69,7 +69,11 @@ public:
 	bool TestConfig() {
 		return config.test();
 	}
-
+	/** Para ulises */
+	void UlisesParamsMulticast(string &ip, int &port) {
+		ip = config.ulises.MulticastGroup;
+		port = config.ulises.MulticastPort;
+	}
 
 public:
 	bool IdConfig(string &idConfig, string &fechaHora);

@@ -10,7 +10,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
     var simul = true;
 
     /** Modelo */
-    vm.radiosel = 0;
+    vm.radiosel = "0";
     vm.current = -1;
     vm.lradios = [];
     vm.rdata = {};
@@ -20,6 +20,8 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
     vm.dval = function () { return true; }
     vm.hide = function () { return false; }
     vm.lcol = 0;
+
+    CfgService.opcion(2);
 
     /** Validador de IdRecurso. Actualiza a la ver la URI Local */
     vm.id_val = function (value) {
@@ -67,7 +69,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
     vm.update_radio = function () {
         if (vm.current != -1)
             set_radio_data(vm.current);
-        get_radio_data(vm.radiosel);
+        get_radio_data(parseInt(vm.radiosel));
 
         vm.set_pagina(0);
     }
@@ -78,9 +80,9 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
         //    return true;
         switch (ind) {
             case 2:
-                return (vm.vdata[1].Value == 0);
+                return (parseInt(vm.vdata[1].Value) == 0);
             case 4:
-                return (vm.vdata[3].Value == 0);
+                return (parseInt(vm.vdata[3].Value) == 0);
         }
         return true;
     }
@@ -100,30 +102,30 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
     vm.rad_show = function (ind) {
         switch (ind) {
             case 2:	// Umbral VAD. Solo si SQH==1.
-                return (vm.vdata[1].Value == 1);
+                return (parseInt(vm.vdata[1].Value) == 1);
             case 4: // Tiempo PTT
                 return false;
             case 6:	// Mostrar Control BSS. Solo Radio Locales en FD.				
-                return (vm.vdata[0].Value == 2 || vm.vdata[0].Value == 3);
+                return (parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3);
             case 7:
             case 8: // Parametros BSS. Solo Radio Locales en FD y BSS Activo.
             case 9:
-                return ((vm.vdata[0].Value == 2 || vm.vdata[0].Value == 3) && vm.vdata[6].Value == 1)
+                return ((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1)
             case 10: // Tiempo de Compensacion CLIMAX. Solo Radio Locales en FD, BSS Activo y Metodo Tiempo FIJO.
-                return (((vm.vdata[0].Value == 2 || vm.vdata[0].Value == 3) && vm.vdata[6].Value == 1) && vm.vdata[9].Value == 2);
+                return (((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1) && parseInt(vm.vdata[9].Value) == 2);
             case 11: // Solo Radio Remoto.
-                return (vm.vdata[0].Value > 3);
+                return (parseInt(vm.vdata[0].Value) > 3);
 
             case 12: // Prioridad PTT / Sesion SIP. Solo Radios Locales.
             case 13:
-                return (vm.vdata[0].Value <= 3);
+                return (parseInt(vm.vdata[0].Value) <= 3);
         }
         return true;
     }
 
     /** */
     vm.grab_show = function (ind) {
-        if (vm.vdata[3].Value == 4 || vm.vdata[3].Value == 6)
+        if (parseInt(vm.vdata[3].Value) == 4 || parseInt(vm.vdata[3].Value) == 6)
             return true;
         return false;
     }
@@ -196,7 +198,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
     vm.restore = function () {
         CfgService.restore().then(function () {
             get_radios();
-            get_radio_data(vm.radiosel);
+            get_radio_data(parseInt(vm.radiosel));
         });
     }
 
@@ -285,7 +287,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 
     /** */
     function get_radio_data(radio) {
-        vm.radiosel = radio;
+        vm.radiosel = radio.toString();
         vm.current = radio;
         vm.rdata = CfgService.radio_data_get(radio);
         if (vm.rdata != undefined) {
@@ -348,7 +350,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
                     },
 					{
 					    Name:/*'Tipo de Agente Radio:'*/transerv.translate('RCTRL_P00_TPA'),
-					    Value: vm.rdata.radio.tipo,
+					    Value: vm.rdata.radio.tipo.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [
@@ -373,7 +375,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
                     },
                     {
                         Name: /*'Enable Registro ?:'*/transerv.translate('RCTRL_P00_ERG'),
-                        Value: vm.rdata.enableRegistro,
+                        Value: vm.rdata.enableRegistro.toString(),
                         Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
                         Input: 1,
                         Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
@@ -391,7 +393,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
                     {
                         Name: /*'Eventos PTT-SQH ?:'*/transerv.translate('RCTRL_P00_ETQ'),
-                        Value: vm.rdata.radio.evtPTT,
+                        Value: vm.rdata.radio.evtPTT.toString(),
                         Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
                         Input: 1,
                         Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
@@ -400,7 +402,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
                     },
                     {
                         Name: /*'Grabacion ?:'*/transerv.translate('RCTRL_P00_GRB'),
-                        Value: vm.rdata.radio.iEnableGI,
+                        Value: vm.rdata.radio.iEnableGI.toString(),
                         Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
                         Input: 1,
                         Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
@@ -423,7 +425,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 vm.vdata = [
 					{
 					    Name: /*'CODEC :'*/transerv.translate('RCTRL_P01_COD'),
-					    Value: vm.rdata.Codec,
+					    Value: vm.rdata.Codec.toString(),
 					    Enable: authservice.ProfilePermission(false, []),
 					    Input: 1,
 					    Inputs: ["G711-A", "G711-U", "G729"],
@@ -432,7 +434,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'AGC en A/D ?:'*/transerv.translate('RCTRL_P01_AGCAD'),
-					    Value: vm.rdata.hardware.AD_AGC,
+					    Value: vm.rdata.hardware.AD_AGC.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
@@ -450,7 +452,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'AGC en D/A ?:'*/transerv.translate('RCTRL_P01_AGCDA'),
-					    Value: vm.rdata.hardware.DA_AGC,
+					    Value: vm.rdata.hardware.DA_AGC.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
@@ -477,7 +479,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'Precision Audio:'*/transerv.translate('RCTRL_P01_AUDP'),
-					    Value: vm.rdata.radio.iPrecisionAudio,
+					    Value: vm.rdata.radio.iPrecisionAudio.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"Estricto"*/transerv.translate('RCTRL_P01_AUDPS'), /*"Normal"*/transerv.translate('RCTRL_P01_AUDPN')],
@@ -490,7 +492,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 vm.vdata = [
 					{
 					    Name:/*'Tipo de Agente Radio:'*/transerv.translate('RCTRL_P00_TPA'),
-					    Value: vm.rdata.radio.tipo,
+					    Value: vm.rdata.radio.tipo.toString(),
 					    Enable: authservice.ProfilePermission(false, []),
 					    Input: 1,
 					    Inputs: [
@@ -525,7 +527,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'Indicacion Salida Audio:'*/transerv.translate('RCTRL_P02_ISDA'),
-					    Value: vm.rdata.radio.ptt,
+					    Value: vm.rdata.radio.ptt.toString(),
 					    Enable: authservice.ProfilePermission(false, []),
 					    Input: 1,
 					    Inputs: [/*"Hardware"*/transerv.translate('RCTRL_P02_HARD'), /*"Tono"*/transerv.translate('RCTRL_P02_TONO')],
@@ -543,7 +545,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: isLocal() ? /*'Metodos BSS Disponibles:'*/transerv.translate('RCTRL_P02_BSSD') : /*'Método BSS Preferido:'*/transerv.translate('RCTRL_P02_BSSP'),
-					    Value: vm.rdata.radio.metodoBss,
+					    Value: vm.rdata.radio.metodoBss.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: isLocal() ? [
@@ -559,7 +561,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'BSS/CLIMAX?:'*/transerv.translate('RCTRL_P02_BSCX'),
-					    Value: vm.rdata.radio.bss,
+					    Value: vm.rdata.radio.bss.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
@@ -586,7 +588,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'CLIMAX DELAY:'*/transerv.translate('RCTRL_P02_BSCXD'),
-					    Value: vm.rdata.radio.climaxDelay,
+					    Value: vm.rdata.radio.climaxDelay.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"ASAP"*/transerv.translate('RCTRL_P02_BSCXA'), /*"Tiempo Fijo"*/transerv.translate('RCTRL_P02_BSCXF')],
@@ -613,7 +615,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name:/*'Prioridad PTT'*/transerv.translate('RCTRL_P02_PTTP'),
-					    Value: vm.rdata.radio.iPttPrio,
+					    Value: vm.rdata.radio.iPttPrio.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [
@@ -628,7 +630,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name:/*'Prioridad Session'*/transerv.translate('RCTRL_P02_SESP'),
-					    Value: vm.rdata.radio.iSesionPrio,
+					    Value: vm.rdata.radio.iSesionPrio.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [
@@ -644,7 +646,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 vm.vdata = [                                                       // Enable: false,
 					{
 					    Name:/*'Tipo de Agente Radio:'*/transerv.translate('RCTRL_P00_TPA'),
-					    Value: vm.rdata.radio.tipo,
+					    Value: vm.rdata.radio.tipo.toString(),
 					    Enable: authservice.ProfilePermission(false, []),
 					    Input: 1,
 					    Inputs: [
@@ -809,7 +811,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 vm.vdata = [
 					{
 					    Name: /*'Tipo de Restriccion:'*/transerv.translate('RCTRL_P04_RES'),
-					    Value: vm.rdata.restriccion,
+					    Value: vm.rdata.restriccion.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"Ninguna"*/transerv.translate('RCTRL_P04_RESN'),
@@ -853,41 +855,41 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
             case 0:
                 vm.rdata.IdRecurso = vm.vdata[0].Value;
                 vm.rdata.radio.colateral.name = vm.vdata[2].Value;
-                vm.rdata.radio.tipo = vm.vdata[3].Value;
+                vm.rdata.radio.tipo = parseInt(vm.vdata[3].Value);
                 vm.rdata.Uri_Local = poner_sip(vm.vdata[4].Value);
-                vm.rdata.enableRegistro = vm.vdata[5].Value;
+                vm.rdata.enableRegistro = parseInt(vm.vdata[5].Value);
                 vm.rdata.szClave = vm.vdata[6].Value;
-                vm.rdata.radio.evtPTT = vm.vdata[7].Value;
-                vm.rdata.radio.iEnableGI = vm.vdata[8].Value;
+                vm.rdata.radio.evtPTT = parseInt(vm.vdata[7].Value);
+                vm.rdata.radio.iEnableGI = parseInt(vm.vdata[8].Value);
                 /* TODO. Forzar PTTSQH vm.tdata.szClave = vm.vdata[9].Value;*/
                 break;
             case 1:
-                vm.rdata.Codec = vm.vdata[0].Value;
-                vm.rdata.hardware.AD_AGC = vm.vdata[1].Value;
+                vm.rdata.Codec = parseInt(vm.vdata[0].Value);
+                vm.rdata.hardware.AD_AGC = parseInt(vm.vdata[1].Value);
                 vm.rdata.hardware.AD_Gain = vm.vdata[2].Value*10;
-                vm.rdata.hardware.DA_AGC = vm.vdata[3].Value;
+                vm.rdata.hardware.DA_AGC = parseInt(vm.vdata[3].Value);
                 vm.rdata.hardware.DA_Gain = vm.vdata[4].Value*10;
                 vm.rdata.radio.tjbd = vm.vdata[5].Value;
-                vm.rdata.radio.iPrecisionAudio = vm.vdata[6].Value;
+                vm.rdata.radio.iPrecisionAudio = parseInt(vm.vdata[6].Value);
                 break;
             case 2:
-                vm.rdata.radio.tipo = vm.vdata[0].Value;
+                vm.rdata.radio.tipo = parseInt(vm.vdata[0].Value);
                 vm.rdata.radio.sq = vm.vdata[1].Value;
                 vm.rdata.radio.umbralVad = vm.vdata[2].Value;
-                vm.rdata.radio.ptt = vm.vdata[3].Value;
+                vm.rdata.radio.ptt = parseInt(vm.vdata[3].Value);
                 vm.rdata.radio.tiempoPtt = vm.vdata[4].Value;
-                vm.rdata.radio.metodoBss = vm.vdata[5].Value;
-                vm.rdata.radio.bss = vm.vdata[6].Value;
+                vm.rdata.radio.metodoBss = parseInt(vm.vdata[5].Value);
+                vm.rdata.radio.bss = parseInt(vm.vdata[6].Value);
                 vm.rdata.radio.tmVentanaRx = vm.vdata[7].Value;
                 vm.rdata.radio.retrasoSqOff = vm.vdata[8].Value;
-                vm.rdata.radio.climaxDelay = vm.vdata[9].Value;
+                vm.rdata.radio.climaxDelay = parseInt(vm.vdata[9].Value);
                 vm.rdata.radio.tmRetardoFijo = vm.vdata[10].Value;
                 vm.rdata.radio.tGRSid = vm.vdata[11].Value;
-                vm.rdata.radio.iPttPrio = vm.vdata[12].Value;
-                vm.rdata.radio.iSesionPrio = vm.vdata[13].Value;
+                vm.rdata.radio.iPttPrio = parseInt(vm.vdata[12].Value);
+                vm.rdata.radio.iSesionPrio = parseInt(vm.vdata[13].Value);
                 break;
             case 3:
-                vm.rdata.radio.tipo = vm.vdata[0].Value;
+                vm.rdata.radio.tipo = parseInt(vm.vdata[0].Value);
                 vm.rdata.radio.colateral.name = vm.vdata[1].Value;
                 if (vm.lcol >= 1) {
                     vm.rdata.radio.colateral.emplazamientos[0].uriTxA = poner_sip(vm.vdata[3].Value);
@@ -909,7 +911,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 }
                 break;
             case 4:
-                vm.rdata.restriccion = vm.vdata[0].Value;
+                vm.rdata.restriccion = parseInt(vm.vdata[0].Value);
                 vm.rdata.blanca = poner_sip(vm.vdata[1].Value);
                 vm.rdata.negra = poner_sip(vm.vdata[2].Value);
                 break;
@@ -984,7 +986,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
 
     /** */
     function Init() {
-        vm.radiosel = 0;
+        vm.radiosel = "0";
         vm.current = -1;
         vm.pagina = 0;
     }
@@ -993,9 +995,9 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
     CfgService.init().then(function () {
         get_radios();
         if ($routeParams.recId == -1)
-            vm.radiosel = CfgService.radio_last_get();
+            vm.radiosel = CfgService.radio_last_get().toString();
         else
-            vm.radiosel = CfgService.radio_index_get(Math.floor($routeParams.recId / 4), $routeParams.recId % 4);
+            vm.radiosel = CfgService.radio_index_get(Math.floor($routeParams.recId / 4), $routeParams.recId % 4).toString();
         vm.update_radio();
     });
 
@@ -1006,7 +1008,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
             event.preventDefault();
         }
         else
-            set_radio_data(vm.radiosel);
+            set_radio_data(parseInt(vm.radiosel));
     });
 
     /** Se ha pulsado el boton -aplicar- */
@@ -1027,7 +1029,7 @@ function ug5kRecrCtrl(authservice, CfgService, ValidateService, transerv, $scope
     $scope.$on('loadcfg', function (data) {
         Init();
         get_radios();
-        vm.radiosel = CfgService.radio_last_get();
+        vm.radiosel = CfgService.radio_last_get().toString();
         vm.update_radio();
     });
 }

@@ -9,6 +9,8 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
     var vm = this;
     var simul = true;
 
+    CfgService.opcion(6);
+
     /** Pagina */
     vm.pagina = 0;	
 

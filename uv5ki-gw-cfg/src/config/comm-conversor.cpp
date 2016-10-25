@@ -462,6 +462,7 @@ void CommConversor::RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRe
 	SetInt((int *)&mrad->iSessionPrio, p_rec->radio.iSesionPrio, INCI_MPSW, "SESSION-PRIO", CommConversor::RadioSessionPrioJ2M);
 
 	SetTipoConmutacionRadio(&mrad->cTipoConmutacion, p_rec->radio.colateral.tipoConmutacion);
+	SetString(mgen->szDestino, p_rec->radio.colateral.name, INCI_MPSW, "FID", CFG_MAX_LONG_NOMBRE_RECURSO);
 	ColateralesRadio(&p_rec->radio.colateral, &mrad->sColateral);
 }
 

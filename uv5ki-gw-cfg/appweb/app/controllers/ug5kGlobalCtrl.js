@@ -15,7 +15,7 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	vm.user = GetUser();
 	vm.logout = function (){Logout();};	
 	vm.enable = function(nivel){return enable(nivel);};
-	vm.select = function (path) { return is_select(path); };
+	vm.select = function (path){return is_select(path);};
 	vm.hora = GetHora();
 
 	vm.idsoftware = "UG5K-REDAN";
@@ -29,6 +29,15 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	vm.lcfg = {};
 
 	vm.isDataHasChanges = false;
+
+    /** */
+	vm.set_opcion = function(opcion) {
+	    vm.opcion = CfgService.opcion(opcion);
+	}
+    /** */
+	vm.get_opcion = function () {
+	    return CfgService.opcion();       // vm.opcion;
+	}
 
     /** */
 	vm.mostrar_opcion = function (opcion) {

@@ -53,7 +53,7 @@ public:
 			bool mode = LocalConfig::cfg.ModoUlises();
 
 			PLOG_INFO("%s (%s) CfgServer: (%s) Iniciado en \"%s\". ", 
-				Tools::read_txt_file(ON_WORKING_DIR("Version.txt")).c_str(),  
+				Tools::read_txt_file(ON_WORKING_DIR("VERSION.TXT")).c_str(),  
 				mode==false ? "REDAN" : "ULISES", acBuildString, WORKING_DIR);
 			PLOG_INFO("ENTER para SALIR.");
 

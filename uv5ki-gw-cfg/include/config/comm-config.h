@@ -22,6 +22,7 @@
 #include "./comm-ser-config.h"
 #include "./comm-har-config.h"
 #include "./comm-res-config.h"
+#include "./comm-uv5-config.h"
 
 
 /** Estructura de CONFIGURACION. Se parte de REDAN */
@@ -99,6 +100,7 @@ public:
 		write_key(writer, "recursos", recursos);
 		write_key(writer, "users", users);
 		write_key(writer, "servicios", servicios);
+		write_key(writer, "ulises", ulises);
 	}
 	virtual void jread(Value &base) {
 		read_key(base, "tipo", tipo);
@@ -109,6 +111,7 @@ public:
 		read_key(base, "servicios", servicios);
 		read_key(base, "hardware", hardware);
 		read_key(base, "recursos", recursos);
+		read_key(base, "ulises", ulises);
 	}
 
 public:
@@ -125,6 +128,8 @@ public:
 	vector<UserData *> users;
 	vector<CommResConfig *> recursos;
 #endif
+	CommUv5Config ulises;
+
 };
 
 #endif

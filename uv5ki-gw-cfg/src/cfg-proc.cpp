@@ -350,15 +350,18 @@ void SoapClientProc::Run()
 	hwIp = _ip_propia;
 
 	p_working_config->load_from(LAST_CFG);
-
-	AvisaPideConfiguracion();
-	while (IsRunning()) {
+	AvisaChequearConfiguracion();
+	// AvisaPideConfiguracion();
+	while (IsRunning()) 
+	{
 
 		this->sleep(HTTP_CLIENT_TICK);
 		stAviso aviso;
 
-		if (avisos.get(aviso)) {
-			try {
+		if (avisos.get(aviso)) 
+		{
+			try 
+			{
 				if (SERVER_URL!="")		// Si me han borrado el servidor no hago POLLING a EL...
 				{
 					if (aviso.main == MAIN_TEST_CONFIG) {
@@ -380,9 +383,13 @@ void SoapClientProc::Run()
 				{
 					StdSincrSet(slcAislado);
 				}
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				PLOG_EXCEP(e, /*"Excepcion en SoapClient::Run: %s", e.what()*/"");
-			} catch (...) {
+			} 
+			catch (...) 
+			{
 				PLOG_ERROR("Excepcion en SoapClient::Run");
 			}
 		}
@@ -411,14 +418,17 @@ string SoapClientProc::getXml(string proc, string p1, string p2, string p3)
 		if (p3 != "")
 			data += ("&"+p3);
 	}
-	string request = "POST " + path + " HTTP/1.1\r\nHost: " + /*SERVER_URL*/hwServer + 
+	string request = "POST " + path + " HTTP/1.1\r\nHost: " + SERVER_URL/*hwServer*/ + 
 		"\r\nContent-Type: application/x-www-form-urlencoded\r\n" +
 		"Content-Length: " + Tools::Int2String((int )data.size()) + 
 		"\r\n\r\n" + 	data /*+ "\r\n"*/;
 	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request);
 	if (response.Status() != "200")
+	{
+		PLOG_DEBUG("SoapClientProc::getXml: %s", response.Status().c_str());
 		throw Exception("REQUEST ERROR: POST " + path + 
-		" Host: " + /*SERVER_URL*/hwServer +  ". " + response.Status() + ":" + response.StatusText());
+		" Host: " + SERVER_URL/*hwServer*/ +  ". " + response.Status() + ":" + response.StatusText());
+	}
 
 #ifdef _WIN32 
 	sistema::DataSaveAs(response.Body(), proc+"_" + p2 + "_" + p3 + ".xml");
@@ -446,20 +456,31 @@ void SoapClientProc::ChequearConfiguracion()
 		string xml_data = getXml("GetVersionConfiguracion","id_sistema=departamento");
 		doc.parse<0>((char *)xml_data.c_str());
 		string version = doc.first_node("string")->value();
-		if (version == p_working_config->TimConfig())
-		{	// Evento CFG-OK
-			if (_stdLocalConfig != slcSincronizado) {
-				// Pido la configuracion
+
+		switch (_stdLocalConfig) 
+		{
+		case slcNoInicializado:
+		case slcAislado:
+			if (version != p_working_config->TimConfig())
+				AvisaPideConfiguracion();
+			else
+			{
+				McastActivateOrDeactivate(true);
+				StdSincrSet(slcSincronizado);
+			}
+			break;
+		case slcSincronizado:
+			if (version != p_working_config->TimConfig()) 
+			{
+				PLOG_DEBUG("SoapClientProc::ChequearConfiguracion: Cambio de configuracion sin aviso previo!!!");
 				AvisaPideConfiguracion();
 			}
-		}
-		else
-		{	// Evento CFG-NOOK
-			if (_stdLocalConfig == slcSincronizado)
-				StdSincrSet(slcConflicto);
-			else {
-				AvisaPideConfiguracion();
-			}
+			break;
+		default:
+			//slcNoBdt = -1,
+			//slcNoActiveCfg = -2,
+			//slcConflico = -4;
+			break;
 		}
 	}
 	catch(...)
@@ -477,7 +498,7 @@ void SoapClientProc::PedirConfiguracion(string cfg)
 	try
 	{
 		/** Lee la configuracion recibida */
-		soap_config sConfig(getXml, hwIp, hwName, hwServer);
+		soap_config sConfig(getXml, hwIp, hwName, SERVER_URL/*hwServer*/);
 
 		/** Salva ultima configuracion */
 		p_working_config->save_to(LAST_SAVE(Tools::Int2String(_lastcfg++ & 3)));
@@ -489,9 +510,7 @@ void SoapClientProc::PedirConfiguracion(string cfg)
 		p_working_config->save_to(LAST_CFG);
 
 		/** Abre si procede el puerto de Escucha MCAST */
-		McastActivateOrDeactivate(true, 
-			sConfig.ParametrosMulticast.GrupoMulticastConfiguracion, 
-			sConfig.ParametrosMulticast.PuertoMulticastConfiguracion);
+		McastActivateOrDeactivate(true);
 
 		/** EstadoSicronizacion=slcSincronizado */
 		StdSincrSet(slcSincronizado);
@@ -511,9 +530,15 @@ void SoapClientProc::SubirConfiguracion()
 }
 
 /** */
-void SoapClientProc::McastActivateOrDeactivate(bool activate, string ipmcast, int port)
+void SoapClientProc::McastActivateOrDeactivate(bool activate)
 {
-	try {
+	string ipmcast;
+	int port;
+
+	P_WORKING_CONFIG->UlisesParamsMulticast(ipmcast, port);
+
+	try
+	{
 		if (activate==true) {
 			if (p_mcast_socket!=NULL) {
 				// Por si cambia la configuracion del puerto...
@@ -527,11 +552,13 @@ void SoapClientProc::McastActivateOrDeactivate(bool activate, string ipmcast, in
 			p_mcast_socket->SetReusable();
 			p_mcast_socket->Bind(port);
 			p_mcast_socket->JoinMulticastGroup(mcast_group, mcast_itf);
+			PLOG_DEBUG("SoapClientProc: MCAST-JOIN(%s:%d)", ipmcast.c_str(), port);
 		}
 		else if (activate==false && p_mcast_socket!=NULL) {
 			p_mcast_socket->Close();
 			delete p_mcast_socket;
 			p_mcast_socket = NULL;
+			PLOG_DEBUG("SoapClientProc: MCAST-UNJOIN");
 		}
 	}
 	catch(socket_error x) 
