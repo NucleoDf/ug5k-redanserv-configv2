@@ -648,16 +648,10 @@
     <None Include="appweb\session-expired.html">
       <Filter>webapp-1</Filter>
     </None>
-    <None Include="appweb\app\templates\ug5kweb-bite-templ.html">
-      <Filter>webapp-1\app\views</Filter>
-    </None>
     <None Include="appweb\app\views\ug5kweb-config.html">
       <Filter>webapp-1\app\views</Filter>
     </None>
     <None Include="appweb\app\views\ug5kweb-hardware.html">
-      <Filter>webapp-1\app\views</Filter>
-    </None>
-    <None Include="appweb\ug5kweb-index.html">
       <Filter>webapp-1\app\views</Filter>
     </None>
     <None Include="appweb\app\views\ug5kweb-inicio.html">
@@ -677,6 +671,9 @@
     </None>
     <None Include="appweb\app\templates\ug5kweb-swload-templ.html">
       <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\ug5kweb-index.html">
+      <Filter>webapp-1\app</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

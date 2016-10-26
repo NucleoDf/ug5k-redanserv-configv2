@@ -51,9 +51,9 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	        case 6:
 	            return true;
 	        case 7:     // Aplicar Cambios.
-	            return authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]);
+	            return (authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]) && CfgService.modo() != "ul");
 	        case 8:     // Descartar Cambios.
-	            return authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]);
+	            return (authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]) && CfgService.modo() != "ul");
 	    }
 	    return false;
 	}
@@ -235,8 +235,9 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
                                 vm.gwid = gw_id();
                                 vm.cfg_act = gw_cfg();
                             });
-
                         }
+
+                        CfgService.modo(data.modo);
                     }
                     else {
                         vm.timer = 0;

@@ -24,7 +24,7 @@ function dataservice($http, logger, Simulador, $q)
 		, upload_config: function() {
 			return remotePost(rest_url_upconfig);
 		}
-		
+
 		/** para ir eliminado */
         , get_data: getData,
         set_data: setData,

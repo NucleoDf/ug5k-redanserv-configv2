@@ -127,7 +127,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 vm.data = [
 					{
 					    Name: /*'Tipo:'*/transerv.translate('SCTRL_P01_TP'),
-					    Value: vm.jserv.sincr.ntp,
+					    Value: vm.jserv.sincr.ntp.toString(),
 					    Enable: authservice.ProfilePermission(false, []),
 					    Input: 1,
 					    Inputs: [
@@ -187,7 +187,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					},
 					{
 					    Name: /*'SNMP-V2?:'*/transerv.translate('SCTRL_P02_SV2'),
-					    Value: vm.jserv.snmp.agv2,
+					    Value: vm.jserv.snmp.agv2.toString(),
 					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
 					    Input: 1,
 					    Inputs: [
@@ -316,14 +316,14 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
                 vm.jserv.sip.registrars = iplist2serv(vm.data[5].Value);
                 break;
             case 1: // NTP...
-                vm.jserv.sincr.ntp = vm.data[0].Value;
+                vm.jserv.sincr.ntp = parseInt(vm.data[0].Value);
                 vm.jserv.sincr.servidores = iplist2serv(vm.data[1].Value);
                 break;
             case 2: // SNMP...
                 vm.jserv.snmp.sport = vm.data[0].Value;
                 vm.jserv.snmp.snmpp = vm.data[1].Value;
                 vm.jserv.snmp.traps = vm.data[2].Value;
-                vm.jserv.snmp.agv2 = vm.data[3].Value;
+                vm.jserv.snmp.agv2 = parseInt(vm.data[3].Value);
                 vm.jserv.snmp.agcomm = vm.data[4].Value;
                 vm.jserv.snmp.agname = vm.data[5].Value;
                 vm.jserv.snmp.agloc = vm.data[6].Value;

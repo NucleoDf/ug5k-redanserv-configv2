@@ -1,1 +1,768 @@
-{"tipo":1,"idConf":"ULISES-CONF","fechaHora":"25/10/2016 16:49:53","general":{"name":"CGW1","emplazamiento":"","dualidad":0,"ipv":"192.168.0.223","ips":"192.168.0.212","nivelconsola":0,"puertoconsola":0,"nivelIncidencias":0,"cpus":[{"tlan":1,"ip0":"","ms0":"","ip1":"","ms1":"","ipb":"192.168.0.223","msb":"255.255.255.0","ipg":"192.168.0.223"},{"tlan":1,"ip0":"","ms0":"","ip1":"","ms1":"","ipb":"","msb":"","ipg":""}]},"hardware":{"slv":[{"tp":1,"pos":[{"tp":0,"cfg":1},{"tp":0,"cfg":2},{"tp":0,"cfg":2},{"tp":0,"cfg":1}]},{"tp":1,"pos":[{"tp":0,"cfg":1},{"tp":0,"cfg":2},{"tp":0,"cfg":2},{"tp":0,"cfg":0}]},{"tp":0,"pos":[{"tp":0,"cfg":0},{"tp":0,"cfg":0},{"tp":0,"cfg":0},{"tp":0,"cfg":0}]},{"tp":0,"pos":[{"tp":0,"cfg":0},{"tp":0,"cfg":0},{"tp":0,"cfg":0},{"tp":0,"cfg":0}]}]},"recursos":[{"IdRecurso":"RD01","Radio_o_Telefonia":1,"SlotPasarela":0,"NumDispositivoSlot":0,"TamRTP":20,"Codec":0,"Uri_Local":"sip:RD01@192.168.0.223","enableRegistro":0,"szClave":"","Buffer_jitter":{"min":0,"max":0},"hardware":{"AD_AGC":0,"AD_Gain":0,"DA_AGC":0,"DA_Gain":0},"radio":{"tipo":4,"sq":0,"ptt":0,"bss":0,"modoConfPtt":0,"repSqBss":1,"desactivacionSq":1,"timeoutPtt":200,"metodoBss":0,"umbralVad":-33,"numFlujosAudio":1,"tiempoPtt":120,"tmVentanaRx":100,"climaxDelay":1,"tmRetardoFijo":100,"bssRtp":0,"retrasoSqOff":50,"evtPTT":0,"tjbd":20,"tGRSid":10,"iEnableGI":1,"tabla_indices_calidad":[],"iSesionPrio":0,"iPttPrio":0,"colateral":{"name":"118.675","tipoConmutacion":0,"emplazamientos":[{"activoTx":0,"activoRx":0,"uriTxA":"","uriTxB":"","uriRxA":"","uriRxB":""},{"activoTx":0,"activoRx":0,"uriTxA":"","uriTxB":"","uriRxA":"","uriRxB":""},{"activoTx":0,"activoRx":0,"uriTxA":"","uriTxB":"","uriRxA":"","uriRxB":""}]},"iPrecisionAudio":1},"telefonia":{"tipo":0,"lado":1,"t_eym":0,"h2h4":0,"ladoeym":0,"modo":0,"r_automatica":1,"no_test_local":"","no_test_remoto":"","it_release":5,"uri_remota":"","detect_vox":0,"umbral_vox":-10,"tm_inactividad":2,"superv_options":1,"tm_superv_options":2,"colateral_scv":0,"ats_rangos_dst":[],"ats_rangos_org":[],"iT_Int_Warning":5},"LlamadaAutomatica":0,"restriccion":0,"blanca":[],"negra":[]},{"IdRecurso":"LC_1","Radio_o_Telefonia":2,"SlotPasarela":0,"NumDispositivoSlot":1,"TamRTP":20,"Codec":0,"Uri_Local":"sip:LC_1@192.168.0.223","enableRegistro":0,"szClave":"","Buffer_jitter":{"min":0,"max":0},"hardware":{"AD_AGC":0,"AD_Gain":0,"DA_AGC":0,"DA_Gain":0},"radio":{"tipo":0,"sq":0,"ptt":0,"bss":0,"modoConfPtt":0,"repSqBss":1,"desactivacionSq":1,"timeoutPtt":200,"metodoBss":0,"umbralVad":-33,"numFlujosAudio":1,"tiempoPtt":0,"tmVentanaRx":100,"climaxDelay":1,"tmRetardoFijo":100,"bssRtp":0,"retrasoSqOff":50,"evtPTT":0,"tjbd":20,"tGRSid":10,"iEnableGI":0,"tabla_indices_calidad":[],"iSesionPrio":0,"iPttPrio":0,"colateral":{"name":"default","tipoConmutacion":0,"emplazamientos":[]},"iPrecisionAudio":1},"telefonia":{"tipo":5,"lado":0,"t_eym":0,"h2h4":0,"ladoeym":0,"modo":0,"r_automatica":0,"no_test_local":"","no_test_remoto":"","it_release":5,"uri_remota":"","detect_vox":1,"umbral_vox":-50,"tm_inactividad":2,"superv_options":1,"tm_superv_options":2,"colateral_scv":0,"ats_rangos_dst":[],"ats_rangos_org":[],"iT_Int_Warning":5},"LlamadaAutomatica":0,"restriccion":0,"blanca":[],"negra":[]},{"IdRecurso":"BC_1","Radio_o_Telefonia":2,"SlotPasarela":0,"NumDispositivoSlot":2,"TamRTP":20,"Codec":1,"Uri_Local":"sip:BC_1@192.168.0.223","enableRegistro":0,"szClave":"","Buffer_jitter":{"min":0,"max":0},"hardware":{"AD_AGC":1,"AD_Gain":1,"DA_AGC":1,"DA_Gain":-11},"radio":{"tipo":0,"sq":0,"ptt":0,"bss":0,"modoConfPtt":0,"repSqBss":1,"desactivacionSq":1,"timeoutPtt":200,"metodoBss":0,"umbralVad":-33,"numFlujosAudio":1,"tiempoPtt":0,"tmVentanaRx":100,"climaxDelay":1,"tmRetardoFijo":100,"bssRtp":0,"retrasoSqOff":50,"evtPTT":0,"tjbd":20,"tGRSid":10,"iEnableGI":0,"tabla_indices_calidad":[],"iSesionPrio":0,"iPttPrio":0,"colateral":{"name":"default","tipoConmutacion":0,"emplazamientos":[]},"iPrecisionAudio":1},"telefonia":{"tipo":1,"lado":0,"t_eym":0,"h2h4":0,"ladoeym":0,"modo":0,"r_automatica":0,"no_test_local":"","no_test_remoto":"","it_release":5,"uri_remota":"","detect_vox":1,"umbral_vox":0,"tm_inactividad":2,"superv_options":1,"tm_superv_options":2,"colateral_scv":0,"ats_rangos_dst":[],"ats_rangos_org":[],"iT_Int_Warning":5},"LlamadaAutomatica":0,"restriccion":0,"blanca":[],"negra":[]},{"IdRecurso":"RD06","Radio_o_Telefonia":1,"SlotPasarela":0,"NumDispositivoSlot":3,"TamRTP":20,"Codec":0,"Uri_Local":"sip:RD06@192.168.0.223","enableRegistro":0,"szClave":"","Buffer_jitter":{"min":0,"max":0},"hardware":{"AD_AGC":0,"AD_Gain":0,"DA_AGC":0,"DA_Gain":0},"radio":{"tipo":4,"sq":0,"ptt":0,"bss":0,"modoConfPtt":0,"repSqBss":1,"desactivacionSq":1,"timeoutPtt":200,"metodoBss":0,"umbralVad":-33,"numFlujosAudio":1,"tiempoPtt":120,"tmVentanaRx":100,"climaxDelay":1,"tmRetardoFijo":100,"bssRtp":0,"retrasoSqOff":50,"evtPTT":0,"tjbd":20,"tGRSid":10,"iEnableGI":1,"tabla_indices_calidad":[],"iSesionPrio":0,"iPttPrio":0,"colateral":{"name":"120.500","tipoConmutacion":0,"emplazamientos":[{"activoTx":0,"activoRx":0,"uriTxA":"","uriTxB":"","uriRxA":"","uriRxB":""},{"activoTx":0,"activoRx":0,"uriTxA":"","uriTxB":"","uriRxA":"","uriRxB":""},{"activoTx":0,"activoRx":0,"uriTxA":"","uriTxB":"","uriRxA":"","uriRxB":""}]},"iPrecisionAudio":1},"telefonia":{"tipo":0,"lado":1,"t_eym":0,"h2h4":0,"ladoeym":0,"modo":0,"r_automatica":1,"no_test_local":"","no_test_remoto":"","it_release":5,"uri_remota":"","detect_vox":0,"umbral_vox":-10,"tm_inactividad":2,"superv_options":1,"tm_superv_options":2,"colateral_scv":0,"ats_rangos_dst":[],"ats_rangos_org":[],"iT_Int_Warning":5},"LlamadaAutomatica":0,"restriccion":0,"blanca":[],"negra":[]},{"IdRecurso":"RD02","Radio_o_Telefonia":1,"SlotPasarela":1,"NumDispositivoSlot":0,"TamRTP":20,"Codec":0,"Uri_Local":"sip:RD02@192.168.0.223","enableRegistro":0,"szClave":"","Buffer_jitter":{"min":0,"max":0},"hardware":{"AD_AGC":0,"AD_Gain":0,"DA_AGC":0,"DA_Gain":0},"radio":{"tipo":4,"sq":0,"ptt":0,"bss":0,"modoConfPtt":0,"repSqBss":1,"desactivacionSq":1,"timeoutPtt":200,"metodoBss":0,"umbralVad":-33,"numFlujosAudio":1,"tiempoPtt":120,"tmVentanaRx":100,"climaxDelay":1,"tmRetardoFijo":100,"bssRtp":0,"retrasoSqOff":50,"evtPTT":0,"tjbd":20,"tGRSid":10,"iEnableGI":1,"tabla_indices_calidad":[],"iSesionPrio":0,"iPttPrio":0,"colateral":{"name":"127.700","tipoConmutacion":0,"emplazamientos":[{"activoTx":0,"activoRx":0,"uriTxA":"","uriTxB":"","uriRxA":"","uriRxB":""},{"activoTx":0,"activoRx":0,"uriTxA":"","uriTxB":"","uriRxA":"","uriRxB":""},{"activoTx":0,"activoRx":0,"uriTxA":"","uriTxB":"","uriRxA":"","uriRxB":""}]},"iPrecisionAudio":1},"telefonia":{"tipo":0,"lado":1,"t_eym":0,"h2h4":0,"ladoeym":0,"modo":0,"r_automatica":1,"no_test_local":"","no_test_remoto":"","it_release":5,"uri_remota":"","detect_vox":0,"umbral_vox":-10,"tm_inactividad":2,"superv_options":1,"tm_superv_options":2,"colateral_scv":0,"ats_rangos_dst":[],"ats_rangos_org":[],"iT_Int_Warning":5},"LlamadaAutomatica":0,"restriccion":0,"blanca":[],"negra":[]},{"IdRecurso":"R2_1","Radio_o_Telefonia":2,"SlotPasarela":1,"NumDispositivoSlot":1,"TamRTP":20,"Codec":0,"Uri_Local":"sip:R2_1@192.168.0.223","enableRegistro":0,"szClave":"","Buffer_jitter":{"min":0,"max":0},"hardware":{"AD_AGC":0,"AD_Gain":0,"DA_AGC":0,"DA_Gain":0},"radio":{"tipo":0,"sq":0,"ptt":0,"bss":0,"modoConfPtt":0,"repSqBss":1,"desactivacionSq":1,"timeoutPtt":200,"metodoBss":0,"umbralVad":-33,"numFlujosAudio":1,"tiempoPtt":0,"tmVentanaRx":100,"climaxDelay":1,"tmRetardoFijo":100,"bssRtp":0,"retrasoSqOff":50,"evtPTT":0,"tjbd":20,"tGRSid":10,"iEnableGI":0,"tabla_indices_calidad":[],"iSesionPrio":0,"iPttPrio":0,"colateral":{"name":"default","tipoConmutacion":0,"emplazamientos":[]},"iPrecisionAudio":1},"telefonia":{"tipo":3,"lado":0,"t_eym":0,"h2h4":0,"ladoeym":0,"modo":0,"r_automatica":0,"no_test_local":"","no_test_remoto":"","it_release":5,"uri_remota":"","detect_vox":1,"umbral_vox":0,"tm_inactividad":2,"superv_options":1,"tm_superv_options":2,"colateral_scv":0,"ats_rangos_dst":[],"ats_rangos_org":[],"iT_Int_Warning":5},"LlamadaAutomatica":0,"restriccion":0,"blanca":[],"negra":[]},{"IdRecurso":"BL_1","Radio_o_Telefonia":2,"SlotPasarela":1,"NumDispositivoSlot":2,"TamRTP":20,"Codec":0,"Uri_Local":"sip:BL_1@192.168.0.223","enableRegistro":0,"szClave":"","Buffer_jitter":{"min":0,"max":0},"hardware":{"AD_AGC":0,"AD_Gain":0,"DA_AGC":0,"DA_Gain":0},"radio":{"tipo":0,"sq":0,"ptt":0,"bss":0,"modoConfPtt":0,"repSqBss":1,"desactivacionSq":1,"timeoutPtt":200,"metodoBss":0,"umbralVad":-33,"numFlujosAudio":1,"tiempoPtt":0,"tmVentanaRx":100,"climaxDelay":1,"tmRetardoFijo":100,"bssRtp":0,"retrasoSqOff":50,"evtPTT":0,"tjbd":20,"tGRSid":10,"iEnableGI":0,"tabla_indices_calidad":[],"iSesionPrio":0,"iPttPrio":0,"colateral":{"name":"default","tipoConmutacion":0,"emplazamientos":[]},"iPrecisionAudio":1},"telefonia":{"tipo":0,"lado":0,"t_eym":0,"h2h4":0,"ladoeym":0,"modo":0,"r_automatica":0,"no_test_local":"","no_test_remoto":"","it_release":5,"uri_remota":"","detect_vox":1,"umbral_vox":0,"tm_inactividad":2,"superv_options":1,"tm_superv_options":2,"colateral_scv":0,"ats_rangos_dst":[],"ats_rangos_org":[],"iT_Int_Warning":5},"LlamadaAutomatica":0,"restriccion":0,"blanca":[],"negra":[]}],"users":[],"servicios":{"name":"","idSERVICIOS":-858993460,"sip":{"PuertoLocalSIP":5060,"KeepAlivePeriod":200,"KeepAliveMultiplier":10,"SupresionSilencio":1,"PeriodoSupervisionSIP":5,"proxys":[],"registrars":[]},"web":{"wport":8080,"stime":0},"snmp":{"agcomm":"public","agcont":"NUCLEO-DF DT. MADRID. SPAIN","agloc":"NUCLEO-DF LABS","agname":"ULISESG5000i","agv2":0,"sport":65000,"snmpp":0,"traps":[]},"grab":{"rtsp_uri":"","rtsp_ip":"127.0.0.1","sport":65001,"rtsp_port":0,"rtsp_rtp":-858993460,"rtp_pl":-858993460,"rtp_sr":-858993460},"sincr":{"ntp":2,"servidores":[]}},"ulises":{"MulticastGroup":"224.100.10.1","MulticastPort":2000}}
+{
+	"tipo" : 1,
+	"idConf" : "ULISES-CONF",
+	"fechaHora" : "26/10/2016 06:00:28 UTC",
+	"general" : {
+		"name" : "CGW1",
+		"emplazamiento" : "",
+		"dualidad" : 0,
+		"ipv" : "192.168.0.223",
+		"ips" : "192.168.0.212",
+		"nivelconsola" : 0,
+		"puertoconsola" : 0,
+		"nivelIncidencias" : 0,
+		"cpus" : [{
+				"tlan" : 1,
+				"ip0" : "",
+				"ms0" : "",
+				"ip1" : "",
+				"ms1" : "",
+				"ipb" : "192.168.0.223",
+				"msb" : "255.255.255.0",
+				"ipg" : "192.168.0.223"
+			}, {
+				"tlan" : 1,
+				"ip0" : "",
+				"ms0" : "",
+				"ip1" : "",
+				"ms1" : "",
+				"ipb" : "",
+				"msb" : "",
+				"ipg" : ""
+			}
+		]
+	},
+	"hardware" : {
+		"slv" : [{
+				"tp" : 1,
+				"pos" : [{
+						"tp" : 0,
+						"cfg" : 1
+					}, {
+						"tp" : 0,
+						"cfg" : 2
+					}, {
+						"tp" : 0,
+						"cfg" : 2
+					}, {
+						"tp" : 0,
+						"cfg" : 1
+					}
+				]
+			}, {
+				"tp" : 1,
+				"pos" : [{
+						"tp" : 0,
+						"cfg" : 1
+					}, {
+						"tp" : 0,
+						"cfg" : 2
+					}, {
+						"tp" : 0,
+						"cfg" : 2
+					}, {
+						"tp" : 0,
+						"cfg" : 0
+					}
+				]
+			}, {
+				"tp" : 0,
+				"pos" : [{
+						"tp" : 0,
+						"cfg" : 0
+					}, {
+						"tp" : 0,
+						"cfg" : 0
+					}, {
+						"tp" : 0,
+						"cfg" : 0
+					}, {
+						"tp" : 0,
+						"cfg" : 0
+					}
+				]
+			}, {
+				"tp" : 0,
+				"pos" : [{
+						"tp" : 0,
+						"cfg" : 0
+					}, {
+						"tp" : 0,
+						"cfg" : 0
+					}, {
+						"tp" : 0,
+						"cfg" : 0
+					}, {
+						"tp" : 0,
+						"cfg" : 0
+					}
+				]
+			}
+		]
+	},
+	"recursos" : [{
+			"IdRecurso" : "RD01",
+			"Radio_o_Telefonia" : 1,
+			"SlotPasarela" : 0,
+			"NumDispositivoSlot" : 0,
+			"TamRTP" : 20,
+			"Codec" : 0,
+			"Uri_Local" : "sip:RD01@192.168.0.223",
+			"enableRegistro" : 0,
+			"szClave" : "",
+			"Buffer_jitter" : {
+				"min" : 0,
+				"max" : 0
+			},
+			"hardware" : {
+				"AD_AGC" : 0,
+				"AD_Gain" : 0,
+				"DA_AGC" : 0,
+				"DA_Gain" : 0
+			},
+			"radio" : {
+				"tipo" : 4,
+				"sq" : 0,
+				"ptt" : 0,
+				"bss" : 0,
+				"modoConfPtt" : 0,
+				"repSqBss" : 1,
+				"desactivacionSq" : 1,
+				"timeoutPtt" : 200,
+				"metodoBss" : 0,
+				"umbralVad" : -33,
+				"numFlujosAudio" : 1,
+				"tiempoPtt" : 120,
+				"tmVentanaRx" : 100,
+				"climaxDelay" : 1,
+				"tmRetardoFijo" : 100,
+				"bssRtp" : 0,
+				"retrasoSqOff" : 50,
+				"evtPTT" : 0,
+				"tjbd" : 20,
+				"tGRSid" : 10,
+				"iEnableGI" : 1,
+				"tabla_indices_calidad" : [],
+				"iSesionPrio" : 0,
+				"iPttPrio" : 0,
+				"colateral" : {
+					"name" : "118.675",
+					"tipoConmutacion" : 0,
+					"emplazamientos" : [{
+							"activoTx" : 0,
+							"activoRx" : 0,
+							"uriTxA" : "",
+							"uriTxB" : "",
+							"uriRxA" : "",
+							"uriRxB" : ""
+						}, {
+							"activoTx" : 0,
+							"activoRx" : 0,
+							"uriTxA" : "",
+							"uriTxB" : "",
+							"uriRxA" : "",
+							"uriRxB" : ""
+						}, {
+							"activoTx" : 0,
+							"activoRx" : 0,
+							"uriTxA" : "",
+							"uriTxB" : "",
+							"uriRxA" : "",
+							"uriRxB" : ""
+						}
+					]
+				},
+				"iPrecisionAudio" : 1
+			},
+			"telefonia" : {
+				"tipo" : 0,
+				"lado" : 1,
+				"t_eym" : 0,
+				"h2h4" : 0,
+				"ladoeym" : 0,
+				"modo" : 0,
+				"r_automatica" : 1,
+				"no_test_local" : "",
+				"no_test_remoto" : "",
+				"it_release" : 5,
+				"uri_remota" : "",
+				"detect_vox" : 0,
+				"umbral_vox" : -10,
+				"tm_inactividad" : 2,
+				"superv_options" : 1,
+				"tm_superv_options" : 2,
+				"colateral_scv" : 0,
+				"ats_rangos_dst" : [],
+				"ats_rangos_org" : [],
+				"iT_Int_Warning" : 5
+			},
+			"LlamadaAutomatica" : 0,
+			"restriccion" : 0,
+			"blanca" : [],
+			"negra" : []
+		}, {
+			"IdRecurso" : "LC_1",
+			"Radio_o_Telefonia" : 2,
+			"SlotPasarela" : 0,
+			"NumDispositivoSlot" : 1,
+			"TamRTP" : 20,
+			"Codec" : 0,
+			"Uri_Local" : "sip:LC_1@192.168.0.223",
+			"enableRegistro" : 0,
+			"szClave" : "",
+			"Buffer_jitter" : {
+				"min" : 0,
+				"max" : 0
+			},
+			"hardware" : {
+				"AD_AGC" : 0,
+				"AD_Gain" : 0,
+				"DA_AGC" : 0,
+				"DA_Gain" : 0
+			},
+			"radio" : {
+				"tipo" : 0,
+				"sq" : 0,
+				"ptt" : 0,
+				"bss" : 0,
+				"modoConfPtt" : 0,
+				"repSqBss" : 1,
+				"desactivacionSq" : 1,
+				"timeoutPtt" : 200,
+				"metodoBss" : 0,
+				"umbralVad" : -33,
+				"numFlujosAudio" : 1,
+				"tiempoPtt" : 0,
+				"tmVentanaRx" : 100,
+				"climaxDelay" : 1,
+				"tmRetardoFijo" : 100,
+				"bssRtp" : 0,
+				"retrasoSqOff" : 50,
+				"evtPTT" : 0,
+				"tjbd" : 20,
+				"tGRSid" : 10,
+				"iEnableGI" : 0,
+				"tabla_indices_calidad" : [],
+				"iSesionPrio" : 0,
+				"iPttPrio" : 0,
+				"colateral" : {
+					"name" : "default",
+					"tipoConmutacion" : 0,
+					"emplazamientos" : []
+				},
+				"iPrecisionAudio" : 1
+			},
+			"telefonia" : {
+				"tipo" : 5,
+				"lado" : 0,
+				"t_eym" : 0,
+				"h2h4" : 0,
+				"ladoeym" : 0,
+				"modo" : 0,
+				"r_automatica" : 0,
+				"no_test_local" : "",
+				"no_test_remoto" : "",
+				"it_release" : 5,
+				"uri_remota" : "",
+				"detect_vox" : 1,
+				"umbral_vox" : -50,
+				"tm_inactividad" : 2,
+				"superv_options" : 1,
+				"tm_superv_options" : 2,
+				"colateral_scv" : 0,
+				"ats_rangos_dst" : [],
+				"ats_rangos_org" : [],
+				"iT_Int_Warning" : 5
+			},
+			"LlamadaAutomatica" : 0,
+			"restriccion" : 0,
+			"blanca" : [],
+			"negra" : []
+		}, {
+			"IdRecurso" : "BC_1",
+			"Radio_o_Telefonia" : 2,
+			"SlotPasarela" : 0,
+			"NumDispositivoSlot" : 2,
+			"TamRTP" : 20,
+			"Codec" : 1,
+			"Uri_Local" : "sip:BC_1@192.168.0.223",
+			"enableRegistro" : 0,
+			"szClave" : "",
+			"Buffer_jitter" : {
+				"min" : 0,
+				"max" : 0
+			},
+			"hardware" : {
+				"AD_AGC" : 1,
+				"AD_Gain" : 1,
+				"DA_AGC" : 1,
+				"DA_Gain" : -11
+			},
+			"radio" : {
+				"tipo" : 0,
+				"sq" : 0,
+				"ptt" : 0,
+				"bss" : 0,
+				"modoConfPtt" : 0,
+				"repSqBss" : 1,
+				"desactivacionSq" : 1,
+				"timeoutPtt" : 200,
+				"metodoBss" : 0,
+				"umbralVad" : -33,
+				"numFlujosAudio" : 1,
+				"tiempoPtt" : 0,
+				"tmVentanaRx" : 100,
+				"climaxDelay" : 1,
+				"tmRetardoFijo" : 100,
+				"bssRtp" : 0,
+				"retrasoSqOff" : 50,
+				"evtPTT" : 0,
+				"tjbd" : 20,
+				"tGRSid" : 10,
+				"iEnableGI" : 0,
+				"tabla_indices_calidad" : [],
+				"iSesionPrio" : 0,
+				"iPttPrio" : 0,
+				"colateral" : {
+					"name" : "default",
+					"tipoConmutacion" : 0,
+					"emplazamientos" : []
+				},
+				"iPrecisionAudio" : 1
+			},
+			"telefonia" : {
+				"tipo" : 1,
+				"lado" : 0,
+				"t_eym" : 0,
+				"h2h4" : 0,
+				"ladoeym" : 0,
+				"modo" : 0,
+				"r_automatica" : 0,
+				"no_test_local" : "",
+				"no_test_remoto" : "",
+				"it_release" : 5,
+				"uri_remota" : "",
+				"detect_vox" : 1,
+				"umbral_vox" : 0,
+				"tm_inactividad" : 2,
+				"superv_options" : 1,
+				"tm_superv_options" : 2,
+				"colateral_scv" : 0,
+				"ats_rangos_dst" : [],
+				"ats_rangos_org" : [],
+				"iT_Int_Warning" : 5
+			},
+			"LlamadaAutomatica" : 0,
+			"restriccion" : 0,
+			"blanca" : [],
+			"negra" : []
+		}, {
+			"IdRecurso" : "RD06",
+			"Radio_o_Telefonia" : 1,
+			"SlotPasarela" : 0,
+			"NumDispositivoSlot" : 3,
+			"TamRTP" : 20,
+			"Codec" : 0,
+			"Uri_Local" : "sip:RD06@192.168.0.223",
+			"enableRegistro" : 0,
+			"szClave" : "",
+			"Buffer_jitter" : {
+				"min" : 0,
+				"max" : 0
+			},
+			"hardware" : {
+				"AD_AGC" : 0,
+				"AD_Gain" : 0,
+				"DA_AGC" : 0,
+				"DA_Gain" : 0
+			},
+			"radio" : {
+				"tipo" : 4,
+				"sq" : 0,
+				"ptt" : 0,
+				"bss" : 0,
+				"modoConfPtt" : 0,
+				"repSqBss" : 1,
+				"desactivacionSq" : 1,
+				"timeoutPtt" : 200,
+				"metodoBss" : 0,
+				"umbralVad" : -33,
+				"numFlujosAudio" : 1,
+				"tiempoPtt" : 120,
+				"tmVentanaRx" : 100,
+				"climaxDelay" : 1,
+				"tmRetardoFijo" : 100,
+				"bssRtp" : 0,
+				"retrasoSqOff" : 50,
+				"evtPTT" : 0,
+				"tjbd" : 20,
+				"tGRSid" : 10,
+				"iEnableGI" : 1,
+				"tabla_indices_calidad" : [],
+				"iSesionPrio" : 0,
+				"iPttPrio" : 0,
+				"colateral" : {
+					"name" : "120.500",
+					"tipoConmutacion" : 0,
+					"emplazamientos" : [{
+							"activoTx" : 0,
+							"activoRx" : 0,
+							"uriTxA" : "",
+							"uriTxB" : "",
+							"uriRxA" : "",
+							"uriRxB" : ""
+						}, {
+							"activoTx" : 0,
+							"activoRx" : 0,
+							"uriTxA" : "",
+							"uriTxB" : "",
+							"uriRxA" : "",
+							"uriRxB" : ""
+						}, {
+							"activoTx" : 0,
+							"activoRx" : 0,
+							"uriTxA" : "",
+							"uriTxB" : "",
+							"uriRxA" : "",
+							"uriRxB" : ""
+						}
+					]
+				},
+				"iPrecisionAudio" : 1
+			},
+			"telefonia" : {
+				"tipo" : 0,
+				"lado" : 1,
+				"t_eym" : 0,
+				"h2h4" : 0,
+				"ladoeym" : 0,
+				"modo" : 0,
+				"r_automatica" : 1,
+				"no_test_local" : "",
+				"no_test_remoto" : "",
+				"it_release" : 5,
+				"uri_remota" : "",
+				"detect_vox" : 0,
+				"umbral_vox" : -10,
+				"tm_inactividad" : 2,
+				"superv_options" : 1,
+				"tm_superv_options" : 2,
+				"colateral_scv" : 0,
+				"ats_rangos_dst" : [],
+				"ats_rangos_org" : [],
+				"iT_Int_Warning" : 5
+			},
+			"LlamadaAutomatica" : 0,
+			"restriccion" : 0,
+			"blanca" : [],
+			"negra" : []
+		}, {
+			"IdRecurso" : "RD02",
+			"Radio_o_Telefonia" : 1,
+			"SlotPasarela" : 1,
+			"NumDispositivoSlot" : 0,
+			"TamRTP" : 20,
+			"Codec" : 0,
+			"Uri_Local" : "sip:RD02@192.168.0.223",
+			"enableRegistro" : 0,
+			"szClave" : "",
+			"Buffer_jitter" : {
+				"min" : 0,
+				"max" : 0
+			},
+			"hardware" : {
+				"AD_AGC" : 0,
+				"AD_Gain" : 0,
+				"DA_AGC" : 0,
+				"DA_Gain" : 0
+			},
+			"radio" : {
+				"tipo" : 4,
+				"sq" : 0,
+				"ptt" : 0,
+				"bss" : 0,
+				"modoConfPtt" : 0,
+				"repSqBss" : 1,
+				"desactivacionSq" : 1,
+				"timeoutPtt" : 200,
+				"metodoBss" : 0,
+				"umbralVad" : -33,
+				"numFlujosAudio" : 1,
+				"tiempoPtt" : 120,
+				"tmVentanaRx" : 100,
+				"climaxDelay" : 1,
+				"tmRetardoFijo" : 100,
+				"bssRtp" : 0,
+				"retrasoSqOff" : 50,
+				"evtPTT" : 0,
+				"tjbd" : 20,
+				"tGRSid" : 10,
+				"iEnableGI" : 1,
+				"tabla_indices_calidad" : [],
+				"iSesionPrio" : 0,
+				"iPttPrio" : 0,
+				"colateral" : {
+					"name" : "127.700",
+					"tipoConmutacion" : 0,
+					"emplazamientos" : [{
+							"activoTx" : 0,
+							"activoRx" : 0,
+							"uriTxA" : "",
+							"uriTxB" : "",
+							"uriRxA" : "",
+							"uriRxB" : ""
+						}, {
+							"activoTx" : 0,
+							"activoRx" : 0,
+							"uriTxA" : "",
+							"uriTxB" : "",
+							"uriRxA" : "",
+							"uriRxB" : ""
+						}, {
+							"activoTx" : 0,
+							"activoRx" : 0,
+							"uriTxA" : "",
+							"uriTxB" : "",
+							"uriRxA" : "",
+							"uriRxB" : ""
+						}
+					]
+				},
+				"iPrecisionAudio" : 1
+			},
+			"telefonia" : {
+				"tipo" : 0,
+				"lado" : 1,
+				"t_eym" : 0,
+				"h2h4" : 0,
+				"ladoeym" : 0,
+				"modo" : 0,
+				"r_automatica" : 1,
+				"no_test_local" : "",
+				"no_test_remoto" : "",
+				"it_release" : 5,
+				"uri_remota" : "",
+				"detect_vox" : 0,
+				"umbral_vox" : -10,
+				"tm_inactividad" : 2,
+				"superv_options" : 1,
+				"tm_superv_options" : 2,
+				"colateral_scv" : 0,
+				"ats_rangos_dst" : [],
+				"ats_rangos_org" : [],
+				"iT_Int_Warning" : 5
+			},
+			"LlamadaAutomatica" : 0,
+			"restriccion" : 0,
+			"blanca" : [],
+			"negra" : []
+		}, {
+			"IdRecurso" : "R2_1",
+			"Radio_o_Telefonia" : 2,
+			"SlotPasarela" : 1,
+			"NumDispositivoSlot" : 1,
+			"TamRTP" : 20,
+			"Codec" : 0,
+			"Uri_Local" : "sip:R2_1@192.168.0.223",
+			"enableRegistro" : 0,
+			"szClave" : "",
+			"Buffer_jitter" : {
+				"min" : 0,
+				"max" : 0
+			},
+			"hardware" : {
+				"AD_AGC" : 0,
+				"AD_Gain" : 0,
+				"DA_AGC" : 0,
+				"DA_Gain" : 0
+			},
+			"radio" : {
+				"tipo" : 0,
+				"sq" : 0,
+				"ptt" : 0,
+				"bss" : 0,
+				"modoConfPtt" : 0,
+				"repSqBss" : 1,
+				"desactivacionSq" : 1,
+				"timeoutPtt" : 200,
+				"metodoBss" : 0,
+				"umbralVad" : -33,
+				"numFlujosAudio" : 1,
+				"tiempoPtt" : 0,
+				"tmVentanaRx" : 100,
+				"climaxDelay" : 1,
+				"tmRetardoFijo" : 100,
+				"bssRtp" : 0,
+				"retrasoSqOff" : 50,
+				"evtPTT" : 0,
+				"tjbd" : 20,
+				"tGRSid" : 10,
+				"iEnableGI" : 0,
+				"tabla_indices_calidad" : [],
+				"iSesionPrio" : 0,
+				"iPttPrio" : 0,
+				"colateral" : {
+					"name" : "default",
+					"tipoConmutacion" : 0,
+					"emplazamientos" : []
+				},
+				"iPrecisionAudio" : 1
+			},
+			"telefonia" : {
+				"tipo" : 3,
+				"lado" : 0,
+				"t_eym" : 0,
+				"h2h4" : 0,
+				"ladoeym" : 0,
+				"modo" : 0,
+				"r_automatica" : 0,
+				"no_test_local" : "",
+				"no_test_remoto" : "",
+				"it_release" : 5,
+				"uri_remota" : "",
+				"detect_vox" : 1,
+				"umbral_vox" : 0,
+				"tm_inactividad" : 2,
+				"superv_options" : 1,
+				"tm_superv_options" : 2,
+				"colateral_scv" : 0,
+				"ats_rangos_dst" : [],
+				"ats_rangos_org" : [],
+				"iT_Int_Warning" : 5
+			},
+			"LlamadaAutomatica" : 0,
+			"restriccion" : 0,
+			"blanca" : [],
+			"negra" : []
+		}, {
+			"IdRecurso" : "BL_1",
+			"Radio_o_Telefonia" : 2,
+			"SlotPasarela" : 1,
+			"NumDispositivoSlot" : 2,
+			"TamRTP" : 20,
+			"Codec" : 0,
+			"Uri_Local" : "sip:BL_1@192.168.0.223",
+			"enableRegistro" : 0,
+			"szClave" : "",
+			"Buffer_jitter" : {
+				"min" : 0,
+				"max" : 0
+			},
+			"hardware" : {
+				"AD_AGC" : 0,
+				"AD_Gain" : 0,
+				"DA_AGC" : 0,
+				"DA_Gain" : 0
+			},
+			"radio" : {
+				"tipo" : 0,
+				"sq" : 0,
+				"ptt" : 0,
+				"bss" : 0,
+				"modoConfPtt" : 0,
+				"repSqBss" : 1,
+				"desactivacionSq" : 1,
+				"timeoutPtt" : 200,
+				"metodoBss" : 0,
+				"umbralVad" : -33,
+				"numFlujosAudio" : 1,
+				"tiempoPtt" : 0,
+				"tmVentanaRx" : 100,
+				"climaxDelay" : 1,
+				"tmRetardoFijo" : 100,
+				"bssRtp" : 0,
+				"retrasoSqOff" : 50,
+				"evtPTT" : 0,
+				"tjbd" : 20,
+				"tGRSid" : 10,
+				"iEnableGI" : 0,
+				"tabla_indices_calidad" : [],
+				"iSesionPrio" : 0,
+				"iPttPrio" : 0,
+				"colateral" : {
+					"name" : "default",
+					"tipoConmutacion" : 0,
+					"emplazamientos" : []
+				},
+				"iPrecisionAudio" : 1
+			},
+			"telefonia" : {
+				"tipo" : 0,
+				"lado" : 0,
+				"t_eym" : 0,
+				"h2h4" : 0,
+				"ladoeym" : 0,
+				"modo" : 0,
+				"r_automatica" : 0,
+				"no_test_local" : "",
+				"no_test_remoto" : "",
+				"it_release" : 5,
+				"uri_remota" : "",
+				"detect_vox" : 1,
+				"umbral_vox" : 0,
+				"tm_inactividad" : 2,
+				"superv_options" : 1,
+				"tm_superv_options" : 2,
+				"colateral_scv" : 0,
+				"ats_rangos_dst" : [],
+				"ats_rangos_org" : [],
+				"iT_Int_Warning" : 5
+			},
+			"LlamadaAutomatica" : 0,
+			"restriccion" : 0,
+			"blanca" : [],
+			"negra" : []
+		}
+	],
+	"users" : [],
+	"servicios" : {
+		"name" : "",
+		"idSERVICIOS" : -858993460,
+		"sip" : {
+			"PuertoLocalSIP" : 5060,
+			"KeepAlivePeriod" : 200,
+			"KeepAliveMultiplier" : 10,
+			"SupresionSilencio" : 1,
+			"PeriodoSupervisionSIP" : 90,
+			"proxys" : [{
+					"ip" : "192.168.1.211",
+					"selected" : 0
+				}, {
+					"ip" : "192.168.2.211",
+					"selected" : 0
+				}],
+			"registrars" : []
+		},
+		"web" : {
+			"wport" : 8080,
+			"stime" : 0
+		},
+		"snmp" : {
+			"agcomm" : "public",
+			"agcont" : "NUCLEO-DF DT. MADRID. SPAIN",
+			"agloc" : "NUCLEO-DF LABS",
+			"agname" : "ULISESG5000i",
+			"agv2" : 0,
+			"sport" : 65000,
+			"snmpp" : 0,
+			"traps" : []
+		},
+		"grab" : {
+			"rtsp_uri" : "",
+			"rtsp_ip" : "127.0.0.1",
+			"sport" : 65001,
+			"rtsp_port" : 0,
+			"rtsp_rtp" : -858993460,
+			"rtp_pl" : -858993460,
+			"rtp_sr" : -858993460
+		},
+		"sincr" : {
+			"ntp" : 2,
+			"servidores" : []
+		}
+	},
+	"ulises" : {
+		"MulticastGroup" : "224.100.10.1",
+		"MulticastPort" : 2000
+	}
+}

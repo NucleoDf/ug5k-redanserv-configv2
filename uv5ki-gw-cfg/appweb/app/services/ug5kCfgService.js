@@ -3,10 +3,10 @@ angular
     .module('Ug5kweb')
     .factory('CfgService', CfgService);
 
-CfgService.$inject = ['dataservice', '$q', '$rootScope', 'transerv'];
+CfgService.$inject = ['dataservice', '$q', '$rootScope', 'transerv', 'authservice'];
 
 /** */
-function CfgService(dataservice, $q, $rootScope, transerv) {
+function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
 
     /** */
     var cfg = null;
@@ -21,7 +21,8 @@ function CfgService(dataservice, $q, $rootScope, transerv) {
     var last_tf_rec = 0;
 
     /** */
-    var global_opt=0;
+    var global_opt = 0;
+    var global_modo = "rd";
 
     /** */
     function Cfg2RadioTelef() {
@@ -429,11 +430,24 @@ function CfgService(dataservice, $q, $rootScope, transerv) {
                 return ret;
             }
         }
+        /** */
         , opcion: function (opt) {
             if (opt != undefined)
                 global_opt = opt;
-            return global_opt;
-                
+            return global_opt;                
+        }
+        /** */
+        , modo: function (md) {
+            if (md != undefined)
+                global_modo = md;
+            return global_modo;
+        }
+        /** */
+        , global_enable: function (perfiles) {
+            return (authservice.ProfilePermission(true, perfiles) && global_modo != "ul");
+        }
+        , hide_on_ulises: function () {
+            return !(global_modo == "ul");
         }
     };
 }

@@ -70,6 +70,9 @@ public:
 		CCSLock _lock(m_lock);
 		return _stdLocalConfig;
 	}
+	string Modo() {
+		return modo;
+	}
 
 protected:
 	void StdSincrSet(eStdLocalConfig nstd/*, jgw_config &local*/);
@@ -85,6 +88,7 @@ protected:
 	int _cntticks;
 	int _maxticks;
 	bool _bconflicto;
+	string modo;
 };
 
 

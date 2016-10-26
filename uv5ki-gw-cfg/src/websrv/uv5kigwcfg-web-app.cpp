@@ -121,12 +121,11 @@ void Uv5kiGwCfgWebApp::stCb_tses(struct mg_connection *conn, string user, web_re
 {
 	resp->actividad=false;
 	if (string(conn->request_method)=="GET") 
-	{
-		// Enlazar con los datos reales en el constructor...
+	{	// Enlazar con los datos reales en el constructor...
 		int std;
 		string cfg_name, cfg_time;
 		P_CFG_PROC->IdConfig(std, cfg_name, cfg_time);
-		webData_tses data(std, cfg_name, cfg_time);
+		webData_tses data(std, cfg_name, cfg_time, P_CFG_PROC->Modo());
 		RETURN_OK200_RESP(resp, data.JSerialize());
 	}
 #if LOCAL_TEST

@@ -209,7 +209,6 @@
     <None Include="appweb\app\services\ug5kMantService.js" />
     <None Include="appweb\app\services\ug5kTranslateService.js" />
     <None Include="appweb\app\services\ug5kValidationService.js" />
-    <None Include="appweb\app\templates\ug5kweb-bite-templ.html" />
     <None Include="appweb\app\templates\ug5kweb-swload-templ.html" />
     <None Include="appweb\app\views\ug5kweb-config.html" />
     <None Include="appweb\app\views\ug5kweb-hardware.html" />

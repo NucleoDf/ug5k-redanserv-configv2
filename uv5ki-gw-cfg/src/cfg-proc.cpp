@@ -186,6 +186,7 @@ void JsonClientProc::Run()
 {
 	SetId("JsonClientProc");
 	PLOG_INFO("JsonClientProc running...");
+	modo="rd";
 
 	_maxticks = (LocalConfig::cfg.ConfigTsup()*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;
@@ -342,6 +343,7 @@ void SoapClientProc::Run()
 {
 	SetId("SoapClientProc");
 	PLOG_INFO("SoapClientProc running...");
+	modo="ul";
 
 	_maxticks = (LocalConfig::cfg.ConfigTsup()*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;

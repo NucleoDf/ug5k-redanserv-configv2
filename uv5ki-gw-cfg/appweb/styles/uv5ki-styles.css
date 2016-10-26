@@ -180,12 +180,12 @@ div#agrupar header#cabecera
 
 #_menu ul li:nth-child(8)
 {
-    margin-top: 1em;
+    margin-top: 3em;
 }
 
 #_menu ul li:nth-child(10)
 {
-    margin-top: 1em;
+    margin-top: 2em;
 }
 
 #_ppalerror
@@ -223,7 +223,19 @@ div#agrupar header#cabecera
     border: 1px solid black;
 }
 
-#_ppallog #btn
+#_ppallog h3
+{
+	font-size: 120%;
+	background-color: #C1022C;
+	color: white;
+	width: 100%;
+	margin: 0;
+	margin-bottom: 1.5em;
+	padding: 0.4em;
+    text-align:center;
+}
+
+#_ppallog .btn
 {
 	float: right;
 }
@@ -268,20 +280,27 @@ section#_ppal #_tabs
     margin-bottom: 10px;
 }
 
-#_contenido .ug5ktb 
+.ug5ktb 
 {
-	border: 0;
+    width: 90%;
+    margin-top: 1em;
+    margin-left: 5%;
+	border-bottom: 1px solid #C1022C;
 }
 
-.ug5ktb tr td:nth-child(2)
+.ug5ktb tr td:last-child,th:last-child
 {
 	text-align: right;
-	width: 60%;
+	/*width: 60%;*/
 }
 
 .ug5ktb label {
     padding: 0.45em;
     color: #C1022C;
+}
+
+.ug5ktb input
+{
 }
 
 .ug5ktb .error 
@@ -291,8 +310,55 @@ section#_ppal #_tabs
 
 .ug5ktb .col-sm-11 input
 {
-    color: blue;
-    float: right;
+    /*float: right;*/
+}
+
+#Estado .ug5ktb
+{
+}
+
+#Estado .ug5ktb tr td:first-child
+{
+    width: 30%;
+}
+
+#Estado .ug5ktb tr td:last-child
+{
+    width: 20%;
+}
+
+#hBite .row
+{
+    width: 80%;
+    margin-left: 10%;
+}
+
+#hBite p
+{
+    color: black;    
+}
+
+#hSoft
+{
+    margin-top: 1em;
+}
+
+#hSoft .row
+{
+    width: 90%;
+    margin-left: 5%;
+}
+
+#hSoft p
+{
+    color: black;    
+}
+
+#_contenido .botones
+{
+    width: 90%;
+    margin-left: 5%;
+    text-align: right;
 }
 
 #_pie

@@ -392,7 +392,9 @@ public:
 class soap_ResourceInfo : public xml_data
 {
 public:
-	soap_ResourceInfo(){}
+	soap_ResourceInfo()	{
+		UmbralTonoSQ = -30;
+	}
 	~soap_ResourceInfo(){}
 public:
 	void xread(xml_node<> * xnode) {

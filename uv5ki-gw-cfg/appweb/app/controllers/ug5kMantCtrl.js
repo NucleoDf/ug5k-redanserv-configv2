@@ -3,9 +3,9 @@ angular
 	.module('Ug5kweb')
 	.controller('ug5kMantCtrl', ug5kMantCtrl);
 
-ug5kMantCtrl.$inject = ['$scope', '$q', '$interval', 'transerv', 'dataservice', 'authservice', 'MantService', 'CfgService', 'ngDialog'];
+ug5kMantCtrl.$inject = ['$scope', '$q', '$interval', 'transerv', 'dataservice', 'authservice', 'MantService', 'CfgService'/*, 'ngDialog'*/];
 
-function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice, MantService, CfgService, ngDialog) {
+function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice, MantService, CfgService/*, ngDialog*/) {
     var vm = this;
     var simul = true;
 
@@ -66,17 +66,8 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
             function (respuesta) {
                 console.log("GET: ", respuesta);
                 $("body").css("cursor", "default");
-                vm.diag = ngDialog.open({
-                    template: './app/templates/ug5kweb-bite-templ.html',
-                    className: 'ngdialog-theme-nucleo',
-                    controller: ['$scope', function ($scope) {
-                        // controller logic
-                        $scope.gRes = respuesta;
-                        $scope.close = function () {
-                            ngDialog.close(vm.diag);
-                        }
-                    }]
-                });
+                $scope.gRes = respuesta;
+                $("#hBite").modal("show");
             },
             function (error) {
                 alert("POST-ERROR: ", error);
@@ -108,67 +99,67 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 
     /** */
 	vm.software_load = function () {
-	    vm.diag = ngDialog.open({
-	        template: './app/templates/ug5kweb-swload-templ.html',
-	        className: 'ngdialog-theme-nucleo',
-	        controller: ['$scope', 'dataservice', function ($scope, dataservice) {
-	            // controller logic
-	            $scope.idsoftware = "UG5K-REDAN";
-	            $scope.version = vm.verbose.version;
-	            //$scope.myFile = "";
-	            $scope.software_load_send = function () {
-	                if ($scope.myFile == undefined)
-	                    alert(/*"Debe Seleccionar un fichero!!!"*/transerv.translate('MCTRL_MSG_04'));
-	                else {
-	                    var file = $scope.myFile;
-	                    console.log('file is ' + JSON.stringify(file));
-	                    var uploadUrl = "/sw_upload";
-	                    dataservice.send_file(uploadUrl, file, $scope.idsoftware, $scope.version).then(
-                            function () {
-                                console.log("Fichero Enviado..");
-                                if (Confirma(/*"Fichero Enviado. ¿Activar la Version?.\nEl sistema se Reiniciara..."*/transerv.translate('MCTRL_MSG_05'))) {
-                                    dataservice.post('/mant/swactiva/1').then(
-                                        function (respuesta) {
-                                            console.log("Version Software Activada");
-                                            alert(/*"Version Software Activada"*/transerv.translate('MCTRL_MSG_06'));
-                                            vgetVersiones();
-                                            vgetVerbose();
-                                        },
-                                        function (error) {
-                                            alert(/*"Error en Activacion software: "*/transerv.translate('MCTRL_MSG_07'), +error.data);
-                                            vgetVersiones();
-                                            vgetVerbose();
-                                        });
-                                }
-                                else {
-                                    dataservice.post('/mant/swactiva/0').then(
-                                        function (respuesta) {
-                                            console.log("Cancelada Activacion de Version Software");
-                                            alert(/*"Cancelada Activacion de Version Software"*/transerv.translate('MCTRL_MSG_08'));
-                                            vgetVersiones();
-                                            vgetVerbose();
-                                        },
-                                        function (error) {
-                                            alert(/*"Error en Activacion software: "*/transerv.translate('MCTRL_MSG_09'), +error.data);
-                                            vgetVersiones();
-                                            vgetVerbose();
-                                        });
-                                }
 
-	                            //vgetVersiones();
-	                            //vgetVerbose();
-	                            ngDialog.close(vm.diag);
-                            },
-                            function (reason) {
-                                alert(/*"Error al enviar el fichero: "*/transerv.translate('MCTRL_MSG_10') + reason.data);
-                                ngDialog.close(vm.diag);
-                            }
-                            );
-	                }
-	            }
+	    //vm.diag = ngDialog.open({
+	    //    template: './app/templates/ug5kweb-swload-templ.html',
+	    //    className: 'ngdialog-theme-nucleo',
+	    //    controller: ['$scope', 'dataservice', function ($scope, dataservice) {
+	    //        // controller logic
+	    //        $scope.idsoftware = "UG5K-REDAN";
+	    //        $scope.version = vm.verbose.version;
+	    //        //$scope.myFile = "";
+	    //        $scope.software_load_send = function () {
+	    //            if ($scope.myFile == undefined)
+	    //                alert(/*"Debe Seleccionar un fichero!!!"*/transerv.translate('MCTRL_MSG_04'));
+	    //            else {
+	    //                var file = $scope.myFile;
+	    //                console.log('file is ' + JSON.stringify(file));
+	    //                var uploadUrl = "/sw_upload";
+	    //                dataservice.send_file(uploadUrl, file, $scope.idsoftware, $scope.version).then(
+        //                    function () {
+        //                        console.log("Fichero Enviado..");
+        //                        if (Confirma(/*"Fichero Enviado. ¿Activar la Version?.\nEl sistema se Reiniciara..."*/transerv.translate('MCTRL_MSG_05'))) {
+        //                            dataservice.post('/mant/swactiva/1').then(
+        //                                function (respuesta) {
+        //                                    console.log("Version Software Activada");
+        //                                    alert(/*"Version Software Activada"*/transerv.translate('MCTRL_MSG_06'));
+        //                                    vgetVersiones();
+        //                                    vgetVerbose();
+        //                                },
+        //                                function (error) {
+        //                                    alert(/*"Error en Activacion software: "*/transerv.translate('MCTRL_MSG_07'), +error.data);
+        //                                    vgetVersiones();
+        //                                    vgetVerbose();
+        //                                });
+        //                        }
+        //                        else {
+        //                            dataservice.post('/mant/swactiva/0').then(
+        //                                function (respuesta) {
+        //                                    console.log("Cancelada Activacion de Version Software");
+        //                                    alert(/*"Cancelada Activacion de Version Software"*/transerv.translate('MCTRL_MSG_08'));
+        //                                    vgetVersiones();
+        //                                    vgetVerbose();
+        //                                },
+        //                                function (error) {
+        //                                    alert(/*"Error en Activacion software: "*/transerv.translate('MCTRL_MSG_09'), +error.data);
+        //                                    vgetVersiones();
+        //                                    vgetVerbose();
+        //                                });
+        //                        }
 
-	        }]
-	    });
+	    //                        //vgetVersiones();
+	    //                        //vgetVerbose();
+	    //                        ngDialog.close(vm.diag);
+        //                    },
+        //                    function (reason) {
+        //                        alert(/*"Error al enviar el fichero: "*/transerv.translate('MCTRL_MSG_10') + reason.data);
+        //                        ngDialog.close(vm.diag);
+        //                    }
+        //                    );
+	    //            }
+	    //        }
+	    //    }]
+	    //});
 	}
 
     /** */

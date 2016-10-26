@@ -306,7 +306,7 @@ protected:
 class webData_tses : public jData
 {
 public:
-	webData_tses(int parStd=0, string parIdc="IDC_IDC", string parTim="TIM_TIM");
+	webData_tses(int parStd=0, string parIdc="IDC_IDC", string parTim="TIM_TIM", string parModo="rd");
 	webData_tses(string jData) {
 		JDeserialize(jData);
 	}
@@ -319,6 +319,7 @@ public:
 		read_key(base, "idc", idc);
 		read_key(base, "tim", tim);
 		read_key(base, "ver", ver);
+		read_key(base, "modo", modo);
 #endif
 	}
 	virtual void jwrite(Writer<StringBuffer> &writer);
@@ -328,6 +329,7 @@ private:
 	string idc;
 	string tim;
 	string ver;
+	string modo;
 #if LOCAL_TEST_1
 	webData_line msg;
 	vector<string> val_prueba1;

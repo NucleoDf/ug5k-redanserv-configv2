@@ -34,11 +34,11 @@ CommConfig::CommConfig(soap_config &sConfig)
 CommGenConfig::CommGenConfig(soap_config &sc)
 {
 	this->name = sc.CfgPasarela.Nombre;
-	this->emplazamiento = "";					// TODO: 
-	this->dualidad = 0;							// TODO: 
+	this->emplazamiento = "";					// Dejar Vacio. 
+	this->dualidad = 0;							// TODO: Leer DatosLocales.ini
 	this->ipv = sc.Ip;
 	this->ips=sc.Server;
-	this->nivelconsola = 0;						// TODO: 
+	this->nivelconsola = 0;						// TODO: Leer DatosLocales.ini
 	this->puertoconsola = 0;
 	this->nivelIncidencias = 0;
 
@@ -137,10 +137,10 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 		this->Codec = sres.info.Codec;
 		this->Uri_Local = "sip:" + sres.IdRecurso + "@" + sc.Ip;
 
-		this->enableRegistro = 0;							// TODO: 
-		this->szClave = "";									// TODO: 
-		this->Buffer_jitter.max = 0;							// TODO: 
-		this->Buffer_jitter.min = 0;							// TODO: 
+		this->enableRegistro = 0;							// Dejar a 0. 
+		this->szClave = "";									// Dejar vacio.
+		this->Buffer_jitter.max = 0;							// Dejar a 0.
+		this->Buffer_jitter.min = 0;							// Dejar a 0. 
 
 		this->hardware.AD_AGC = sres.info.GananciaAGCRX;
 		this->hardware.AD_Gain= sres.info.GananciaAGCRXdBm;
@@ -162,58 +162,57 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->radio.umbralVad=sres.info.radio.UmbralVAD;
 			this->radio.numFlujosAudio=sres.info.radio.NumFlujosAudio;
 			this->radio.tiempoPtt=sres.info.radio.TiempoPTT;
-			this->radio.tmVentanaRx=100;										// TODO: 
-			this->radio.climaxDelay=1;										// TODO: 
-			this->radio.tmRetardoFijo=100;									// TODO: 
-			this->radio.bssRtp=0;											// TODO: 
-			this->radio.retrasoSqOff=50;										// TODO: 
-			this->radio.evtPTT=0;											// TODO: 
-			this->radio.tjbd=20;												// TODO: 
-			this->radio.tGRSid=10;											// TODO: 
-			this->radio.iEnableGI=sres.info.GrabacionEd137==false ? 0 : 1;
+			this->radio.tmVentanaRx=0;										// Radio Local a 0
+			this->radio.climaxDelay=0;										// Idem
+			this->radio.tmRetardoFijo=0;										// Idem
+			this->radio.bssRtp=0;											// TODO: Quitar...
+			this->radio.retrasoSqOff=0;										// Dejar a 0
+			this->radio.evtPTT=0;											// Dejar a 0
+			this->radio.tjbd=30;												// Dejar a 30
+			this->radio.tGRSid=10;											// Dejar a 10
+			this->radio.iEnableGI=sres.info.GrabacionEd137==false ? 0 : 1;	// 
 
-			this->radio.tabla_indices_calidad.clear();						// TODO: 
+			this->radio.tabla_indices_calidad.clear();						//  
 		
-			this->radio.iSesionPrio=0;										// Solo en REDAN. Radio Local.
-			this->radio.iPttPrio=0;											// 
-			this->radio.iPrecisionAudio=1;									// Normal.
+			this->radio.iSesionPrio=0;										// Radio Local a 0
+			this->radio.iPttPrio=0;											// Idem
+			this->radio.iPrecisionAudio=0;									// Normal.
 
-			this->radio.colateral.name=sres.info.IdDestino;					// Frecuencia. Solo REDAN
-			this->radio.colateral.tipoConmutacion=0;
-			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
-			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
-			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
+			this->radio.colateral.name=sres.info.IdDestino;					// FID. Frecuencia
+			this->radio.colateral.tipoConmutacion=0;							// Quitar...
+																			// Es en local. Quitar.
+			this->radio.colateral.emplazamientos.clear();
 		}
 		else 
 		{
 			/** Parametros Generales Telefonia */
 			sc.TipoTelefonia((int )sres.Interface, this->telefonia.tipo);
 			this->telefonia.lado = sres.info.telef.Lado;
-			this->telefonia.t_eym = 0;								 // sres.info.telef.TipoEM; TODO: En REDAN no se utiliza.
-			this->telefonia.h2h4 = 0;								 // sres.info.telef.Modo; TODO: En REDAN no se utiliza.
-			this->telefonia.ladoeym = 0;								 // res.info.telef.Lado; TODO: En REDAN no se utiliza.
-			this->telefonia.modo = 0;								 // sres.info.telef.Modo; TODO: En REDAN no se utiliza.
-			this->telefonia.r_automatica = 0;						 // Solo en REDAN.
-			this->telefonia.no_test_local = "";						 // TODO: Solo en REDAN.
-			this->telefonia.no_test_remoto = "";						 // TODO: Solo en REDAN.
-			this->telefonia.it_release = 5;							 // TODO: Solo en REDAN.
-			this->telefonia.uri_remota = "";							 // TODO: Solo en REDAN.
-			this->telefonia.detect_vox = 1;							 // TODO: 
+			this->telefonia.t_eym = 0;								 // TODO: Confirmar.
+			this->telefonia.h2h4 = 0;								 // TODO: Confirmar.
+			this->telefonia.ladoeym = 0;								 // TODO: Confirmar.
+			this->telefonia.modo = 0;								 // TODO: Confirmar.
+			this->telefonia.r_automatica = 0;						 // Dejar a Cero.
+			this->telefonia.no_test_local = "";						 // TODO: Numero de la Central PROPIA.
+			this->telefonia.no_test_remoto = "";						 // TODO: Numero del troncal que contiene al recurso.
+			this->telefonia.it_release = 5;							 // Dejar a 5.
+			this->telefonia.uri_remota = "";							 // Dejar vacio.
+			this->telefonia.detect_vox = 1;							 // Dejar a 1.
 			this->telefonia.umbral_vox = sres.info.UmbralTonoSQ;		 // TODO: Confirmar.
 			this->telefonia.tm_inactividad = 2;						 // TODO: Confirmar.
-			this->telefonia.superv_options = 1;						 // TODO: Confirmar.
-			this->telefonia.tm_superv_options = 2;					 // TODO: Confirmar.
-			this->telefonia.colateral_scv = 0;						 // TODO: Confirmar.
-			this->telefonia.iT_Int_Warning = 5;						 // TODO: Confirmar.
-			this->telefonia.ats_rangos_dst.clear();					 // TODO: Confirmar.
-			this->telefonia.ats_rangos_org.clear();					 // TODO: Confirmar.
+			this->telefonia.superv_options = 0;						 // Dejar a 0.
+			this->telefonia.tm_superv_options = 0;					 // Dejar a 0.
+			this->telefonia.colateral_scv = 0;						 // Dejar a 0.
+			this->telefonia.iT_Int_Warning = 5;						 // Dejar a 5.
+			this->telefonia.ats_rangos_dst.clear();					 // Dejar Vacio.
+			this->telefonia.ats_rangos_org.clear();					 // Dejar Vacio.
 		}
 
-		this->LlamadaAutomatica=0;							// Solo REDAN.
+		this->LlamadaAutomatica=0;									// Dejar a 0
 
-		this->restriccion=0;									// Solo REDAN.
-		this->blanca.clear();								// Solo REDAN.
-		this->negra.clear();									// Solo REDAN.
+		this->restriccion=0;											// Dejar a 0.
+		this->blanca.clear();										// Dejar Vacio.
+		this->negra.clear();											// Dejar Vacio.
 	}
 }
 
@@ -223,5 +222,5 @@ CommUv5Config::CommUv5Config(soap_config &sc)
 	this->MulticastGroup = sc.ParametrosMulticast.GrupoMulticastConfiguracion;
 	this->MulticastPort = sc.ParametrosMulticast.PuertoMulticastConfiguracion;
 
-	// TODO: Resto de la configruacion.
+	// TODO: Resto de la configuracion.
 }

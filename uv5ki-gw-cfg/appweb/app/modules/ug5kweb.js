@@ -70,6 +70,8 @@ var rest_url_logout = '/logout';
 var rest_url_tses = '/tses';
 var rest_url_config = '/config';
 var rest_url_upconfig = '/uploadcfg';
+var rest_url_preconfig = '/preconf';
+var rest_url_impexp = '/impexp';
 var routeForUnauthorizedAccess = '/noaut';
 var routeForLogin = '/login.html';
 
