@@ -24,6 +24,22 @@
 
 using namespace std;
 
+/** */
+class url 
+{
+public:
+	  // omitted copy, ==, accessors, ...
+    url(const string& url_s) {
+		parse(url_s);
+	}
+private:
+    void parse(const string& url_s);
+
+public:
+    string protocol_, host_, path_, query_;
+};
+
+/** */
 class Tools
 {
 public:

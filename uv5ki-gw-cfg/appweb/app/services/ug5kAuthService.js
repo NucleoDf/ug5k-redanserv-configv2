@@ -3,17 +3,25 @@ angular
     .module('Ug5kweb')
     .factory('authservice', authservice);
 
-authservice.$inject = ['$q','$location','$rootScope'];
+authservice.$inject = ['MantService', '$q', '$location', '$rootScope'];
 
 /** */
-function authservice($q, $location, $rootScope) {
+function authservice(MantService, $q, $location, $rootScope) {
     var retorno = {
-        browser_support: BrowserSupport,
-        check_session_route: CheckSession,
-		check_session: CheckSession_old,
-		profile: Profile,
-		ProfilePermission: ProfilePermission,
-        Confirma: Confirma
+        browser_support: BrowserSupport
+        , check_session_route: CheckSession
+        , check_session: CheckSession_old
+        , profile: Profile
+        , ProfilePermission: ProfilePermission
+        , Confirma: Confirma
+        , global_enable: function (perfiles) {
+            if (ProfilePermission(true, perfiles)==false)
+                return false;
+            var aislado = MantService.global_estado()==-3 ? true : false;
+            if (aislado == false && MantService.modo() == "ul")
+                return false;
+            return true;
+        }
     };
 
     /** */

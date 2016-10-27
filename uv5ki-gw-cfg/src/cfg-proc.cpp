@@ -6,7 +6,7 @@
 /** */
 #define HTTP_CLIENT_TICK	50
 #ifdef _PARAMS_IN_INI_
-#define SERVER_URL			(LocalConfig::cfg.ServerURL())
+#define SERVER_URL			(LocalConfig::cfg.get(strSection, strItemServidor))
 #else
 #define SERVER_URL			(jgw_config::cfg.ServerURL())
 #endif
@@ -83,7 +83,7 @@ void CfgProc::AvisaChequearConfiguracion()
 	CCSLock _lock(m_lock);
 
 #ifdef _WIN32
-	if (LocalConfig::cfg.winSyncSer())
+	if (LocalConfig::cfg.get(strWindowsTest, strItemWindowsTestServidor)=="1"/*.winSyncSer()*/)
 	{
 #endif
 		stAviso aviso;
@@ -150,7 +150,7 @@ void CfgProc::GeneraAvisosCpu(string host, string cmd)
 /** */
 void CfgProc::ResourcesConfigClear()
 {
-	if (LocalConfig::cfg.ClearResourcesOnBdt()==1) 
+	if (LocalConfig::cfg.get(strSection,strItemClearResourcesOnBdt)=="1")	// .ClearResourcesOnBdt()==1) 
 	{
 		PLOG_DEBUG("Procediendo a Limpiar los Recursos de la Pasarela por estar fuera de CFG-ACTIVA");
 
@@ -188,7 +188,7 @@ void JsonClientProc::Run()
 	PLOG_INFO("JsonClientProc running...");
 	modo="rd";
 
-	_maxticks = (LocalConfig::cfg.ConfigTsup()*1000)/HTTP_CLIENT_TICK;
+	_maxticks = (atoi(LocalConfig::cfg.get(strSection, strItemConfigTSUP).c_str())*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;
 	sistema::GetIpAddress(_ip_propia);
 
@@ -345,15 +345,20 @@ void SoapClientProc::Run()
 	PLOG_INFO("SoapClientProc running...");
 	modo="ul";
 
-	_maxticks = (LocalConfig::cfg.ConfigTsup()*1000)/HTTP_CLIENT_TICK;
+	_maxticks = (atoi(LocalConfig::cfg.get(strSection, strItemConfigTSUP).c_str())/*.ConfigTsup()*/*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;
 
+	/** Leo los datos del Hardware */
 	sistema::GetWorkingIpAddressAndName(_ip_propia, hwServer, hwName);
+	
+	/** Actualizo los datos en mis ficheros */
+	LocalConfig::cfg.set(strSection, strItemServidor, hwServer);
 	hwIp = _ip_propia;
 
+	/** Leer la ultima CFG recibida */
 	p_working_config->load_from(LAST_CFG);
+
 	AvisaChequearConfiguracion();
-	// AvisaPideConfiguracion();
 	while (IsRunning()) 
 	{
 

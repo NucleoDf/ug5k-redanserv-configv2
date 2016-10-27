@@ -18,11 +18,12 @@
 
 using namespace rapidxml;
 
-#define RAPID_XML_NODE_VALUE(pnode, tag)			(pnode!=NULL ? (pnode->first_node(tag)!=NULL ? pnode->first_node(tag)->value() : tag) : tag)
+#define RAPID_XML_NODE_VALUE(pnode, tag)	(pnode!=NULL ? (pnode->first_node(tag)!=NULL ? pnode->first_node(tag)->value() : tag) : tag)
 
 typedef string (*remoteGetXdataFunc)(string proc, string p1, string p2, string p3);
-
-enum TI_ {TI_Radio=0, TI_LCEN=1, TI_BC=2, TI_BL=3, TI_AB=4, TI_ATS_R2=5, TI_ATS_N5=6, TI_ATS_QSIG=7, TI_ISDN_2BD=8, TI_ISDN_30BD=9, TI_I_O=10, TI_DATOS=11};
+enum TI_ {
+	TI_Radio=0, TI_LCEN=1, TI_BC=2, TI_BL=3, TI_AB=4, TI_ATS_R2=5, TI_ATS_N5=6, TI_ATS_QSIG=7, TI_ISDN_2BD=8, TI_ISDN_30BD=9, TI_I_O=10, TI_DATOS=11
+};
 
 /** */
 class xml_data : public CodeBase
@@ -597,7 +598,6 @@ public:
 	int PeriodoSupervisionSIP;
 	vector<soap_RecursosSCV> ListaRecursos;
 };
-
 
 /** */
 class soap_config : public xml_data

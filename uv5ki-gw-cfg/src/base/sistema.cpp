@@ -61,9 +61,9 @@ string sistema::ResultExecuteCommand(char* cmd)
 /** */
 bool sistema::GetIpAddress(/*char *szIf, */string &ip)
 {
-	char *szIf = (char *)LocalConfig::cfg.NetworkInterfaceActiva().c_str();
+	char *szIf = (char *)LocalConfig::cfg.get(strSection, strItemNetworkInterfaceActiva, "eth0")/*.NetworkInterfaceActiva()*/.c_str();
 #ifdef _WIN32
-	ip = LocalConfig::cfg.ipWindows();
+	ip = LocalConfig::cfg.get(strWindowsTest, strItemWindowsTestIp)/*.ipWindows()*/;
 	return true;
 #else
     int iSocket;
@@ -111,17 +111,20 @@ void sistema::GetMacAddress(char *lan, char *mac)
 /** */
 void sistema::GetWorkingIpAddressAndName(string &ip, string &ipserv, string &name)
 {
+	DatosLocales datos_locales;
 	GetIpAddress(ip);
-#if defined _WIN32
-	ipserv = LocalConfig::cfg.ServerURL();
-	name = "CGW1";							// TODO: 
-#elif defined __APPLE__
-	ipserv = LocalConfig::cfg.ServerURL();
-	name = "CGW1";							// TODO: 	
-#else
-	ipserv = LocalConfig::cfg.ServerURL();	// TODO: 
-	name = "CGW1";							// TODO: 
-#endif
+	ipserv = datos_locales.ipServ;
+	name = datos_locales.idGw;							// TODO: 
+//#if defined _WIN32	
+//	ipserv = datos_locales.ipServ;
+//	name = datos_locales.idGw;							// TODO: 
+//#elif defined __APPLE__
+//	ipserv = LocalConfig::cfg.ServerURL();
+//	name = "CGW1";							// TODO: 	
+//#else
+//	ipserv = LocalConfig::cfg.ServerURL();	// TODO: 
+//	name = "CGW1";							// TODO: 
+//#endif
 }
 
 /** */
@@ -214,8 +217,8 @@ void sistema::DataSaveAs(string data, string filename)
  */
 bool sistema::MainOrStandby()
 {
-	string filepath = onfs(LocalConfig::cfg.getString("M-S-CONTROL", "PATH", "/mnt/ramfs/cpumode"));
-	string isMain = onfs(LocalConfig::cfg.getString("M-S-CONTROL", "MAIN", "PRINCIPAL"));
+	string filepath = onfs(LocalConfig::cfg.get("M-S-CONTROL", "PATH", "/mnt/ramfs/cpumode"));
+	string isMain = onfs(LocalConfig::cfg.get("M-S-CONTROL", "MAIN", "PRINCIPAL"));
 	ifstream ff(filepath.c_str());
 
 	if (ff.good())
@@ -242,13 +245,23 @@ time_t sistema::_TIMER_CLK()
 /** */
 string sistema::SnmpAgentVersion()
 {
-    //return ResultExecuteCommand((char *)"/home/snmp/ug5ksnmp /V");
-	return ResultExecuteCommand((char *)(LocalConfig::cfg.snmpExe() + " /V").c_str());
+#if defined(_PPC82xx_)
+    string file = onfs(LocalConfig::cfg.get(strModulos, strItemExeSnmp));
+	string command = file + " /V";
+	return ResultExecuteCommand((char *)command.c_str());
+#else
+	return "SnmpAgentVersion (WIN-LNX) 1.0.1";
+#endif
 }
 
 /** */
 string sistema::RecordServiceVersion() 
 {
-    //return ResultExecuteCommand((char *)"/home/rec/UG5KEd137b4Service /V");
-	return ResultExecuteCommand((char *)(LocalConfig::cfg.recExe() + " /V").c_str());
+#if defined(_PPC82xx_)
+	string file = onfs(LocalConfig::cfg.get(strModulos, strItemExeGrabador));
+	string command = file + " /V";
+	return ResultExecuteCommand((char *)command.c_str());
+#else
+	return "RecordServiceVersion (WIN-LNX) 1.0.1";
+#endif
 }

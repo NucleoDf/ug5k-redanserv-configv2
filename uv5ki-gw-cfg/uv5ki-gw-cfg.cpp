@@ -50,7 +50,7 @@ public:
 		try 
 		{
 			plogInit();
-			bool mode = LocalConfig::cfg.ModoUlises();
+			bool mode = LocalConfig::cfg.get(strUlises, strItemUlisesModo, "0")=="1"/*.ModoUlises()*/;
 
 			PLOG_INFO("%s (%s) CfgServer: (%s) Iniciado en \"%s\". ", 
 				Tools::read_txt_file(ON_WORKING_DIR("VERSION.TXT")).c_str(),  

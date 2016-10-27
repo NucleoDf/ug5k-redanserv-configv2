@@ -288,6 +288,10 @@ section#_ppal #_tabs
 	border-bottom: 1px solid #C1022C;
 }
 
+.ug5ktb tr td
+{
+}
+
 .ug5ktb tr td:last-child,th:last-child
 {
 	text-align: right;
@@ -295,17 +299,24 @@ section#_ppal #_tabs
 }
 
 .ug5ktb label {
-    padding: 0.45em;
     color: #C1022C;
+    padding-top:0.3em;
+    margin: 0px;
 }
 
 .ug5ktb input
 {
+    margin: 0px;
 }
 
-.ug5ktb .error 
+.ug5ktb .error
 {
 	padding-right: 1em;
+}
+
+.ug5ktb .lista input
+{
+    margin-bottom: 0.5em;
 }
 
 .ug5ktb .col-sm-11 input

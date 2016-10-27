@@ -1,6 +1,6 @@
 #include "../../include/tools/ftp-client.h"
 
-#define SCK_RECV_TIMEOUT	(LocalConfig::cfg.FtpGenTimeout())
+#define SCK_RECV_TIMEOUT	(atoi(LocalConfig::cfg.get(strSection, strItemFtpGenTimeout,"5").c_str())/*.FtpGenTimeout()*/)
 
 #if !defined(_PPC82xx_)
 /** */

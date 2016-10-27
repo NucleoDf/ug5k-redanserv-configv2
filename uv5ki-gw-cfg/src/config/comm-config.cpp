@@ -37,7 +37,7 @@ CommGenConfig::CommGenConfig(soap_config &sc)
 	this->emplazamiento = "";					// Dejar Vacio. 
 	this->dualidad = 0;							// TODO: Leer DatosLocales.ini
 	this->ipv = sc.Ip;
-	this->ips=sc.Server;
+	this->ips = sc.Server;
 	this->nivelconsola = 0;						// TODO: Leer DatosLocales.ini
 	this->puertoconsola = 0;
 	this->nivelIncidencias = 0;
@@ -66,23 +66,23 @@ CommSerConfig::CommSerConfig(soap_config &sc)
 	}
 
 	/** WEB */
-	this->web.wport = atoi(LocalConfig::cfg.PuertoEscucha().c_str());
-	this->web.stime = atoi(LocalConfig::cfg.TiempoSesion().c_str());
+	this->web.wport = atoi(LocalConfig::cfg.get(strSection, strItemWebPort)/*.PuertoEscucha()*/.c_str());
+	this->web.stime = atoi(LocalConfig::cfg.get(strSection, strItemSessionTime)/*TiempoSesion()*/.c_str());
 
 	/** SNMP */
-	LocalConfig snmpini(LocalConfig::cfg.snmpModule());
+	LocalConfig snmpini(LocalConfig::cfg.get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
 	this->snmp.sport = 65000;
-	this->snmp.snmpp = snmpini.getInt("AGENTE","PORT");
-	this->snmp.agcomm = snmpini.getString("AGENTE","SNMPV2COMM");
-	this->snmp.agcont = snmpini.getString("AGENTE","CONTACT");
-	this->snmp.agloc = snmpini.getString("AGENTE","LOCATION");
-	this->snmp.agname = snmpini.getString("AGENTE","NAME");
-	this->snmp.agv2 = snmpini.getInt("AGENTE","SNMPV2");
+	this->snmp.snmpp = atoi(snmpini.get("AGENTE","PORT").c_str());
+	this->snmp.agcomm = snmpini.get("AGENTE","SNMPV2COMM");
+	this->snmp.agcont = snmpini.get("AGENTE","CONTACT");
+	this->snmp.agloc = snmpini.get("AGENTE","LOCATION");
+	this->snmp.agname = snmpini.get("AGENTE","NAME");
+	this->snmp.agv2 = atoi(snmpini.get("AGENTE","SNMPV2").c_str());
 
 	/** Grabador */
-	LocalConfig recini(LocalConfig::cfg.recModule());
-	this->grab.rtsp_ip = recini.getString("RTSP","IP_REC_A");
-	this->grab.rtsp_port = recini.getInt("RTSP","PORT");
+	LocalConfig recini(LocalConfig::cfg.get(strModulos, strItemModuloGrabador)/*.recModule()*/);
+	this->grab.rtsp_ip = recini.get("RTSP","IP_REC_A");
+	this->grab.rtsp_port = atoi(recini.get("RTSP","PORT").c_str());
 
 	/** SINCR */
 	if (sc.CfgPasarela.MasterSincronizacion != "")
@@ -150,7 +150,7 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 		if (sres.TipoRecurso==0) 
 		{
 			/** Parametros Generales Radio */
-			this->radio.tipo=4;												// Remoto RxTx
+			this->radio.tipo=4;												// TODO: INFO en <TipoRecurso> 
 			this->radio.sq=sres.info.radio.SQ=="v" ? 1 : 0;
 			this->radio.ptt=sres.info.radio.PTT=="s" ? 1 : 0;
 			this->radio.bss=sres.info.radio.BSS==false ? 0 : 1;

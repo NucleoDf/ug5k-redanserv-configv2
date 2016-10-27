@@ -61,7 +61,7 @@ void CfgConversor::SetInt(int *actual, int inuevo, int evento, string nombre, in
 /** */
 void CfgConversor::SetInt(LocalConfig &lcfg, string section, string key, int inuevo, int evento, string nombre)
 {
-	int iactual = lcfg.getInt(section, key);
+	int iactual = atoi(lcfg.get(section, key).c_str());
 	if (inuevo != iactual)
 	{
 		char buffer[16];
@@ -72,7 +72,7 @@ void CfgConversor::SetInt(LocalConfig &lcfg, string section, string key, int inu
 		eventos.push_back(CommConvertEvent(evento, "", nombre, buffer));
 #endif
 	}
-	lcfg.setInt(section, key, inuevo);
+	lcfg.set(section, key, Tools::itoa(inuevo));
 }
 
 /** */
@@ -90,9 +90,9 @@ void CfgConversor::SetString(LocalConfig &lcfg, string section, string key, stri
 {
 	if (snuevo != "" || vacios == true)
 	{
-		string sactual = lcfg.getString(section, key);
+		string sactual = lcfg.get(section, key);
 		eventos.push_back(CommConvertEvent(evento, "", nombre, snuevo));
-		lcfg.setString(section, key, snuevo);
+		lcfg.set(section, key, snuevo);
 	}
 	else
 		PLOG_ERROR("Intento Escritura String Vacio en INI (%s-%s).", section.c_str(), key.c_str());
@@ -729,7 +729,7 @@ bool CommConversor::IsAdd(int grec)		// Mira si el Recurso ha sido A�adido...
 /** */
 void CommConversor::ActualizaSnmpIni()
 {
-	LocalConfig snmpini(LocalConfig::cfg.snmpModule());
+	LocalConfig snmpini(LocalConfig::cfg.get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
 
 	SetInt(snmpini, "AGENTE", "PORT", p_cfg_in->servicios.snmp.snmpp, INCI_MPGP, "SNMP PUERTO ESCUCHA");
 	SetString(snmpini, "AGENTE", "NAME", p_cfg_in->servicios.snmp.agname, INCI_MPGP, "SNMP-NAME");
@@ -739,7 +739,7 @@ void CommConversor::ActualizaSnmpIni()
 	SetInt(snmpini, "AGENTE", "SNMPV2", p_cfg_in->servicios.snmp.agv2, INCI_MPGP, "HABILITA SNMPV2");
 
 	int ikey=0;
-	snmpini.deleteSection("TRAPS");
+	snmpini.del("TRAPS");
 	for (vector<string>::iterator itr = p_cfg_in->servicios.snmp.traps.begin(); itr != p_cfg_in->servicios.snmp.traps.end(); ++itr,ikey++)
 	{
 		string leido = *itr;
@@ -747,7 +747,7 @@ void CommConversor::ActualizaSnmpIni()
 				continue;
 		char strkey[32];
 		sprintf(strkey,"DST%02d",ikey);
-		snmpini.setString("TRAPS", strkey, leido.c_str());
+		snmpini.set("TRAPS", strkey, leido.c_str());
 	}
 
 	snmpini.save();
@@ -756,7 +756,7 @@ void CommConversor::ActualizaSnmpIni()
 /** */
 void CommConversor::ActualizaRecordIni()
 {
-	LocalConfig recini(LocalConfig::cfg.recModule());
+	LocalConfig recini(LocalConfig::cfg.get(strModulos, strItemModuloGrabador)/*.recModule()*/);
 
 	/** 20160721. Solo son configurables la IP y Puerto de Grabador */
 	//setString(recini, "RTSP", "IP", p_cfg_in->servicios.grab.rtsp_ip, INCI_MPGP, "GRABADOR IP");

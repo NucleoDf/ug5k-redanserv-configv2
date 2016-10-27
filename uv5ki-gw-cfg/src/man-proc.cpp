@@ -51,15 +51,15 @@ void ManProc::Run()
 	estado.itf = estado.cpu0.itfs;
 
 	/** */
-	//bite.res = 0;
-	//bite.msg = "{\"res\": \"No Inicializado.\"}";
+	snmpVersion = sistema::SnmpAgentVersion();
+	recVersion = sistema::RecordServiceVersion();
 
 	_cnt = 1;
 	while (IsRunning())
 	{
 		sleep(1000);
 #ifdef _WIN32
-		if (LocalConfig::cfg.winStdSnmp())
+		if (LocalConfig::cfg.get(strWindowsTest, strItemWindowsTestSnmpStd, "0")=="1"/*.winStdSnmp()*/)
 #endif
 		{
 			CCSLock _lock(m_lock);
@@ -100,8 +100,8 @@ string ManProc::jestado()
 
 	/** Actualizo las Versiones */
 	estado.serv = string(acStrVersion());
-	estado.snmp = Versiones::snmpVersion;
-	estado.record = Versiones::recVersion;
+	estado.snmp = snmpVersion;
+	estado.record = recVersion;
 
 	return estado.JSerialize();
 }
@@ -272,7 +272,7 @@ void ManProc::GetEstadoCpu(int cpu)
 {
 	try 
 	{
-		LocalConfig snmpconfig(LocalConfig::cfg.snmpModule());
+		LocalConfig snmpconfig(LocalConfig::cfg.get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
 		if (cpu==0)
 		{
 #if _CFG_PROC_
@@ -280,7 +280,8 @@ void ManProc::GetEstadoCpu(int cpu)
 #else
 			estado.cpu0.ip = "192.168.0.71";
 #endif
-			HistClient::p_hist->GetEstado(CIPAddress(estado.cpu0.ip,snmpconfig.getInt("SERVICIO","UDP_PORT_IN_AGSNMP","65000")),st_estado_cpu0);
+			CIPAddress to(estado.cpu0.ip, atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str()));
+			HistClient::p_hist->GetEstado(to, st_estado_cpu0);
 		}
 		else if (cpu==1)
 		{
@@ -289,7 +290,8 @@ void ManProc::GetEstadoCpu(int cpu)
 #else
 			estado.cpu1.ip = "192.168.0.72";
 #endif
-			HistClient::p_hist->GetEstado(CIPAddress(estado.cpu1.ip,snmpconfig.getInt("SERVICIO","UDP_PORT_IN_AGSNMP","65000")),st_estado_cpu1);
+			CIPAddress to(estado.cpu1.ip, atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str()));
+			HistClient::p_hist->GetEstado(to ,st_estado_cpu1);
 		}
 	}
 	catch(socket_error e) 

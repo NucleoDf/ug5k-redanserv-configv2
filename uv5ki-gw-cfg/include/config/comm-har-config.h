@@ -13,7 +13,6 @@
 #include "../base/sistema.h"
 #include "../websrv/uv5kigwcfg-web-app-data.h"
 #include "../tools/tools.h"
-#include "../versiones.h"
 #include "../config/local-config.h"
 
 #define _NUM_SLAVES_		4

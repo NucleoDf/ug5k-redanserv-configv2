@@ -3,24 +3,13 @@ angular
 	.module('Ug5kweb')
 	.controller('ug5kConfCtrl', ug5kConfCtrl);
 
-ug5kConfCtrl.$inject = ['dataservice', 'authservice', 'CfgService', 'transerv', '$q', '$scope', '$http'];
+ug5kConfCtrl.$inject = ['$scope', '$route', 'dataservice', 'authservice', 'CfgService', 'transerv'];
 
-function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope, $http) {
+function ug5kConfCtrl($scope, $route, dataservice, authservice, CfgService, transerv) {
     var vm = this;
 
     CfgService.opcion(5);
 
-    /** */
-    function post(url, data) {
-        var deferred = $q.defer();
-        dataservice.set_data(url, data, false).then(
-			function (respuesta) {
-			    console.log("POST: ", respuesta);
-			    deferred.resolve();
-			}
-		);
-        return deferred.promise;
-    }
     /** */
     vm.pcfgNumber = undefined;
 
@@ -43,7 +32,7 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
             case 2:         // Guardar
             case 3:         // Activar
             case 4:         // Borrar
-                return authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]);
+                return authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]);
                 break;
         }
         return false;
@@ -57,7 +46,6 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
     /** */
     vm.descartar = function () {
         if (Confirma(/*"¿Realmente desea descartar los cambios efectuados?"*/transerv.translate('CCTRL_MSG_01'))) {
-            // post('/conf/descartar', {});
             CfgService.restore();
         }
     }
@@ -85,8 +73,7 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
             var pre = /*"¿Quiere salvar la configuracion actual como "*/transerv.translate('CCTRL_MSG_05') + vm.preconfname + " ?";
             if (Confirma(pre)) {
                 $("body").css("cursor", "progress");
-                post('/preconf/' + vm.preconfname, {})
-                 .then(
+                dataservice.act_preconf(vm.preconfname, {}).then(
                      function (res) {
                          vm.get_preconf();
                          alert(/*"Preconfiguración "*/transerv.translate('CCTRL_MSG_06') + vm.preconfname + /*" guardada correctamente."*/transerv.translate('CCTRL_MSG_07'));
@@ -110,8 +97,8 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
         if (name == undefined) return;
         var pre = /*"¿Quiere activar la Preconfiguracion "*/transerv.translate('CCTRL_MSG_09') + name + " ?";
         if (Confirma(pre)) {
-            $("body").css("cursor", "progress");
-            dataservice.put_data('/preconf/' + name, {})
+            $("body").css("cursor", "progress");            
+            dataservice.set_preconf(name, {})
                 .then(function (res) {
                     console.log("PUT: ", res);
                     CfgService.restore();
@@ -126,7 +113,7 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
         if (name == undefined) return;
         var pre = /*"¿Quiere Eliminar la Preconfiguracion "*/transerv.translate('CCTRL_MSG_10') + name + " ?";
         if (Confirma(pre)) {
-            dataservice.del_data('/preconf/' + name, {})
+            dataservice.del_preconf(name)
                 .then(
                     function (res) {
                         console.log("DELETE: ", res);
@@ -138,19 +125,13 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
 
     /** */
     vm.get_preconf = function () {
-        var deferred = $q.defer();
-        var url = '/preconf';
 
-        console.log("GET ", url);
-        dataservice.get_data(url, false).then(
+        dataservice.get_preconf().then(
 			function (respuesta) {
-			    console.log("res:", respuesta);
-			    vm.preconf = respuesta;
-			    deferred.resolve();
+			    console.log("res:", respuesta.data);
+			    vm.preconf = respuesta.data;
 			}
 		);
-
-        return deferred.promise;
     }
 
     /** */
@@ -172,7 +153,8 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
                     var text = reader.result;
                     try {
                         var obj = JSON.parse(text);
-                        $http.post("/impexp/"+filename, obj).then(function (response) {
+
+                        dataservice.set_import(filename, obj).then(function (response) {
                             if (response.data.res === "ok") {
                                 alert(/*"Preconfiguración "*/transerv.translate('CCTRL_MSG_06') + /*" guardada correctamente."*/transerv.translate('CCTRL_MSG_07'));
                                 vm.get_preconf();
@@ -184,6 +166,8 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
                             console.log(response);                
                             alert(transerv.translate('CCTRL_MSG_12')/*"Error Comunicaciones. Mire Log Consola..."*/);
                         });
+
+
 
                         console.log('Object: ' + obj);
                     }
@@ -210,8 +194,7 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
 
             if (Confirma(transerv.translate('CCTRL_MSG_13')/*"¿Desea Exportar la preconfiguracion "*/ + name + "?") == false)
                 return;
-
-            $http.get("/impexp/" + name).then(function (response) {
+            dataservice.get_export(name).then(function (response) {
                 download(name + ".json", JSON.stringify(response.data));
                 alert(transerv.translate('CCTRL_MSG_14')/*"Preconfiguración exportada correctamente"*/);
             }, function (response) {
@@ -288,6 +271,12 @@ function ug5kConfCtrl(dataservice, authservice, CfgService, transerv, $q, $scope
 
     /** */
     $scope.$on("$destroy", function () {
+    });
+
+    /** */
+    $scope.$on('std_change', function (data) {
+        console.log("std_change");
+        $route.reload();
     });
 
     /** */

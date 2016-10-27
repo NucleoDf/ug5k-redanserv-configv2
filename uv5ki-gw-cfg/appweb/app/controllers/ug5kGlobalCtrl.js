@@ -3,9 +3,9 @@ angular
 	.module('Ug5kweb')
 	.controller('ug5kGlobalCtrl', ug5kGlobalCtrl);
 
-ug5kGlobalCtrl.$inject = ['$scope', '$rootScope', '$interval', '$translate', 'dataservice', 'authservice', 'CfgService', 'transerv'];
+ug5kGlobalCtrl.$inject = ['$scope', '$rootScope', '$interval', '$translate', 'dataservice', 'authservice', 'CfgService', 'MantService', 'transerv'];
 
-function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, authservice, CfgService, transerv) {
+function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, authservice, CfgService, MantService, transerv) {
 
     var vm = this;
 
@@ -51,9 +51,9 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	        case 6:
 	            return true;
 	        case 7:     // Aplicar Cambios.
-	            return (authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]) && CfgService.modo() != "ul");
+	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]));
 	        case 8:     // Descartar Cambios.
-	            return (authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]) && CfgService.modo() != "ul");
+	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]));
 	    }
 	    return false;
 	}
@@ -237,7 +237,11 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
                             });
                         }
 
-                        CfgService.modo(data.modo);
+                        MantService.modo(data.modo);
+                        if (data.std != MantService.estado()) {
+                            $scope.$broadcast('std_change', [1, 2, 3]);
+                        }
+                        MantService.global_estado(data.std);
                     }
                     else {
                         vm.timer = 0;

@@ -11,6 +11,7 @@
 #include <cstdlib>
 
 #include "../tools/stlini.h"
+#include "../tools/tools.h"
 
 using namespace std;
 #define strFile							ON_WORKING_DIR("u5kweb-config.ini")
@@ -71,116 +72,170 @@ using namespace std;
 #define ON_SWREP(p)						(LocalConfig::onswrep(p).c_str())
 
 /** */
-#define LAST_CFG						(onflash(LocalConfig::cfg.ConfigFile().c_str()))
+#define LAST_CFG						(onflash(LocalConfig::cfg.get(strSection, strItemConfigFile).c_str()))
 #define LAST_CFG_PRUEBA					(onflash("gw_config_prueba.json"))
 #define LAST_SAVE(n)					(onflash(string("last_gw_config_")+string(n)+string(".json")))
 
-/** */
-typedef map<string,string> MapString;
+///** */
+//typedef map<string,string> MapString;
+//
+///** */
+//class stStrings
+//{
+//	public:
+//		MapString ToIdent;
+//		MapString ToKey;
+//};
+//
+///** */
+//class LocalConfig : CodeBase
+//{
+//public:
+//	static LocalConfig cfg;
+//
+//private:
+//	INIFile ini;
+//	string namefile;
+//
+//private:
+//	stStrings _strings;
+//#ifdef _LOCAL_LOCK_
+//	CCritSec _lock;
+//#endif
+//
+//public:
+//	LocalConfig(void);
+//	LocalConfig(string strfile);
+//	~LocalConfig(void);
+//
+//	string getString(string section, string item, string def="");
+//	int getInt(string section, string item, string def="");
+//	void setString(string section, string item, string valor);
+//	void setInt(string section, string item, int valor);
+//
+//public:
+//	void save(void);
+//	void sync();
+//
+//	string PuertoEscucha(string puerto="NoPuerto");
+//	string TiempoSesion(string segundos="NoSegundos");
+//	string ServerURL();
+//
+//	string PathToPreconf(string path="NoPath");
+//	string PathToVersiones();
+//	int FtpGenTimeout() {return atoi(getString(strSection, strItemFtpGenTimeout,"5").c_str());}
+//	int FtpSendTimeout(){return atoi(getString(strSection, strItemFtpSendTimeout,"6000").c_str());}
+//	int HttpGenTimeout(){return atoi(getString(strSection, strItemHttpGenTimeout,"5").c_str());}
+//	int ClearResourcesOnBdt(){return atoi(getString(strSection, strItemClearResourcesOnBdt,"1").c_str());}
+//
+//	string Log();
+//	string Login();
+//	int ConfigTsup();
+//
+//    string NucleoProcName();
+//    string SnmpProcName();
+//    string RecordProcName();
+//    string NetworkInterfaceActiva();
+//	string ConfigFile();
+//
+//	/** */
+//	string LastRouteDest(string ip="GetIp");
+//	string LastRouteVia(string ip="GetIp");
+//	string LastRouteSource(string ip="GetIp");
+//
+//	/** SECCION ULISES */
+//	bool ModoUlises() {
+//		int md = getInt(strUlises, strItemUlisesModo, "0");
+//		return md==1 ? true : false;
+//	}
+//
+//	/** */
+//	static string onswrep(string filename);
+//	static string snmpModule()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemModuloSnmp,"./ug5ksnmp-config.ini"));} 
+//	static string recModule()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemModuloGrabador, "./ug5krec-config.ini"));} 
+//	/** */
+//	static string snmpExe()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemExeSnmp,"/home/snmp/ug5ksnmp"));} 
+//	static string recExe()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemExeGrabador, "/home/rec/UG5KEd137b4Service"));} 
+//
+//	static int SupervisedFileUnlocktime() {
+//		return LocalConfig::cfg.getInt(strFilesSupervidor, strSupervisedFileUnlockTime, "10");
+//	}
+//
+//	/** */
+//	INISection getSection(string section); 
+//	void deleteSection(string section);
+//
+//private:
+//	/** */
+//	void LoadStrings();
+//	/** */
+//	string KeyToIdent(string key);
+//	string IdentToKey(string ident);
+//	/** */
+//	void GetKeyConfigLocal(INISection &config);
+//	void SetKeyConfigLocal(string key, string data);
+//
+//#ifdef _WIN32
+//public:
+//	string ipWindows() { return GetIniSetting(ini, strWindowsTest, strItemWindowsTestIp, "192.168.1.129");}
+//	bool winSyncFtp() { return GetIniSetting(ini, strWindowsTest, strItemWindowsTestSyncFtp, "0") == "0" ? false : true;}
+//	bool winStdSnmp() { return GetIniSetting(ini, strWindowsTest, strItemWindowsTestSnmpStd, "0") == "0" ? false : true;}
+//	bool winSyncSer() { return GetIniSetting(ini, strWindowsTest, strItemWindowsTestServidor, "0") == "0" ? false : true;}
+//#endif
+//};
 
 /** */
-class stStrings
-{
-	public:
-		MapString ToIdent;
-		MapString ToKey;
-};
-
-/** */
-class LocalConfig : CodeBase
+class LocalConfig : public CodeBase
 {
 public:
 	static LocalConfig cfg;
-
+public:
+	LocalConfig(string filename=strFile) {
+		pszFilename = filename.c_str();
+		ini = LoadIni(pszFilename);
+	}
+	~LocalConfig() {}
+public:
+	string get(string section, string key, string def="") {
+		return GetIniSetting(ini, section.c_str(), key.c_str(), def.c_str());
+	}
+	INISection &get(string section) {
+		return ini[section.c_str()];
+	}
+	void set(string section, string key, string val, bool save=true) {
+		PutIniSetting(ini, section.c_str(), key.c_str(), val.c_str());
+		if (save)
+			SaveIni(ini,pszFilename);
+	}
+	void del(string strsection) {
+		INISection vacia;
+		ini[strsection.c_str()] = vacia;	
+	}
+	void save() {
+		SaveIni(ini,pszFilename);
+	}
 private:
 	INIFile ini;
-	string namefile;
+	const char *pszFilename;
+};
 
-private:
-	stStrings _strings;
-#ifdef _LOCAL_LOCK_
-	CCritSec _lock;
-#endif
-
+/** */
+class DatosLocales : public CodeBase
+{
 public:
-	LocalConfig(void);
-	LocalConfig(string strfile);
-	~LocalConfig(void);
+	DatosLocales() {
+		INIFile ini = LoadIni(onram("DatosLocales.ini").c_str());
 
-	string getString(string section, string item, string def="");
-	int getInt(string section, string item, string def="");
-	void setString(string section, string item, string valor);
-	void setInt(string section, string item, int valor);
-
-public:
-	void save(void);
-	void sync();
-
-	string PuertoEscucha(string puerto="NoPuerto");
-	string TiempoSesion(string segundos="NoSegundos");
-	string ServerURL();
-
-	string PathToPreconf(string path="NoPath");
-	string PathToVersiones();
-	int FtpGenTimeout() {return atoi(getString(strSection, strItemFtpGenTimeout,"5").c_str());}
-	int FtpSendTimeout(){return atoi(getString(strSection, strItemFtpSendTimeout,"6000").c_str());}
-	int HttpGenTimeout(){return atoi(getString(strSection, strItemHttpGenTimeout,"5").c_str());}
-	int ClearResourcesOnBdt(){return atoi(getString(strSection, strItemClearResourcesOnBdt,"1").c_str());}
-
-	string Log();
-	string Login();
-	int ConfigTsup();
-
-    string NucleoProcName();
-    string SnmpProcName();
-    string RecordProcName();
-    string NetworkInterfaceActiva();
-	string ConfigFile();
-
-	/** */
-	string LastRouteDest(string ip="GetIp");
-	string LastRouteVia(string ip="GetIp");
-	string LastRouteSource(string ip="GetIp");
-
-	/** SECCION ULISES */
-	bool ModoUlises() {
-		int md = getInt(strUlises, strItemUlisesModo, "0");
-		return md==1 ? true : false;
+		idGw = GetIniSetting(ini, "DATOS_LOCALES", "Identificador_Pasarela", "GWDEF");
+		dualidad = GetIniSetting(ini, "DATOS_LOCALES", "Dual_CGW", "n")=="s" ? true : false;
+		ipServ = GetIniSetting(ini, "DATOS_LOCALES", "Url_Servidor", "127.0.0.1");
+		ipServ = url(ipServ).host_;
 	}
-
-	/** */
-	static string onswrep(string filename);
-	static string snmpModule()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemModuloSnmp,"./ug5ksnmp-config.ini"));} 
-	static string recModule()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemModuloGrabador, "./ug5krec-config.ini"));} 
-	/** */
-	static string snmpExe()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemExeSnmp,"/home/snmp/ug5ksnmp"));} 
-	static string recExe()	{return onfs(LocalConfig::cfg.getString(strModulos, strItemExeGrabador, "/home/rec/UG5KEd137b4Service"));} 
-
-	static int SupervisedFileUnlocktime() {
-		return LocalConfig::cfg.getInt(strFilesSupervidor, strSupervisedFileUnlockTime, "10");
-	}
-
-	/** */
-	INISection getSection(string section); 
-	void deleteSection(string section);
-
-private:
-	/** */
-	void LoadStrings();
-	/** */
-	string KeyToIdent(string key);
-	string IdentToKey(string ident);
-	/** */
-	void GetKeyConfigLocal(INISection &config);
-	void SetKeyConfigLocal(string key, string data);
-
-#ifdef _WIN32
+	~DatosLocales(){}
 public:
-	string ipWindows() { return GetIniSetting(ini, strWindowsTest, strItemWindowsTestIp, "192.168.1.129");}
-	bool winSyncFtp() { return GetIniSetting(ini, strWindowsTest, strItemWindowsTestSyncFtp, "0") == "0" ? false : true;}
-	bool winStdSnmp() { return GetIniSetting(ini, strWindowsTest, strItemWindowsTestSnmpStd, "0") == "0" ? false : true;}
-	bool winSyncSer() { return GetIniSetting(ini, strWindowsTest, strItemWindowsTestServidor, "0") == "0" ? false : true;}
-#endif
+	string idGw;
+	bool dualidad;
+	string ipServ;	
 };
 
 #endif

@@ -3,9 +3,9 @@ angular
 	.module('Ug5kweb')
 	.controller('ug5kServCtrl', ug5kServCtrl);
 
-ug5kServCtrl.$inject = ['authservice', 'CfgService', 'ValidateService', 'transerv', '$scope'];
+ug5kServCtrl.$inject = ['$scope', '$route', 'authservice', 'CfgService', 'ValidateService', 'transerv'];
 
-function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope) {
+function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, transerv) {
     var vm = this;
     var url = '/servicios';
 
@@ -70,7 +70,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Puerto'*/transerv.translate('SCTRL_P00_PORT'),
 					    Value: vm.jserv.sip.PuertoLocalSIP,
-					    Enable: authservice.ProfilePermission(false, []),
+					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -79,7 +79,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Keep Alive Period:'*/transerv.translate('SCTRL_P00_KAP'),
 					    Value: vm.jserv.sip.KeepAlivePeriod,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.noshow,
@@ -88,7 +88,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Keep Alive Mult.:'*/transerv.translate('SCTRL_P00_KAM'),
 					    Value: vm.jserv.sip.KeepAliveMultiplier,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.noshow,
@@ -97,7 +97,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Periodo Supervision:'*/transerv.translate('SCTRL_P00_SPT'),
 					    Value: vm.jserv.sip.PeriodoSupervisionSIP,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -106,7 +106,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Proxy:'*/transerv.translate('SCTRL_P00_PRX'),
 					    Value: serv2iplist(vm.jserv.sip.proxys),
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 2,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -115,7 +115,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Registrar:'*/transerv.translate('SCTRL_P00_REG'),
 					    Value: serv2iplist(vm.jserv.sip.registrars),
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 2,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -128,7 +128,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Tipo:'*/transerv.translate('SCTRL_P01_TP'),
 					    Value: vm.jserv.sincr.ntp.toString(),
-					    Enable: authservice.ProfilePermission(false, []),
+					    Enable: false,
 					    Input: 1,
 					    Inputs: [
                             /*"NADA"*/transerv.translate('SCTRL_P01_NONE'),
@@ -140,7 +140,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Servidor NTP:'*/transerv.translate('SCTRL_P01_NTPS'),
 					    Value: serv2iplist(vm.jserv.sincr.servidores),
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 2,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -149,7 +149,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
     				{
     				    Name: /*'Servidor NTP Default'*/transerv.translate('SCTRL_P01_NTPSD'),
     				    Value: CfgService.inicio_data_get().ips.split(":")[0],
-    				    Enable: authservice.ProfilePermission(false, []),
+    				    Enable: false,
     				    Input: 0,
     				    Inputs: [],
     				    Show: vm.def_show,
@@ -162,7 +162,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Puerto Servicio:'*/transerv.translate('SCTRL_P02_PORT'),
 					    Value: vm.jserv.snmp.sport,
-					    Enable: authservice.ProfilePermission(false, []),
+					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -171,7 +171,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Puerto SNMP:'*/transerv.translate('SCTRL_P02_SPORT'),
 					    Value: vm.jserv.snmp.snmpp,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -180,7 +180,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Destinos TRAPS:'*/transerv.translate('SCTRL_P02_TRAP'),
 					    Value: vm.jserv.snmp.traps,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 2,
 					    Inputs: [],
 					    Show: vm.def_show, Val: vm.validate_trap
@@ -188,7 +188,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'SNMP-V2?:'*/transerv.translate('SCTRL_P02_SV2'),
 					    Value: vm.jserv.snmp.agv2.toString(),
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 1,
 					    Inputs: [
                             /*"No"*/transerv.translate('SCTRL_P00_NO'),
@@ -199,7 +199,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'SNMP-V2-COMMUNITY:'*/transerv.translate('SCTRL_P02_SV2C'),
 					    Value: vm.jserv.snmp.agcomm,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.v2commshow,
@@ -208,7 +208,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'SNMP-NAME:'*/transerv.translate('SCTRL_P02_NAM'),
 					    Value: vm.jserv.snmp.agname,
-					    Enable: authservice.ProfilePermission(false, []),
+					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -217,7 +217,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'SNMP-LOCATION:'*/transerv.translate('SCTRL_P02_LOC'),
 					    Value: vm.jserv.snmp.agloc,
-					    Enable: authservice.ProfilePermission(false, []),
+					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -226,7 +226,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'SNMP-CONTACT:'*/transerv.translate('SCTRL_P02_CON'),
 					    Value: vm.jserv.snmp.agcont,
-					    Enable: authservice.ProfilePermission(false, []),
+					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -239,7 +239,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Puerto Servicio:'*/transerv.translate('SCTRL_P03_PORT'),
 					    Value: vm.jserv.web.wport,
-					    Enable: authservice.ProfilePermission(false, []),
+					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -248,7 +248,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Tiempo de Session (seg):'*/transerv.translate('SCTRL_P03_STIME'),
 					    Value: vm.jserv.web.stime,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -261,7 +261,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'Puerto Servicio:'*/transerv.translate('SCTRL_P04_PORT'),
 					    Value: vm.jserv.grab.sport,
-					    Enable: authservice.ProfilePermission(false, []),
+					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
 					    Show: false,
@@ -270,7 +270,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'RTSP-URI:'*/transerv.translate('SCTRL_P04_URI'),
 					    Value: vm.jserv.grab.rtsp_uri,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: false,
@@ -279,7 +279,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'RTSP-IP:'*/transerv.translate('SCTRL_P04_IP'),
 					    Value: vm.jserv.grab.rtsp_ip,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -288,7 +288,7 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
 					{
 					    Name: /*'PUERTO RTSP:'*/transerv.translate('SCTRL_P04_RPORT'),
 					    Value: vm.jserv.grab.rtsp_port,
-					    Enable: authservice.ProfilePermission(true, [ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.def_show,
@@ -449,4 +449,9 @@ function ug5kServCtrl(authservice, CfgService, ValidateService, transerv, $scope
         get_data();
     });
 
+    /** */
+    $scope.$on('std_change', function (data) {
+        console.log("std_change");
+        $route.reload();
+    });
 }

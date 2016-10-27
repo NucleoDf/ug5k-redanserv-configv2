@@ -22,7 +22,7 @@
             <td>TIPO</td>
             <td>
               <select id="selectCorto" data-ng-model="vm.jslv.tp" 
-					data-ng-disabled="true" class="form-control" >
+					data-ng-disabled="true" class="form-control input-sm" >
                 <option value="0">NCFG</option>
                 <option value="1">IA4</option>
                 <option value="2">IQ1</option>
@@ -40,60 +40,60 @@
             </td>
           </tr>-->
           <tr>
-            <td><label class="control-label">Posicion 0</label></td>
+            <td><label class="control-label input-sm">Posicion 0</label></td>
             <td>
               <select data-ng-model="vm.jslv.pos[0].cfg"
 				data-ng-disabled="vm.enable_pos(0)==false" 
-				data-ng-change="vm.pos_change(0)" class="form-control">
+				data-ng-change="vm.pos_change(0)" class="form-control input-sm">
                 <option value="0" translate>HARDWARE_NOCONF</option>
                 <option value="1" translate>HARDWARE_RADIO</option>
                 <option value="2" translate>HARDWARE_TELEF</option>
               </select>
             </td>
             <td>
-				<button class="form-control" data-ng-disabled="vm.jslv.pos[0].cfg==0" 
+				<button class="form-control input-sm" data-ng-disabled="vm.jslv.pos[0].cfg==0" 
 					data-ng-click="vm.pos_click(0,vm.jslv.pos[0].cfg)" translate >HARDWARE_IR</button></td>
           </tr>
           <tr>
-            <td><label class="control-label">Posicion 1</label></td>
+            <td><label class="control-label input-sm">Posicion 1</label></td>
             <td>
               <select  data-ng-model="vm.jslv.pos[1].cfg" 
 					data-ng-disabled="vm.enable_pos(1)==false" 
-					data-ng-change="vm.pos_change(1)" class="form-control" >
+					data-ng-change="vm.pos_change(1)" class="form-control input-sm" >
                 <option value="0" translate>HARDWARE_NOCONF</option>
                 <option value="1" translate>HARDWARE_RADIO</option>
                 <option value="2" translate>HARDWARE_TELEF</option>
               </select>
             </td>
-            <td><button class="form-control" data-ng-disabled="vm.jslv.pos[1].cfg==0" 
+            <td><button class="form-control input-sm" data-ng-disabled="vm.jslv.pos[1].cfg==0" 
 					data-ng-click="vm.pos_click(1,vm.jslv.pos[1].cfg)" translate>HARDWARE_IR</button></td>
           </tr>
           <tr>
-            <td><label class="control-label">Posicion 2</label></td>
+            <td><label class="control-label input-sm">Posicion 2</label></td>
             <td>
               <select data-ng-model="vm.jslv.pos[2].cfg" 
 					data-ng-disabled="vm.enable_pos(2)==false" 
-					data-ng-change="vm.pos_change(2)" class="form-control" >
+					data-ng-change="vm.pos_change(2)" class="form-control input-sm" >
                 <option value="0" translate>HARDWARE_NOCONF</option>
                 <option value="1" translate>HARDWARE_RADIO</option>
                 <option value="2" translate>HARDWARE_TELEF</option>
               </select>
             </td>
-            <td><button class="form-control" data-ng-disabled="vm.jslv.pos[2].cfg==0" 
+            <td><button class="form-control input-sm" data-ng-disabled="vm.jslv.pos[2].cfg==0" 
 					data-ng-click="vm.pos_click(2,vm.jslv.pos[2].cfg)" translate>HARDWARE_IR</button></td>
           </tr>
           <tr>
-            <td><label class="control-label">Posicion 3</label></td>
+            <td><label class="control-label input-sm">Posicion 3</label></td>
             <td>
               <select data-ng-model="vm.jslv.pos[3].cfg" 
 					data-ng-disabled="vm.enable_pos(3)==false" 
-					data-ng-change="vm.pos_change(3)" class="form-control" >
+					data-ng-change="vm.pos_change(3)" class="form-control input-sm" >
                 <option value="0" translate>HARDWARE_NOCONF</option>
                 <option value="1" translate>HARDWARE_RADIO</option>
                 <option value="2" translate>HARDWARE_TELEF</option>
               </select>
             </td>
-            <td><button class="form-control"  data-ng-disabled="vm.jslv.pos[3].cfg==0" 
+            <td><button class="form-control input-sm"  data-ng-disabled="vm.jslv.pos[3].cfg==0" 
 					data-ng-click="vm.pos_click(3,vm.jslv.pos[3].cfg)" translate>HARDWARE_IR</button></td>
           </tr>
           <tr>

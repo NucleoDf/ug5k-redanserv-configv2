@@ -16,7 +16,6 @@
 #include "./base/sistema.h"
 #include "./websrv/uv5kigwcfg-web-app-data.h"
 #include "./tools/tools.h"
-#include "./versiones.h"
 #include "./config/local-config.h"
 #include "./config/comm-config.h"
 
@@ -116,10 +115,10 @@ public:
 	jEstado() {
 		
 		serv = string(acStrVersion());
-		snmp = Versiones::snmpVersion;
-		record = Versiones::recVersion;
-
 		stdg = cpua = stdf = stdn = -1;
+
+		//snmp = Versiones::snmpVersion;
+		//record = Versiones::recVersion;
 		//for (int i=0; i<_NUM_HW_ITFS_; i++)
 		//	itf.push_back(new jInterface());
 	}
@@ -232,6 +231,8 @@ protected:
 protected:
 	CCritSec m_lock;
 	int _cnt;
+	string snmpVersion;
+	string recVersion;
 };
 
 #endif

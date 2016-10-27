@@ -72,6 +72,11 @@ var rest_url_config = '/config';
 var rest_url_upconfig = '/uploadcfg';
 var rest_url_preconfig = '/preconf';
 var rest_url_impexp = '/impexp';
+var rest_url_mnt_std = '/mant/std';
+var rest_url_mnt_reset = '/mant/reset';
+var rest_url_mnt_bite = "/mant/bite";
+var rest_url_mnt_versiones = '/mant/lver';
+var rest_url_mnt_version = '/mant/ver';
 var routeForUnauthorizedAccess = '/noaut';
 var routeForLogin = '/login.html';
 

@@ -44,7 +44,7 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 /** */
 void Uv5kiGwCfgWebApp::GetConfig() 
 {
-	_web_config.web_port = LocalConfig::cfg.PuertoEscucha();
+	_web_config.web_port = LocalConfig::cfg.get(strSection, strItemWebPort, "8080")/*.PuertoEscucha()*/;
 	_web_config.document_root = "appweb";
 	_web_config.default_page = "ug5kweb-index.html";
 	_web_config.login_uri = "/login.html";
@@ -316,8 +316,7 @@ void Uv5kiGwCfgWebApp::stCb_mtto(struct mg_connection *conn, string user, web_re
 			RETURN_OK200_RESP(resp, ManProc::p_man->jestado());
 		}
 		else if (levels[2]=="ver") {
-			// TODO: 
-			RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			RETURN_OK200_RESP(resp, webData_VersionNucleo().JSerialize());
 		}
 		else if (levels[2]=="lver") {
 			// TODO: 

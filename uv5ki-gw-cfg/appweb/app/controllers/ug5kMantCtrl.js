@@ -46,7 +46,7 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 	    if (Confirma(/*"¿Desea Reinicializar la Unidad?"*/transerv.translate('MCTRL_MSG_02')) == false) return;
 
 	    $("body").css("cursor", "progress");
-	    dataservice.set_data('/mant/reset', {}, false).then(
+	    dataservice.mnt_reset().then(
             function (respuesta) {
                 $("body").css("cursor", "default");
                 console.log("POST: ", respuesta);
@@ -62,7 +62,7 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 	    console.log("BITE!!!");
 	    if (Confirma(/*"¿Desea que la Unidad ejecute el procedimiento BITE?"*/transerv.translate('MCTRL_MSG_03')) == false) return;
 	    $("body").css("cursor", "progress");
-	    dataservice.get_data('/mant/bite', false).then(
+	    dataservice.get_bite().then(
             function (respuesta) {
                 console.log("GET: ", respuesta);
                 $("body").css("cursor", "default");
@@ -82,18 +82,18 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 
     /** */
 	function vgetVerbose() {
-	    dataservice.get_data("/mant/ver", false).then(function (data) {
-	        console.log("Verbose: ", data);
-	        vm.verbose = data;
+	    dataservice.mnt_get_version().then(function (response) {
+	        console.log("Verbose: ", response.data);
+	        vm.verbose = response.data;
 	    });
 	}
 
     /** Para carga de Software */
     /** */
 	function vgetVersiones() {
-	    dataservice.get_data("/mant/lver", false).then(function (data) {
-	        console.log("Versiones: ", data);
-	        vm.versiones = data;
+	    dataservice.mnt_get_versiones().then(function (response) {
+	        console.log("Versiones: ", response.data);
+	        vm.versiones = response.data;
 	    });
 	}
 
@@ -164,17 +164,17 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 
     /** */
 	vm.software_restore = function () {
-	    if (Confirma(/*"¿Desea Restaurar el Software a la version anterior?.\nEl sistema se Reiniciara..."*/transerv.translate('MCTRL_MSG_11'))) {
-	        dataservice.post('/mant/swrestore').then(
-                function (respuesta) {
-                    console.log("Restauracion Software Efectuada...");
-                    vgetVersiones();
-                    vgetVerbose();
-                },
-                function (error) {
-                    alert(/*"Error en Restauracion software: "*/transerv.translate('MCTRL_MSG_12'), +error.data);
-                });
-	    }
+	    //if (Confirma(/*"¿Desea Restaurar el Software a la version anterior?.\nEl sistema se Reiniciara..."*/transerv.translate('MCTRL_MSG_11'))) {
+	    //    dataservice.post('/mant/swrestore').then(
+        //        function (respuesta) {
+        //            console.log("Restauracion Software Efectuada...");
+        //            vgetVersiones();
+        //            vgetVerbose();
+        //        },
+        //        function (error) {
+        //            alert(/*"Error en Restauracion software: "*/transerv.translate('MCTRL_MSG_12'), +error.data);
+        //        });
+	    //}
 	}
 
 

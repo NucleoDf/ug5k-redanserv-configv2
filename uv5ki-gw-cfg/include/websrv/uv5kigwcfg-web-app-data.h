@@ -6,6 +6,7 @@
 #include "../rapidjson/document.h"
 #include "../rapidjson/writer.h"
 #include "../rapidjson/stringbuffer.h"
+#include "../config/local-config.h"
 
 #define __POR_REFERENCIA__		1	
 
@@ -338,6 +339,45 @@ private:
 #endif
 };
 
+
+/** */
+class webData_VersionNucleo : public jData
+{
+public:
+	webData_VersionNucleo() {
+		string strpath = onfs(LocalConfig::cfg.get(strSection, strItemPath2Versiones));	// .PathToVersiones();
+		const char *filename = strpath.c_str();
+		ifstream infile(filename);
+		stringstream buffer;
+		string line;
+		
+		buffer << infile.rdbuf();
+		while (std::getline(buffer, line))
+		{
+			if (line=="") continue;
+			if (line.find("Ultima Actualizacion") == 0) continue;
+			line.erase(std::remove_if(line.begin(), line.end(), &Tools::IsNoAscii), line.end());
+			if (line.find(":") == line.length()-1) 
+			{
+				string line1;
+				if (std::getline(buffer, line1))
+				{
+					line1.erase(std::remove_if(line1.begin(), line1.end(), &Tools::IsNoAscii), line1.end());
+					line = line + " " + line1;
+				}
+			}
+			lines.push_back(webData_line(line));
+		}
+	}
+	~webData_VersionNucleo(){}
+public:
+	virtual void jread(Value &base){}
+	virtual void jwrite(Writer<StringBuffer> &writer) {
+		write_key(writer, "lines", lines);
+	}
+private:
+	vector<webData_line> lines;
+};
 
 #endif
 

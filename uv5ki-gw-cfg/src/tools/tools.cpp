@@ -1,5 +1,21 @@
 #include "../../include/tools/tools.h"
 
+/** */
+void url::parse(const string& url_s)
+{
+	size_t pos1 = url_s.find("//") + 2;
+	if (pos1 < url_s.length()) 
+	{
+		protocol_ = url_s.substr(0, pos1);
+		size_t pos2 = url_s.find("/", pos1);
+		if (pos2 < url_s.length())
+		{
+			host_ = url_s.substr(pos1, (pos2-pos1));
+			path_ = url_s.substr(pos2, url_s.length()-pos2);
+		}
+	}
+}
+
 /**
 */
 bool Tools::EsIgual(const char * str1, const char * str2)

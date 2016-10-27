@@ -177,7 +177,7 @@ bool WorkingConfig::UserAccess(string user, string pwd, int *profile)
 void *WorkingConfig::DelayedSignal(void *arg)
 {
 	Sleep(2000);
-	sistema::SignalNuevaConfiguracion(LocalConfig::cfg.NucleoProcName());
+	sistema::SignalNuevaConfiguracion(LocalConfig::cfg.get(strSection, strItemNucleoProcName)/*.NucleoProcName()*/);
 #ifndef _NO_WORKING_THREAD_
 	pthread_exit(NULL);
 #endif

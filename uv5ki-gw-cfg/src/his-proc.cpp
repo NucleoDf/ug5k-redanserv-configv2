@@ -17,16 +17,16 @@ HistClient::~HistClient(void)
 void HistClient::Run()
 {
 	CUDPSocket sck;
-	LocalConfig snmpconfig(LocalConfig::cfg.snmpModule());
+	LocalConfig snmpconfig(LocalConfig::cfg.get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
 	char buffer[BUFSIZ+1];
 	stHistAviso aviso;
 
 	SetId("HistClient");
 	PLOG_INFO("HistClient running...");
 
-	default_dst = CIPAddress("127.0.0.1", snmpconfig.getInt("SERVICIO","UDP_PORT_IN_AGSNMP","65000"));
-	default_port = snmpconfig.getInt("SERVICIO","UDP_PORT_IN_AGSNMP","65000");
-	PrepareSocket(sck, snmpconfig.getInt("SERVICIO","UDP_PORT_IN_CONFIG","65002"));
+	default_dst = CIPAddress("127.0.0.1", atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str()));
+	default_port = atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str());
+	PrepareSocket(sck, atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_CONFIG","65002").c_str()));
 
 	while (IsRunning())
 	{

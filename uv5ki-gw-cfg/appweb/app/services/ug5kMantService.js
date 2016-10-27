@@ -3,10 +3,10 @@ angular
     .module('Ug5kweb')
     .factory('MantService', MantService);
 
-MantService.$inject = ['dataservice', '$q', 'transerv'];
+MantService.$inject = ['dataservice', 'transerv'];
 
 /** */
-function MantService(dataservice, $q, transerv) {
+function MantService(dataservice, transerv) {
 
 	/** */
     var txtStdGeneral = [
@@ -96,6 +96,8 @@ function MantService(dataservice, $q, transerv) {
 
     /** */
     var std = defMantStd();
+    var global_modo = "rd";
+    var global_std = -1;
 
     /** */
     function defMantStd() {
@@ -137,14 +139,13 @@ function MantService(dataservice, $q, transerv) {
 
     /** */
     function getEstado() {
-        return dataservice.get_data('/mant/std', false).then(
+        return dataservice.mnt_std().then(
             function (resp) {
                 if (resp.hasOwnProperty('error')) {
-                    //                    alert("getEstado: " + resp.error);
                     std = defMantStd();
                 }
                 else {
-                    std = resp;
+                    std = resp.data;
                     normalizeEstadoItf();
                 }
             });
@@ -164,33 +165,34 @@ function MantService(dataservice, $q, transerv) {
 
     /** */
     return {
-        init: getEstado,
-        dispose: function () { },
-        get_estado: getEstado,
-        estado: function () {
+        init: getEstado
+        , dispose: function () { }
+        , get_estado: getEstado
+        , estado: function () {
             return std;
-        },
+        }
+        ,
         textoEstado: function (std, indice) {
             if (std >= 0 && std < 5 && indice >= 0 && indice < 8)
-                return txtEstados[indice][std];
+                return transerv.translate(txtEstados[indice][std]);
             return transerv.translate('MANS_MSG_UKNW');     // "Desconocido"
-        },
-        styleEstado: function (std) {
+        }
+        , styleEstado: function (std) {
             return (std >= 0 && std < 5) ? styEstados[std] : { 'color': 'red', ' background-color': 'gray' };
 
-        },
-        styleOther: function (cpu) {
+        }
+        , styleOther: function (cpu) {
             return cpu == 0 ? { 'color': 'black', 'background-color': 'lightgray' } :
                 cpu == 1 ? { 'color': 'blue', 'background-color': 'white' } :
                 cpu == 2 ? { 'color': 'blue', 'background-color': 'white' } : { 'color': 'white', 'background-color': 'tomato' };
-        },
-        textoTipoItf: function (tp) {
+        }
+        , textoTipoItf: function (tp) {
             return (tp >= 0 && tp < 10) ? txtItfTipos[tp] : /*"Desconocido"*/transerv.translate('MANS_MSG_UKNW');
-        },
-        textoModoItf: function (tp) {
+        }
+        , textoModoItf: function (tp) {
             return (tp >= 0 && tp < 2) ? txtModos[tp] : /*"Sin Informacion"*/transerv.translate('MANS_MSG_NINFO');
-        },
-        textoBucleItf: function (tp) {
+        }
+        , textoBucleItf: function (tp) {
             if (tp == 0)
                 return "Off";
             else if (tp == 1)
@@ -200,11 +202,27 @@ function MantService(dataservice, $q, transerv) {
                 return "RFE" + (emp+1);
             }
             return /*"Sin Informacion"*/"SI";
-        },
-        get_slot_itf: function (index) {
+        }
+        , get_slot_itf: function (index) {
             var slot = Math.floor(index/4).toString();
             var itf = (index % 4).toString();
             return slot + ":" + itf;
+        }
+        /** */
+        , modo: function (md) {
+            if (md != undefined)
+                global_modo = md;
+            return global_modo;
+        }
+        /** */
+        , hide_on_ulises: function () {
+            return !(global_modo == "ul");
+        }
+        , global_estado: function (std) {
+            if (std != undefined) {
+                global_std = std;
+            }
+            return global_std;
         }
     };
 }

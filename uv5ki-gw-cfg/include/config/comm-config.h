@@ -14,7 +14,6 @@
 #include "../websrv/uv5kigwcfg-web-app-data.h"
 #include "../tools/tools.h"
 #include "../config/local-config.h"
-#include "../versiones.h"
 
 #include "./soap-config.h"
 #include "./users-config.h"
@@ -24,9 +23,7 @@
 #include "./comm-res-config.h"
 #include "./comm-uv5-config.h"
 
-
 /** Estructura de CONFIGURACION. Se parte de REDAN */
-
 class CommConfig : public jData
 {
 public:

@@ -22,7 +22,6 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
 
     /** */
     var global_opt = 0;
-    var global_modo = "rd";
 
     /** */
     function Cfg2RadioTelef() {
@@ -435,19 +434,6 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
             if (opt != undefined)
                 global_opt = opt;
             return global_opt;                
-        }
-        /** */
-        , modo: function (md) {
-            if (md != undefined)
-                global_modo = md;
-            return global_modo;
-        }
-        /** */
-        , global_enable: function (perfiles) {
-            return (authservice.ProfilePermission(true, perfiles) && global_modo != "ul");
-        }
-        , hide_on_ulises: function () {
-            return !(global_modo == "ul");
         }
     };
 }

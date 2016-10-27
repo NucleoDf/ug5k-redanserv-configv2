@@ -183,7 +183,6 @@
     <ClCompile Include="src\tools\Parse.cpp" />
     <ClCompile Include="src\tools\stlini.cpp" />
     <ClCompile Include="src\tools\tools.cpp" />
-    <ClCompile Include="src\versiones.cpp" />
     <ClCompile Include="src\websrv\mongoose.c" />
     <ClCompile Include="src\websrv\uv5kigwcfg-web-app-data.cpp" />
     <ClCompile Include="src\websrv\uv5kigwcfg-web-app.cpp" />
@@ -201,8 +200,6 @@
     <None Include="appweb\app\controllers\ug5kServCtrl.js" />
     <None Include="appweb\app\modules\ug5kweb.js" />
     <None Include="appweb\app\routes\ug5kRoutes.js" />
-    <None Include="appweb\app\services\logger.js" />
-    <None Include="appweb\app\services\Simulador.js" />
     <None Include="appweb\app\services\ug5kAuthService.js" />
     <None Include="appweb\app\services\ug5kCfgService.js" />
     <None Include="appweb\app\services\ug5kCommService.js" />

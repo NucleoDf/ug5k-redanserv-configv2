@@ -347,9 +347,6 @@
     <ClCompile Include="src\tools\tools.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="src\versiones.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="src\man-proc.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -602,12 +599,6 @@
     </None>
     <None Include="appweb\app\controllers\ug5kRectCtrl.js">
       <Filter>webapp-1\app\controllers</Filter>
-    </None>
-    <None Include="appweb\app\services\logger.js">
-      <Filter>webapp-1\app\services</Filter>
-    </None>
-    <None Include="appweb\app\services\Simulador.js">
-      <Filter>webapp-1\app\services</Filter>
     </None>
     <None Include="appweb\app\services\ug5kAuthService.js">
       <Filter>webapp-1\app\services</Filter>

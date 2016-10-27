@@ -20,7 +20,6 @@
 #include "../base/sistema.h"
 #include "../tools/tools.h"
 #include "../config/local-config.h"
-#include "../versiones.h"
 #include "./comm-config.h"
 #include "./soap-config.h"
 #include "./comm-conversor.h"

@@ -3,9 +3,9 @@ angular
 	.module('Ug5kweb')
 	.controller('ug5kHardCtrl', ug5kHardCtrl);
 
-ug5kHardCtrl.$inject = ['CfgService', 'authservice', 'transerv', '$scope', '$location'];
+ug5kHardCtrl.$inject = ['$scope', '$location', '$route', 'CfgService', 'authservice', 'transerv'];
 
-function ug5kHardCtrl(CfgService, authservice, transerv, $scope, $location) {
+function ug5kHardCtrl( $scope, $location, $route, CfgService, authservice, transerv) {
 	var vm = this;
 
 	/** */
@@ -53,7 +53,7 @@ function ug5kHardCtrl(CfgService, authservice, transerv, $scope, $location) {
 
     /** */
 	vm.enable_pos = function (pos) {
-	    return CfgService.global_enable([ADMIN_PROFILE, ING_PROFILE]);
+	    return authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]);
 	}
 
     /** */
@@ -97,5 +97,11 @@ function ug5kHardCtrl(CfgService, authservice, transerv, $scope, $location) {
     /** */
 	$scope.$on('loadcfg', function (data) {
 	    vm.get_data(vm.slv);
+	});
+
+    /** */
+	$scope.$on('std_change', function (data) {
+	    console.log("std_change");
+	    $route.reload();
 	});
 }
