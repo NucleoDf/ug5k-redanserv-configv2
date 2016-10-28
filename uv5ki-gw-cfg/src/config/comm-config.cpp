@@ -38,6 +38,10 @@ CommGenConfig::CommGenConfig(soap_config &sc)
 	this->dualidad = 0;							// TODO: Leer DatosLocales.ini
 	this->ipv = sc.Ip;
 	this->ips = sc.Server;
+
+	this->acGrupoMulticast = sc.ParametrosMulticast.GrupoMulticastConfiguracion;
+	this->uiPuertoMulticast = sc.ParametrosMulticast.PuertoMulticastConfiguracion;
+
 	this->nivelconsola = 0;						// TODO: Leer DatosLocales.ini
 	this->puertoconsola = 0;
 	this->nivelIncidencias = 0;
@@ -222,5 +226,81 @@ CommUv5Config::CommUv5Config(soap_config &sc)
 	this->MulticastGroup = sc.ParametrosMulticast.GrupoMulticastConfiguracion;
 	this->MulticastPort = sc.ParametrosMulticast.PuertoMulticastConfiguracion;
 
-	// TODO: Resto de la configuracion.
+	// Plan ATS.
+	for(size_t iPlanAts=0; iPlanAts<sc.ArrayOfNumeracionATS.size(); iPlanAts++)
+	{
+		soap_NumeracionATS sPlanAts = sc.ArrayOfNumeracionATS[iPlanAts];
+		CommUlises_st_numeracionats numeracionats(sPlanAts);
+		this->plannumeracionats.push_back(numeracionats);
+	}
+	// Plan IP
+	for (size_t iPlanIp=0; iPlanIp<sc.ArrayOfDireccionamientoIP.size(); iPlanIp++)
+	{
+		this->plandireccionamientoip.push_back(CommUlises_st_direccionamientoip(sc.ArrayOfDireccionamientoIP[iPlanIp]));
+	}
+
+	// Plan Troncales.
+	for (size_t iPlanTronc=0; iPlanTronc<sc.ArrayOfListaTroncales.size(); iPlanTronc++)
+	{
+		this->plantroncales.push_back(CommUlises_st_listatroncales(sc.ArrayOfListaTroncales[iPlanTronc]));
+	}
+
+	// Plan Redes.
+	for (size_t iPlanRed=0; iPlanRed<sc.ArrayOfListaRedes.size(); iPlanRed++)
+	{
+		this->planredes.push_back(CommUlises_st_listaredes(sc.ArrayOfListaRedes[iPlanRed]));
+	}
+
+	// Plan Usuario TV
+	for (size_t iTv=0; iTv<sc.ArrayOfAsignacionUsuariosTV.size(); iTv++)
+	{
+		this->planasignacionusuarios.push_back(CommUlises_st_asignacionusuario_tv(sc.ArrayOfAsignacionUsuariosTV[iTv]));
+	}
+
+	// Plan Recursos GW.
+	for (size_t iGw=0; iGw<sc.ArrayOfAsignacionRecursosGW.size(); iGw++)
+	{
+		this->planasignacionrecursos.push_back(CommUlises_st_asignacionusuario_gw(sc.ArrayOfAsignacionRecursosGW[iGw]));
+	}
+
+	// Plan SIP
+	for (size_t iSip=0; iSip<sc.ArrayOfDireccionamientoSIP.size(); iSip++)
+	{
+		this->plandireccionamientosip.push_back(CommUlises_st_direccionamiento_sip(sc.ArrayOfDireccionamientoSIP[iSip]));
+	}
+}
+
+/** */
+CommUlises_st_numeracionats::CommUlises_st_numeracionats(soap_NumeracionATS sPlanAts)
+{
+	this->centralpropia = sPlanAts.CentralPropia ? 1 : 0;
+	this->throwswitching = sPlanAts.Throwswitching ? 1 : 0;
+	this->no_test = sPlanAts.NumTest;
+
+	// Rangos Operadores
+	for (size_t iRango=0; iRango<sPlanAts.RangosOperador.size(); iRango++)
+	{
+		soap_NumeracionATS::soap_RangosSCV sRango = sPlanAts.RangosOperador[iRango];
+		CommUlises_st_rango rango(sRango);
+
+		this->rangosoperador.push_back(rango);
+	}
+
+	// Rangos Operadores Privilegiados.
+	for (size_t iRango=0; iRango<sPlanAts.RangosPrivilegiados.size(); iRango++)
+	{
+		soap_NumeracionATS::soap_RangosSCV sRango = sPlanAts.RangosPrivilegiados[iRango];
+		CommUlises_st_rango rango(sRango);
+
+		this->rangosprivilegiados.push_back(rango);
+	}
+
+	// Plan Rutas.
+	for (size_t iRuta=0; iRuta<sPlanAts.ListaRutas.size(); iRuta++)
+	{
+		soap_NumeracionATS::soap_PlanRutas sRuta = sPlanAts.ListaRutas[iRuta];
+		CommUlises_st_planrutas ruta(sRuta);
+
+		this->listarutas.push_back(ruta);
+	}
 }

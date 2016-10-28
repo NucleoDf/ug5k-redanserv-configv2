@@ -209,7 +209,8 @@ void HistClient::SetEventosHistoricos(string user, EventosHistoricos *eventos)
 	EventosHistoricos::iterator it;
 	for (it=eventos->begin(); it!=eventos->end(); it++)
 	{
-		SetEvent(it->evento, user, it->res, it->name, it->data);
+		if (it->evento != INCI_NONE)
+			SetEvent(it->evento, user, it->res, it->name, it->data);
 	}
 }
 

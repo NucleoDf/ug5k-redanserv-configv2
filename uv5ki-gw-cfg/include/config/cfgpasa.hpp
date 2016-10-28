@@ -18,12 +18,18 @@
 #ifndef INCLUIDO_CFGPASA_PUNTOHACHE
 #define INCLUIDO_CFGPASA_PUNTOHACHE
 
-// #include "../pthreads/include/pthread.h"
+#include "../pthreads/include/pthread.h"
+
+#define ULISES
 
 //------------------------------------------------------------
 //  Definiciones
 //------------------------------------------------------------
 
+#define NUEVA_CONFI     1
+
+#define PRECISION_ESTRICTA 0
+#define PRECISION_NORMAL   1
 
 /*
  * Dimensionamiento
@@ -264,15 +270,6 @@ enum eType
     };
 #define CFG_TOTAL_TYPES_EYM   5
 
-
-/*
-#define CFG_EyM_TYPE_I        0
-#define CFG_EyM_TYPE_II       1
-#define CFG_EyM_TYPE_III      2
-#define CFG_EyM_TYPE_IV       3
-#define CFG_EyM_TYPE_V        4
-#define CFG_TOTAL_TYPES_EYM   5
-*/
 /*
 * Modo EyM
 */
@@ -332,6 +329,161 @@ enum eType
 #define N_MAX_RANGOS            128
 #define N_MAX_PRIV          16
 
+//------------------------------------------------------------------------------------------
+//  datos y estructuras del sistema Ulises
+//------------------------------------------------------------------------------------------
+
+#ifdef ULISES
+
+
+#define LONG_AB             	19
+#define N_ABONADOS_BY_TV        32
+#define N_MAX_TRONCALES         128
+#define N_MAX_CENTRALES         8
+#define N_RUTAS_BY_CENTRAL      4
+#define N_MAX_RUTAS         	(N_MAX_CENTRALES*N_RUTAS_BY_CENTRAL)
+#define N_TRONCALES_RUTA        8
+#define N_MAX_REC_BY_TRONCAL    8
+#define N_MAX_REDES         	16
+#define N_MAX_REC_BY_NET        128
+#define N_MAX_TV            	256
+#define N_MAX_TIFX          	64
+#define N_MAX_REC_BY_TIFX       16
+#define N_MAX_REC_SISTEMA       N_MAX_TIFX*N_MAX_REC_BY_TIFX
+
+
+#define CFG_MAX_LONG_NOMBRE     CFG_MAX_LONG_NOMBRE_RECURSO    //igualo los nombres al mismo tamano
+
+/*#define LONG_NAME           32
+#define LONG_NAME_TV            LONG_NAME
+#define LONG_NAME_REC           LONG_NAME
+#define LONG_NAME_RUTA          LONG_NAME
+#define LONG_NAME_CENTRAL       LONG_NAME
+#define LONG_NAME_TRONCAL       LONG_NAME
+*/
+//--------------------- Finalizacion de tablas ---------------------------------/
+#define NO_NAME                 0
+#define NO_PREFIJO              255
+#define CENTRAL_NO_DEF          2
+#define NO_INICIAL              0
+#define NO_TRONCAL              0
+#define NO_TIPO_RUTA            255
+#define NO_REC                  0
+#define NO_HOST                 0
+#define NO_USUARIO              0
+//--------------------- Finalizacion de tablas ---------------------------------/
+
+
+
+struct st_direccionamientoip {
+    char idhost[CFG_MAX_LONG_NOMBRE];/*NO_NAME fin de tabla*/
+    char ipred1[MAX_LONG_DIRIP];
+    char ipred2[MAX_LONG_DIRIP];
+    unsigned char tipohost;
+    bool operator ==( const st_direccionamientoip& );
+    bool operator !=( const st_direccionamientoip& );
+};
+
+
+struct st_asignacionusuario_tv {
+    char idusuario [CFG_MAX_LONG_NOMBRE];
+    char idhost[CFG_MAX_LONG_NOMBRE];/*NO_NAME fin de tabla NO_HOST*/
+    bool operator ==( const st_asignacionusuario_tv& );
+    bool operator !=( const st_asignacionusuario_tv& );
+};
+
+
+struct st_asignacionrecursos_gw {
+    char idrecurso [CFG_MAX_LONG_NOMBRE];
+    char idhost[CFG_MAX_LONG_NOMBRE];/*NO_NAME fin de tabla NO_HOST*/
+    bool operator ==( const st_asignacionrecursos_gw& );
+    bool operator !=( const st_asignacionrecursos_gw& );
+};
+
+
+struct st_no_abonado {
+    unsigned int prefijo;/*NO_PREFIJO fin de tabla*/
+    char abonado [LONG_AB];
+    bool operator ==( const st_no_abonado& );
+    bool operator !=( const st_no_abonado& );
+};
+
+
+struct st_direccionamiento_sip  {
+    char idusuario [CFG_MAX_LONG_NOMBRE];/*NO_NAME fin de tabla NO_USUARIO*/
+    struct st_no_abonado array_abonados[N_ABONADOS_BY_TV];
+    bool operator ==( const st_direccionamiento_sip& );
+    bool operator !=( const st_direccionamiento_sip& );
+};
+
+
+struct st_plan_recursos {
+    unsigned char tipo;
+    unsigned char idrec [CFG_MAX_LONG_NOMBRE];/*0 para indicar fin de tabla NO_REC*/
+    bool operator ==( const st_plan_recursos& );
+    bool operator !=( const st_plan_recursos& );
+};
+
+
+struct st_listaredes {
+    char idred [CFG_MAX_LONG_NOMBRE];
+    unsigned int prefijo;/*prefijo 255 para indicar fin tabla*/
+    struct st_plan_recursos listarecursos [N_MAX_REC_BY_NET];
+    bool operator ==( const st_listaredes& );
+    bool operator !=( const st_listaredes& );
+};
+
+
+struct st_listatroncales {
+    char idtroncal [CFG_MAX_LONG_NOMBRE];/*0 para indicar fin de tabla NO_TRONCAL*/
+    char no_test [LONG_AB_ATS];
+    struct st_plan_recursos listarecursos [N_MAX_REC_BY_TRONCAL];
+    bool operator ==( const st_listatroncales& );
+    bool operator !=( const st_listatroncales& );
+    bool ConfirmaRecurso( char* );
+};
+
+
+struct st_planrutas {
+    unsigned char tiporuta; /* directa o alternativa,255 fin tabla(NO_TIPO_RUTA)*/
+    char listatroncales [N_TRONCALES_RUTA][CFG_MAX_LONG_NOMBRE];
+    bool operator ==( const st_planrutas& );
+    bool operator !=( const st_planrutas& );
+    bool ConfirmaTroncal( char* );
+};
+
+/*
+ * Rango con los numeros ATS en binario.
+ */
+
+
+struct st_rango {
+    char inicial [LONG_AB_ATS];/*0 para indicar fin de tabla*/
+    char final [LONG_AB_ATS];
+    struct st_no_abonado abonado;
+    bool operator ==( const st_rango& );
+    bool operator !=( const st_rango& );
+};
+
+
+struct st_numeracionats {
+    unsigned char centralpropia; /*Mi Central,CENTRAL_NO_DEF para indicar fin tabla */;
+    unsigned char throwswitching;
+    char no_test [LONG_AB_ATS];
+    struct st_rango rangosoperador[N_MAX_RANGOS]; /*array de rangos de operdores */
+    struct st_rango rangosprivilegiados[N_MAX_PRIV]; /*array de rangos de ope.privilegiados */
+    struct st_planrutas listarutas [N_MAX_RUTAS];
+    bool operator ==( const st_numeracionats& );
+    bool operator !=( const st_numeracionats& );
+    bool ConfirmaTroncal( char* );
+};
+
+
+
+
+#endif
+//------------------------------------------------------------------------------------------
+
 //------------------------------------------------------------
 //  Tipos de datos
 //------------------------------------------------------------
@@ -387,6 +539,13 @@ struct cfgColateralPP
     int itm_superv_options;                 /* temporizador supervision options */
     int iColateralSCV;                    /* indica si el colateral es un recurso de una pasarela (0) o un SCV (1)*/
 
+};
+
+
+//esta estructura se deja de momento porque en redan se utiliza, se pasa cfgsistema a los recursos para que tengan la ip para darla a grabación.
+struct st_config_sistema
+{
+    char szDirVirtual[CFG_MAX_LONG_URL+1];
 };
 
 
@@ -584,14 +743,17 @@ struct cfgConfigIfRadio
     int iSupervisionModuladoraTx;   
     int iModoConfirmacionPtt;   
     int iPeriodoRtpSqBss;   
-    int iNumPaquetesSqOff;   
+    int iNumPaquetesSqOff;   	////iNumPaquetesSqOff en realidad es SQ Forzado o no
     int iPttTimeOut;
     int iNumFlujosMezcla;
     unsigned int KeepAlivePeriod;
     unsigned int KeepAliveMultiplier;
     int iSessionPrio;
     int iPttPrio;
+#ifdef NUEVA_CONFI
     int iPrecisionAudio;     //precision del recurso radio (5 o 20 grenularidad)
+#endif
+    
 
     int iTiempoPttBloqueado;    // 2000 por defecto.
     int iRetrasoPttOff;         // 0 por defecto.
@@ -731,8 +893,9 @@ struct cfgConfigIfR2N5
     } sTiemA, sTiemB;
 
     int iT_Release;                              //tiempo generando tonos antes de liberar
+#ifdef NUEVA_CONFI
     int iT_Int_Warning;   //tiempo de duracion de los tonos de interrupt warning
-
+#endif
 //    char szIdTroncal[CFG_MAX_LONG_NOMBRE_TRONCAL+1];
 //    char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
 
@@ -812,12 +975,6 @@ struct cfgConfigIfRdsi
 };
 
 
-struct st_config_sistema
-{
-    char szDirVirtual[CFG_MAX_LONG_URL+1];
-};
-
-
 /*
  * Estructura: cfgConfigRecurso.
  * Descripcion: Configuracion _completita_ de un recurso.
@@ -848,7 +1005,6 @@ struct cfgConfigRecurso
     void PorDefecto();
     void TomaTipoRec( int );
     void TomaTipoIf( int );
-    void ExtraeCfgSys(struct st_config_sistema *);
     bool operator ==( const cfgConfigRecurso& );
     bool operator !=( const cfgConfigRecurso& );
     bool CambiaColateral(cfgConfigRecurso *pcfgOtra );
@@ -923,9 +1079,6 @@ struct cfgConfigPasarela
     int iNumRecursos;
 
     char acTipoSlot[MAX_SLOTS_PASARELA];
-//    char acGrupoMulticast[CFG_MAX_LONG_URL+1];
-//    unsigned int uiPuertoMulticast;
-
     struct LocalizadorRecurso asLocRec[MAX_RECURSOS_TIFX];
     struct cfgConfigRecurso sRecurso[MAX_RECURSOS_TIFX];
 
@@ -933,6 +1086,33 @@ struct cfgConfigPasarela
     char szDirSipProxy[NUM_SIP_PROXY][MAX_LONG_DIRIP];
     char szDirSrvNtp[NUM_SRV_NTP][MAX_LONG_DIRIP];
 
+#ifdef ULISES
+    char acGrupoMulticast[CFG_MAX_LONG_URL+1];
+    unsigned int uiPuertoMulticast;
+    struct st_numeracionats plannumeracionats [N_MAX_CENTRALES];
+    struct st_direccionamientoip plandireccionamientoip[N_MAX_TV+N_MAX_TIFX];
+    struct st_listatroncales plantroncales [N_MAX_TRONCALES];
+    struct st_listaredes planredes [N_MAX_REDES];
+    struct st_asignacionusuario_tv planasignacionusuarios [N_MAX_TV];
+    struct st_asignacionrecursos_gw planasignacionrecursos[N_MAX_REC_SISTEMA];
+    struct st_direccionamiento_sip plandireccionamientosip [N_MAX_TV];
+
+    /*
+     * todo meter estas funciones en cfgConfigPasarela
+     *
+    st_config_sistema();
+    bool operator ==( const st_config_sistema& );
+    bool operator !=( const st_config_sistema& );
+    void DimeNumerosPrueba( char*, int, char*, char*, char* );
+    void DimeMisRangos( struct st_rango_binario*, int*, struct st_rango_binario*, int* );
+    void DimeRangosDirectos( char *szIdRec,
+    										struct st_rango_binario *psRangosDirectosOpe,
+    										int *piNumRangosOperador,
+    										struct st_rango_binario *psRangosDirectosPriv,
+    										int *piNumRangosPrivilegiados );
+     */
+
+  #endif
 
 
     void TomaNombre( char* );

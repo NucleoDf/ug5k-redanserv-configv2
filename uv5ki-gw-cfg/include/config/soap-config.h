@@ -217,7 +217,6 @@ public:
 	bool Interno;
 	int Min;
 	int Max;
-
 };
 
 /** */

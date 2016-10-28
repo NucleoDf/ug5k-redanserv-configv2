@@ -187,6 +187,9 @@ vector<CommConvertEvent> *CommConversor::convierte(CommConfig &cfgIn, void *p_mc
 	ActualizaSnmpIni();
 	ActualizaWebIni();
 
+	/** ULISES */
+	TablasUlises(&p_cfg_in->ulises);
+
 	return &eventos;
 }
 
@@ -237,8 +240,11 @@ void CommConversor::ParametrosGlobales()
 	SetInt(&mcfg->iSipPeriodoSuperv, p_cfg_in->servicios.sip.PeriodoSupervisionSIP, INCI_MPGP, "SUPERVISION-SIP");
 
 	SetInt(&mcfg->iSnmpPuertoRemoto, p_cfg_in->servicios.snmp.sport, INCI_MPGP, "Puerto Servicio SNMP");
-
 	SetInt(&mcfg->iRecPuertoRemoto, p_cfg_in->servicios.grab.sport, INCI_MPGP, "Puerto Servicio Grabador");
+
+	// ULISES
+	SetString(mcfg->acGrupoMulticast, p_cfg_in->general.acGrupoMulticast, INCI_MPGP, "IP MCAST", CFG_MAX_LONG_URL);
+	SetInt((int *)&mcfg->uiPuertoMulticast, p_cfg_in->general.uiPuertoMulticast, INCI_MPGP, "Puerto MCAST");
 
 }
 
@@ -782,3 +788,138 @@ void CommConversor::ActualizaWebIni()
 		SetInt(webini, "U5KWEB", "WEB-PORT",p_cfg_in->servicios.web.wport, INCI_MPGP, "PUERTO DE ESCUCHA");
 	webini.save();
 }
+
+/*******************************************************************************************************************/
+/** */
+void CommConversor::TablasUlises(CommUv5Config *p_tbs)
+{
+	TablaUlises(p_tbs->plannumeracionats, mcfg->plannumeracionats);
+	TablaUlises(p_tbs->plandireccionamientoip, mcfg->plandireccionamientoip);
+	TablaUlises(p_tbs->plantroncales, mcfg->plantroncales);
+	TablaUlises(p_tbs->planredes, mcfg->planredes);
+	TablaUlises(p_tbs->planasignacionusuarios, mcfg->planasignacionusuarios);
+	TablaUlises(p_tbs->planasignacionrecursos, mcfg->planasignacionrecursos);
+	TablaUlises(p_tbs->plandireccionamientosip, mcfg->plandireccionamientosip);
+}
+
+/** */
+void CommConversor::TablaUlises(vector<CommUlises_st_numeracionats> &plan, struct st_numeracionats *p_plan)
+{
+	/** Plan numeracion ATS */
+	size_t ats;
+	for (ats=0; ats<plan.size(); ats++)
+	{
+		if (ats >= (N_MAX_TV+N_MAX_TIFX)) {
+			PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de numeracion ATS");
+			break;
+		}
+		plan[ats].copyto(&p_plan[ats]);
+	}
+	if (ats < (N_MAX_TV+N_MAX_TIFX))
+		p_plan[ats].centralpropia = CENTRAL_NO_DEF;
+}
+
+/** */
+void CommConversor::TablaUlises(vector<CommUlises_st_direccionamientoip> &plan, struct st_direccionamientoip *p_plan)
+{
+	/** Plan direccionamiento IP */
+	size_t ip;
+	for (ip=0; ip<plan.size(); ip++)
+	{
+		if (ip >= (N_MAX_TV+N_MAX_TIFX)) {
+			PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de DIRECCIONAMIENTO IP");
+			break;
+		}
+		plan[ip].copyto(&p_plan[ip]);
+	}
+	if (ip < (N_MAX_TV+N_MAX_TIFX))
+		p_plan[ip].idhost[0]=NO_NAME;
+}
+
+/** */
+void CommConversor::TablaUlises(vector<CommUlises_st_listatroncales> &plan, struct st_listatroncales *p_plan)
+{
+	/** Plan de troncales */
+	size_t tr;
+	for (tr=0; tr<plan.size(); tr++)
+	{
+		if (tr >= N_MAX_TRONCALES) {
+			PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de TRONCALES");
+			break;
+		}
+		plan[tr].copyto(&p_plan[tr]);
+	}
+	if (tr < N_MAX_TRONCALES)
+		p_plan[tr].idtroncal[0]=0;
+}
+
+/** */
+void CommConversor::TablaUlises(vector<CommUlises_st_listaredes> &plan, struct st_listaredes *p_plan)
+{
+	/** Plan de redes */
+	size_t red;
+	for (red=0; red<plan.size(); red++)
+	{
+		if (red >= N_MAX_REDES) {
+			PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de REDES");
+			break;
+		}
+		plan[red].copyto(&p_plan[red]);
+	}
+	if (red < N_MAX_REDES)
+		p_plan[red].prefijo=255;
+}
+
+/** */
+void CommConversor::TablaUlises(vector<CommUlises_st_asignacionusuario_tv> &plan, struct st_asignacionusuario_tv *p_plan)
+{
+	/** Plan de asignacion de Usuarios TV */
+	size_t tv;
+	for (tv=0; tv<plan.size(); tv++)
+	{
+		if (tv >= N_MAX_TV) {
+			PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de Asignacion de Usuarios TV");
+			break;
+		}
+		plan[tv].copyto(&p_plan[tv]);
+	}
+	if (tv < N_MAX_TV)
+		p_plan[tv].idhost[0] = NO_NAME;
+}
+
+/** */
+void CommConversor::TablaUlises(vector<CommUlises_st_asignacionusuario_gw> &plan, struct st_asignacionrecursos_gw *p_plan)
+{
+	/** Plan de asignacion de recursos GW */
+	size_t gw;
+	for (gw=0; gw<plan.size(); gw++)
+	{
+		if (gw >= N_MAX_REC_SISTEMA) {
+			PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de Asignacion de Recursos GW");
+			break;
+		}
+		plan[gw].copyto(&p_plan[gw]);
+	}
+	if (gw < N_MAX_REC_SISTEMA)
+		p_plan[gw].idhost[0] = NO_NAME;
+}
+
+/** */
+void CommConversor::TablaUlises(vector<CommUlises_st_direccionamiento_sip> &plan, struct st_direccionamiento_sip *p_plan)
+{
+	/** Plan direccionamiento SIP */
+	size_t iSip;
+	for (iSip=0; iSip<plan.size(); iSip++)
+	{
+		if (iSip >= N_MAX_TV) 
+		{
+			PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de Direccionamiento SIP");
+			break;
+		}		
+		plan[iSip].copyto(&p_plan[iSip]);
+	}
+
+	if (iSip < N_MAX_TV)
+		p_plan[iSip].idusuario[0] = NO_NAME;
+}
+

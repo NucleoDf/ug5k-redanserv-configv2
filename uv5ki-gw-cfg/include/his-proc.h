@@ -38,6 +38,8 @@ using namespace std;
 #define INCI_BITE		184		// Ejecucion BITE desde Local.									/ USER /
 #define INCI_SELPR		2100	// SP-Radio	Selección Principal/Reserva							*/ USER:REC=RECURSO /
 
+#define INCI_NONE		-1
+
 /** */
 class CommConvertEvent 
 {
