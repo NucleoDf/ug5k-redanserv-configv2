@@ -97,7 +97,7 @@ public:
 	CommUlises_st_planrutas(){
 	}
 	CommUlises_st_planrutas(soap_NumeracionATS::soap_PlanRutas sRuta){
-		tiporuta = atoi(sRuta.TipoRuta.c_str());		// TODO: Convertir los tipos de Ruta.... 
+		tiporuta = sRuta.TipoRuta=="D" ? 0 : 1;		// TODO: Convertir los tipos de Ruta.... 
 		listatroncales = sRuta.ListaTroncales;
 	}
 	~CommUlises_st_planrutas(){}
@@ -194,7 +194,7 @@ public:
 		idhost = sDir.IdHost;
 		ipred1 = sDir.IpRed1;
 		ipred2 = sDir.IpRed2;
-		tipohost = atoi(sDir.TipoHost.c_str());		// TODO: Transformar el Tipo de HOST
+		tipohost = (int )sDir.TipoHost;
 
 		// TODO: ¿que se hace con estos parametros del SOAP?
 		//bool Interno;
@@ -240,11 +240,11 @@ public:
 	CommUlises_st_plan_recursos() {
 	}
 	CommUlises_st_plan_recursos(soap_ListaTroncales::soap_PlanRecursos sRec) {
-		tipo = atoi(sRec.Tipo.c_str());	// TODO: Convertir el tipo....
+		tipo = (int )sRec.Tipo;		// Convertir el tipo....
 		idrec = sRec.IdRecurso;
 	}
 	CommUlises_st_plan_recursos(soap_ListaRedes::soap_PlanRecursos sRec) {
-		tipo = atoi(sRec.Tipo.c_str());	// TODO: Convertir el tipo....
+		tipo = (int )sRec.Tipo;		// Convertir el tipo....
 		idrec = sRec.IdRecurso;
 	}
 public:

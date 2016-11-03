@@ -86,6 +86,10 @@ public:
 		write_key(writer, "ats_rangos_dst", ats_rangos_dst);
 		write_key(writer, "ats_rangos_org", ats_rangos_org);
 		write_key(writer, "iT_Int_Warning", iT_Int_Warning);
+
+		write_key(writer, "idRed", idRed);
+		write_key(writer, "idTroncal", idTroncal);
+		write_key(writer, "listaEnlacesInternos", listaEnlacesInternos);
 	}
 	virtual void jread(Value &base)
 	{
@@ -109,6 +113,10 @@ public:
 		read_key(base, "ats_rangos_dst", ats_rangos_dst);
 		read_key(base, "ats_rangos_org", ats_rangos_org);
 		read_key(base, "iT_Int_Warning", iT_Int_Warning);
+
+		read_key(base, "idRed", idRed);
+		read_key(base, "idTroncal", idTroncal);
+		read_key(base, "listaEnlacesInternos", listaEnlacesInternos);
 	}
 
 public:
@@ -137,6 +145,11 @@ public:
 	vector<CommResTelefAtsRange *> ats_rangos_dst;
 	vector<CommResTelefAtsRange *> ats_rangos_org;
 #endif
+
+	/** Proviene de Ulises */
+	string idRed;
+	string idTroncal;
+	vector<string> listaEnlacesInternos;
 };
 
 #endif

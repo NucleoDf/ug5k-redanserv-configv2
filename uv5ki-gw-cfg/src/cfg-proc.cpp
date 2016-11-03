@@ -270,7 +270,7 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 	/** Activa la configuracion recibida */
  	p_working_config->set(cfg_redan);
 
-	/** Actualiza la configuracion recibida... TODO: Comprobar los PATH */
+	/** Actualiza la configuracion recibida... */
 	p_working_config->save_to(LAST_CFG);
 
 	/** EstadoSicronizacion=slcSincronizado */
@@ -513,7 +513,7 @@ void SoapClientProc::PedirConfiguracion(string cfg)
 		/** Activa la configuracion recibida */
  		p_working_config->set(sConfig);
 
-		/** Actualiza la configuracion recibida... TODO:  Comprobar los PATH */
+		/** Actualiza la configuracion recibida... */
 		p_working_config->save_to(LAST_CFG);
 
 		/** Abre si procede el puerto de Escucha MCAST */

@@ -25,6 +25,10 @@ enum TI_ {
 	TI_Radio=0, TI_LCEN=1, TI_BC=2, TI_BL=3, TI_AB=4, TI_ATS_R2=5, TI_ATS_N5=6, TI_ATS_QSIG=7, TI_ISDN_2BD=8, TI_ISDN_30BD=9, TI_I_O=10, TI_DATOS=11
 };
 
+enum THOST_ {
+	THOST_TOP = 0, THOST_TIFX = 1, THOST_EXTRADIO = 2, THOST_EXTTELEFONIA = 3, THOST_EXTSISTEMA = 4
+};
+
 /** */
 class xml_data : public CodeBase
 {
@@ -61,6 +65,16 @@ protected:
 			str_val=="TI_AB" ? TI_AB :
 			str_val=="TI_ATS_R2" ? TI_ATS_R2 :
 			str_val=="TI_ATS_N5" ? TI_ATS_N5 :
+			-1);
+	}
+	void read_key(xml_node<> * xnode, const char *indice, THOST_ &val) {
+		string str_val = RAPID_XML_NODE_VALUE(xnode, indice);
+		val = (THOST_)(
+			str_val=="TEH_TOP" ? THOST_TOP :
+			str_val=="TEH_TIFX" ? THOST_TIFX :
+			str_val=="TEH_EXTERNO_RADIO" ? THOST_EXTRADIO :
+			str_val=="TEH_EXTERNO_TELEFONIA" ? THOST_EXTTELEFONIA :
+			str_val=="TEH_EXTERNO_SISTEMA" ? THOST_EXTSISTEMA :
 			-1);
 	}
 	void read_key(xml_node<> * xnode, const char *indice, string &val) {
@@ -213,7 +227,7 @@ public:
 	string IdHost;
 	string IpRed1;
 	string IpRed2;
-	string TipoHost;
+	THOST_ TipoHost;
 	bool Interno;
 	int Min;
 	int Max;
@@ -268,7 +282,7 @@ public:
 		}
 	public:
 		string IdRecurso;
-		string Tipo;
+		TI_ Tipo;
 	};
 
 public:
@@ -303,7 +317,7 @@ public:
 		}
 	public:
 		string IdRecurso;
-		string Tipo;
+		TI_ Tipo;
 	};
 
 public:
@@ -348,7 +362,7 @@ public:
 		string Final;
 		string IdSistema;
 		string Central;
-		int Tipo;
+		int Tipo;				// TODO: Es un string 'O', 'P', ???
 	};
 
 	class soap_PlanRutas : public xml_data
@@ -469,43 +483,43 @@ public:
 	int TamRTP;
 	int Codec;
 	bool GrabacionEd137;
-	int TipoDestino;
+	int TipoDestino;					// TODO: No se asigna.
 	string IdDestino;
-	int FrqTonoSQ;
+	int FrqTonoSQ;						// TODO: No se asigna.
 	int UmbralTonoSQ;
-	int FrqTonoPTT;
-	int UmbralTonoPTT;
+	int FrqTonoPTT;						// TODO: No se asigna.
+	int UmbralTonoPTT;					// TODO: No se asigna.
 	struct {
 		/** Telefonia */
-		vector<string> ListaEnlacesInternos;
-		int IdPrefijo;
+		vector<string> ListaEnlacesInternos;	// TODO: Pendiente.
+		int IdPrefijo;					// TODO: No se asigna.
 		/** LC */
-		int RefrescoEstados;
-		int Timeout;
-		int LongRafagas;
+		int RefrescoEstados;			// TODO: No se asigna.
+		int Timeout;					// TODO: No se asigna.
+		int LongRafagas;				// TODO: No se asigna.
 		/** BC/BL/AB */
-		int Lado;
-		string Modo;
-		string TipoEM;
+		int Lado;						// TODO: No se asigna.
+		string Modo;					// TODO: No se asigna.
+		string TipoEM;					// TODO: No se asigna.
 		/** AB */
-		string IdRed;
+		string IdRed;					// TODO: Pendiente.
 		/** R2/N5 */
-		string IdTroncal;
+		string IdTroncal;				// TODO: Pendiente.
 	} telef;
 	struct {
-		bool EM;
+		bool EM;						// TODO: No se asigna.
 		string SQ;
 		string PTT;
-		int FrqTonoE;
-		int UmbralTonoE;
-		int FrqTonoM;
-		int UmbralTonoM;
+		int FrqTonoE;					// TODO: No se asigna.
+		int UmbralTonoE;				// TODO: No se asigna.
+		int FrqTonoM;					// TODO: No se asigna.
+		int UmbralTonoM;				// TODO: No se asigna.
 		bool BSS;
-		bool NTZ;
-		int TipoNTZ;
-		bool Cifrado;
-		bool SupervPortadoraTx;
-		bool SupervModuladoraTx;
+		bool NTZ;						// TODO: No se asigna.
+		int TipoNTZ;					// TODO: No se asigna.
+		bool Cifrado;					// TODO: No se asigna.
+		bool SupervPortadoraTx;			// TODO: No se asigna.
+		bool SupervModuladoraTx;		// TODO: No se asigna.
 		int ModoConfPTT;
 		int RepSQyBSS;
 		int DesactivacionSQ;
@@ -516,8 +530,8 @@ public:
 		int NumFlujosAudio;
 		int KeepAlivePeriod;
 		int KeepAliveMultiplier;
-		string IdEmplazamiento;
-		int Tipo;
+		string IdEmplazamiento;			// TODO: No se asigna.
+		int Tipo;						// TODO: No se asigna.
 	} radio;
 };
 
@@ -550,12 +564,12 @@ public:
 
 public:
 	string IdRecurso;
-	int Tipo;
+	int Tipo;						// TODO: No se asigna.
 	TI_ Interface;
 	int SlotPasarela;
 	int NumDispositivoSlot;
 	string ServidorSIP;
-	bool Diffserv;
+	bool Diffserv;					// TODO. No se asigna.
 	string IdSistema;
 	int TipoRecurso;
 	string IdTifX;

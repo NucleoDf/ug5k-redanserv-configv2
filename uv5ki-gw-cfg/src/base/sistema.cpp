@@ -115,16 +115,6 @@ void sistema::GetWorkingIpAddressAndName(string &ip, string &ipserv, string &nam
 	GetIpAddress(ip);
 	ipserv = datos_locales.ipServ;
 	name = datos_locales.idGw;							// TODO: 
-//#if defined _WIN32	
-//	ipserv = datos_locales.ipServ;
-//	name = datos_locales.idGw;							// TODO: 
-//#elif defined __APPLE__
-//	ipserv = LocalConfig::cfg.ServerURL();
-//	name = "CGW1";							// TODO: 	
-//#else
-//	ipserv = LocalConfig::cfg.ServerURL();	// TODO: 
-//	name = "CGW1";							// TODO: 
-//#endif
 }
 
 /** */

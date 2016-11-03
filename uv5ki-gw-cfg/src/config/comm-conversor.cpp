@@ -374,6 +374,10 @@ void CommConversor::RecursoGeneral(CommResConfig *p_rec, struct cfgConfigGeneral
 	mgen->iSnmpPuertoRemoto = mcfg->iSnmpPuertoRemoto;
 	mgen->iRecPuertoRemoto = mcfg->iRecPuertoRemoto;
 
+	// TODO: mgen->iFlgUsarDiffServ
+
+	// TODO: mgen->aListaEnlacesExternos
+
 }
 
 /** */
@@ -619,6 +623,10 @@ void CommConversor::RecursoTelefoniaR2N5(CommResConfig *p_rec, struct cfgConfigI
 #endif
 	}
 
+	/** TODO: */
+	//char szIdTroncal[CFG_MAX_LONG_NOMBRE_TRONCAL+1];
+	//char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
+
 }
 
 /** */
@@ -640,7 +648,10 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	SetInt((int *)(&mtlf->iUmbralVox), p_rec->telefonia.umbral_vox, INCI_MPSW, "UMBRAL VOX");
 	SetInt((int *)(&mtlf->iTmInactividad), p_rec->telefonia.tm_inactividad, INCI_MPSW, "TIEMPO INACTIVIDAD");
 
-	// strcpy(mtlf->szIdRed, "");	
+	// TODO: 
+	// strcpy(mtlf->szIdRed, "");
+    // char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
+
 }
 
 /** */

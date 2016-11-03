@@ -139,7 +139,11 @@ void WorkingConfig::ResourcesClear()
 {
 	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) 
 	{
-		// TODO: 
+		// Borrar las referencias en la configuracion HW.
+		config.hardware.clear();
+
+		// Borrar la Lista de recursos.
+		config.recursos.clear();
 		return;
 	}
 	throw Exception("Modo de Configuracion no implementado borrando recursos...");

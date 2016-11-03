@@ -230,12 +230,18 @@ public:
 		dualidad = GetIniSetting(ini, "DATOS_LOCALES", "Dual_CGW", "n")=="s" ? true : false;
 		ipServ = GetIniSetting(ini, "DATOS_LOCALES", "Url_Servidor", "127.0.0.1");
 		ipServ = url(ipServ).host_;
+		nivel_consola = atoi(GetIniSetting(ini, "DATOS_LOCALES", "ConsolaNivel", "0").c_str());
+		puerto_consola = atoi(GetIniSetting(ini, "DATOS_LOCALES", "ConsolaPuerto", "19710").c_str());
+		nivel_incidencias = atoi(GetIniSetting(ini, "DATOS_LOCALES", "IncidenciasNivel", "3").c_str());
 	}
 	~DatosLocales(){}
 public:
 	string idGw;
 	bool dualidad;
-	string ipServ;	
+	string ipServ;
+	int nivel_consola;
+	int puerto_consola;
+	int nivel_incidencias;
 };
 
 #endif

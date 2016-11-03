@@ -37,6 +37,9 @@ public:
 		read_key(base, "tp", tp);
 		read_key(base, "cfg", cfg);
 	}
+	void clear() {
+		tp = cfg = 0;
+	}
 public:
 	int cfg;
 	int tp;
@@ -62,6 +65,12 @@ public:
 	{
 		read_key(base, "tp", tp);
 		read_key(base, "pos", pos);
+	}
+	void clear() {
+		tp=0;
+		for (vector<CommHarConfigPos>::iterator it=pos.begin(); it!=pos.end(); it++) {
+			it->clear();
+		}
 	}
 public:
 	int tp;
@@ -90,6 +99,11 @@ public:
 	virtual void jread(Value &base)
 	{
 		read_key(base, "slv", slv);
+	}
+	void clear() {
+		for (vector<CommHarConfigSlv>::iterator it=slv.begin(); it!=slv.end(); it++) {
+			it->clear();
+		}
 	}
 
 public:

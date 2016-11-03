@@ -33,18 +33,20 @@ CommConfig::CommConfig(soap_config &sConfig)
 /** */
 CommGenConfig::CommGenConfig(soap_config &sc)
 {
+	DatosLocales datos_locales;
+
 	this->name = sc.CfgPasarela.Nombre;
-	this->emplazamiento = "";					// Dejar Vacio. 
-	this->dualidad = 0;							// TODO: Leer DatosLocales.ini
+	this->emplazamiento = "";								// Dejar Vacio. 
+	this->dualidad = datos_locales.dualidad==true ? 1 : 0;	// Leer DatosLocales.ini
 	this->ipv = sc.Ip;
 	this->ips = sc.Server;
 
 	this->acGrupoMulticast = sc.ParametrosMulticast.GrupoMulticastConfiguracion;
 	this->uiPuertoMulticast = sc.ParametrosMulticast.PuertoMulticastConfiguracion;
 
-	this->nivelconsola = 0;						// TODO: Leer DatosLocales.ini
-	this->puertoconsola = 0;
-	this->nivelIncidencias = 0;
+	this->nivelconsola = datos_locales.nivel_consola;		// Leer DatosLocales.ini
+	this->puertoconsola = datos_locales.puerto_consola;
+	this->nivelIncidencias = datos_locales.nivel_incidencias;
 
 	this->cpus.push_back(CommGenCpu(sc.Ip,"255.255.255.0",sc.Ip));
 	this->cpus.push_back(CommGenCpu());
@@ -154,15 +156,15 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 		if (sres.TipoRecurso==0) 
 		{
 			/** Parametros Generales Radio */
-			this->radio.tipo=4;												// TODO: INFO en <TipoRecurso> 
+			this->radio.tipo=4;												// TODO: INFO en <TipoRecurso> o <TipoDestino>
 			this->radio.sq=sres.info.radio.SQ=="v" ? 1 : 0;
 			this->radio.ptt=sres.info.radio.PTT=="s" ? 1 : 0;
 			this->radio.bss=sres.info.radio.BSS==false ? 0 : 1;
-			this->radio.modoConfPtt=sres.info.radio.ModoConfPTT;
+			this->radio.modoConfPtt=sres.info.radio.ModoConfPTT;				// TODO: Comprobar coherencia de valores.
 			this->radio.repSqBss=sres.info.radio.RepSQyBSS;
 			this->radio.desactivacionSq=sres.info.radio.DesactivacionSQ;
 			this->radio.timeoutPtt=sres.info.radio.TimeoutPTT;
-			this->radio.metodoBss=sres.info.radio.MetodoBSS;
+			this->radio.metodoBss=sres.info.radio.MetodoBSS;					// TODO: Comprobar coherencia de valores.
 			this->radio.umbralVad=sres.info.radio.UmbralVAD;
 			this->radio.numFlujosAudio=sres.info.radio.NumFlujosAudio;
 			this->radio.tiempoPtt=sres.info.radio.TiempoPTT;
@@ -210,6 +212,10 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->telefonia.iT_Int_Warning = 5;						 // Dejar a 5.
 			this->telefonia.ats_rangos_dst.clear();					 // Dejar Vacio.
 			this->telefonia.ats_rangos_org.clear();					 // Dejar Vacio.
+
+			this->telefonia.idRed = sres.info.telef.IdRed;
+			this->telefonia.idTroncal = sres.info.telef.IdTroncal;
+			this->telefonia.listaEnlacesInternos = sres.info.telef.ListaEnlacesInternos;
 		}
 
 		this->LlamadaAutomatica=0;									// Dejar a 0
@@ -217,6 +223,7 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 		this->restriccion=0;											// Dejar a 0.
 		this->blanca.clear();										// Dejar Vacio.
 		this->negra.clear();											// Dejar Vacio.
+
 	}
 }
 

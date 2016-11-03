@@ -111,7 +111,6 @@ int WebAppServer::WebHandler(struct mg_connection *conn, enum mg_event ev)
 			if (_hup.HandleRequest(conn, result))
 				return result;
 #endif
-			// TODO: Chequear si esto esta bien...
 			if (config()->enable_login==true)
 			{
 				if (Check4SecureUri(conn->uri) == true && 
