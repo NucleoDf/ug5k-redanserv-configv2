@@ -91,7 +91,9 @@ void WorkingConfig::load_from(string file)
 			PLOG_EXCEP(x, "Error cargando fichero de configuracion: %s", file.c_str());
 			// Poner configuracion por defecto.
 			CommConfig cfg;
+			PLOG_DEBUG("Generada CFG Por Defecto,");
 			set(cfg);
+			PLOG_DEBUG("Activada CFG Por Defecto");
 		}
 
 		return;
@@ -181,7 +183,7 @@ bool WorkingConfig::UserAccess(string user, string pwd, int *profile)
 void *WorkingConfig::DelayedSignal(void *arg)
 {
 	Sleep(2000);
-	sistema::SignalNuevaConfiguracion(LocalConfig::cfg.get(strSection, strItemNucleoProcName)/*.NucleoProcName()*/);
+	sistema::SignalNuevaConfiguracion(LocalConfig::p_cfg->get(strSection, strItemNucleoProcName)/*.NucleoProcName()*/);
 #ifndef _NO_WORKING_THREAD_
 	pthread_exit(NULL);
 #endif

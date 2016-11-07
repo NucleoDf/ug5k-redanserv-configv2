@@ -1,7 +1,7 @@
 #include "../../include/config/local-config.h"
 
 /** */
-LocalConfig LocalConfig::cfg;
+LocalConfig *LocalConfig::p_cfg;
 
 
 ///**

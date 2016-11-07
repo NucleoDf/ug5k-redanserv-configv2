@@ -61,9 +61,9 @@ string sistema::ResultExecuteCommand(char* cmd)
 /** */
 bool sistema::GetIpAddress(/*char *szIf, */string &ip)
 {
-	char *szIf = (char *)LocalConfig::cfg.get(strSection, strItemNetworkInterfaceActiva, "eth0")/*.NetworkInterfaceActiva()*/.c_str();
+	char *szIf = (char *)LocalConfig::p_cfg->get(strSection, strItemNetworkInterfaceActiva, "eth0")/*.NetworkInterfaceActiva()*/.c_str();
 #ifdef _WIN32
-	ip = LocalConfig::cfg.get(strWindowsTest, strItemWindowsTestIp)/*.ipWindows()*/;
+	ip = LocalConfig::p_cfg->get(strWindowsTest, strItemWindowsTestIp)/*.ipWindows()*/;
 	return true;
 #else
     int iSocket;
@@ -207,8 +207,8 @@ void sistema::DataSaveAs(string data, string filename)
  */
 bool sistema::MainOrStandby()
 {
-	string filepath = onfs(LocalConfig::cfg.get("M-S-CONTROL", "PATH", "/mnt/ramfs/cpumode"));
-	string isMain = onfs(LocalConfig::cfg.get("M-S-CONTROL", "MAIN", "PRINCIPAL"));
+	string filepath = onfs(LocalConfig::p_cfg->get("M-S-CONTROL", "PATH", "/mnt/ramfs/cpumode"));
+	string isMain = onfs(LocalConfig::p_cfg->get("M-S-CONTROL", "MAIN", "PRINCIPAL"));
 	ifstream ff(filepath.c_str());
 
 	if (ff.good())
@@ -236,7 +236,7 @@ time_t sistema::_TIMER_CLK()
 string sistema::SnmpAgentVersion()
 {
 #if defined(_PPC82xx_)
-    string file = onfs(LocalConfig::cfg.get(strModulos, strItemExeSnmp));
+    string file = onfs(LocalConfig::p_cfg->get(strModulos, strItemExeSnmp));
 	string command = file + " /V";
 	return ResultExecuteCommand((char *)command.c_str());
 #else
@@ -248,7 +248,7 @@ string sistema::SnmpAgentVersion()
 string sistema::RecordServiceVersion() 
 {
 #if defined(_PPC82xx_)
-	string file = onfs(LocalConfig::cfg.get(strModulos, strItemExeGrabador));
+	string file = onfs(LocalConfig::p_cfg->get(strModulos, strItemExeGrabador));
 	string command = file + " /V";
 	return ResultExecuteCommand((char *)command.c_str());
 #else

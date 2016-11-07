@@ -238,7 +238,7 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
                         }
 
                         MantService.modo(data.modo);
-                        if (data.std != MantService.estado()) {
+                        if (data.std != MantService.global_estado()) {
                             $scope.$broadcast('std_change', [1, 2, 3]);
                         }
                         MantService.global_estado(data.std);

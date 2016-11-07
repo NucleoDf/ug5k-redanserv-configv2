@@ -52,9 +52,6 @@
     <ClCompile Include="src\man-proc.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\versiones.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\base\sistema.cpp">
       <Filter>src\base</Filter>
     </ClCompile>
@@ -71,6 +68,11 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="uv5ki-gw-cfg.cpp" />
+    <ClCompile Include="src\file-supervisor.cpp" />
+    <ClCompile Include="src\config\comm-config.cpp" />
+    <ClCompile Include="src\config\soap-config.cpp" />
+    <ClCompile Include="src\tools\ftp-client.cpp" />
+    <ClCompile Include="src\tools\http-client.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">

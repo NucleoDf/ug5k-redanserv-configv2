@@ -21,8 +21,8 @@
 
 
 using namespace std;
-/** */
-extern char *acStrVersion();
+///** */
+//extern char *acStrVersion();
 
 /** */
 enum ePRIdentity {epriError, epriCpu0, epriCpu1, epriNone }; 
@@ -114,7 +114,7 @@ class jEstado : public jData
 public:
 	jEstado() {
 		
-		serv = string(acStrVersion());
+		serv = VersionConfiguracion();
 		stdg = cpua = stdf = stdn = -1;
 
 		//snmp = Versiones::snmpVersion;
@@ -231,8 +231,8 @@ protected:
 protected:
 	CCritSec m_lock;
 	int _cnt;
-	string snmpVersion;
-	string recVersion;
+	//string snmpVersion;
+	//string recVersion;
 };
 
 #endif

@@ -746,7 +746,7 @@ bool CommConversor::IsAdd(int grec)		// Mira si el Recurso ha sido A�adido...
 /** */
 void CommConversor::ActualizaSnmpIni()
 {
-	LocalConfig snmpini(LocalConfig::cfg.get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
+	LocalConfig snmpini(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/));
 
 	SetInt(snmpini, "AGENTE", "PORT", p_cfg_in->servicios.snmp.snmpp, INCI_MPGP, "SNMP PUERTO ESCUCHA");
 	SetString(snmpini, "AGENTE", "NAME", p_cfg_in->servicios.snmp.agname, INCI_MPGP, "SNMP-NAME");
@@ -773,7 +773,7 @@ void CommConversor::ActualizaSnmpIni()
 /** */
 void CommConversor::ActualizaRecordIni()
 {
-	LocalConfig recini(LocalConfig::cfg.get(strModulos, strItemModuloGrabador)/*.recModule()*/);
+	LocalConfig recini(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloGrabador)/*.recModule()*/));
 
 	/** 20160721. Solo son configurables la IP y Puerto de Grabador */
 	//setString(recini, "RTSP", "IP", p_cfg_in->servicios.grab.rtsp_ip, INCI_MPGP, "GRABADOR IP");
@@ -791,7 +791,7 @@ void CommConversor::ActualizaRecordIni()
 /** */
 void CommConversor::ActualizaWebIni()
 {
-	LocalConfig &webini = LocalConfig::cfg;
+	LocalConfig &webini = *LocalConfig::p_cfg;
 
 	SetString(webini,"U5KWEB","CONFIG-SERVER", p_cfg_in->general.ips,INCI_MPGP,"URL-SERVIDOR", true);		// Permite string vacios...
 	SetInt(webini, "U5KWEB", "SESSION-TIME", p_cfg_in->servicios.web.stime, INCI_MPGP, "TIEMPO SESION");

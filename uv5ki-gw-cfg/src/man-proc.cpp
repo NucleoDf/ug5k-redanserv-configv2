@@ -1,9 +1,9 @@
 #include "../include/man-proc.h"
 #include "../include/his-proc.h"
+#include "../include/cfg-proc.h"
 
-#define _CFG_PROC_		0
-
-#define _NOTIFICA_ESTADOS_CPU_	0
+#define _CFG_PROC_				1
+#define _NOTIFICA_ESTADOS_CPU_	1
 
 /** */
 ManProc *ManProc::p_man=NULL;
@@ -50,16 +50,16 @@ void ManProc::Run()
 	ManProc::p_man->resetCpu(epriCpu1, estado.cpu1);
 	estado.itf = estado.cpu0.itfs;
 
-	/** */
-	snmpVersion = sistema::SnmpAgentVersion();
-	recVersion = sistema::RecordServiceVersion();
+	///** */
+	//snmpVersion = sistema::SnmpAgentVersion();
+	//recVersion = sistema::RecordServiceVersion();
 
 	_cnt = 1;
 	while (IsRunning())
 	{
 		sleep(1000);
 #ifdef _WIN32
-		if (LocalConfig::cfg.get(strWindowsTest, strItemWindowsTestSnmpStd, "0")=="1"/*.winStdSnmp()*/)
+		if (LocalConfig::p_cfg->get(strWindowsTest, strItemWindowsTestSnmpStd, "0")=="1"/*.winStdSnmp()*/)
 #endif
 		{
 			CCSLock _lock(m_lock);
@@ -76,7 +76,7 @@ void ManProc::Run()
 			if ((--_cntEstados) <= 0)
 			{
 				NotificaEstadosCpu();
-				_cntEstados = LocalConfig::cfg.getInt("MODULOS", "ACTUALIZAESTADOSEN", "15");
+				_cntEstados = atoi(LocalConfig::p_cfg->get("MODULOS", "ACTUALIZAESTADOSEN", "15").c_str());
 			}
 #endif
 		}
@@ -99,9 +99,9 @@ string ManProc::jestado()
 	_cnt = _cnt >= 2 ? 2 : _cnt;
 
 	/** Actualizo las Versiones */
-	estado.serv = string(acStrVersion());
-	estado.snmp = snmpVersion;
-	estado.record = recVersion;
+	estado.serv = VersionConfiguracion();		// string(acStrVersion());
+	estado.snmp = VersionSnmp();
+	estado.record = VersionGrabador();
 
 	return estado.JSerialize();
 }
@@ -272,11 +272,11 @@ void ManProc::GetEstadoCpu(int cpu)
 {
 	try 
 	{
-		LocalConfig snmpconfig(LocalConfig::cfg.get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
+		LocalConfig snmpconfig(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/));
 		if (cpu==0)
 		{
 #if _CFG_PROC_
-			estado.cpu0.ip = jgw_config::cfg.ipcpu(0);
+			estado.cpu0.ip = P_WORKING_CONFIG->ipcpu(0);
 #else
 			estado.cpu0.ip = "192.168.0.71";
 #endif
@@ -286,7 +286,7 @@ void ManProc::GetEstadoCpu(int cpu)
 		else if (cpu==1)
 		{
 #if _CFG_PROC_
-			estado.cpu1.ip = jgw_config::cfg.ipcpu(1);
+			estado.cpu1.ip = P_WORKING_CONFIG->ipcpu(1);
 #else
 			estado.cpu1.ip = "192.168.0.72";
 #endif
@@ -310,7 +310,7 @@ void ManProc::NotificaEstadosCpu()
 	try 
 	{
 #if _CFG_PROC_
-		int quiensoy = jgw_config::cfg.cpu1cpu2();
+		int quiensoy =  P_WORKING_CONFIG->cpu1cpu2();
 #else
 		int quiensoy = 0;
 #endif

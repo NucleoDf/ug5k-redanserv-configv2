@@ -50,7 +50,9 @@ public:
 		try 
 		{
 			plogInit();
-			bool mode = LocalConfig::cfg.get(strUlises, strItemUlisesModo, "0")=="1"/*.ModoUlises()*/;
+			LocalConfig::p_cfg = new LocalConfig();
+
+			bool mode = LocalConfig::p_cfg->get(strUlises, strItemUlisesModo, "0")=="1"/*.ModoUlises()*/;
 
 			PLOG_INFO("%s (%s) CfgServer: (%s) Iniciado en \"%s\". ", 
 				Tools::read_txt_file(ON_WORKING_DIR("VERSION.TXT")).c_str(),  
@@ -109,9 +111,12 @@ public:
 			ManProc::p_man->Dispose();
 			HistClient::p_hist->Dispose();
 
+			delete FileSupervisor::p_fspv;
 			delete CfgProc::p_cfg_proc;
 			delete ManProc::p_man;
 			delete HistClient::p_hist;
+
+			delete LocalConfig::p_cfg;
 
 			PLOG_INFO("UG5k-APPSERVER Finalizado.");
 			plogDispose();

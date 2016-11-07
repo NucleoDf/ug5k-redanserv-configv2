@@ -187,10 +187,10 @@ function MantService(dataservice, transerv) {
                 cpu == 2 ? { 'color': 'blue', 'background-color': 'white' } : { 'color': 'white', 'background-color': 'tomato' };
         }
         , textoTipoItf: function (tp) {
-            return (tp >= 0 && tp < 10) ? txtItfTipos[tp] : /*"Desconocido"*/transerv.translate('MANS_MSG_UKNW');
+            return (tp >= 0 && tp < 10) ? transerv.translate(txtItfTipos[tp]) : /*"Desconocido"*/transerv.translate('MANS_MSG_UKNW');
         }
         , textoModoItf: function (tp) {
-            return (tp >= 0 && tp < 2) ? txtModos[tp] : /*"Sin Informacion"*/transerv.translate('MANS_MSG_NINFO');
+            return (tp >= 0 && tp < 2) ? transerv.translate(txtModos[tp]) : /*"Sin Informacion"*/transerv.translate('MANS_MSG_NINFO');
         }
         , textoBucleItf: function (tp) {
             if (tp == 0)

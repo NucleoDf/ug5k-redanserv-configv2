@@ -72,11 +72,11 @@ CommSerConfig::CommSerConfig(soap_config &sc)
 	}
 
 	/** WEB */
-	this->web.wport = atoi(LocalConfig::cfg.get(strSection, strItemWebPort)/*.PuertoEscucha()*/.c_str());
-	this->web.stime = atoi(LocalConfig::cfg.get(strSection, strItemSessionTime)/*TiempoSesion()*/.c_str());
+	this->web.wport = atoi(LocalConfig::p_cfg->get(strSection, strItemWebPort)/*.PuertoEscucha()*/.c_str());
+	this->web.stime = atoi(LocalConfig::p_cfg->get(strSection, strItemSessionTime)/*TiempoSesion()*/.c_str());
 
 	/** SNMP */
-	LocalConfig snmpini(LocalConfig::cfg.get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
+	LocalConfig snmpini(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
 	this->snmp.sport = 65000;
 	this->snmp.snmpp = atoi(snmpini.get("AGENTE","PORT").c_str());
 	this->snmp.agcomm = snmpini.get("AGENTE","SNMPV2COMM");
@@ -84,9 +84,11 @@ CommSerConfig::CommSerConfig(soap_config &sc)
 	this->snmp.agloc = snmpini.get("AGENTE","LOCATION");
 	this->snmp.agname = snmpini.get("AGENTE","NAME");
 	this->snmp.agv2 = atoi(snmpini.get("AGENTE","SNMPV2").c_str());
+	/** TODO... */
+	this->snmp.traps.push_back("2," + sc.Server + "/162");
 
 	/** Grabador */
-	LocalConfig recini(LocalConfig::cfg.get(strModulos, strItemModuloGrabador)/*.recModule()*/);
+	LocalConfig recini(LocalConfig::p_cfg->get(strModulos, strItemModuloGrabador)/*.recModule()*/);
 	this->grab.rtsp_ip = recini.get("RTSP","IP_REC_A");
 	this->grab.rtsp_port = atoi(recini.get("RTSP","PORT").c_str());
 

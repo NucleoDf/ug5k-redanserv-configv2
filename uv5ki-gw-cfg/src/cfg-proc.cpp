@@ -4,9 +4,9 @@
 #define SCK_RECV_TIMEOUT	(LocalConfig::cfg.HttpGenTimeout()*1000)
 
 /** */
-#define HTTP_CLIENT_TICK	50
+#define HTTP_CLIENT_TICK	100
 #ifdef _PARAMS_IN_INI_
-#define SERVER_URL			(LocalConfig::cfg.get(strSection, strItemServidor))
+#define SERVER_URL			(LocalConfig::p_cfg->get(strSection, strItemServidor))
 #else
 #define SERVER_URL			(jgw_config::cfg.ServerURL())
 #endif
@@ -83,7 +83,7 @@ void CfgProc::AvisaChequearConfiguracion()
 	CCSLock _lock(m_lock);
 
 #ifdef _WIN32
-	if (LocalConfig::cfg.get(strWindowsTest, strItemWindowsTestServidor)=="1"/*.winSyncSer()*/)
+	if (LocalConfig::p_cfg->get(strWindowsTest, strItemWindowsTestServidor)=="1"/*.winSyncSer()*/)
 	{
 #endif
 		stAviso aviso;
@@ -150,7 +150,7 @@ void CfgProc::GeneraAvisosCpu(string host, string cmd)
 /** */
 void CfgProc::ResourcesConfigClear()
 {
-	if (LocalConfig::cfg.get(strSection,strItemClearResourcesOnBdt)=="1")	// .ClearResourcesOnBdt()==1) 
+	if (LocalConfig::p_cfg->get(strSection,strItemClearResourcesOnBdt)=="1")	// .ClearResourcesOnBdt()==1) 
 	{
 		PLOG_DEBUG("Procediendo a Limpiar los Recursos de la Pasarela por estar fuera de CFG-ACTIVA");
 
@@ -188,7 +188,7 @@ void JsonClientProc::Run()
 	PLOG_INFO("JsonClientProc running...");
 	modo="rd";
 
-	_maxticks = (atoi(LocalConfig::cfg.get(strSection, strItemConfigTSUP).c_str())*1000)/HTTP_CLIENT_TICK;
+	_maxticks = (atoi(LocalConfig::p_cfg->get(strSection, strItemConfigTSUP).c_str())*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;
 	sistema::GetIpAddress(_ip_propia);
 
@@ -345,23 +345,24 @@ void SoapClientProc::Run()
 	PLOG_INFO("SoapClientProc running...");
 	modo="ul";
 
-	_maxticks = (atoi(LocalConfig::cfg.get(strSection, strItemConfigTSUP).c_str())/*.ConfigTsup()*/*1000)/HTTP_CLIENT_TICK;
+	_maxticks = (atoi(LocalConfig::p_cfg->get(strSection, strItemConfigTSUP).c_str())/*.ConfigTsup()*/*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;
 
 	/** Leo los datos del Hardware */
 	sistema::GetWorkingIpAddressAndName(_ip_propia, hwServer, hwName);
+	PLOG_INFO("SoapClientProc running. GetWorkingIpAddressAndName (%s-%s-%s).", _ip_propia.c_str(), hwServer.c_str(), hwName.c_str());
 	
 	/** Actualizo los datos en mis ficheros */
-	LocalConfig::cfg.set(strSection, strItemServidor, hwServer);
+	LocalConfig::p_cfg->set(strSection, strItemServidor, hwServer);
 	hwIp = _ip_propia;
 
 	/** Leer la ultima CFG recibida */
 	p_working_config->load_from(LAST_CFG);
+	PLOG_INFO("SoapClientProc running. Leida LAST_CFG");
 
 	AvisaChequearConfiguracion();
 	while (IsRunning()) 
 	{
-
 		this->sleep(HTTP_CLIENT_TICK);
 		stAviso aviso;
 

@@ -68,6 +68,23 @@ public:
 	bool TestConfig() {
 		return config.test();
 	}
+	int cpu1cpu2() {
+		string ippropia;
+		if (sistema::GetIpAddress(ippropia))
+		{
+			if (ippropia == ipcpu(0))
+				return 0;
+			if (ippropia == ipcpu(1))
+				return 1;
+			PLOG_ERROR("CommConfig::cpu1cpu2: ERROR CPU0-CPU1 No coincide con IPPROPIA !!!");
+			return -1;
+		}	
+		PLOG_ERROR("CommConfig::cpu1cpu2: ERROR. NO IP PROPIA !!!");
+		return -1;
+	}
+	string ipcpu(int cpu) {
+		return cpu==0 ? config.general.cpus[0].ipb : config.general.cpus[1].ipb;
+	}
 	/** Para ulises */
 	void UlisesParamsMulticast(string &ip, int &port) {
 		ip = config.ulises.MulticastGroup;
@@ -78,8 +95,6 @@ public:
 	bool IdConfig(string &idConfig, string &fechaHora);
 
 	/** */
-	int cpu1cpu2();
-	string ipcpu(int cpu);	
 
 protected:
 	void init();

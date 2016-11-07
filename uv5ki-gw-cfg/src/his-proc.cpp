@@ -17,7 +17,7 @@ HistClient::~HistClient(void)
 void HistClient::Run()
 {
 	CUDPSocket sck;
-	LocalConfig snmpconfig(LocalConfig::cfg.get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
+	LocalConfig snmpconfig(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/));
 	char buffer[BUFSIZ+1];
 	stHistAviso aviso;
 

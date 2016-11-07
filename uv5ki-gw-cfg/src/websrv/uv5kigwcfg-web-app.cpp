@@ -44,7 +44,7 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 /** */
 void Uv5kiGwCfgWebApp::GetConfig() 
 {
-	_web_config.web_port = LocalConfig::cfg.get(strSection, strItemWebPort, "8080")/*.PuertoEscucha()*/;
+	_web_config.web_port = LocalConfig::p_cfg->get(strSection, strItemWebPort, "8080")/*.PuertoEscucha()*/;
 	_web_config.document_root = "appweb";
 	_web_config.default_page = "ug5kweb-index.html";
 	_web_config.login_uri = "/login.html";
@@ -66,6 +66,7 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.sec_uris.push_back("/cpu2cpu");
 	_web_config.sec_uris.push_back("/test");
 	_web_config.sec_uris.push_back("/hojaExterna.css");
+	_web_config.sec_uris.push_back("/mant/ver");
 
 	_web_config.access_control = stAccessControl;	
 }

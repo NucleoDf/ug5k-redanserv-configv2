@@ -264,7 +264,7 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
 					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
-					    Show: false,
+					    Show: vm.noshow,
 					    Val: ValidateService.def_val
 					},
 					{
@@ -273,7 +273,7 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
 					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: false,
+					    Show: vm.noshow,
 					    Val: ValidateService.def_val
 					},
 					{
@@ -293,7 +293,7 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
 					    Inputs: [],
 					    Show: vm.def_show,
 					    Val: ValidateService.def_val
-					},
+					}
 					//{ Name: /*'TRAMAS RTP?:'*/transerv.translate('SCTRL_P04_RTP'), Value: vm.jserv.grab.rtsp_rtp, Enable: true, Input: 1, Inputs: ["No", "Si"], Show: vm.def_show, Val: ValidateService.def_val },
 					//{ Name: /*'RTP PAYLOAD:'*/transerv.translate('SCTRL_P04_PAY'), Value: vm.jserv.grab.rtp_pl, Enable: false, Input: 0, Inputs: [], Show: vm.def_show, Val: ValidateService.def_val },
 					//{ Name: /*'RTP RATE:'*/transerv.translate('SCTRL_P04_RES'), Value: vm.jserv.grab.rtp_sr, Enable: false, Input: 0, Inputs: [], Show: vm.def_show, Val: ValidateService.def_val }

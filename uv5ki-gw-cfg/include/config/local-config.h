@@ -72,7 +72,7 @@ using namespace std;
 #define ON_SWREP(p)						(LocalConfig::onswrep(p).c_str())
 
 /** */
-#define LAST_CFG						(onflash(LocalConfig::cfg.get(strSection, strItemConfigFile).c_str()))
+#define LAST_CFG						(onflash(LocalConfig::p_cfg->get(strSection, strItemConfigFile).c_str()))
 #define LAST_CFG_PRUEBA					(onflash("gw_config_prueba.json"))
 #define LAST_SAVE(n)					(onflash(string("last_gw_config_")+string(n)+string(".json")))
 
@@ -188,11 +188,11 @@ using namespace std;
 class LocalConfig : public CodeBase
 {
 public:
-	static LocalConfig cfg;
+	static LocalConfig *p_cfg;
 public:
 	LocalConfig(string filename=strFile) {
-		pszFilename = filename.c_str();
-		ini = LoadIni(pszFilename);
+		_filename = filename;
+		ini = LoadIni(_filename.c_str());
 	}
 	~LocalConfig() {}
 public:
@@ -205,18 +205,18 @@ public:
 	void set(string section, string key, string val, bool save=true) {
 		PutIniSetting(ini, section.c_str(), key.c_str(), val.c_str());
 		if (save)
-			SaveIni(ini,pszFilename);
+			SaveIni(ini, _filename.c_str());
 	}
 	void del(string strsection) {
 		INISection vacia;
 		ini[strsection.c_str()] = vacia;	
 	}
 	void save() {
-		SaveIni(ini,pszFilename);
+		SaveIni(ini, _filename.c_str() );
 	}
 private:
 	INIFile ini;
-	const char *pszFilename;
+	string _filename;
 };
 
 /** */

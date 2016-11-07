@@ -30,7 +30,7 @@ bool FileSupervisor::LocalLock(string pathoffile)
 		return false;
 
 	PLOG_INFO("Locking %s", pathoffile.c_str());
-	file->LocalLock(atoi(LocalConfig::cfg.get(strFilesSupervidor, strSupervisedFileUnlockTime, "10").c_str())/*SupervisedFileUnlocktime()*/);
+	file->LocalLock(atoi(LocalConfig::p_cfg->get(strFilesSupervidor, strSupervisedFileUnlockTime, "10").c_str())/*SupervisedFileUnlocktime()*/);
 
 	return true;
 }
@@ -135,7 +135,7 @@ void FileSupervisor::Init()
 {
 	try
 	{
-		INISection SupervisedFiles = LocalConfig::cfg.get(strFilesSupervidor);
+		INISection SupervisedFiles = LocalConfig::p_cfg->get(strFilesSupervidor);
 		string keyStart = strKeySupervisedFile;
 		for (INISection::iterator item=SupervisedFiles.begin(); item != SupervisedFiles.end(); item++)
 		{
@@ -174,7 +174,7 @@ SupervisedFile *FileSupervisor::Find(string pathoffile)
 */
 void SupervisedFile::SyncToRemote(string ipRemote)
 {
-	string httpHost = ipRemote + ":" + LocalConfig::cfg.get(strSection, strItemWebPort)/*.PuertoEscucha()*/;
+	string httpHost = ipRemote + ":" + LocalConfig::p_cfg->get(strSection, strItemWebPort)/*.PuertoEscucha()*/;
 
 	if (RemoteLock(httpHost)==true)				// Los Errores Saldran por excepcion...
 	{

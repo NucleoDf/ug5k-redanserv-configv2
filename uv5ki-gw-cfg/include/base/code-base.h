@@ -15,7 +15,7 @@
 	#include <crtdbg.h>
 	#include <tchar.h>
 	#include "../../include/pthreads/include/pthread.h"
-	#define WORKING_DIR		"./"
+	#define WORKING_DIR		".\\"
 	#define __FILENAME__			(strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 #else
 	#include <unistd.h>
@@ -158,6 +158,10 @@ protected:
 	static string onflash(string filename) {
 		return onfs("/home/serv/" + filename);
 	}
+	static string VersionGlobal();
+	static string VersionConfiguracion();
+	static string VersionSnmp();
+	static string VersionGrabador();
 
 private:
 	static plog::ConsoleAppender<plog::ConsoleFormatter> *p_consoleAppender;

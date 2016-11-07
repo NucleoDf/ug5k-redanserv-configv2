@@ -1,4 +1,6 @@
 #include "../../include/base/code-base.h"
+#include "../../include/base/sistema.h"
+#include "../../include/tools/tools.h"
 
 /** MACROS */
 #define LOGCONF	ON_WORKING_DIR("plog.conf")
@@ -122,5 +124,27 @@ void *CodeBase::plog_thread_routine(void *arg)
 	return NULL;
 }
 
+/** */
+string CodeBase::VersionGlobal() 
+{
+	return Tools::read_txt_file(ON_WORKING_DIR("version.txt"));
+}
 
+/** */
+extern char *acStrVersion();
+string CodeBase::VersionConfiguracion()
+{
+	return (string )acStrVersion();
+}
+/** */
+string CodeBase:: VersionSnmp() 
+{
+	return sistema::SnmpAgentVersion();
+}
+
+/** */
+string CodeBase::VersionGrabador()
+{
+	return sistema::RecordServiceVersion();
+}
 

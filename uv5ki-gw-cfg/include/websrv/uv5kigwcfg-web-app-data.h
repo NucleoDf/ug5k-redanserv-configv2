@@ -345,7 +345,7 @@ class webData_VersionNucleo : public jData
 {
 public:
 	webData_VersionNucleo() {
-		string strpath = onfs(LocalConfig::cfg.get(strSection, strItemPath2Versiones));	// .PathToVersiones();
+		string strpath = onfs(LocalConfig::p_cfg->get(strSection, strItemPath2Versiones));	// .PathToVersiones();
 		const char *filename = strpath.c_str();
 		ifstream infile(filename);
 		stringstream buffer;
@@ -368,14 +368,28 @@ public:
 			}
 			lines.push_back(webData_line(line));
 		}
+
+		version = VersionGlobal();
+		cfgsver = VersionConfiguracion();
+		snmpver = VersionSnmp();
+		recsver = VersionGrabador();
+
 	}
 	~webData_VersionNucleo(){}
 public:
 	virtual void jread(Value &base){}
 	virtual void jwrite(Writer<StringBuffer> &writer) {
+		write_key(writer, "version", version);
+		write_key(writer, "cfgsver", cfgsver);
+		write_key(writer, "snmpver", snmpver);
+		write_key(writer, "recsver", recsver);
 		write_key(writer, "lines", lines);
 	}
 private:
+	string version;
+	string cfgsver;
+	string snmpver;
+	string recsver;
 	vector<webData_line> lines;
 };
 
