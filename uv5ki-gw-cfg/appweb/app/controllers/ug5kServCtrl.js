@@ -32,7 +32,7 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
 
     /** */
     vm.set_index = function (index) {
-        if (!validate_page()) {
+        if (!authservice.global_validate(validate_page())) {
             alert(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
         }
         else if (authservice.check_session() == true) {
@@ -422,7 +422,7 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
 
     /** Cambio de Vista... */
     $scope.$on("$locationChangeStart", function (event) {
-        if (!validate_page()) {
+        if (!authservice.global_validate(validate_page())) {
             alert(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
             event.preventDefault();
         }
@@ -433,7 +433,7 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
     /** Se ha pulsado el boton -aplicar- */
     $scope.$on('savecfg', function (data) {
         console.log("savecfg");
-        if (!validate_page()) {
+        if (!authservice.global_validate(validate_page())) {
             alert(/*"Existen Errores de Formato o Rango. No puede salvar lo cambios..."*/transerv.translate('ICTRL_MSG_01'));
         }
         else {

@@ -18,15 +18,13 @@
 #ifndef INCLUIDO_CFGPASA_PUNTOHACHE
 #define INCLUIDO_CFGPASA_PUNTOHACHE
 
-// #include <pthread.h>
+//#include "../pthreads/include/pthread.h"
 
 #define ULISES
+
 //------------------------------------------------------------
 //  Definiciones
 //------------------------------------------------------------
-#ifndef LongWord
-	#define LongWord unsigned int
-#endif
 
 #define NUEVA_CONFI     1
 
@@ -320,6 +318,7 @@ enum eType
 #define CFG_MAX_TIEMPO_PTT_INFINITO    0
 #define CFG_PTT_LOCKOUT                1
  
+
 /* strings
  *
  */
@@ -362,27 +361,6 @@ enum eType
 #define LONG_NAME_CENTRAL       LONG_NAME
 #define LONG_NAME_TRONCAL       LONG_NAME
 */
-
-#define RUTA_DIRECTA        0
-#define RUTA_ALTERNATIVA    1
-
-//tipo de interface para cada recurso en la structura struct st_plan_recursos
-
-#define TI_Radio	0
-#define TI_LCEN		1
-#define TI_BC		2
-#define TI_BL		3
-#define TI_AB		4
-#define TI_ATS_R2	5
-#define TI_ATS_N5	6
-#define TI_ATS_QSIG	7
-#define TI_ISDN_2BD	8
-#define TI_ISDN_30BD	9
-#define TI_I_O		10
-#define TI_DATOS	11
-
-
-
 //--------------------- Finalizacion de tablas ---------------------------------/
 #define NO_NAME                 0
 #define NO_PREFIJO              255
@@ -479,20 +457,12 @@ struct st_planrutas {
  */
 
 
-struct st_rango_binario
-{
-    LongWord lwInicial;
-    LongWord lwFinal;
-};
-
-
 struct st_rango {
     char inicial [LONG_AB_ATS];/*0 para indicar fin de tabla*/
     char final [LONG_AB_ATS];
     struct st_no_abonado abonado;
     bool operator ==( const st_rango& );
     bool operator !=( const st_rango& );
-    void EnBinario( struct st_rango_binario* );
 };
 
 
@@ -509,15 +479,6 @@ struct st_numeracionats {
 };
 
 
-/*
-* Estructura: cfgEnlaceExterno
-* Introducido 10 de Marzo de 2009
-*/
-
-struct cfgEnlaceExterno
-{
-   char szId[CFG_MAX_LONG_NOMBRE+1];
-};
 
 
 #endif
@@ -634,10 +595,7 @@ struct cfgConfigGeneralRecurso
     char szClave[MAX_LONG_CLAVE+1];
     struct cfgColateralPP  sColateral;
 
-#ifdef ULISES
-    int size_aListaEnlacesExternos;
-    struct cfgEnlaceExterno aListaEnlacesExternos[MAX_ENLACES_EXTERNOS_POR_REC];
-#endif
+
     cfgConfigGeneralRecurso();
     void TomaSlot( int );
     void TomaDispositivo( int );
@@ -938,16 +896,15 @@ struct cfgConfigIfR2N5
 #ifdef NUEVA_CONFI
     int iT_Int_Warning;   //tiempo de duracion de los tonos de interrupt warning
 #endif
+//    char szIdTroncal[CFG_MAX_LONG_NOMBRE_TRONCAL+1];
+//    char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
 
     char ntest_local[LONG_AB_ATS];
     char ntest_remoto[LONG_AB_ATS];
     struct st_rangoATS rangos_dst[N_MAX_RANGOS_ATS];      /*array de rangos de nuemros destino */
     struct st_rangoATS rangos_org[N_MAX_RANGOS_ATS];      /*array de rangos de numeros origen */
 
-#ifdef ULISES
-    char szIdTroncal[CFG_MAX_LONG_NOMBRE_TRONCAL+1];
-    char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
-#endif
+
     void TomaLado( int );
     void PorDefecto();
     bool operator ==( const cfgConfigIfR2N5& );
@@ -986,9 +943,8 @@ struct cfgConfigIfTlf
     int iDetectVox;
     int iUmbralVox;
     int iTmInactividad;
-#ifdef ULISES
-    char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
-#endif
+  //  char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
+
     void PorDefecto();
     bool operator ==( const cfgConfigIfTlf& );
     bool operator !=( const cfgConfigIfTlf& );
@@ -1146,7 +1102,7 @@ struct cfgConfigPasarela
      *
     st_config_sistema();
     bool operator ==( const st_config_sistema& );
-    bool operator !=( const st_config_sistema& );*/
+    bool operator !=( const st_config_sistema& );
     void DimeNumerosPrueba( char*, int, char*, char*, char* );
     void DimeMisRangos( struct st_rango_binario*, int*, struct st_rango_binario*, int* );
     void DimeRangosDirectos( char *szIdRec,
@@ -1154,7 +1110,7 @@ struct cfgConfigPasarela
     										int *piNumRangosOperador,
     										struct st_rango_binario *psRangosDirectosPriv,
     										int *piNumRangosPrivilegiados );
-
+     */
 
   #endif
 

@@ -13,6 +13,9 @@
         <li data-ng-class="{'active': vm.pagina==3}" >
             <a href="" data-ng-click="vm.set_pagina(3)" data-ng-show="vm.show_plbn()">{{vm.bnorats()}}</a>
         </li>
+        <li data-ng-class="{'active': vm.pagina==4}" >
+            <a href="" data-ng-click="vm.set_pagina(4)" data-ng-show="vm.show_penl()" translate>Enlaces Internos</a>
+        </li>
     </ul>
 </section>
 <section id="_contenido">
@@ -40,7 +43,7 @@
                         <ol data-ng-switch-when="2" data-ng-disabled="item.Enable==false">
                             <li data-ng-repeat="item1 in item.Value track by $index" style="list-style-type: none">
                                 <span class="error" ng-show="item.Val(item.Value[$index])==false" translate>TELEF_ERROR</span>
-                                <input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()"></input>
+                                <input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()" data-ng-disabled="item.Enable==false"></input>
                             </li>
                         </ol>
                         <span data-ng-switch-when="3">

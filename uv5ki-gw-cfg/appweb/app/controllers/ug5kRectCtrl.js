@@ -3,9 +3,9 @@ angular
 	.module('Ug5kweb')
 	.controller('ug5kRectCtrl', ug5kRectCtrl);
 
-ug5kRectCtrl.$inject = ['$scope', '$routeParams', '$route', 'authservice', 'CfgService', 'ValidateService', 'transerv'];
+ug5kRectCtrl.$inject = ['$scope', '$routeParams', '$route', 'authservice', 'CfgService', 'ValidateService', 'transerv', 'MantService'];
 
-function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, ValidateService, transerv) {
+function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, ValidateService, transerv, MantService) {
     var vm = this;
     var simul = true;
 
@@ -86,7 +86,16 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /** */
     vm.show_plbn = function () {
+        var hide = MantService.hide_on_ulises();
+        if (hide == false)
+            return false;
         return vm.show_rangos_ats();
+    }
+
+    /** */
+    vm.show_penl = function () {            
+        var hide = MantService.hide_on_ulises();
+        return !hide;
     }
 
     /** */
@@ -141,7 +150,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /** */
     vm.set_pagina = function (pagina) {
-        if (!validate_page()) {
+        if (!authservice.global_validate(validate_page())) {
             alert(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
         }
         else if (authservice.check_session() == true) {
@@ -557,6 +566,21 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     },
                 ];
                 break;
+
+            case 4:                 // TODO...
+                vm.vdata = [
+                    {
+                        Name: 'Enlaces Internos',
+                        Value: vm.tdata.telefonia.listaEnlacesInternos,
+                        Enable: false,
+                        Input: 2,
+                        Inputs: [],
+                        Show: function () { return true; },
+                        Val: vm.dval
+                    },
+                ];
+                break;
+
             default:
                 vm.vdata = [];
                 break;
@@ -610,6 +634,8 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     console.log("Salvo BN");
                 }
 
+                break;
+            case 4:                     // TODO.
                 break;
         }
     }
@@ -735,7 +761,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /** Cambio de Vista... */
     $scope.$on("$locationChangeStart", function (event) {
-        if (!validate_page()) {
+        if (!authservice.global_validate(validate_page())) {
             alert(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
             event.preventDefault();
         }
@@ -746,7 +772,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     /** Se ha pulsado el boton -aplicar- */
     $scope.$on('savecfg', function (data) {
         console.log("savecfg");
-        if (!validate_page()) {
+        if (!authservice.global_validate(validate_page())) {
             alert(/*"Existen Errores de Formato o Rango. No puede salvar lo cambios..."*/transerv.translate('ICTRL_MSG_01'));
         }
         else {

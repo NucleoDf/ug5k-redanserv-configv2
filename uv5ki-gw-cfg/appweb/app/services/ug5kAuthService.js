@@ -22,6 +22,10 @@ function authservice(MantService, $q, $location, $rootScope) {
                 return false;
             return true;
         }
+        , global_validate: function (local_validate) {
+            var aislado = MantService.global_estado() == -3 ? true : false;
+            return (aislado == true) ? local_validate : MantService.modo() == "ul" ? true : local_validate;
+        }
     };
 
     /** */

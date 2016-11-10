@@ -3,9 +3,9 @@ angular
 	.module('Ug5kweb')
 	.controller('ug5kRecrCtrl', ug5kRecrCtrl);
 
-ug5kRecrCtrl.$inject = ['$scope', '$routeParams', '$route', 'authservice', 'CfgService', 'ValidateService', 'transerv'];
+ug5kRecrCtrl.$inject = ['$scope', '$routeParams', '$route', 'authservice', 'CfgService', 'ValidateService', 'transerv', 'MantService'];
 
-function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, ValidateService, transerv) {
+function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, ValidateService, transerv, MantService) {
     var vm = this;
     var simul = true;
 
@@ -88,7 +88,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     }
     /** */
     vm.set_pagina = function (pagina) {
-        if (!validate_page()) {
+        if (!authservice.global_validate(validate_page())) {
             alert(transerv.translate('ICTRL_MSG_01'));   // "Existen Errores de Formato o Rango. No puede cambiar de vista...");
         }
         else if (authservice.check_session() == true) {
@@ -99,7 +99,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     }
 
     /** */
-    vm.rad_show = function (ind) {
+    vm.rad_show = function (ind) {     
         switch (ind) {
             case 2:	// Umbral VAD. Solo si SQH==1.
                 return (parseInt(vm.vdata[1].Value) == 1);
@@ -119,6 +119,102 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 12: // Prioridad PTT / Sesion SIP. Solo Radios Locales.
             case 13:
                 return (parseInt(vm.vdata[0].Value) <= 3);
+        }
+        return true;
+    }
+
+    /** */
+    vm.p0_rad_show = function (ind) {
+        switch (ind) {
+            case 0:     // ID Recurso
+                return true;
+            case 1:     // SLOT / Posicion
+                return true;
+            case 2:     // Frecuencia
+                return MantService.hide_on_ulises();
+            case 3:     // Tipo de Agente
+                return MantService.hide_on_ulises();
+            case 4:     // URI.
+                return true;
+            case 5:     // Enable Registro.
+                return true;
+            case 6:     // Clave
+                return vm.show_clave();
+            case 7:     // Eventos PTT/SQH
+                return true;
+            case 8:     // Grabacion.
+                return vm.grab_show();
+            case 9:     // Forzar PTT
+                return false;
+        }
+        return false;
+    }
+    /** */
+    vm.p1_rad_show = function (ind) {
+        switch (ind) {
+            case 0:         // CODEC
+                return true;
+            case 1:         // AGC A/D
+                return true;
+            case 2:         // Val G-A/D
+                return vm.radgain_show();
+            case 3:         // AGC D/A
+                return true;
+            case 4:         // Val G-D/A
+                return vm.radgain_show();
+            case 5:         // Jitter Buffer
+                return false;
+            case 6:         // Precision Audio.
+                return true;
+        }
+        return false;
+    }
+    /** */
+    vm.p2_rad_show = function (ind) {
+        switch (ind) {
+            case 0:         // Tipo Agente
+                return MantService.hide_on_ulises();
+            case 1:         // Opciones de SQH
+                return true;
+            case 2:         // Umbral VAD
+                return (parseInt(vm.vdata[1].Value) == 1);
+            case 3:         // Indicacion Salida Audio.
+                return true;
+            case 4:         // Tiempo PTT Maximo
+                return false;
+            case 5:         // Metodo BSS
+                return true;
+            case 6:         // BSS / CLIMAX ?
+                return (parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3);
+            case 7:         // Ventana BSS
+            case 8:         // BSS. Cola SQUELCH
+            case 9:         // CLIMAX-DELAY
+                return ((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1);
+            case 10:        // Tiempo...
+                return (((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1) && parseInt(vm.vdata[9].Value) == 2);
+            case 11:        // GRS Internal DELAY
+                return (parseInt(vm.vdata[0].Value) > 3);
+            case 12:        // Prioridad PTT.
+            case 13:        // Prioridad Session.
+                return (parseInt(vm.vdata[0].Value) <= 3);
+        }
+        return true;
+    }
+    /** */
+    vm. p3_rad_show = function (ind) {
+        switch (ind) {
+            case 0:         // Tipo Agente Radio.
+                return MantService.hide_on_ulises();
+            case 1:         // Frecuencia
+                return MantService.hide_on_ulises();
+        }
+        return vm.col_show();
+    }
+    /** */
+    vm.p4_rad_show = function (ind) {
+        switch (ind) {
+            default:
+                return true;
         }
         return true;
     }
@@ -220,6 +316,8 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /** Mostrar Pestañas Listas Blancas y Negras */
     vm.pbn_show = function () {
+        if (MantService.hide_on_ulises() == false)
+            return false;
         if (vm.rdata != undefined && vm.vdata.length > 0) {
             switch (vm.pagina) {
                 case 0:
@@ -238,22 +336,22 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
         if (vm.show_forceptt() == false) {
             return {
                 Name: /*'Indicacion Entrada Audio:'*/transerv.translate('RCTRL_P02_IENA'),
-                Value: vm.rdata.radio.sq < 2 ? vm.rdata.radio.sq : 0,
-                Enable: true,
+                Value: vm.rdata.radio.sq < 2 ? vm.rdata.radio.sq.toString() : "0",
+                Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
                 Input: 1,
                 Inputs: [/*"Hardware"*/transerv.translate('RCTRL_P02_HARD'), /*"VAD"*/transerv.translate('RCTRL_P02_VAD')],
-                Show: vm.rad_show,
+                Show: vm.p2_rad_show,
                 Val: vm.dval
             };
         }
         else {
             return {
                 Name: /*'Indicacion Entrada Audio:'*/transerv.translate('RCTRL_P02_IENA'),
-                Value: vm.rdata.radio.sq,
-                Enable: true,
+                Value: vm.rdata.radio.sq.toString(),
+                Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
                 Input: 1,
                 Inputs: [/*"Hardware"*/transerv.translate('RCTRL_P02_HARD'), /*"VAD"*/transerv.translate('RCTRL_P02_VAD'), /*"Forzado"*/transerv.translate('RCTRL_P02_FOR')],
-                Show: vm.rad_show,
+                Show: vm.p2_rad_show,
                 Val: vm.dval
             }
         }
@@ -327,7 +425,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: function () { return true; },
+					    Show: vm.p0_rad_show,
 					    Val: vm.id_val
 					},
 					{
@@ -336,7 +434,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.dval,
+					    Show: vm.p0_rad_show,
 					    Val: vm.dval
 					},
                     {
@@ -345,7 +443,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
                         Input: 0,
                         Inputs: [],
-                        Show: vm.dval,
+                        Show: vm.p0_rad_show,
                         Val: vm.fid_val
                     },
 					{
@@ -361,7 +459,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                              /*"Remoto RxTx"*/transerv.translate('RCTRL_P00_RTR'), 
                              /*"Remoto Tx"*/transerv.translate('RCTRL_P00_RTX'), 
                              /*"Remoto Rx"]*/transerv.translate('RCTRL_P00_RRX')], 
-					    Show: vm.rad_show,
+					    Show: vm.p0_rad_show,
 					    Val: vm.dval
 					},
                     {
@@ -370,7 +468,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: false,
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
-                        Show: vm.dval,
+                        Show: vm.p0_rad_show,
                         Val: ValidateService.uri_val
                     },
                     {
@@ -379,7 +477,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
                         Input: 1,
                         Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
-                        Show: vm.dval,
+                        Show: vm.p0_rad_show,
                         Val: vm.dval
                     },
 					{
@@ -388,7 +486,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.show_clave,
+					    Show: vm.p0_rad_show,
 					    Val: ValidateService.max_long_val
 					},
                     {
@@ -397,7 +495,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
                         Input: 1,
                         Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
-                        Show: vm.dval,
+                        Show: vm.p0_rad_show,
                         Val: vm.dval
                     },
                     {
@@ -406,7 +504,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
                         Input: 1,
                         Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
-                        Show: vm.grab_show,
+                        Show: vm.p0_rad_show,
                         Val: vm.dval
                     },
 					{
@@ -415,7 +513,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
-					    Show: /*vm.show_forceptt*/vm.hide,
+					    Show: vm.p0_rad_show,
 					    Val: vm.dval
 					}
 
@@ -429,7 +527,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: false,
 					    Input: 1,
 					    Inputs: ["G711-A", "G711-U", "G729"],
-					    Show: vm.dval,
+					    Show: vm.p1_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -438,7 +536,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
-					    Show: vm.dval,
+					    Show: vm.p1_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -447,7 +545,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.radgain_show,
+					    Show: vm.p1_rad_show,
 					    Val: vm.cbmad_val
 					},
 					{
@@ -456,7 +554,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
-					    Show: vm.dval,
+					    Show: vm.p1_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -465,7 +563,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.radgain_show,
+					    Show: vm.p1_rad_show,
 					    Val: vm.cbmda_val
 					},
 					{
@@ -474,7 +572,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.hide,
+					    Show: vm.p1_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -483,7 +581,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"Estricto"*/transerv.translate('RCTRL_P01_AUDPS'), /*"Normal"*/transerv.translate('RCTRL_P01_AUDPN')],
-					    Show: vm.dval,
+					    Show: vm.p1_rad_show,
 					    Val: vm.dval
 					}
                 ];
@@ -503,7 +601,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                              /*"Remoto RxTx"*/transerv.translate('RCTRL_P00_RTR'),
                              /*"Remoto Tx"*/transerv.translate('RCTRL_P00_RTX'),
                              /*"Remoto Rx"]*/transerv.translate('RCTRL_P00_RRX')],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
 					//{
@@ -522,7 +620,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.vad_val
 					},
 					{
@@ -531,7 +629,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: false,
 					    Input: 1,
 					    Inputs: [/*"Hardware"*/transerv.translate('RCTRL_P02_HARD'), /*"Tono"*/transerv.translate('RCTRL_P02_TONO')],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -540,7 +638,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -556,7 +654,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                             /*"RSSI"*/transerv.translate('RCTRL_P02_BSSR'),
                             /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1')
 					    ],
-					    Show: vm.dval,
+					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -565,7 +663,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"Si"*/transerv.translate('RCTRL_P00_SI')],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -574,7 +672,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.bssv_val
 					},
 					{
@@ -583,7 +681,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.bssv_val
 					},
 					{
@@ -592,7 +690,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('RCTRL_P00_NO'), /*"ASAP"*/transerv.translate('RCTRL_P02_BSCXA'), /*"Tiempo Fijo"*/transerv.translate('RCTRL_P02_BSCXF')],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -601,7 +699,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.climaxt_val
 					},
 					{
@@ -610,7 +708,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.climaxt_val
 					},
 					{
@@ -625,7 +723,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                              /*"PTT-Prioritario"*/transerv.translate('RCTRL_P02_PTTP3'),
                              /*"PTT-Emergencia"*/transerv.translate('RCTRL_P02_PTTP4')
                                 ],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -637,7 +735,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                              /*"Normal"*/transerv.translate('RCTRL_P02_SESP0'),
                              /*"Emergencia"*/transerv.translate('RCTRL_P02_SESP1')
 					    ],
-					    Show: vm.rad_show,
+					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					}
                 ];
@@ -657,7 +755,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                              /*"Remoto RxTx"*/transerv.translate('RCTRL_P00_RTR'),
                              /*"Remoto Tx"*/transerv.translate('RCTRL_P00_RTX'),
                              /*"Remoto Rx"]*/transerv.translate('RCTRL_P00_RRX')],
-					    Show: vm.rad_show,
+					    Show: vm.p3_rad_show,
 					    Val: vm.dval
 					},
                     {
@@ -666,7 +764,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: false,
                         Input: 0,
                         Inputs: [],
-                        Show: vm.dval,
+                        Show: vm.p3_rad_show,
                         Val: vm.fid_val
                     },
 					{
@@ -675,7 +773,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: false,
 					    Input: -1,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: vm.dval
 					},
 					{
@@ -684,7 +782,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -693,7 +791,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -702,7 +800,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -711,17 +809,17 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
-
                     {
                         Name: /*'Emplazamiento-2:'*/transerv.translate('RCTRL_P03_SITE2'),
                         Value: [],
                         Enable: false,
                         Input: -1,
                         Inputs: [],
-                        Show: vm.col_show, Val: vm.dval
+                        Show: vm.p3_rad_show,
+                        Val: vm.dval
                     },
 					{
 					    Name: /*'-- URI-TX-A:'*/transerv.translate('RCTRL_P03_TXA'),
@@ -729,7 +827,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -738,7 +836,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -747,7 +845,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -756,7 +854,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 
@@ -766,7 +864,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: false,
                         Input: -1,
                         Inputs: [],
-                        Show: vm.col_show,
+                        Show: vm.p3_rad_show,
                         Val: vm.dval
                     },
 					{
@@ -775,7 +873,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -784,7 +882,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -793,7 +891,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -802,7 +900,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.col_show,
+					    Show: vm.p3_rad_show,
 					    Val: ValidateService.uri_val
 					}
                 ];
@@ -1003,7 +1101,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /** Cambio de Vista... */
     $scope.$on("$locationChangeStart", function (event) {
-        if (!validate_page()) {
+        if (!authservice.global_validate(validate_page())) {
             alert(transerv.translate('ICTRL_MSG_01'));  // "Existen Errores de Formato o Rango. No puede cambiar de vista...");
             event.preventDefault();
         }
@@ -1014,7 +1112,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     /** Se ha pulsado el boton -aplicar- */
     $scope.$on('savecfg', function (data) {
         //console.log("savecfg");
-        if (!validate_page()) {
+        if (!authservice.global_validate(validate_page())) {
             alert(transerv.translate('ICTRL_MSG_01'));  // "Existen Errores de Formato o Rango. No puede salvar lo cambios...");
         }
         else {

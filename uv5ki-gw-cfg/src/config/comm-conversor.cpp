@@ -345,7 +345,6 @@ void CommConversor::Recurso(CommResConfig *p_rec, struct cfgConfigRecurso *mrec,
 	default:
 		break;
 	}
-
 }
 
 /** */
@@ -376,8 +375,12 @@ void CommConversor::RecursoGeneral(CommResConfig *p_rec, struct cfgConfigGeneral
 
 	// TODO: mgen->iFlgUsarDiffServ
 
-	// TODO: mgen->aListaEnlacesExternos
-
+	/** Lista de enlaces externos ??? */
+	mgen->size_aListaEnlacesExternos = p_rec->telefonia.listaEnlacesInternos.size();
+	for (int iex=0; iex<mgen->size_aListaEnlacesExternos; iex++) 
+	{
+		memcpy(mgen->aListaEnlacesExternos[iex].szId, p_rec->telefonia.listaEnlacesInternos[iex].c_str(), MAX_ENLACES_EXTERNOS_POR_REC);
+	}
 }
 
 /** */
@@ -388,7 +391,7 @@ void CommConversor::RecursoColateralTPP(CommResConfig *p_rec, struct cfgColatera
 
 	SetInt(&mcol->isuperv_options, p_rec->telefonia.superv_options, INCI_MPSW, "HABILITA OPTIONS");
 	SetInt(&mcol->itm_superv_options, p_rec->telefonia.tm_superv_options, INCI_MPSW, "TIEMPO OPTIONS");
-	SetInt(&mcol->iColateralSCV, p_rec->telefonia.colateral_scv, INCI_MPSW, "TIPO COLATERAL");
+	SetInt(&mcol->iColateralSCV, p_rec->telefonia.colateral_scv, INCI_MPSW, "TIPO COLATERAL");	
 }
 
 /** */
@@ -623,10 +626,9 @@ void CommConversor::RecursoTelefoniaR2N5(CommResConfig *p_rec, struct cfgConfigI
 #endif
 	}
 
-	/** TODO: */
-	//char szIdTroncal[CFG_MAX_LONG_NOMBRE_TRONCAL+1];
-	//char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
-
+	/** */
+	memcpy(mr2n5->szIdRed, p_rec->telefonia.idRed.c_str(), CFG_MAX_LONG_NOMBRE_RED);
+	memcpy(mr2n5->szIdTroncal, p_rec->telefonia.idTroncal.c_str(), CFG_MAX_LONG_NOMBRE_TRONCAL);
 }
 
 /** */
@@ -648,9 +650,8 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	SetInt((int *)(&mtlf->iUmbralVox), p_rec->telefonia.umbral_vox, INCI_MPSW, "UMBRAL VOX");
 	SetInt((int *)(&mtlf->iTmInactividad), p_rec->telefonia.tm_inactividad, INCI_MPSW, "TIEMPO INACTIVIDAD");
 
-	// TODO: 
-	// strcpy(mtlf->szIdRed, "");
-    // char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
+	/** */
+	memcpy(mtlf->szIdRed, p_rec->telefonia.idRed.c_str(), CFG_MAX_LONG_NOMBRE_RED);
 
 }
 

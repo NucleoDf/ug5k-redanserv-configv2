@@ -190,6 +190,9 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->radio.colateral.tipoConmutacion=0;							// Quitar...
 																			// Es en local. Quitar.
 			this->radio.colateral.emplazamientos.clear();
+			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
+			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
+			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
 		}
 		else 
 		{
@@ -226,6 +229,7 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 		this->blanca.clear();										// Dejar Vacio.
 		this->negra.clear();											// Dejar Vacio.
 
+		/** */
 	}
 }
 

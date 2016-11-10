@@ -150,7 +150,6 @@ public:
 	int restriccion;
 	vector<string> blanca;
 	vector<string> negra;
-
 };
 
 #endif

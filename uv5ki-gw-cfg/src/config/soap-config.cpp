@@ -10,24 +10,34 @@ soap_config::soap_config(remoteGetXdataFunc remoteFunc, string iphw, string hwNa
 	
 	PLOG_DEBUG("SOAP: GetVersionConfiguracion desde %s",ipServer.c_str());
 	xdata_idConfig = remote_get_xdata_func("GetVersionConfiguracion","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetParametrosGenerales desde %s",ipServer.c_str());
 	xdata_ParametrosGeneralesSistema = remote_get_xdata_func("GetParametrosGenerales","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetParametrosMulticast desde %s",ipServer.c_str());
 	xdata_ParametrosMulticast = remote_get_xdata_func("GetParametrosMulticast","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetPlanAsignacionRecursos desde %s",ipServer.c_str());
 	xdata_ArrayOfAsignacionRecursosGW = remote_get_xdata_func("GetPlanAsignacionRecursos","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetPlanAsignacionUsuarios desde %s",ipServer.c_str());
 	xdata_ArrayOfAsignacionUsuariosTV = remote_get_xdata_func("GetPlanAsignacionUsuarios","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetPlanDireccionamientoIP desde %s",ipServer.c_str());
 	xdata_ArrayOfDireccionamientoIP = remote_get_xdata_func("GetPlanDireccionamientoIP","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetPlanDireccionamientoSIP desde %s",ipServer.c_str());
 	xdata_ArrayOfDireccionamientoSIP = remote_get_xdata_func("GetPlanDireccionamientoSIP","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetPlanRedes desde %s",ipServer.c_str());
 	xdata_ArrayOfListaRedes = remote_get_xdata_func("GetPlanRedes","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetPlanTroncales desde %s",ipServer.c_str());
 	xdata_ArrayOfListaTroncales = remote_get_xdata_func("GetPlanTroncales","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetPlanNumeracionATS desde %s",ipServer.c_str());
 	xdata_ArrayOfNumeracionATS = remote_get_xdata_func("GetPlanNumeracionATS","id_sistema=departamento","","");
+	
 	PLOG_DEBUG("SOAP: GetCfgPasarela desde %s",ipServer.c_str());
 	xdata_CfgPasarela = remote_get_xdata_func("GetCfgPasarela","id_sistema=departamento", "id_hw=" + hwName, "");
 
