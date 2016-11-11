@@ -47,6 +47,7 @@
     <script src="./app/controllers/ug5kServCtrl.js"></script>
     <script src="./app/controllers/ug5kMantCtrl.js"></script>
     <script src="./app/controllers/ug5kConfCtrl.js"></script>
+    <script src="./app/controllers/ug5kUlisesCtrl.js"></script>
 
     <!-- inject-app:js -->
 <!--     <script src="./scripts/u5k-prog.js"></script>
@@ -110,14 +111,18 @@
 					data-ng-show="gvm.mostrar_opcion(6)">
                     <a href="/#pmant" data-ng-click="gvm.set_opcion(6)" translate>INDEX_OPC_MANT</a>
                 </li>
+                <li data-ng-class="{'active': gvm.get_opcion()==9}"
+					data-ng-show="gvm.mostrar_opcion(9)">
+                    <a href="/#ulises" data-ng-click="gvm.set_opcion(9)" translate>INDEX_OPC_ULISES</a>
+                </li>
 
-                <li	data-ng-show="gvm.mostrar_opcion(7)"  >
+                <li	id='aplicar' data-ng-show="gvm.mostrar_opcion(7)"  >
                     <a href="" data-ng-click="gvm.save()" translate>INDEX_OPC_APLICAR</a>
                 </li>
                 <li data-ng-show="gvm.mostrar_opcion(8)">
                     <a href="" data-ng-click="gvm.restore()" translate>INDEX_OPC_DESCARTAR</a>
                 </li>
-                <li>
+                <li id="logout">
                     <a href="#" i data-ng-click="gvm.logout()" translate>INDEX_OPC_LOGOUT</a>
                 </li>
             </ul>

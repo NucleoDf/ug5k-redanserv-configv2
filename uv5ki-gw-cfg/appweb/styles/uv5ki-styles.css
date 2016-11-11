@@ -178,12 +178,12 @@ div#agrupar header#cabecera
 	padding: 5px;
 }
 
-#_menu ul li:nth-child(8)
+#_menu ul li#aplicar/* :nth-child(8)*/
 {
     margin-top: 3em;
 }
 
-#_menu ul li:nth-child(10)
+#_menu ul li#logout /*:nth-child(10)*/
 {
     margin-top: 2em;
 }
@@ -371,6 +371,49 @@ section#_ppal #_tabs
     margin-left: 5%;
     text-align: right;
 }
+
+.ulises
+{
+}
+    .ulises p
+    {
+        color: white;
+    	background-color: #C1022C;
+        text-align: center;
+        font-size: 100%;
+        font-weight: bold;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .ulises div
+    {
+    }
+
+    .ulises table
+    {
+        width: 80%;
+        margin-left: 10%;
+        border-bottom: 1px solid black;
+    }
+
+        .ulises table tr td
+        {
+            font-size: 80%;
+            padding: 2px;
+            color: black;
+        }
+
+        .ulises table th:last-child
+        {
+            text-align: left;
+        }
+
+    .ulises .opciones
+    {
+        width: 80%;
+        margin-left: 10%;
+    }
 
 #_pie
 {

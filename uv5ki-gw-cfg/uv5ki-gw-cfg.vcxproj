@@ -198,6 +198,7 @@
     <None Include="appweb\app\controllers\ug5kRecrCtrl.js" />
     <None Include="appweb\app\controllers\ug5kRectCtrl.js" />
     <None Include="appweb\app\controllers\ug5kServCtrl.js" />
+    <None Include="appweb\app\controllers\ug5kUlisesCtrl.js" />
     <None Include="appweb\app\modules\ug5kweb.js" />
     <None Include="appweb\app\routes\ug5kRoutes.js" />
     <None Include="appweb\app\services\ug5kAuthService.js" />
@@ -214,6 +215,7 @@
     <None Include="appweb\app\views\ug5kweb-recr.html" />
     <None Include="appweb\app\views\ug5kweb-rect.html" />
     <None Include="appweb\app\views\ug5kweb-servicios.html" />
+    <None Include="appweb\app\views\ug5kweb-ulises.html" />
     <None Include="appweb\error1.html" />
     <None Include="appweb\error2.html" />
     <None Include="appweb\languages\en_US.json" />

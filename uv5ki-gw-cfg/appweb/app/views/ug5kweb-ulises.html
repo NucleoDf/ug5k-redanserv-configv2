@@ -1,0 +1,253 @@
+<h3 translate>ULISES_TITULO</h3>
+<section id="_tabs">
+    <ul class="nav nav-tabs" data-persist="true" data-persist="true">
+        <li data-ng-class="{'active': vm.pagina==0}">
+            <a href="" data-ng-click="vm.Pagina(0)" translate>ULI_PG00</a>
+        </li>
+        <li data-ng-class="{'active': vm.pagina==1}">
+            <a href="" data-ng-click="vm.Pagina(1)" translate>ULI_PG01</a>
+        </li>
+        <li data-ng-class="{'active': vm.pagina==2}">
+            <a href="" data-ng-click="vm.Pagina(2)" translate>ULI_PG02</a>
+        </li>
+    </ul>
+</section>
+<section id="_contenido" class="ulises">
+    <div id="pdir" ng-show="vm.pagina==0">
+        <div id="pdir-ip" ng-show="vm.opcion==0">
+            <p>Plan de Direccionamiento IP</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th translate>Id</th>
+                        <th translate>Tipo</th>
+                        <th translate>IP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in vm.pdir_ip">
+                        <td>
+                            <div>{{item.idhost}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.tipohost}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.ipred1}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div id="pdir-sip" ng-show="vm.opcion==1">
+            <p>Plan de Direccionamiento SIP</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th translate>Usuario</th>
+                        <th translate>Abonados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in vm.pdir_sip">
+                        <td>
+                            <div>{{item.idusuario}}</div>
+                        </td>
+                        <td>
+                            <ol>
+                                <li data-ng-repeat="abn in item.array_abonados track by $index" style="list-style-type: none">
+                                    {{abn.prefijo+"-"+abn.abonado}}
+                                </li>
+                        </ol>                            
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div id="pdir-opciones" class="opciones">
+            <button class="btn btn-default" data-ng-click="vm.Opcion(0)" translate>Plan IP</button>
+            <button class="btn btn-default" data-ng-click="vm.Opcion(1)" translate>Plan SIP</button>
+        </div>
+    </div>
+
+    <div id="pasg" ng-show="vm.pagina==1">
+        <div id="pasg-usu" ng-show="vm.opcion==0">
+            <p>Plan de Asignacion de Usuarios</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th translate>Usuario</th>
+                        <th translate>Host</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in vm.pasg_usu">
+                        <td>
+                            <div>{{item.idusuario}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.idhost}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div id="pasg-rec" ng-show="vm.opcion==1">
+            <p>Plan de Asignacion de Recursos</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th translate>Recurso</th>
+                        <th translate>Host</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in vm.pasg_rec">
+                        <td>
+                            <div>{{item.idrecurso}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.idhost}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div id="pasg-opciones" class="opciones">
+            <button class="btn btn-default" data-ng-click="vm.Opcion(0)" translate>Usuarios</button>
+            <button class="btn btn-default" data-ng-click="vm.Opcion(1)" translate>Recursos</button>
+        </div>
+    </div>
+
+    <div id="ats" ng-show="vm.pagina==2">
+        <div id="ats-red" ng-show="vm.opcion==0">
+            <p>Plan de Redess</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th translate>Id</th>
+                        <th translate>Prefijo</th>
+                        <th translate>Recursos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in vm.ats_red">
+                        <td>
+                            <div>{{item.idred}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.prefijo}}</div>
+                        </td>
+                        <td>
+                            <ol>
+                                <li data-ng-repeat="rec in item.listarecursos track by $index" style="list-style-type: none">
+                                    {{rec.tipo+"-"+rec.idrec}}
+                                </li>
+                        </ol>                            
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div id="ats-trc" ng-show="vm.opcion==1">
+            <p>Plan de Troncales</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th translate>Id</th>
+                        <th translate>Test</th>
+                        <th translate>Recursos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in vm.ats_trc">
+                        <td>
+                            <div>{{item.idtroncal}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.no_test}}</div>
+                        </td>
+                        <td>
+                            <ol>
+                                <li data-ng-repeat="rec in item.listarecursos track by $index" style="list-style-type: none">
+                                    {{rec.tipo+"-"+rec.idrec}}
+                                </li>
+                        </ol>                            
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div id="ats-num" ng-show="vm.opcion==2">
+            <p>Plan de Numeracion</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th translate>Test</th>
+                        <th translate>Attr</th>
+                        <th translate>Operadores</th>
+                        <th translate>Privilegiados</th>
+                        <th translate>Rutas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in vm.ats_num">
+                        <td>
+                            <div>{{item.no_test}}</div>
+                        </td>
+                        <td>
+                            <div>{{(item.centralpropia==1 ? "CPR" : "CCL")+"-"+(item.throwswitching==1 ? "Si" : "No")}}</div>
+                        </td>
+                        <td>
+                            <ol>
+                                <li data-ng-repeat="ope in item.rangosoperador track by $index" style="list-style-type: none">
+                                    {{ope.inicial + "-" + ope.final}}
+                                </li>
+                        </ol>                            
+                        </td>
+                        <td>
+                            <ol>
+                                <li data-ng-repeat="ope in item.rangosprivilegiados track by $index" style="list-style-type: none">
+                                    {{ope.inicial + "-" + ope.final}}
+                                </li>
+                        </ol>                            
+                        </td>
+                        <td>
+                            <ol>
+                                <li data-ng-repeat="rut in item.listarutas track by $index" style="list-style-type: none">
+                                    <div>{{rut.tiporuta}}</div>
+                                    <div>
+                                        <ol>
+                                            <li data-ng-repeat="trc in rut.listatroncales" style="list-style-type: none">
+                                                {{trc}}
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </li>
+                        </ol>                            
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+        <div id="ats-opciones" class="opciones">
+            <button class="btn btn-default" data-ng-click="vm.Opcion(0)" translate>Redes</button>
+            <button class="btn btn-default" data-ng-click="vm.Opcion(1)" translate>Troncales</button>
+            <button class="btn btn-default" data-ng-click="vm.Opcion(2)" translate>Numeracion</button>
+        </div>
+    </div>
+</section>

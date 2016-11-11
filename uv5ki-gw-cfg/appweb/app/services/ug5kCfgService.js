@@ -435,5 +435,8 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                 global_opt = opt;
             return global_opt;                
         }
+        , ulises: function () {
+            return cfg.ulises;
+        }
     };
 }

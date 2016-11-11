@@ -176,29 +176,74 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     }
 
     /** */
-    vm.tel_show = function (ind) {
+    vm.p0_tel_show = function (ind) {
+        switch (ind) {
+            case 0:             // ID recurso
+                return true;
+            case 1:             // Slot / Posicion
+                return true;
+            case 2:             // Tipo de Interfaz
+                return true;
+            case 3:             // URI
+                return true;
+            case 4:             // Enable Registro
+                return true;
+            case 5:             // Clave.
+                return vm.show_clave();
+        }
+        return false;
+    }
+
+    /** */
+    vm.p1_tel_show = function (ind) {
+        switch (ind) {
+            case 0:             // CODEC
+            case 1:             // AGC A/D
+            case 3:             // AGC D/A
+                return true;
+            case 2:             // A/D Gain
+            case 4:             // D/A Gain
+                return vm.telgain_show();
+        }
+        return false;
+    }
+
+    /** */
+    vm.p2_tel_show = function (ind) {
         switch (ind) {
             case 0: // Tipo
                 return true;
 
             case 1: // uri
+                if (MantService.hide_on_ulises() == false)
+                    return false;
                 return vm.vdata[0].Value != 6;
 
             case 2: // Respuesta automatica simulada. Para R2/N5 y LCEN
             case 7: // Supervisa Colateral
+                if (MantService.hide_on_ulises() == false)
+                    return false;
                 return (vm.vdata[0].Value == 3 || vm.vdata[0].Value == 4 || vm.vdata[0].Value == 5);
 
             case 4: // Lado.        N5/R2
-            case 5: // Test Remoto.
-            case 6: // Test Local.
             case 12: // Periodo Interrupt Warning
                 return (vm.vdata[0].Value == 3 || vm.vdata[0].Value == 4);
 
+            case 5: // Test Remoto.
+            case 6: // Test Local.
+                if (MantService.hide_on_ulises() == false)
+                    return false;
+                return (vm.vdata[0].Value == 3 || vm.vdata[0].Value == 4);
+
             case 3: // Tiempo Release.
+                if (MantService.hide_on_ulises() == false)
+                    return false;
                 return ((vm.vdata[0].Value == 3 || vm.vdata[0].Value == 4 || vm.vdata[0].Value == 5) && vm.vdata[2].Value == 1);
 
             case 8: // Tiempo Supervision Colateral
-                return ((vm.vdata[0].Value == 3 || vm.vdata[0].Value == 4 || vm.vdata[0].Value==5 ) && vm.vdata[7].Value == 1);
+                if (MantService.hide_on_ulises() == false)
+                    return false;
+                return ((vm.vdata[0].Value == 3 || vm.vdata[0].Value == 4 || vm.vdata[0].Value == 5) && vm.vdata[7].Value == 1);
 
             case 9: // Vox BL
                 return (vm.vdata[0].Value == 0);
@@ -206,8 +251,30 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 11: // Cola Umbral BL
                 return (vm.vdata[0].Value == 0 && vm.vdata[9].Value == 1);
 
+            case 13: // ID-RED.     Solo en AB
+                if (MantService.hide_on_ulises() == true)
+                    return false;
+                return (vm.vdata[0].Value == 2);
+
+            case 14: // ID-TRONCAL. En R2/N5
+                if (MantService.hide_on_ulises() == true)
+                    return false;
+                return (vm.vdata[0].Value == 3 || vm.vdata[0].Value == 4);
+
             default:
                 return false;
+        }
+    }
+
+    /** */
+    vm.p3_tel_show = function (ind) {
+        switch (ind) {
+            case 0:             // Tipo de Restriccion
+            case 1:
+            case 2:
+                return vm.lbn_show();
+            default:
+                return vm.show_rangos_ats();
         }
     }
 
@@ -255,7 +322,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.dval,
+					    Show: vm.p0_tel_show,
 					    Val: vm.id_val
 					},
 					{
@@ -264,7 +331,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: false,
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.dval,
+					    Show: vm.p0_tel_show,
 					    Val: vm.dval
 					},
 					{
@@ -283,7 +350,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                               //,/*"TUN-LOC"*/transerv.translate('TCTRL_P00_LTU')
                               //,/*"TUN-REM"*/transerv.translate('TCTRL_P00_RTU')
 					    ],
-					    Show: vm.dval,
+					    Show: vm.p0_tel_show,
 					    Val: vm.dval
 					},
 					{
@@ -292,7 +359,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: false,
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.dval,
+					    Show: vm.p0_tel_show,
 					    Val: ValidateService.uri_val
 					},
                     {
@@ -301,7 +368,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
                         Input: 1,
                         Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
-                        Show: vm.dval,
+                        Show: vm.p0_tel_show,
                         Val: vm.dval
                     },
 					{
@@ -310,7 +377,8 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.show_clave,
+					    Show: vm.p0_tel_show,
+
 					    Val: ValidateService.max_long_val
 					}
                 ];
@@ -323,7 +391,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: false,
 					    Input: 1,
 					    Inputs: ["G711-A", "G711-U", "G729"],
-					    Show: vm.dval,
+					    Show: vm.p1_tel_show,
 					    Val: vm.dval
 					},
 					{
@@ -332,7 +400,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
-					    Show: vm.dval,
+					    Show: vm.p1_tel_show,
 					    Val: vm.dval
 					},
 					{
@@ -341,7 +409,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.telgain_show,
+					    Show: vm.p1_tel_show,
 					    Val: vm.cbmad_val
 					},
 					{
@@ -350,7 +418,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
-					    Show: vm.dval,
+					    Show: vm.p1_tel_show,
 					    Val: vm.dval
 					},
 					{
@@ -381,7 +449,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                               /*"ATS-QSIG"*/transerv.translate('TCTRL_P00_IQS'),
                               /*"TUN-LOC" */transerv.translate('TCTRL_P00_LTU'),
                               /*"TUN-REM" */transerv.translate('TCTRL_P00_RTU')],
-					    Show: vm.dval,
+					    Show: vm.p2_tel_show,
 					    Val: vm.dval
 					},
 					{
@@ -390,7 +458,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: ValidateService.uri_val
 					},
 					{
@@ -399,7 +467,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: vm.dval
 					},
 					{
@@ -408,7 +476,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: vm.ptre_val
 					},
 					{
@@ -417,7 +485,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"Lado A"*/transerv.translate('TCTRL_P02_LADOA'), /*"Lado B"*/transerv.translate('TCTRL_P02_LADOB')],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: vm.dval
 					},
 					{
@@ -426,7 +494,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: vm.validate_ats_number
 					},
 					{
@@ -435,7 +503,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: vm.validate_ats_number
 					},
     				{
@@ -444,7 +512,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     				    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
     				    Input: 1,
     				    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
-    				    Show: vm.tel_show,
+    				    Show: vm.p2_tel_show,
     				    Val: vm.dval
     				},
 					{
@@ -453,7 +521,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: vm.tsup_val
 					},
     				{
@@ -462,7 +530,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     				    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
     				    Input: 1,
     				    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
-    				    Show: vm.tel_show,
+    				    Show: vm.p2_tel_show,
     				    Val: vm.dval
     				},
 					{
@@ -471,7 +539,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: vm.vox_val
 					},
 					{
@@ -480,7 +548,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: vm.cvox_val
 					},
 					{
@@ -489,8 +557,26 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: vm.tel_show,
+					    Show: vm.p2_tel_show,
 					    Val: vm.validate_iwp
+					},
+					{
+					    Name: /*'Id RED'*/transerv.translate('Id. RED'),                    // TODO...
+					    Value: vm.tdata.telefonia.idRed,
+					    Enable: false,
+					    Input: 0,
+					    Inputs: [],
+					    Show: vm.p2_tel_show,
+					    Val: ValidateService.max_long_val
+					},
+					{
+					    Name: /*'Id Troncal'*/transerv.translate('Id. Troncal'),            // TODO...
+					    Value: vm.tdata.telefonia.idTroncal,
+					    Enable: false,
+					    Input: 0,
+					    Inputs: [],
+					    Show: vm.p2_tel_show,
+					    Val: ValidateService.max_long_val
 					}
                 ];
                 break;
@@ -526,8 +612,6 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Show: vm.lbn_show,
                         Val: ValidateService.uri_val
                     },
-
-
                     {
                         Name: /*'Rango Abonados Origen.'*/transerv.translate('TCTRL_P03_OAB'),
                         Value: vm.tdata.restriccion,
@@ -614,12 +698,14 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 vm.tdata.telefonia.lado = parseInt(vm.vdata[4].Value);
                 vm.tdata.telefonia.no_test_remoto = vm.vdata[5].Value;
                 vm.tdata.telefonia.no_test_local = vm.vdata[6].Value;
-                vm.tdata.telefonia.superv_options = parseInt(vm.vdata[7].Value);          //Supervisa Colateral ???
-                vm.tdata.telefonia.tm_superv_options = vm.vdata[8].Value;       //Tiempo Supervision Colateral
-                vm.tdata.telefonia.detect_vox = parseInt(vm.vdata[9].Value);              //VOX en BL ???
-                vm.tdata.telefonia.umbral_vox = vm.vdata[10].Value;             //Umbral VOX en BL
-                vm.tdata.telefonia.tm_inactividad = vm.vdata[11].Value;         //Cola VOX
+                vm.tdata.telefonia.superv_options = parseInt(vm.vdata[7].Value);// Supervisa Colateral ???
+                vm.tdata.telefonia.tm_superv_options = vm.vdata[8].Value;       // Tiempo Supervision Colateral
+                vm.tdata.telefonia.detect_vox = parseInt(vm.vdata[9].Value);    // VOX en BL ???
+                vm.tdata.telefonia.umbral_vox = vm.vdata[10].Value;             // Umbral VOX en BL
+                vm.tdata.telefonia.tm_inactividad = vm.vdata[11].Value;         // Cola VOX
                 vm.tdata.telefonia.iT_Int_Warning = vm.vdata[12].Value;         // Periodo Interrupt Warning.
+                vm.tdata.telefonia.idRed = vm.vdata[13].Value;                  // Ulises-idRed.
+                vm.tdata.telefonia.idTroncal = vm.vdata[14].Value;              // Ulises-idTroncal.
                 break;
             case 3:
                 if ((vm.tdata.telefonia.tipo == 3 || vm.tdata.telefonia.tipo == 4 || vm.tdata.telefonia.tipo == 6)) {

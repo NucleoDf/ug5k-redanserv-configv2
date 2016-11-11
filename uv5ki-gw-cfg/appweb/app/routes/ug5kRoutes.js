@@ -75,6 +75,16 @@ function config($routeProvider) {
 		        }
 		    }
 		})
+		.when('/ulises', {
+		    templateUrl: 'app/views/ug5kweb-ulises.html',
+		    controller: 'ug5kUlisesCtrl',
+		    controllerAs: 'vm',
+		    resolve: {
+		        permission: function (authservice) {
+		            return authservice.check_session_route();
+		        }
+		    }
+		})
 		.when(routeForUnauthorizedAccess, {
 		    templateUrl: 'app/views/session-expired.html'
 		    // templateUrl: 'session-expired.html'

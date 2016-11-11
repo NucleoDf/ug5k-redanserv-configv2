@@ -54,6 +54,8 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]));
 	        case 8:     // Descartar Cambios.
 	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]));
+	        case 9:     // Tablas de ULISES.
+	            return !MantService.hide_on_ulises();
 	    }
 	    return false;
 	}

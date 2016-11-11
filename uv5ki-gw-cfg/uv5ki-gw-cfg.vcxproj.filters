@@ -666,6 +666,12 @@
     <None Include="appweb\ug5kweb-index.html">
       <Filter>webapp-1\app</Filter>
     </None>
+    <None Include="appweb\app\views\ug5kweb-ulises.html">
+      <Filter>webapp-1\app\views</Filter>
+    </None>
+    <None Include="appweb\app\controllers\ug5kUlisesCtrl.js">
+      <Filter>webapp-1\app\controllers</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="ng-app\images\bkg-image.jpg">
