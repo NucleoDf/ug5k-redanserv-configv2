@@ -48,7 +48,7 @@ void WebAppServer::Dispose()
 void WebAppServer::Run()
 {
 	SetId("WebAppServer");
-	config()->session_control.Reset();
+	config()->session_control.reset();
 
 	PLOG_INFO("WebAppServer running...");
 	while(IsRunning())
@@ -60,8 +60,8 @@ void WebAppServer::Run()
 			if (config()->enable_ssession==true)
 			{
 				int t_inact = config()->session_time==0 ? TIEMPO_SESSION_DEFAULT : config()->session_time;
-				if (config()->session_control.Inactivo(t_inact)==true)      // Supervision de Tiempo de Inactividad.
-					config()->session_control.Reset();
+				if (config()->session_control.noactive(t_inact)==true)      // Supervision de Tiempo de Inactividad.
+					config()->session_control.reset();
 			}
 		}
 		catch(...)
@@ -146,7 +146,7 @@ int WebAppServer::ProcessRequest(struct mg_connection * conn)
 			wb(conn, user, &response);
 
 			if (config()->enable_ssession==true && response.actividad==true)
-				config()->session_control.RegActividad();
+				config()->session_control.tick();
 
 			mg_send_status(conn, response.code);
 			mg_send_header(conn, "Content-type", "application/json");
@@ -176,50 +176,52 @@ webCallback WebAppServer::FindRest(string url)
 /** */
 int WebAppServer::check_auth(struct mg_connection *conn) 
 {
-	char ssid[100], calculated_ssid[100], name[100], expire[100];
-	char str_profile[16];
+	char ssid[100];
+	//char calculated_ssid[100], name[100], expire[100];
+	//char str_profile[16];
 
 	// Always authenticate requests
 	if (Check4SecureUri(conn->uri)==true)
 		return MG_TRUE;
 
-	if (config()->session_control.Get()==true)
+	if (config()->session_control.active()==true)
 	{
 		// Look for session ID in the Cookie.
 		// That session ID can be validated against the database that stores current active sessions.
 		mg_parse_header(mg_get_header(conn, "Cookie"), "ssid", ssid, sizeof(ssid));
 
-#if _NO_EXPIRE_
-#ifdef _WIN32
-		if (sscanf_s(ssid, "%[^|]|%[^|]|", name, sizeof(name), str_profile, sizeof(str_profile)) == 2) 
-#else
-		if (sscanf(ssid, "%[^|]|%[^|]|", name, str_profile) == 2) 
-#endif
-		{
-			generate_ssid(name, atoi(str_profile), expire, calculated_ssid, sizeof(calculated_ssid));
-			if (strcmp(ssid, calculated_ssid) == 0) 
-			{
-				// _session.RegActividad();			// No se puede chequear aqui por los Polling automaticos de la pagina.
-				return MG_TRUE;  // Authenticate
-			}
-		}
-#else
-#ifdef _WIN32
-		if (sscanf_s(ssid, "%[^|]|%[^|]|%[^|]|", name, sizeof(name), str_profile, sizeof(str_profile), expire, sizeof(expire)) == 3) 
-#else
-		if (sscanf(ssid, "%[^|]|%[^|]|%[^|]|", name, str_profile, expire) == 3) 
-#endif
-		{
-			generate_ssid(name, atoi(str_profile), expire, calculated_ssid, sizeof(calculated_ssid));
-			if (strcmp(ssid, calculated_ssid) == 0) 
-			{
-				config()->session_control.RegActividad();
-				return MG_TRUE;  // Authenticate
-			}
-		}
-#endif
+//#if _NO_EXPIRE_
+//#ifdef _WIN32
+//		if (sscanf_s(ssid, "%[^|]|%[^|]|", name, sizeof(name), str_profile, sizeof(str_profile)) == 2) 
+//#else
+//		if (sscanf(ssid, "%[^|]|%[^|]|", name, str_profile) == 2) 
+//#endif
+//		{
+//			generate_ssid(name, atoi(str_profile), expire, calculated_ssid, sizeof(calculated_ssid));
+//			if (strcmp(ssid, calculated_ssid) == 0) 
+//			{
+//				// _session.RegActividad();			// No se puede chequear aqui por los Polling automaticos de la pagina.
+//				return MG_TRUE;  // Authenticate
+//			}
+//		}
+//#else
+//#ifdef _WIN32
+//		if (sscanf_s(ssid, "%[^|]|%[^|]|%[^|]|", name, sizeof(name), str_profile, sizeof(str_profile), expire, sizeof(expire)) == 3) 
+//#else
+//		if (sscanf(ssid, "%[^|]|%[^|]|%[^|]|", name, str_profile, expire) == 3) 
+//#endif
+//		{
+//			generate_ssid(name, atoi(str_profile), expire, calculated_ssid, sizeof(calculated_ssid));
+//			if (strcmp(ssid, calculated_ssid) == 0) 
+//			{
+//				config()->session_control.RegActividad();
+//				return MG_TRUE;  // Authenticate
+//			}
+//		}
+//#endif
+		if (config()->session_control.check(ssid))
+			return MG_TRUE;
 	}
-	config()->session_control.Reset();
 
 	// Auth failed, do NOT authenticate, redirect to login page
 	mg_printf(conn, "HTTP/1.1 302 Moved\r\nLocation: %s\r\n\r\n",config()->login_uri.c_str());
@@ -244,7 +246,7 @@ string WebAppServer::current_user(struct mg_connection *conn)
 }
 
 /** */
-int WebAppServer::check_login_form_submission(struct mg_connection *conn)
+int WebAppServer::check_login_form_submission_old(struct mg_connection *conn)
 {
 	char name[100], password[100], ssid[100], expire_epoch[100];
 	int profile=64;
@@ -255,9 +257,8 @@ int WebAppServer::check_login_form_submission(struct mg_connection *conn)
 
 	mg_get_var(conn, "name", name, sizeof(name));
 	mg_get_var(conn, "password", password, sizeof(password));
-
 	bool acceso = config()->enable_login==true ? config()->access_control(name, password, &profile) : true;
-	bool session= config()->enable_ssession==true ? config()->session_control.Get() : false;
+	bool session= config()->enable_ssession==true ? config()->session_control.active() : false;
 	if (profile == ROOT_PROFILE || session == false)
 	{
 		if (acceso == true)
@@ -303,7 +304,7 @@ int WebAppServer::check_login_form_submission(struct mg_connection *conn)
 				ssid, expire);
 
 #endif // _NO_EXPIRE_
-			config()->session_control.Set(name);
+			config()->session_control.active(ssid, name, profile);
 			return MG_TRUE;
 		}
 		else
@@ -317,6 +318,63 @@ int WebAppServer::check_login_form_submission(struct mg_connection *conn)
 		if (config()->enable_login==true)
 			mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->closed_session_uri.c_str());
 	}
+	return MG_FALSE;
+}
+
+/** */
+int WebAppServer::check_login_form_submission(struct mg_connection *conn)
+{
+	char name[100], password[100], ssid[100], expire_epoch[100];
+	int profile=64;
+
+	/** Datos */
+	mg_get_var(conn, "name", name, sizeof(name));
+	mg_get_var(conn, "password", password, sizeof(password));
+	bool acceso = config()->enable_login==true ? config()->access_control(name, password, &profile) : true;
+
+#ifdef _WIN32
+	_snprintf_s(expire_epoch, sizeof(expire_epoch), "%lu", (unsigned long)0);
+#else
+	snprintf(expire_epoch, sizeof(expire_epoch), "%lu", (unsigned long)0);
+#endif
+	if (config()->session_control.active()==true)
+	{
+		if (profile == ROOT_PROFILE)
+		{
+			if (config()->session_control.isroot()==false)
+			{
+				generate_ssid(name, PERF_ADMIN, expire_epoch, ssid, sizeof(ssid));
+				mg_printf(conn,
+						"HTTP/1.1 302 Found\r\n"
+						"Set-Cookie: ssid=%s \r\n"
+						"Location: /\r\n\r\n\r\n",
+						ssid);
+				config()->session_control.active(ssid, "root", PERF_ADMIN);
+				return MG_TRUE;		
+			}
+		}
+	}
+	else
+	{
+		if (acceso == true)
+		{
+			generate_ssid(name, profile, expire_epoch, ssid, sizeof(ssid));
+			mg_printf(conn,
+				"HTTP/1.1 302 Found\r\n"
+				"Set-Cookie: ssid=%s \r\n"
+				"Location: /\r\n\r\n\r\n",
+				ssid);
+			config()->session_control.active(ssid, name, profile);
+			return MG_TRUE;		
+		}
+		else 
+		{
+			if (config()->enable_login==true)
+				mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->bad_user_uri.c_str());
+		}
+	}
+	if (config()->enable_login==true)
+		mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->closed_session_uri.c_str());
 	return MG_FALSE;
 }
 

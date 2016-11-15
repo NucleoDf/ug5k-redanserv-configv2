@@ -3,7 +3,6 @@
 /** */
 LocalConfig *LocalConfig::p_cfg;
 
-
 ///**
 // */
 //LocalConfig::LocalConfig(void) {

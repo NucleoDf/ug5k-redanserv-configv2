@@ -110,7 +110,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: /*'IP Virtual:'*/transerv.translate('ICTRL_01_VIP'),
 					    Value: vm.j_data.ipv,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -119,7 +119,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: /*'Servidor de Configuracion:'*/transerv.translate('ICTRL_01_SERV'),
 					    Value: vm.j_data.ips,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -143,7 +143,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'ETH0 Ip:',
 					    Value: vm.j_data.cpus[0].ip0,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -152,7 +152,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'ETH0 Msk:',
 					    Value: vm.j_data.cpus[0].ms0,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -161,7 +161,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'ETH1 Ip:',
 					    Value: vm.j_data.cpus[0].ip1,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -170,7 +170,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'ETH1 Msk',
 					    Value: vm.j_data.cpus[0].ms1,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -179,7 +179,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'BOND Ip:',
 					    Value: vm.j_data.cpus[0].ipb,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -188,7 +188,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'BOND Msk:',
 					    Value: vm.j_data.cpus[0].msb,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -197,7 +197,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'Gateway Ip:',
 					    Value: vm.j_data.cpus[0].ipg,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -221,7 +221,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'ETH0 Ip:',
 					    Value: vm.j_data.cpus[1].ip0,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -230,7 +230,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'ETH0 Msk:',
 					    Value: vm.j_data.cpus[1].ms0,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -239,7 +239,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'ETH1 Ip:',
 					    Value: vm.j_data.cpus[1].ip1,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -248,7 +248,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'ETH1 Msk',
 					    Value: vm.j_data.cpus[1].ms1,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -257,7 +257,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'BOND Ip:',
 					    Value: vm.j_data.cpus[1].ipb,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -266,7 +266,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'BOND Msk:',
 					    Value: vm.j_data.cpus[1].msb,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,
@@ -275,7 +275,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: 'Gateway Ip:',
 					    Value: vm.j_data.cpus[1].ipg,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,

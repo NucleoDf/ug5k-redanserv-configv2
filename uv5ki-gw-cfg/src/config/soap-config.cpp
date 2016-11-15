@@ -43,13 +43,14 @@ soap_config::soap_config(remoteGetXdataFunc remoteFunc, string iphw, string hwNa
 
 	XDeserialize(xdata_idConfig, "string");
 
-	/** Obtener la Ip de la configuracion */
-	this->Ip = iphw;
+	/** Obtener las Ip de la configuracion */
+	this->IpHw = this->IpCol = this->IpVirt = iphw;	
 	for (vector<soap_DireccionamientoIP>::iterator host=ArrayOfDireccionamientoIP.begin();
 		host != ArrayOfDireccionamientoIP.end(); host++)
 	{
 		if (host->IdHost == CfgPasarela.Nombre) {
-			this->Ip = host->IpRed1;
+			this->IpVirt = host->IpRed1;
+			this->IpCol = host->IpRed2;
 			break;
 		}
 	}	

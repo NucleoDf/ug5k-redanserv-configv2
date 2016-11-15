@@ -45,7 +45,11 @@ function ValidateService($q) {
             return true;
         }
         , max_long_val: function (value) {
-            return local_max_length_val(value);
+            if (local_max_length_val(value) == false)
+                return false;
+            if (value != "" && value.match(regx_idval) == null)
+                return false;
+            return true;
         }
     };
 }

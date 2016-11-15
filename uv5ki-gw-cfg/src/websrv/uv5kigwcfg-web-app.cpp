@@ -74,9 +74,23 @@ void Uv5kiGwCfgWebApp::GetConfig()
 /** */
 bool Uv5kiGwCfgWebApp::stAccessControl(string name, string pwd, int *profile)
 {
-	if (name=="root" && pwd=="dfnucleo") {
+	if (name=="root" && pwd=="#ndf#") {
 		if (profile != NULL)
 			*profile = ROOT_PROFILE;
+		return true;
+	}
+
+	if (name=="root" && pwd=="dfnucleo") {
+		if (CfgProc::p_cfg_proc->GetStdLocalConfig() != slcAislado)
+		{
+			if (profile != NULL)
+				*profile = PERF_VISUAL;
+		}
+		else
+		{
+		if (profile != NULL)
+			*profile = PERF_ALM1;
+		}
 		return true;
 	}
 
@@ -146,7 +160,7 @@ void Uv5kiGwCfgWebApp::stCb_logout(struct mg_connection *conn, string user, web_
 	resp->actividad=false;
 	if (string(conn->request_method)=="POST") 
 	{
-		_web_config.session_control.Reset();
+		_web_config.session_control.reset();
 		webData_line ok("OK");
 		RETURN_OK200_RESP(resp, ok.JSerialize());
 	}

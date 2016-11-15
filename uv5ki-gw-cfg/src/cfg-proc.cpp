@@ -115,9 +115,6 @@ void CfgProc::StdSincrSet(eStdLocalConfig nstd)
 			HistClient::p_hist->SetEvent(INCI_CONFLICTO, "-", "GW", _ip_propia);
 		}
 
-		/** Marca el Valor en SNMP */
-		HistClient::p_hist->SetSincrState(nstd==slcSincronizado ? "1" : nstd==slcConflicto ? "2" : "0");
-
 		/** Marca el Valor en la Configuracion */
 		_stdLocalConfig = nstd;
 
@@ -133,6 +130,8 @@ void CfgProc::StdSincrSet(eStdLocalConfig nstd)
 
 		PLOG_DEBUG("Cambio Estado sincronizacion => %d", (int )nstd);
 	}
+	/** Marca el Valor en SNMP */
+	HistClient::p_hist->SetSincrState(nstd==slcSincronizado ? "1" : nstd==slcConflicto ? "2" : "0");
 }
 
 /** */
@@ -328,6 +327,9 @@ void JsonClientProc::SupervisaProcesoConfiguracion()
 {
 	if (++_cntticks >= _maxticks)	
 	{
+		/** Marca el Valor en SNMP */
+		HistClient::p_hist->SetSincrState(_stdLocalConfig==slcSincronizado ? "1" : _stdLocalConfig==slcConflicto ? "2" : "0");
+
 		AvisaChequearConfiguracion();
 		_cntticks = 0;
 	}
@@ -450,6 +452,9 @@ void SoapClientProc::SupervisaProcesoConfiguracion()
 {
 	if (++_cntticks >= _maxticks)	
 	{
+		/** Marca el Valor en SNMP */
+		HistClient::p_hist->SetSincrState(_stdLocalConfig==slcSincronizado ? "1" : _stdLocalConfig==slcConflicto ? "2" : "0");
+
 		AvisaChequearConfiguracion();
 		_cntticks = 0;
 	}

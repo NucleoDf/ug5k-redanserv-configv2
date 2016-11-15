@@ -255,3 +255,14 @@ string sistema::RecordServiceVersion()
 	return "RecordServiceVersion (WIN-LNX) 1.0.1";
 #endif
 }
+
+/** */
+int sistema::ParImpar()
+{
+#if defined(_PPC82xx_)
+	// TODO:
+	return 0;
+#else
+	return 1;
+#endif
+}

@@ -51,9 +51,9 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	        case 6:
 	            return true;
 	        case 7:     // Aplicar Cambios.
-	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]));
+	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]));
 	        case 8:     // Descartar Cambios.
-	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]));
+	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]));
 	        case 9:     // Tablas de ULISES.
 	            return !MantService.hide_on_ulises();
 	    }
@@ -85,6 +85,9 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	            break;
 	        case VIS_PROFILE:
 	            str_profile = " (vis)";
+	            break;
+	        case 128:
+	            str_profile = " (rt)";
 	            break;
 	    }
 	    var str_user = vm.user.length <= 8 ? vm.user : vm.user.substr(0, 8) + "...";

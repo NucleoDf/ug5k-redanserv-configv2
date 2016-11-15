@@ -386,13 +386,19 @@ section#_ppal #_tabs
         padding: 0px;
     }
 
-    .ulises div
+    .ulises #pdir-opciones, #pdir-ip
     {
+    }
+
+    .ulises .pagination
+    {
+        margin: 0.5em;
     }
 
     .ulises table
     {
         width: 80%;
+        margin: 0.5em;
         margin-left: 10%;
         border-bottom: 1px solid black;
     }

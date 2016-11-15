@@ -346,8 +346,8 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                               ,/*"ATS-R2"*/transerv.translate('TCTRL_P00_IR2')
                               ,/*"ATS-N5"*/transerv.translate('TCTRL_P00_IN5')
                               ,/*"LCEN"*/transerv.translate('TCTRL_P00_ILC')
-                              //,/*"ATS-QSIG"*/transerv.translate('TCTRL_P00_IQS')
-                              //,/*"TUN-LOC"*/transerv.translate('TCTRL_P00_LTU')
+                              ,/*"ATS-QSIG"*/transerv.translate('TCTRL_P00_IQS')
+                              ,/*"TUN-LOC"*/transerv.translate('TCTRL_P00_LTU')
                               //,/*"TUN-REM"*/transerv.translate('TCTRL_P00_RTU')
 					    ],
 					    Show: vm.p0_tel_show,

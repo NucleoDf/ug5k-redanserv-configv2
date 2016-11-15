@@ -140,7 +140,7 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
 					{
 					    Name: /*'Servidor NTP:'*/transerv.translate('SCTRL_P01_NTPS'),
 					    Value: serv2iplist(vm.jserv.sincr.servidores),
-					    Enable: authservice.global_enable([ADMIN_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ALM1_PROFILE]),
 					    Input: 2,
 					    Inputs: [],
 					    Show: vm.def_show,

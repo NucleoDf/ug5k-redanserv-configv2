@@ -37,9 +37,10 @@ CommGenConfig::CommGenConfig(soap_config &sc)
 
 	this->name = sc.CfgPasarela.Nombre;
 	this->emplazamiento = "";								// Dejar Vacio. 
-	this->dualidad = datos_locales.dualidad==true ? 1 : 0;	// Leer DatosLocales.ini
-	this->ipv = sc.Ip;
+	// this->dualidad = datos_locales.dualidad==true ? 1 : 0;	// Leer DatosLocales.ini
+	this->ipv = sc.IpVirt;
 	this->ips = sc.Server;
+	this->dualidad = (sc.IpVirt == sc.IpCol ? 0 : 1);
 
 	this->acGrupoMulticast = sc.ParametrosMulticast.GrupoMulticastConfiguracion;
 	this->uiPuertoMulticast = sc.ParametrosMulticast.PuertoMulticastConfiguracion;
@@ -48,8 +49,25 @@ CommGenConfig::CommGenConfig(soap_config &sc)
 	this->puertoconsola = datos_locales.puerto_consola;
 	this->nivelIncidencias = datos_locales.nivel_incidencias;
 
-	this->cpus.push_back(CommGenCpu(sc.Ip,"255.255.255.0",sc.Ip));
-	this->cpus.push_back(CommGenCpu());
+	if (this->dualidad==0)
+	{
+		this->cpus.push_back(CommGenCpu(sc.IpHw,"255.255.255.0",sc.IpHw));
+		this->cpus.push_back(CommGenCpu());
+	}
+	else 
+	{
+		if (sistema::ParImpar()==0)
+		{
+			this->cpus.push_back(CommGenCpu(sc.IpHw,"255.255.255.0",sc.IpHw));
+			this->cpus.push_back(CommGenCpu(sc.IpCol,"255.255.255.0",sc.IpCol));
+		}
+		else
+		{
+			this->cpus.push_back(CommGenCpu(sc.IpCol,"255.255.255.0",sc.IpCol));
+			this->cpus.push_back(CommGenCpu(sc.IpHw,"255.255.255.0",sc.IpHw));
+		}
+	}
+
 }
 
 /** */
@@ -143,7 +161,7 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 		this->NumDispositivoSlot =sres. NumDispositivoSlot;
 		this->TamRTP = sres.info.TamRTP;	
 		this->Codec = sres.info.Codec;
-		this->Uri_Local = "sip:" + sres.IdRecurso + "@" + sc.Ip;
+		this->Uri_Local = "sip:" + sres.IdRecurso + "@" + sc.IpVirt;
 
 		this->enableRegistro = 0;							// Dejar a 0. 
 		this->szClave = "";									// Dejar vacio.

@@ -1,37 +1,37 @@
-<h3 translate>ULISES_TITULO</h3>
+<h3 translate>Tablas de ULISES</h3>
 <section id="_tabs">
     <ul class="nav nav-tabs" data-persist="true" data-persist="true">
         <li data-ng-class="{'active': vm.pagina==0}">
-            <a href="" data-ng-click="vm.Pagina(0)" translate>ULI_PG00</a>
+            <a href="" data-ng-click="vm.Pagina(0)" translate>Direccionamiento</a>
         </li>
         <li data-ng-class="{'active': vm.pagina==1}">
-            <a href="" data-ng-click="vm.Pagina(1)" translate>ULI_PG01</a>
+            <a href="" data-ng-click="vm.Pagina(1)" translate>Asignaciones</a>
         </li>
         <li data-ng-class="{'active': vm.pagina==2}">
-            <a href="" data-ng-click="vm.Pagina(2)" translate>ULI_PG02</a>
+            <a href="" data-ng-click="vm.Pagina(2)" translate>ATS</a>
         </li>
     </ul>
 </section>
 <section id="_contenido" class="ulises">
     <div id="pdir" ng-show="vm.pagina==0">
-        <div id="pdir-ip" ng-show="vm.opcion==0">
-            <p>Plan de Direccionamiento IP</p>
+        <div id="pdir-ip" ng-show="vm.opcion != 4">
+            <p translate>Plan de Direccionamiento IP</p>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th translate>Id</th>
-                        <th translate>Tipo</th>
+<!--                        <th translate>Tipo</th>-->
                         <th translate>IP</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-repeat="item in vm.pdir_ip">
+                    <tr data-ng-repeat="item in vm.pdir_ip | filter:{ tipohost: vm.opcion }">
                         <td>
                             <div>{{item.idhost}}</div>
                         </td>
-                        <td>
+<!--                        <td>
                             <div>{{item.tipohost}}</div>
-                        </td>
+                        </td>-->
                         <td>
                             <div>{{item.ipred1}}</div>
                         </td>
@@ -41,8 +41,8 @@
                 </tfoot>
             </table>
         </div>
-        <div id="pdir-sip" ng-show="vm.opcion==1">
-            <p>Plan de Direccionamiento SIP</p>
+        <div id="pdir-sip" ng-show="vm.opcion==4">
+            <p translate>Plan de Direccionamiento SIP</p>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -58,7 +58,7 @@
                         <td>
                             <ol>
                                 <li data-ng-repeat="abn in item.array_abonados track by $index" style="list-style-type: none">
-                                    {{abn.prefijo+"-"+abn.abonado}}
+                                    {{abn.prefijo + "-" + abn.abonado}}
                                 </li>
                         </ol>                            
                         </td>
@@ -68,15 +68,20 @@
                 </tfoot>
             </table>
         </div>
-        <div id="pdir-opciones" class="opciones">
-            <button class="btn btn-default" data-ng-click="vm.Opcion(0)" translate>Plan IP</button>
-            <button class="btn btn-default" data-ng-click="vm.Opcion(1)" translate>Plan SIP</button>
+        <div id="pdir-opciones" class="opciones, text-center">
+          <ul class="pagination">
+            <li ng-class="{'active': vm.opcion==0}"><a href="" ng-click='vm.Opcion(0)' translate>Plan IP Puestos</a></li>
+            <li ng-class="{'active': vm.opcion==1}"><a href="" ng-click='vm.Opcion(1)' translate>Plan IP Pasarelas</a></li>
+            <li ng-class="{'active': vm.opcion==2}"><a href="" ng-click='vm.Opcion(2)' translate>Plan IP Radios</a></li>
+            <li ng-class="{'active': vm.opcion==3}"><a href="" ng-click='vm.Opcion(3)' translate>Plan IP Telefonos</a></li>
+            <li ng-class="{'active': vm.opcion==4}"><a href="" ng-click='vm.Opcion(4)' translate>Plan SIP</a></li>
+          </ul>
         </div>
     </div>
 
     <div id="pasg" ng-show="vm.pagina==1">
         <div id="pasg-usu" ng-show="vm.opcion==0">
-            <p>Plan de Asignacion de Usuarios</p>
+            <p translate>Plan de Asignacion de Usuarios</p>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -99,7 +104,7 @@
             </table>
         </div>
         <div id="pasg-rec" ng-show="vm.opcion==1">
-            <p>Plan de Asignacion de Recursos</p>
+            <p translate>Plan de Asignacion de Recursos</p>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -121,15 +126,17 @@
                 </tfoot>
             </table>
         </div>
-        <div id="pasg-opciones" class="opciones">
-            <button class="btn btn-default" data-ng-click="vm.Opcion(0)" translate>Usuarios</button>
-            <button class="btn btn-default" data-ng-click="vm.Opcion(1)" translate>Recursos</button>
+        <div id="pasg-opciones" class="opciones, text-center">
+          <ul class="pagination">
+            <li ng-class="{'active': vm.opcion==0}"><a href="" ng-click='vm.Opcion(0)' translate>Usuarios</a></li>
+            <li ng-class="{'active': vm.opcion==1}"><a href="" ng-click='vm.Opcion(1)' translate>Recursos</a></li>
+          </ul>
         </div>
     </div>
 
     <div id="ats" ng-show="vm.pagina==2">
         <div id="ats-red" ng-show="vm.opcion==0">
-            <p>Plan de Redess</p>
+            <p translate>Plan de Redes</p>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -160,7 +167,7 @@
             </table>
         </div>
         <div id="ats-trc" ng-show="vm.opcion==1">
-            <p>Plan de Troncales</p>
+            <p translate>Plan de Troncales</p>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -191,7 +198,7 @@
             </table>
         </div>
         <div id="ats-num" ng-show="vm.opcion==2">
-            <p>Plan de Numeracion</p>
+            <p translate>Plan de Numeracion</p>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -244,10 +251,12 @@
                 </tfoot>
             </table>
         </div>
-        <div id="ats-opciones" class="opciones">
-            <button class="btn btn-default" data-ng-click="vm.Opcion(0)" translate>Redes</button>
-            <button class="btn btn-default" data-ng-click="vm.Opcion(1)" translate>Troncales</button>
-            <button class="btn btn-default" data-ng-click="vm.Opcion(2)" translate>Numeracion</button>
+        <div id="ats-opciones" class="opciones, text-center">
+          <ul class="pagination">
+            <li ng-class="{'active': vm.opcion==0}"><a href="" ng-click='vm.Opcion(0)' translate>Redes</a></li>
+            <li ng-class="{'active': vm.opcion==1}"><a href="" ng-click='vm.Opcion(1)' translate>Troncales</a></li>
+            <li ng-class="{'active': vm.opcion==2}"><a href="" ng-click='vm.Opcion(2)' translate>Numeracion</a></li>
+          </ul>
         </div>
     </div>
 </section>

@@ -666,8 +666,10 @@ public:
 	soap_CfgPasarela CfgPasarela;
 
 public:
-	string Ip;
 	string Server;
+	string IpVirt;
+	string IpHw;
+	string IpCol;
 
 public:
 	string xdata_idConfig;

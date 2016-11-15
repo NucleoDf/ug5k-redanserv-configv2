@@ -4,7 +4,14 @@
 #include "../../include/base/thread.h"
 #include "mongoose.h"
 
-#define ROOT_PROFILE	256
+#define PERF_VISUAL			(0x01)
+#define PERF_CTRL			(0x02)
+#define PERF_ALM2			(0x04)
+#define PERF_ALM1			(0x08)
+#define PERF_GEST			(0x10)
+#define PERF_ING			(0x20)
+#define PERF_ADMIN			(0x40)
+#define ROOT_PROFILE		(0x80)
 
 typedef struct
 {
@@ -24,40 +31,53 @@ class SessionControl
 public:
 	SessionControl()
 	{
-		Reset();
+		reset();
 	}
 public:
-	bool Get(){return _set;}
-	void Set(string user = "")
+	bool active(){return _set;}
+	void active(string ssid, string name, int profile)
 	{
-		_user = user;
+		_ssid = ssid;
+		_name = name;
+		_profile = profile;
 		_start = _last = time(NULL);
 		_set = true;
 	}
-	void Reset()
+	bool check(string ssid) {
+		return ssid == _ssid;
+	}
+	bool isroot() {
+		return _name=="root" && _profile==ROOT_PROFILE;
+	}
+	void reset()
 	{
 		_set=false;
-		_user = "";
+		_ssid = "";
 		_start = _last = 0;
+		_name = "";
+		_profile = 0;
 	}
-	void RegActividad()
+	void tick()
 	{
 		_last = time(NULL);
 	}
-	bool Inactivo(int _cuanto)
+	bool noactive(int _cuanto)
 	{
         time_t _now = time(NULL);
 		return (_set==true && (_now-_last)>_cuanto) ? true : false;
 	}
-	time_t TActividad()
+	time_t time_active()
 	{
 		return (_last-_start);
 	}
+
 private:
 	bool _set;
-	string _user;
 	time_t _start;
 	time_t _last;
+	string _ssid;
+	string _name;
+	int _profile;
 };
 
 typedef struct
@@ -96,6 +116,7 @@ protected:
 	int ProcessRequest(struct mg_connection * conn);
 	webCallback FindRest(string url);
 	string current_user(struct mg_connection *conn);
+	int check_login_form_submission_old(struct mg_connection *conn);
 	int check_login_form_submission(struct mg_connection *conn);
 	int check_auth(struct mg_connection *conn) ;
 	void generate_ssid(const char *user_name, int profile, const char *expiration_date,

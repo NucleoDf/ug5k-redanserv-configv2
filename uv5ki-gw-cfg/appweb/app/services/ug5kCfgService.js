@@ -201,7 +201,7 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                 umbral_vox: -10,
                 tm_inactividad: 2,
                 superv_options: 1,
-                tm_superv_options: 2,
+                tm_superv_options: 90,
                 colateral_scv: 0,
                 iT_Int_Warning: 5,
                 ats_rangos_dst: [

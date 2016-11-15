@@ -3,7 +3,7 @@
 #include "../include/cfg-proc.h"
 
 #define _CFG_PROC_				1
-#define _NOTIFICA_ESTADOS_CPU_	1
+#define _NOTIFICA_ESTADOS_CPU_	0
 
 /** */
 ManProc *ManProc::p_man=NULL;

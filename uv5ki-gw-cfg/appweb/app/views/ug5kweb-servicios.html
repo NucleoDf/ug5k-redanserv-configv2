@@ -35,7 +35,7 @@
                         <li data-ng-repeat="item1 in item.Value track by $index" > <!--style="list-style-type: none">-->
                             <span class="error" ng-show="item.Val(item.Value[$index])==false" translate>SERV_ERROR</span>
                             <span class="lista">
-                                <input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()"/>
+                                <input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()" data-ng-disabled="item.Enable==false"/>
                             </span>
                         </li>
                     </ul>

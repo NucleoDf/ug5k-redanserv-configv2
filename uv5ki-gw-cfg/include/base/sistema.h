@@ -72,6 +72,9 @@ public:
 	/** */
 	static string SnmpAgentVersion();
 	static string RecordServiceVersion();
+
+	/** */
+	static int ParImpar();
 	
 };
 
