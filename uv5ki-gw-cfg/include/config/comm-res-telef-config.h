@@ -16,8 +16,9 @@
 class CommResTelefAtsRange : public jData
 {
 public:
-	CommResTelefAtsRange() {
-		inicial = final = "";
+	CommResTelefAtsRange(string Inicial="", string Final="") {
+		inicial = Inicial;
+		final = Final;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer)
@@ -90,6 +91,11 @@ public:
 		write_key(writer, "idRed", idRed);
 		write_key(writer, "idTroncal", idTroncal);
 		write_key(writer, "listaEnlacesInternos", listaEnlacesInternos);
+
+		write_key(writer, "ats_rangos_operador", ats_rangos_operador);
+		write_key(writer, "ats_rangos_privilegiados", ats_rangos_privilegiados);
+		write_key(writer, "ats_rangos_directos_ope", ats_rangos_directos_ope);
+		write_key(writer, "ats_rangos_directos_pri", ats_rangos_directos_pri);
 	}
 	virtual void jread(Value &base)
 	{
@@ -117,6 +123,11 @@ public:
 		read_key(base, "idRed", idRed);
 		read_key(base, "idTroncal", idTroncal);
 		read_key(base, "listaEnlacesInternos", listaEnlacesInternos);
+
+		read_key(base, "ats_rangos_operador", ats_rangos_operador);
+		read_key(base, "ats_rangos_privilegiados", ats_rangos_privilegiados);
+		read_key(base, "ats_rangos_directos_ope", ats_rangos_directos_ope);
+		read_key(base, "ats_rangos_directos_pri", ats_rangos_directos_pri);
 	}
 
 public:
@@ -150,6 +161,12 @@ public:
 	string idRed;
 	string idTroncal;
 	vector<string> listaEnlacesInternos;
+
+	vector<CommResTelefAtsRange> ats_rangos_operador;
+	vector<CommResTelefAtsRange> ats_rangos_privilegiados;
+	vector<CommResTelefAtsRange> ats_rangos_directos_ope;
+	vector<CommResTelefAtsRange> ats_rangos_directos_pri;
+
 };
 
 #endif

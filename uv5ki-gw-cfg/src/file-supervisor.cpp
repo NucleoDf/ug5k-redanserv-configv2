@@ -56,7 +56,7 @@ void FileSupervisor::Run()
 {
 	/** */
 	SetId("FileSupervisor");
-	PLOG_INFO("FileSupervisor running...");
+	PLOG_INFO("FileSupervisor (%d) running...", pid());
 
 	Init();
 

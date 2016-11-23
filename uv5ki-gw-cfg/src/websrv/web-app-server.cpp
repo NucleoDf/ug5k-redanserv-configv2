@@ -50,7 +50,7 @@ void WebAppServer::Run()
 	SetId("WebAppServer");
 	config()->session_control.reset();
 
-	PLOG_INFO("WebAppServer running...");
+	PLOG_INFO("WebAppServer (%d) running...", pid());
 	while(IsRunning())
 	{
 		try

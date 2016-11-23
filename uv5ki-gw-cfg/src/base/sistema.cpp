@@ -266,3 +266,4 @@ int sistema::ParImpar()
 	return 1;
 #endif
 }
+

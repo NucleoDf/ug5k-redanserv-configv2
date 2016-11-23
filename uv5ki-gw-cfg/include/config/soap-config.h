@@ -22,7 +22,8 @@ using namespace rapidxml;
 
 typedef string (*remoteGetXdataFunc)(string proc, string p1, string p2, string p3);
 enum TI_ {
-	TI_Radio=0, TI_LCEN=1, TI_BC=2, TI_BL=3, TI_AB=4, TI_ATS_R2=5, TI_ATS_N5=6, TI_ATS_QSIG=7, TI_ISDN_2BD=8, TI_ISDN_30BD=9, TI_I_O=10, TI_DATOS=11
+	TI_Radio=0, TI_LCEN=1, TI_BC=2, TI_BL=3, TI_AB=4, TI_ATS_R2=5, TI_ATS_N5=6, TI_ATS_QSIG=7, TI_ISDN_2BD=8, TI_ISDN_30BD=9, TI_I_O=10, TI_DATOS=11,
+	TI_EM_PP=13, TI_EM_MARC=14
 };
 
 enum THOST_ {
@@ -65,6 +66,8 @@ protected:
 			str_val=="TI_AB" ? TI_AB :
 			str_val=="TI_ATS_R2" ? TI_ATS_R2 :
 			str_val=="TI_ATS_N5" ? TI_ATS_N5 :
+			str_val=="TI_EM_PP" ? TI_EM_PP:
+			str_val=="TI_EM_MARC" ? TI_EM_MARC :
 			-1);
 	}
 	void read_key(xml_node<> * xnode, const char *indice, THOST_ &val) {
@@ -488,10 +491,10 @@ public:
 	int FrqTonoSQ;						// TODO: No se asigna.
 	int UmbralTonoSQ;
 	int FrqTonoPTT;						// TODO: No se asigna.
-	int UmbralTonoPTT;					// TODO: No se asigna.
+	int UmbralTonoPTT;					// TODO: No se asigna. => iNivelTonoPtt
 	struct {
 		/** Telefonia */
-		vector<string> ListaEnlacesInternos;	// TODO: Pendiente.
+		vector<string> ListaEnlacesInternos;	
 		int IdPrefijo;					// TODO: No se asigna.
 		/** LC */
 		int RefrescoEstados;			// TODO: No se asigna.
@@ -518,8 +521,8 @@ public:
 		bool NTZ;						// TODO: No se asigna.
 		int TipoNTZ;					// TODO: No se asigna.
 		bool Cifrado;					// TODO: No se asigna.
-		bool SupervPortadoraTx;			// TODO: No se asigna.
-		bool SupervModuladoraTx;		// TODO: No se asigna.
+		bool SupervPortadoraTx;			// TODO: No se asigna.  => iSupervisionPortadoraTx
+		bool SupervModuladoraTx;		// TODO: No se asigna.  => iSupervisionModuladoraTx
 		int ModoConfPTT;
 		int RepSQyBSS;
 		int DesactivacionSQ;
@@ -569,7 +572,7 @@ public:
 	int SlotPasarela;
 	int NumDispositivoSlot;
 	string ServidorSIP;
-	bool Diffserv;					// TODO. No se asigna.
+	bool Diffserv;					
 	string IdSistema;
 	int TipoRecurso;
 	string IdTifX;
@@ -664,6 +667,48 @@ public:
 	vector<soap_ListaTroncales> ArrayOfListaTroncales;
 	vector<soap_NumeracionATS> ArrayOfNumeracionATS;
 	soap_CfgPasarela CfgPasarela;
+
+public:
+	soap_NumeracionATS *CentralPropia() {
+		for (size_t i=0; i<ArrayOfNumeracionATS.size(); i++) {
+			if (ArrayOfNumeracionATS[i].CentralPropia==true)
+				return &ArrayOfNumeracionATS[i];
+		}
+		return NULL;
+	}
+	soap_NumeracionATS *CentralConRutaDirecta(string idres) {
+		for (size_t it=0; it<ArrayOfListaTroncales.size(); it++) {
+			for (size_t ir=0; ir<ArrayOfListaTroncales[it].ListaRecursos.size(); ir++) {
+				if (ArrayOfListaTroncales[it].ListaRecursos[ir].IdRecurso == idres) {
+					for (size_t ic=0; ic<ArrayOfNumeracionATS.size(); ic++) {
+						if (ArrayOfNumeracionATS[ic].CentralPropia==false) {
+							for (size_t iru=0; iru<ArrayOfNumeracionATS[ic].ListaRutas.size(); iru++) {
+								if (ArrayOfNumeracionATS[ic].ListaRutas[iru].TipoRuta=="D") {
+									for (size_t itr=0; itr<ArrayOfNumeracionATS[ic].ListaRutas[iru].ListaTroncales.size(); itr++) {
+										if (ArrayOfNumeracionATS[ic].ListaRutas[iru].ListaTroncales[itr] == ArrayOfListaTroncales[it].IdTroncal) {
+											return &ArrayOfNumeracionATS[ic];
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+			}
+		}
+		return NULL;
+	}
+	soap_ListaTroncales *TrunckOfResource(string idres) {
+		for (size_t it=0; it<ArrayOfListaTroncales.size(); it++) {
+			for (size_t ir=0; ir<ArrayOfListaTroncales[it].ListaRecursos.size(); ir++) {
+				if (ArrayOfListaTroncales[it].ListaRecursos[ir].IdRecurso == idres) {
+					return &ArrayOfListaTroncales[it];
+				}
+			}
+		}
+		return NULL;
+	}
 
 public:
 	string Server;

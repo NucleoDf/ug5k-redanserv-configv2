@@ -43,7 +43,7 @@ void ManProc::Run()
 	int _cntEstados = 1;
 #endif
 	SetId("ManProc");
-	PLOG_INFO("ManProc running...");
+	PLOG_INFO("ManProc (%d) running...", pid());
 
 	/** Inicializando las tablas */
 	ManProc::p_man->resetCpu(epriCpu0, estado.cpu0);

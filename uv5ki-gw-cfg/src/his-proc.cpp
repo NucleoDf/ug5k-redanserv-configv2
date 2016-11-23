@@ -22,7 +22,7 @@ void HistClient::Run()
 	stHistAviso aviso;
 
 	SetId("HistClient");
-	PLOG_INFO("HistClient running...");
+	PLOG_INFO("HistClient (%d) running...", pid());
 
 	default_dst = CIPAddress("127.0.0.1", atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str()));
 	default_port = atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str());

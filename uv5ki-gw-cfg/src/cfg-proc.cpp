@@ -184,7 +184,7 @@ void CfgProc::ResourcesConfigClear()
 void JsonClientProc::Run() 
 {
 	SetId("JsonClientProc");
-	PLOG_INFO("JsonClientProc running...");
+	PLOG_INFO("JsonClientProc (%d) running...", pid());
 	modo="rd";
 
 	_maxticks = (atoi(LocalConfig::p_cfg->get(strSection, strItemConfigTSUP).c_str())*1000)/HTTP_CLIENT_TICK;
@@ -344,7 +344,7 @@ string SoapClientProc::hwServer;
 void SoapClientProc::Run()
 {
 	SetId("SoapClientProc");
-	PLOG_INFO("SoapClientProc running...");
+	PLOG_INFO("SoapClientProc (%d) running...", pid());
 	modo="ul";
 
 	_maxticks = (atoi(LocalConfig::p_cfg->get(strSection, strItemConfigTSUP).c_str())/*.ConfigTsup()*/*1000)/HTTP_CLIENT_TICK;

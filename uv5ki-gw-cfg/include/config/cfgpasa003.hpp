@@ -18,7 +18,7 @@
 #ifndef INCLUIDO_CFGPASA_PUNTOHACHE
 #define INCLUIDO_CFGPASA_PUNTOHACHE
 
-//#include <pthread.h>
+// #include <pthread.h>
 
 #define ULISES
 //------------------------------------------------------------
@@ -61,7 +61,6 @@
 #define MAX_NUM_COLATERALES     MAX_NUM_EMPL*4
 
 #define LONG_AB_ATS   6
-#define PREF_ATS		3
 
 #define CFG_COORDS_LOCALIZADOR          2  // Coordenadas para lozalizar un rec. ( slot+dispositivo ).
 
@@ -328,8 +327,8 @@ enum eType
 #define STR_NULO                    "---"
 
 
-#define N_MAX_RANGOS            16
-#define N_MAX_PRIV          8
+#define N_MAX_RANGOS            128
+#define N_MAX_PRIV          16
 
 //------------------------------------------------------------------------------------------
 //  datos y estructuras del sistema Ulises
@@ -619,20 +618,13 @@ struct cfgConfigGeneralRecurso
     char szDestino[CFG_MAX_LONG_NOMBRE_RECURSO+1];
 
     // int iNumSesionesRtpEstaticas;
-#if 1
-    int iFlgUsarDiffServ;
-    int iSnmpPuertoRemoto;
-    int iRecPuertoRemoto;
-    //int iRecPuertoBase;
-    int iEnableGI;
 
-#else
-    //int iFlgUsarDiffServ;
+//    int iFlgUsarDiffServ;
     int iSnmpPuertoRemoto;
     int iRecPuertoRemoto;
     int iRecPuertoBase;
     int iEnableGI;
-#endif
+
     char szUriLocal[MAX_LONG_DIR_AMPLIADA+1];
     int iLLamadaAutomatica;
     int iRestriccion;
@@ -800,7 +792,10 @@ struct cfgConfigIfRadio
     unsigned int KeepAliveMultiplier;
     int iSessionPrio;
     int iPttPrio;
+#ifdef NUEVA_CONFI
     int iPrecisionAudio;     //precision del recurso radio (5 o 20 grenularidad)
+#endif
+    
 
     int iTiempoPttBloqueado;    // 2000 por defecto.
     int iRetrasoPttOff;         // 0 por defecto.
@@ -940,7 +935,9 @@ struct cfgConfigIfR2N5
     } sTiemA, sTiemB;
 
     int iT_Release;                              //tiempo generando tonos antes de liberar
+#ifdef NUEVA_CONFI
     int iT_Int_Warning;   //tiempo de duracion de los tonos de interrupt warning
+#endif
 
     char ntest_local[LONG_AB_ATS];
     char ntest_remoto[LONG_AB_ATS];
@@ -950,16 +947,6 @@ struct cfgConfigIfR2N5
 #ifdef ULISES
     char szIdTroncal[CFG_MAX_LONG_NOMBRE_TRONCAL+1];
     char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
-  #if 1
-    int iNumRangosOperador;
-    int iNumRangosPrivilegiados;
-    struct st_rango_binario asMisRangosOperador[N_MAX_RANGOS];
-    struct st_rango_binario asMisRangosPrivilegiados[N_MAX_PRIV];
-    int iNumRangosDirectosOpe;
-    int iNumRangosDirectosPriv;
-    struct st_rango_binario asRangosDirectosOpe[N_MAX_RANGOS];
-    struct st_rango_binario asRangosDirectosPriv[N_MAX_PRIV];
-  #endif
 #endif
     void TomaLado( int );
     void PorDefecto();
@@ -1160,7 +1147,7 @@ struct cfgConfigPasarela
     st_config_sistema();
     bool operator ==( const st_config_sistema& );
     bool operator !=( const st_config_sistema& );*/
-    void DimeNumerosPrueba( char*, int, char*, char* );
+    void DimeNumerosPrueba( char*, int, char*, char*, char* );
     void DimeMisRangos( struct st_rango_binario*, int*, struct st_rango_binario*, int* );
     void DimeRangosDirectos( char *szIdRec,
     										struct st_rango_binario *psRangosDirectosOpe,

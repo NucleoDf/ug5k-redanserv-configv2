@@ -108,6 +108,8 @@ public:
 		write_key(writer, "restriccion", restriccion);
 		write_key(writer, "blanca", blanca);
 		write_key(writer, "negra", negra);
+		write_key(writer, "iFlgUsarDiffServ", iFlgUsarDiffServ);
+		write_key(writer, "szDestino", szDestino);
 	}
 	virtual void jread(Value &base)
 	{
@@ -128,6 +130,8 @@ public:
 		read_key(base, "restriccion", restriccion);
 		read_key(base,"blanca", blanca);
 		read_key(base,"negra", negra);
+		read_key(base,"iFlgUsarDiffServ", iFlgUsarDiffServ);
+		read_key(base,"szDestino", szDestino);
 	}
 
 public:
@@ -150,6 +154,67 @@ public:
 	int restriccion;
 	vector<string> blanca;
 	vector<string> negra;
+
+	int iFlgUsarDiffServ;
+	string szDestino;
+
+public:
+	vector<CommResTelefAtsRange> AtsRangosOperador(soap_config &sc) {
+		vector<CommResTelefAtsRange> rangos;	
+		soap_NumeracionATS *p_CentralPropia = sc.CentralPropia();
+		if (p_CentralPropia != NULL) {
+			for (size_t r=0; r<p_CentralPropia->RangosOperador.size(); r++) {
+				rangos.push_back(CommResTelefAtsRange(p_CentralPropia->RangosOperador[r].Inicial,
+					p_CentralPropia->RangosOperador[r].Final));
+			}
+		}
+		return rangos;
+	}
+	vector<CommResTelefAtsRange> AtsRangosPrivilegiados(soap_config &sc){
+		vector<CommResTelefAtsRange> rangos;	
+		soap_NumeracionATS *p_CentralPropia = sc.CentralPropia();
+		if (p_CentralPropia != NULL) {
+			for (size_t r=0; r<p_CentralPropia->RangosPrivilegiados.size(); r++) {
+				rangos.push_back(CommResTelefAtsRange(p_CentralPropia->RangosPrivilegiados[r].Inicial,
+					p_CentralPropia->RangosPrivilegiados[r].Final));
+			}
+		}
+		return rangos;
+	}
+	vector<CommResTelefAtsRange> AtsRangosDirectosOpe(soap_config &sc, string res){
+		vector<CommResTelefAtsRange> rangos;	
+		soap_NumeracionATS *p_Central = sc.CentralConRutaDirecta(res);
+		if (p_Central != NULL) {
+			for (size_t r=0; r<p_Central->RangosOperador.size(); r++) {
+				rangos.push_back(CommResTelefAtsRange(p_Central->RangosOperador[r].Inicial,
+					p_Central->RangosOperador[r].Final));
+			}
+		}
+		return rangos;
+	}
+	vector<CommResTelefAtsRange> AtsRangosDirectorPri(soap_config &sc, string res){
+		vector<CommResTelefAtsRange> rangos;	
+		soap_NumeracionATS *p_Central = sc.CentralConRutaDirecta(res);
+		if (p_Central != NULL) {
+			for (size_t r=0; r<p_Central->RangosPrivilegiados.size(); r++) {
+				rangos.push_back(CommResTelefAtsRange(p_Central->RangosPrivilegiados[r].Inicial,
+					p_Central->RangosPrivilegiados[r].Final));
+			}
+		}
+		return rangos;
+	}
+	string AtsLocalTestNumber(soap_config &sc) {
+		soap_NumeracionATS *p_CentralPropia = sc.CentralPropia();
+		if (p_CentralPropia != NULL)
+			return p_CentralPropia->NumTest;
+		return "";
+	}
+	string AtsRemoteTestNumber(soap_config &sc, string res) {
+		soap_ListaTroncales *p_trunk = sc.TrunckOfResource(res);
+		if (p_trunk != NULL)
+			return p_trunk->NumeroTest;
+		return "";
+	}
 };
 
 #endif

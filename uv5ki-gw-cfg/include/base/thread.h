@@ -6,6 +6,7 @@
 
 #ifdef _WIN32
 	#include <Windows.h>
+	#include <process.h>
 #else
 	#include <unistd.h>
 	#define Sleep(m)	usleep(1000*m)
@@ -123,6 +124,16 @@ public:
 
 	}
 	std::string GetId(void)  { return m_id; }
+	/** */
+	int pid() 
+	{
+#if defined(_WIN32)
+		return _getpid();
+#else
+		return (int )getpid();
+#endif
+	}
+
 
 protected:
 	virtual void Run() = 0;

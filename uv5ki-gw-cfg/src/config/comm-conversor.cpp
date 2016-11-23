@@ -21,7 +21,7 @@ int CfgConversor::TelefoniaJ2M(int iItf)
 	};
 	if (iItf < 9)
 		return tbconv[iItf];
-	return -1;
+	return iItf;
 }
 
 /** */
@@ -209,6 +209,8 @@ void CommConversor::ParametrosGlobales()
 	SetInt(&mcfg->iNivelIncidencias, p_cfg_in->general.nivelIncidencias, INCI_MPGP, "NIVEL-INCIDENCIAS");
 	SetInt(&mcfg->iDual, p_cfg_in->general.dualidad, INCI_MPGP, "DUALIDAD");
 	strcpy(mcfg->acIdConfig,"");
+
+	// TODO: De momento se queda asi...
 	mcfg->iModoSincronizacion = 2;
 
 	for (size_t icpu=0; icpu<p_cfg_in->general.cpus.size() && icpu < 2; icpu++)
@@ -273,7 +275,9 @@ void CommConversor::Servidores()
 #endif
 	}
 
-	/** NTP Master */
+	/** NTP Master */	
+	for (i=0; i<2;i++)
+		strcpy(mcfg->szDirSrvNtp[i], "");
 	for (i=0; i<p_cfg_in->servicios.sincr.servidores.size() && i<2; i++)
 	{
 #if __POR_REFERENCIA__
@@ -373,7 +377,8 @@ void CommConversor::RecursoGeneral(CommResConfig *p_rec, struct cfgConfigGeneral
 	mgen->iSnmpPuertoRemoto = mcfg->iSnmpPuertoRemoto;
 	mgen->iRecPuertoRemoto = mcfg->iRecPuertoRemoto;
 
-	// TODO: mgen->iFlgUsarDiffServ
+	memcpy(mgen->szDestino, p_rec->szDestino.c_str(), CFG_MAX_LONG_NOMBRE_RECURSO);
+	mgen->iFlgUsarDiffServ = p_rec->iFlgUsarDiffServ;
 
 	/** Lista de enlaces externos ??? */
 	mgen->size_aListaEnlacesExternos = p_rec->telefonia.listaEnlacesInternos.size();
@@ -430,7 +435,7 @@ void CommConversor::RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRe
 
 	SetInt(&mrad->iTipoRadio, p_rec->radio.tipo, INCI_MPSW, "TIPO RADIO");
 	SetInt(&mrad->iUmbralDetSq, p_rec->radio.umbralVad, INCI_MPSW, "UMBRAL SQUELCH");
-	mrad->iNivelTonoPtt = -10;
+	mrad->iNivelTonoPtt = -10;	// TODO: 
 	SetInt(&mrad->iMetodoBss, p_rec->radio.metodoBss, INCI_MPSW, "METODO BSS");
 	mrad->iNtz = 0;
 	SetInt(&mrad->TiempoMaxPtt, p_rec->radio.tiempoPtt, INCI_MPSW, "TIEMPO MAXIMO PTT");
@@ -629,6 +634,45 @@ void CommConversor::RecursoTelefoniaR2N5(CommResConfig *p_rec, struct cfgConfigI
 	/** */
 	memcpy(mr2n5->szIdRed, p_rec->telefonia.idRed.c_str(), CFG_MAX_LONG_NOMBRE_RED);
 	memcpy(mr2n5->szIdTroncal, p_rec->telefonia.idTroncal.c_str(), CFG_MAX_LONG_NOMBRE_TRONCAL);
+
+	/** */
+	/*
+    int iNumRangosOperador;
+    int iNumRangosPrivilegiados;
+    struct st_rango_binario asMisRangosOperador[N_MAX_RANGOS],
+    struct st_rango_binario asMisRangosPrivilegiados[N_MAX_PRIV];
+    int iNumRangosDirectosOpe;
+    int iNumRangosDirectosPriv;
+    struct st_rango_binario asRangosDirectosOpe[N_MAX_RANGOS];
+    struct st_rango_binario asRangosDirectosPriv[N_MAX_PRIV];
+	*/
+	mr2n5->iNumRangosOperador = p_rec->telefonia.ats_rangos_operador.size();
+	for (int i = 0; i< mr2n5->iNumRangosOperador; i++)
+	{
+		mr2n5->asMisRangosOperador[i].lwFinal = (LongWord )atoi(p_rec->telefonia.ats_rangos_operador[i].final.c_str());
+		mr2n5->asMisRangosOperador[i].lwInicial = (LongWord )atoi(p_rec->telefonia.ats_rangos_operador[i].inicial.c_str());
+	}
+
+	mr2n5->iNumRangosPrivilegiados = p_rec->telefonia.ats_rangos_privilegiados.size();
+	for (int i=0; i<mr2n5->iNumRangosPrivilegiados; i++)
+	{
+		mr2n5->asMisRangosPrivilegiados[i].lwFinal = (LongWord)atoi(p_rec->telefonia.ats_rangos_privilegiados[i].final.c_str());
+		mr2n5->asMisRangosPrivilegiados[i].lwInicial = (LongWord)atoi(p_rec->telefonia.ats_rangos_privilegiados[i].inicial.c_str());
+	}
+
+	mr2n5->iNumRangosDirectosOpe = p_rec->telefonia.ats_rangos_directos_ope.size();
+	for (int i=0; i<mr2n5->iNumRangosDirectosOpe; i++)
+	{
+		mr2n5->asRangosDirectosOpe[i].lwFinal = (LongWord)atoi(p_rec->telefonia.ats_rangos_directos_ope[i].final.c_str());
+		mr2n5->asRangosDirectosOpe[i].lwInicial = (LongWord)atoi(p_rec->telefonia.ats_rangos_directos_ope[i].inicial.c_str());
+	}
+
+	mr2n5->iNumRangosDirectosPriv = p_rec->telefonia.ats_rangos_directos_pri.size();
+	for (int i=0; i<mr2n5->iNumRangosDirectosPriv; i++)
+	{
+		mr2n5->asRangosDirectosPriv[i].lwFinal = (LongWord)atoi(p_rec->telefonia.ats_rangos_directos_pri[i].final.c_str());
+		mr2n5->asRangosDirectosPriv[i].lwInicial = (LongWord)atoi(p_rec->telefonia.ats_rangos_directos_pri[i].inicial.c_str());
+	}
 }
 
 /** */

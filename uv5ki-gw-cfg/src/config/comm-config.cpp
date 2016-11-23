@@ -23,11 +23,12 @@ CommConfig::CommConfig(soap_config &sConfig)
 		this->recursos.push_back(CommResConfig(sConfig, irec));
 	}
 
+	/** Configuracion especifica de ULISES */
+	this->ulises = CommUv5Config(sConfig);
+
 	/** En Ulises no hay usuarios */
 	this->users.clear();
 
-	/** Configuracion especifica de ULISES */
-	this->ulises = CommUv5Config(sConfig);
 }
 
 /** */
@@ -222,8 +223,8 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->telefonia.ladoeym = 0;								 // TODO: Confirmar.
 			this->telefonia.modo = 0;								 // TODO: Confirmar.
 			this->telefonia.r_automatica = 0;						 // Dejar a Cero.
-			this->telefonia.no_test_local = "";						 // TODO: Numero de la Central PROPIA.
-			this->telefonia.no_test_remoto = "";						 // TODO: Numero del troncal que contiene al recurso.
+			this->telefonia.no_test_local = AtsLocalTestNumber(sc);						// Numero de la Central PROPIA.
+			this->telefonia.no_test_remoto = AtsRemoteTestNumber(sc, this->IdRecurso);	// Numero del troncal que contiene al recurso.
 			this->telefonia.it_release = 5;							 // Dejar a 5.
 			this->telefonia.uri_remota = "";							 // Dejar vacio.
 			this->telefonia.detect_vox = 1;							 // Dejar a 1.
@@ -239,6 +240,11 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->telefonia.idRed = sres.info.telef.IdRed;
 			this->telefonia.idTroncal = sres.info.telef.IdTroncal;
 			this->telefonia.listaEnlacesInternos = sres.info.telef.ListaEnlacesInternos;
+
+			this->telefonia.ats_rangos_operador = AtsRangosOperador(sc);
+			this->telefonia.ats_rangos_privilegiados = AtsRangosPrivilegiados(sc);
+			this->telefonia.ats_rangos_directos_ope = AtsRangosDirectosOpe(sc, this->IdRecurso);
+			this->telefonia.ats_rangos_directos_pri = AtsRangosDirectorPri(sc, this->IdRecurso);
 		}
 
 		this->LlamadaAutomatica=0;									// Dejar a 0
@@ -248,6 +254,8 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 		this->negra.clear();											// Dejar Vacio.
 
 		/** */
+		this->iFlgUsarDiffServ = sres.Diffserv;
+		this->szDestino = sres.info.IdDestino;
 	}
 }
 

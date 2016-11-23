@@ -106,6 +106,6 @@ void soap_config::TipoTelefonia(int stipo, int &jtipo)
 		stipo==4 ? 2 :				// AB
 		stipo==5 ? 3 :				// R2
 		stipo==6 ? 4 :				// N5
-		-1;
+		stipo;
 }
 

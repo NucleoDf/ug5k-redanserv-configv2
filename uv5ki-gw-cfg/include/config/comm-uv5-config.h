@@ -159,21 +159,26 @@ public:
 		pa->centralpropia = (unsigned char )centralpropia;
 		pa->throwswitching = (unsigned char )throwswitching;
 		strncpy(pa->no_test, no_test.c_str(), LONG_AB_ATS);
+		memset(&pa->rangosoperador, 0, N_MAX_RANGOS*sizeof(st_rango));
 		for (r=0; r<rangosoperador.size(); r++) {
 			if (r<N_MAX_RANGOS) {
 				rangosoperador[r].copyto(&pa->rangosoperador[r]);
 			}
 		}
+		memset(&pa->rangosprivilegiados, 0, N_MAX_PRIV*sizeof(st_rango));
 		for (r=0; r<rangosprivilegiados.size(); r++) {
 			if (r<N_MAX_PRIV) {
 				rangosprivilegiados[r].copyto(&pa->rangosprivilegiados[r]);
 			}
 		}
+		memset(&pa->listarutas, 0, N_MAX_RUTAS*sizeof(st_planrutas));
 		for (r=0; r<listarutas.size(); r++) {
 			if (r<N_MAX_RUTAS) {
 				listarutas[r].copyto(&pa->listarutas[r]);
 			}
 		}
+		if (r<N_MAX_RUTAS)
+			pa->listarutas[r].tiporuta=NO_TIPO_RUTA;
 	}
 public:
 	int centralpropia;
@@ -297,6 +302,7 @@ public:
 	void copyto(st_listatroncales *pt) {
 		strncpy(pt->idtroncal, idtroncal.c_str(), CFG_MAX_LONG_NOMBRE);
 		strncpy(pt->no_test, no_test.c_str(), LONG_AB_ATS);
+		memset(&pt->listarecursos, 0, N_MAX_REC_BY_TRONCAL*sizeof(st_plan_recursos));
 		for (size_t rec=0; rec<listarecursos.size(); rec++) {
 			if (rec < N_MAX_REC_BY_TRONCAL) {
 				listarecursos[rec].copyto(&pt->listarecursos[rec]);
@@ -487,6 +493,8 @@ public:
 		read_key(base, "planasignacionrecursos", planasignacionrecursos);
 		read_key(base, "plandireccionamientosip", plandireccionamientosip);
 	}
+
+public:
 
 public:
 	string MulticastGroup;

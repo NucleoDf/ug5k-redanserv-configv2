@@ -18,7 +18,7 @@
 #ifndef INCLUIDO_CFGPASA_PUNTOHACHE
 #define INCLUIDO_CFGPASA_PUNTOHACHE
 
-//#include <pthread.h>
+// #include <pthread.h>
 
 #define ULISES
 //------------------------------------------------------------
@@ -328,8 +328,8 @@ enum eType
 #define STR_NULO                    "---"
 
 
-#define N_MAX_RANGOS            16
-#define N_MAX_PRIV          8
+#define N_MAX_RANGOS            128
+#define N_MAX_PRIV          16
 
 //------------------------------------------------------------------------------------------
 //  datos y estructuras del sistema Ulises
@@ -619,20 +619,13 @@ struct cfgConfigGeneralRecurso
     char szDestino[CFG_MAX_LONG_NOMBRE_RECURSO+1];
 
     // int iNumSesionesRtpEstaticas;
-#if 1
-    int iFlgUsarDiffServ;
-    int iSnmpPuertoRemoto;
-    int iRecPuertoRemoto;
-    //int iRecPuertoBase;
-    int iEnableGI;
 
-#else
-    //int iFlgUsarDiffServ;
+//    int iFlgUsarDiffServ;
     int iSnmpPuertoRemoto;
     int iRecPuertoRemoto;
     int iRecPuertoBase;
     int iEnableGI;
-#endif
+
     char szUriLocal[MAX_LONG_DIR_AMPLIADA+1];
     int iLLamadaAutomatica;
     int iRestriccion;
