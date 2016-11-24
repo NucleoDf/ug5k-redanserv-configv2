@@ -410,7 +410,7 @@ class soap_ResourceInfo : public xml_data
 {
 public:
 	soap_ResourceInfo()	{
-		UmbralTonoSQ = -30;
+		radio.UmbralTonoSQ = -30;
 	}
 	~soap_ResourceInfo(){}
 public:
@@ -425,10 +425,6 @@ public:
 		read_key(xnode, "GrabacionEd137", GrabacionEd137);
 		read_key(xnode, "TipoDestino", TipoDestino);
 		read_key(xnode, "IdDestino", IdDestino);
-		read_key(xnode, "FrqTonoSQ", FrqTonoSQ);
-		read_key(xnode, "UmbralTonoSQ", UmbralTonoSQ);
-		read_key(xnode, "FrqTonoPTT", FrqTonoPTT);
-		read_key(xnode, "UmbralTonoPTT", UmbralTonoPTT);
 
 		/** Telefonia */
 		read_key(xnode, "ListaEnlacesInternos", telef.ListaEnlacesInternos);
@@ -475,6 +471,11 @@ public:
 		read_key(xnode, "KeepAliveMultiplier", radio.KeepAliveMultiplier);
 		read_key(xnode, "IdEmplazamiento", radio.IdEmplazamiento);
 		read_key(xnode, "Tipo", radio.Tipo);
+
+		read_key(xnode, "FrqTonoSQ", radio.FrqTonoSQ);
+		read_key(xnode, "UmbralTonoSQ", radio.UmbralTonoSQ);
+		read_key(xnode, "FrqTonoPTT", radio.FrqTonoPTT);
+		read_key(xnode, "UmbralTonoPTT", radio.UmbralTonoPTT);
 	}
 public:
 	/** Comunes */
@@ -488,10 +489,6 @@ public:
 	bool GrabacionEd137;
 	int TipoDestino;					// TODO: No se asigna.
 	string IdDestino;
-	int FrqTonoSQ;						// TODO: No se asigna.
-	int UmbralTonoSQ;
-	int FrqTonoPTT;						// TODO: No se asigna.
-	int UmbralTonoPTT;					// TODO: No se asigna. => iNivelTonoPtt
 	struct {
 		/** Telefonia */
 		vector<string> ListaEnlacesInternos;	
@@ -521,8 +518,8 @@ public:
 		bool NTZ;						// TODO: No se asigna.
 		int TipoNTZ;					// TODO: No se asigna.
 		bool Cifrado;					// TODO: No se asigna.
-		bool SupervPortadoraTx;			// TODO: No se asigna.  => iSupervisionPortadoraTx
-		bool SupervModuladoraTx;		// TODO: No se asigna.  => iSupervisionModuladoraTx
+		bool SupervPortadoraTx;			// => iSupervisionPortadoraTx
+		bool SupervModuladoraTx;		// => iSupervisionModuladoraTx
 		int ModoConfPTT;
 		int RepSQyBSS;
 		int DesactivacionSQ;
@@ -535,6 +532,11 @@ public:
 		int KeepAliveMultiplier;
 		string IdEmplazamiento;			// TODO: No se asigna.
 		int Tipo;						// TODO: No se asigna.
+
+		int FrqTonoSQ;
+		int UmbralTonoSQ;
+		int FrqTonoPTT;
+		int UmbralTonoPTT;				// => iNivelTonoPtt
 	} radio;
 };
 
@@ -567,7 +569,7 @@ public:
 
 public:
 	string IdRecurso;
-	int Tipo;						// TODO: No se asigna.
+	int Tipo;						// En los recursos radio Modo (0: RX, 1: TX y 2:RXTX).
 	TI_ Interface;
 	int SlotPasarela;
 	int NumDispositivoSlot;

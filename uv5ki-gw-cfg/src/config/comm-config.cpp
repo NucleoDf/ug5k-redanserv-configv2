@@ -177,7 +177,7 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 		if (sres.TipoRecurso==0) 
 		{
 			/** Parametros Generales Radio */
-			this->radio.tipo=4;												// TODO: INFO en <TipoRecurso> o <TipoDestino>
+			this->radio.tipo=sres.Tipo==0 ? 6 : sres.Tipo==1 ? 5 : 4;		// Tipos RemotoRx, RemotoTx o RemotoRxTx
 			this->radio.sq=sres.info.radio.SQ=="v" ? 1 : 0;
 			this->radio.ptt=sres.info.radio.PTT=="s" ? 1 : 0;
 			this->radio.bss=sres.info.radio.BSS==false ? 0 : 1;
@@ -212,6 +212,13 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
 			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
 			this->radio.colateral.emplazamientos.push_back(CommResRadioEmplazamiento());
+
+			this->radio.FrqTonoSQ = sres.info.radio.FrqTonoSQ;
+			this->radio.UmbralTonoSQ = sres.info.radio.UmbralTonoSQ;
+			this->radio.FrqTonoPTT = sres.info.radio.FrqTonoPTT;
+			this->radio.UmbralTonoPTT = sres.info.radio.UmbralTonoPTT;							// => iNivelTonoPtt
+			this->radio.SupervPortadoraTx = sres.info.radio.SupervPortadoraTx==true ? 1 : 0;		// => iSupervisionPortadoraTx
+			this->radio.SupervModuladoraTx = sres.info.radio.SupervModuladoraTx==true ? 1 : 0;	// => iSupervisionModuladoraTx
 		}
 		else 
 		{
@@ -228,7 +235,7 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->telefonia.it_release = 5;							 // Dejar a 5.
 			this->telefonia.uri_remota = "";							 // Dejar vacio.
 			this->telefonia.detect_vox = 1;							 // Dejar a 1.
-			this->telefonia.umbral_vox = sres.info.UmbralTonoSQ;		 // TODO: Confirmar.
+			this->telefonia.umbral_vox = -20;						 // TODO: Confirmar.
 			this->telefonia.tm_inactividad = 2;						 // TODO: Confirmar.
 			this->telefonia.superv_options = 0;						 // Dejar a 0.
 			this->telefonia.tm_superv_options = 0;					 // Dejar a 0.

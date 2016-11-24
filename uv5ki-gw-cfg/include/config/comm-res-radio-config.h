@@ -112,6 +112,13 @@ public:
 		iSesionPrio=0;
 		iPttPrio=0;
 		iPrecisionAudio=1;
+
+		FrqTonoSQ = 0;				// TODO: Definir los valores por defecto.
+		UmbralTonoSQ = -15;			
+		FrqTonoPTT = 0;					
+		UmbralTonoPTT = -15;			 
+		SupervPortadoraTx = 0;		 
+		SupervModuladoraTx = 0;		 
 	}
 	~CommResRadio() {
 	}
@@ -144,6 +151,13 @@ public:
 		write_key(writer, "iPttPrio", iPttPrio);
 		write_key(writer, "colateral", colateral);
 		write_key(writer, "iPrecisionAudio", iPrecisionAudio);
+
+		write_key(writer, "FrqTonoSQ", FrqTonoSQ);
+		write_key(writer, "UmbralTonoSQ", UmbralTonoSQ);
+		write_key(writer, "FrqTonoPTT", FrqTonoPTT);
+		write_key(writer, "UmbralTonoPTT", UmbralTonoPTT);
+		write_key(writer, "SupervPortadoraTx", SupervPortadoraTx);
+		write_key(writer, "SupervModuladoraTx", SupervModuladoraTx);
 	}
 	virtual void jread(Value &base)
 	{
@@ -173,6 +187,13 @@ public:
 		read_key(base,"iPttPrio", iPttPrio);
 		read_key(base,"colateral", colateral);
 		read_key(base,"iPrecisionAudio", iPrecisionAudio);
+
+		read_key(base,"FrqTonoSQ", FrqTonoSQ);
+		read_key(base,"UmbralTonoSQ", UmbralTonoSQ);
+		read_key(base,"FrqTonoPTT", FrqTonoPTT);
+		read_key(base,"UmbralTonoPTT", UmbralTonoPTT);
+		read_key(base,"SupervPortadoraTx", SupervPortadoraTx);
+		read_key(base,"SupervModuladoraTx", SupervModuladoraTx);
 	}
 
 public:
@@ -202,6 +223,14 @@ public:
 	int iPttPrio;
 	CommResRadioColateral colateral;
 	int iPrecisionAudio;
+
+	/** Nuevos desde ULISES */
+	int FrqTonoSQ;					
+	int UmbralTonoSQ;					
+	int FrqTonoPTT;					
+	int UmbralTonoPTT;				// TODO: No se asigna. => iNivelTonoPtt
+	int SupervPortadoraTx;			// TODO: No se asigna.  => iSupervisionPortadoraTx
+	int SupervModuladoraTx;			// TODO: No se asigna.  => iSupervisionModuladoraTx
 };
 
 #endif

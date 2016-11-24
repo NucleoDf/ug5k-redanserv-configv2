@@ -45,7 +45,7 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 void Uv5kiGwCfgWebApp::GetConfig() 
 {
 	_web_config.web_port = LocalConfig::p_cfg->get(strSection, strItemWebPort, "8080")/*.PuertoEscucha()*/;
-	_web_config.document_root = "appweb";
+	_web_config.document_root = ON_WORKING_DIR("appweb");
 	_web_config.default_page = "ug5kweb-index.html";
 	_web_config.login_uri = "/login.html";
 	_web_config.bad_user_uri = "/error1.html";

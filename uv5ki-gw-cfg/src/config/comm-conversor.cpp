@@ -431,24 +431,25 @@ void CommConversor::RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRe
 		eventos.push_back(CommConvertEvent(INCI_MPSW, _srec, "TIPO-SQUELCH", forzado==0 ? "FORZADO ON" : "FORZADO OFF"));
 	}
 
-	mrad->iEyM = 0;
-
 	SetInt(&mrad->iTipoRadio, p_rec->radio.tipo, INCI_MPSW, "TIPO RADIO");
 	SetInt(&mrad->iUmbralDetSq, p_rec->radio.umbralVad, INCI_MPSW, "UMBRAL SQUELCH");
-	mrad->iNivelTonoPtt = -10;	// TODO: 
 	SetInt(&mrad->iMetodoBss, p_rec->radio.metodoBss, INCI_MPSW, "METODO BSS");
 	mrad->iNtz = 0;
 	SetInt(&mrad->TiempoMaxPtt, p_rec->radio.tiempoPtt, INCI_MPSW, "TIEMPO MAXIMO PTT");
-	mrad->iSupervisionPortadoraTx = 0;
-	mrad->iSupervisionModuladoraTx = 0;
 	SetInt(&mrad->iModoConfirmacionPtt, p_rec->radio.modoConfPtt, INCI_MPSW, "MODO CONFIRMAR PTT");
 	SetInt(&mrad->iPeriodoRtpSqBss, p_rec->radio.repSqBss, INCI_MPSW, "RepSQyBSS");
+
+	mrad->iSupervisionPortadoraTx = p_rec->radio.SupervPortadoraTx;
+	mrad->iSupervisionModuladoraTx = p_rec->radio.SupervModuladoraTx;
+	mrad->iNivelTonoPtt = p_rec->radio.UmbralTonoPTT;
 
 	// 20160804. Este campo se utiliza para el SQH forzado...
 	// SetInt(&mrad->iNumPaquetesSqOff, jradio, "desactivacionSq", INCI_MPSW, "PAQUETES SQ-OFF");
 	SetInt(&mrad->iPttTimeOut, p_rec->radio.timeoutPtt, INCI_MPSW, "TIMEOUT PTT");
 	SetInt(&mrad->iNumFlujosMezcla, p_rec->radio.numFlujosAudio, INCI_MPSW, "NUMERO DE FLUJOS EN MEZCLA");
 	SetInt(&mrad->iRetrasoSqOff, p_rec->radio.retrasoSqOff, INCI_MPSW, "COLA SQUELCH OFF");
+
+	mrad->iEyM = 0;
 	mrad->iTiempoPttBloqueado = 2000;
 	mrad->iRetrasoPttOff = 0;
 
