@@ -26,3 +26,6 @@ nbproject
 /uv5ki-gw-cfg/fs-win/home/serv/last_gw_config_1.json
 /uv5ki-gw-cfg/temp.txt
 /uv5ki-gw-cfg/include/config/cfgpasa - copia.hpp
+*.log*
+*.suo
+/uv5ki-gw-cfg/Entregas
