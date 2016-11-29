@@ -73,6 +73,7 @@ protected:
 	static void stCb_importexport(struct mg_connection *conn, string user, web_response *resp);
 	static void stCb_mtto(struct mg_connection *conn, string user, web_response *resp);
 	static void stCb_internos(struct mg_connection *conn, string user, web_response *resp);
+	static void stCb_dev(struct mg_connection *conn, string user, web_response *resp);
 
 	static bool stAccessControl(string name, string pwd, int *profile);
 

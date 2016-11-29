@@ -30,8 +30,10 @@ function ug5kConfCtrl($scope, $route, dataservice, authservice, CfgService, tran
             case 0:         // Exportar
             case 1:         // Importar
             case 2:         // Guardar
-            case 3:         // Activar
             case 4:         // Borrar
+                return authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]);
+
+            case 3:         // Activar
                 return authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]);
                 break;
         }

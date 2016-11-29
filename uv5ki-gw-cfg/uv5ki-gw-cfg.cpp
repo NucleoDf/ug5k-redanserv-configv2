@@ -9,7 +9,7 @@
 #define VRS_ID_SOFTWARE			"UV5KI-GW CFG-SERVER"
 #define VRS_VERSION_MAYOR		2
 #define VRS_VERSION_MENOR_A		0
-#define VRS_VERSION_MENOR_B		0
+#define VRS_VERSION_MENOR_B		1
 
 #if defined _WIN32
  char acBuildString[] =		"WIN-VER";

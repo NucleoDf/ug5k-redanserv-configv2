@@ -40,7 +40,7 @@ function dataservice($http)
             return remotePut(rest_url_preconfig + "/" + name, data);
         }
         , del_preconf: function (name) {
-            return remoteDel(rest_url_preconfig);
+            return remoteDel(rest_url_preconfig + "/" + name);
         }
         , mnt_std: function () {
             return remoteGet(rest_url_mnt_std);
@@ -56,6 +56,9 @@ function dataservice($http)
         }
         , mnt_get_versiones: function () {
             return remoteGet(rest_url_mnt_versiones);
+        }
+        , dev_hist_send: function (msg) {
+            return remotePost(rest_url_dev_hist, msg);
         }
 
 		/** para ir eliminado */

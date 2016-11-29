@@ -39,6 +39,7 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 	_handlers_list["/cpu2cpu"]=stCb_internos;		// PUT.					COMUNICACIONES INTERNAS
 
 	_handlers_list["/test"]=stCb_;					// GET, POST.			PARA PRUEBAS...
+	_handlers_list["/dev"]=stCb_dev;				// GET, POST			PARA DESARROLLO...
 }
 
 /** */
@@ -396,6 +397,41 @@ void Uv5kiGwCfgWebApp::stCb_internos(struct mg_connection *conn, string user, we
 			RETURN_OK200_RESP(resp, webData_line("OK").JSerialize());
 		}
 		RETURN_NOT_IMPLEMENTED_RESP(resp);		
+	}
+	RETURN_NOT_IMPLEMENTED_RESP(resp);
+}
+
+/** */
+void Uv5kiGwCfgWebApp::stCb_dev(struct mg_connection *conn, string user, web_response *resp)
+{
+	resp->actividad=false;
+	vector<string> levels = parse_uri(string(conn->uri));
+	
+	if (string(conn->request_method)=="GET") 
+	{
+	}
+	else if (string(conn->request_method)=="POST")
+	{
+		if (levels.size()==3 && levels[2]=="hist")						// Genera una trama de historico 
+		{
+			string data_in = string(conn->content, conn->content_len );
+			vector<string> data_hist;
+			Tools::split(data_hist, data_in, ',');
+			if (data_hist.size() >= 3)
+			{
+				P_HIS_PROC->SetEvent(
+					atoi(data_hist[0].c_str()),
+					data_hist[1],
+					data_hist[2],
+					data_hist.size() >= 4 ? data_hist[3] : "",
+					data_hist.size() >= 5 ? data_hist[4] : "",
+					data_hist.size() >= 6 ? data_hist[5] : "",
+					data_hist.size() >= 7 ? data_hist[6] : ""
+					);
+				RETURN_OK200_RESP(resp, "");
+			}
+		RETURN_IERROR_RESP(resp, webData_line("Error en Formato de trama. Pocos parámetros.").JSerialize());
+		}
 	}
 	RETURN_NOT_IMPLEMENTED_RESP(resp);
 }

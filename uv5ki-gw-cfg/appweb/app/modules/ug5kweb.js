@@ -52,6 +52,7 @@ var VIS_PROFILE = 1;
 
 /** Variables Globales */
 var Simulate = false;
+var Desarrollando = true;
 var pollingTime = 5000;
 var maxPreconf = 8;
 var InciPoll = 10;
@@ -77,6 +78,7 @@ var rest_url_mnt_reset = '/mant/reset';
 var rest_url_mnt_bite = "/mant/bite";
 var rest_url_mnt_versiones = '/mant/lver';
 var rest_url_mnt_version = '/mant/ver';
+var rest_url_dev_hist = '/dev/hist';
 var routeForUnauthorizedAccess = '/noaut';
 var routeForLogin = '/login.html';
 

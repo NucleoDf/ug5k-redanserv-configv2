@@ -104,6 +104,9 @@ std::queue<PLogEvent > CodeBase::plog_queue;
 util::Mutex CodeBase::plog_mutex;
 void *CodeBase::plog_thread_routine(void *arg) 
 {
+#if !defined(_WIN32)
+	PLOG_INFO("PlogThread (%d) running...", (int )getpid());
+#endif
 	while (_plog_iniciado == true)
 	{
 		if (!plog_queue.empty())
@@ -120,6 +123,7 @@ void *CodeBase::plog_thread_routine(void *arg)
 			if (plog::pLogProfiles[(int)evento.sev].toNetwork)
 				NDFLOG_(plogNetwork, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
 		}
+		Sleep(10);
 	}
 	return NULL;
 }

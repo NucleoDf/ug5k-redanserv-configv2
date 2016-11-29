@@ -66,7 +66,8 @@ void ManProc::Run()
 			if ((--_cnt) <= 0)
 			{
 				GetEstadoCpu(0);
-				GetEstadoCpu(1);
+				if (P_WORKING_CONFIG->DualCpu() == true)
+					GetEstadoCpu(1);
 
 				/** Polling Normal cada minuto */
 				_cnt = 60;

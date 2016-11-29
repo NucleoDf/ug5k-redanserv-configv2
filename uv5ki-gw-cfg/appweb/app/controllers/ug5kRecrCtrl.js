@@ -60,6 +60,8 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /** */
     vm.fid_val = function (value) {
+        if (MantService.modo() == "ul")
+            return true;
         if (value != "" && value.match(regx_fid) == null)
             return false;
         return true;

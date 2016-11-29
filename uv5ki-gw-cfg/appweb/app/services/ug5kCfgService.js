@@ -270,15 +270,15 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
 
     /** */
     return {
-        init: Init,
-        restore: function () {
+        init: Init
+        , restore: function () {
             cfg = null;
             return Init();
         }
         , test_ip_virtual: function () {
             return cfg == null ? true : cfg.general.ipv == last_ip_virtual ? true : false;
         }
-        ,save: function () {
+        , save: function () {
             dataservice.set_config(cfg).then(
                 function (respuesta) {
                     console.log("POST: ", respuesta.data);
@@ -437,6 +437,9 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
         }
         , ulises: function () {
             return cfg.ulises;
+        }
+        , dualidad: function () {
+            return cfg.general.dualidad == 0 ? false : true;
         }
     };
 }

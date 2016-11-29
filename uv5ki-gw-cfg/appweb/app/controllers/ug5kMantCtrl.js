@@ -40,6 +40,11 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 	    return ver.std == 'Actual' ? /*'Nueva'*/transerv.translate('MCTRL_MSG_00') : /*'Anterior'*/transerv.translate('MCTRL_MSG_01');
 	}
 
+    /** */
+	vm.show_cpu1 = function () {
+	    return CfgService.dualidad();
+	}
+
     /** Pagina de Control */
     /** */
 	vm.reset = function () {
@@ -188,10 +193,26 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 
     /** */
 	vm.logs = function () {
-	    var win = window.open('/logs/ug5kser.log', '_blank');
+	    var win = window.open('/logs/uvki-gwser.log.csv', '_blank');
 	    win.focus();
 	}
 
+    /** Pagina de Desarrollo */
+    /** */
+	vm.historico = "H01,";
+	vm.desarrollo = function() {
+	    return Desarrollando;
+	}
+    /** */
+	vm.desarrollo_send_historico = function () {
+	    dataservice.dev_hist_send(vm.historico).then(function (response) {
+	        console.log("Trama: " + vm.historico + " enviada");
+	    },
+        function (response) {
+            console.log("Error: " + response);
+        });
+	}
+    
     /** */
 	function Confirma(msg) {
 	    if (authservice.check_session() && confirm(msg))

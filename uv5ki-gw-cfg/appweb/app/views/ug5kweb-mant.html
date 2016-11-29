@@ -16,6 +16,9 @@
         <li data-ng-class="{'active': vm.pagina==4}">
             <a href="" data-ng-click="vm.set_pagina(4)" ng-show="false" translate>MAN_PG04</a>
         </li>
+        <li data-ng-class="{'active': vm.pagina==5}">
+            <a href="" data-ng-click="vm.set_pagina(5)" ng-show="vm.desarrollo()" translate>Desarrollo</a>
+        </li>
     </ul>
 </section>
 <section id="_contenido">
@@ -80,7 +83,7 @@
                 </td>
             </tr>
         </table>
-        <table class="table table-striped ug5ktb">
+        <table class="table table-striped ug5ktb" ng-show="vm.show_cpu1()">
             <tr>
                 <td class="_cab" ng-style="{'color':'black'}">{{'CPU-1 ('+vm.std.cpu1.ip+')'}}</td>
                 <td class="_cab" translate>MAN_PG00_L05</td>
@@ -182,6 +185,14 @@
         <div class="row">
             <div class="col-md-3"><label translate>MAN_PG03_L03</label></div>
             <div class="col-md-8"><p data-ng_repeat="line in vm.verbose.lines">{{line.res}}</p></div>
+        </div>
+    </div>
+
+    <div id="Desarrollo" data-ng-show="vm.pagina==5">
+        <div class="row">
+            <div class="col-md-4"><label>Genera Evento Historico</label></div>
+            <div class="col-md-6"><input type="text" class="form-control input-sm" data-ng-model="vm.historico"/></div>
+            <div class="col-md-2"><button class="btn btn-default" data-ng-click="vm.desarrollo_send_historico()" >Enviar</button></div>
         </div>
     </div>
 

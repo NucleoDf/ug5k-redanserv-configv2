@@ -228,9 +228,9 @@ public:
 	int FrqTonoSQ;					
 	int UmbralTonoSQ;					
 	int FrqTonoPTT;					
-	int UmbralTonoPTT;				// TODO: No se asigna. => iNivelTonoPtt
-	int SupervPortadoraTx;			// TODO: No se asigna.  => iSupervisionPortadoraTx
-	int SupervModuladoraTx;			// TODO: No se asigna.  => iSupervisionModuladoraTx
+	int UmbralTonoPTT;				// => iNivelTonoPtt
+	int SupervPortadoraTx;			// => iSupervisionPortadoraTx
+	int SupervModuladoraTx;			// => iSupervisionModuladoraTx
 };
 
 #endif
