@@ -38,7 +38,7 @@ public:
 	~WorkingConfig();
 
 public:
-	EventosHistoricos *set(CommConfig &redanConfig);
+	EventosHistoricos *set(CommConfig &redanConfig, bool actualiza_ini);
 	void set(soap_config &sConfig);
 	void set();
 	void load_from(string file);
@@ -104,13 +104,14 @@ protected:
 private:
 	WorkingConfigMode cfg_mode;
 	ug5k_mem_config *p_mem_config;
-	CommConfig config;
 	CommConversor redanConv;
 #ifdef _WIN32
 #else
 	key_t key_mem;
 	int  shmid;
 #endif 
+public:
+	CommConfig config;
 };
 
 #endif

@@ -280,6 +280,16 @@ section#_ppal #_tabs
     margin-bottom: 10px;
 }
 
+.ug5k
+{
+}
+    .ug5k table tr td
+    {
+        font-size: 90%;
+        padding: 3px;
+        color: black;
+    }
+
 .ug5ktb 
 {
     width: 90%;
@@ -419,6 +429,16 @@ section#_ppal #_tabs
     {
         width: 80%;
         margin-left: 10%;
+    }
+
+.mtto
+{
+}
+    .mtto table tr td
+    {
+        font-size: 90%;
+        padding: 4px;
+        color: black;
     }
 
 #_pie

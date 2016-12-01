@@ -5,14 +5,17 @@
 
 /** */
 #define HTTP_CLIENT_TICK	100
-#ifdef _PARAMS_IN_INI_
-#define SERVER_URL			(LocalConfig::p_cfg->get(strSection, strItemServidor))
+#if _PARAMS_IN_INI_
+ #define SERVER_URL			(LocalConfig::p_cfg->get(strSection, strItemServidor))
 #else
-#define SERVER_URL			(jgw_config::cfg.ServerURL())
+ #define SERVER_URL			(CfgProc::hwServer)
 #endif
 
 /** */
 CfgProc *CfgProc::p_cfg_proc=NULL;
+string CfgProc::hwName;
+string CfgProc::hwIp;
+string CfgProc::hwServer;
 
 /** */
 CfgProc::CfgProc(void) {
@@ -187,9 +190,12 @@ void JsonClientProc::Run()
 	PLOG_INFO("JsonClientProc (%d) running...", pid());
 	modo="rd";
 
+	/** Leo los datos del Hardware */
+	sistema::GetWorkingIpAddressAndName(_ip_propia, hwServer, hwName);
+	PLOG_INFO("SoapClientProc running. GetWorkingIpAddressAndName (%s-%s-%s).", _ip_propia.c_str(), hwServer.c_str(), hwName.c_str());
+
 	_maxticks = (atoi(LocalConfig::p_cfg->get(strSection, strItemConfigTSUP).c_str())*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;
-	sistema::GetIpAddress(_ip_propia);
 
 	p_working_config->load_from(LAST_CFG);
 
@@ -267,7 +273,7 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 	cfg_redan.JDeserialize(response.Body());
 	
 	/** Activa la configuracion recibida */
- 	p_working_config->set(cfg_redan);
+ 	p_working_config->set(cfg_redan, true);
 
 	/** Actualiza la configuracion recibida... */
 	p_working_config->save_to(LAST_CFG);
@@ -330,6 +336,8 @@ void JsonClientProc::SupervisaProcesoConfiguracion()
 		/** Marca el Valor en SNMP */
 		HistClient::p_hist->SetSincrState(_stdLocalConfig==slcSincronizado ? "1" : _stdLocalConfig==slcConflicto ? "2" : "0");
 
+		/** Para poder visualizar a quien se le está haciendo POLLING */
+		P_WORKING_CONFIG->config.general.ips = SERVER_URL;		
 		AvisaChequearConfiguracion();
 		_cntticks = 0;
 	}
@@ -337,9 +345,6 @@ void JsonClientProc::SupervisaProcesoConfiguracion()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // SoapClientProc
-string SoapClientProc::hwName;
-string SoapClientProc::hwIp;
-string SoapClientProc::hwServer;
 /** */
 void SoapClientProc::Run()
 {
@@ -354,10 +359,9 @@ void SoapClientProc::Run()
 	sistema::GetWorkingIpAddressAndName(_ip_propia, hwServer, hwName);
 	PLOG_INFO("SoapClientProc running. GetWorkingIpAddressAndName (%s-%s-%s).", _ip_propia.c_str(), hwServer.c_str(), hwName.c_str());
 	
-	/** Actualizo los datos en mis ficheros */
-	LocalConfig::p_cfg->set(strSection, strItemServidor, hwServer);
-	hwIp = _ip_propia;
+	// LocalConfig::p_cfg->set(strSection, strItemServidor, hwServer);
 
+	hwIp = _ip_propia;
 	/** Leer la ultima CFG recibida */
 	p_working_config->load_from(LAST_CFG);
 	PLOG_INFO("SoapClientProc running. Leida LAST_CFG");
@@ -455,6 +459,8 @@ void SoapClientProc::SupervisaProcesoConfiguracion()
 		/** Marca el Valor en SNMP */
 		HistClient::p_hist->SetSincrState(_stdLocalConfig==slcSincronizado ? "1" : _stdLocalConfig==slcConflicto ? "2" : "0");
 
+		/** Para poder visualizar a quien se le está haciendo POLLING */
+		P_WORKING_CONFIG->config.general.ips = SERVER_URL;		
 		AvisaChequearConfiguracion();
 		_cntticks = 0;
 	}

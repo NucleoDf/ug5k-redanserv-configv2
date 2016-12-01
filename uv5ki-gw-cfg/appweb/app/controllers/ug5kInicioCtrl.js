@@ -119,7 +119,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: /*'Servidor de Configuracion:'*/transerv.translate('ICTRL_01_SERV'),
 					    Value: vm.j_data.ips,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
+					    Enable: false, // authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,

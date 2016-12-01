@@ -22,7 +22,7 @@
     </ul>
 </section>
 <section id="_contenido">
-    <div id="Estado" data-ng-show="vm.pagina==0">
+    <div id="Estado" data-ng-show="vm.pagina==0" class="mtto">
         <table class="table table-striped ug5ktb">
             <tr>
                 <td class="_cab" ng-style="{'color':'black'}" translate>MAN_PG00_L00</td>
@@ -115,7 +115,7 @@
         </table>
         <div class="botones"><button class="btn btn-default" data-ng-click="vm.logs()" data-ng-show="vm.mostrar_boton(0)" translate>MAN_PG01_L00</button></div>
     </div>
-    <div id="Interfaces" data-ng-show="vm.pagina==1">
+    <div id="Interfaces" data-ng-show="vm.pagina==1" class="mtto">
         <div id="ntp" class="_tablarec">
             <table class="table table-striped ug5ktb">
                 <tr>
@@ -215,7 +215,7 @@
                         <div class="col-md-2"><label translate>BITE_MSG_02</label> 
                         </div>
                         <div class="col-md-8">
-                            <p id="p" data-ng-repeat="line in gRes.msg">{{line.line}}</p>
+                            <p id="p" data-ng-repeat="line in gRes.msg">{{line.res}}</p>
                         </div>
                     </div>
                 </div>

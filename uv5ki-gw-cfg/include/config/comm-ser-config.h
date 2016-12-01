@@ -163,6 +163,7 @@ public:
 	CommSerGrab() {
 		sport = 65001;
 		rtsp_ip = "127.0.0.1";
+		rtsp_port = 554;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {

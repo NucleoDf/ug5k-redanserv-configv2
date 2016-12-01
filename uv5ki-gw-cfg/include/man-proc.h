@@ -233,6 +233,7 @@ protected:
 	int _cnt;
 	//string snmpVersion;
 	//string recVersion;
+	int snmpServicePort;
 };
 
 #endif

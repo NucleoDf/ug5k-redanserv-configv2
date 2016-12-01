@@ -49,12 +49,12 @@ void WorkingConfig::dispose()
 }
 
 /** */
-EventosHistoricos *WorkingConfig::set(CommConfig &redanCfg) 
+EventosHistoricos *WorkingConfig::set(CommConfig &redanCfg, bool actualiza_ini) 
 {
 	config = redanCfg;
 
 	/** Actualizar la memoria y los ficheros INI */
-	EventosHistoricos *his = redanConv.convierte(config, p_mem_config);
+	EventosHistoricos *his = redanConv.convierte(config, p_mem_config, actualiza_ini);
 
 	/** Mandar el SIGNAL USR2 */
 	WorkingThread(WorkingConfig::DelayedSignal, this).Do();
@@ -67,12 +67,12 @@ void WorkingConfig::set(soap_config &sConfig)
 {
 	/** Parse */
 	CommConfig newConfig(sConfig);
-	set(newConfig);
+	set(newConfig, true);
 }
 
 /** */
 void WorkingConfig::set() {
-	set(config);
+	set(config, false);
 }
 
 /** */
@@ -84,7 +84,7 @@ void WorkingConfig::load_from(string file)
 		{
 			ifstream f(file.c_str(), ios_base::in);
 			CommConfig cfg(f);
-			set(cfg);
+			set(cfg, false);
 		}
 		catch(Exception x)
 		{
@@ -92,7 +92,7 @@ void WorkingConfig::load_from(string file)
 			// Poner configuracion por defecto.
 			CommConfig cfg;
 			PLOG_DEBUG("Generada CFG Por Defecto,");
-			set(cfg);
+			set(cfg, false);
 			PLOG_DEBUG("Activada CFG Por Defecto");
 		}
 

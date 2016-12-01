@@ -51,6 +51,10 @@ class CommHarConfigSlv : public jData
 public:
 	CommHarConfigSlv() {
 		tp=0;
+		pos.push_back(CommHarConfigPos());
+		pos.push_back(CommHarConfigPos());
+		pos.push_back(CommHarConfigPos());
+		pos.push_back(CommHarConfigPos());
 	}
 	~CommHarConfigSlv() {
 		clear_array(pos);
@@ -86,6 +90,10 @@ class CommHarConfig : public jData
 {
 public:
 	CommHarConfig() {
+		slv.push_back(CommHarConfigSlv());
+		slv.push_back(CommHarConfigSlv());
+		slv.push_back(CommHarConfigSlv());
+		slv.push_back(CommHarConfigSlv());
 	}
 	CommHarConfig(soap_config &sc);
 	~CommHarConfig() {

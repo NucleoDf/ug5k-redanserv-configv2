@@ -18,8 +18,9 @@
 #ifndef INCLUIDO_CFGPASA_PUNTOHACHE
 #define INCLUIDO_CFGPASA_PUNTOHACHE
 
-// #include <pthread.h>
+//#include <pthread.h>
 
+#define ULISES
 //------------------------------------------------------------
 //  Definiciones
 //------------------------------------------------------------
@@ -27,9 +28,7 @@
 	#define LongWord unsigned int
 #endif
 
-#define MODO_ULISES		0
-#define MODO_REDAN		1
-
+#define NUEVA_CONFI     1
 
 #define PRECISION_ESTRICTA 0
 #define PRECISION_NORMAL   1
@@ -329,12 +328,14 @@ enum eType
 #define STR_NULO                    "---"
 
 
-#define N_MAX_RANGOS          16
-#define N_MAX_PRIV            8
+#define N_MAX_RANGOS            16
+#define N_MAX_PRIV          8
 
 //------------------------------------------------------------------------------------------
 //  datos y estructuras del sistema Ulises
 //------------------------------------------------------------------------------------------
+
+#ifdef ULISES
 
 
 #define LONG_AB             	19
@@ -520,6 +521,7 @@ struct cfgEnlaceExterno
 };
 
 
+#endif
 //------------------------------------------------------------------------------------------
 
 //------------------------------------------------------------
@@ -615,14 +617,22 @@ struct cfgConfigGeneralRecurso
     int iSlot;
     int iDispositivo;
     char szDestino[CFG_MAX_LONG_NOMBRE_RECURSO+1];
-    int iCfgModoSistema;				//NUEVO
+
     // int iNumSesionesRtpEstaticas;
+#if 1
     int iFlgUsarDiffServ;
     int iSnmpPuertoRemoto;
     int iRecPuertoRemoto;
-    int iRecPuertoBase;					//NUEVO
+    //int iRecPuertoBase;
     int iEnableGI;
 
+#else
+    //int iFlgUsarDiffServ;
+    int iSnmpPuertoRemoto;
+    int iRecPuertoRemoto;
+    int iRecPuertoBase;
+    int iEnableGI;
+#endif
     char szUriLocal[MAX_LONG_DIR_AMPLIADA+1];
     int iLLamadaAutomatica;
     int iRestriccion;
@@ -632,8 +642,10 @@ struct cfgConfigGeneralRecurso
     char szClave[MAX_LONG_CLAVE+1];
     struct cfgColateralPP  sColateral;
 
+#ifdef ULISES
     int size_aListaEnlacesExternos;
     struct cfgEnlaceExterno aListaEnlacesExternos[MAX_ENLACES_EXTERNOS_POR_REC];
+#endif
     cfgConfigGeneralRecurso();
     void TomaSlot( int );
     void TomaDispositivo( int );
@@ -935,8 +947,10 @@ struct cfgConfigIfR2N5
     struct st_rangoATS rangos_dst[N_MAX_RANGOS_ATS];      /*array de rangos de nuemros destino */
     struct st_rangoATS rangos_org[N_MAX_RANGOS_ATS];      /*array de rangos de numeros origen */
 
+#ifdef ULISES
     char szIdTroncal[CFG_MAX_LONG_NOMBRE_TRONCAL+1];
     char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
+  #if 1
     int iNumRangosOperador;
     int iNumRangosPrivilegiados;
     struct st_rango_binario asMisRangosOperador[N_MAX_RANGOS];
@@ -945,6 +959,8 @@ struct cfgConfigIfR2N5
     int iNumRangosDirectosPriv;
     struct st_rango_binario asRangosDirectosOpe[N_MAX_RANGOS];
     struct st_rango_binario asRangosDirectosPriv[N_MAX_PRIV];
+  #endif
+#endif
     void TomaLado( int );
     void PorDefecto();
     bool operator ==( const cfgConfigIfR2N5& );
@@ -983,7 +999,9 @@ struct cfgConfigIfTlf
     int iDetectVox;
     int iUmbralVox;
     int iTmInactividad;
+#ifdef ULISES
     char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
+#endif
     void PorDefecto();
     bool operator ==( const cfgConfigIfTlf& );
     bool operator !=( const cfgConfigIfTlf& );
@@ -1099,9 +1117,6 @@ struct cfgConfigPasarela
     char szDirCPU1[CFG_MAX_LONG_URL+1];
     char szDirVirtual[CFG_MAX_LONG_URL+1];
     char szDirSrvConfig[CFG_MAX_LONG_URL+1];
-
-    int iCfgModoSistema;			//NUEVO
-
     int iNivelConsola;
     int iPuertoConsola;
     int iNivelIncidencias;
@@ -1128,6 +1143,7 @@ struct cfgConfigPasarela
     char szDirSipProxy[NUM_SIP_PROXY][MAX_LONG_DIRIP];
     char szDirSrvNtp[NUM_SRV_NTP][MAX_LONG_DIRIP];
 
+#ifdef ULISES
     char acGrupoMulticast[CFG_MAX_LONG_URL+1];
     unsigned int uiPuertoMulticast;
     struct st_numeracionats plannumeracionats [N_MAX_CENTRALES];
@@ -1151,6 +1167,10 @@ struct cfgConfigPasarela
     										int *piNumRangosOperador,
     										struct st_rango_binario *psRangosDirectosPriv,
     										int *piNumRangosPrivilegiados );
+
+
+  #endif
+
 
     void TomaNombre( char* );
     void TomaModoSincro( int );

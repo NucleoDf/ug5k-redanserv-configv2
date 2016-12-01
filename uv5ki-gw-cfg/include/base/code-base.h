@@ -58,7 +58,7 @@
 #include "exception.h"
 #include "plog.h"
 
-#define _PARAMS_IN_INI_
+#define _PARAMS_IN_INI_			0
 #define ON_WORKING_DIR(m)		(((std::string)WORKING_DIR)+((std::string)m)).c_str()
 
 #define ON_RAM(p)				(onram(p).c_str())

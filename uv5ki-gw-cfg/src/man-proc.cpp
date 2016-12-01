@@ -29,6 +29,8 @@ void ManProc::st_estado_cpu1(bool res, int len, void *data)
 /** */
 ManProc::ManProc(void)
 {
+	LocalConfig snmpconfig(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/));
+	snmpServicePort = atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str());
 }
 
 /** */
@@ -45,6 +47,7 @@ void ManProc::Run()
 	SetId("ManProc");
 	PLOG_INFO("ManProc (%d) running...", pid());
 
+
 	/** Inicializando las tablas */
 	ManProc::p_man->resetCpu(epriCpu0, estado.cpu0);
 	ManProc::p_man->resetCpu(epriCpu1, estado.cpu1);
@@ -54,7 +57,7 @@ void ManProc::Run()
 	//snmpVersion = sistema::SnmpAgentVersion();
 	//recVersion = sistema::RecordServiceVersion();
 
-	_cnt = 1;
+	_cnt = 10;
 	while (IsRunning())
 	{
 		sleep(1000);
@@ -273,15 +276,20 @@ void ManProc::GetEstadoCpu(int cpu)
 {
 	try 
 	{
-		LocalConfig snmpconfig(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/));
+		//LocalConfig snmpconfig(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/));
 		if (cpu==0)
 		{
 #if _CFG_PROC_
-			estado.cpu0.ip = P_WORKING_CONFIG->ipcpu(0);
+			if (P_WORKING_CONFIG->DualCpu() == true)
+				estado.cpu0.ip = P_WORKING_CONFIG->ipcpu(0);
+			else
+			{
+				estado.cpu0.ip="127.0.0.1";
+			}
 #else
 			estado.cpu0.ip = "192.168.0.71";
 #endif
-			CIPAddress to(estado.cpu0.ip, atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str()));
+			CIPAddress to(estado.cpu0.ip, snmpServicePort/* atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str())*/);
 			HistClient::p_hist->GetEstado(to, st_estado_cpu0);
 		}
 		else if (cpu==1)
@@ -291,7 +299,7 @@ void ManProc::GetEstadoCpu(int cpu)
 #else
 			estado.cpu1.ip = "192.168.0.72";
 #endif
-			CIPAddress to(estado.cpu1.ip, atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str()));
+			CIPAddress to(estado.cpu1.ip, snmpServicePort/*atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str())*/);
 			HistClient::p_hist->GetEstado(to ,st_estado_cpu1);
 		}
 	}
@@ -305,6 +313,7 @@ void ManProc::GetEstadoCpu(int cpu)
 	}
 }
 
+#if _NOTIFICA_ESTADOS_CPU_
 /** */
 void ManProc::NotificaEstadosCpu()
 {
@@ -335,6 +344,8 @@ void ManProc::NotificaEstadosCpu()
 		PLOG_ERROR("ManProc::NotificaEstadosCpu. Excepcion No controlada...");
 	}        
 }
+
+#endif
 
 ///////////////////////////////////////////////////////////////////
 //

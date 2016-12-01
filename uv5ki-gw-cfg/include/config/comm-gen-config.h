@@ -68,12 +68,15 @@ public:
 	CommGenConfig() {
 		name="defecto";
 		emplazamiento="defecto";
-		dualidad = 1;
 		ipv = "127.0.0.1";
 		ips = "127.0.0.1";
 		nivelconsola = 0;
 		puertoconsola = 0;
 		nivelIncidencias = 0;
+
+		dualidad = 0;
+		cpus.push_back(CommGenCpu("127.0.0.1","255.255.255.0","127.0.0.1"));
+		cpus.push_back(CommGenCpu("127.0.0.1","255.255.255.0","127.0.0.1"));
 	}
 	CommGenConfig(soap_config &sc);
 	~CommGenConfig() {

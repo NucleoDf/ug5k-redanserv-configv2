@@ -184,7 +184,7 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 		CommConfig cfg(data_in);
 		if (cfg.test()==true) 
 		{
-			EventosHistoricos *ev = P_WORKING_CONFIG->set(cfg);
+			EventosHistoricos *ev = P_WORKING_CONFIG->set(cfg, true);
 			P_WORKING_CONFIG->TimeStamp();
 			P_WORKING_CONFIG->save_to(LAST_CFG);
 			P_HIS_PROC->SetEventosHistoricos(user, ev);				// Generar los historicos de cambios.
@@ -262,7 +262,7 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 
 					// Activar la configuracion...
 			CommConfig cfg(activa.data);
-			P_WORKING_CONFIG->set(cfg);			// Historicos de cambios ???
+			P_WORKING_CONFIG->set(cfg, true);	// Historicos de cambios ???
 			P_WORKING_CONFIG->save_to(LAST_CFG);
 												// Sincronizar Fichero....
 			if (P_CFG_PROC->GetStdLocalConfig() != slcAislado && P_WORKING_CONFIG->DualCpu())
@@ -379,7 +379,7 @@ void Uv5kiGwCfgWebApp::stCb_internos(struct mg_connection *conn, string user, we
 		{
 			string data_in = string(conn->content, conn->content_len );
 			CommConfig cfg(data_in);
-			P_WORKING_CONFIG->set(cfg);								// No Genero historicos.
+			P_WORKING_CONFIG->set(cfg, true);						// No Genero historicos.
 			// P_WORKING_CONFIG->TimeStamp();						// Ni cambio la hora..
 			P_WORKING_CONFIG->save_to(LAST_CFG);
 			RETURN_OK200_RESP(resp, webData_line("Configuracion Activada...").JSerialize());

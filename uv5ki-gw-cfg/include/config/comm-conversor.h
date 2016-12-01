@@ -30,7 +30,7 @@ protected:
 class CommConversor : public CfgConversor
 {
 public:
-	EventosHistoricos *convierte(CommConfig &cfgIn, void *p_mcfg);
+	EventosHistoricos *convierte(CommConfig &cfgIn, void *p_mcfg, bool actualiza_ini);
 
 protected:
 	CommConfig *p_cfg_in;

@@ -32,6 +32,7 @@ public:
 		fechaHora = Tools::Ahora_Servidor();
 	}
 	CommConfig(string jstring) {
+		tipo = 0;							// Configuracion desde servidor REDAN
 		JDeserialize(jstring);
 	}
 	CommConfig(ifstream &f) {
@@ -40,7 +41,7 @@ public:
 			data += linea;
 		JDeserialize(data);
 	}
-	CommConfig(soap_config &sConfig);
+	CommConfig(soap_config &sConfig);		// Configuracion desde servidor ULISES. (el tipo se pone a 1)
 	~CommConfig() {
 		clear_array(users);
 		clear_array(recursos);

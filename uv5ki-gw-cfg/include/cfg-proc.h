@@ -89,6 +89,11 @@ protected:
 	int _maxticks;
 	bool _bconflicto;
 	string modo;
+protected:
+	static string hwIp;
+	static string hwName;
+	static string hwServer;
+
 };
 
 
@@ -139,9 +144,6 @@ protected:
 
 protected:
 	static string getXml(string rtName, string p1, string p2="", string p3="");
-	static string hwIp;
-	static string hwName;
-	static string hwServer;
 
 private:
 	CommConfig cfg_soap;

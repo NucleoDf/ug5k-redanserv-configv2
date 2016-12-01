@@ -202,7 +202,7 @@ public:
 	INISection &get(string section) {
 		return ini[section.c_str()];
 	}
-	void set(string section, string key, string val, bool save=true) {
+	void set(string section, string key, string val, bool save=false) {
 		PutIniSetting(ini, section.c_str(), key.c_str(), val.c_str());
 		if (save)
 			SaveIni(ini, _filename.c_str());

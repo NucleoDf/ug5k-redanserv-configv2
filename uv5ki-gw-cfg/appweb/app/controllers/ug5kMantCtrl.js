@@ -67,11 +67,11 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 	    console.log("BITE!!!");
 	    if (Confirma(/*"¿Desea que la Unidad ejecute el procedimiento BITE?"*/transerv.translate('MCTRL_MSG_03')) == false) return;
 	    $("body").css("cursor", "progress");
-	    dataservice.get_bite().then(
+	    dataservice.mnt_bite().then(
             function (respuesta) {
                 console.log("GET: ", respuesta);
                 $("body").css("cursor", "default");
-                $scope.gRes = respuesta;
+                $scope.gRes = respuesta.data;
                 $("#hBite").modal("show");
             },
             function (error) {

@@ -144,7 +144,7 @@ void CommConversor::SetTipoConmutacionRadio(char *actual, int nuevo)
 }
 
 /** */
-vector<CommConvertEvent> *CommConversor::convierte(CommConfig &cfgIn, void *p_mcfg)
+vector<CommConvertEvent> *CommConversor::convierte(CommConfig &cfgIn, void *p_mcfg, bool actualiza_ini)
 {
 	/** Inicializar Variables Internas. */
 	p_cfg_in = &cfgIn;
@@ -180,12 +180,17 @@ vector<CommConvertEvent> *CommConversor::convierte(CommConfig &cfgIn, void *p_mc
 		int igrec = mcfg->asLocRec[irec].iSlot*4 + mcfg->asLocRec[irec].iDispositivo;
 		Recurso(p_cfg_in->recursos[irec], &mcfg->sRecurso[igrec]);
 #endif
+		/** Modo de Pasarela en Recursos */
+		mcfg->sRecurso[igrec].sGeneral.iCfgModoSistema = p_cfg_in->tipo==1 ? 0 : 1;						// 0: Ulises, 1: Redan.
 	}
 
 	/** Actualizar datos en INI's */
-	ActualizaRecordIni();
-	ActualizaSnmpIni();
-	ActualizaWebIni();
+	if (actualiza_ini) 
+	{
+		ActualizaRecordIni();
+		ActualizaSnmpIni();
+		ActualizaWebIni();
+	}
 
 	/** ULISES */
 	TablasUlises(&p_cfg_in->ulises);
@@ -247,6 +252,9 @@ void CommConversor::ParametrosGlobales()
 	// ULISES
 	SetString(mcfg->acGrupoMulticast, p_cfg_in->general.acGrupoMulticast, INCI_MPGP, "IP MCAST", CFG_MAX_LONG_URL);
 	SetInt((int *)&mcfg->uiPuertoMulticast, p_cfg_in->general.uiPuertoMulticast, INCI_MPGP, "Puerto MCAST");
+
+	// MODO en Pasarela
+	mcfg->iCfgModoSistema = p_cfg_in->tipo==1 ? 0 : 1;						// 0: Ulises, 1: Redan.
 
 }
 
@@ -374,8 +382,10 @@ void CommConversor::RecursoGeneral(CommResConfig *p_rec, struct cfgConfigGeneral
 		memcpy(mgen->szListaNegra[(int )i], p_rec->negra[i].c_str(), MAX_LONG_DIR_URI);
 	}
 
+	/** */
 	mgen->iSnmpPuertoRemoto = mcfg->iSnmpPuertoRemoto;
 	mgen->iRecPuertoRemoto = mcfg->iRecPuertoRemoto;
+	mgen->iRecPuertoBase = 65004;
 
 	memcpy(mgen->szDestino, p_rec->szDestino.c_str(), CFG_MAX_LONG_NOMBRE_RECURSO);
 	mgen->iFlgUsarDiffServ = p_rec->iFlgUsarDiffServ;
