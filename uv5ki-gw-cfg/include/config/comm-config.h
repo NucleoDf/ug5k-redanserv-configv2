@@ -28,12 +28,14 @@ class CommConfig : public jData
 {
 public:
 	CommConfig() {
-		idConf="defecto";
+		/** Modo para las configuraciones por defecto */
+		tipo = LocalConfig::p_cfg->get(strUlises, strItemUlisesModo, "0")=="1" ? 1 : 0;
+		idConf=string("defecto_") + (tipo==0 ? string("redan") : string("ulises"));
 		fechaHora = Tools::Ahora_Servidor();
 	}
 	CommConfig(string jstring) {
-		tipo = 0;							// Configuracion desde servidor REDAN
 		JDeserialize(jstring);
+		tipo = 0;							// Configuracion desde servidor REDAN
 	}
 	CommConfig(ifstream &f) {
 		string data,linea;
@@ -46,28 +48,22 @@ public:
 		clear_array(users);
 		clear_array(recursos);
 	}
-public:
-	bool operator == (CommConfig &otra) {
-		return (idConf == otra.idConf && fechaHora == otra.fechaHora) ? true : false;
-	}
-	bool operator < (CommConfig &otra) {
-		struct tm time_l,time_o;
-		time_t loctime,othtime;
-
-		Tools::DateString2time(fechaHora, time_l);
-		Tools::DateString2time(otra.fechaHora, time_o);
-
-		loctime = mktime(&time_l);
-		othtime = mktime(&time_o);
-
-		return loctime < othtime;	
-	}
-	//CommConfig & operator= (CommConfig &cfg) {
-	//	idConf = cfg.idConf;
-	//	fechaHora = cfg.fechaHora;
-
-	//	return *this;
-	//}
+//public:
+//	bool operator == (CommConfig &otra) {
+//		return (idConf == otra.idConf && fechaHora == otra.fechaHora) ? true : false;
+//	}
+//	bool operator < (CommConfig &otra) {
+//		struct tm time_l,time_o;
+//		time_t loctime,othtime;
+//
+//		Tools::DateString2time(fechaHora, time_l);
+//		Tools::DateString2time(otra.fechaHora, time_o);
+//
+//		loctime = mktime(&time_l);
+//		othtime = mktime(&time_o);
+//
+//		return loctime < othtime;	
+//	}
 public:
 	bool IpColateral(string &ip) {
 		if (general.dualidad != 0) 
@@ -128,6 +124,46 @@ public:
 #endif
 	CommUv5Config ulises;
 
+};
+
+/** Para los Polling de Test */
+class RedanTestComm : public jData
+{
+public:
+	RedanTestComm(string jstr) {
+		JDeserialize(jstr);
+		tipo = 0;
+	}
+public:
+	bool isEqual(CommConfig &otra) {
+		return (idConf == otra.idConf && fechaHora == otra.fechaHora) ? true : false;
+	}
+	bool isNewer(CommConfig &otra) {
+		struct tm time_l,time_o;
+		time_t loctime,othtime;
+
+		Tools::DateString2time(fechaHora, time_l);
+		Tools::DateString2time(otra.fechaHora, time_o);
+
+		loctime = mktime(&time_l);
+		othtime = mktime(&time_o);
+
+		return loctime > othtime;	
+	}
+
+public:
+	virtual void jwrite(Writer<StringBuffer> &writer) {
+		write_key(writer, "idConf", idConf);
+		write_key(writer, "fechaHora", fechaHora);
+	}
+	virtual void jread(Value &base) {
+		read_key(base, "idConf", idConf);
+		read_key(base, "fechaHora", fechaHora);
+	}
+public:
+	int tipo;
+	string idConf;
+	string fechaHora;
 };
 
 #endif

@@ -22,7 +22,7 @@ function dataservice($http)
 			return remotePost(rest_url_config, cfg);
 		}
 		, upload_config: function() {
-			return remotePost(rest_url_upconfig);
+		    return remotePut(rest_url_config);
 		}
         , set_import: function (filename, cfg) {
             return remotePost(rest_url_impexp + "/" + filename, cfg);

@@ -83,7 +83,7 @@ void FileSupervisor::Run()
 							}
 							else
 							{
-								PLOG_ERROR("Error en FileSupervisor. Fichero: %s. Ip Colateral no Encontrada.", (*file).srcPaht().c_str());
+								PLOG_ERROR("Error en FileSupervisor. Fichero: %s. Ip Colateral no Valida.", (*file).srcPaht().c_str());
 							}
 						}
 					}

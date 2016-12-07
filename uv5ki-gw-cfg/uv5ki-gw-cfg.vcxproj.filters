@@ -141,9 +141,6 @@
     <ClInclude Include="include\tools\tools.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="include\versiones.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="include\man-proc.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>

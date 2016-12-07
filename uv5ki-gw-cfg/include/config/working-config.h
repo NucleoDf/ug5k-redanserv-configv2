@@ -46,7 +46,7 @@ public:
 
 public:
 	void TimeStamp();
-	void TimeStamp(CommConfig &remota);
+	void TimeStamp(RedanTestComm &remota);
 	bool HasResources() {
 		return (config.recursos.size() != 0);
 	}

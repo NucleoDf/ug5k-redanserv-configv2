@@ -198,6 +198,7 @@ void JsonClientProc::Run()
 	_cntticks = 0;
 
 	p_working_config->load_from(LAST_CFG);
+	p_working_config->config.tipo = 0;
 
 	// TODO: StdClient::std.NotificaCambioConfig();
 	AvisaChequearConfiguracion();
@@ -271,6 +272,7 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 
 	/** Lee la configuracion recibida */
 	cfg_redan.JDeserialize(response.Body());
+	p_working_config->config.tipo = 0;
 	
 	/** Activa la configuracion recibida */
  	p_working_config->set(cfg_redan, true);
@@ -293,17 +295,29 @@ void JsonClientProc::ChequearConfiguracion()
 			" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.Status() + ":" + response.StatusText());
 	}
 
-	CommConfig cfgRemota(response.Body());
+	//CommConfig cfgRemota(response.Body());
+	//if (cfgRemota.idConf == "-1")
+	//	StdSincrSet(slcNoBdt);
+	//else if (cfgRemota.idConf == "-2")
+	//	StdSincrSet(slcNoActiveCfg);
+	//else if (cfg_redan == cfgRemota) 
+	//	StdSincrSet(slcSincronizado);
+	//else if (cfg_redan < cfgRemota)
+	//	AvisaPideConfiguracion(cfgRemota.idConf);
+	//else
+	//	StdSincrSet(slcConflicto);
+	RedanTestComm cfgRemota(response.Body());
 	if (cfgRemota.idConf == "-1")
 		StdSincrSet(slcNoBdt);
 	else if (cfgRemota.idConf == "-2")
 		StdSincrSet(slcNoActiveCfg);
-	else if (cfg_redan == cfgRemota) 
+	else if (cfgRemota.isEqual(cfg_redan)) 
 		StdSincrSet(slcSincronizado);
-	else if (cfg_redan < cfgRemota)
+	else if (cfgRemota.isNewer(cfg_redan))
 		AvisaPideConfiguracion(cfgRemota.idConf);
 	else
 		StdSincrSet(slcConflicto);
+
 }
 
 /** */
@@ -322,7 +336,7 @@ void JsonClientProc::SubirConfiguracion()
 			" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.Status() + ":" + response.StatusText());
 	}
 
-	CommConfig cfgRemota(response.Body());
+	RedanTestComm cfgRemota(response.Body());
 	p_working_config->TimeStamp(cfgRemota);
 	p_working_config->save_to(LAST_CFG);
 	PLOG_INFO("Configuracion Enviada Correctamente (%s).", cfgRemota.fechaHora.c_str());
@@ -364,6 +378,7 @@ void SoapClientProc::Run()
 	hwIp = _ip_propia;
 	/** Leer la ultima CFG recibida */
 	p_working_config->load_from(LAST_CFG);
+	p_working_config->config.tipo = 1;
 	PLOG_INFO("SoapClientProc running. Leida LAST_CFG");
 
 	AvisaChequearConfiguracion();

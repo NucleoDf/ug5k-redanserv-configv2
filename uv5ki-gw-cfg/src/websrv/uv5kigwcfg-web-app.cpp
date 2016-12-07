@@ -343,6 +343,9 @@ void Uv5kiGwCfgWebApp::stCb_mtto(struct mg_connection *conn, string user, web_re
 			string jBite = BiteControl().get();
 			RETURN_OK200_RESP(resp, jBite);
 		}
+		else if (levels[2]=="logs") {
+			RETURN_OK200_RESP(resp, webData_LogsList().JSerialize());
+		}		
 		RETURN_NOT_IMPLEMENTED_RESP(resp);
 	}
 	else if (string(conn->request_method)=="POST") {
@@ -457,10 +460,15 @@ void *Uv5kiGwCfgWebApp::ConfigSync(void* arg)
 	string ipColateral;									// Sincronizar el fichero...
 	if (P_WORKING_CONFIG->IpColateral(ipColateral)==true)
 	{
-		ParseResponse resp = HttpClient(ipColateral).SendHttpCmd("PUT", 
-			string(CPU2CPU_MSG)+ "/" + string(CPU2CPU_MSG_CAMBIO_CONFIG), P_WORKING_CONFIG->JConfig());
-		if (resp.Status() != "200")
-			PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. HTTP-ERROR %s: <%s>", resp.Status().c_str(), resp.Body().c_str());
+		if (ipColateral != "") 
+		{
+			ParseResponse resp = HttpClient(ipColateral).SendHttpCmd("PUT", 
+				string(CPU2CPU_MSG)+ "/" + string(CPU2CPU_MSG_CAMBIO_CONFIG), P_WORKING_CONFIG->JConfig());
+			if (resp.Status() != "200")
+				PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. HTTP-ERROR %s: <%s>", resp.Status().c_str(), resp.Body().c_str());
+		}
+		else
+			PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. IP-COLATERAL NO VALIDA!!!");
 	}
 	else
 		PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. NO IP-COLATERAL!!!");

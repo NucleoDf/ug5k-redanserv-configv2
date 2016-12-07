@@ -21,6 +21,12 @@
  #include <netdb.h> 
 
  #include <signal.h>
+
+#if defined(_PPC82xx_)
+ #include <linux/config.h>
+ #include <asm/ioctl.h>
+#endif
+
 #endif
 
 #include <algorithm>

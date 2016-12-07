@@ -1,4 +1,5 @@
 #include "../../include/tools/tools.h"
+#include "../../include/base/socket.h"
 
 /** */
 void url::parse(const string& url_s)
@@ -128,7 +129,7 @@ int Tools::atoi(string str)
 {
 	int ret;
 	int ok = sscanf(str.c_str(), "%i", &ret);
-	return ok==1 ? ret : 0;
+	return ok==1 ? ret : -1;
 }
 
 /** */
@@ -321,4 +322,22 @@ string Tools::read_txt_file(string name)
 	vector<char> buffer((istreambuf_iterator<char>(infile)), istreambuf_iterator<char>());
 	buffer.push_back('\0');
 	return string(&buffer[0]);
+}
+
+/** */
+bool Tools::ip_format_test(string ip)
+{
+	vector<string> cuartetos;
+	split(cuartetos, ip, '.');
+
+	if (cuartetos.size() != 4)
+		return false;
+
+	for (int cuarteto = 0; cuarteto < 4; cuarteto++)
+	{
+		int valor = atoi(cuartetos[cuarteto]);
+		if (valor < 0 || valor > 255)
+			return false;
+	}
+	return true;
 }

@@ -153,7 +153,6 @@
     <ClInclude Include="include\tools\Parse.h" />
     <ClInclude Include="include\tools\stlini.h" />
     <ClInclude Include="include\tools\tools.h" />
-    <ClInclude Include="include\versiones.h" />
     <ClInclude Include="include\websrv\mongoose.h" />
     <ClInclude Include="include\websrv\uv5kigwcfg-web-app-data.h" />
     <ClInclude Include="include\websrv\uv5kigwcfg-web-app.h" />

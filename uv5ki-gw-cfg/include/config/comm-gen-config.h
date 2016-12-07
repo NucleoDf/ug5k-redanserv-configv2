@@ -11,6 +11,7 @@
 #include "../websrv/uv5kigwcfg-web-app-data.h"
 #include "../tools/tools.h"
 #include "../config/local-config.h"
+#include "../base/sistema.h"
 
 /** */
 class CommGenCpu : public jData
@@ -18,6 +19,8 @@ class CommGenCpu : public jData
 public:
 	CommGenCpu() {
 		tlan=1;
+		ip1 = ipb = ip0 = ipg = "";
+		ms0 = ms1 = msb = "255.255.255.0";
 	}
 	CommGenCpu(string ip, string msc, string gw) {
 		tlan=1;
@@ -66,17 +69,39 @@ class CommGenConfig : public jData
 {
 public:
 	CommGenConfig() {
-		name="defecto";
-		emplazamiento="defecto";
-		ipv = "127.0.0.1";
-		ips = "127.0.0.1";
+		name="GW-DEF";
+		emplazamiento="EMPL-DEF";
+
+		sistema::GetIpAddress(ipv);
+		ips = "127.0.0.1";		
 		nivelconsola = 0;
 		puertoconsola = 0;
 		nivelIncidencias = 0;
 
-		dualidad = 0;
-		cpus.push_back(CommGenCpu("127.0.0.1","255.255.255.0","127.0.0.1"));
-		cpus.push_back(CommGenCpu("127.0.0.1","255.255.255.0","127.0.0.1"));
+		/** En Modo ULISES la configuracion por defecto es NoDual en Redan es Dual */
+		dualidad = LocalConfig::p_cfg->get(strUlises, strItemUlisesModo, "0")=="1" ? 0 : 1;
+
+		if (this->dualidad==0)
+		{
+			this->cpus.push_back(CommGenCpu(ipv,"255.255.255.0",ipv));
+			this->cpus.push_back(CommGenCpu());
+		}
+		else 
+		{
+			string ipColDef = "";
+			if (sistema::ParImpar()==0)
+			{
+				this->cpus.push_back(CommGenCpu(ipv,"255.255.255.0",ipv));
+				this->cpus.push_back(CommGenCpu(ipColDef,"255.255.255.0",ipColDef));
+			}
+			else
+			{
+				this->cpus.push_back(CommGenCpu(ipColDef,"255.255.255.0",ipColDef));
+				this->cpus.push_back(CommGenCpu(ipv,"255.255.255.0",ipv));
+			}
+		}
+		//cpus.push_back(CommGenCpu());
+		//cpus.push_back(CommGenCpu());
 	}
 	CommGenConfig(soap_config &sc);
 	~CommGenConfig() {
@@ -84,18 +109,21 @@ public:
 	}
 public:
 	bool IpColateral(string ipPropia, string &ip) {
+
 		if (cpus.size() < 2)
 			return false;
+		
 		if (ipPropia==cpus[0].ipb)
 		{
 			ip = cpus[1].ipb;
-			return true;
+			return Tools::ip_format_test(ip);
 		}
 		else if (ipPropia==cpus[1].ipb)
 		{
 			ip = cpus[0].ipb;
-			return true;
+			return Tools::ip_format_test(ip);
 		}		
+		
 		PLOG_ERROR("CommGenConfig::IpColateral: ERROR. NO IP PROPIA!!!");
 		return false;
 	}

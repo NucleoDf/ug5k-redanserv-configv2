@@ -260,8 +260,21 @@ string sistema::RecordServiceVersion()
 int sistema::ParImpar()
 {
 #if defined(_PPC82xx_)
-	// TODO:
-	return 0;
+	#define ESD_DEV "/dev/esdiscretas"
+	#define ESDI_LEE_LADO_LR	_IOR('E',16, unsigned int)
+
+	int iFdEsd = -1;
+   	if ( (iFdEsd=open(ESD_DEV, O_RDWR)) < 0 )
+	{
+		PLOG_ERROR("sistema::ParImpar. Error en Apertura de Driver ED !!!");
+   		return -1;
+	}
+	int iLado = ioctl( iFdEsd, ESDI_LEE_LADO_LR, 0 );
+	close(iFdEsd);
+
+	PLOG_INFO("sistema::ParImpar: lado %i", iLado);
+
+	return iLado;
 #else
 	return 1;
 #endif

@@ -393,6 +393,24 @@ private:
 	vector<webData_line> lines;
 };
 
+/** */
+class webData_LogsList : public jData
+{
+public:
+	webData_LogsList() {
+		/** Obtener el PATH de los LOGS.. */
+		string path = ON_WORKING_DIR("appweb/logs");
+		/** Hacer una lista de los ficheros en ese PATH */
+	}
+public:
+	virtual void jread(Value &base){}
+	virtual void jwrite(Writer<StringBuffer> &writer) {
+		write_key(writer, "lst", lst);
+	}
+public:
+	vector<webData_line> lst;
+};
+
 #endif
 
 

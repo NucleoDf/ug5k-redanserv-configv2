@@ -75,6 +75,8 @@ public:
 	static std::string CookieTime(char *buffer, struct tm stime);
 	static bool IsNoAscii(char c);
 	static string read_txt_file(string name);
+
+	static bool ip_format_test(string ip);
 };
 
 #endif

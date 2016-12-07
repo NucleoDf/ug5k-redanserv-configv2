@@ -289,8 +289,13 @@ void ManProc::GetEstadoCpu(int cpu)
 #else
 			estado.cpu0.ip = "192.168.0.71";
 #endif
-			CIPAddress to(estado.cpu0.ip, snmpServicePort/* atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str())*/);
-			HistClient::p_hist->GetEstado(to, st_estado_cpu0);
+			if (Tools::ip_format_test(estado.cpu0.ip))
+			{
+				CIPAddress to(estado.cpu0.ip, snmpServicePort/* atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str())*/);
+				HistClient::p_hist->GetEstado(to, st_estado_cpu0);
+			}
+			else
+				PLOG_ERROR("ManProc::GetEstadoCpu %d. IP NO Valida: %s", cpu, estado.cpu0.ip.c_str());
 		}
 		else if (cpu==1)
 		{
@@ -299,8 +304,13 @@ void ManProc::GetEstadoCpu(int cpu)
 #else
 			estado.cpu1.ip = "192.168.0.72";
 #endif
-			CIPAddress to(estado.cpu1.ip, snmpServicePort/*atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str())*/);
-			HistClient::p_hist->GetEstado(to ,st_estado_cpu1);
+			if (Tools::ip_format_test(estado.cpu1.ip))
+			{
+				CIPAddress to(estado.cpu1.ip, snmpServicePort/*atoi(snmpconfig.get("SERVICIO","UDP_PORT_IN_AGSNMP","65000").c_str())*/);
+				HistClient::p_hist->GetEstado(to ,st_estado_cpu1);
+			}
+			else
+				PLOG_ERROR("ManProc::GetEstadoCpu %d. IP NO Valida: %s", cpu, estado.cpu1.ip.c_str());
 		}
 	}
 	catch(socket_error e) 

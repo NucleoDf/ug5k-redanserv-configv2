@@ -126,7 +126,7 @@ void WorkingConfig::TimeStamp()
 }
 
 /** */
-void WorkingConfig::TimeStamp(CommConfig &remota)
+void WorkingConfig::TimeStamp(RedanTestComm &remota)
 {
 	if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) 
 	{
