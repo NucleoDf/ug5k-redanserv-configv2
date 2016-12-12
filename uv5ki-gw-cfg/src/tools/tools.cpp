@@ -341,3 +341,24 @@ bool Tools::ip_format_test(string ip)
 	}
 	return true;
 }
+
+/** */
+void Tools::Dir(vector<string> &lista, string path, string msc)
+{
+	DIR *dir;
+	struct dirent *ent;
+	lista.clear();
+	if ((dir = opendir (path.c_str())) != NULL)  {
+	  /* print all the files and directories within directory */
+		while ((ent = readdir (dir)) != NULL) {
+			string name = string(ent->d_name);
+			if (name != "." && name != "..")
+				lista.push_back(name);
+		}
+		closedir (dir);
+	} 
+	else {
+	  /* could not open directory */
+	}
+}
+

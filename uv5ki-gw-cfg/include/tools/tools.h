@@ -19,8 +19,8 @@
 	#include <Windows.h>
 	#pragma warning (disable:4996) 
 #else
-	#include <dirent.h>
 #endif
+	#include <dirent.h>
 
 using namespace std;
 
@@ -58,7 +58,7 @@ public:
 	static bool ValidateIpAddress(const string &ipAddress);
 	static string itoa(int i);
 	static int atoi(string str);
-	static void Dir(list<string> &lista, string path, string msc);
+	static void Dir(vector<string> &lista, string path, string msc);
 	static void DelFile(string path, string file);
 
 public:

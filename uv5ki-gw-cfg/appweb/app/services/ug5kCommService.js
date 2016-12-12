@@ -57,6 +57,9 @@ function dataservice($http)
         , mnt_get_versiones: function () {
             return remoteGet(rest_url_mnt_versiones);
         }
+        , mnt_get_filelogs: function () {
+            return remoteGet(rest_url_mnt_filelogs);
+        }
         , dev_hist_send: function (msg) {
             return remotePost(rest_url_dev_hist, msg);
         }

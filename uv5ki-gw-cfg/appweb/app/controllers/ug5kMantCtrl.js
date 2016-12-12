@@ -12,7 +12,9 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
     CfgService.opcion(6);
 
     /** Pagina */
-    vm.pagina = 0;	
+    vm.pagina = 0;
+
+    vm.logfiles = [ ];
 
     /** */
     vm.mostrar_boton = function (boton) {
@@ -197,6 +199,12 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 	    win.focus();
 	}
 
+    /** */
+	vm.showlog = function (logfile) {
+	    var win = window.open('/logs/' + logfile.res, '_blank');
+	    win.focus();
+	}
+
     /** Pagina de Desarrollo */
     /** */
 	vm.historico = "H01,";
@@ -225,6 +233,9 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 	    vm.std = MantService.estado();
 	    vgetVerbose();
 	    vgetVersiones();
+	    dataservice.mnt_get_filelogs().then(function (response) {
+	        vm.logfiles = response.data.lst;
+	    });
 	    console.log("Servicio de Mantenimiento Inicializado");
 	});
 

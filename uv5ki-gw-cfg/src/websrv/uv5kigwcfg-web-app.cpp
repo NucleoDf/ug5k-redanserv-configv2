@@ -52,7 +52,11 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.bad_user_uri = "/error1.html";
 	_web_config.closed_session_uri = "/error2.html";
 	_web_config.secret = ":-)";
+#ifdef _WIN32
+	_web_config.enable_login = false;
+#else
 	_web_config.enable_login = true;
+#endif
 	_web_config.enable_ssession = false;
 	_web_config.session_time = 0;
 

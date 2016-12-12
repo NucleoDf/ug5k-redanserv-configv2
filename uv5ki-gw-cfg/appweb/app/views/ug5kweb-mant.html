@@ -113,7 +113,18 @@
                 </td>
             </tr>
         </table>
-        <div class="botones"><button class="btn btn-default" data-ng-click="vm.logs()" data-ng-show="vm.mostrar_boton(0)" translate>MAN_PG01_L00</button></div>
+        <div class="botones">
+            <span uib-dropdown on-toggle="toggled(open)" data-ng-show="vm.mostrar_boton(0)">
+                <button class="btn btn-default" uib-dropdown-toggle>
+                    <p translate>MAN_PG01_L00</p>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="simple-dropdown" role="menu">
+                    <li role="menuitem" data-ng-repeat="logfile in vm.logfiles">
+                        <a href ng-click="vm.showlog(logfile)">{{logfile.res}}</a>
+                    </li>
+                </ul>
+            </span>
+        </div>
     </div>
     <div id="Interfaces" data-ng-show="vm.pagina==1" class="mtto">
         <div id="ntp" class="_tablarec">

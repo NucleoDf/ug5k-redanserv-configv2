@@ -400,7 +400,13 @@ public:
 	webData_LogsList() {
 		/** Obtener el PATH de los LOGS.. */
 		string path = ON_WORKING_DIR("appweb/logs");
+
 		/** Hacer una lista de los ficheros en ese PATH */
+		vector<string> dir;
+		Tools::Dir(dir, path, "");
+		for (size_t i=0; i<dir.size(); i++)	{
+			lst.push_back(webData_line(dir[i]));
+		}
 	}
 public:
 	virtual void jread(Value &base){}
@@ -412,5 +418,3 @@ public:
 };
 
 #endif
-
-
