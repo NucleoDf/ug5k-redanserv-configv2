@@ -53,11 +53,11 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.closed_session_uri = "/error2.html";
 	_web_config.secret = ":-)";
 #ifdef _WIN32
-	_web_config.enable_login = false;
+	_web_config.enable_login = true;
 #else
 	_web_config.enable_login = true;
 #endif
-	_web_config.enable_ssession = false;
+	_web_config.enable_ssession = true;
 	_web_config.session_time = 0;
 
 	_web_config.sec_uris.push_back("/styles/bootstrap/bootstrap.min.css");

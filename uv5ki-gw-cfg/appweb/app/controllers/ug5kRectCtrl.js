@@ -526,8 +526,8 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					},
     				{
     				    Name: /*'Deteccion Vox ?:'*/transerv.translate('TCTRL_P02_VOX'),
-    				    Value: vm.tdata.telefonia.detect_vox.toString(),
-    				    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+    				    Value: "1",             // 20161213. Siempre debe valer 1. vm.tdata.telefonia.detect_vox.toString(),
+    				    Enable: false,          // 20161213. No se puede editar. authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
     				    Input: 1,
     				    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
     				    Show: vm.p2_tel_show,

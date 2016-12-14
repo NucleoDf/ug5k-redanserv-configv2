@@ -30,11 +30,11 @@ function authservice(MantService, $q, $location, $rootScope) {
 
     /** */
     function CheckSession_old() {
-        var match = document.cookie.match(new RegExp('ssid' + '=([^;]+)'));
-        if (session_supervision===true && !!match) {
-            $location.path(routeForUnauthorizedAccess);
-            return false;
-        }
+        //var match = document.cookie.match(new RegExp('ssid' + '=([^;]+)'));
+        //if (session_supervision===true && !!match) {
+        //    $location.path(routeForUnauthorizedAccess);
+        //    return false;
+        //}
         return true;
     }
 

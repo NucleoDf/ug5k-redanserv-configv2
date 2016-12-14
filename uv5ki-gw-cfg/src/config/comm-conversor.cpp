@@ -701,7 +701,11 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	SetInt((int *)(&mtlf->iModoEyM), p_rec->telefonia.h2h4, INCI_MPSW, "MODO DE EYM");
 	SetInt((int *)(&mtlf->iLadoEyM), p_rec->telefonia.ladoeym, INCI_MPSW, "LADO DE EYM");
 
-	SetInt((int *)(&mtlf->iDetectVox), p_rec->telefonia.detect_vox, INCI_MPSW, "DETECCION VOX");
+	// 20161213. Este valor siempre debe valer 1.
+	// SetInt((int *)(&mtlf->iDetectVox), p_rec->telefonia.detect_vox, INCI_MPSW, "DETECCION VOX");
+	mtlf->iDetectVox = 1;
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	SetInt((int *)(&mtlf->iUmbralVox), p_rec->telefonia.umbral_vox, INCI_MPSW, "UMBRAL VOX");
 	SetInt((int *)(&mtlf->iTmInactividad), p_rec->telefonia.tm_inactividad, INCI_MPSW, "TIEMPO INACTIVIDAD");
 

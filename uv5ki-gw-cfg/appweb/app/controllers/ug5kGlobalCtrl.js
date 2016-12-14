@@ -218,15 +218,17 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	    if (++vm.timer >= sesion_sup) {
 	        // console.log("SessionTimer TICK.");
 
-	        if (vm.session == true && authservice.check_session() == false) {
-	            console.log("Session Expired");
-	            dataservice.logout();
-	            vm.session = false;
-	        }
+	        //if (vm.session == true && authservice.check_session() == false) {
+	        //    console.log("Session Expired");
+	        //    dataservice.logout();
+	        //    vm.session = false;
+	        //}
 
 	        dataservice.get_tses().then(
                 function (response) {               // OK.
+                    console.log(response);
                     var data = response.data;
+
                     if (response.status == 200 && (typeof data) == 'object') {
                         console.log(data/*.lconfig*/);
 

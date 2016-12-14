@@ -61,7 +61,7 @@ var carga_upload_config = false;
 var carga_upload_config_timer = 0;              // Temporizador Aleatorio en Segundos...
 var carga_upload_config_timer_max = 60;         // Máximo del Temporizador.
 var carga_upload_config_timer_min = 20;         // Minimo del Temporizador.
-var session_supervision = false;
+var session_supervision = true;
 
 /** */
 var sesion_sup = 10;

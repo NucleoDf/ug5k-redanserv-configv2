@@ -1,8 +1,12 @@
 #include "../../include/websrv/web-app-server.h"
 
-#define _UPLOAD_			0
-#define _NO_EXPIRE_			1
-#define TIEMPO_SESSION_DEFAULT	(30*60)
+#define _UPLOAD_				0
+#define _NO_EXPIRE_				1
+#ifdef _WIN32
+ #define TIEMPO_SESSION_DEFAULT	(1*60)
+#else
+ #define TIEMPO_SESSION_DEFAULT	(30*60)
+#endif
 
 /** */
 WebAppServer::WebAppServer(void) 
