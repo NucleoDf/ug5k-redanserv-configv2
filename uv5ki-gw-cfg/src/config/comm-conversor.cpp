@@ -493,6 +493,16 @@ void CommConversor::RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRe
 	SetTipoConmutacionRadio(&mrad->cTipoConmutacion, p_rec->radio.colateral.tipoConmutacion);
 	SetString(mgen->szDestino, p_rec->radio.colateral.name, INCI_MPSW, "FID", CFG_MAX_LONG_NOMBRE_RECURSO);
 	ColateralesRadio(&p_rec->radio.colateral, &mrad->sColateral);
+
+	/** Indices de Calidad */
+	for (size_t icad = 0; icad < BSSC_QIDXVAL; icad++) {
+		if (icad < p_rec->radio.tabla_indices_calidad.size()) {
+			mrad->qidxNdf2Rssi[icad] = (char )p_rec->radio.tabla_indices_calidad[icad];
+		}
+		else  {
+			mrad->qidxNdf2Rssi[icad] = (char )icad;
+		}
+	}
 }
 
 /** */

@@ -18,7 +18,7 @@
 #ifndef INCLUIDO_CFGPASA_PUNTOHACHE
 #define INCLUIDO_CFGPASA_PUNTOHACHE
 
-//#include <pthread.h>
+// #include <pthread.h>
 
 //------------------------------------------------------------
 //  Definiciones
@@ -329,10 +329,8 @@ enum eType
 #define STR_NULO                    "---"
 
 
-#define N_MAX_RANGOS        16
-#define N_MAX_PRIV          8
-
-#define BSSC_QIDXVAL		16
+#define N_MAX_RANGOS          16
+#define N_MAX_PRIV            8
 
 //------------------------------------------------------------------------------------------
 //  datos y estructuras del sistema Ulises
@@ -617,12 +615,12 @@ struct cfgConfigGeneralRecurso
     int iSlot;
     int iDispositivo;
     char szDestino[CFG_MAX_LONG_NOMBRE_RECURSO+1];
-    int iCfgModoSistema;
+    int iCfgModoSistema;				//NUEVO
     // int iNumSesionesRtpEstaticas;
     int iFlgUsarDiffServ;
     int iSnmpPuertoRemoto;
     int iRecPuertoRemoto;
-    int iRecPuertoBase;
+    int iRecPuertoBase;					//NUEVO
     int iEnableGI;
 
     char szUriLocal[MAX_LONG_DIR_AMPLIADA+1];
@@ -807,8 +805,6 @@ struct cfgConfigIfRadio
 
 
     struct cfgColateralRadio  sColateral;
-
-    char qidxNdf2Rssi[BSSC_QIDXVAL];
 
     void TomaTipoPtt( char );
     void TomaTipoSq( char  );
@@ -1104,7 +1100,7 @@ struct cfgConfigPasarela
     char szDirVirtual[CFG_MAX_LONG_URL+1];
     char szDirSrvConfig[CFG_MAX_LONG_URL+1];
 
-    int iCfgModoSistema;
+    int iCfgModoSistema;			//NUEVO
 
     int iNivelConsola;
     int iPuertoConsola;

@@ -218,7 +218,7 @@ public:
 	int tjbd;
 	int tGRSid;
 	int iEnableGI;
-	vector<string> tabla_indices_calidad;
+	vector<int> tabla_indices_calidad;
 	int iSesionPrio;
 	int iPttPrio;
 	CommResRadioColateral colateral;
