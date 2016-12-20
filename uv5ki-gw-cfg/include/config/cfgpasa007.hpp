@@ -18,7 +18,7 @@
 #ifndef INCLUIDO_CFGPASA_PUNTOHACHE
 #define INCLUIDO_CFGPASA_PUNTOHACHE
 
-// #include <pthread.h>
+//#include <pthread.h>
 
 //------------------------------------------------------------
 //  Definiciones
@@ -92,10 +92,6 @@
 #define NO_CLIMAXDELAY     0
 #define CLD_ASAP		   1
 #define CLD_TM_FIJO        2
-
-
-#define MODO_CALC_CLD_RELATIVO	0
-#define MODO_CALC_CLD_ABSOLUTO	1
 
 /*
  * Tipos de recurso.
@@ -803,7 +799,6 @@ struct cfgConfigIfRadio
     int iTiempo_VentanaRx;
     int iClimaxDelay;
     int iTmRetardoFijo;
-    int iModoCalculoClimax;		//MODO_CALC_CLD_RELATIVO- ABSOLUTO
     int iBssRtp;
     char cTipoConmutacion;
     int iEvtPTT;     //0 no envia 1 envia

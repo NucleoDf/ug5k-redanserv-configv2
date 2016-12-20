@@ -69,11 +69,12 @@ class CommGenConfig : public jData
 {
 public:
 	CommGenConfig() {
-		name="GW-DEF";
+		/** Leo los datos del Hardware */
+		sistema::GetWorkingIpAddressAndName(ipv, ips, name);
+
+		name += "-DEF";
 		emplazamiento="EMPL-DEF";
 
-		sistema::GetIpAddress(ipv);
-		ips = "127.0.0.1";		
 		nivelconsola = 0;
 		puertoconsola = 0;
 		nivelIncidencias = 0;

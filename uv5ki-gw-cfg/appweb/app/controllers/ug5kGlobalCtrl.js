@@ -64,32 +64,47 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	vm.user_str = function () {
 	    var profile = authservice.profile();
 	    var str_profile = " (" + profile + ")";
-	    switch (profile) {
-	        case ADMIN_PROFILE:
-	            str_profile = " (adm)";
-	            break;
-	        case ING_PROFILE:
-	            str_profile = " (ing)";
-	            break;
-	        case GEST_PROFILE:
-	            str_profile = " (ges)";
-	            break;
-	        case CRTL_PROFILE:
-	            str_profile = " (ctr)";
-	            break;
-	        case ALM1_PROFILE:
-	            str_profile = " (al1)";
-	            break;
-	        case ALM2_PROFILE:
-	            str_profile = " (al2)";
-	            break;
-	        case VIS_PROFILE:
-	            str_profile = " (vis)";
-	            break;
-	        case 128:
-	            str_profile = " (rt)";
-	            break;
+	    if (profile == 128)
+	        str_profile = " (rt)";
+	    else {
+	        if (profiles_multiples == false) {
+	            switch (profile) {
+	                case ADMIN_PROFILE:
+	                    str_profile = " (adm)";
+	                    break;
+	                case ING_PROFILE:
+	                    str_profile = " (ing)";
+	                    break;
+	                case GEST_PROFILE:
+	                    str_profile = " (ges)";
+	                    break;
+	                case CRTL_PROFILE:
+	                    str_profile = " (ctr)";
+	                    break;
+	                case ALM1_PROFILE:
+	                    str_profile = " (al1)";
+	                    break;
+	                case ALM2_PROFILE:
+	                    str_profile = " (al2)";
+	                    break;
+	                case VIS_PROFILE:
+	                    str_profile = " (vis)";
+	                    break;
+	            }
+	        }
+	        else {
+	            var txt = "(";
+	            txt += (profile & ADMIN_PROFILE != 0) ? "a" : "";
+	            txt += (profile & ING_PROFILE != 0) ? "i" : "";
+	            txt += (profile & GEST_PROFILE != 0) ? "g" : "";
+	            txt += (profile & CRTL_PROFILE != 0) ? "c" : "";
+	            txt += (profile & ALM1_PROFILE != 0) ? "m" : "";
+	            txt += (profile & ALM2_PROFILE != 0) ? "n" : "";
+	            txt += (profile & VIS_PROFILE != 0) ? "v" : "";
+	            str_profile = " (" + txt + ")";
+            }
 	    }
+
 	    var str_user = vm.user.length <= 8 ? vm.user : vm.user.substr(0, 8) + "...";
 	    return str_user + str_profile;
 	}

@@ -51,8 +51,6 @@ var CRTL_PROFILE = 2;
 var VIS_PROFILE = 1;
 
 /** Variables Globales */
-var Simulate = false;
-var Desarrollando = true;
 var pollingTime = 5000;
 var maxPreconf = 8;
 var InciPoll = 10;
@@ -61,7 +59,11 @@ var carga_upload_config = false;
 var carga_upload_config_timer = 0;              // Temporizador Aleatorio en Segundos...
 var carga_upload_config_timer_max = 60;         // Máximo del Temporizador.
 var carga_upload_config_timer_min = 20;         // Minimo del Temporizador.
+
+var Simulate = false;
+var Desarrollando = false;
 var session_supervision = true;
+var profiles_multiples = true;
 
 /** */
 var sesion_sup = 10;

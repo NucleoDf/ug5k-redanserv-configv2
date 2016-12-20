@@ -46,6 +46,14 @@ public:
 		KeepAliveMultiplier=10;
 		SupresionSilencio=0;
 		PeriodoSupervisionSIP=100;
+
+		proxys.push_back(CommSerServidor());
+		proxys.push_back(CommSerServidor());
+		proxys.push_back(CommSerServidor());
+
+		registrars.push_back(CommSerServidor());
+		registrars.push_back(CommSerServidor());
+		registrars.push_back(CommSerServidor());
 	}
 	~CommSerSip() {
 		clear_array(proxys);
@@ -201,6 +209,9 @@ class CommSerSincr : public jData
 public:
 	CommSerSincr() {
 		ntp = 2;
+
+		servidores.push_back(CommSerServidor());
+		servidores.push_back(CommSerServidor());
 	}
 	~CommSerSincr() {
 		clear_array(servidores);

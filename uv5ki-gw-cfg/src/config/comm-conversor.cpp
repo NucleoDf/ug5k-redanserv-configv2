@@ -264,7 +264,7 @@ void CommConversor::Servidores()
 	size_t i;
 
 	/** SIP Proxy */
-	for (i=0; i<p_cfg_in->servicios.sip.proxys.size(); i++)
+	for (i=0; i<p_cfg_in->servicios.sip.proxys.size() && i<NUM_SIP_PROXY; i++)
 	{
 #if __POR_REFERENCIA__
 		memcpy(mcfg->szDirSipProxy[i], p_cfg_in->servicios.sip.proxys[i].ip.c_str(), MAX_LONG_DIRIP);
@@ -274,7 +274,7 @@ void CommConversor::Servidores()
 	}
 
 	/** SIP Registrars */
-	for (i=0; i< p_cfg_in->servicios.sip.registrars.size(); i++)
+	for (i=0; i< p_cfg_in->servicios.sip.registrars.size() && i<NUM_SIP_REGISTRAR; i++)
 	{
 #if __POR_REFERENCIA__
 		memcpy(mcfg->szDirSipRegistrar[i], p_cfg_in->servicios.sip.registrars[i].ip.c_str(), MAX_LONG_DIRIP);
