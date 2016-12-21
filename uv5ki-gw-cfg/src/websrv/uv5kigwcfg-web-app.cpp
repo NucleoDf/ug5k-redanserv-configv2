@@ -165,6 +165,7 @@ void Uv5kiGwCfgWebApp::stCb_logout(struct mg_connection *conn, string user, web_
 	resp->actividad=false;
 	if (string(conn->request_method)=="POST") 
 	{
+		PLOG_INFO("Uv5kiGwCfgWebApp: LOGOUT Usuario: %s", user.c_str());
 		_web_config.session_control.reset();
 		webData_line ok("OK");
 		RETURN_OK200_RESP(resp, ok.JSerialize());
@@ -183,6 +184,7 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 	}
 	else if (string(conn->request_method)=="POST") 
 	{
+		PLOG_INFO("Uv5kiGwCfgWebApp: Recibida Orden de Cambio de Configuracion. Usuario: %s", user.c_str());
 		// Activar la Configuracion...
 		string data_in = string(conn->content, conn->content_len );
 		CommConfig cfg(data_in);
@@ -192,16 +194,22 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 			P_WORKING_CONFIG->TimeStamp();
 			P_WORKING_CONFIG->save_to(LAST_CFG);
 			P_HIS_PROC->SetEventosHistoricos(user, ev);				// Generar los historicos de cambios.
+
+			PLOG_INFO("Uv5kiGwCfgWebApp: Orden de Cambio de Configuracion ejecutada...");
 				// Sincronizar Fichero....
 			if (P_CFG_PROC->GetStdLocalConfig() != slcAislado && P_WORKING_CONFIG->DualCpu())
 			{
 				WorkingThread(Uv5kiGwCfgWebApp::ConfigSync, NULL).Do();
 			}
+			else 
+			{
+				PLOG_ERROR("Uv5kiGwCfgWebApp: Error Sincronizando Cambio de Configuracion");
+			}
 		}
 		else {
+			PLOG_ERROR("Uv5kiGwCfgWebApp: Error procesando Orden de Cambio de Configuracion. Formato Incorrecto...");
 			RETURN_IERROR_RESP(resp, webData_line("Formato de Configuracion incorrecto").JSerialize());
-		}
-		
+		}		
 		RETURN_OK200_RESP(resp, webData_line("Configuracion Activada...").JSerialize());
 	}
 	else if (string(conn->request_method)=="PUT") 
@@ -212,6 +220,7 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 		}
 		// Dar aviso de carga de configuracion...
 		P_CFG_PROC->AvisaSubirConfiguracion();
+		PLOG_INFO("Uv5kiGwCfgWebApp: Orden de Subir configuracion local. Usuario: %s", user.c_str());
 		RETURN_OK200_RESP(resp, webData_line("Peticion de Subida cursada...").JSerialize());
 	}
 	RETURN_NOT_IMPLEMENTED_RESP(resp);
@@ -246,6 +255,7 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 			}
 			/** HIST 154 */
 			P_HIS_PROC->SetEvent(INCI_GCFG, user, /*"CFG", */activa.name);
+			PLOG_INFO("Uv5kiGwCfgWebApp: Salvada Preconfiguracion %s. Usuario: %s", pcfg_name.c_str(), user.c_str());
 		}
 		else if (string(conn->request_method)=="PUT") // Activar Configuracion.
 		{
@@ -263,6 +273,7 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 				RETURN_IERROR_RESP(resp, webData_line("Error al Activar Preconfiguracion: " + pcfg_name + ". Formato de Configuraicon incorrecto").JSerialize());
 			}
 			P_HIS_PROC->SetEvent(INCI_ACFG, user, /*"CFG", */activa.name);
+			PLOG_INFO("Uv5kiGwCfgWebApp: Activada Preconfiguracion %s. Usuario: %s", pcfg_name.c_str(), user.c_str());
 
 					// Activar la configuracion...
 			CommConfig cfg(activa.data);
@@ -281,6 +292,7 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 			}
 					/** HIST 156 */
 			P_HIS_PROC->SetEvent(INCI_DCFG, user, pcfg_name);
+			PLOG_INFO("Uv5kiGwCfgWebApp: Eliminada Preconfiguracion %s. Usuario: %s", pcfg_name.c_str(), user.c_str());
 		}
 		RETURN_OK200_RESP(resp, CommPreconfs().JSerialize());
 	}
@@ -304,6 +316,7 @@ void Uv5kiGwCfgWebApp::stCb_importexport(struct mg_connection *conn, string user
 		if (preconfs.get(levels[2], exportada)==false) {
 			RETURN_IERROR_RESP(resp, webData_line("Error al Exportar Preconfiguracion: " + levels[2] + ". No esta en la base de datos.").JSerialize());
 		}
+		PLOG_INFO("Uv5kiGwCfgWebApp: Exportada Preconfiguracion %s. Usuario: %s", levels[2].c_str(), user.c_str());
 		RETURN_OK200_RESP(resp, exportada.data);
 	}
 	else if (string(conn->request_method)=="POST" )			// IMPORT... (Igual a salvar como, excepto por el nombre)...
@@ -318,6 +331,7 @@ void Uv5kiGwCfgWebApp::stCb_importexport(struct mg_connection *conn, string user
 		}
 		/** HIST 154 */
 		HistClient::p_hist->SetEvent(INCI_GCFG, user, /*"CFG", */activa.name);
+		PLOG_INFO("Uv5kiGwCfgWebApp: Importada Preconfiguracion %s. Usuario: %s", pcfg_name.c_str(), user.c_str());
 		RETURN_OK200_RESP(resp, webData_line("ok").JSerialize());
 	}
 	RETURN_NOT_IMPLEMENTED_RESP(resp);
@@ -356,6 +370,7 @@ void Uv5kiGwCfgWebApp::stCb_mtto(struct mg_connection *conn, string user, web_re
 		if (levels[2]=="reset") {
 			WorkingThread(Uv5kiGwCfgWebApp::DelayedReset, NULL).Do();
 			P_HIS_PROC->SetEvent(INCI_RESET, user, "");
+			PLOG_INFO("Uv5kiGwCfgWebApp: RESET de Unidad por Usuario: %s", user.c_str());
 			RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
 		}
 		else if (levels[2]=="swactiva") {
@@ -461,25 +476,32 @@ void *Uv5kiGwCfgWebApp::DelayedReset(void* arg)
 /** */
 void *Uv5kiGwCfgWebApp::ConfigSync(void* arg)
 {
-	string ipColateral;									// Sincronizar el fichero...
-	if (P_WORKING_CONFIG->IpColateral(ipColateral)==true)
+	try 
 	{
-		if (ipColateral != "") 
+		string ipColateral;									// Sincronizar el fichero...
+		if (P_WORKING_CONFIG->IpColateral(ipColateral)==true)
 		{
-			ParseResponse resp = HttpClient(ipColateral).SendHttpCmd("PUT", 
-				string(CPU2CPU_MSG)+ "/" + string(CPU2CPU_MSG_CAMBIO_CONFIG), P_WORKING_CONFIG->JConfig());
-			if (resp.Status() != "200")
-				PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. HTTP-ERROR %s: <%s>", resp.Status().c_str(), resp.Body().c_str());
+			if (ipColateral != "") 
+			{
+				ParseResponse resp = HttpClient(ipColateral).SendHttpCmd("PUT", 
+					string(CPU2CPU_MSG)+ "/" + string(CPU2CPU_MSG_CAMBIO_CONFIG), P_WORKING_CONFIG->JConfig());
+				if (resp.Status() != "200")
+					PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. HTTP-ERROR %s: <%s>", resp.Status().c_str(), resp.Body().c_str());
+			}
+			else
+				PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. IP-COLATERAL NO VALIDA!!!");
 		}
 		else
-			PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. IP-COLATERAL NO VALIDA!!!");
-	}
-	else
-		PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. NO IP-COLATERAL!!!");
+			PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. NO IP-COLATERAL!!!");
 
-#ifndef _NO_WORKING_THREAD_
-	pthread_exit(NULL);
-#endif
+	#ifndef _NO_WORKING_THREAD_
+		pthread_exit(NULL);
+	#endif
+	}
+	catch(...) 
+	{
+		PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync Exception !!!");
+	}
 	return NULL;
 }
 

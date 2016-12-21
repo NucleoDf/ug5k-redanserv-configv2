@@ -116,7 +116,7 @@ protected:
 	void SubirConfiguracion();
 
 private:
-	CommConfig cfg_redan;
+	// CommConfig cfg_redan;
 };
 
 /** */

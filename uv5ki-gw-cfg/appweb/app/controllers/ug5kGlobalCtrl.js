@@ -202,7 +202,9 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
     /** */
 	function gw_id() {
 	    var gen = CfgService.inicio_data_get();
-	    return gen==null ? "" : gen.name;
+	    var strid = gen == null ? "" : gen.name;
+	    strid += vm.lcfg.ntpsync == 1 ? " (Sync)" : " (No Sync: " + vm.lcfg.localdate + ")";
+	    return strid;
 	}
 
     /** */
@@ -264,6 +266,7 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
                             $scope.$broadcast('std_change', [1, 2, 3]);
                         }
                         MantService.global_estado(data.std);
+                        MantService.ntpsync(data.ntpsync);
                     }
                     else {
                         vm.timer = 0;

@@ -91,8 +91,11 @@ void CfgConversor::SetString(LocalConfig &lcfg, string section, string key, stri
 	if (snuevo != "" || vacios == true)
 	{
 		string sactual = lcfg.get(section, key);
-		eventos.push_back(CommConvertEvent(evento, "", nombre, snuevo));
-		lcfg.set(section, key, snuevo);
+		if (sactual != snuevo) 
+		{
+			eventos.push_back(CommConvertEvent(evento, "", nombre, snuevo));
+			lcfg.set(section, key, snuevo);
+		}
 	}
 	else
 		PLOG_ERROR("Intento Escritura String Vacio en INI (%s-%s).", section.c_str(), key.c_str());
@@ -207,7 +210,7 @@ void CommConversor::ParametrosGlobales()
 	// strcpy(mcfg->acIdSistema,"");
 	SetString(mcfg->acIdSistema, p_cfg_in->general.emplazamiento, INCI_MPGP, "ID-EMPLAZAMIENTO",CFG_MAX_LONG_ID);
 	SetString(mcfg->szNombre, p_cfg_in->general.name, INCI_MPGP, "ID-PASARELA",CFG_MAX_LONG_NOMBRE_PASARELA);		
-	SetString(mcfg->szDirVirtual, p_cfg_in->general.ipv, INCI_MPGP, "URL-SERVIDOR",CFG_MAX_LONG_URL);
+	SetString(mcfg->szDirVirtual, p_cfg_in->general.ipv, INCI_MPGP, "IP-VIRTUAL",CFG_MAX_LONG_URL);
 	SetString(mcfg->szDirSrvConfig, p_cfg_in->general.ips, INCI_MPGP, "URL-SERVIDOR",CFG_MAX_LONG_URL);
 	SetInt(&mcfg->iNivelConsola, p_cfg_in->general.nivelconsola, INCI_MPGP, "NIVEL-CONSOLA");
 	SetInt(&mcfg->iPuertoConsola, p_cfg_in->general.puertoconsola, INCI_MPGP, "PUERTO-CONSOLA");
@@ -387,7 +390,7 @@ void CommConversor::RecursoGeneral(CommResConfig *p_rec, struct cfgConfigGeneral
 	mgen->iRecPuertoRemoto = mcfg->iRecPuertoRemoto;
 	mgen->iRecPuertoBase = 65004;
 
-	memcpy(mgen->szDestino, p_rec->szDestino.c_str(), CFG_MAX_LONG_NOMBRE_RECURSO);
+	// memcpy(mgen->szDestino, p_rec->szDestino.c_str(), CFG_MAX_LONG_NOMBRE_RECURSO);
 	mgen->iFlgUsarDiffServ = p_rec->iFlgUsarDiffServ;
 
 	/** Lista de enlaces externos ??? */

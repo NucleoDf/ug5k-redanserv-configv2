@@ -98,6 +98,7 @@ function MantService(dataservice, transerv) {
     var std = defMantStd();
     var global_modo = "rd";
     var global_std = -1;
+    var ntpsync = 0;
 
     /** */
     function defMantStd() {
@@ -223,6 +224,11 @@ function MantService(dataservice, transerv) {
                 global_std = std;
             }
             return global_std;
+        }
+        , ntpsync: function (ntp) {
+            if (ntp != undefined)
+                ntpsync = ntp;
+            return ntpsync;
         }
     };
 }

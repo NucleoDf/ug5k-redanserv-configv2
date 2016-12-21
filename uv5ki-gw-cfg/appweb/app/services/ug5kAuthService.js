@@ -17,9 +17,15 @@ function authservice(MantService, $q, $location, $rootScope) {
         , global_enable: function (perfiles) {
             if (ProfilePermission(true, perfiles)==false)
                 return false;
-            var aislado = MantService.global_estado()==-3 ? true : false;
-            if (aislado == false && MantService.modo() == "ul")
-                return false;
+            if (MantService.modo() == "ul") {
+                if (MantService.global_estado() != -3)              // En ULISES solo si estoy aislado.
+                    return false;
+            }
+            else {
+                if ( MantService.global_estado() != -3  &&          // En REDAN si estoy conectado pero no sincronizado no dejo cambiar.
+                    MantService.ntpsync() == 0)
+                    return false;
+            }
             return true;
         }
         , global_validate: function (local_validate) {

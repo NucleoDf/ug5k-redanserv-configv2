@@ -9,6 +9,9 @@ webData_tses::webData_tses(int parStd, string parIdc, string parTim, string parM
 	ver = VersionGlobal();
 	modo = parModo;
 
+	ntpsync = IsNtpSync()==true ? 1 : 0;
+	localdate = Tools::Ahora_Servidor();
+
 #if LOCAL_TEST_1
 	val_prueba1.push_back("Valor-1");
 	val_prueba1.push_back("Valor-2");
@@ -31,6 +34,8 @@ void webData_tses::jwrite(Writer<StringBuffer> &writer)
 	write_key/*_string*/(writer, "tim", tim);
 	write_key/*_string*/(writer, "ver", ver);
 	write_key/*_string*/(writer, "modo", modo);
+	write_key/*_string*/(writer, "ntpsync", ntpsync);
+	write_key/*_string*/(writer, "localdate", localdate);
 #if LOCAL_TEST_1
 	write_key/*_object*/(writer, "msg", msg);
 	write_key(writer, "ArrayPrueba1", val_prueba1);

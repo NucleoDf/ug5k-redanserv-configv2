@@ -152,3 +152,11 @@ string CodeBase::VersionGrabador()
 	return sistema::RecordServiceVersion();
 }
 
+/** */
+bool CodeBase::IsNtpSync()
+{
+	string ntp_sync_info = Tools::read_txt_file(onfs("/var/ntpq_report"));
+	PLOG_INFO("IsNtpSync: %s", ntp_sync_info.c_str());
+	return ntp_sync_info=="" || ntp_sync_info[0]=='n' ? false : true;
+}
+

@@ -20,6 +20,9 @@ function CfgService(dataservice, $q, $rootScope, transerv) {
     var last_rd_rec = 0;
     var last_tf_rec = 0;
 
+    var ntpsync = 0;
+    var localdate = "";
+
     /** */
     function Cfg2RadioTelef() {
 
@@ -425,6 +428,16 @@ function CfgService(dataservice, $q, $rootScope, transerv) {
                 }
                 return ret;
             }
+        }
+        , ntpsync: function (ntp) {
+            if (ntp != undefined)
+                ntpsync = ntp;
+            return ntpsync;
+        }
+        , localdate: function (strdate) {
+            if (strdate != undefined)
+                localdate = strdate;
+            return localdate;
         }
     };
 }

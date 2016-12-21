@@ -271,7 +271,7 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 	p_working_config->save_to(LAST_SAVE(Tools::Int2String(_lastcfg++ & 3)));
 
 	/** Lee la configuracion recibida */
-	cfg_redan.JDeserialize(response.Body());
+	CommConfig cfg_redan(response.Body());
 	p_working_config->config.tipo = 0;
 	
 	/** Activa la configuracion recibida */
@@ -311,9 +311,9 @@ void JsonClientProc::ChequearConfiguracion()
 		StdSincrSet(slcNoBdt);
 	else if (cfgRemota.idConf == "-2")
 		StdSincrSet(slcNoActiveCfg);
-	else if (cfgRemota.isEqual(cfg_redan)) 
+	else if (cfgRemota.isEqual(p_working_config->config/*cfg_redan*/)) 
 		StdSincrSet(slcSincronizado);
-	else if (cfgRemota.isNewer(cfg_redan))
+	else if (cfgRemota.isNewer(p_working_config->config/*cfg_redan*/))
 		AvisaPideConfiguracion(cfgRemota.idConf);
 	else
 		StdSincrSet(slcConflicto);
@@ -323,8 +323,8 @@ void JsonClientProc::ChequearConfiguracion()
 /** */
 void JsonClientProc::SubirConfiguracion()
 {
-	string cfgname = cfg_redan.idConf;
-	string cfg = cfg_redan.JSerialize();
+	string cfgname = p_working_config->config/*cfg_redan*/.idConf;
+	string cfg = p_working_config->config/*cfg_redan*/.JSerialize();
 
 	string path = "/configurations/" + cfgname + "/gateways/" + _ip_propia + "/all";
 	string request = "POST " + path + " HTTP/1.1\r\nHost: " + SERVER_URL/*_host_config*/ + "\r\nContent-Type: application/json; charset=utf-8\r\n" +

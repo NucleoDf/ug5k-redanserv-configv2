@@ -226,6 +226,8 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
                                 vm.cfg_act = gw_cfg();
                             });
 
+                            CfgService.ntpsync(data.ntpsync);
+                            CfgService.localdate(data.localdate);
                         }
                     }
                     else {

@@ -163,6 +163,8 @@ protected:
 	static string VersionSnmp();
 	static string VersionGrabador();
 
+	static bool IsNtpSync();
+
 private:
 	static plog::ConsoleAppender<plog::ConsoleFormatter> *p_consoleAppender;
 	static plog::NetUdpAppender<plog::Log4viewFormatter> *p_log4viewAppender;
