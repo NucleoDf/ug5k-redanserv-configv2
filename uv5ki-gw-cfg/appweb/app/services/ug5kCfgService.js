@@ -153,7 +153,8 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                 tjbd: 20,
                 tGRSid: 10,
                 iEnableGI: 0,
-                tabla_indices_calidad: [],
+                tabla_indices_calidad:
+                    [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
                 iSesionPrio: 0,
                 iPttPrio: 0,
                 iPrecisionAudio: 1,
@@ -183,7 +184,13 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                         activoRx: 0
                     }
                     ]
-                }
+                },
+                FrqTonoSQ: -1,
+                UmbralTonoSQ: -1,
+                FrqTonoPTT: -1,
+                UmbralTonoPTT: -1,
+                SupervPortadoraTx: -1,
+                SupervModuladoraTx: -1
             },
             telefonia: {
                 tipo: 0,
@@ -220,7 +227,9 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
             LlamadaAutomatica: 0,
             restriccion: 0,
             blanca: ["", "", "", "", "", "", "", ""],
-            negra: ["", "", "", "", "", "", "", ""]
+            negra: ["", "", "", "", "", "", "", ""],
+            iFlgUsarDiffServ: 0,
+            szDestino: "110.000"
         };
     }
 
