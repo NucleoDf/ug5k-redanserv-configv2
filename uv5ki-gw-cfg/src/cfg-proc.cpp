@@ -266,6 +266,8 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 		throw Exception("REQUEST ERROR: GET " + path + 
 			" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.StatusText());
 	}
+	/** Salva los datos recibidos */
+	sistema::DataSaveAs(response.Body(), LAST_JSON_REC(Tools::Int2String(_lastcfg & 3)));
 
 	/** Salva ultima configuracion */
 	p_working_config->save_to(LAST_SAVE(Tools::Int2String(_lastcfg++ & 3)));
@@ -461,8 +463,7 @@ string SoapClientProc::getXml(string proc, string p1, string p2, string p3)
 
 #ifdef _WIN32 
 	sistema::DataSaveAs(response.Body(), proc+"_" + p2 + "_" + p3 + ".xml");
-#endif
-	
+#endif	
 	return response.Body();
 }
 
@@ -533,6 +534,9 @@ void SoapClientProc::PedirConfiguracion(string cfg)
 	{
 		/** Lee la configuracion recibida */
 		soap_config sConfig(getXml, hwIp, hwName, SERVER_URL/*hwServer*/);
+
+		/** Salva la configuracion recibida */
+		sConfig.saveIn(LAST_SOAP_REC(Tools::Int2String(_lastcfg & 3)));
 
 		/** Salva ultima configuracion */
 		p_working_config->save_to(LAST_SAVE(Tools::Int2String(_lastcfg++ & 3)));

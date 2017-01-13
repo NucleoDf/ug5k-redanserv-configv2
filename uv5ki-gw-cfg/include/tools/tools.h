@@ -58,6 +58,7 @@ public:
 	static bool ValidateIpAddress(const string &ipAddress);
 	static string itoa(int i);
 	static int atoi(string str);
+	static float atof(string str);
 	static void Dir(vector<string> &lista, string path, string msc);
 	static void DelFile(string path, string file);
 

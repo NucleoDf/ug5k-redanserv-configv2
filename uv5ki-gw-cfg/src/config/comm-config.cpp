@@ -37,7 +37,7 @@ CommGenConfig::CommGenConfig(soap_config &sc)
 	DatosLocales datos_locales;
 
 	this->name = sc.CfgPasarela.Nombre;
-	this->emplazamiento = "";								// Dejar Vacio. 
+	this->emplazamiento = "";									// Dejar Vacio. 
 	// this->dualidad = datos_locales.dualidad==true ? 1 : 0;	// Leer DatosLocales.ini
 	this->ipv = sc.IpVirt;
 	this->ips = sc.Server;
@@ -169,10 +169,10 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 		this->Buffer_jitter.max = 0;							// Dejar a 0.
 		this->Buffer_jitter.min = 0;							// Dejar a 0. 
 
-		this->hardware.AD_AGC = sres.info.GananciaAGCRX;
-		this->hardware.AD_Gain= sres.info.GananciaAGCRXdBm;
-		this->hardware.DA_AGC = sres.info.GananciaAGCTX;
-		this->hardware.DA_Gain= sres.info.GananciaAGCTXdBm;
+		this->hardware.AD_AGC = sres.info.GananciaAGCTX;
+		this->hardware.AD_Gain= (int )(Tools::atof(sres.info.GananciaAGCTXdBm)*10);
+		this->hardware.DA_AGC = sres.info.GananciaAGCRX;
+		this->hardware.DA_Gain= (int )(Tools::atof(sres.info.GananciaAGCRXdBm)*10);
 
 		if (sres.TipoRecurso==0) 
 		{

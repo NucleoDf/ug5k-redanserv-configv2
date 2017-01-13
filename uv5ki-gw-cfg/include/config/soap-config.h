@@ -480,9 +480,9 @@ public:
 public:
 	/** Comunes */
 	int GananciaAGCTX;
-	int GananciaAGCTXdBm;
+	string GananciaAGCTXdBm;
 	int GananciaAGCRX;
-	int GananciaAGCRXdBm;
+	string GananciaAGCRXdBm;
 	bool SupresionSilencio;
 	int TamRTP;
 	int Codec;
@@ -582,6 +582,11 @@ public:
 
 protected:
 	string xdata_ResourceInfo;
+public:
+	void saveIn(ofstream &ff) {
+		ff << "[Recurso " << IdRecurso << "]" << endl;
+		ff << xdata_ResourceInfo << endl << "[-----------------]" << endl;
+	}
 };
 
 /** */
@@ -730,6 +735,29 @@ public:
 	string xdata_ArrayOfListaTroncales;
 	string xdata_ArrayOfNumeracionATS;
 	string xdata_CfgPasarela;
+
+public:
+	void saveIn(string tofile) {
+		ofstream ff(ON_FLASH(tofile));
+		
+		ff << "[IdConfig] " << endl << xdata_idConfig << endl << endl;
+		ff << "[Parametros Generales] " << endl << xdata_ParametrosGeneralesSistema << endl << endl;
+		ff << "[Parametros Multicast] " << endl << xdata_ParametrosMulticast << endl << endl;
+		
+		ff << "[CfgPasareala] " << endl << xdata_CfgPasarela << endl;
+		for (size_t res = 0; res <CfgPasarela.ListaRecursos.size(); res++) {
+			CfgPasarela.ListaRecursos[res].saveIn(ff);
+		}
+		ff << endl;
+
+		ff << "[Asignacion Recursos GW] " << endl << xdata_ArrayOfAsignacionRecursosGW << endl << endl;
+		ff << "[Asignacion Usuarios TV] " << endl << xdata_ArrayOfAsignacionUsuariosTV << endl << endl;
+		ff << "[Plan IP] " << endl << xdata_ArrayOfDireccionamientoIP << endl << endl;
+		ff << "[Plan SIP] " << endl << xdata_ArrayOfDireccionamientoSIP << endl << endl;
+		ff << "[Troncales] " << endl << xdata_ArrayOfListaTroncales << endl << endl;
+		ff << "[Redes] " << endl << xdata_ArrayOfListaRedes << endl << endl;
+		ff << "[Numeracion ATS] " << endl << xdata_ArrayOfNumeracionATS << endl << endl;
+	}
 
 public:
 	void sip_servers(vector<string> &sipservers);

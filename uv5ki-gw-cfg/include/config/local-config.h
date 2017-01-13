@@ -75,6 +75,8 @@ using namespace std;
 #define LAST_CFG						(onflash(LocalConfig::p_cfg->get(strSection, strItemConfigFile).c_str()))
 #define LAST_CFG_PRUEBA					(onflash("gw_config_prueba.json"))
 #define LAST_SAVE(n)					(onflash(string("last_gw_config_")+string(n)+string(".json")))
+#define LAST_JSON_REC(n)				(string("last_json_rec_")+string(n)+string(".json"))
+#define LAST_SOAP_REC(n)				(string("last_soap_rec_")+string(n)+string(".soap"))
 
 ///** */
 //typedef map<string,string> MapString;

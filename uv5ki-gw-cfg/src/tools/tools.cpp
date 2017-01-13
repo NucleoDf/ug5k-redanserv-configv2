@@ -132,6 +132,20 @@ int Tools::atoi(string str)
 	return ok==1 ? ret : -1;
 }
 
+/**
+*/
+float Tools::atof(string num_str)
+{
+	//float ret;
+	//int ok = sscanf(str.c_str(), "%f", &ret);
+	//return ok==1 ? ret : -1;
+	// return (float)(::atof(str.c_str()));
+	std::istringstream iss(num_str);
+	float f_val = 0;
+	iss >> f_val;
+	return f_val;
+}
+
 /** */
 bool Tools::ValidateIpAddress(const string &ipAddress)
 {

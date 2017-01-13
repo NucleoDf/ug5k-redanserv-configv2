@@ -503,7 +503,7 @@ void CommConversor::RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRe
 			mrad->qidxNdf2Rssi[icad] = (char )p_rec->radio.tabla_indices_calidad[icad];
 		}
 		else  {
-			mrad->qidxNdf2Rssi[icad] = (char )icad;
+			mrad->qidxNdf2Rssi[icad] = (char )0x0F;
 		}
 	}
 }

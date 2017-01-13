@@ -199,6 +199,10 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 12:        // Prioridad PTT.
             case 13:        // Prioridad Session.
                 return (parseInt(vm.vdata[0].Value) <= 3);
+            case 14:        // Tabla de Calificacion Radio. Solo en Radios Remotos.
+                if (MantService.hide_on_ulises() == false)
+                    return false;
+                return (parseInt(vm.vdata[0].Value) > 3);
         }
         return true;
     }
@@ -210,7 +214,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 1:         // Frecuencia
                 return MantService.hide_on_ulises();
         }
-        return vm.col_show();
+        return vm.col_show(ind);
     }
     /** */
     vm.p4_rad_show = function (ind) {
@@ -358,6 +362,18 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             }
         }
     }
+
+    /** */
+    vm.tbQidx = function (radio) {
+        var str_qidx = "";
+        var index = 0;
+        radio.tabla_indices_calidad.forEach(function (val) {
+            str_qidx += (index.toString() + ":" + val.toString() + ", ");
+            index++;
+        });
+        return str_qidx;
+    }
+
 
     /** */
     function quitar_sip(uri) {
@@ -737,6 +753,15 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                              /*"Normal"*/transerv.translate('RCTRL_P02_SESP0'),
                              /*"Emergencia"*/transerv.translate('RCTRL_P02_SESP1')
 					    ],
+					    Show: vm.p2_rad_show,
+					    Val: vm.dval
+					},
+					{
+					    Name:/*'Tabla QIDX'*/transerv.translate('Calificacion BSS'),
+					    Value: vm.tbQidx(vm.rdata.radio),                           // "00-01-02-03-04-05",
+					    Enable: false,
+					    Input: 0,
+					    Inputs: [ ],
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					}

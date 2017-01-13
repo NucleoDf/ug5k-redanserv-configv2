@@ -145,11 +145,14 @@ public:
 	}
 	virtual void jread(Value &base)
 	{
+		DatosLocales datos_locales;
+
 		read_key(base, "name", name);
 		read_key(base, "emplazamiento", emplazamiento);
 		read_key(base,"dualidad", dualidad);
 		read_key(base, "ipv", ipv);
-		read_key(base, "ips", ips);
+		// read_key(base, "ips", ips);							// El servidor no se lee del fichero sino de la configuracion...
+		ips = datos_locales.ipServ;
 		read_key(base,"acGrupoMulticast", acGrupoMulticast);
 		read_key(base,"uiPuertoMulticast", uiPuertoMulticast);
 		read_key(base,"nivelconsola", nivelconsola);

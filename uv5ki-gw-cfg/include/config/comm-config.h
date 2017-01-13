@@ -34,10 +34,11 @@ public:
 		fechaHora = Tools::Ahora_Servidor();
 	}
 	CommConfig(string jstring) {
+											// Configuracion desde REDAN
 		JDeserialize(jstring);
-		tipo = 0;							// Configuracion desde servidor REDAN
+		tipo = 0;							
 	}
-	CommConfig(ifstream &f) {
+	CommConfig(ifstream &f) {               // Configuracion desde fichero JSON
 		string data,linea;
 		while (std::getline(f, linea))
 			data += linea;
