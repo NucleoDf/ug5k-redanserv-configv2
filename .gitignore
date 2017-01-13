@@ -31,3 +31,7 @@ nbproject
 /uv5ki-gw-cfg/Entregas
 /uv5ki-gw-cfg/fs-win/home/serv/comm-config.json.000
 /uv5ki-gw-cfg/fs-win/home/serv/comm-config.json.001
+/uv5ki-gw-cfg/fs-win/home/serv/*.soap
+/uv5ki-gw-cfg/fs-win/home/serv/*.json
+*copia*
+/uv5ki-gw-cfg/fs-win/home/serv/*.old
