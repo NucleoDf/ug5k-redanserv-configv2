@@ -322,14 +322,16 @@ void CommConversor::Recurso(CommResConfig *p_rec, struct cfgConfigRecurso *mrec,
 	case CFG_IFREC_TIPO_RADIO:
 		RecursoRadio(p_rec, &mrec->sGeneral, &mrec->uIf.sRadio);
 		break;
+	
 	case CFG_IFREC_TIPO_LCEN:
 		RecursoColateralTPP(p_rec, &mrec->sGeneral.sColateral);
-		RecursoLcen(p_rec, &mrec->uIf.sLcen);
+		RecursoLcen(p_rec, &mrec->uIf.sLcen, &mrec->sGeneral);
 		break;
+
 	case CFG_IFREC_TIPO_R2:
 	case CFG_IFREC_TIPO_N5:
 		RecursoColateralTPP(p_rec, &mrec->sGeneral.sColateral);
-		RecursoTelefoniaR2N5(p_rec, &mrec->uIf.sR2N5);
+		RecursoTelefoniaR2N5(p_rec, &mrec->uIf.sR2N5, &mrec->sGeneral);
 		break;
 
 	case CFG_IFREC_TIPO_BC:
@@ -338,7 +340,7 @@ void CommConversor::Recurso(CommResConfig *p_rec, struct cfgConfigRecurso *mrec,
 	case CFG_IFREC_TIPO_EYM_PP:
 	case CFG_IFREC_TIPO_EYM_MARC:
 		RecursoColateralTPP(p_rec, &mrec->sGeneral.sColateral);
-		RecursoTelefoniaAnalogica(p_rec, &mrec->uIf.sTlf);
+		RecursoTelefoniaAnalogica(p_rec, &mrec->uIf.sTlf, &mrec->sGeneral);
 		break;
 
 	case CFG_IFREC_TIPO_TUN_LOCAL:
@@ -357,6 +359,7 @@ void CommConversor::Recurso(CommResConfig *p_rec, struct cfgConfigRecurso *mrec,
 	case CFG_IFREC_TIPO_DATOS:
 	case CFG_IFREC_TIPO_RRC:
 		break;
+	
 	default:
 		break;
 	}
@@ -460,7 +463,6 @@ void CommConversor::RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRe
 	// SetInt(&mrad->iNumPaquetesSqOff, jradio, "desactivacionSq", INCI_MPSW, "PAQUETES SQ-OFF");
 	SetInt(&mrad->iPttTimeOut, p_rec->radio.timeoutPtt, INCI_MPSW, "TIMEOUT PTT");
 	SetInt(&mrad->iNumFlujosMezcla, p_rec->radio.numFlujosAudio, INCI_MPSW, "NUMERO DE FLUJOS EN MEZCLA");
-	SetInt(&mrad->iRetrasoSqOff, p_rec->radio.retrasoSqOff, INCI_MPSW, "COLA SQUELCH OFF");
 
 	mrad->iEyM = 0;
 	mrad->iTiempoPttBloqueado = 2000;
@@ -469,18 +471,44 @@ void CommConversor::RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRe
 	SetInt((int *)&mrad->KeepAlivePeriod, p_cfg_in->servicios.sip.KeepAlivePeriod, INCI_MPSW, "KeepAlivePeriod");
 	SetInt((int *)&mrad->KeepAliveMultiplier,p_cfg_in->servicios.sip.KeepAliveMultiplier, INCI_MPSW, "KeepAliveMultiplier");
 
-	// mrad->iRetrasoSqOff = 0;
-	if (p_rec->radio.bss == 1)
-	{
-		SetInt((int *)&mrad->iClimaxDelay, p_rec->radio.climaxDelay, INCI_MPSW, "CLIMAX");
-	}
-	else
-	{
-		mrad->iClimaxDelay = 0;
+	/** 20170191. */
+	switch(mrad->iTipoRadio) {
+		case TIPO_RD_LOCAL_FD_SIMPLE:
+		case TIPO_RD_LOCAL_FD_PR:
+			if (p_rec->radio.bss == 1)
+				SetInt((int *)&mrad->iClimaxDelay, p_rec->radio.climaxDelay, INCI_MPSW, "CLIMAX");
+			else
+				mrad->iClimaxDelay = 0;
+			SetInt(&mrad->iRetrasoSqOff, p_rec->radio.retrasoSqOff, INCI_MPSW, "COLA SQUELCH OFF");
+			SetInt((int *)&mrad->iTiempo_VentanaRx, p_rec->radio.tmVentanaRx, INCI_MPSW, "VENTANA ANALISIS BSS");
+			SetInt((int *)&mrad->iTmRetardoFijo, p_rec->radio.tmRetardoFijo, INCI_MPSW, "RETRASO FIJO CLIMAX");
+			break;
+		default:
+			mrad->iClimaxDelay = 0;
+			mrad->iRetrasoSqOff= 0;
+			mrad->iTiempo_VentanaRx = 0;
+			mrad->iTmRetardoFijo = 0;
+			break;
 	}
 
-	SetInt((int *)&mrad->iTiempo_VentanaRx, p_rec->radio.tmVentanaRx, INCI_MPSW, "VENTANA ANALISIS BSS");
-	SetInt((int *)&mrad->iTmRetardoFijo, p_rec->radio.tmRetardoFijo, INCI_MPSW, "RETRASO FIJO CLIMAX");
+	switch(mrad->iTipoRadio) {
+	case TIPO_RD_REMOTO_RX:
+		mgen->iTipo = CFG_REC_TIPO_AUDIO_RX;
+		break;
+	case TIPO_RD_REMOTO_TX:
+		mgen->iTipo = CFG_REC_TIPO_AUDIO_TX;
+		break;
+	default:
+	//case TIPO_RD_LOCAL_SIMPLE:
+	//case TIPO_RD_LOCAL_PR:
+	//case TIPO_RD_LOCAL_FD_SIMPLE:
+	//case TIPO_RD_LOCAL_FD_PR:
+	//case TIPO_RD_REMOTO_RXTX:
+		mgen->iTipo = CFG_REC_TIPO_AUDIO_TXRX;
+		break;
+	}
+	/*****************************************/
+
 	SetInt((int *)&mrad->iBssRtp, p_rec->radio.bssRtp, INCI_MPSW, "BSS EN RTP");
 	SetInt((int *)&mrad->iEvtPTT, p_rec->radio.evtPTT, INCI_MPSW, "GENERACION HISTORICO PTT-SQH");
 	SetInt((int *)&mrad->iTjbd, p_rec->radio.tjbd, INCI_MPSW, "JITTER BUFFER DELAY");
@@ -535,7 +563,7 @@ void CommConversor::ColateralesRadio(CommResRadioColateral *p_col, struct cfgCol
 }
 
 /** */
-void CommConversor::RecursoLcen(CommResConfig *p_rec, struct cfgConfigIfLcen   *mlce)
+void CommConversor::RecursoLcen(CommResConfig *p_rec, struct cfgConfigIfLcen   *mlce, struct cfgConfigGeneralRecurso *mgen)
 {
 	mlce->iUmbralRxTonoLcen = -35;
 	mlce->iNivelTxTonoLcen = -18;
@@ -564,10 +592,15 @@ void CommConversor::RecursoLcen(CommResConfig *p_rec, struct cfgConfigIfLcen   *
 	mlce->iT12 = 200;
 
 	SetInt(&mlce->iT_Release, p_rec->telefonia.it_release, INCI_MPSW, "TIEMPO TONOS RELEASE");
+
+	/* 20170119. */
+	mgen->iRestriccion = 0;
+	// mgen->iEnableRegistro = 0; 
+	/*************/
 }
 
 /** */
-void CommConversor::RecursoTelefoniaR2N5(CommResConfig *p_rec, struct cfgConfigIfR2N5   *mr2n5)
+void CommConversor::RecursoTelefoniaR2N5(CommResConfig *p_rec, struct cfgConfigIfR2N5   *mr2n5, struct cfgConfigGeneralRecurso *mgen)
 {
 	mr2n5->sTiemA.iP1Min = 0;
 	mr2n5->sTiemA.iP1Nom = 0;
@@ -697,10 +730,15 @@ void CommConversor::RecursoTelefoniaR2N5(CommResConfig *p_rec, struct cfgConfigI
 		mr2n5->asRangosDirectosPriv[i].lwFinal = (LongWord)atoi(p_rec->telefonia.ats_rangos_directos_pri[i].final.c_str());
 		mr2n5->asRangosDirectosPriv[i].lwInicial = (LongWord)atoi(p_rec->telefonia.ats_rangos_directos_pri[i].inicial.c_str());
 	}
+
+	/* 20170119. */
+	mgen->iRestriccion = 0;
+	// mgen->iEnableRegistro = 0; 
+	/*************/
 }
 
 /** */
-void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgConfigIfTlf   *mtlf)
+void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgConfigIfTlf   *mtlf, struct cfgConfigGeneralRecurso *mgen)
 {
 	mtlf->iPatronRing = 	0;
 	mtlf->iPeriodoRing = 50;
@@ -725,6 +763,23 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	/** */
 	memcpy(mtlf->szIdRed, p_rec->telefonia.idRed.c_str(), CFG_MAX_LONG_NOMBRE_RED);
 
+	
+	/* 20170119. */
+	switch ( mgen->iTipoIf)
+	{
+	case CFG_IFREC_TIPO_BL:
+		mtlf->iModoEyM = 0;
+		break;
+	case CFG_IFREC_TIPO_BC:
+	case CFG_IFREC_TIPO_AB:
+		mtlf->iDetectVox = 0;
+		break;
+	default:
+		break;
+	}
+	mgen->iRestriccion=0;
+	// mgen->iEnableRegistro = 0;
+	/*************/
 }
 
 /** */

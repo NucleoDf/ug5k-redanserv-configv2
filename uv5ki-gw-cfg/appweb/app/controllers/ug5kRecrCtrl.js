@@ -21,6 +21,9 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     vm.hide = function () { return false; }
     vm.lcol = 0;
 
+    /** */
+    var ar_on_ulises = true;                // Habilita o no el Agente Radio en ULISES
+
     CfgService.opcion(2);
 
     /** Validador de IdRecurso. Actualiza a la ver la URI Local */
@@ -135,7 +138,9 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 2:     // Frecuencia
                 return MantService.hide_on_ulises();
             case 3:     // Tipo de Agente
-                return MantService.hide_on_ulises();
+                if (ar_on_ulises == false)
+                    return MantService.hide_on_ulises();
+                return true;
             case 4:     // URI.
                 return true;
             case 5:     // Enable Registro.
@@ -175,7 +180,9 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     vm.p2_rad_show = function (ind) {
         switch (ind) {
             case 0:         // Tipo Agente
-                return MantService.hide_on_ulises();
+                if (ar_on_ulises == false)
+                    return MantService.hide_on_ulises();
+                return true;
             case 1:         // Opciones de SQH
                 return true;
             case 2:         // Umbral VAD
@@ -210,7 +217,9 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     vm. p3_rad_show = function (ind) {
         switch (ind) {
             case 0:         // Tipo Agente Radio.
-                return MantService.hide_on_ulises();
+                if (ar_on_ulises == false)
+                    return MantService.hide_on_ulises();
+                break;
             case 1:         // Frecuencia
                 return MantService.hide_on_ulises();
         }

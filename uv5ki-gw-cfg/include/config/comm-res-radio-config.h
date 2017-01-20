@@ -99,7 +99,7 @@ public:
 		metodoBss=0;
 		umbralVad=-33;
 		numFlujosAudio=1;
-		tiempoPtt=0;
+		tiempoPtt=200;
 		tmVentanaRx=100;
 		climaxDelay=1;
 		tmRetardoFijo=100;
@@ -172,7 +172,10 @@ public:
 		read_key(base, "metodoBss", metodoBss);
 		read_key(base, "umbralVad", umbralVad);
 		read_key(base, "numFlujosAudio", numFlujosAudio);
-		read_key(base, "tiempoPtt", tiempoPtt);
+		/** 20170119. En REDAN venga lo que venga este valor vale 200 */
+		// read_key(base, "tiempoPtt", tiempoPtt);
+		tiempoPtt=200;
+		/****************/
 		read_key(base, "tmVentanaRx", tmVentanaRx);
 		read_key(base, "climaxDelay", climaxDelay);
 		read_key(base, "tmRetardoFijo", tmRetardoFijo);

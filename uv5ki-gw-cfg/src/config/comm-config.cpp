@@ -194,7 +194,9 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->radio.tmRetardoFijo=0;										// Idem
 			this->radio.bssRtp=0;											// TODO: Quitar...
 			this->radio.retrasoSqOff=0;										// Dejar a 0
-			this->radio.evtPTT=0;											// Dejar a 0
+			/** 20170119. Este campo viene en UmbralTonoPTT. Valores mayores de 0 => evtPtt=1, */
+			this->radio.evtPTT=sres.info.radio.UmbralTonoPTT > 0 ? 1 : 0;
+			/***************************/
 			this->radio.tjbd=30;												// Dejar a 30
 			this->radio.tGRSid=10;											// Dejar a 10
 			this->radio.iEnableGI=sres.info.GrabacionEd137==false ? 0 : 1;	// 

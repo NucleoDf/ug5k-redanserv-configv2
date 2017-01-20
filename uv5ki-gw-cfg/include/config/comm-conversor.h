@@ -41,7 +41,7 @@ protected:
 	void SetTipoSqh(char *actual, int nuevo);
 	void SetTipoConmutacionRadio(char *actual, int nuevo);
 
-		/** */
+	/* **/
 	void ParametrosGlobales();
 	void Servidores();
 	void Recurso(CommResConfig *p_rec, struct cfgConfigRecurso *mrec, bool add=false);
@@ -52,14 +52,14 @@ protected:
 	void RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRecurso *mgen, struct cfgConfigIfRadio   *mrad);
 	void ColateralesRadio(CommResRadioColateral *p_col, struct cfgColateralRadio *mcol);
 
-	void RecursoLcen(CommResConfig *p_rec, struct cfgConfigIfLcen   *mlce);
-	void RecursoTelefoniaR2N5(CommResConfig *p_rec, struct cfgConfigIfR2N5   *mr2n5);
-	void RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgConfigIfTlf   *mtlf);
+	void RecursoLcen(CommResConfig *p_rec, struct cfgConfigIfLcen   *mlce, struct cfgConfigGeneralRecurso *mgen);
+	void RecursoTelefoniaR2N5(CommResConfig *p_rec, struct cfgConfigIfR2N5   *mr2n5, struct cfgConfigGeneralRecurso *mgen);
+	void RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgConfigIfTlf   *mtlf, struct cfgConfigGeneralRecurso *mgen);
 	void RecursoTelefoniaDigital(CommResConfig *p_rec, struct cfgConfigIfRdsi  *mdig);
 
 	void RecursosBorrados();
 	void RecursosAnadidos();
-	bool IsAdd(int grec);		// Mira si el Recurso es A�adido...
+	bool IsAdd(int grec);		// Mira si el Recurso es Añadido...
 
 	void ActualizaSnmpIni();
 	void ActualizaRecordIni();
