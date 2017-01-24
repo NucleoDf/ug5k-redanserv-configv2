@@ -78,6 +78,7 @@ public:
 	static string read_txt_file(string name);
 
 	static bool ip_format_test(string ip);
+	static void tm2String(struct tm* timeptr, string format, string &date);
 };
 
 #endif

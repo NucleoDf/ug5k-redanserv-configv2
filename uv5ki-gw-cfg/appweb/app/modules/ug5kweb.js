@@ -40,8 +40,8 @@ ug5kApp.directive('fileModel', ['$parse', function ($parse) {
          element.popover({ placement: 'top', html: 'true' });
      };
  });
- 
- /** */
+
+/** */
 var ADMIN_PROFILE = 64;
 var ING_PROFILE = 32;
 var GEST_PROFILE = 16;

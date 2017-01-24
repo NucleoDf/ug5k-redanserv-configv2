@@ -1,17 +1,20 @@
 #include "../../include/websrv/uv5kigwcfg-web-app.h"
 
+#define FILEOFVERSION	onfs("/home/serv/versiones.json")
 /** */
 BiteControl *BiteControl::This = NULL;
 
 /** */
 restHandler Uv5kiGwCfgWebApp::_handlers_list;
 web_config  Uv5kiGwCfgWebApp::_web_config;
+webData_VersionNucleoNew Uv5kiGwCfgWebApp::_versiones;
 
 /** */
 Uv5kiGwCfgWebApp::Uv5kiGwCfgWebApp(void)
 {
 	GetHandlers();
 	GetConfig();
+	_versiones.loadfrom(FILEOFVERSION);
 }
 
 /** */
@@ -354,7 +357,8 @@ void Uv5kiGwCfgWebApp::stCb_mtto(struct mg_connection *conn, string user, web_re
 		}
 		else if (levels[2]=="lver") {
 			// TODO: 
-			RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			//RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			RETURN_OK200_RESP(resp, _versiones.JSerialize());
 		}
 		else if (levels[2]=="bite") {
 			P_HIS_PROC->SetEvent(INCI_BITE, user, "");

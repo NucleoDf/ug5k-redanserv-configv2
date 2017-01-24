@@ -376,3 +376,11 @@ void Tools::Dir(vector<string> &lista, string path, string msc)
 	}
 }
 
+/** */
+void Tools::tm2String(struct tm* timeptr, string format, string &date)
+{
+	char buffer [80];
+	strftime (buffer,80,format.c_str(),timeptr);
+	date = string(buffer);
+}
+

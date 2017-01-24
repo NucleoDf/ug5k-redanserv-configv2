@@ -177,36 +177,43 @@
         </table>
     </div>
     <div id="hSoft" data-ng-show="vm.pagina==3">
-        <div class="row">
-            <div class="col-md-3"><label>Version</label></div>
-            <div class="col-md-8"><p>{{gvm.version}}</p></div>
-        </div>
-        <div class="row">
-            <div class="col-md-3"><label translate>MAN_PG03_L00</label></div>
-            <div class="col-md-8"><p>{{vm.std.serv}}</p></div>
-        </div>
-        <div class="row">
-            <div class="col-md-3"><label translate>MAN_PG03_L04</label></div>
-            <div class="col-md-8"><p>{{vm.std.snmp}}</p></div>
-        </div>
-        <div class="row">
-            <div class="col-md-3"><label translate>MAN_PG03_L05</label></div>
-            <div class="col-md-8"><p>{{vm.std.record}}</p></div>
-        </div>
-        <div class="row">
-            <div class="col-md-3"><label translate>MAN_PG03_L03</label></div>
-            <div class="col-md-8"><p data-ng_repeat="line in vm.verbose.lines">{{line.res}}</p></div>
-        </div>
+        <ul class="list-group">
+            <li class="list-group-item ndf-ver-01">{{"Ulises G 5000. Version " + vm.versiones.Version}}</li>
+            <li class="list-group-item">
+                <ul class="list-group">
+                    <li class="list-group-item" data-ng_repeat="comp in vm.versiones.Components">
+                        <button type="button" class="btn btn-default ndf-ver-02" data-toggle="collapse" data-target="#comp-{{$index}}">{{comp.Id + " Ver " + vm.versiones.Version}}</button>
+                        <div id="comp-{{$index}}" class="collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item  ndf-ver-03" data-ng_repeat="file in comp.Files">
+                                    <div class="row">
+                                        <div class="col-md-3">{{vm.verfname(file.Path)}}</div>
+                                        <div class="col-md-2">{{file.Size}}</div>
+                                        <div class="col-md-2">{{file.Date}}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
-
+    <!-- Pantalla para funciones especificas para desarrollo -->
     <div id="Desarrollo" data-ng-show="vm.pagina==5">
+        <h4>Controles Desarrollo</h4>
         <div class="row">
-            <div class="col-md-4"><label>Genera Evento Historico</label></div>
-            <div class="col-md-6"><input type="text" class="form-control input-sm" data-ng-model="vm.historico"/></div>
-            <div class="col-md-2"><button class="btn btn-default" data-ng-click="vm.desarrollo_send_historico()" >Enviar</button></div>
+            <div class="col-md-4">
+                <label>Genera Evento Historico</label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control input-sm" data-ng-model="vm.historico" />
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-default" data-ng-click="vm.desarrollo_send_historico()">Enviar</button>
+            </div>
         </div>
     </div>
-
     <!-- Pantalla Modal BITE -->
     <div id="hBite" class="modal fade" role="dialog" tabindex='-1'>
         <div class="modal-dialog">
@@ -216,14 +223,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-2"><label>Global</label>
+                        <div class="col-md-2">
+                            <label>Global</label>
                         </div>
                         <div class="col-md-8">
                             <p>{{gRes.res}}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2"><label translate>BITE_MSG_02</label> 
+                        <div class="col-md-2">
+                            <label translate>BITE_MSG_02</label>
                         </div>
                         <div class="col-md-8">
                             <p id="p" data-ng-repeat="line in gRes.msg">{{line.res}}</p>
@@ -236,8 +245,63 @@
             </div>
         </div>
     </div>
+    <!-- Pantall Modal Versiones-->
+    <div id="devVersion" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" translate>Versiones de Desarrollo</h4>
+                </div>
+                <div class="modal-body">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Version</label>
+            </div>
+            <div class="col-md-8">
+                <p>{{gvm.version}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label translate>MAN_PG03_L00</label>
+            </div>
+            <div class="col-md-8">
+                <p>{{vm.std.serv}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label translate>MAN_PG03_L04</label>
+            </div>
+            <div class="col-md-8">
+                <p>{{vm.std.snmp}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label translate>MAN_PG03_L05</label>
+            </div>
+            <div class="col-md-8">
+                <p>{{vm.std.record}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label translate>MAN_PG03_L03</label>
+            </div>
+            <div class="col-md-8">
+                <p data-ng_repeat="line in vm.verbose.lines">{{line.res}}</p>
+            </div>
+        </div>
 
-
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default bhis" data-dismiss="modal" translate>BITE_MSG_03</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Para la carga de software -->
     <div id="cargasw" data-ng-show="vm.pagina==4">
         <table class="ug5ktbPre">
             <tr>
@@ -247,10 +311,10 @@
                 <th translate>MAN_PG04_L03</th>
             </tr>
             <tr data-ng-repeat="ver in vm.versiones">
-                <td >{{ver.std}}</td>
-                <td >{{ver.version}}</td>
-                <td >{{ver.fecha}}</td>
-                <td >
+                <td>{{ver.std}}</td>
+                <td>{{ver.version}}</td>
+                <td>{{ver.fecha}}</td>
+                <td>
                     <button class="buttonLargo" data-ng-click="ver.std=='Actual' ? vm.software_load() : vm.software_restore()" data-ng-disabled="gvm.enable(32)==0">
                         {{vm.BtnText(ver)}}
                     </button>
@@ -258,6 +322,5 @@
             </tr>
         </table>
     </div>
-
 
 </section>

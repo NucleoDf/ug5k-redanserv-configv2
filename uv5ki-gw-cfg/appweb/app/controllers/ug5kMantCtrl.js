@@ -3,9 +3,9 @@ angular
 	.module('Ug5kweb')
 	.controller('ug5kMantCtrl', ug5kMantCtrl);
 
-ug5kMantCtrl.$inject = ['$scope', '$q', '$interval', 'transerv', 'dataservice', 'authservice', 'MantService', 'CfgService'/*, 'ngDialog'*/];
+ug5kMantCtrl.$inject = ['$document', '$scope', '$q', '$interval', 'transerv', 'dataservice', 'authservice', 'MantService', 'CfgService'/*, 'ngDialog'*/];
 
-function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice, MantService, CfgService/*, ngDialog*/) {
+function ug5kMantCtrl($document, $scope, $q, $interval, transerv, dataservice, authservice, MantService, CfgService/*, ngDialog*/) {
     var vm = this;
     var simul = true;
 
@@ -88,6 +88,11 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 	vm.myFile = "";
 
     /** */
+	vm.verfname = function (path) {
+	    return path.substring(path.lastIndexOf('/') + 1);;
+	}
+
+    /** Versiones SW para Desarrollo */
 	function vgetVerbose() {
 	    dataservice.mnt_get_version().then(function (response) {
 	        console.log("Verbose: ", response.data);
@@ -95,8 +100,7 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 	    });
 	}
 
-    /** Para carga de Software */
-    /** */
+    /** Versiones Software Control de Configuracion */
 	function vgetVersiones() {
 	    dataservice.mnt_get_versiones().then(function (response) {
 	        console.log("Versiones: ", response.data);
@@ -258,5 +262,14 @@ function ug5kMantCtrl($scope, $q, $interval, transerv, dataservice, authservice,
 	$scope.$on("$destroy", function () {
 	    $interval.cancel(cancelTimer);
 	    MantService.dispose();
+	    $(document).unbind('keypress');
+	});
+
+    /** Bind keypress*/
+	$document.on("keypress", function (event) {
+	    console.log("Keydown..." + event.which);
+	    if (event.which == 118 || event.which==86) {    // Tecla 'v'
+	        $("#devVersion").modal("show");
+	    }
 	});
 }

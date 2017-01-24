@@ -280,4 +280,36 @@ int sistema::ParImpar()
 #endif
 }
 
+/** */
+void sistema::fileattr(string path, string &date, string &size)
+{
+//#ifdef _WIN32
+//			struct _stat _currentMod;
+//			_stat( _fileConfig.c_str(), &_currentMod );
+//			if (_lastMod.st_mtime != _currentMod.st_mtime)
+//			{
+//				_lastMod.st_mtime = _currentMod.st_mtime;
+//				change = true;
+//			}
+//#else
+//			struct stat _currentMod;
+//			lstat( _fileConfig.c_str(), &plog::_lastMod );
+//			if (_lastMod.st_mtime != _currentMod.st_mtime)
+//			{
+//				_lastMod.st_mtime = _currentMod.st_mtime;
+//				change = true;
+//			}
+//#endif // _WIN32
+	struct stat stat_buf;
+    int rc = stat(path.c_str(), &stat_buf);
+	if (rc==0) {
+		size = Tools::itoa(rc==0 ? stat_buf.st_size : 0);
+		struct tm * timeinfo = localtime(&stat_buf.st_ctime); 
+		Tools::tm2String(timeinfo, "%d/%m/%Y", date);
+	}
+	else {
+		size = "0";
+		date = "???";
+	}
+}
 

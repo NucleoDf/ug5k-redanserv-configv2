@@ -2,6 +2,7 @@
 #define _UV5KIGWCFG_WEB_DATA_H_
 
 #include "../base/code-base.h"
+#include "../base/sistema.h"
 #include "../tools/tools.h"
 #include "../rapidjson/document.h"
 #include "../rapidjson/writer.h"
@@ -417,6 +418,83 @@ public:
 	}
 public:
 	vector<webData_line> lst;
+};
+
+/** */
+class webData_VersionNucleoNew : public jData {
+public:
+	/** */
+	class Component : public jData {
+	public:
+		/** */
+		class File : public jData {
+		public:
+			File() {
+			}
+		public:
+			virtual void jread(Value &base){
+				read_key(base, "Path", Path);
+				//read_key(base, "Date", Date);
+				//read_key(base, "Size", Size);
+				sistema::fileattr(onfs(Path), Date, Size);
+			}
+			virtual void jwrite(Writer<StringBuffer> &writer) {
+				write_key(writer, "Path", Path);
+				write_key(writer, "Date", Date);
+				write_key(writer, "Size", Size);
+			}
+		public:
+			string Path;
+			string Date;
+			string Size;
+		};
+
+	public:
+		Component() {
+		}
+	public:
+		virtual void jread(Value &base){
+			read_key(base, "Name", Name);
+			read_key(base, "Id", Id);
+			read_key(base, "Files", Files);
+		}
+		virtual void jwrite(Writer<StringBuffer> &writer) {
+			write_key(writer, "Name", Name);
+			write_key(writer, "Id", Id);
+			write_key(writer, "Files", Files);
+		}
+	public:
+		string Name;
+		string Id;
+		vector <File> Files;
+	};
+
+public:
+	webData_VersionNucleoNew() {
+	}
+public:
+	virtual void jread(Value &base){
+		read_key(base, "Version", Version);
+		read_key(base, "Components", Components);
+	}
+	virtual void jwrite(Writer<StringBuffer> &writer) {
+		write_key(writer, "Version", Version);
+		write_key(writer, "Components", Components);
+	}
+	void loadfrom(string filename) {
+		try {
+			ifstream f(filename.c_str(), ios_base::in);
+			string data,linea;
+			while (std::getline(f, linea))
+				data += linea;
+			JDeserialize(data);
+		}
+		catch(Exception x) {
+		}
+	}
+public:
+	string Version;
+	vector<Component> Components;
 };
 
 #endif

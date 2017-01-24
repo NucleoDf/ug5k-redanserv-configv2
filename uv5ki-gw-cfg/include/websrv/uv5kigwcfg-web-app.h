@@ -98,6 +98,7 @@ private:
 private:
 	static restHandler _handlers_list;
 	static web_config  _web_config;
+	static webData_VersionNucleoNew _versiones;
 };
 
 #endif

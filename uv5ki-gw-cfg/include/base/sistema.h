@@ -81,6 +81,9 @@ public:
 
 	/** */
 	static int ParImpar();
+
+	/** */
+	static void fileattr(string path, string &date, string &size);
 	
 };
 

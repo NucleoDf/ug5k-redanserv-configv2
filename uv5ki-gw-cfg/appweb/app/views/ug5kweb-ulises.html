@@ -13,73 +13,111 @@
     </ul>
 </section>
 <section id="_contenido" class="ulises">
+    <!-- -->
     <div id="pdir" ng-show="vm.pagina==0">
-        <div id="pdir-ip" ng-show="vm.opcion != 4">
-            <p translate>Plan de Direccionamiento IP</p>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th translate>Id</th>
-<!--                        <th translate>Tipo</th>-->
-                        <th translate>IP</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="item in vm.pdir_ip | filter:{ tipohost: vm.opcion }">
-                        <td>
-                            <div>{{item.idhost}}</div>
-                        </td>
-<!--                        <td>
-                            <div>{{item.tipohost}}</div>
-                        </td>-->
-                        <td>
-                            <div>{{item.ipred1}}</div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                </tfoot>
-            </table>
-        </div>
-        <div id="pdir-sip" ng-show="vm.opcion==4">
-            <p translate>Plan de Direccionamiento SIP</p>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th translate>Usuario</th>
-                        <th translate>Abonados</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="item in vm.pdir_sip">
-                        <td>
-                            <div>{{item.idusuario}}</div>
-                        </td>
-                        <td>
-                            <ol>
-                                <li data-ng-repeat="abn in item.array_abonados track by $index" style="list-style-type: none">
-                                    {{abn.prefijo + "-" + abn.abonado}}
+        <div class="row">
+            <div class="col-md-5">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-default " data-toggle="collapse" data-target="#ipt">{{"Plan IP Puestos"}}</button>
+                        <div id="ipt" class="collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item ndf-row" data-ng_repeat="item in vm.pdir_ip | filter:{ tipohost: 0 }">
+                                    <div class="row">
+                                        <div class="col-md-3">{{item.idhost}}</div>
+                                        <div class="col-md-3">{{item.ipred1}}</div>
+                                    </div>
                                 </li>
-                        </ol>                            
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                </tfoot>
-            </table>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-5">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#ipp">{{"Plan IP Pasarelas"}}</button>
+                        <div id="ipp" class="collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item ndf-row" data-ng_repeat="item in vm.pdir_ip | filter:{ tipohost: 1 }">
+                                    <div class="row">
+                                        <div class="col-md-3">{{item.idhost}}</div>
+                                        <div class="col-md-3">{{item.ipred1}}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div id="pdir-opciones" class="opciones, text-center">
-          <ul class="pagination">
-            <li ng-class="{'active': vm.opcion==0}"><a href="" ng-click='vm.Opcion(0)' translate>Plan IP Puestos</a></li>
-            <li ng-class="{'active': vm.opcion==1}"><a href="" ng-click='vm.Opcion(1)' translate>Plan IP Pasarelas</a></li>
-            <li ng-class="{'active': vm.opcion==2}"><a href="" ng-click='vm.Opcion(2)' translate>Plan IP Radios</a></li>
-            <li ng-class="{'active': vm.opcion==3}"><a href="" ng-click='vm.Opcion(3)' translate>Plan IP Telefonos</a></li>
-            <li ng-class="{'active': vm.opcion==4}"><a href="" ng-click='vm.Opcion(4)' translate>Plan SIP</a></li>
-          </ul>
+        <div class="row">
+            <div class="col-md-5">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#ipr">{{"Plan IP Radios"}}</button>
+                        <div id="ipr" class="collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item ndf-row" data-ng_repeat="item in vm.pdir_ip | filter:{ tipohost: 2 }">
+                                    <div class="row">
+                                        <div class="col-md-3">{{item.idhost}}</div>
+                                        <div class="col-md-3">{{item.ipred1}}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-5">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#ipa">{{"Plan IP Telefonos"}}</button>
+                        <div id="ipa" class="collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item ndf-row" data-ng_repeat="item in vm.pdir_ip | filter:{ tipohost: 3 }">
+                                    <div class="row">
+                                        <div class="col-md-3">{{item.idhost}}</div>
+                                        <div class="col-md-3">{{item.ipred1}}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#sip">{{"Plan SIP"}}</button>
+                        <div id="sip" class="collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item" data-ng_repeat="item in vm.pdir_sip">
+                                    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#sip-{{$index}}">{{item.idusuario}}</button>
+                                    <div id="sip-{{$index}}" class="collapse">
+                                        <ul class="list-group">
+                                            <li class="list-group-item ndf-row" data-ng_repeat="abn in item.array_abonados track by $index">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        {{abn.prefijo + "-" + abn.abonado}}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-
+    <!-- -->
     <div id="pasg" ng-show="vm.pagina==1">
+        <!--
         <div id="pasg-usu" ng-show="vm.opcion==0">
             <p translate>Plan de Asignacion de Usuarios</p>
             <table class="table table-striped">
@@ -127,11 +165,12 @@
             </table>
         </div>
         <div id="pasg-opciones" class="opciones, text-center">
-          <ul class="pagination">
-            <li ng-class="{'active': vm.opcion==0}"><a href="" ng-click='vm.Opcion(0)' translate>Usuarios</a></li>
-            <li ng-class="{'active': vm.opcion==1}"><a href="" ng-click='vm.Opcion(1)' translate>Recursos</a></li>
-          </ul>
+            <ul class="pagination">
+                <li ng-class="{'active': vm.opcion==0}"><a href="" ng-click='vm.Opcion(0)' translate>Usuarios</a></li>
+                <li ng-class="{'active': vm.opcion==1}"><a href="" ng-click='vm.Opcion(1)' translate>Recursos</a></li>
+            </ul>
         </div>
+        -->
     </div>
 
     <div id="ats" ng-show="vm.pagina==2">
@@ -155,10 +194,9 @@
                         </td>
                         <td>
                             <ol>
-                                <li data-ng-repeat="rec in item.listarecursos track by $index" style="list-style-type: none">
-                                    {{rec.tipo+"-"+rec.idrec}}
+                                <li data-ng-repeat="rec in item.listarecursos track by $index" style="list-style-type: none">{{rec.tipo+"-"+rec.idrec}}
                                 </li>
-                        </ol>                            
+                            </ol>
                         </td>
                     </tr>
                 </tbody>
@@ -186,10 +224,9 @@
                         </td>
                         <td>
                             <ol>
-                                <li data-ng-repeat="rec in item.listarecursos track by $index" style="list-style-type: none">
-                                    {{rec.tipo+"-"+rec.idrec}}
+                                <li data-ng-repeat="rec in item.listarecursos track by $index" style="list-style-type: none">{{rec.tipo+"-"+rec.idrec}}
                                 </li>
-                        </ol>                            
+                            </ol>
                         </td>
                     </tr>
                 </tbody>
@@ -219,17 +256,15 @@
                         </td>
                         <td>
                             <ol>
-                                <li data-ng-repeat="ope in item.rangosoperador track by $index" style="list-style-type: none">
-                                    {{ope.inicial + "-" + ope.final}}
+                                <li data-ng-repeat="ope in item.rangosoperador track by $index" style="list-style-type: none">{{ope.inicial + "-" + ope.final}}
                                 </li>
-                        </ol>                            
+                            </ol>
                         </td>
                         <td>
                             <ol>
-                                <li data-ng-repeat="ope in item.rangosprivilegiados track by $index" style="list-style-type: none">
-                                    {{ope.inicial + "-" + ope.final}}
+                                <li data-ng-repeat="ope in item.rangosprivilegiados track by $index" style="list-style-type: none">{{ope.inicial + "-" + ope.final}}
                                 </li>
-                        </ol>                            
+                            </ol>
                         </td>
                         <td>
                             <ol>
@@ -237,13 +272,12 @@
                                     <div>{{rut.tiporuta}}</div>
                                     <div>
                                         <ol>
-                                            <li data-ng-repeat="trc in rut.listatroncales" style="list-style-type: none">
-                                                {{trc}}
+                                            <li data-ng-repeat="trc in rut.listatroncales" style="list-style-type: none">{{trc}}
                                             </li>
                                         </ol>
                                     </div>
                                 </li>
-                        </ol>                            
+                            </ol>
                         </td>
                     </tr>
                 </tbody>
@@ -252,11 +286,11 @@
             </table>
         </div>
         <div id="ats-opciones" class="opciones, text-center">
-          <ul class="pagination">
-            <li ng-class="{'active': vm.opcion==0}"><a href="" ng-click='vm.Opcion(0)' translate>Redes</a></li>
-            <li ng-class="{'active': vm.opcion==1}"><a href="" ng-click='vm.Opcion(1)' translate>Troncales</a></li>
-            <li ng-class="{'active': vm.opcion==2}"><a href="" ng-click='vm.Opcion(2)' translate>Numeracion</a></li>
-          </ul>
+            <ul class="pagination">
+                <li ng-class="{'active': vm.opcion==0}"><a href="" ng-click='vm.Opcion(0)' translate>Redes</a></li>
+                <li ng-class="{'active': vm.opcion==1}"><a href="" ng-click='vm.Opcion(1)' translate>Troncales</a></li>
+                <li ng-class="{'active': vm.opcion==2}"><a href="" ng-click='vm.Opcion(2)' translate>Numeracion</a></li>
+            </ul>
         </div>
     </div>
 </section>

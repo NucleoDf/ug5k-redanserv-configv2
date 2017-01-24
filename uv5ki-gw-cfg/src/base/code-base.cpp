@@ -42,11 +42,11 @@ void CodeBase::plogInit()
 	plog::init<plogConsole>("plog_con", plog::verbose, p_consoleAppender);
 	plog::init<plogNetwork>("plog_net", plog::verbose, p_log4viewAppender);
 
-	_plog_iniciado = true;
 	pthread_create(&plog_thread_id, NULL, plog_thread_routine, NULL);
 #if !defined(_WIN32) && !defined(__APPLE__) && !defined(_PPC82xx_)
 	pthread_setname_np(plog_thread_id, id.c_str());
 #endif 
+	_plog_iniciado = true;
 }
 
 /** */
@@ -102,6 +102,10 @@ void CodeBase::_FormatLog(plog::Severity level, const char *file, int line, cons
 pthread_t CodeBase::plog_thread_id;
 std::queue<PLogEvent > CodeBase::plog_queue;
 util::Mutex CodeBase::plog_mutex;
+#if !defined(_PPC82xx_)
+ /** Para pruebas... */
+ int cntEvents = 0;
+#endif
 void *CodeBase::plog_thread_routine(void *arg) 
 {
 #if !defined(_WIN32)
@@ -109,19 +113,29 @@ void *CodeBase::plog_thread_routine(void *arg)
 #endif
 	while (_plog_iniciado == true)
 	{
-		if (!plog_queue.empty())
+		try 
 		{
 			util::MutexLock lock(plog_mutex);
-			cfg.TestCfgChange(); 
-			PLogEvent evento = plog_queue.front();
-			plog_queue.pop();
+			if (!plog_queue.empty())
+			{
+				cfg.TestCfgChange(); 
+				PLogEvent evento = plog_queue.front();
+				plog_queue.pop();
 
-			if (plog::pLogProfiles[(int)evento.sev].toFile)
-				NDFLOG_(plogFile, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
-			if (plog::pLogProfiles[(int)evento.sev].toConsole)
-				NDFLOG_(plogConsole, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
-			if (plog::pLogProfiles[(int)evento.sev].toNetwork)
-				NDFLOG_(plogNetwork, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
+				if (plog::pLogProfiles[(int)evento.sev].toFile)
+					NDFLOG_(plogFile, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
+				if (plog::pLogProfiles[(int)evento.sev].toConsole)
+					NDFLOG_(plogConsole, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
+				if (plog::pLogProfiles[(int)evento.sev].toNetwork)
+					NDFLOG_(plogNetwork, evento.sev, evento.from.c_str(), evento.line) << evento.msg;			
+#if !defined(_PPC82xx_)
+				/** Para pruebas... */
+				if (++cntEvents == 32)
+					throw new Exception("Excepcion provocada para pruebas");
+#endif
+			}
+		}
+		catch(...) {		
 		}
 		Sleep(10);
 	}
