@@ -262,13 +262,13 @@ function ug5kMantCtrl($document, $scope, $q, $interval, transerv, dataservice, a
 	$scope.$on("$destroy", function () {
 	    $interval.cancel(cancelTimer);
 	    MantService.dispose();
-	    $(document).unbind('keypress');
+	    $(document).unbind('keydown');
 	});
 
     /** Bind keypress*/
-	$document.on("keypress", function (event) {
+	$document.on("keydown", function (event) {
 	    console.log("Keydown..." + event.which);
-	    if (event.which == 118 || event.which==86) {    // Tecla 'v'
+	    if ((event.which == 118 || event.which == 86) && event.ctrlKey) {    // Tecla CTRL + 'v'
 	        $("#devVersion").modal("show");
 	    }
 	});

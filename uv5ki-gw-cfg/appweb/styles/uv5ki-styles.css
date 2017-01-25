@@ -409,75 +409,52 @@ section#_ppal #_tabs
 .ulises
 {
 }
-    .ulises p
-    {
-        color: white;
-    	background-color: #C1022C;
-        text-align: center;
-        font-size: 100%;
-        font-weight: bold;
-        margin: 0px;
-        padding: 0px;
-    }
-
-    .ulises #pdir
+    .ulises #pdir,#pasg,#ats
     {
         margin-left: 2em;
     }
 
-        .ulises #pdir .btn
-        {
-            width: 15em;
-            text-align: left;
-        }
-
-        .ulises #pdir .col-md-3
-        {
-            width:8em;
-        }
-
-        .ulises #pdir .ndf-row
-        {
-            margin-left: 2em;
-            padding: 4px;
-            font-size: 85%;
-            color: blue;
-        }
-
-
-    .ulises #pdir-opciones, #pdir-ip
+    .ulises .list-group-item
     {
+        padding: 4px;
+        margin-left: 1em;
     }
 
-    .ulises .pagination
+    .ulises button.level-0
     {
-        margin: 0.5em;
+        min-width: 15em;
+        text-align: left;
     }
 
-    .ulises table
+    .ulises button.level-1
     {
-        width: 80%;
-        margin: 0.5em;
-        margin-left: 10%;
-        border-bottom: 1px solid black;
+        text-align: left;
+        padding: 4px;
+        font-size: 80%;
+        min-width: 8em;
     }
 
-        .ulises table tr td
-        {
-            font-size: 80%;
-            padding: 2px;
-            color: black;
-        }
-
-        .ulises table th:last-child
-        {
-            text-align: left;
-        }
-
-    .ulises .opciones
+    .ulises div.level-1
     {
-        width: 80%;
-        margin-left: 10%;
+        font-size: 80%;
+        color: blue;
+        margin-left: 1em;
+        padding-left: 4px;
+        padding-right: 4px;
+        width:10em;
+    }
+
+    .ulises div.v-align
+    {
+        padding-top: 4px;
+    }
+
+    .ulises button.level-2
+    {
+        min-width: 7em;
+        text-align: left;
+        padding: 4px;
+        font-size: 80%;
     }
 
 .mtto

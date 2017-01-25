@@ -51,8 +51,11 @@ public:
 		{
 			plogInit();
 			LocalConfig::p_cfg = new LocalConfig();
-
+#if defined (_WIN32)
+			bool mode = false;	/** false: REDAN, true: ULISES */
+#else
 			bool mode = LocalConfig::p_cfg->get(strUlises, strItemUlisesModo, "0")=="1"/*.ModoUlises()*/;
+#endif
 
 			PLOG_INFO("%s (%s) CfgServer: (%s) Iniciado en \"%s\". ", 
 				Tools::read_txt_file(ON_WORKING_DIR("VERSION.TXT")).c_str(),  
