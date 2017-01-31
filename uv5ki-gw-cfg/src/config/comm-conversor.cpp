@@ -534,6 +534,9 @@ void CommConversor::RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRe
 			mrad->qidxNdf2Rssi[icad] = (char )0x0F;
 		}
 	}
+
+	/** 20170130. Modo de Calculo Climax */
+	SetInt((int *)&mrad->iModoCalculoClimax, p_rec->radio.iModoCalculoClimax, INCI_MPSW, "PRECISION DE AUDIO");
 }
 
 /** */

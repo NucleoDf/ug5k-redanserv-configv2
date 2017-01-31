@@ -201,12 +201,14 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 return ((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1);
             case 10:        // Tiempo...
                 return (((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1) && parseInt(vm.vdata[9].Value) == 2);
-            case 11:        // GRS Internal DELAY
+            case 11:        // Modo Calculo CLIMAX
+                return ((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1 && parseInt(vm.vdata[9].Value) != 0);
+            case 12:        // GRS Internal DELAY
                 return (parseInt(vm.vdata[0].Value) > 3);
-            case 12:        // Prioridad PTT.
-            case 13:        // Prioridad Session.
+            case 13:        // Prioridad PTT.
+            case 14:        // Prioridad Session.
                 return (parseInt(vm.vdata[0].Value) <= 3);
-            case 14:        // Tabla de Calificacion Radio. Solo en Radios Remotos.
+            case 15:        // Tabla de Calificacion Radio. Solo en Radios Remotos.
                 if (MantService.hide_on_ulises() == false)
                     return false;
                 return (parseInt(vm.vdata[0].Value) > 3);
@@ -615,7 +617,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 break;
             case 2:
                 vm.vdata = [
-					{
+					{ // 0
 					    Name:/*'Tipo de Agente Radio:'*/transerv.translate('RCTRL_P00_TPA'),
 					    Value: vm.rdata.radio.tipo.toString(),
 					    Enable: false,
@@ -640,8 +642,8 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					//    Show: vm.rad_show,
 					//    Val: vm.dval
 					//},
-                    vm.sqh_options(),
-					{
+                    vm.sqh_options(),   // 1
+					{   // 2
 					    Name: /*'Umbral VAD (dbm):'*/transerv.translate('RCTRL_P02_UVAD'),
 					    Value: vm.rdata.radio.umbralVad,
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -650,7 +652,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.vad_val
 					},
-					{
+					{   // 3
 					    Name: /*'Indicacion Salida Audio:'*/transerv.translate('RCTRL_P02_ISDA'),
 					    Value: vm.rdata.radio.ptt.toString(),
 					    Enable: false,
@@ -659,7 +661,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
-					{
+					{   // 4
 					    Name: /*'Tiempo PTT Maximo:'*/transerv.translate('RCTRL_P02_TPTT'),
 					    Value: vm.rdata.radio.tiempoPtt,
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -668,7 +670,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
-					{
+					{   // 5
 					    Name: isLocal() ? /*'Metodos BSS Disponibles:'*/transerv.translate('RCTRL_P02_BSSD') : /*'Método BSS Preferido:'*/transerv.translate('RCTRL_P02_BSSP'),
 					    Value: vm.rdata.radio.metodoBss.toString(),
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -684,7 +686,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
-					{
+					{ // 6
 					    Name: /*'BSS/CLIMAX?:'*/transerv.translate('RCTRL_P02_BSCX'),
 					    Value: vm.rdata.radio.bss.toString(),
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -693,7 +695,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
-					{
+					{ // 7
 					    Name: /*'Ventana BSS (ms):'*/transerv.translate('RCTRL_P02_BSCXW'),
 					    Value: vm.rdata.radio.tmVentanaRx,
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -702,7 +704,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.bssv_val
 					},
-					{
+					{ // 8
 					    Name: /*'BSS COLA SQHELCH (ms):'*/transerv.translate('RCTRL_P02_BSCXQ'),
 					    Value: vm.rdata.radio.retrasoSqOff,
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -711,7 +713,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.bssv_val
 					},
-					{
+					{ // 9
 					    Name: /*'CLIMAX DELAY:'*/transerv.translate('RCTRL_P02_BSCXD'),
 					    Value: vm.rdata.radio.climaxDelay.toString(),
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -720,7 +722,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
-					{
+					{ // 10
 					    Name: /*'TIEMPO (ms):'*/transerv.translate('RCTRL_P02_BSCXT'),
 					    Value: vm.rdata.radio.tmRetardoFijo,
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -729,7 +731,16 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.climaxt_val
 					},
-					{
+					{ // 11
+					    Name: transerv.translate('Metodo de Calculo CLIMAX'),
+					    Value: vm.rdata.radio.iModoCalculoClimax.toString(),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Input: 1,
+					    Inputs: [transerv.translate('Relativo'), transerv.translate('Absoluto')],
+					    Show: vm.p2_rad_show,
+					    Val: vm.dval
+					},
+					{ // 12 <-- 11
 					    Name: /*'GRS INTERNAL DELAY (ms):'*/transerv.translate('RCTRL_P02_BSCXG'),
 					    Value: vm.rdata.radio.tGRSid,
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -738,7 +749,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.climaxt_val
 					},
-					{
+					{ // 13 <-- 12
 					    Name:/*'Prioridad PTT'*/transerv.translate('RCTRL_P02_PTTP'),
 					    Value: vm.rdata.radio.iPttPrio.toString(),
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -753,7 +764,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
-					{
+					{ // 14 <-- 13
 					    Name:/*'Prioridad Session'*/transerv.translate('RCTRL_P02_SESP'),
 					    Value: vm.rdata.radio.iSesionPrio.toString(),
 					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
@@ -765,7 +776,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval
 					},
-					{
+					{ // 15 <-- 14
 					    Name:/*'Tabla QIDX'*/transerv.translate('Calificacion BSS'),
 					    Value: vm.tbQidx(vm.rdata.radio),                           // "00-01-02-03-04-05",
 					    Enable: false,
@@ -1018,9 +1029,10 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 vm.rdata.radio.retrasoSqOff = vm.vdata[8].Value;
                 vm.rdata.radio.climaxDelay = parseInt(vm.vdata[9].Value);
                 vm.rdata.radio.tmRetardoFijo = vm.vdata[10].Value;
-                vm.rdata.radio.tGRSid = vm.vdata[11].Value;
-                vm.rdata.radio.iPttPrio = parseInt(vm.vdata[12].Value);
-                vm.rdata.radio.iSesionPrio = parseInt(vm.vdata[13].Value);
+                vm.rdata.radio.iModoCalculoClimax = vm.vdata[11].Value;
+                vm.rdata.radio.tGRSid = vm.vdata[12].Value;
+                vm.rdata.radio.iPttPrio = parseInt(vm.vdata[13].Value);
+                vm.rdata.radio.iSesionPrio = parseInt(vm.vdata[14].Value);
                 break;
             case 3:
                 vm.rdata.radio.tipo = parseInt(vm.vdata[0].Value);

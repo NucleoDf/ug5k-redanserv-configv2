@@ -221,6 +221,8 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->radio.UmbralTonoPTT = sres.info.radio.UmbralTonoPTT;							// => iNivelTonoPtt
 			this->radio.SupervPortadoraTx = sres.info.radio.SupervPortadoraTx==true ? 1 : 0;		// => iSupervisionPortadoraTx
 			this->radio.SupervModuladoraTx = sres.info.radio.SupervModuladoraTx==true ? 1 : 0;	// => iSupervisionModuladoraTx
+
+			this->radio.iModoCalculoClimax = 0;
 		}
 		else 
 		{

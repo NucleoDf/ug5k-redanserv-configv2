@@ -118,7 +118,8 @@ public:
 		FrqTonoPTT = 0;					
 		UmbralTonoPTT = -15;			 
 		SupervPortadoraTx = 0;		 
-		SupervModuladoraTx = 0;		 
+		SupervModuladoraTx = 0;		
+		iModoCalculoClimax = 0;		// 20170130. Nuevo. 0: Relativo (defaecto), 1: absoluto
 	}
 	~CommResRadio() {
 	}
@@ -151,6 +152,7 @@ public:
 		write_key(writer, "iPttPrio", iPttPrio);
 		write_key(writer, "colateral", colateral);
 		write_key(writer, "iPrecisionAudio", iPrecisionAudio);
+		write_key(writer, "iModoCalculoClimax", iModoCalculoClimax);
 
 		write_key(writer, "FrqTonoSQ", FrqTonoSQ);
 		write_key(writer, "UmbralTonoSQ", UmbralTonoSQ);
@@ -190,6 +192,7 @@ public:
 		read_key(base,"iPttPrio", iPttPrio);
 		read_key(base,"colateral", colateral);
 		read_key(base,"iPrecisionAudio", iPrecisionAudio);
+		read_key(base,"iModoCalculoClimax", iModoCalculoClimax);
 
 		read_key(base,"FrqTonoSQ", FrqTonoSQ);
 		read_key(base,"UmbralTonoSQ", UmbralTonoSQ);
@@ -226,6 +229,9 @@ public:
 	int iPttPrio;
 	CommResRadioColateral colateral;
 	int iPrecisionAudio;
+
+	/** */
+	int iModoCalculoClimax;
 
 	/** Nuevos desde ULISES */
 	int FrqTonoSQ;					
