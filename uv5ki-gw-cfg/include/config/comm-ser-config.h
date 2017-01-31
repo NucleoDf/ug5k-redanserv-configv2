@@ -170,34 +170,41 @@ class CommSerGrab : public jData
 public:
 	CommSerGrab() {
 		sport = 65001;
-		rtsp_ip = "127.0.0.1";
+		rtsp_ip = rtspb_ip = "127.0.0.1";
 		rtsp_port = 554;
 	}
 public:
 	virtual void jwrite(Writer<StringBuffer> &writer) {
-		write_key(writer, "rtsp_uri", rtsp_uri);
 		write_key(writer, "rtsp_ip", rtsp_ip);
-		write_key(writer, "sport", sport);
+		write_key(writer, "rtspb_ip", rtspb_ip);
 		write_key(writer, "rtsp_port", rtsp_port);
+
+		write_key(writer, "rtsp_uri", rtsp_uri);
+		write_key(writer, "sport", sport);
 		write_key(writer, "rtsp_rtp", rtsp_rtp);
 		write_key(writer, "rtp_pl", rtp_pl);
 		write_key(writer, "rtp_sr", rtp_sr);
 	}
 	virtual void jread(Value &base) {
-		read_key(base, "rtsp_uri", rtsp_uri);
 		read_key(base, "rtsp_ip", rtsp_ip);
-		read_key(base, "sport", sport);
+		read_key(base, "rtspb_ip", rtspb_ip);
 		read_key(base, "rtsp_port", rtsp_port);
+
+		read_key(base, "rtsp_uri", rtsp_uri);
+		read_key(base, "sport", sport);
 		read_key(base, "rtsp_rtp", rtsp_rtp);
 		read_key(base, "rtp_pl", rtp_pl);
 		read_key(base, "rtp_sr", rtp_sr);
 	}
 
-public:
-	string rtsp_uri;
+public:	
 	string rtsp_ip;
-	int sport;
+	string rtspb_ip;
 	int rtsp_port;
+
+	/** No se Utilizan */
+	string rtsp_uri;
+	int sport;
 	int rtsp_rtp;
 	int rtp_pl;
 	int rtp_sr;

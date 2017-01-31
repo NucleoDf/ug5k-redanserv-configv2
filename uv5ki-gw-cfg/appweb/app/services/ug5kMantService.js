@@ -8,7 +8,7 @@ MantService.$inject = ['dataservice', 'transerv'];
 /** */
 function MantService(dataservice, transerv) {
 
-	/** */
+    /** */
     var txtStdGeneral = [
         transerv.translate('MANS_MSG_NINI'),        // STDG: No Inicializado
         transerv.translate('MANS_MSG_OK'),          // STDG: Ok
@@ -230,5 +230,12 @@ function MantService(dataservice, transerv) {
                 ntpsync = ntp;
             return ntpsync;
         }
+        , is_redan: function () {
+            return global_modo == "rd";
+        }
+        , is_ulises: function () {
+            return global_modo == "ul";
+        }
+        
     };
 }

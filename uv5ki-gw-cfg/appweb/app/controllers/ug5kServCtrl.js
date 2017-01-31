@@ -3,9 +3,9 @@ angular
 	.module('Ug5kweb')
 	.controller('ug5kServCtrl', ug5kServCtrl);
 
-ug5kServCtrl.$inject = ['$scope', '$route', 'authservice', 'CfgService', 'ValidateService', 'transerv'];
+ug5kServCtrl.$inject = ['$scope', '$route', 'authservice', 'CfgService', 'ValidateService', 'transerv', 'MantService'];
 
-function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, transerv) {
+function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, transerv, MantService) {
     var vm = this;
     var url = '/servicios';
 
@@ -286,6 +286,15 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
 					    Val: ValidateService.ip_val
 					},
 					{
+					    Name: /*'RTSP-IP:'*/transerv.translate('SCTRL_P04_IPB'),
+					    Value: vm.jserv.grab.rtspb_ip,
+					    Enable: authservice.global_enable([ADMIN_PROFILE]),
+					    Input: 0,
+					    Inputs: [],
+					    Show: MantService.is_ulises,
+					    Val: ValidateService.ip_val
+					},
+					{
 					    Name: /*'PUERTO RTSP:'*/transerv.translate('SCTRL_P04_RPORT'),
 					    Value: vm.jserv.grab.rtsp_port,
 					    Enable: authservice.global_enable([ADMIN_PROFILE]),
@@ -337,7 +346,8 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
                 vm.jserv.grab.sport = vm.data[0].Value;
                 vm.jserv.grab.rtsp_uri = vm.data[1].Value;
                 vm.jserv.grab.rtsp_ip = vm.data[2].Value;
-                vm.jserv.grab.rtsp_port = vm.data[3].Value;
+                vm.jserv.grab.rtspb_ip = vm.data[3].Value;
+                vm.jserv.grab.rtsp_port = vm.data[4].Value;
                 //vm.jserv.grab.rtsp_rtp = vm.data[4].Value;
                 //vm.jserv.grab.rtp_pl = vm.data[5].Value;
                 //vm.jserv.grab.rtp_sr = vm.data[6].Value;
