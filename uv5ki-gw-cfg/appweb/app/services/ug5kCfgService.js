@@ -450,5 +450,15 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
         , dualidad: function () {
             return cfg.general.dualidad == 0 ? false : true;
         }
+        , indice_carga: function () {
+            var ic = 0;
+            if (cfg != null) {
+                $.each(cfg.recursos, function (rec) {
+                    ic += 1;
+                });
+            }
+                
+            return ic;
+        }
     };
 }

@@ -81,7 +81,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: /*'Emplazamiento:'*/transerv.translate('ICTRL_01_EMP'),
 					    Value: vm.j_data.emplazamiento,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: false /*authservice.global_enable([ADMIN_PROFILE, ING_PROFILE])*/,
 					    Input: 0,
 					    Inputs: [],
 					    Show: MantService.hide_on_ulises(),
@@ -90,7 +90,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 					{
 					    Name: /*'Identificador:'*/transerv.translate('ICTRL_01_ID'),
 					    Value: vm.j_data.name,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: false /*authservice.global_enable([ADMIN_PROFILE, ING_PROFILE])*/,
 					    Input: 0,
 					    Inputs: [],
 					    Show: true,

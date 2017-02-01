@@ -16,7 +16,7 @@ void HttpClient::ParseHost(string host, string &ip, int &port)
 }
 
 /** */
-ParseResponse HttpClient::SendHttpCmd(string cmd)
+ParseResponse HttpClient::SendHttpCmd(string cmd, int ms_timeout)
 {
 	string ip;
 	int port;
@@ -32,7 +32,7 @@ ParseResponse HttpClient::SendHttpCmd(string cmd)
 			throw Exception("Error al Enviar request: " + cmd);
 
 		string respuesta;
-		sck.Recv_text(respuesta, 5000);
+		sck.Recv_text(respuesta, ms_timeout);
 
 		sck.Close();
 		return ParseResponse(respuesta.c_str());
@@ -45,8 +45,8 @@ ParseResponse HttpClient::SendHttpCmd(string cmd)
 }
 
 /** */
-ParseResponse HttpClient::SendHttpCmd(string metodo, string cmd, string jdata)
+ParseResponse HttpClient::SendHttpCmd(string metodo, string cmd, int ms_timeout, string jdata)
 {
 	string request = metodo + "/" + cmd + " HTTP/1.1\r\nHost: " + server + "\r\nContent-Type: application/json\r\n" + jdata + "\r\n";
-	return SendHttpCmd(request);
+	return SendHttpCmd(request, ms_timeout);
 }

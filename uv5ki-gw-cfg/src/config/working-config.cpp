@@ -59,6 +59,13 @@ EventosHistoricos *WorkingConfig::set(CommConfig &redanCfg, bool actualiza_ini)
 	/** Mandar el SIGNAL USR2 */
 	WorkingThread(WorkingConfig::DelayedSignal, this).Do();
 
+	/** Mandar las señales a los procesos colaterales */
+	if (actualiza_ini==true)
+	{
+		HistClient::p_hist->Signal(LocalConfig().getint(strModulos, strItemModuloSnmp, "65000"));
+		HistClient::p_hist->Signal(LocalConfig().getint(strModulos,strItemModuloGrabador, "65001"));
+	}
+
 	return his;
 }
 

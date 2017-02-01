@@ -140,6 +140,42 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	}
 
     /** */
+	vm.gw_id = function () {
+	    var gen = CfgService.inicio_data_get();
+	    var strid = gen == null ? "" : gen.name;
+	    var strntp = vm.lcfg.ntpsync == 1 ? "S" : "N";
+	    var stridc = "0";   // TODO.
+        
+	    //strid += vm.lcfg.ntpsync == 1 ? " (Sync)" : " (No Sync: " + vm.lcfg.localdate + ")";
+	    //return strid;
+	    //return "ID: " + strid + ", NTP: " + strntp + ", IC: " + stridc + ", LT: " + vm.lcfg.localdate;
+	    return strid;
+	}
+
+    /** */
+	vm.gw_ntp = function () {
+	    return "NTP: " + (vm.lcfg.ntpsync == 1 ? "S" : "N");
+	}
+
+    /** */
+	vm.gw_lt = function () {
+	    return vm.lcfg.localdate
+	}
+
+    /** */
+	vm.gw_ic = function () {
+	    return "IC: " + CfgService.indice_carga().toString();
+	}
+
+    /** */
+	vm.gw_modo = function () {
+	    var modo = MantService.modo();
+	    var modo_redan = MantService.modo_redan();
+	    var vmodo = modo == "ul" ? " U" : modo_redan == "0" ? " R0" : " R1";
+	    return "V: " + vm.version + vmodo;
+	}
+
+    /** */
 	function Confirma(msg) {
 	    if (authservice.check_session() && confirm(msg))
 	        return true;
@@ -200,12 +236,12 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	}
 
     /** */
-	function gw_id() {
-	    var gen = CfgService.inicio_data_get();
-	    var strid = gen == null ? "" : gen.name;
-	    strid += vm.lcfg.ntpsync == 1 ? " (Sync)" : " (No Sync: " + vm.lcfg.localdate + ")";
-	    return strid;
-	}
+	//function gw_id() {
+	//    var gen = CfgService.inicio_data_get();
+	//    var strid = gen == null ? "" : gen.name;
+	//    strid += vm.lcfg.ntpsync == 1 ? " (Sync)" : " (No Sync: " + vm.lcfg.localdate + ")";
+	//    return strid;
+	//}
 
     /** */
 	function gw_cfg() {
@@ -220,7 +256,7 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 
     /** */
 	CfgService.init().then(function () {
-	    vm.gwid = gw_id();
+	    // vm.gwid = gw_id();
 	    vm.cfg_act = gw_cfg();
 	    vm.last_config = JSON.stringify( CfgService.cfg_get() );
 	});
@@ -256,15 +292,18 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
                         if (ant.tim != data/*.lconfig*/.tim) {
 
                             CfgService.restore().then(function () {
-                                vm.gwid = gw_id();
+                                // vm.gwid = gw_id();
                                 vm.cfg_act = gw_cfg();
                             });
                         }
 
                         MantService.modo(data.modo);
+                        MantService.modo_redan(data.modo_redan);
+
                         if (data.std != MantService.global_estado()) {
                             $scope.$broadcast('std_change', [1, 2, 3]);
                         }
+
                         MantService.global_estado(data.std);
                         MantService.ntpsync(data.ntpsync);
                     }
@@ -283,7 +322,7 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	        vm.timer = 0;
 	        vm.date = GetDate();
         }
-	    vm.gwid = gw_id();
+	    // vm.gwid = gw_id();
 	    vm.cfg_act = gw_cfg();
 
 	    /** Supervisar Cambios */

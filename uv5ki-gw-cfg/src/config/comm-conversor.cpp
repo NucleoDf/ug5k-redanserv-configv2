@@ -187,6 +187,9 @@ vector<CommConvertEvent> *CommConversor::convierte(CommConfig &cfgIn, void *p_mc
 		mcfg->sRecurso[igrec].sGeneral.iCfgModoSistema = p_cfg_in->tipo==1 ? 0 : 1;						// 0: Ulises, 1: Redan.
 	}
 
+	/** ULISES */
+	TablasUlises(&p_cfg_in->ulises);
+
 	/** Actualizar datos en INI's */
 	if (actualiza_ini) 
 	{
@@ -194,9 +197,6 @@ vector<CommConvertEvent> *CommConversor::convierte(CommConfig &cfgIn, void *p_mc
 		ActualizaSnmpIni();
 		ActualizaWebIni();
 	}
-
-	/** ULISES */
-	TablasUlises(&p_cfg_in->ulises);
 
 	return &eventos;
 }

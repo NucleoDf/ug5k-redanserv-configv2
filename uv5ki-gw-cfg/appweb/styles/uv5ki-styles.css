@@ -467,7 +467,45 @@ section#_ppal #_tabs
         color: black;
     }
 
+.statusbar
+{
+    clear: both;
+    min-height: 20px;
+    margin-bottom: 1px;
+}
+
+    .statusbar .navbar-text
+    {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        float: right;
+        font-weight: bold;
+        font-size: 80%;
+    }
+
+    .statusbar .navbar-text.pie
+    {
+        color: #C1012C;
+    }
+
+    .statusbar .navbar-text.modo
+    {
+        float: left;
+    }
 #_pie
+{
+    clear: both;
+    /*text-align: center;
+    padding: 6px;
+    color: #C1012C;
+    font-weight: bold;
+    width: 100%;
+    border: 1px solid #C1012C;
+    border-radius: 3px 3px 3px 3px;
+    background-color: transparent;*/
+}
+
+#_pie1
 {
     clear: both;
     text-align: center;

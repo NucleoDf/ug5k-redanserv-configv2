@@ -17,43 +17,46 @@ using namespace std;
 #define strFile							ON_WORKING_DIR("u5kweb-config.ini")
 
 #define strSection						((const char *)"U5KWEB")
-#define strItemWebPort					((const char *)"WEB-PORT")
-#define strItemSessionTime				((const char *)"SESSION-TIME")
-#define strItemPath2Versiones			((const char *)"PATH-VERSIONES")
-#define strItemLog						((const char *)"LOG")
-#define strItemLogin					((const char *)"LOGIN")
-#define strItemFtpGenTimeout			((const char *)"FTP-GEN-TIMEOUT")
-#define strItemFtpSendTimeout			((const char *)"FTP-SEND-TIMEOUT")
-#define strItemHttpGenTimeout			((const char *)"HTTP-GEN-TIMEOUT")
-#define strItemClearResourcesOnBdt		((const char *)"CLEAR-RESOURCES-ONNOBDT")
-
-#define strItemServidor					((const char *)"CONFIG-SERVER")
-#define strItemNetworkInterfaceActiva	((const char *)"ETH-ACTIVA")
-#define strItemConfigFile				((const char *)"CONFIG-FILE")
-#define strItemConfigTSUP				((const char *)"CONFIG-TSUP")
-
-#define strItemNucleoProcName			((const char *)"NUCLEO-PROC-NAME")
-#define strItemSnmpProcName				((const char *)"SNMP-PROC-NAME")
-#define strItemRecordProcName			((const char *)"RECORD-PROC-NAME")
+#define strItemWebPort							((const char *)"WEB-PORT")
+#define strItemSessionTime						((const char *)"SESSION-TIME")
+#define strItemPath2Versiones					((const char *)"PATH-VERSIONES")
+#define strItemLog								((const char *)"LOG")
+#define strItemLogin							((const char *)"LOGIN")
+#define strItemFtpGenTimeout					((const char *)"FTP-GEN-TIMEOUT")
+#define strItemFtpSendTimeout					((const char *)"FTP-SEND-TIMEOUT")
+#define strItemHttpGenTimeout					((const char *)"HTTP-GEN-TIMEOUT")
+#define strItemClearResourcesOnBdt				((const char *)"CLEAR-RESOURCES-ONNOBDT")
+#define strItemServidor							((const char *)"CONFIG-SERVER")
+#define strItemNetworkInterfaceActiva			((const char *)"ETH-ACTIVA")
+#define strItemConfigFile						((const char *)"CONFIG-FILE")
+#define strItemConfigTSUP						((const char *)"CONFIG-TSUP")
+#define strItemNucleoProcName					((const char *)"NUCLEO-PROC-NAME")
+#define strItemSnmpProcName						((const char *)"SNMP-PROC-NAME")
+#define strItemRecordProcName					((const char *)"RECORD-PROC-NAME")
 
 #define strSectionStrings				((const char *)"U5KWEB-KEY-IDENT")
-#define strSectionLast					((const char *)"U5KWEB-LAST")
-#define strLastIpDest					((const char *)"IP-DEST")
-#define strLastIpVia					((const char *)"IP-VIA")
-#define strLastIpSource					((const char *)"IP-SRC")
+#define strSectionLast							((const char *)"U5KWEB-LAST")
+#define strLastIpDest							((const char *)"IP-DEST")
+#define strLastIpVia							((const char *)"IP-VIA")
+#define strLastIpSource							((const char *)"IP-SRC")
 
 #define strModulos						((const char *)"MODULOS")
-#define strItemModuloSnmp				((const char *)"SNMP-CONFIG-FILE")
-#define strItemModuloGrabador			((const char *)"GRAB-CONFIG-FILE")
-#define strItemExeSnmp					((const char *)"SNMP-EXE-FILE")
-#define strItemExeGrabador				((const char *)"GRAB-EXE-FILE")
+#define strItemModuloSnmp						((const char *)"SNMP-CONFIG-FILE")
+#define strItemModuloGrabador					((const char *)"GRAB-CONFIG-FILE")
+#define strItemExeSnmp							((const char *)"SNMP-EXE-FILE")
+#define strItemExeGrabador						((const char *)"GRAB-EXE-FILE")
 
-#define strUlises						((const char *)"ULISES-V5000")
-#define strItemUlisesModo				((const char *)"MODO-ULISES")
+#define strRuntime						((const char *)"G5K-RUNTIME")
+#define strRuntimeItemModoGlobal				((const char *)"MODO")
+#define strRuntimeItemModoRedan					((const char *)"MODO-REDAN")
+#define strRuntimeItemLocalHttpTimeout			((const char *)"LOCAL_HTTP_TIMEOUT")
+#define strRuntimeItemRedanHttpGetTimeout		((const char *)"REDAN_HTTP_GET_TIMEOUT")
+#define strRuntimeItemRedanHttpPostTimeout		((const char *)"REDAN_HTTP_POST_TIMEOUT")
+#define strRuntimeItemUlisesHttpTimeout			((const char *)"ULISES_HTTP_TIMEOUT")
 
 
 #define strFilesSupervidor				((const char *)"FILESUPERVISOR")
-#define strKeySupervisedFile			((const char *)"FILE")
+#define strKeySupervisedFile					((const char *)"FILE")
 //#ifdef _WIN32
 // #define strKeySupervisedFile			((const char *)"WFILE")
 //#else
@@ -63,10 +66,10 @@ using namespace std;
 
 #ifdef _WIN32
  #define strWindowsTest					((const char *)"WINDOWS-TEST")
- #define strItemWindowsTestIp			((const char *)"IP-WINDOWS")
- #define strItemWindowsTestSyncFtp		((const char *)"SINCR-FTP")
- #define strItemWindowsTestSnmpStd		((const char *)"SNMPSTD")
- #define strItemWindowsTestServidor		((const char *)"SINCR-SERV")
+ #define strItemWindowsTestIp					((const char *)"IP-WINDOWS")
+ #define strItemWindowsTestSyncFtp				((const char *)"SINCR-FTP")
+ #define strItemWindowsTestSnmpStd				((const char *)"SNMPSTD")
+ #define strItemWindowsTestServidor				((const char *)"SINCR-SERV")
 #endif
 
 #define ON_SWREP(p)						(LocalConfig::onswrep(p).c_str())
@@ -200,6 +203,9 @@ public:
 public:
 	string get(string section, string key, string def="") {
 		return GetIniSetting(ini, section.c_str(), key.c_str(), def.c_str());
+	}
+	int getint(string section, string key, string def="") {
+		return atoi(get(section, key, def).c_str());
 	}
 	INISection &get(string section) {
 		return ini[section.c_str()];

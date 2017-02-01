@@ -190,12 +190,13 @@ void SupervisedFile::SyncToRemote(string ipRemote)
 */
 bool SupervisedFile::RemoteLock(string httpHost)
 {
+	
 	/** Generar el comando y Espera Respuesta... */
 	string request = "PUT /" + string(CPU2CPU_MSG) + "/" + string(CPU2CPU_MSG_REMOTE_LOCK) + " HTTP/1.1\r\n" + 
 		"Host: " + httpHost + 
 		"\r\n\r\n" + 
 		_dstpath;
-	ParseResponse response = HttpClient(httpHost).SendHttpCmd(request);
+	ParseResponse response = HttpClient(httpHost).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemLocalHttpTimeout, "5000"));
 	if (response.Status() != "200")
 	{
 		throw Exception("REQUEST ERROR: PUT /" + string(CPU2CPU_MSG) + "/" + string(CPU2CPU_MSG_REMOTE_LOCK) + " Host: " + httpHost +  ". " + response.Status());
@@ -212,7 +213,7 @@ bool SupervisedFile::RemoteUnlock(string httpHost)
 		"Host: " + httpHost + 
 		"\r\n\r\n" +
 		_dstpath;
-	ParseResponse response = HttpClient(httpHost).SendHttpCmd(request);
+	ParseResponse response = HttpClient(httpHost).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemLocalHttpTimeout, "5000"));
 	if (response.Status() != "200")
 	{
 		throw Exception("REQUEST ERROR: PUT /" + string(CPU2CPU_MSG) + "/" + string(CPU2CPU_MSG_REMOTE_LOCK) + " Host: " + httpHost +  ". " + response.Status());

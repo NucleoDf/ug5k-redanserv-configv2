@@ -65,7 +65,7 @@
             <div id="_tit_ppal">
 <!--                <h2>Ulises G 5000</h2>-->
                 <h1 translate><mark>INDEX_TITULO</mark></h1>
-                <p>{{gvm.gwid}}</p>
+                <p>{{gvm.gw_id()}}</p>
                 <p>{{gvm.cfg_act}}</p>
             </div>
             <div id="_contSupDrcha">
@@ -127,13 +127,20 @@
                 </li>
             </ul>
         </nav>
-
         <section id="_ppal">
             <div id="_ppal_view" data-ng-view></div>
         </section>
-
-        <footer id="_pie" translate>INDEX_PIE</footer>
+        <footer id="_pie">
+            <div>
+            <nav class="statusbar navbar navbar-default">
+                <p class="navbar-text">{{gvm.gw_ic()}}</p>
+                <p class="navbar-text">{{gvm.gw_ntp()}}</p>
+                <p class="navbar-text">{{gvm.gw_lt()}}</p>
+                <p class="navbar-text pie" translate>INDEX_PIE</p>
+                <p class="navbar-text modo">{{gvm.gw_modo()}}</p>
+            </nav>
+                </div>
+        </footer>
     </div>
-
 </body>
 </html>

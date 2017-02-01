@@ -21,8 +21,8 @@ public:
 	~HttpClient(void){}
 
 public:
-	ParseResponse SendHttpCmd(string cmd);
-	ParseResponse SendHttpCmd(string metodo, string cmd, string jdata="");
+	ParseResponse SendHttpCmd(string cmd, int ms_timeout);
+	ParseResponse SendHttpCmd(string metodo, string cmd, int ms_timeout, string jdata="");
 
 public:
 	static void ParseHost(string host, string &ip, int &port);

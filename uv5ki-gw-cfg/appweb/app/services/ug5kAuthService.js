@@ -15,14 +15,16 @@ function authservice(MantService, $q, $location, $rootScope) {
         , ProfilePermission: ProfilePermission
         , Confirma: Confirma
         , global_enable: function (perfiles) {
-            if (ProfilePermission(true, perfiles)==false)
+
+            if (ProfilePermission(true, perfiles) == false)
                 return false;
-            if (MantService.modo() == "ul") {
-                if (MantService.global_estado() != -3)              // En ULISES solo si estoy aislado.
+
+            if (MantService.modo() == "ul" || MantService.modo_redan()=="1") {
+                if (MantService.global_estado() != -3)              // En ULISES o REDAN  MODO 1, solo si estoy aislado.
                     return false;
             }
             else {
-                if ( MantService.global_estado() != -3  &&          // En REDAN si estoy conectado pero no sincronizado no dejo cambiar.
+                if ( MantService.global_estado() != -3  &&          // En REDAN MODO 0 si estoy conectado pero no sincronizado no dejo cambiar.
                     MantService.ntpsync() == 0)
                     return false;
             }

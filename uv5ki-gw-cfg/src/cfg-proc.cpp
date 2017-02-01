@@ -142,7 +142,7 @@ void CfgProc::GeneraAvisosCpu(string host, string cmd)
 {
 	/** Generar el comando y Espera Respuesta... */
 	string request = "PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " HTTP/1.1\r\nHost: " + host + "\r\nContent-Type: application/json\r\n\r\n";
-	ParseResponse response = HttpClient(host).SendHttpCmd(request);
+	ParseResponse response = HttpClient(host).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemLocalHttpTimeout, "5000"));
 	if (response.Status() != "200")
 	{
 		throw Exception("REQUEST ERROR: PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " Host: " + host +  ". " + response.Status());
@@ -189,12 +189,14 @@ void JsonClientProc::Run()
 	SetId("JsonClientProc");
 	PLOG_INFO("JsonClientProc (%d) running...", pid());
 	modo="rd";
+	_last_cfgr_time="";
 
 	/** Leo los datos del Hardware */
 	sistema::GetWorkingIpAddressAndName(_ip_propia, hwServer, hwName);
 	PLOG_INFO("SoapClientProc running. GetWorkingIpAddressAndName (%s-%s-%s).", _ip_propia.c_str(), hwServer.c_str(), hwName.c_str());
 
 	_maxticks = (atoi(LocalConfig::p_cfg->get(strSection, strItemConfigTSUP).c_str())*1000)/HTTP_CLIENT_TICK;
+	_modo_redan = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoRedan);
 	_cntticks = 0;
 
 	p_working_config->load_from(LAST_CFG);
@@ -260,7 +262,7 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 {
 	string path = "/configurations/" + cfg + "/gateways/" + _ip_propia + "/all";
 	string request = "GET " + path + " HTTP/1.1\r\nHost: " + SERVER_URL /*_host_config*/ + "\r\nContent-Type: application/json\r\n\r\n";
-	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request);
+	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemRedanHttpGetTimeout, "5000"));
 	if (response.Status() != "200")
 	{
 		throw Exception("REQUEST ERROR: GET " + path + 
@@ -290,58 +292,78 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 void JsonClientProc::ChequearConfiguracion() 
 {
 	string request = "GET /gateways/" + _ip_propia + "/" + MAIN_TEST_CONFIG + " HTTP/1.1\r\nHost: " + SERVER_URL/*_host_config*/ + "\r\nContent-Type: application/json\r\n\r\n";
-	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request);
+	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemRedanHttpGetTimeout, "5000"));
 	if (response.Status() != "200")
 	{
 		throw Exception("REQUEST ERROR: GET /" + _ip_propia + "/" + MAIN_TEST_CONFIG + 
 			" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.Status() + ":" + response.StatusText());
 	}
 
-	//CommConfig cfgRemota(response.Body());
-	//if (cfgRemota.idConf == "-1")
-	//	StdSincrSet(slcNoBdt);
-	//else if (cfgRemota.idConf == "-2")
-	//	StdSincrSet(slcNoActiveCfg);
-	//else if (cfg_redan == cfgRemota) 
-	//	StdSincrSet(slcSincronizado);
-	//else if (cfg_redan < cfgRemota)
-	//	AvisaPideConfiguracion(cfgRemota.idConf);
-	//else
-	//	StdSincrSet(slcConflicto);
 	RedanTestComm cfgRemota(response.Body());
-	if (cfgRemota.idConf == "-1")
-		StdSincrSet(slcNoBdt);
-	else if (cfgRemota.idConf == "-2")
-		StdSincrSet(slcNoActiveCfg);
-	else if (cfgRemota.isEqual(p_working_config->config/*cfg_redan*/)) 
-		StdSincrSet(slcSincronizado);
-	else if (cfgRemota.isNewer(p_working_config->config/*cfg_redan*/))
-		AvisaPideConfiguracion(cfgRemota.idConf);
-	else
-		StdSincrSet(slcConflicto);
 
+	if (_modo_redan=="0") 
+	{
+		if (cfgRemota.idConf == "-1")
+			StdSincrSet(slcNoBdt);
+		else if (cfgRemota.idConf == "-2")
+			StdSincrSet(slcNoActiveCfg);
+		else if (cfgRemota.isSameTime(p_working_config->config/*cfg_redan*/)) {
+			p_working_config->config.idConf = cfgRemota.idConf;
+			StdSincrSet(slcSincronizado);
+		}
+		else if (cfgRemota.isNewer(p_working_config->config/*cfg_redan*/))
+			AvisaPideConfiguracion(cfgRemota.idConf);
+		else
+			StdSincrSet(slcConflicto);
+	}
+	else if (_modo_redan == "1")
+	{
+		if (cfgRemota.idConf == "-1")
+			StdSincrSet(slcNoBdt);
+		else if (cfgRemota.idConf == "-2")
+			StdSincrSet(slcNoActiveCfg);
+		else if (cfgRemota.isSameTime(p_working_config->config/*cfg_redan*/)) {
+			p_working_config->config.idConf = cfgRemota.idConf;
+			StdSincrSet(slcSincronizado);
+		}
+		else 
+			AvisaPideConfiguracion(cfgRemota.idConf);
+	}
+	else 
+	{
+		PLOG_ERROR("JsonClientProc::ChequearConfiguracion. ERROR. MODO-REDAN=%s. No es un valor valido.", _modo_redan.c_str());
+	}
+	
+	_last_cfgr_time = cfgRemota.fechaHora;
 }
 
 /** */
 void JsonClientProc::SubirConfiguracion()
 {
-	string cfgname = p_working_config->config/*cfg_redan*/.idConf;
-	string cfg = p_working_config->config/*cfg_redan*/.JSerialize();
-
-	string path = "/configurations/" + cfgname + "/gateways/" + _ip_propia + "/all";
-	string request = "POST " + path + " HTTP/1.1\r\nHost: " + SERVER_URL/*_host_config*/ + "\r\nContent-Type: application/json; charset=utf-8\r\n" +
-		"Content-Length: " + Tools::Int2String((int )cfg.size()) + "\r\n\r\n" + 	cfg + "\r\n";
-	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request);
-	if (response.Status() != "200")
+	if (_modo_redan == "0")
 	{
-		throw Exception("REQUEST ERROR: POST " + path + 
-			" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.Status() + ":" + response.StatusText());
-	}
+		string cfgname = p_working_config->config/*cfg_redan*/.idConf;
+		string cfg = p_working_config->config/*cfg_redan*/.JSerialize();
 
-	RedanTestComm cfgRemota(response.Body());
-	p_working_config->TimeStamp(cfgRemota);
-	p_working_config->save_to(LAST_CFG);
-	PLOG_INFO("Configuracion Enviada Correctamente (%s).", cfgRemota.fechaHora.c_str());
+		string path = "/configurations/" + cfgname + "/gateways/" + _ip_propia + "/all";
+		string request = "POST " + path + " HTTP/1.1\r\nHost: " + SERVER_URL/*_host_config*/ + "\r\nContent-Type: application/json; charset=utf-8\r\n" +
+			"Content-Length: " + Tools::Int2String((int )cfg.size()) + "\r\n\r\n" + 	cfg + "\r\n";
+		ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemRedanHttpPostTimeout, "5000"));
+		if (response.Status() != "200")
+		{
+			throw Exception("REQUEST ERROR: POST " + path + 
+				" Host: " + SERVER_URL/*_host_config*/ +  ". " + response.Status() + ":" + response.StatusText());
+		}
+
+		RedanTestComm cfgRemota(response.Body());
+		p_working_config->TimeStamp(cfgRemota);
+		p_working_config->save_to(LAST_CFG);
+		PLOG_INFO("Configuracion Enviada Correctamente (%s).", cfgRemota.fechaHora.c_str());
+	}
+	else 
+	{
+		PLOG_ERROR("JsonClientProc::SubirConfiguracion. ERROR. MODO-REDAN=%s. No se puede subir configuraciones en este modo.", _modo_redan.c_str());
+	}
 }
 
 /** */
@@ -367,6 +389,7 @@ void SoapClientProc::Run()
 	SetId("SoapClientProc");
 	PLOG_INFO("SoapClientProc (%d) running...", pid());
 	modo="ul";
+	_last_cfgr_time = "";
 
 	_maxticks = (atoi(LocalConfig::p_cfg->get(strSection, strItemConfigTSUP).c_str())/*.ConfigTsup()*/*1000)/HTTP_CLIENT_TICK;
 	_cntticks = 0;
@@ -453,7 +476,7 @@ string SoapClientProc::getXml(string proc, string p1, string p2, string p3)
 		"\r\nContent-Type: application/x-www-form-urlencoded\r\n" +
 		"Content-Length: " + Tools::Int2String((int )data.size()) + 
 		"\r\n\r\n" + 	data /*+ "\r\n"*/;
-	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request);
+	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemUlisesHttpTimeout, "5000"));
 	if (response.Status() != "200")
 	{
 		PLOG_DEBUG("SoapClientProc::getXml: %s", response.Status().c_str());

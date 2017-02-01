@@ -29,7 +29,7 @@ class CommConfig : public jData
 public:
 	CommConfig() {
 		/** Modo para las configuraciones por defecto */
-		tipo = LocalConfig::p_cfg->get(strUlises, strItemUlisesModo, "0")=="1" ? 1 : 0;
+		tipo = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoGlobal, "0")=="1" ? 1 : 0;
 		idConf=string("defecto_") + (tipo==0 ? string("redan") : string("ulises"));
 		fechaHora = Tools::Ahora_Servidor();
 	}
@@ -138,6 +138,9 @@ public:
 public:
 	bool isEqual(CommConfig &otra) {
 		return (idConf == otra.idConf && fechaHora == otra.fechaHora) ? true : false;
+	}
+	bool isSameTime(CommConfig &otra) {
+		return (fechaHora == otra.fechaHora) ? true : false;
 	}
 	bool isNewer(CommConfig &otra) {
 		struct tm time_l,time_o;

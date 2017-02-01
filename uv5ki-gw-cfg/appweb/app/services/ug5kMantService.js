@@ -99,6 +99,7 @@ function MantService(dataservice, transerv) {
     var global_modo = "rd";
     var global_std = -1;
     var ntpsync = 0;
+    var modo_redan = "0";
 
     /** */
     function defMantStd() {
@@ -214,6 +215,12 @@ function MantService(dataservice, transerv) {
             if (md != undefined)
                 global_modo = md;
             return global_modo;
+        }
+        /** */
+        , modo_redan: function (md) {
+            if (md != undefined)
+                modo_redan = md;
+            return modo_redan;
         }
         /** */
         , hide_on_ulises: function () {

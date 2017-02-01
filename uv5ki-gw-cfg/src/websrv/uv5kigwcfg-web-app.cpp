@@ -148,7 +148,7 @@ void Uv5kiGwCfgWebApp::stCb_tses(struct mg_connection *conn, string user, web_re
 		int std;
 		string cfg_name, cfg_time;
 		P_CFG_PROC->IdConfig(std, cfg_name, cfg_time);
-		webData_tses data(std, cfg_name, cfg_time, P_CFG_PROC->Modo());
+		webData_tses data(std, cfg_name, cfg_time, P_CFG_PROC->Modo(), _versiones.Version);
 		RETURN_OK200_RESP(resp, data.JSerialize());
 	}
 #if LOCAL_TEST
@@ -488,7 +488,9 @@ void *Uv5kiGwCfgWebApp::ConfigSync(void* arg)
 			if (ipColateral != "") 
 			{
 				ParseResponse resp = HttpClient(ipColateral).SendHttpCmd("PUT", 
-					string(CPU2CPU_MSG)+ "/" + string(CPU2CPU_MSG_CAMBIO_CONFIG), P_WORKING_CONFIG->JConfig());
+					string(CPU2CPU_MSG)+ "/" + string(CPU2CPU_MSG_CAMBIO_CONFIG), 
+					LocalConfig().getint(strRuntime, strRuntimeItemLocalHttpTimeout, "5000"),
+					P_WORKING_CONFIG->JConfig());
 				if (resp.Status() != "200")
 					PLOG_ERROR("Uv5kiGwCfgWebApp::ConfigSync. HTTP-ERROR %s: <%s>", resp.Status().c_str(), resp.Body().c_str());
 			}

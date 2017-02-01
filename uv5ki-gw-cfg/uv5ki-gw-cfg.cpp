@@ -54,13 +54,13 @@ public:
 #if defined (_WIN32)
 			bool mode = false;	/** false: REDAN, true: ULISES */
 #else
-			bool mode = LocalConfig::p_cfg->get(strUlises, strItemUlisesModo, "0")=="1"/*.ModoUlises()*/;
+			bool mode = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoGlobal, "0")=="1"/*.ModoUlises()*/;
 #endif
+			string redan_mode = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoRedan, "0");
 
 			PLOG_INFO("%s (%s) CfgServer: (%s) Iniciado en \"%s\". ", 
 				Tools::read_txt_file(ON_WORKING_DIR("VERSION.TXT")).c_str(),  
-				mode==false ? "REDAN" : "ULISES", acBuildString, WORKING_DIR);
-			PLOG_INFO("ENTER para SALIR.");
+				mode==false ? string("REDAN-" + redan_mode).c_str() : "ULISES", acBuildString, WORKING_DIR);
 
 			/** Inicializacion Comun */
 			Uv5kiGwCfgWebApp webApp;

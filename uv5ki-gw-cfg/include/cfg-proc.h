@@ -73,6 +73,7 @@ public:
 	string Modo() {
 		return modo;
 	}
+	string LastServCfgTime(){return _last_cfgr_time;}
 
 protected:
 	void StdSincrSet(eStdLocalConfig nstd/*, jgw_config &local*/);
@@ -93,7 +94,7 @@ protected:
 	static string hwIp;
 	static string hwName;
 	static string hwServer;
-
+	string _last_cfgr_time;
 };
 
 
@@ -103,6 +104,7 @@ class JsonClientProc : public CfgProc
 public:
 	JsonClientProc(void) {
 		p_working_config = new WorkingConfig(cfgRedan);
+		_modo_redan = "0";
 	}
 	~JsonClientProc(void){};
 
@@ -117,6 +119,7 @@ protected:
 
 private:
 	// CommConfig cfg_redan;
+	string _modo_redan;
 };
 
 /** */

@@ -308,7 +308,7 @@ protected:
 class webData_tses : public jData
 {
 public:
-	webData_tses(int parStd=0, string parIdc="IDC_IDC", string parTim="TIM_TIM", string parModo="rd");
+	webData_tses(int parStd=0, string parIdc="IDC_IDC", string parTim="TIM_TIM", string parModo="rd", string version="0.0");
 	webData_tses(string jData) {
 		JDeserialize(jData);
 	}
@@ -332,8 +332,10 @@ private:
 	string tim;
 	string ver;
 	string modo;
+	string modo_redan;
 	int ntpsync;
 	string localdate;
+	string timr;
 #if LOCAL_TEST_1
 	webData_line msg;
 	vector<string> val_prueba1;

@@ -80,7 +80,7 @@ public:
 		nivelIncidencias = 0;
 
 		/** En Modo ULISES la configuracion por defecto es NoDual en Redan es Dual */
-		dualidad = LocalConfig::p_cfg->get(strUlises, strItemUlisesModo, "0")=="1" ? 0 : 1;
+		dualidad = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoGlobal, "0")=="1" ? 0 : 1;
 
 		if (this->dualidad==0)
 		{
