@@ -1,5 +1,5 @@
 {
-	"Version" : "2.0",
+	"Version" : "BETA12",
 	"Components" : [
 		{
 			"Name": "UG5K-Linux",
@@ -13,86 +13,103 @@
 			"Files" : [
 				{
 					"Path": "/usr/bin/nucleopsrla",
+					"Modo": 1,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/bin/rclcen",
+					"Modo": 1,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/bin/rcr2n5",
+					"Modo": 1,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/bin/rcradio",
+					"Modo": 1,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/bin/rctlf",
+					"Modo": 1,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/bin/servdsp",
+					"Modo": 2,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/lib/modules/2.4.32/misc/82xx_spi.o",
+					"Modo": 3,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/lib/modules/2.4.32/misc/eeprom.o",
+					"Modo": 3,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/lib/modules/2.4.32/misc/esdiscretas.o",
+					"Modo": 3,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/lib/modules/2.4.32/misc/hpidsp.o",
+					"Modo": 3,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/lib/modules/2.4.32/misc/mtifm.o",
+					"Modo": 3,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/lib/modules/2.4.32/misc/pcm.o",
+					"Modo": 3,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/lib/modules/2.4.32/misc/risctimers.o",
+					"Modo": 3,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/home/cd40cgw/cgw6747.bin",
+					"Modo": 4,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/lib/libeXosip2.so.6",
+					"Modo": 0,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/lib/libosip2.so.6",
+					"Modo": 0,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/lib/libosipparser2.so.6",
+					"Modo": 0,
 					"Date": "",
 					"Size": ""
 				}
@@ -104,6 +121,7 @@
 			"Files" : [
 				{
 					"Path": "/home/serv/uvki-gwser",
+					"Modo": 1,
 					"Date": "",
 					"Size": ""
 				}
@@ -115,21 +133,25 @@
 			"Files" : [
 				{
 					"Path": "/home/snmp/ug5ksnmp",
+					"Modo": 1,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/lib/libagent++.so",
+					"Modo": 0,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/lib/libdes.so",
+					"Modo": 0,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/lib/libsnmp++.so",
+					"Modo": 0,
 					"Date": "",
 					"Size": ""
 				}
@@ -141,6 +163,7 @@
 			"Files" : [
 				{
 					"Path": "/home/rec/ug5krec",
+					"Modo": 1,
 					"Date": "",
 					"Size": ""
 				}

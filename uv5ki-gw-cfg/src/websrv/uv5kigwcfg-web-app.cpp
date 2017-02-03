@@ -14,7 +14,7 @@ Uv5kiGwCfgWebApp::Uv5kiGwCfgWebApp(void)
 {
 	GetHandlers();
 	GetConfig();
-	_versiones.loadfrom(FILEOFVERSION);
+	// _versiones.loadfrom(FILEOFVERSION);
 }
 
 /** */
@@ -147,6 +147,9 @@ void Uv5kiGwCfgWebApp::stCb_tses(struct mg_connection *conn, string user, web_re
 	{	// Enlazar con los datos reales en el constructor...
 		int std;
 		string cfg_name, cfg_time;
+		if (_versiones.isLoaded()==false) {
+			_versiones.loadfrom(FILEOFVERSION);
+		}
 		P_CFG_PROC->IdConfig(std, cfg_name, cfg_time);
 		webData_tses data(std, cfg_name, cfg_time, P_CFG_PROC->Modo(), _versiones.Version);
 		RETURN_OK200_RESP(resp, data.JSerialize());
@@ -358,6 +361,9 @@ void Uv5kiGwCfgWebApp::stCb_mtto(struct mg_connection *conn, string user, web_re
 		else if (levels[2]=="lver") {
 			// TODO: 
 			//RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
+			if (_versiones.isLoaded()==false) {
+				_versiones.loadfrom(FILEOFVERSION);
+			}
 			RETURN_OK200_RESP(resp, _versiones.JSerialize());
 		}
 		else if (levels[2]=="bite") {

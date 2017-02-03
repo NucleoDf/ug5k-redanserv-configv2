@@ -452,13 +452,35 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
         }
         , indice_carga: function () {
             var ic = 0;
+            var nr = 0;
             if (cfg != null) {
-                $.each(cfg.recursos, function (rec) {
-                    ic += 1;
+                $.each(cfg.recursos, function (index) {
+                    var rec = cfg.recursos[index];
+                    nr += 1;
+                    if (rec.Radio_o_Telefonia == 1) {
+                        switch (rec.radio.tipo) {
+                            case 0: // Radio Local Simple o P/R
+                            case 1:
+                                ic += (rec.radio.iPrecisionAudio == 0 ? 2 : 1);
+                                break;
+                            case 2: // Radio Local FD Simple o P/R
+                            case 3:
+                                ic += 8;
+                                break;
+                            case 4: // Radio Remota.
+                            case 5:
+                            case 6:
+                                ic += (rec.radio.iPrecisionAudio == 0 ? 2 : 1);
+                                break;
+                        }
+                    }
+                    else if (rec.Radio_o_Telefonia == 2) {
+                        ic += 1;
+                    }
                 });
             }
                 
-            return ic;
+            return nr.toString() + "/" + ic.toString();
         }
     };
 }

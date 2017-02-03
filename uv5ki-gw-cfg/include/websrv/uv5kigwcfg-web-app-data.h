@@ -436,9 +436,11 @@ public:
 		public:
 			virtual void jread(Value &base){
 				read_key(base, "Path", Path);
+				read_key(base, "Modo", Modo);
 				//read_key(base, "Date", Date);
 				//read_key(base, "Size", Size);
-				sistema::fileattr(onfs(Path), Date, Size);
+				sistema::fileattr(onfs(Path), Modo, Date, Size);
+				Sleep(1);
 			}
 			virtual void jwrite(Writer<StringBuffer> &writer) {
 				write_key(writer, "Path", Path);
@@ -449,6 +451,7 @@ public:
 			string Path;
 			string Date;
 			string Size;
+			int Modo;
 		};
 
 	public:
@@ -493,6 +496,9 @@ public:
 		}
 		catch(Exception x) {
 		}
+	}
+	bool isLoaded() {
+		return Components.size()==0 ? false : true;
 	}
 public:
 	string Version;

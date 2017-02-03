@@ -1,11 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <map>
 
 #include "../../include/base/sistema.h"
 #include "../../include/config/local-config.h"
 
 #define SIGU5K01        40
+
+/*******************************************************/
+class MonthNameConv
+{
+public:
+	MonthNameConv() {
+		months["Dec"]="12";
+		months["Nov"]="11";
+		months["Oct"]="10";
+		months["Sep"]="09";
+		months["Aug"]="08";
+		months["Jul"]="07";
+		months["Jun"]="06";
+		months["May"]="05";
+		months["Apr"]="04";
+		months["Mar"]="03";
+		months["Feb"]="02";
+		months["Jan"]="01";
+	}
+public:
+	string translate(string name) {
+		map<string,string>::iterator it = months.find(name);
+		if (it != months.end())
+			return it->second;
+		return name;
+	}
+private:
+	map<string, string> months;
+};
+/*******************************************************/
+
+
 /**
 */
 sistema::sistema(void)
@@ -28,7 +61,7 @@ void sistema::ExecuteCommand(char *cmd)
 }
 
 /** */
-string sistema::ResultExecuteCommand(char* cmd)
+string sistema::ResultExecuteCommand(char* cmd, string paraTest)
 {
 #ifdef _WIN32
 	#define POPEN	_popen
@@ -38,6 +71,7 @@ string sistema::ResultExecuteCommand(char* cmd)
 	#define PCLOSE	pclose
 #endif
 
+#if defined(_PPC82xx_)
     char buffer[128];
     std::string result = "";
     FILE* pipe = POPEN(cmd, "r");
@@ -55,7 +89,10 @@ string sistema::ResultExecuteCommand(char* cmd)
     }
     PCLOSE(pipe);
 	result.erase(std::remove(result.begin(), result.end(), '\n'), result.end());
-    return result;    
+    return result;   
+#else
+	return paraTest;
+#endif
 }
 
 /** */
@@ -281,32 +318,50 @@ int sistema::ParImpar()
 }
 
 /** */
-void sistema::fileattr(string path, string &date, string &size)
+void sistema::fileattr(string path, int modo, string &date, string &size)
 {
-//#ifdef _WIN32
-//			struct _stat _currentMod;
-//			_stat( _fileConfig.c_str(), &_currentMod );
-//			if (_lastMod.st_mtime != _currentMod.st_mtime)
-//			{
-//				_lastMod.st_mtime = _currentMod.st_mtime;
-//				change = true;
-//			}
-//#else
-//			struct stat _currentMod;
-//			lstat( _fileConfig.c_str(), &plog::_lastMod );
-//			if (_lastMod.st_mtime != _currentMod.st_mtime)
-//			{
-//				_lastMod.st_mtime = _currentMod.st_mtime;
-//				change = true;
-//			}
-//#endif // _WIN32
 	struct stat stat_buf;
     int rc = stat(path.c_str(), &stat_buf);
 	if (rc==0) {
 		size = Tools::itoa(rc==0 ? stat_buf.st_size : 0);
 		struct tm * timeinfo = localtime(&stat_buf.st_ctime); 
 		Tools::tm2String(timeinfo, "%d/%m/%Y", date);
+
+		/** Rectificamos la fecha en funcion del tipo de fichero */
+		string strFound;
+		size_t pos;
+		switch(modo) 
+		{
+			case 0:		// Ficheros 'Comerciales'.
+				date = "";
+				break;
+			case 1:		// '<file> /V'.				Buscar NUCLEODF YYYY-MM-DD
+				strFound = ResultExecuteCommand((char *)(path + " /V").c_str(), "Recurso RAD V0.0.1 (NUCLEODF 2017-01-26 16:35:50)");
+				pos = strFound.find("NUCLEODF ");
+				strFound = strFound.substr(pos+9, strFound.size()-(pos+9+1));
+				date = strFound.substr(8,2)+"/"+strFound.substr(5,2) + "/" + strFound.substr(0,4);
+				break;
+			case 2:		// 'grep NUCLEODF <file>'.	Buscar NUCLEODF YYYY-MM-DD
+				strFound = ResultExecuteCommand((char *)("grep NUCLEODF " + path).c_str(), "NUCLEODF 2017-01-26 16:35:50");
+				pos = strFound.find("NUCLEODF ");
+				strFound = strFound.substr(pos+9, strFound.size()-(pos+9));
+				date = strFound.substr(8,2)+"/"+strFound.substr(5,2) + "/" + strFound.substr(0,4);
+				break;
+			case 3:		// 'grep Revision <file>'.	Buscar (mmm DD YYYY. mmm Abreviaturas del mes en Ingles...
+				strFound = ResultExecuteCommand((char *)("grep Revision " + path).c_str(), "Driver PCM 82xx MCC. $Revision: 1.3 $ (Dec 20 2016 18:13:11)");
+				pos = strFound.find("$ (");
+				strFound = strFound.substr(pos+3, strFound.size()-(pos+3+1));
+				date = strFound.substr(4,2)+"/"+ MonthNameConv().translate(strFound.substr(0,3)) + "/" + strFound.substr(7,4);
+				break;
+			case 4:		// 'grep 201 <file>'.		Buscar DD-MM-YYYY
+				strFound = ResultExecuteCommand((char *)("grep 201 " + path).c_str(), "05-01-2017, 15:39 <291328>");
+				pos = strFound.find(", ");
+				strFound = strFound.substr(0,pos);
+				date = strFound.substr(0,2)+"/"+strFound.substr(3,2) + "/" + strFound.substr(6,4);
+				break;
+		}
 	}
+
 	else {
 		size = "0";
 		date = "???";

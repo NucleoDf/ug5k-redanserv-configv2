@@ -371,8 +371,9 @@ void JsonClientProc::SupervisaProcesoConfiguracion()
 {
 	if (++_cntticks >= _maxticks)	
 	{
-		/** Marca el Valor en SNMP */
-		HistClient::p_hist->SetSincrState(_stdLocalConfig==slcSincronizado ? "1" : _stdLocalConfig==slcConflicto ? "2" : "0");
+		///** Marca el Valor en SNMP */
+		// HistClient::p_hist->SetSincrState(_stdLocalConfig==slcSincronizado ? "1" : _stdLocalConfig==slcConflicto ? "2" : "0");
+		// Ya lo hace en el procedimiento de Polling
 
 		/** Para poder visualizar a quien se le está haciendo POLLING */
 		P_WORKING_CONFIG->config.general.ips = SERVER_URL;		
@@ -495,8 +496,9 @@ void SoapClientProc::SupervisaProcesoConfiguracion()
 {
 	if (++_cntticks >= _maxticks)	
 	{
-		/** Marca el Valor en SNMP */
-		HistClient::p_hist->SetSincrState(_stdLocalConfig==slcSincronizado ? "1" : _stdLocalConfig==slcConflicto ? "2" : "0");
+		///** Marca el Valor en SNMP */
+		//HistClient::p_hist->SetSincrState(_stdLocalConfig==slcSincronizado ? "1" : _stdLocalConfig==slcConflicto ? "2" : "0");
+		// Ya lo hace en el procedimiento de Polling.
 
 		/** Para poder visualizar a quien se le está haciendo POLLING */
 		P_WORKING_CONFIG->config.general.ips = SERVER_URL;		

@@ -43,7 +43,7 @@ public:
 
 public:
 	static void ExecuteCommand(char *cmd);
-    static string ResultExecuteCommand(char *cmd);
+    static string ResultExecuteCommand(char *cmd, string paraTest="");
         
 	//static void GetIfconfigCommand(char *cmd, const char *ift, const char *ip, const char *msc);
 	//static void GetIfenslaveCommand(char *cmd, const char *ifbond, const char *if1, const char *if2);
@@ -83,7 +83,7 @@ public:
 	static int ParImpar();
 
 	/** */
-	static void fileattr(string path, string &date, string &size);
+	static void fileattr(string path, int modo, string &date, string &size);
 	
 };
 
