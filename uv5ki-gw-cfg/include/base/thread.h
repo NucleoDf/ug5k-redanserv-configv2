@@ -193,6 +193,34 @@ public:
 };
 
 /** */
+class RealWorkingThread
+{
+private:
+	void *(*_start)(void *);
+	void *_arg;
+
+public:
+	RealWorkingThread(void *(*start_add)(void *), void *arg)
+	{
+		_start = start_add;
+		_arg = arg;
+	}
+	~RealWorkingThread()
+	{
+	}
+	/** */
+	void Do()
+	{
+		pthread_t m_hThread;
+		pthread_attr_t attr;
+		pthread_attr_init(&attr);
+		pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+		pthread_create(&m_hThread, &attr, _start, _arg);
+	}
+};
+
+
+/** */
 template <typename T> class ColaAventos
 {
 private:

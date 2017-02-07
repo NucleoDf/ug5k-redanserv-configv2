@@ -186,6 +186,8 @@ void CfgProc::ResourcesConfigClear()
 /** */
 void JsonClientProc::Run() 
 {
+	TimeMeasure tick(LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60"));
+
 	SetId("JsonClientProc");
 	PLOG_INFO("JsonClientProc (%d) running...", pid());
 	modo="rd";
@@ -247,6 +249,9 @@ void JsonClientProc::Run()
 			}
 		}
 		SupervisaProcesoConfiguracion();
+		if (tick.elapsed()==true) {		
+			PLOG_INFO("(%d)=>JsonClientProc. TICK", pid());
+		}
 	}
 	PLOG_INFO("JsonClientProc leaving...");
 }
@@ -387,6 +392,8 @@ void JsonClientProc::SupervisaProcesoConfiguracion()
 /** */
 void SoapClientProc::Run()
 {
+	TimeMeasure tick(LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60"));
+
 	SetId("SoapClientProc");
 	PLOG_INFO("SoapClientProc (%d) running...", pid());
 	modo="ul";
@@ -450,6 +457,9 @@ void SoapClientProc::Run()
 		}
 		SupervisaProcesoConfiguracion();
 		McastTest();
+		if (tick.elapsed()==true) {		
+			PLOG_INFO("(%d)=>SoapClientProc. TICK", pid());
+		}
 	}
 	PLOG_INFO("SoapClientProc leaving...");
 }

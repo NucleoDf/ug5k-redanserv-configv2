@@ -41,6 +41,7 @@ ManProc::~ManProc(void)
 /** */
 void ManProc::Run()
 {
+	TimeMeasure tick(LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60"));
 #if _NOTIFICA_ESTADOS_CPU_
 	int _cntEstados = 1;
 #endif
@@ -83,6 +84,9 @@ void ManProc::Run()
 				_cntEstados = atoi(LocalConfig::p_cfg->get("MODULOS", "ACTUALIZAESTADOSEN", "15").c_str());
 			}
 #endif
+		}
+		if (tick.elapsed()==true) {		
+			PLOG_INFO("(%d)=>ManProc. TICK", pid());
 		}
 	}
 	PLOG_INFO("ManProc leaving...");

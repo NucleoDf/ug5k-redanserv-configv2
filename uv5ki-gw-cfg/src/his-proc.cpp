@@ -20,6 +20,7 @@ void HistClient::Run()
 	LocalConfig snmpconfig(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/));
 	char buffer[BUFSIZ+1];
 	stHistAviso aviso;
+	TimeMeasure tick(LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60"));
 
 	SetId("HistClient");
 	PLOG_INFO("HistClient (%d) running...", pid());
@@ -72,6 +73,9 @@ void HistClient::Run()
 			{
 				PLOG_ERROR("Excepcion en HistClient::Run (Generica)");
 			}
+		}
+		if (tick.elapsed()==true) {		
+			PLOG_INFO("(%d)=>HistClient. TICK", pid());
 		}
 	}
 	PLOG_INFO("HistClient leaving...");

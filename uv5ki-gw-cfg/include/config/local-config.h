@@ -53,6 +53,7 @@ using namespace std;
 #define strRuntimeItemRedanHttpGetTimeout		((const char *)"REDAN_HTTP_GET_TIMEOUT")
 #define strRuntimeItemRedanHttpPostTimeout		((const char *)"REDAN_HTTP_POST_TIMEOUT")
 #define strRuntimeItemUlisesHttpTimeout			((const char *)"ULISES_HTTP_TIMEOUT")
+#define strRuntimeItemThreadActiveTick			((const char *)"THREAD_ACTIVE_TICK")
 
 
 #define strFilesSupervidor				((const char *)"FILESUPERVISOR")

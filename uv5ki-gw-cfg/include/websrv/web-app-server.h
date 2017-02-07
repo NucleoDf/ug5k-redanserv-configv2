@@ -95,6 +95,7 @@ typedef struct
 	vector<string>		sec_uris;			// Lista de URIS que no se ven afectadas por la seguridad. Dependen de la aplicacion.
 	webAccessRoutine	access_control;		// Rutina que permite el acceso o no en función de los usuarios.
 	SessionControl		session_control;
+	int					tick;				// Para el control de presencia del Servior
 } web_config;
 
 

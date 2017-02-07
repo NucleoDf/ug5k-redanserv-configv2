@@ -10,11 +10,19 @@ web_config  Uv5kiGwCfgWebApp::_web_config;
 webData_VersionNucleoNew Uv5kiGwCfgWebApp::_versiones;
 
 /** */
+void *Uv5kiGwCfgWebApp::file_version_load_thread_routine(void *arg) 
+{
+	PLOG_INFO("Uv5kiGwCfgWebApp. Cargando Fichero de versiones...");
+	 _versiones.loadfrom(FILEOFVERSION);
+	PLOG_INFO("Uv5kiGwCfgWebApp. Fichero de versiones cargado...");
+	 return NULL;
+}
+
+/** */
 Uv5kiGwCfgWebApp::Uv5kiGwCfgWebApp(void)
 {
 	GetHandlers();
 	GetConfig();
-	// _versiones.loadfrom(FILEOFVERSION);
 }
 
 /** */
@@ -77,6 +85,11 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.sec_uris.push_back("/mant/ver");
 
 	_web_config.access_control = stAccessControl;	
+
+	_web_config.tick = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60");
+
+	/** Cargo el fichero de versiones en THREAD aparte */
+	RealWorkingThread(file_version_load_thread_routine, NULL).Do();
 }
 
 /** */
@@ -147,9 +160,6 @@ void Uv5kiGwCfgWebApp::stCb_tses(struct mg_connection *conn, string user, web_re
 	{	// Enlazar con los datos reales en el constructor...
 		int std;
 		string cfg_name, cfg_time;
-		if (_versiones.isLoaded()==false) {
-			_versiones.loadfrom(FILEOFVERSION);
-		}
 		P_CFG_PROC->IdConfig(std, cfg_name, cfg_time);
 		webData_tses data(std, cfg_name, cfg_time, P_CFG_PROC->Modo(), _versiones.Version);
 		RETURN_OK200_RESP(resp, data.JSerialize());
@@ -361,10 +371,7 @@ void Uv5kiGwCfgWebApp::stCb_mtto(struct mg_connection *conn, string user, web_re
 		else if (levels[2]=="lver") {
 			// TODO: 
 			//RETURN_OK200_RESP(resp, webData_line("En construccion").JSerialize());
-			if (_versiones.isLoaded()==false) {
-				_versiones.loadfrom(FILEOFVERSION);
-			}
-			RETURN_OK200_RESP(resp, _versiones.JSerialize());
+			RETURN_OK200_RESP(resp, _versiones.isLoaded()==true ? _versiones.JSerialize() : "");
 		}
 		else if (levels[2]=="bite") {
 			P_HIS_PROC->SetEvent(INCI_BITE, user, "");

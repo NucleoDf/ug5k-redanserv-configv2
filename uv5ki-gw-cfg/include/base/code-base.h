@@ -143,6 +143,7 @@ protected:
 		va_end(args);
 	}
 	/** */
+public:
 	static string onfs(string filename) {
 #if defined(_WIN32)
 		return "./fs-win" + filename;

@@ -432,21 +432,33 @@ public:
 		class File : public jData {
 		public:
 			File() {
+				_wasUnloaded = false;
 			}
 		public:
 			virtual void jread(Value &base){
 				read_key(base, "Path", Path);
 				read_key(base, "Modo", Modo);
-				//read_key(base, "Date", Date);
-				//read_key(base, "Size", Size);
-				sistema::fileattr(onfs(Path), Modo, Date, Size);
-				Sleep(1);
+				read_key(base, "Date", Date);
+				read_key(base, "Size", Size);
+				if (Date == "") {
+					try {
+						sistema::fileattr(onfs(Path), Modo, Date, Size);
+					}
+					catch(...) {
+					}
+					Sleep(1);
+					_wasUnloaded = true;
+				}
 			}
 			virtual void jwrite(Writer<StringBuffer> &writer) {
 				write_key(writer, "Path", Path);
 				write_key(writer, "Date", Date);
+				write_key(writer, "Modo", Modo);
 				write_key(writer, "Size", Size);
 			}
+			bool wasUnloaded(){return _wasUnloaded;}
+		protected:
+			bool _wasUnloaded;
 		public:
 			string Path;
 			string Date;
@@ -476,14 +488,17 @@ public:
 
 public:
 	webData_VersionNucleoNew() {
+		_isLoaded = false;
 	}
 public:
 	virtual void jread(Value &base){
 		read_key(base, "Version", Version);
+		read_key(base, "Fecha", Fecha);
 		read_key(base, "Components", Components);
 	}
 	virtual void jwrite(Writer<StringBuffer> &writer) {
 		write_key(writer, "Version", Version);
+		write_key(writer, "Fecha", Fecha);
 		write_key(writer, "Components", Components);
 	}
 	void loadfrom(string filename) {
@@ -493,15 +508,57 @@ public:
 			while (std::getline(f, linea))
 				data += linea;
 			JDeserialize(data);
+			if (wasUnloaded()==true) {
+				ofstream ff(filename.c_str(), ios_base::out);			
+				string data = JSerialize();
+				ff.write(data.c_str(), data.length());
+			}
+			toTextFile(filename+".txt");
 		}
-		catch(Exception x) {
+		catch(...) {
 		}
+		_isLoaded=true;
+	}
+	bool wasUnloaded() {
+		for (vector<Component>::iterator comp=Components.begin(); comp!=Components.end(); comp++){
+			for (vector<Component::File>::iterator file = comp->Files.begin(); file != comp->Files.end(); file++) {
+				if (file->wasUnloaded() == true) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	bool isLoaded() {
-		return Components.size()==0 ? false : true;
+		return _isLoaded;
 	}
+	void printComponents() {
+		printf("Version: %s. Fecha: %s\n",Version.c_str(), Fecha.c_str());
+		for (vector<Component>::iterator comp=Components.begin(); comp!=Components.end(); comp++){
+			printf("\n\t%s\n", comp->Id.c_str());
+			for (vector<Component::File>::iterator file = comp->Files.begin(); file != comp->Files.end(); file++) {
+				string base_filename = file->Path.substr(file->Path.find_last_of("/\\") + 1);
+				printf("\t\t%20s:\t(%10s - %7s)\n", base_filename.c_str(), file->Date.c_str(), file->Size.c_str());
+			}
+		}
+	}
+	void toTextFile(string filename) {
+		ofstream ff(filename.c_str(), ios_base::out);
+		ff << "Version: " << Version << ". Fecha: " << Fecha << endl;
+		for (vector<Component>::iterator comp=Components.begin(); comp!=Components.end(); comp++){
+			ff << endl << setw(4) << " " << comp->Id << endl;
+			for (vector<Component::File>::iterator file = comp->Files.begin(); file != comp->Files.end(); file++) {
+				string base_filename = file->Path.substr(file->Path.find_last_of("/\\") + 1);
+				//printf("\t\t%20s:\t(%10s - %7s)\n", base_filename.c_str(), file->Date.c_str(), file->Size.c_str());
+				ff << setw(8) << " " << setw(30) << base_filename + ": " << setw(15) << "(" + file->Date + " - " << setw(8) << file->Size + ")" << endl;
+			}
+		}
+	}
+protected:
+	bool _isLoaded;
 public:
 	string Version;
+	string Fecha;
 	vector<Component> Components;
 };
 

@@ -1,5 +1,6 @@
 {
 	"Version" : "BETA12",
+	"Fecha": "13/03/2017",
 	"Components" : [
 		{
 			"Name": "UG5K-Linux",
@@ -13,31 +14,31 @@
 			"Files" : [
 				{
 					"Path": "/usr/bin/nucleopsrla",
-					"Modo": 1,
+					"Modo": 2,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/bin/rclcen",
-					"Modo": 1,
+					"Modo": 2,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/bin/rcr2n5",
-					"Modo": 1,
+					"Modo": 2,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/bin/rcradio",
-					"Modo": 1,
+					"Modo": 2,
 					"Date": "",
 					"Size": ""
 				},
 				{
 					"Path": "/usr/bin/rctlf",
-					"Modo": 1,
+					"Modo": 2,
 					"Date": "",
 					"Size": ""
 				},

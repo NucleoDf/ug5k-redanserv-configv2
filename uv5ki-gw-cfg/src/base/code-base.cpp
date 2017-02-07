@@ -64,8 +64,10 @@ void CodeBase::plogDispose()
 /** */
 void CodeBase::_Log(plog::Severity level, const char *from, int line, const char *fmt, va_list args)
 {
-	if (_plog_iniciado == false)
-		plogInit();
+	if (_plog_iniciado == false) {
+		// plogInit();
+		return;
+	}
 
 	char textString[1024] = {'\0'};
 	memset(textString, '\0', sizeof(textString));

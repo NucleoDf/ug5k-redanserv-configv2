@@ -79,6 +79,29 @@ public:
 
 	static bool ip_format_test(string ip);
 	static void tm2String(struct tm* timeptr, string format, string &date);
+
 };
+
+/** */
+class TimeMeasure 
+{
+public:
+	TimeMeasure(time_t timeout) {
+		_last = time(NULL);
+		_timeout = timeout;
+	}
+	bool elapsed() {
+		time_t now = time(NULL);
+		if (now > (_last + _timeout)) {
+			_last = now;
+			return true;
+		}
+		return false;
+	}
+private:
+	time_t _last;
+	time_t _timeout;
+};
+
 
 #endif

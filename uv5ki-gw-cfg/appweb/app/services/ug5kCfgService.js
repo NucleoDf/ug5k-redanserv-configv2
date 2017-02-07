@@ -190,7 +190,8 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                 FrqTonoPTT: -1,
                 UmbralTonoPTT: -1,
                 SupervPortadoraTx: -1,
-                SupervModuladoraTx: -1
+                SupervModuladoraTx: -1,
+                iModoCalculoClimax: 0
             },
             telefonia: {
                 tipo: 0,

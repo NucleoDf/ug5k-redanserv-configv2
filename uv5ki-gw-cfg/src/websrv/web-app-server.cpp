@@ -1,4 +1,5 @@
 #include "../../include/websrv/web-app-server.h"
+#include "../../include/tools/tools.h"
 
 #define _UPLOAD_				0
 #define _NO_EXPIRE_				1
@@ -51,6 +52,8 @@ void WebAppServer::Dispose()
 /** */
 void WebAppServer::Run()
 {
+	TimeMeasure tick(config()->tick);
+
 	SetId("WebAppServer");
 	config()->session_control.reset();
 
@@ -67,6 +70,11 @@ void WebAppServer::Run()
 				if (config()->session_control.noactive(t_inact)==true)      // Supervision de Tiempo de Inactividad.
 					config()->session_control.reset();
 			}
+
+			if (tick.elapsed()==true) {
+				PLOG_INFO("(%d)=>WebAppServer. TICK", pid());
+			}
+
 		}
 		catch(...)
 		{

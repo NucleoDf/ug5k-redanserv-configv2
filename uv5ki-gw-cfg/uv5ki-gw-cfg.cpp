@@ -302,12 +302,18 @@ int main(int argc, char* argv[])
 	/** Imprime la Version */
 	if ( 2==argc )
 	{
-		if (!strncmp(argv[1],"/V",3))
+		if (!strncmp(argv[1],"/V",2))
 		{
 			printf( " %s   V%d.%d.%d (%s)\n",
 				VRS_ID_SOFTWARE,
 				VRS_VERSION_MAYOR, VRS_VERSION_MENOR_A, VRS_VERSION_MENOR_B,
 				acBuildString );
+			return -1;
+		}
+		else if (!strncmp(argv[1],"/JV",3)) {
+			webData_VersionNucleoNew versiones;
+			versiones.loadfrom(versiones.onfs("/home/serv/versiones.json"));
+			versiones.printComponents();
 			return -1;
 		}
 	}
