@@ -51,9 +51,9 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	        case 6:
 	            return true;
 	        case 7:     // Aplicar Cambios.
-	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]));
+	            return (authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE, ALM1_PROFILE]));
 	        case 8:     // Descartar Cambios.
-	            return (authservice.global_enable([ADMIN_PROFILE, ING_PROFILE, ALM1_PROFILE]));
+	            return (authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE, ALM1_PROFILE]));
 	        case 9:     // Tablas de ULISES.
 	            return !MantService.hide_on_ulises();
 	    }
@@ -90,17 +90,22 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	                case VIS_PROFILE:
 	                    str_profile = " (vis)";
 	                    break;
+	                case PCFG_PROFILE:
+	                    str_profile = " (cfg)";
+	                    break;
 	            }
 	        }
 	        else {
-	            var txt = "(";
-	            txt += (profile & ADMIN_PROFILE != 0) ? "a" : "";
-	            txt += (profile & ING_PROFILE != 0) ? "i" : "";
-	            txt += (profile & GEST_PROFILE != 0) ? "g" : "";
-	            txt += (profile & CRTL_PROFILE != 0) ? "c" : "";
-	            txt += (profile & ALM1_PROFILE != 0) ? "m" : "";
-	            txt += (profile & ALM2_PROFILE != 0) ? "n" : "";
-	            txt += (profile & VIS_PROFILE != 0) ? "v" : "";
+	            var txt = "";
+	            
+	            txt += ((profile & ADMIN_PROFILE)!= 0) ? "a" : "";
+	            txt += ((profile & PCFG_PROFILE) != 0) ? "c" : "";
+	            txt += ((profile & ING_PROFILE) != 0) ? "*" : "";
+	            txt += ((profile & GEST_PROFILE) != 0) ? "*" : "";
+	            txt += ((profile & CRTL_PROFILE) != 0) ? "m" : "";
+	            txt += ((profile & ALM1_PROFILE) != 0) ? "i" : "";
+	            txt += ((profile & ALM2_PROFILE) != 0) ? "*" : "";
+	            txt += ((profile & VIS_PROFILE)  != 0) ? "v" : "";
 	            str_profile = " (" + txt + ")";
             }
 	    }

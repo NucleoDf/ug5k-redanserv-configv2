@@ -4,14 +4,25 @@
 #include "../../include/base/thread.h"
 #include "mongoose.h"
 
-#define PERF_VISUAL			(0x01)
-#define PERF_CTRL			(0x02)
-#define PERF_ALM2			(0x04)
-#define PERF_ALM1			(0x08)
-#define PERF_GEST			(0x10)
-#define PERF_ING			(0x20)
-#define PERF_ADMIN			(0x40)
-#define ROOT_PROFILE		(0x80)
+#define _PERFILES_EN_20170208_
+
+#if defined(_PERFILES_EN_20170208_)
+ #define PERF_VISUAL		(0x0001)
+ #define PERF_CTRL			(0x0002)
+ #define PERF_ALM1			(0x0008)
+ #define PERF_ADMIN			(0x0040)
+ #define PERF_PCONF			(0x1000)
+ #define ROOT_PROFILE		(PERF_VISUAL | PERF_CTRL | PERF_ADMIN | PERF_PCONF)
+#else
+ #define PERF_VISUAL		(0x01)
+ #define PERF_CTRL			(0x02)
+ #define PERF_ALM2			(0x04)
+ #define PERF_ALM1			(0x08)
+ #define PERF_GEST			(0x10)
+ #define PERF_ING			(0x20)
+ #define PERF_ADMIN			(0x40)
+ #define ROOT_PROFILE		(0x80)
+#endif
 
 typedef struct
 {

@@ -198,7 +198,7 @@
 	"SCTRL_P01_NTPSD": "Servidor NTP por Defecto",
 	"SCTRL_P02_PORT": "Puerto Servicio",
 	"SCTRL_P02_SPORT": "Puerto SNMP",
-	"SCTRL_P02_TRAP": "Destinos TRAPS",
+	"SCTRL_P02_TRAP": "Destinos TRAPS (Formato [1|2|3],IP/Port)",
 	"SCTRL_P02_SV2": "SNMP-V2?",
 	"SCTRL_P02_SV2C": "SNMP-V2-COMMUNITY",
 	"SCTRL_P02_NAM": "SNMP-NAME",

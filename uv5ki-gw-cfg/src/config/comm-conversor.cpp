@@ -916,7 +916,7 @@ void CommConversor::ActualizaRecordIni()
 	//setInt(recini, "RTP", "PAYLOAD_FORMAT", p_cfg_in->servicios.grab.rtp_pl, INCI_MPGP, "GRABADOR PAYLOAD RTP");
 	SetString(recini, "RTSP", "IP_REC_A", p_cfg_in->servicios.grab.rtsp_ip, INCI_MPGP, "IP GRABADOR A");
 	SetString(recini, "RTSP", "IP_REC_B", p_cfg_in->servicios.grab.rtspb_ip, INCI_MPGP, "IP GRABADOR B");
-	SetInt(recini, "RTSP", "PORT", p_cfg_in->servicios.grab.rtsp_port, INCI_MPGP, "GRABADOR PUERTO RTSP");
+	SetInt(recini, "RTSP", "PORT_RTSP", p_cfg_in->servicios.grab.rtsp_port, INCI_MPGP, "GRABADOR PUERTO RTSP");
 	recini.save();
 }
 

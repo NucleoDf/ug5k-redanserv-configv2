@@ -319,7 +319,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Recurso:'*/transerv.translate('TCTRL_P00_RES'),
 					    Value: vm.tdata.IdRecurso,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p0_tel_show,
@@ -337,7 +337,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Tipo de Interfaz Telefonico:'*/transerv.translate('TCTRL_P00_ITF'),
 					    Value: vm.tdata.telefonia.tipo.toString(),
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 1,
 					    Inputs: [
                               /*"PP-BL"*/transerv.translate('TCTRL_P00_IBL')
@@ -365,7 +365,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     {
                         Name: /*'Enable Registro ?:'*/transerv.translate('TCTRL_P00_REG'),
                         Value: vm.tdata.enableRegistro.toString(),
-                        Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 1,
                         Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
                         Show: vm.p0_tel_show,
@@ -374,7 +374,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Clave:'*/transerv.translate('TCTRL_P00_CLV'),
 					    Value: vm.tdata.szClave,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p0_tel_show,
@@ -397,7 +397,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'AGC en A/D ?:'*/transerv.translate('TCTRL_P01_AGCAD'),
 					    Value: vm.tdata.hardware.AD_AGC.toString(),
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
 					    Show: vm.p1_tel_show,
@@ -406,7 +406,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Ajuste Cero Digital en A/D (dBm):'*/transerv.translate('TCTRL_P01_AGCAD_AJUSTE'),
 					    Value: vm.tdata.hardware.AD_Gain / 10,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p1_tel_show,
@@ -415,7 +415,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'AGC en D/A ?:'*/transerv.translate('TCTRL_P01_AGCDA'),
 					    Value: vm.tdata.hardware.DA_AGC.toString(),
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
 					    Show: vm.p1_tel_show,
@@ -424,7 +424,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Ajuste Cero Digital en A/D (dBm)::'*/transerv.translate('TCTRL_P01_AGCDA_AJUSTE'),
 					    Value: vm.tdata.hardware.DA_Gain / 10,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.telgain_show,
@@ -455,7 +455,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'URI Remota:'*/transerv.translate('TCTRL_P02_RURI'),
 					    Value: jamp_no_sip == 1 ? CfgService.quitar_sip(vm.tdata.telefonia.uri_remota) : vm.tdata.telefonia.uri_remota,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: jamp_no_sip == 1 ? 3 : 0,
 					    Inputs: [],
 					    Show: vm.p2_tel_show,
@@ -464,7 +464,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Respuesta Automatica Simulada ?:'*/transerv.translate('TCTRL_P02_ARSP'),
 					    Value: vm.tdata.telefonia.r_automatica.toString(),
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
 					    Show: vm.p2_tel_show,
@@ -473,7 +473,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Periodo tonos respuesta estado (s):'*/transerv.translate('TCTRL_P02_PTON'),
 					    Value: vm.tdata.telefonia.it_release,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p2_tel_show,
@@ -482,7 +482,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Lado:'*/transerv.translate('TCTRL_P02_LADO'),
 					    Value: vm.tdata.telefonia.lado.toString(),
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 1,
 					    Inputs: [/*"Lado A"*/transerv.translate('TCTRL_P02_LADOA'), /*"Lado B"*/transerv.translate('TCTRL_P02_LADOB')],
 					    Show: vm.p2_tel_show,
@@ -491,7 +491,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Numero TEST Colateral:'*/transerv.translate('TCTRL_P02_CTES'),
 					    Value: vm.tdata.telefonia.no_test_remoto,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p2_tel_show,
@@ -500,7 +500,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Numero TEST Local:'*/transerv.translate('TCTRL_P02_LTES'),
 					    Value: vm.tdata.telefonia.no_test_local,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p2_tel_show,
@@ -509,7 +509,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     				{
     				    Name: /*'Supervisa Colateral ?:'*/transerv.translate('TCTRL_P02_CSUP'),
     				    Value: vm.tdata.telefonia.superv_options.toString(),
-    				    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+    				    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
     				    Input: 1,
     				    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
     				    Show: vm.p2_tel_show,
@@ -518,7 +518,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Tiempo Supervision (s):'*/transerv.translate('TCTRL_P02_TSUP'),
 					    Value: vm.tdata.telefonia.tm_superv_options,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p2_tel_show,
@@ -527,7 +527,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     				{
     				    Name: /*'Deteccion Vox ?:'*/transerv.translate('TCTRL_P02_VOX'),
     				    Value: "1",             // 20161213. Siempre debe valer 1. vm.tdata.telefonia.detect_vox.toString(),
-    				    Enable: false,          // 20161213. No se puede editar. authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+    				    Enable: false,          // 20161213. No se puede editar. authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
     				    Input: 1,
     				    Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
     				    Show: vm.p2_tel_show,
@@ -536,7 +536,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Umbral Vox (dbm):'*/transerv.translate('TCTRL_P02_UVOX'),
 					    Value: vm.tdata.telefonia.umbral_vox,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p2_tel_show,
@@ -545,7 +545,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Cola Vox (s):'*/transerv.translate('TCTRL_P02_CVOX'),
 					    Value: vm.tdata.telefonia.tm_inactividad,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p2_tel_show,
@@ -554,7 +554,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Periodo Interrupt Warning'*/transerv.translate('TCTRL_P02_IWP'),
 					    Value: vm.tdata.telefonia.iT_Int_Warning,
-					    Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
 					    Show: vm.p2_tel_show,
@@ -585,7 +585,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     {
                         Name: /*'Tipo de Restriccion:'*/transerv.translate('TCTRL_P03_RES'),
                         Value: vm.tdata.restriccion.toString(),
-                        Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 1,
                         Inputs: [
                             /*"Ninguna"*/transerv.translate('TCTRL_P03_RESN'), 
@@ -597,7 +597,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     {
                         Name: '',
                         Value: jamp_no_sip == 1 ? CfgService.quitar_sip(vm.tdata.blanca) : vm.tdata.blanca,
-                        Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: jamp_no_sip == 1 ? 4: 2,
                         Inputs: [],
                         Show: vm.lbn_show,
@@ -606,7 +606,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     {
                         Name: '',
                         Value: jamp_no_sip == 1 ? CfgService.quitar_sip(vm.tdata.negra) : vm.tdata.negra,
-                        Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: jamp_no_sip == 1 ? 4 : 2,
                         Inputs: [],
                         Show: vm.lbn_show,
@@ -615,7 +615,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     {
                         Name: /*'Rango Abonados Origen.'*/transerv.translate('TCTRL_P03_OAB'),
                         Value: vm.tdata.restriccion,
-                        Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: -1,
                         Inputs: [],
                         Show: vm.show_rangos_ats,
@@ -624,7 +624,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     {
                         Name: ' ',
                         Value: ats2lista(vm.tdata.telefonia.ats_rangos_org),
-                        Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 2,
                         Inputs: [],
                         Show: vm.show_rangos_ats,
@@ -633,7 +633,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     {
                         Name: /*'Rango Abonados Destino.'*/transerv.translate('TCTRL_P03_DAB'),
                         Value: vm.tdata.restriccion,
-                        Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: -1,
                         Inputs: [],
                         Show: vm.show_rangos_ats,
@@ -642,7 +642,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     {
                         Name: ' ',
                         Value: ats2lista(vm.tdata.telefonia.ats_rangos_dst),
-                        Enable: authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 2,
                         Inputs: [],
                         Show: vm.show_rangos_ats,

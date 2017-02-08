@@ -109,7 +109,7 @@ CommSerConfig::CommSerConfig(soap_config &sc)
 	/** Grabador */
 	LocalConfig recini(LocalConfig::p_cfg->get(strModulos, strItemModuloGrabador)/*.recModule()*/);
 	this->grab.rtsp_ip = recini.get("RTSP","IP_REC_A");
-	this->grab.rtsp_port = atoi(recini.get("RTSP","PORT").c_str());
+	this->grab.rtsp_port = atoi(recini.get("RTSP","PORT_RTSP").c_str());
 
 	/** SINCR */
 	if (sc.CfgPasarela.MasterSincronizacion != "")

@@ -97,9 +97,10 @@ function authservice(MantService, $q, $location, $rootScope) {
 
 	        if (profileList.constructor === Array) {
 	            var currentProfile = Profile();
-	            if (currentProfile === 128)             // Usuario de Puerta Atras...
+	            if (currentProfile === PUERTA_ATRAS)             // Usuario de Puerta Atras...
 	                return true;
 	            for (i = 0; i < profileList.length; i++) {
+
 	                if (profiles_multiples == false) {
 	                    if (currentProfile === profileList[i])
 	                        return true;

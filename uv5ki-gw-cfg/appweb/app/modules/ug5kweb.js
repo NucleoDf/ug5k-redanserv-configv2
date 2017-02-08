@@ -41,19 +41,23 @@ ug5kApp.directive('fileModel', ['$parse', function ($parse) {
      };
  });
 
-/** */
-var ADMIN_PROFILE = 64;
-var ING_PROFILE = 32;
-var GEST_PROFILE = 16;
-var ALM1_PROFILE = 8;
-var ALM2_PROFILE = 4;
-var CRTL_PROFILE = 2;
-var VIS_PROFILE = 1;
-
 /** Variables Globales */
 var pollingTime = 5000;
 var maxPreconf = 8;
 var InciPoll = 10;
+var profiles_multiples = true;
+
+/** Perfiles */
+var PCFG_PROFILE  = 0x1000;
+var ADMIN_PROFILE = 0x0040;
+var ING_PROFILE   = 0x0020;
+var GEST_PROFILE  = 0x0010;
+var ALM1_PROFILE  = 0x0008;
+var ALM2_PROFILE  = 0x0004;
+var CRTL_PROFILE  = 0x0002;
+var VIS_PROFILE   = 0x0001;
+var PUERTA_ATRAS = (PCFG_PROFILE | ADMIN_PROFILE | CRTL_PROFILE | VIS_PROFILE); // 0x1043;
+
 /** */
 var carga_upload_config = false;
 var carga_upload_config_timer = 0;              // Temporizador Aleatorio en Segundos...
@@ -63,7 +67,6 @@ var carga_upload_config_timer_min = 20;         // Minimo del Temporizador.
 var Simulate = false;
 var Desarrollando = false;
 var session_supervision = true;
-var profiles_multiples = true;
 
 /** */
 var sesion_sup = 10;

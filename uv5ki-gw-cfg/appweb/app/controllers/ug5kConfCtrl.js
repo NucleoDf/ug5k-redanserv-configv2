@@ -31,10 +31,10 @@ function ug5kConfCtrl($scope, $route, dataservice, authservice, CfgService, tran
             case 1:         // Importar
             case 2:         // Guardar
             case 4:         // Borrar
-                return authservice.ProfilePermission(true, [ADMIN_PROFILE, ING_PROFILE]);
+                return authservice.ProfilePermission(true, [ADMIN_PROFILE, PCFG_PROFILE]);
 
             case 3:         // Activar
-                return authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]);
+                return authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]);
                 break;
         }
         return false;

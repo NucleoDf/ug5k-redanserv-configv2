@@ -53,7 +53,7 @@ function ug5kHardCtrl( $scope, $location, $route, CfgService, authservice, trans
 
     /** */
 	vm.enable_pos = function (pos) {
-	    return authservice.global_enable([ADMIN_PROFILE, ING_PROFILE]);
+	    return authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]);
 	}
 
     /** */
