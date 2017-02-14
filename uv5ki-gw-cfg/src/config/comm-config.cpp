@@ -238,9 +238,9 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->telefonia.no_test_remoto = AtsRemoteTestNumber(sc, this->IdRecurso);	// Numero del troncal que contiene al recurso.
 			this->telefonia.it_release = 5;							 // Dejar a 5.
 			this->telefonia.uri_remota = "";							 // Dejar vacio.
-			this->telefonia.detect_vox = 1;							 // Dejar a 1.
-			this->telefonia.umbral_vox = -20;						 // TODO: Confirmar.
-			this->telefonia.tm_inactividad = 2;						 // TODO: Confirmar.
+			this->telefonia.detect_vox = 0;							 // Dejar a 0. En ULISES no hay deteccion de cuelgue.
+			this->telefonia.umbral_vox = -26;						 // 
+			this->telefonia.tm_inactividad = 12;						 // 
 			this->telefonia.superv_options = 0;						 // Dejar a 0.
 			this->telefonia.tm_superv_options = 0;					 // Dejar a 0.
 			this->telefonia.colateral_scv = 0;						 // Dejar a 0.
