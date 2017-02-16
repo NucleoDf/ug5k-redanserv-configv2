@@ -83,6 +83,7 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.sec_uris.push_back("/test");
 	_web_config.sec_uris.push_back("/hojaExterna.css");
 	_web_config.sec_uris.push_back("/mant/ver");
+	_web_config.sec_uris.push_back("/mant/lver");
 
 	_web_config.access_control = stAccessControl;	
 
