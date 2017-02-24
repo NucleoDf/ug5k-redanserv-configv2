@@ -174,6 +174,7 @@ private:
 	static bool _plog_iniciado;
 	static pthread_t plog_thread_id;
 	static void *plog_thread_routine(void *arg);
+	static bool plog_queue_event_get(PLogEvent *p_evento);
 	static std::queue<PLogEvent> plog_queue;
 	static util::Mutex plog_mutex;
 };

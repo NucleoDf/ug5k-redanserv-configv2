@@ -128,7 +128,7 @@ public:
 	int pid() 
 	{
 #if defined(_WIN32)
-		return _getpid();
+		return (int )GetCurrentThreadId();
 #else
 		return (int )getpid();
 #endif

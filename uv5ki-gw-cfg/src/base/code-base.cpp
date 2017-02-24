@@ -24,8 +24,8 @@ CodeBase::~CodeBase(void)
 /** */
 void CodeBase::plogInit() 
 {
-	if (_plog_iniciado == true)
-		return;
+	//if (_plog_iniciado == true)
+	//	return;
 
 #ifdef _WIN32
 	cfg.Configure("./wplog.conf");
@@ -42,11 +42,11 @@ void CodeBase::plogInit()
 	plog::init<plogConsole>("plog_con", plog::verbose, p_consoleAppender);
 	plog::init<plogNetwork>("plog_net", plog::verbose, p_log4viewAppender);
 
+	_plog_iniciado = true;
 	pthread_create(&plog_thread_id, NULL, plog_thread_routine, NULL);
 #if !defined(_WIN32) && !defined(__APPLE__) && !defined(_PPC82xx_)
 	pthread_setname_np(plog_thread_id, id.c_str());
 #endif 
-	_plog_iniciado = true;
 }
 
 /** */
@@ -108,6 +108,19 @@ util::Mutex CodeBase::plog_mutex;
  /** Para pruebas... */
  int cntEvents = 0;
 #endif
+
+bool CodeBase::plog_queue_event_get(PLogEvent *p_evento) 
+{
+	util::MutexLock lock(plog_mutex);
+	if (!plog_queue.empty())
+	{
+		*p_evento = plog_queue.front();
+		plog_queue.pop();
+		return true;
+	}
+	return false;
+}
+
 void *CodeBase::plog_thread_routine(void *arg) 
 {
 #if !defined(_WIN32)
@@ -117,13 +130,10 @@ void *CodeBase::plog_thread_routine(void *arg)
 	{
 		try 
 		{
-			util::MutexLock lock(plog_mutex);
-			if (!plog_queue.empty())
+			PLogEvent evento;
+			if (plog_queue_event_get(&evento)==true)
 			{
 				cfg.TestCfgChange(); 
-				PLogEvent evento = plog_queue.front();
-				plog_queue.pop();
-
 				if (plog::pLogProfiles[(int)evento.sev].toFile)
 					NDFLOG_(plogFile, evento.sev, evento.from.c_str(), evento.line) << evento.msg;
 				if (plog::pLogProfiles[(int)evento.sev].toConsole)
@@ -137,7 +147,12 @@ void *CodeBase::plog_thread_routine(void *arg)
 #endif
 			}
 		}
-		catch(...) {		
+		catch(...) {
+#if !defined(_WIN32)
+			PLOG_ERROR("PlogThread (%d) Exception...", (int )getpid());
+#else
+			PLOG_ERROR("PlogThread Exception...");
+#endif
 		}
 		Sleep(10);
 	}

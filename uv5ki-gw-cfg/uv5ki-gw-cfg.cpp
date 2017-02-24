@@ -57,10 +57,20 @@ public:
 			bool mode = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoGlobal, "0")=="1"/*.ModoUlises()*/;
 #endif
 			string redan_mode = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoRedan, "0");
-
+#if defined (_WIN32)
 			PLOG_INFO("%s (%s) CfgServer: (%s) Iniciado en \"%s\". ", 
 				Tools::read_txt_file(ON_WORKING_DIR("VERSION.TXT")).c_str(),  
-				mode==false ? string("REDAN-" + redan_mode).c_str() : "ULISES", acBuildString, WORKING_DIR);
+				mode==false ? string("REDAN-" + redan_mode).c_str() : "ULISES", 
+				acBuildString, 
+				WORKING_DIR);
+#else
+			PLOG_INFO("%s (%s) CfgServer(pid: %d): (%s) Iniciado en \"%s\". ", 
+				Tools::read_txt_file(ON_WORKING_DIR("VERSION.TXT")).c_str(),  
+				mode==false ? string("REDAN-" + redan_mode).c_str() : "ULISES",
+				(int )getpid(),
+				acBuildString, 
+				WORKING_DIR);
+#endif
 
 			/** Inicializacion Comun */
 			Uv5kiGwCfgWebApp webApp;
