@@ -136,8 +136,8 @@ public:
 		write_key(writer, "dualidad", dualidad);
 		write_key(writer, "ipv", ipv);
 		write_key(writer, "ips", ips);
-		write_key(writer, "acGrupoMulticast", acGrupoMulticast);
-		write_key(writer, "uiPuertoMulticast", uiPuertoMulticast);
+		//write_key(writer, "acGrupoMulticast", acGrupoMulticast);
+		//write_key(writer, "uiPuertoMulticast", uiPuertoMulticast);
 		write_key(writer, "nivelconsola", nivelconsola);
 		write_key(writer, "puertoconsola", puertoconsola);
 		write_key(writer, "nivelIncidencias", nivelIncidencias);
@@ -153,8 +153,8 @@ public:
 		read_key(base, "ipv", ipv);
 		// read_key(base, "ips", ips);							// El servidor no se lee del fichero sino de la configuracion...
 		ips = datos_locales.ipServ;
-		read_key(base,"acGrupoMulticast", acGrupoMulticast);
-		read_key(base,"uiPuertoMulticast", uiPuertoMulticast);
+		//read_key(base,"acGrupoMulticast", acGrupoMulticast);
+		//read_key(base,"uiPuertoMulticast", uiPuertoMulticast);
 		read_key(base,"nivelconsola", nivelconsola);
 		read_key(base,"puertoconsola", puertoconsola);
 		read_key(base,"nivelIncidencias", nivelIncidencias);
@@ -175,8 +175,8 @@ public:
 #else
 	vector<CommGenCpu *> cpus;
 #endif
-	string acGrupoMulticast;
-	int uiPuertoMulticast;
+	//string acGrupoMulticast;
+	//int uiPuertoMulticast;
 };
 
 #endif

@@ -43,8 +43,8 @@ CommGenConfig::CommGenConfig(soap_config &sc)
 	this->ips = sc.Server;
 	this->dualidad = (sc.IpVirt == sc.IpCol ? 0 : 1);
 
-	this->acGrupoMulticast = sc.ParametrosMulticast.GrupoMulticastConfiguracion;
-	this->uiPuertoMulticast = sc.ParametrosMulticast.PuertoMulticastConfiguracion;
+	//this->acGrupoMulticast = sc.ParametrosMulticast.GrupoMulticastConfiguracion;
+	//this->uiPuertoMulticast = sc.ParametrosMulticast.PuertoMulticastConfiguracion;
 
 	this->nivelconsola = datos_locales.nivel_consola;		// Leer DatosLocales.ini
 	this->puertoconsola = datos_locales.puerto_consola;
@@ -81,14 +81,24 @@ CommSerConfig::CommSerConfig(soap_config &sc)
 	
 	vector<string> sipserver;
 	sc.sip_servers(sipserver);
-	for(vector<string>::iterator it=sipserver.begin(); it!=sipserver.end(); it++) 
-	{
-		if (this->sip.proxys.size() < 2)
-		{
-			this->sip.proxys.push_back(CommSerServidor(*it));
-			this->sip.registrars.push_back(CommSerServidor(*it));
-		}
+
+	if (sipserver.size() > 0) {
+		this->sip.proxys[0] = sipserver[0];
+		this->sip.registrars[0] = sipserver[0];
 	}
+	if (sipserver.size() > 1) {
+		this->sip.proxys[1] = sipserver[1];
+		this->sip.registrars[1] = sipserver[1];
+	}
+
+	//for(vector<string>::iterator it=sipserver.begin(); it!=sipserver.end(); it++) 
+	//{
+	//	if (this->sip.proxys.size() < 2)
+	//	{
+	//		this->sip.proxys.push_back(CommSerServidor(*it));
+	//		this->sip.registrars.push_back(CommSerServidor(*it));
+	//	}
+	//}
 
 	/** WEB */
 	this->web.wport = atoi(LocalConfig::p_cfg->get(strSection, strItemWebPort)/*.PuertoEscucha()*/.c_str());
@@ -113,7 +123,7 @@ CommSerConfig::CommSerConfig(soap_config &sc)
 
 	/** SINCR */
 	if (sc.CfgPasarela.MasterSincronizacion != "")
-		this->sincr.servidores.push_back(CommSerServidor(sc.CfgPasarela.MasterSincronizacion));
+		this->sincr.servidores[0] = CommSerServidor(sc.CfgPasarela.MasterSincronizacion);
 }
 
 /** */

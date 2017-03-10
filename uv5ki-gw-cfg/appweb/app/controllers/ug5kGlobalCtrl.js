@@ -256,7 +256,8 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
                   vm.lcfg.std == -4 ? /*vm.gctrl_sync_4 */ transerv.translate('GCTRL_SYNC_4') :
                   vm.lcfg.std == -5 ? /*vm.gctrl_sync_5 */ transerv.translate('GCTRL_SYNC_5') : vm.lcfg.idc;
 
-	    return cfg + " ( " + vm.lcfg.tim + " )";
+        /** 20170306. Se quita el TS porque 'puede inducir a error/duda' */
+	    return cfg /*+ " ( " + vm.lcfg.tim + " )"*/;
 	}
 
     /** */
@@ -337,7 +338,6 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	    //        vm.isDataHasChanges = true;
 	    //    }
 	    //}
-
         /** Simulador de Carga Upload.. */
 	    if (carga_upload_config == true) {
 	        if (carga_upload_config_timer == 0) {

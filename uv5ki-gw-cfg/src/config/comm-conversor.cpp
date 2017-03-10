@@ -253,8 +253,8 @@ void CommConversor::ParametrosGlobales()
 	SetInt(&mcfg->iRecPuertoRemoto, p_cfg_in->servicios.grab.sport, INCI_MPGP, "Puerto Servicio Grabador");
 
 	// ULISES
-	SetString(mcfg->acGrupoMulticast, p_cfg_in->general.acGrupoMulticast, INCI_MPGP, "IP MCAST", CFG_MAX_LONG_URL);
-	SetInt((int *)&mcfg->uiPuertoMulticast, p_cfg_in->general.uiPuertoMulticast, INCI_MPGP, "Puerto MCAST");
+	SetString(mcfg->acGrupoMulticast, p_cfg_in->ulises.MulticastGroup, INCI_MPGP, "IP MCAST", CFG_MAX_LONG_URL);
+	SetInt((int *)&mcfg->uiPuertoMulticast, p_cfg_in->ulises.MulticastPort, INCI_MPGP, "Puerto MCAST");
 
 	// MODO en Pasarela
 	mcfg->iCfgModoSistema = p_cfg_in->tipo==1 ? 0 : 1;						// 0: Ulises, 1: Redan.
