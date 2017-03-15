@@ -52,7 +52,7 @@ public:
 			plogInit();
 			LocalConfig::p_cfg = new LocalConfig();
 #if defined (_WIN32)
-			bool mode = false;	/** false: REDAN, true: ULISES */
+			bool mode = true;	/** false: REDAN, true: ULISES */
 #else
 			bool mode = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoGlobal, "0")=="1"/*.ModoUlises()*/;
 #endif
