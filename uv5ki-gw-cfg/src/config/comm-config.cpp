@@ -195,7 +195,6 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->radio.repSqBss=sres.info.radio.RepSQyBSS;
 			this->radio.desactivacionSq=sres.info.radio.DesactivacionSQ;
 			this->radio.timeoutPtt=sres.info.radio.TimeoutPTT;
-			this->radio.metodoBss=sres.info.radio.MetodoBSS;					// TODO: Comprobar coherencia de valores.
 			this->radio.umbralVad=sres.info.radio.UmbralVAD;
 			this->radio.numFlujosAudio=sres.info.radio.NumFlujosAudio;
 			this->radio.tiempoPtt=sres.info.radio.TiempoPTT;
@@ -204,18 +203,26 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->radio.tmRetardoFijo=0;										// Idem
 			this->radio.bssRtp=0;											// TODO: Quitar...
 			this->radio.retrasoSqOff=0;										// Dejar a 0
-			/** 20170119. Este campo viene en UmbralTonoPTT. Valores mayores de 0 => evtPtt=1, */
-			this->radio.evtPTT=sres.info.radio.UmbralTonoPTT > 0 ? 1 : 0;
-			/***************************/
-			this->radio.tjbd=30;												// Dejar a 30
-			this->radio.tGRSid=10;											// Dejar a 10
-			this->radio.iEnableGI=sres.info.GrabacionEd137==false ? 0 : 1;	// 
 
-			this->radio.tabla_indices_calidad.clear();						//  
-		
-			this->radio.iSesionPrio=0;										// Radio Local a 0
+			/** 20170119. Este campo viene en UmbralTonoPTT. Valores mayores de 0 => evtPtt=1, */
+			//  20170316. En nueva config, viene con campo específico.
+			// this->radio.evtPTT=sres.info.radio.UmbralTonoPTT > 0 ? 1 : 0;
+			/***************************/
+
+			/** 20170316. Parámetros específicos para FD */
+			this->radio.tGRSid=sres.info.radio.GrsDelay;								// GRS Delay
+			this->radio.metodoBss=sres.info.radio.MetodoBSS;							// Metodo QIDX
+			sres.TablaBss(this->radio.tabla_indices_calidad);						//  
+			this->radio.iEnableGI=sres.info.radio.GrabacionEd137==false ? 0 : 1;		// 
+			this->radio.evtPTT=sres.info.radio.EnableEventPttSq  ? 1 : 0;
+			/*********************************************/
+
+			this->radio.tjbd=30;												// Dejar a 30		
 			this->radio.iPttPrio=0;											// Idem
-			this->radio.iPrecisionAudio=0;									// Normal.
+			this->radio.iPrecisionAudio=0;									// Estricta.
+
+			this->radio.iSesionPrio=0;										// Radio Local a 0
+			this->radio.iModoCalculoClimax = 0;
 
 			this->radio.colateral.name=sres.info.IdDestino;					// FID. Frecuencia
 			this->radio.colateral.tipoConmutacion=0;							// Quitar...
@@ -232,7 +239,6 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->radio.SupervPortadoraTx = sres.info.radio.SupervPortadoraTx==true ? 1 : 0;		// => iSupervisionPortadoraTx
 			this->radio.SupervModuladoraTx = sres.info.radio.SupervModuladoraTx==true ? 1 : 0;	// => iSupervisionModuladoraTx
 
-			this->radio.iModoCalculoClimax = 0;
 		}
 		else 
 		{

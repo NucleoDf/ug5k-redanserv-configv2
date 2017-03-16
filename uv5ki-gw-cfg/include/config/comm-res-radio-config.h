@@ -187,7 +187,6 @@ public:
 		read_key(base, "tjbd", tjbd);
 		read_key(base, "tGRSid", tGRSid);
 		read_key(base, "iEnableGI", iEnableGI);
-		read_key(base,"tabla_indices_calidad", tabla_indices_calidad);
 		read_key(base,"iSesionPrio", iSesionPrio);
 		read_key(base,"iPttPrio", iPttPrio);
 		read_key(base,"colateral", colateral);
@@ -200,6 +199,7 @@ public:
 		read_key(base,"UmbralTonoPTT", UmbralTonoPTT);
 		read_key(base,"SupervPortadoraTx", SupervPortadoraTx);
 		read_key(base,"SupervModuladoraTx", SupervModuladoraTx);
+		read_key(base,"tabla_indices_calidad", tabla_indices_calidad);
 	}
 
 public:

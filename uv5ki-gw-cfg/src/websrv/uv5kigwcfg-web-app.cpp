@@ -47,6 +47,7 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 	//_handlers_list["/mant/reset"]=stCb_mtto;		// RESET de UNIDAD		POST
 	//_handlers_list["/mant/swactiva"]=stCb_mtto;	// ACTIVAR SW-VER		POST
 	//_handlers_list["/mant/swrestore"]=stCb_mtto;	// RETAURAR SW-VER		POST
+	_handlers_list["/ntpstatus"]=stCb_ntpstatus;	// GET.					INFO CLIENTE NTP.
 	_handlers_list["/cpu2cpu"]=stCb_internos;		// PUT.					COMUNICACIONES INTERNAS
 
 	_handlers_list["/test"]=stCb_;					// GET, POST.			PARA PRUEBAS...
@@ -84,6 +85,7 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.sec_uris.push_back("/hojaExterna.css");
 	_web_config.sec_uris.push_back("/mant/ver");
 	_web_config.sec_uris.push_back("/mant/lver");
+	_web_config.sec_uris.push_back("/ntpstatus");
 
 	_web_config.access_control = stAccessControl;	
 
@@ -173,6 +175,17 @@ void Uv5kiGwCfgWebApp::stCb_tses(struct mg_connection *conn, string user, web_re
 		RETURN_OK200_RESP(resp, "");
 	}
 #endif
+	RETURN_NOT_IMPLEMENTED_RESP(resp);
+}
+
+void Uv5kiGwCfgWebApp::stCb_ntpstatus(struct mg_connection *conn, string user, web_response *resp)
+{
+	resp->actividad=false;
+	if (string(conn->request_method)=="GET") 
+	{
+		webData_NtpStatus data;
+		RETURN_OK200_RESP(resp, data.JSerialize());
+	}
 	RETURN_NOT_IMPLEMENTED_RESP(resp);
 }
 

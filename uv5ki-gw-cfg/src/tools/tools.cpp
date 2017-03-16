@@ -196,6 +196,19 @@ void Tools::split(std::vector<std::string> &tokens, const std::string &text, cha
 }
 
 /** */
+void Tools::stringofint_to_vectorint(string inputstring, char sep, vector<int> &output)
+{
+	/* El string debe venir sin caracteres adicionales entre los enteros */
+	vector<string> str_ints;
+	Tools::split(str_ints, inputstring, sep);
+	for (vector<string>::iterator i=str_ints.begin();
+		i!=str_ints.end(); i++) {
+			output.push_back(Tools::atoi(*i));
+	}
+}
+
+
+/** */
 bool Tools::StrContains(std::string texto, std::string valor) {
     if (texto.find(valor) != std::string::npos)
         return true;

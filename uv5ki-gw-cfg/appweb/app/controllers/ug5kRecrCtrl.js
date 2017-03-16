@@ -209,8 +209,8 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 14:        // Prioridad Session.
                 return (parseInt(vm.vdata[0].Value) <= 3);
             case 15:        // Tabla de Calificacion Radio. Solo en Radios Remotos.
-                if (MantService.hide_on_ulises() == false)
-                    return false;
+                //if (MantService.hide_on_ulises() == false)
+                //    return false;
                 return (parseInt(vm.vdata[0].Value) > 3);
         }
         return true;
@@ -379,7 +379,8 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
         var str_qidx = "";
         var index = 0;
         radio.tabla_indices_calidad.forEach(function (val) {
-            str_qidx += (index.toString() + ":" + val.toString() + ", ");
+            if (index < 6)
+                str_qidx += (index.toString() + ":" + val.toString() + ", ");
             index++;
         });
         return str_qidx;

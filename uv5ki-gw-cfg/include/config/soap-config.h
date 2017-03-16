@@ -462,7 +462,6 @@ public:
 		read_key(xnode, "DesactivacionSQ", radio.DesactivacionSQ);
 
 		read_key(xnode, "TimeoutPTT", radio.TimeoutPTT);
-		read_key(xnode, "MetodoBSS", radio.MetodoBSS);
 		read_key(xnode, "UmbralVAD", radio.UmbralVAD);
 		read_key(xnode, "TiempoPTT", radio.TiempoPTT);
 
@@ -476,7 +475,16 @@ public:
 		read_key(xnode, "UmbralTonoSQ", radio.UmbralTonoSQ);
 		read_key(xnode, "FrqTonoPTT", radio.FrqTonoPTT);
 		read_key(xnode, "UmbralTonoPTT", radio.UmbralTonoPTT);
+
+		/** 20170316. Nuevos Parámetros para FD */
+		read_key(xnode, "Metodos_bss_idmetodos_bss", radio.MetodoBSS);
+		read_key(xnode, "GrsDelay", radio.GrsDelay);
+		read_key(xnode, "EnableEventPttSq", radio.EnableEventPttSq);
+		read_key(xnode, "GrabacionEd137", radio.GrabacionEd137);
+		read_key(xnode, "IdTablaBss", radio.TablaBss);
+		// radio.TablaBss="1, 2, 3,  4 ,5,   6,7,8,9,10,11,mmm,11,";
 	}
+
 public:
 	/** Comunes */
 	int GananciaAGCTX;
@@ -524,7 +532,6 @@ public:
 		int RepSQyBSS;
 		int DesactivacionSQ;
 		int TimeoutPTT;
-		int MetodoBSS;
 		int UmbralVAD;
 		int TiempoPTT;
 		int NumFlujosAudio;
@@ -537,6 +544,13 @@ public:
 		int UmbralTonoSQ;
 		int FrqTonoPTT;
 		int UmbralTonoPTT;				// => iNivelTonoPtt
+
+		/** 20170316. Nuevos Parámetros para FD */
+		int MetodoBSS;
+		int GrsDelay;
+		bool EnableEventPttSq;
+		bool GrabacionEd137;
+		string TablaBss;
 	} radio;
 };
 
@@ -565,6 +579,16 @@ public:
 			"tipo=" + Tools::Int2String((int)Interface));
 
 		read_key(xdata_ResourceInfo, "Tablas", info);
+	}
+	void TablaBss(vector<int> &v) {
+		Tools::stringofint_to_vectorint(info.radio.TablaBss, ',', v);
+		/** Si hay menos de 6, completo */
+		if (v.size() < 6) {
+			int add = 6 - v.size();
+			for (int i=0; i<add; i++) {
+				v.push_back(15);
+			}
+		}
 	}
 
 public:

@@ -344,6 +344,35 @@ private:
 #endif
 };
 
+/** */
+class webData_NtpStatus : public jData
+{
+public:
+	webData_NtpStatus() {
+		string test = "";
+#if !defined(_PPC82xx_)
+		test = test + "     remote           refid      st t when poll reach   delay   offset  jitter\n";
+		test = test + "==============================================================================\n";
+		test = test + "*192.168.0.129   172.24.90.11     6 u    6   16  377    0.357    7.203   1.838\n";
+		test = test + " 192.168.0.212   .INIT.          16 u    7   16    0    0.000    0.000   0.000\n";
+		test += "\n";
+		test += "*cosas que no tienen sentido\n";
+#endif
+		string res = sistema::ResultExecuteCommand("ntpq -c peers", test);
+		istringstream f(res);
+		string line;
+		while (std::getline(f, line)) {
+			lines.push_back(line);
+		}
+	}
+	virtual void jread(Value &base){}
+	virtual void jwrite(Writer<StringBuffer> &writer) {
+		write_key(writer, "lines", lines);
+	}
+private:
+	vector<string> lines;
+};
+
 
 /** */
 class webData_VersionNucleo : public jData
