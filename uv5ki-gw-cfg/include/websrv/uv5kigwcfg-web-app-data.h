@@ -358,7 +358,7 @@ public:
 		test += "\n";
 		test += "*cosas que no tienen sentido\n";
 #endif
-		string res = sistema::ResultExecuteCommand("ntpq -c peers", test);
+		string res = sistema::ResultExecuteCommand((char *)"ntpq -c peers", test);
 		istringstream f(res);
 		string line;
 		while (std::getline(f, line)) {

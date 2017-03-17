@@ -105,7 +105,7 @@ CommSerConfig::CommSerConfig(soap_config &sc)
 	this->web.stime = atoi(LocalConfig::p_cfg->get(strSection, strItemSessionTime)/*TiempoSesion()*/.c_str());
 
 	/** SNMP */
-	LocalConfig snmpini(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/);
+	LocalConfig snmpini(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloSnmp)/*.snmpModule()*/));
 	this->snmp.sport = 65000;
 	this->snmp.snmpp = atoi(snmpini.get("AGENTE","PORT").c_str());
 	this->snmp.agcomm = snmpini.get("AGENTE","SNMPV2COMM");
@@ -117,8 +117,11 @@ CommSerConfig::CommSerConfig(soap_config &sc)
 	this->snmp.traps.push_back("2," + sc.Server + "/162");
 
 	/** Grabador */
-	LocalConfig recini(LocalConfig::p_cfg->get(strModulos, strItemModuloGrabador)/*.recModule()*/);
-	this->grab.rtsp_ip = recini.get("RTSP","IP_REC_A");
+	LocalConfig recini(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloGrabador)/*.recModule()*/));
+
+	this->grab.rtsp_ip = sc.CfgPasarela.Grabador1;							// recini.get("RTSP","IP_REC_A");
+	this->grab.rtspb_ip = sc.CfgPasarela.Grabador2;
+	
 	this->grab.rtsp_port = atoi(recini.get("RTSP","PORT_RTSP").c_str());
 
 	/** SINCR */

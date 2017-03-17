@@ -432,7 +432,7 @@ void SoapClientProc::Run()
 					} else if (aviso.main == MAIN_PIDE_CONFIG) {
 						PLOG_INFO("Solicitando Configuracion a: %s...", aviso.ip.c_str());
 						PedirConfiguracion(aviso.cmd);
-						PLOG_INFO("Configuraci�n Recibida...");
+						PLOG_INFO("Configuracion Recibida...");
 					} else if (aviso.main == CPU2CPU_MSG) {
 						PLOG_INFO("Avisando de cambio de Configuracion a: %s", aviso.ip.c_str());
 						GeneraAvisosCpu(aviso.ip, aviso.cmd);

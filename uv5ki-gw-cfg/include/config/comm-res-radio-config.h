@@ -99,7 +99,7 @@ public:
 		metodoBss=0;
 		umbralVad=-33;
 		numFlujosAudio=1;
-		tiempoPtt=200;
+		tiempoPtt=0;
 		tmVentanaRx=100;
 		climaxDelay=1;
 		tmRetardoFijo=100;

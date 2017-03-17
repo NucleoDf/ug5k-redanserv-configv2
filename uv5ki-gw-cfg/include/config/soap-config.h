@@ -96,6 +96,16 @@ protected:
 			val.push_back(res_node->value());
 		}
 	}
+	void read_key(xml_node<> * xnode, const char *root, vector<int> &val) {
+		xml_node<> *root_node = xnode->first_node((char *)root);
+		val.clear();
+		if (root_node==NULL)
+			return;
+		for (xml_node<> * res_node = root_node->first_node("int"); res_node; res_node = res_node->next_sibling())
+		{			
+			val.push_back(atoi(res_node->value()));
+		}
+	}
 	template <typename T> void read_key(xml_node<> * xnode, const char *root, const char *name, vector<T> &val) {
 		xml_node<> *root_node = xnode->first_node((char *)root);
 		val.clear();
@@ -125,6 +135,22 @@ protected:
 
 protected:
 	static remoteGetXdataFunc remote_get_xdata_func;
+};
+
+/** */
+class soap_IntEntry : public xml_data
+{
+public:
+	soap_IntEntry() {
+		valor = 0;
+	}
+	~soap_IntEntry(){}
+public:
+	void xread(xml_node<> *xnode) {
+		read_key(xnode, "int", valor);
+	}
+public:
+	int valor;
 };
 
 /** */
@@ -481,7 +507,7 @@ public:
 		read_key(xnode, "GrsDelay", radio.GrsDelay);
 		read_key(xnode, "EnableEventPttSq", radio.EnableEventPttSq);
 		read_key(xnode, "GrabacionEd137", radio.GrabacionEd137);
-		read_key(xnode, "IdTablaBss", radio.TablaBss);
+		read_key(xnode, "ValuesTablaBss", radio.ValuesTablaBss);
 		// radio.TablaBss="1, 2, 3,  4 ,5,   6,7,8,9,10,11,mmm,11,";
 	}
 
@@ -550,7 +576,7 @@ public:
 		int GrsDelay;
 		bool EnableEventPttSq;
 		bool GrabacionEd137;
-		string TablaBss;
+		vector<int> ValuesTablaBss;
 	} radio;
 };
 
@@ -573,16 +599,22 @@ public:
 		read_key(xnode, "TipoRecurso", TipoRecurso);
 		read_key(xnode, "IdTifX", IdTifX);
 
+		/** Lee Recursos de forma Remota */
 		xdata_ResourceInfo = remote_get_xdata_func("GetParametrosRecursoById",
 			"idSistema=departamento", 
 			"idRecurso="+IdRecurso, 
 			"tipo=" + Tools::Int2String((int)Interface));
+		///** Simulacion de una carga */
+		//xdata_ResourceInfo = Tools::read_txt_file(onfs("/home/GetParametrosRecursoById_idRecurso=RD-SIM_tipo=0.xml"));
 
 		read_key(xdata_ResourceInfo, "Tablas", info);
 	}
 	void TablaBss(vector<int> &v) {
-		Tools::stringofint_to_vectorint(info.radio.TablaBss, ',', v);
-		/** Si hay menos de 6, completo */
+		v.clear();
+		for (vector<int>::iterator i=info.radio.ValuesTablaBss.begin(); i!=info.radio.ValuesTablaBss.end(); i++) {
+			v.push_back(*i);
+		}
+		/** si hay menos de 6, completo */
 		if (v.size() < 6) {
 			int add = 6 - v.size();
 			for (int i=0; i<add; i++) {
@@ -631,6 +663,9 @@ public:
 		read_key(xnode, "PuertoLocalSIP", PuertoLocalSIP);
 		read_key(xnode, "PeriodoSupervisionSIP", PeriodoSupervisionSIP);
 		read_key(xnode, "ListaRecursos", "RecursosSCV", ListaRecursos);
+		/** */
+		read_key(xnode, "Grabador1", Grabador1);
+		read_key(xnode, "Grabador2", Grabador2);
 	}
 
 public:
@@ -644,6 +679,9 @@ public:
 	int PuertoLocalSIP;
 	int PeriodoSupervisionSIP;
 	vector<soap_RecursosSCV> ListaRecursos;
+	/** */
+	string Grabador1;
+	string Grabador2;
 };
 
 /** */

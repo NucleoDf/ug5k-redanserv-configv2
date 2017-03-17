@@ -40,6 +40,8 @@ soap_config::soap_config(remoteGetXdataFunc remoteFunc, string iphw, string hwNa
 	
 	PLOG_DEBUG("SOAP: GetCfgPasarela desde %s",ipServer.c_str());
 	xdata_CfgPasarela = remote_get_xdata_func("GetCfgPasarela","id_sistema=departamento", "id_hw=" + hwName, "");
+	///** Simulacion para Pruebas */
+	//xdata_CfgPasarela = Tools::read_txt_file(onfs("/home/GetCfgPasarela_id_hw=CGW3_.xml"));
 
 	XDeserialize(xdata_idConfig, "string");
 
