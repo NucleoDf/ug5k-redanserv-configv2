@@ -664,8 +664,8 @@ public:
 		read_key(xnode, "PeriodoSupervisionSIP", PeriodoSupervisionSIP);
 		read_key(xnode, "ListaRecursos", "RecursosSCV", ListaRecursos);
 		/** */
-		read_key(xnode, "Grabador1", Grabador1);
-		read_key(xnode, "Grabador2", Grabador2);
+		read_key(xnode, "IpGrabador1", Grabador1);
+		read_key(xnode, "IpGrabador2", Grabador2);
 	}
 
 public:
