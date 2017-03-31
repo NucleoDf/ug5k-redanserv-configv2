@@ -175,8 +175,9 @@ public:
 		read_key(base, "umbralVad", umbralVad);
 		read_key(base, "numFlujosAudio", numFlujosAudio);
 		/** 20170119. En REDAN venga lo que venga este valor vale 200 */
+		/** 20170327. En REDAN venga lo que venga este valor vale 0 */
 		// read_key(base, "tiempoPtt", tiempoPtt);
-		tiempoPtt=200;
+		tiempoPtt=0;
 		/****************/
 		read_key(base, "tmVentanaRx", tmVentanaRx);
 		read_key(base, "climaxDelay", climaxDelay);
