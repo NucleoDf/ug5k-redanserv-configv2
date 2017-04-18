@@ -54,7 +54,7 @@ bool FileSupervisor::LocalUnlock(string pathoffile)
 */
 void FileSupervisor::Run()
 {
-	TimeMeasure tick(LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60"));
+	time_t tick = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60");
 	/** */
 	SetId("FileSupervisor");
 	PLOG_INFO("FileSupervisor (%d) running...", pid());
@@ -107,7 +107,7 @@ void FileSupervisor::Run()
 		{
 			PLOG_ERROR("Exception no Esperada en FileSupervisor.");
 		}
-		if (tick.elapsed()==true) {		
+		if (Tick.elapsed(tick)==true) {		
 			PLOG_INFO("(%d)=>FileSupervisor. TICK", pid());
 		}
 	}

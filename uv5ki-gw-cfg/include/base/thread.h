@@ -26,6 +26,25 @@
 	#define THREAD_PRIORITY_NORMAL 1
 #endif
 
+/** */
+class TimeMeasure 
+{
+public:
+	TimeMeasure() {
+		_last = time(NULL);
+	}
+	bool elapsed(time_t _timeout) {
+		time_t now = time(NULL);
+		if (now > (_last + _timeout)) {
+			_last = now;
+			return true;
+		}
+		return false;
+	}
+private:
+	time_t _last;
+};
+
 /**
 */
 class CCritSec  
@@ -114,6 +133,7 @@ public:
 	virtual void Start(/*int nPriority = THREAD_PRIORITY_NORMAL*/);
 	virtual void Stop();
 	bool IsLive();
+	TimeMeasure Tick;
 public:
 	void SetId(std::string id) 
 	{ 

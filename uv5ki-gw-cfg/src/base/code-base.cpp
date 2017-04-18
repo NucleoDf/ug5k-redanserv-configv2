@@ -11,6 +11,11 @@ plog::LogConfig CodeBase::cfg;
 plog::ConsoleAppender<plog::ConsoleFormatter> *CodeBase::p_consoleAppender;
 plog::NetUdpAppender<plog::Log4viewFormatter> *CodeBase::p_log4viewAppender;
 
+#if !defined(_PPC82xx_)
+ /** Para pruebas... */
+ int cntEvents = 0;
+#endif
+
 /** */
 CodeBase::CodeBase(void)
 {
@@ -69,7 +74,9 @@ void CodeBase::_Log(plog::Severity level, const char *from, int line, const char
 		return;
 	}
 
-	char textString[1024] = {'\0'};
+	util::MutexLock lock(plog_mutex);
+
+	static char textString[1024] = {'\0'};
 	memset(textString, '\0', sizeof(textString));
 
 #ifdef _WIN32
@@ -79,8 +86,12 @@ void CodeBase::_Log(plog::Severity level, const char *from, int line, const char
 #endif
 
 	PLogEvent evento(level, from, line, textString);
-	util::MutexLock lock(plog_mutex);
-	plog_queue.push(evento);
+
+	/** 20170418. Control de la COLA de LOGS */
+	if (plog_queue.size() < 20)
+		plog_queue.push(evento);
+	else
+		Tools::append2file(onflash("fatalerrors.log"), "Cola de Log llena...");
 }
 
 /** */
@@ -88,14 +99,14 @@ void CodeBase::_FormatLog(plog::Severity level, const char *file, int line, cons
 {
 	try
 	{
-		//std::stringstream ss;
-		//ss << file << " (L:" << line << "): " << fmt;
-		//ss << file << " (L:" << line << ")";
 		_Log(level, file, line, fmt, args);
 	}
 	catch(...)
 	{
-		_Log(fatal, "", 0, "Error en _FormatLog", args);
+		/** 
+			20170418. Si la función genera una excepción, no puedo volver a llamarla porque podría dar lugar a un bucle infinito.
+		 */
+		Tools::append2file(onflash("fatalerrors.log"), "Error en _FormatLog");
 		return;
 	}
 }
@@ -104,11 +115,6 @@ void CodeBase::_FormatLog(plog::Severity level, const char *file, int line, cons
 pthread_t CodeBase::plog_thread_id;
 std::queue<PLogEvent > CodeBase::plog_queue;
 util::Mutex CodeBase::plog_mutex;
-#if !defined(_PPC82xx_)
- /** Para pruebas... */
- int cntEvents = 0;
-#endif
-
 bool CodeBase::plog_queue_event_get(PLogEvent *p_evento) 
 {
 	util::MutexLock lock(plog_mutex);
@@ -142,16 +148,18 @@ void *CodeBase::plog_thread_routine(void *arg)
 					NDFLOG_(plogNetwork, evento.sev, evento.from.c_str(), evento.line) << evento.msg;			
 #if !defined(_PPC82xx_)
 				/** Para pruebas... */
-				if (++cntEvents == 32)
+			if (++cntEvents == 32)
 					throw new Exception("Excepcion provocada para pruebas");
 #endif
 			}
 		}
 		catch(...) {
 #if !defined(_WIN32)
-			PLOG_ERROR("PlogThread (%d) Exception...", (int )getpid());
+//			PLOG_ERROR("PlogThread (%d) Exception...", (int )getpid());
+			Tools::append2file(onflash("fatalerrors.log"), "PlogThread Exception...");
 #else
-			PLOG_ERROR("PlogThread Exception...");
+//			PLOG_ERROR("PlogThread Exception...");
+			Tools::append2file(onflash("fatalerrors.log"), "PlogThread Exception...");
 #endif
 		}
 		Sleep(10);

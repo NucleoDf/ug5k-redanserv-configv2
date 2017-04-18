@@ -41,7 +41,7 @@ ManProc::~ManProc(void)
 /** */
 void ManProc::Run()
 {
-	TimeMeasure tick(LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60"));
+	time_t tick = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60");
 #if _NOTIFICA_ESTADOS_CPU_
 	int _cntEstados = 1;
 #endif
@@ -85,7 +85,7 @@ void ManProc::Run()
 			}
 #endif
 		}
-		if (tick.elapsed()==true) {		
+		if (Tick.elapsed(tick)==true) {		
 			PLOG_INFO("(%d)=>ManProc. TICK", pid());
 		}
 	}

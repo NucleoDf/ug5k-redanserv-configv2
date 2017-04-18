@@ -52,7 +52,7 @@ void WebAppServer::Dispose()
 /** */
 void WebAppServer::Run()
 {
-	TimeMeasure tick(config()->tick);
+	time_t tick = config()->tick;
 
 	SetId("WebAppServer");
 	config()->session_control.reset();
@@ -71,7 +71,7 @@ void WebAppServer::Run()
 					config()->session_control.reset();
 			}
 
-			if (tick.elapsed()==true) {
+			if (Tick.elapsed(tick)==true) {
 				PLOG_INFO("(%d)=>WebAppServer. TICK", pid());
 			}
 

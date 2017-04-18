@@ -397,3 +397,13 @@ void Tools::tm2String(struct tm* timeptr, string format, string &date)
 	date = string(buffer);
 }
 
+/** */
+void Tools::append2file(string name, string msg) 
+{
+	try {
+		ofstream outfile(name.c_str(), ios_base::app);
+		outfile << msg << endl;
+	}
+	catch(...) {
+	}
+}

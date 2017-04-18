@@ -51,6 +51,9 @@ public:
 		{
 			plogInit();
 			LocalConfig::p_cfg = new LocalConfig();
+			
+			/** 20170418. Timeout de procesos 'colgados'. 15 veces el tick de actividad */
+			hangup_timeout = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60") * 15;
 #if defined (_WIN32)
 			bool mode = false;	/** false: REDAN, true: ULISES */
 #else
@@ -72,14 +75,14 @@ public:
 				WORKING_DIR);
 #endif
 
-			/** Inicializacion Comun */
-			Uv5kiGwCfgWebApp webApp;
+			pwebApp = new Uv5kiGwCfgWebApp();
 
 			/** Crearlo seg�n el entorno */
 			if (mode==false)
 				CfgProc::p_cfg_proc = new JsonClientProc();
 			else
 				CfgProc::p_cfg_proc = new SoapClientProc();
+
 			HistClient::p_hist = new HistClient();
 			ManProc::p_man = new ManProc();
 			FileSupervisor::p_fspv = new FileSupervisor();
@@ -90,11 +93,14 @@ public:
 			CfgProc::p_cfg_proc->Start();
 			FileSupervisor::p_fspv->Start();		
 
-			webApp.Start();
+			pwebApp->Start();
 
 	#ifdef _WIN32
-				/** Lazo de Windows */				
-			std::cin.get();
+				/** Lazo de Windows */		
+			while (std::cin.rdbuf()->in_avail()==0)
+			{
+				SupervisaProcesos();
+			}
 	#else
 				/** Lazo de LINUX */
 			// Si se ejecuta desde CARPER, nos pasan como primer parametro el descriptor de pipe para refrescar al perro (a CARPER).
@@ -109,15 +115,18 @@ public:
 			while(salida==0) 
 			{
 				CThread::sleep(100);
+
 				if (iDescPerro != -1)
 					write( iDescPerro, &ucPerro, 1 );
+
+				SupervisaProcesos();
 			}
 	#endif
 
 			/** Finalizacion Comun */
 
 			/** Parada de Threads */
-			webApp.Dispose();
+			pwebApp->Dispose();
 
 			FileSupervisor::p_fspv->Stop();
 			CfgProc::p_cfg_proc->Stop();
@@ -300,6 +309,30 @@ private:
 	}
 
 #endif
+	void SupervisaProcesos() {
+		if (HistClient::p_hist->Tick.elapsed(hangup_timeout)==true) {
+			Tools::append2file(onflash("fatalerrors.log"), "Reset por HISTCLIENT Colgado...");
+			exit(-1);
+		}
+		if (CfgProc::p_cfg_proc->Tick.elapsed(hangup_timeout)==true) {
+			Tools::append2file(onflash("fatalerrors.log"), "Reset por CFGPROC Colgado...");
+			exit(-1);
+		}
+		if (ManProc::p_man->Tick.elapsed(hangup_timeout)==true) {
+			Tools::append2file(onflash("fatalerrors.log"), "Reset por MANPROC Colgado...");
+			exit(-1);
+		}
+		if (FileSupervisor::p_fspv->Tick.elapsed(hangup_timeout)==true) {
+			Tools::append2file(onflash("fatalerrors.log"), "Reset por FILESUP Colgado...");
+			exit(-1);
+		}
+		if (pwebApp->Tick.elapsed(hangup_timeout)==true) {
+			Tools::append2file(onflash("fatalerrors.log"), "Reset por WEBSRV Colgado...");
+			exit(-1);
+		}
+	}
+	time_t hangup_timeout;
+	Uv5kiGwCfgWebApp *pwebApp;
 };
 
 /** */
