@@ -15,6 +15,12 @@ function ug5kMantCtrl($document, $scope, $q, $interval, transerv, dataservice, a
     vm.pagina = 0;
 
     vm.logfiles = [ ];
+	
+	vm.users = [{name:"user1", clave:"", perfil:64}
+		,{name:"user2", clave:"", perfil:0x1000}
+		,{name:"user3", clave:"", perfil:2}
+		,{name:"user4", clave:"", perfil:1}
+	];
 
     /** */
     vm.mostrar_boton = function (boton) {
@@ -81,6 +87,23 @@ function ug5kMantCtrl($document, $scope, $q, $interval, transerv, dataservice, a
             });
 	}
 
+	/** Para los usuarios */
+	vm.txt_user_profile = function(profile) {
+        var txt = "";
+	            
+        txt += ((profile & ADMIN_PROFILE)!= 0) ? "adm/" : "";
+        txt += ((profile & PCFG_PROFILE) != 0) ? "cfg/" : "";
+        txt += ((profile & ING_PROFILE) != 0) ? "*/" : "";
+        txt += ((profile & GEST_PROFILE) != 0) ? "*/" : "";
+        txt += ((profile & CRTL_PROFILE) != 0) ? "ctr/" : "";
+        txt += ((profile & ALM1_PROFILE) != 0) ? "i/" : "";
+        txt += ((profile & ALM2_PROFILE) != 0) ? "*/" : "";
+        txt += ((profile & VIS_PROFILE)  != 0) ? "vis/" : "";
+		
+		txt = txt.length == 0 ? txt : txt.substring(0, txt.length - 1);
+        return " (" + txt + ")";
+	}
+	
     /** Para las versiones sofware */
 	vm.verbose = {};
 	vm.versiones = [];
@@ -240,6 +263,8 @@ function ug5kMantCtrl($document, $scope, $q, $interval, transerv, dataservice, a
 	    dataservice.mnt_get_filelogs().then(function (response) {
 	        vm.logfiles = response.data.lst;
 	    });
+		
+		vm.users = CfgService.cfg_get().users;
 	    console.log("Servicio de Mantenimiento Inicializado");
 	});
 

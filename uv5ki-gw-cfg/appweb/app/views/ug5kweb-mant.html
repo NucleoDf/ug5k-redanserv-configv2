@@ -11,13 +11,16 @@
             <a href="" data-ng-click="vm.set_pagina(2)" data-ng-show="vm.mostrar_boton(1)" translate>MAN_PG02</a>
         </li>
         <li data-ng-class="{'active': vm.pagina==3}">
-            <a href="" data-ng-click="vm.set_pagina(3)" translate>MAN_PG03</a>
+            <a href="" data-ng-click="vm.set_pagina(3)" data-ng-show="vm.mostrar_boton(0)" translate>Usuarios Habilitados</a>
         </li>
         <li data-ng-class="{'active': vm.pagina==4}">
-            <a href="" data-ng-click="vm.set_pagina(4)" ng-show="false" translate>MAN_PG04</a>
+            <a href="" data-ng-click="vm.set_pagina(4)" translate>MAN_PG03</a>
         </li>
         <li data-ng-class="{'active': vm.pagina==5}">
-            <a href="" data-ng-click="vm.set_pagina(5)" ng-show="vm.desarrollo()" translate>Desarrollo</a>
+            <a href="" data-ng-click="vm.set_pagina(5)" ng-show="false" translate>MAN_PG04</a>
+        </li>
+        <li data-ng-class="{'active': vm.pagina==6}">
+            <a href="" data-ng-click="vm.set_pagina(6)" ng-show="vm.desarrollo()" translate>Desarrollo</a>
         </li>
     </ul>
 </section>
@@ -176,7 +179,19 @@
             </tr>
         </table>
     </div>
-    <div id="hSoft" data-ng-show="vm.pagina==3">
+	<div id="users" data-ng-show="vm.pagina==3">
+		<table class="table table-striped ug5ktb">
+			<tr>
+				<th translate>Id. Usuario</th>
+				<th translate>Perfil</th>
+			</tr>
+			<tr data-ng-repeat = "user in vm.users">
+				<td>{{user.name}}</td>
+				<td>{{vm.txt_user_profile(user.perfil)}}</td>
+			</tr>
+		</table>
+	</div>
+    <div id="hSoft" data-ng-show="vm.pagina==4">
         <ul class="list-group">
             <li class="list-group-item ndf-ver-01">{{"Ulises G 5000. Version " + vm.versiones.Version + " (" + vm.versiones.Fecha + ")"}}</li>
             <li class="list-group-item">
@@ -200,7 +215,7 @@
         </ul>
     </div>
     <!-- Pantalla para funciones especificas para desarrollo -->
-    <div id="Desarrollo" data-ng-show="vm.pagina==5">
+    <div id="Desarrollo" data-ng-show="vm.pagina==6">
         <h4>Controles Desarrollo</h4>
         <div class="row">
             <div class="col-md-4">
@@ -302,7 +317,7 @@
         </div>
     </div>
     <!-- Para la carga de software -->
-    <div id="cargasw" data-ng-show="vm.pagina==4">
+    <div id="cargasw" data-ng-show="vm.pagina==5">
         <table class="ug5ktbPre">
             <tr>
                 <th translate>MAN_PG04_L00</th>
