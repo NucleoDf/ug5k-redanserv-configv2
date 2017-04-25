@@ -204,6 +204,9 @@ void JsonClientProc::Run()
 	p_working_config->load_from(LAST_CFG);
 	p_working_config->config.tipo = 0;
 
+	// TODO. Comprobar que _ip_propia es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
+	// y hay que obtener la configuracion del Servidor...
+
 	// TODO: StdClient::std.NotificaCambioConfig();
 	AvisaChequearConfiguracion();
 	while (IsRunning()) {
@@ -412,6 +415,10 @@ void SoapClientProc::Run()
 	/** Leer la ultima CFG recibida */
 	p_working_config->load_from(LAST_CFG);
 	p_working_config->config.tipo = 1;
+
+	// TODO. Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
+	// y hay que obtener la configuracion del Servidor...
+
 	PLOG_INFO("SoapClientProc running. Leida LAST_CFG");
 
 	AvisaChequearConfiguracion();

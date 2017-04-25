@@ -88,10 +88,10 @@ void CodeBase::_Log(plog::Severity level, const char *from, int line, const char
 	PLogEvent evento(level, from, line, textString);
 
 	/** 20170418. Control de la COLA de LOGS */
-	if (plog_queue.size() < 20)
+	if (plog_queue.size() < 100)
 		plog_queue.push(evento);
 	else
-		Tools::append2file(onflash("fatalerrors.log"), "Cola de Log llena...");
+		Tools::append2file(onflash("fatalerrors.log"), string("Cola de Log llena... Tamaño Maximo: ") + string(""));
 }
 
 /** */
