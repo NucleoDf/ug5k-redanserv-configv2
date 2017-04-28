@@ -643,7 +643,7 @@ void SoapClientProc::McastActivateOrDeactivate(bool activate)
 	}
 	catch(socket_error x) 
 	{
-		PLOG_EXCEP(x, "McastActivateOrDeactivate(%s:%d): %s", ipmcast.c_str(), port, x.what());		
+		PLOG_EXCEP(x, "McastActivateOrDeactivate(%s:%d): %s", ipmcast.c_str(), port, x.what().c_str());		
 	}
 }
 

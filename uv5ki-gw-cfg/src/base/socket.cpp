@@ -434,27 +434,28 @@ bool CSocket::Connect(const CIPAddress &addr, int timeout)
 		throw socket_error(WSAENOTSOCK, "Connect");
 
 #ifdef _WIN32
+	/*
     TIMEVAL Timeout;
     Timeout.tv_sec = timeout;
     Timeout.tv_usec = 0;
 
 	//set the socket in non-blocking
-    //unsigned long iMode = 1;
-    //int iResult = ioctlsocket(m_socket, FIONBIO, &iMode);
-    //if (iResult != NO_ERROR)
-    //    throw socket_error(iResult, "ioctlsocket failed with error: ");
+    unsigned long iMode = 1;
+    int iResult = ioctlsocket(m_socket, FIONBIO, &iMode);
+    if (iResult != NO_ERROR)
+        throw socket_error(iResult, "ioctlsocket failed with error: ");
 
 	int res = connect(m_socket, addr, addr.size());
 	if (res != 0)
 		return false;
-	//if (connect(m_socket, addr, addr.size()) != 0)
-	//	return false;
+	if (connect(m_socket, addr, addr.size()) != 0)
+		return false;
 
    // restart the socket mode
- //   iMode = 0;
-	//iResult = ioctlsocket(m_socket, FIONBIO, &iMode);
- //   if (iResult != NO_ERROR)
- //       throw socket_error(iResult, "ioctlsocket failed with error: ");
+    iMode = 0;
+	iResult = ioctlsocket(m_socket, FIONBIO, &iMode);
+    if (iResult != NO_ERROR)
+        throw socket_error(iResult, "ioctlsocket failed with error: ");
  
     fd_set Write, Err;
     FD_ZERO(&Write);
@@ -468,6 +469,9 @@ bool CSocket::Connect(const CIPAddress &addr, int timeout)
         return true;
  
     return false;
+//
+*/
+	return Connect(addr);
 #else
 	int res, valopt; 
 	long arg; 
@@ -495,11 +499,15 @@ bool CSocket::Connect(const CIPAddress &addr, int timeout)
 			{ 
 				lon = sizeof(int); 
 				getsockopt(m_socket, SOL_SOCKET, SO_ERROR, (void*)(&valopt), &lon); 
-				if (valopt)
-					throw socket_error(valopt, "Error in connection()");
+				if (valopt) {
+					errno = valopt;
+					throw socket_error("Error in connect");
+				}
 			} 
-			else 
+			else {
+				errno = ETIMEDOUT;
 				throw socket_error("Timeout on connect");
+			}
 		} 
 		else 
 			throw socket_error(errno, "Error connecting");
@@ -548,7 +556,7 @@ int CSocket::Recv(void *buf, int sz, int _flags)
 
 ////////////////////////////////////////////////////////////////////////////////
 //
-int CSocket::Recv_text(string &text, int timeout/*=0*/)
+int CSocket::Recv_text(string &text, int timeout/*=0*/, int char_timeout/*=10*/)
 {
 	text = "";
 	if (this->IsReadable(timeout))
@@ -559,14 +567,14 @@ int CSocket::Recv_text(string &text, int timeout/*=0*/)
 			if (this->Recv(&leido, 1) != 1)
 				break;			
 			text.push_back(leido);
-		} while (this->IsReadable(10));
+		} while (this->IsReadable(char_timeout));
 	}
 	return text.length();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //
-int CSocket::Recv_bin(vector<byte> &buff, int timeout/*=0*/)
+int CSocket::Recv_bin(vector<byte> &buff, int timeout/*=0*/, int char_timeout/*=10*/)
 {
 	buff.clear();
 	if (this->IsReadable(timeout))
@@ -576,7 +584,7 @@ int CSocket::Recv_bin(vector<byte> &buff, int timeout/*=0*/)
 		{
 			this->Recv(&leido, 1);
 			buff.push_back(leido);
-		} while (this->IsReadable(10));
+		} while (this->IsReadable(char_timeout));
 	}
 	return buff.size();
 }

@@ -52,8 +52,8 @@ public:
 			plogInit();
 			LocalConfig::p_cfg = new LocalConfig();
 			
-			/** 20170418. Timeout de procesos 'colgados'. 15 veces el tick de actividad */
-			hangup_timeout = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTick, "60") * 15;
+			/** 20170418. Timeout de procesos 'colgados' */
+			hangup_timeout = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTimeout, "180");
 #if defined (_WIN32)
 			bool mode = false;	/** false: REDAN, true: ULISES */
 #else

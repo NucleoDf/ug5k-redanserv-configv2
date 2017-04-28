@@ -319,7 +319,7 @@ void ManProc::GetEstadoCpu(int cpu)
 	}
 	catch(socket_error e) 
 	{
-		PLOG_ERROR("ManProc::GetEstadoCpu %d. socket_error: %s.", cpu, e.what());
+		PLOG_ERROR("ManProc::GetEstadoCpu %d. socket_error: %s.", cpu, e.what().c_str());
 	}
 	catch(...) 
 	{

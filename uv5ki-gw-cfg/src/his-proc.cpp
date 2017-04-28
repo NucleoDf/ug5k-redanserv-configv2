@@ -239,7 +239,7 @@ void HistClient::PrepareSocket(CUDPSocket &sck, int port)
 	}
 	catch(socket_error e)
 	{
-		PLOG_ERROR("Excepcion en HistClient::PrepareSocket (port=%d): %s", port, e.what());
+		PLOG_ERROR("Excepcion en HistClient::PrepareSocket (port=%d): %s", port, e.what().c_str());
 	}
 }
 

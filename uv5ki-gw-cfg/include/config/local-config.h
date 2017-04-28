@@ -54,6 +54,9 @@ using namespace std;
 #define strRuntimeItemRedanHttpPostTimeout		((const char *)"REDAN_HTTP_POST_TIMEOUT")
 #define strRuntimeItemUlisesHttpTimeout			((const char *)"ULISES_HTTP_TIMEOUT")
 #define strRuntimeItemThreadActiveTick			((const char *)"THREAD_ACTIVE_TICK")
+#define strRuntimeItemThreadActiveTimeout		((const char *)"THREAD_ACTIVE_TIMEOUT")
+#define strRuntimeItemHttpCharTimeout			((const char *)"HTTP_CHAR_TIMEOUT")
+#define strRuntimeItemTcpConnTimeout			((const char *)"TCP_CONN_TIMEOUT")
 
 
 #define strFilesSupervidor				((const char *)"FILESUPERVISOR")

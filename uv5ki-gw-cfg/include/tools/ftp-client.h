@@ -33,13 +33,13 @@ private:
 	string _msg;
 public:
 #if defined _WIN32
-	virtual const char *what() {return _msg.c_str();}
+	virtual const string what() {return _msg.c_str();}
 #elif defined __APPLE__
-	virtual const char *what() const _NOEXCEPT {return _msg.c_str();}
+	virtual const string what() const _NOEXCEPT {return _msg.c_str();}
 #elif defined _PPC82xx_
-	virtual const char *what() {return _msg.c_str();}
+	virtual const string what() {return _msg.c_str();}
 #else
-	virtual const char *what() {return _msg.c_str();}
+	virtual const string what() {return _msg.c_str();}
 #endif
 
 };

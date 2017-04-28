@@ -26,13 +26,13 @@ ParseResponse HttpClient::SendHttpCmd(string cmd, int ms_timeout)
 
 	try 
 	{
-		if (!sck.Connect(host))
+		if (!sck.Connect(host, conn_timeout))
 			throw Exception("No puedo conectarme al HOST: " + server);
 		if (sck.Send(cmd.c_str(), cmd.length()) != (int) cmd.length())
 			throw Exception("Error al Enviar request: " + cmd);
 
 		string respuesta;
-		sck.Recv_text(respuesta, ms_timeout);
+		sck.Recv_text(respuesta, ms_timeout, char_timeout);
 
 		sck.Close();
 		return ParseResponse(respuesta.c_str());
@@ -40,7 +40,8 @@ ParseResponse HttpClient::SendHttpCmd(string cmd, int ms_timeout)
 	} 
 	catch (socket_error e) 
 	{
-		throw Exception(e);
+		// throw Exception(e);
+		throw Exception("Error al Conectarme al HOST " + server + ": " + e.Message(), e.Code());
 	}
 }
 

@@ -90,11 +90,11 @@ void FileSupervisor::Run()
 					}
 					catch(FtpClientException e)
 					{
-						PLOG_ERROR("FtpClientException en FileSupervisor. Fichero: %s, Excepcion: %s", (*file).srcPaht().c_str(), e.what());
+						PLOG_ERROR("FtpClientException en FileSupervisor. Fichero: %s, Excepcion: %s", (*file).srcPaht().c_str(), e.what().c_str());
 					}
 					catch(Exception e)
 					{
-						PLOG_ERROR("HttpClientException en FileSupervisor. Fichero: %s, Excepcion: %s", (*file).srcPaht().c_str(), e.what());
+						PLOG_ERROR("HttpClientException en FileSupervisor. Fichero: %s, Excepcion: %s", (*file).srcPaht().c_str(), e.what().c_str());
 					}
 					catch(...)
 					{

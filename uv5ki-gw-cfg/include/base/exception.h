@@ -20,6 +20,7 @@ class Exception : public runtime_error
 public:
 	Exception(const char *s="");
 	Exception(string s);
+	Exception(string s, int error);
 	~Exception(void) throw(){}
 protected:
 
@@ -51,14 +52,17 @@ private:
 public:
 	unsigned long Code(void);
 #if defined _WIN32
-	virtual const char *what();
+	virtual const string what();
 #elif defined __APPLE__
-	virtual const char *what() const _NOEXCEPT;
+	virtual const string what() const _NOEXCEPT;
 #elif defined _PPC82xx_
-	virtual const char *what();
+	virtual const string what();
 #else
-	virtual const char *what();
+	virtual const string what();
 #endif
+	string Message() {
+		return m_msg;
+	}
 };
 
 #endif

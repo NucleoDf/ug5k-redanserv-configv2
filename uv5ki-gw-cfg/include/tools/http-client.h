@@ -17,6 +17,8 @@ class HttpClient : public CodeBase
 public:
 	HttpClient(string host="localhost") {
 		server = host;
+		char_timeout = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemHttpCharTimeout, "100");
+		conn_timeout = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemTcpConnTimeout, "60");
 	}
 	~HttpClient(void){}
 
@@ -29,6 +31,8 @@ public:
 
 private:
 	string server;
+	int char_timeout;
+	int conn_timeout;
 };
 
 #endif

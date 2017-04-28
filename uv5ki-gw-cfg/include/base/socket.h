@@ -39,7 +39,6 @@
 #endif
 #include "code-base.h"
 
-
 /** */
 class CIPAddress;
 class CUDPSocket;
@@ -84,7 +83,7 @@ public:
     }
 
     socket_error(int lastError, const char *s="")
-        : Exception(s)
+		: Exception(s, lastError)
     {
     }
 
@@ -174,8 +173,8 @@ public:
     int Send(const void *buf, int sz);
     int Recv(void *buf, int sz, int _flags=0);
 	// AGL.
-	int Recv_text(string &text, int timeout=0);
-	int Recv_bin(vector<byte> &buffer, int timeout=0);
+	int Recv_text(string &text, int timeout=0, int char_timeout=10);
+	int Recv_bin(vector<byte> &buffer, int timeout=0, int char_timeout=10);
 
     const CIPAddress &GetLocalAddress() const;
     const CIPAddress GetRemoteAddress() const;
