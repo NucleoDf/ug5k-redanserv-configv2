@@ -38,27 +38,27 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /** Validador cbm en A/D */
     vm.cbmad_val = function (value) {
-        return value >= -13.4 && value <= 1.20 ? true : false;
+        return value >= rr_ad_rng.min && value <= rr_ad_rng.max ? true : false;
     }
 
     /** Validador cmd en D/A */
     vm.cbmda_val = function (value) {
-        return value >= -24.3 && value <= 1.10 ? true : false;
+        return value >= rr_da_rng.min && value <= rr_da_rng.max ? true : false;
     }
 
     /** Validador nivel VAD */
     vm.vad_val = function (value) {
-        return value >= -35 && value <= -15 ? true : false;
+        return value >= rr_vad_rng.min && value <= rr_vad_rng.max ? true : false;
     }
 
     /** Validador ventana BSS */
     vm.bssv_val = function (value) {
-        return value >= 10 && value <= 1000 ? true : false;
+        return value >= rr_bssw_rng.min && value <= rr_bssw_rng.max ? true : false;
     }
 
     /** Validador tiempo fijo CLIMAX */
     vm.climaxt_val = function (value) {
-        return value >= 0 && value <= 250 ? true : false;
+        return value >= rr_clxt_rng.min && value <= rr_clxt_rng.max ? true : false;
     }
 
     /** */
@@ -183,35 +183,47 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 if (ar_on_ulises == false)
                     return MantService.hide_on_ulises();
                 return true;
-            case 1:         // Opciones de SQH
-                return true;
+
+            case 1:         // Opciones de SQH. En todos menos en los TX-Remotos (vm.vdata[0].Value == 5)
+                return parseInt(vm.vdata[0].Value) != 5;
+
             case 2:         // Umbral VAD
-                return (parseInt(vm.vdata[1].Value) == 1);
-            case 3:         // Indicacion Salida Audio.
-                return true;
+                return (parseInt(vm.vdata[1].Value) == 1 && parseInt(vm.vdata[0].Value) != 5);
+
+            case 3:         // Indicacion Salida Audio. En todos menos en los Rx-Remotos (vm.vdata[0].Value == 6)
+                return parseInt(vm.vdata[0].Value) != 6;
+
             case 4:         // Tiempo PTT Maximo
                 return false;
-            case 5:         // Metodo BSS
-                return true;
+
+            case 5:         // Metodo BSS. En todos menos en los TX-Remotos (vm.vdata[0].Value == 5)
+                return parseInt(vm.vdata[0].Value) != 5;;
+
             case 6:         // BSS / CLIMAX ?
                 return (parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3);
+
             case 7:         // Ventana BSS
             case 8:         // BSS. Cola SQUELCH
             case 9:         // CLIMAX-DELAY
                 return ((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1);
+
             case 10:        // Tiempo...
                 return (((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1) && parseInt(vm.vdata[9].Value) == 2);
+
             case 11:        // Modo Calculo CLIMAX
                 return ((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1 && parseInt(vm.vdata[9].Value) != 0);
+
             case 12:        // GRS Internal DELAY
-                return (parseInt(vm.vdata[0].Value) > 3);
+                return (parseInt(vm.vdata[0].Value) == 4 || parseInt(vm.vdata[0].Value) == 5);
+
             case 13:        // Prioridad PTT.
             case 14:        // Prioridad Session.
                 return (parseInt(vm.vdata[0].Value) <= 3);
+
             case 15:        // Tabla de Calificacion Radio. Solo en Radios Remotos.
                 //if (MantService.hide_on_ulises() == false)
                 //    return false;
-                return (parseInt(vm.vdata[0].Value) > 3);
+                return (parseInt(vm.vdata[0].Value) == 4 || parseInt(vm.vdata[0].Value) == 6);
         }
         return true;
     }

@@ -252,7 +252,7 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	function gw_cfg() {
 	    var cfg = vm.lcfg.std == -1 ? /*vm.gctrl_sync_1 */ transerv.translate('GCTRL_SYNC_1') :
                   vm.lcfg.std == -2 ? /*vm.gctrl_sync_2 */ transerv.translate('GCTRL_SYNC_2') :
-                  vm.lcfg.std == -3 ? /*vm.gctrl_sync_3 */ transerv.translate('GCTRL_SYNC_3') :
+                  vm.lcfg.std == -3 ? /*vm.gctrl_sync_3 */ transerv.translate('GCTRL_SYNC_3') + "<CFG: " + vm.lcfg.idc + ">":
                   vm.lcfg.std == -4 ? /*vm.gctrl_sync_4 */ transerv.translate('GCTRL_SYNC_4') :
                   vm.lcfg.std == -5 ? /*vm.gctrl_sync_5 */ transerv.translate('GCTRL_SYNC_5') : vm.lcfg.idc;
 

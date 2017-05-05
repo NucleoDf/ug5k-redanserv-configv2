@@ -307,6 +307,10 @@ void Uv5kiGwCfgWebApp::stCb_preconfig(struct mg_connection *conn, string user, w
 
 					// Activar la configuracion...
 			CommConfig cfg(activa.data);
+			/** 20170503. El nombre de ka CFG es el de la PRECFG de la base de datos */
+			cfg.idConf = pcfg_name;
+			/************************************/
+
 			P_WORKING_CONFIG->set(cfg, true);	// Historicos de cambios ???
 			P_WORKING_CONFIG->save_to(LAST_CFG);
 												// Sincronizar Fichero....

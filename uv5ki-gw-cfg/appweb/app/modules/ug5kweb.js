@@ -58,6 +58,23 @@ var CRTL_PROFILE  = 0x0002;
 var VIS_PROFILE   = 0x0001;
 var PUERTA_ATRAS = (PCFG_PROFILE | ADMIN_PROFILE | CRTL_PROFILE | VIS_PROFILE); // 0x1043;
 
+/** Rangos Recursos Radio */
+var rr_ad_rng = { min: -13.5, max: 1.20 };
+var rr_da_rng = { min: -24.3, max: 1.10 };
+var rr_vad_rng = { min: -35, max: -15 };
+var rr_bssw_rng = { min: 10, max: 5000 };
+var rr_clxt_rng = { min: 0, max: 250 };
+
+/** Rangos Recursos Telefonia */
+var pr_ad_rng = { min: -13.5, max: 1.20 };
+var pr_da_rng = { min: -24.3, max: 1.10 };
+var pr_vad_rng = { min: -35, max: -15 };
+var pr_vxq_rng = { min: 0, max: 30 };
+var pr_ptre_rng = { min: 1, max: 10 };
+var pr_tsup_rng = { min: 1, max: 10 };
+var pr_iwp_rng = { min: 5, max: 15 };
+
+
 /** */
 var carga_upload_config = false;
 var carga_upload_config_timer = 0;              // Temporizador Aleatorio en Segundos...

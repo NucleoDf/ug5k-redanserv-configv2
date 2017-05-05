@@ -204,10 +204,13 @@ void JsonClientProc::Run()
 	p_working_config->load_from(LAST_CFG);
 	p_working_config->config.tipo = 0;
 
-	// TODO. Comprobar que _ip_propia es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
+	// Comprobar que _ip_propia es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
 	// y hay que obtener la configuracion del Servidor...
+	if (p_working_config->ippropia() != _ip_propia) {
+		p_working_config->ResetTimeStamp();				// Pone Fecha 01/01/1970, para que sea actualizado.
+		PLOG_INFO("Detectado Cambio de IP-LOCAL. Nueva IP: %s", _ip_propia.c_str());
+	}
 
-	// TODO: StdClient::std.NotificaCambioConfig();
 	AvisaChequearConfiguracion();
 	while (IsRunning()) {
 
@@ -416,10 +419,15 @@ void SoapClientProc::Run()
 	p_working_config->load_from(LAST_CFG);
 	p_working_config->config.tipo = 1;
 
-	// TODO. Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
-	// y hay que obtener la configuracion del Servidor...
-
 	PLOG_INFO("SoapClientProc running. Leida LAST_CFG");
+
+	// Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
+	// y hay que obtener la configuracion del Servidor...
+	if (p_working_config->config.general.name != hwName) {
+		p_working_config->config.general.name = hwName;
+		p_working_config->ResetTimeStamp();
+		PLOG_INFO("Detectado Cambio de ID. Nuevo ID: %s", hwName.c_str());
+	}
 
 	AvisaChequearConfiguracion();
 	while (IsRunning()) 

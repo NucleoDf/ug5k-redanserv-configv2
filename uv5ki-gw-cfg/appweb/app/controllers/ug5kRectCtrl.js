@@ -33,32 +33,32 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /** Validador cbm en A/D */
     vm.cbmad_val = function (value) {
-        return value >= -13.4 && value <= 1.20 ? true : false;
+        return value >= pr_ad_rng.min && value <= pr_ad_rng.max ? true : false;
     }
 
     /** Validador cmd en D/A */
     vm.cbmda_val = function (value) {
-        return value >= -24.3 && value <= 1.10 ? true : false;
+        return value >= pr_da_rng.min && value <= pr_da_rng.max ? true : false;
     }
 
     /** Validador nivel VOX */
     vm.vox_val = function (value) {
-        return value >= -35 && value <= -15 ? true : false;
+        return value >= pr_vad_rng.min && value <= pr_vad_rng.max ? true : false;
     }
 
     /** Validador cola VOX */
     vm.cvox_val = function (value) {
-        return value >= 0 && value <= 30 ? true : false;
+        return value >= pr_vxq_rng.min && value <= pr_vxq_rng.max ? true : false;
     }
 
     /** Validador Periodo tonos respuesta estado (s) */
     vm.ptre_val = function (value) {
-        return value >= 1 && value <= 10 ? true : false;
+        return value >= pr_ptre_rng.min && value <= pr_ptre_rng.max ? true : false;
     }
 
     /** Validador tiempo supervision (s) */
     vm.tsup_val = function (value) {
-        return value >= 1 && value <= 10 ? true : false;
+        return value >= pr_tsup_rng.min && value <= pr_tsup_rng.max ? true : false;
     }
 
     /** */
@@ -75,7 +75,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /** */
     vm.validate_iwp = function (valor) {
-        return (valor >= 5 && valor <= 15);
+        return (valor >= pr_iwp_rng.min && valor <= pr_iwp_rng.max);
     }
 
     /** */

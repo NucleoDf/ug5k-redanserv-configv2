@@ -47,6 +47,13 @@ public:
 public:
 	void TimeStamp();
 	void TimeStamp(RedanTestComm &remota);
+	void ResetTimeStamp() {
+		if (cfg_mode == cfgRedan || cfg_mode == cfgSoap) {
+			config.fechaHora = "01/01/1970 00:00:00 UTC";
+			return;	
+		}
+		throw Exception("Modo de Configuracion no implementado obteniendo timestamp...");	
+	}
 	bool HasResources() {
 		return (config.recursos.size() != 0);
 	}
@@ -83,8 +90,12 @@ public:
 		return -1;
 	}
 	string ipcpu(int cpu) {
-		return cpu==0 ? config.general.cpus[0].ipb : config.general.cpus[1].ipb;
+		return cpu==0 ? config.general.cpus[0].ipb : cpu==1 ? config.general.cpus[1].ipb : "ip-erronea";
 	}
+	string ippropia() {
+		return ipcpu(cpu1cpu2());
+	}
+
 	/** Para ulises */
 	void UlisesParamsMulticast(string &ip, int &port) {
 		ip = config.ulises.MulticastGroup;
