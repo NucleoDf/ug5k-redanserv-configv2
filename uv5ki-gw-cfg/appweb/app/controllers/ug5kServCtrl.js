@@ -291,7 +291,7 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
 					    Enable: authservice.global_enable([ADMIN_PROFILE]),
 					    Input: 0,
 					    Inputs: [],
-					    Show: MantService.is_ulises,
+					    Show: vm.def_show/*MantService.is_ulises*/,
 					    Val: ValidateService.ip_val
 					},
 					{

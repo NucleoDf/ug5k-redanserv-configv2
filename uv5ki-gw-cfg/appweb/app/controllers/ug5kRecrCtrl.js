@@ -392,7 +392,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
         var index = 0;
         radio.tabla_indices_calidad.forEach(function (val) {
             if (index < 6)
-                str_qidx += (index.toString() + ":" + val.toString() + ", ");
+                str_qidx += ((index*10).toString() + ": " + val.toString() + ", ");
             index++;
         });
         return str_qidx;
