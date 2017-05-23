@@ -5,7 +5,7 @@
     "Region": "Región Centro",
     "BackupServiceDomain": "192.168.0.212:8082",
     "Version": "2.0",
-    "SubVersion": "1",
+    "SubVersion": "0",
     "Date": "05/05/2017",
     "NodeJS": "6.9.5",
     "MySQL": "5.7.17",
