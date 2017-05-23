@@ -32,7 +32,7 @@ var GetConfigurations = function(f) {
 					$.each(data.result, function(index, value){
 						var item = $('<li>' + 
 							'<a data-cfg=' + value.idCFG + ' ondrop="dropSiteToCfg(event)" ondragover="getOverDropC(event)" style="display:block" onclick=\'CheckingAnyChange("GeneralContent", function(){ShowCfg(' + JSON.stringify(value) + ')})\'>' + value.name + '</a>' +
-								'<ul class="gtwList" id="cfg-' + value.name + '" style="display:none"></ul>' + 
+								'<ul class="gtwList" id="cfg-' + value.name + '" style="display:none"></ul>' +
 								'</li>');
 						if (value.activa)
 							item.addClass('active');
