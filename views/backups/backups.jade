@@ -1,0 +1,86 @@
+block backups
+
+
+div(id="FormConfigurationBackup", style="display: none; width: 330px")
+	div.menu.fadeNucleo#DivBackups(style='position:relative;display:none')
+		h3(tkey='SetupBackup')
+		table(style='table-layout:fixed; width:95%')
+			tr
+				td#tdConfiguration(style='vertical-align:top;width: 175px')
+					#AddFormConfigurationBackup.content(style='width:auto;padding:5px;display:none')
+						table
+							tr
+								td
+									label(style='color:black' tkey='Path')
+								td(colspan=3)
+									input.textbox(id="path", type="text" style='width: 245px')
+							tr
+								td
+									label(style='color:black' tkey='Depth')
+								td
+									select#profundidad(type="text" style='width: 45px')
+								td
+									label(style='color:black' tkey='Days')
+							tr
+								td(colspan=4 style='padding-top: 10px')
+									label(style='color:black' tkey='BackupTimestamp')
+									div(style='border-top: 1px solid black; width:100%')
+							tr
+								td
+									label(style='color:black' tkey='Hour')
+								td
+									select#horaBackup(type='text' style='width: 45px')
+								td
+									label(style='color:black' tkey='Minute')
+								td
+									select#minutosBackup(type="text" style='width: 45px')
+							tr
+								td(colspan=4 align='center'  style='padding-top: 30px')
+									a.ButtonNucleo(onclick='AcceptParametersBackup()' tkey='Commit')
+
+div(id="FormLogs", style="display: none; width: 1100px")
+	div.menu.fadeNucleo#DivLogs(style='position:relative;display:none;height: 650px')
+		h3(tkey='LogsManagement')
+		table(style='table-layout:fixed')
+			tr
+				td#tdLog(style='vertical-align:top;width: 90%')
+					#AddFormLogsBackup.content(style='width:auto;padding:5px;display:none')
+						table.gradienttable#TableLog(style='table-layout: fixed;width:100%')
+							tr(style='height:20px')
+								th(style='width:20%')
+									a(href='#' , style='color:gray' tkey="DateTime")
+								th(style='width:10%')
+									a(href='#' , style='color:gray' tkey="Level")
+								th(style='width:70%')
+									a(href='#' , style='color:gray' tkey="Description")
+			tr
+				td(align='center'  style='padding-top: 30px')
+					table(style='width:100%;table-layout:fixed;padding:15px')
+						tr
+							td(align='center')
+								a.ButtonNucleo(onclick='PageLog=0;GetLogsBackup()' tkey='First')
+							td(align='left')
+								a.ButtonNucleo(onclick='PageLog > 0 ? PageLog-- : PageLog = 0;GetLogsBackup()' tkey='Previous')
+							td(align='center')
+								label#PageLog(data-page='0')
+							td(align='right')
+								a.ButtonNucleo(onclick='PageLog < MaxPages-1 ? PageLog++ : PageLog = MaxPages-1; GetLogsBackup()' tkey='Next')
+							td(align='center')
+								a.ButtonNucleo(onclick='PageLog = MaxPages-1; GetLogsBackup()' tkey='Last')
+					a.ButtonNucleo(onclick='DeleteLogBackup()' tkey='RemoveLog')
+
+
+						
+div(id="FormHandBackup", style="display: none; width: 350px")
+	div.menu.fadeNucleo#DivHandBackup(style='position:relative;display:none')
+		h3(tkey='HandBackup')
+		table(style='table-layout:fixed')
+			tr
+				td#tdHandBackup(style='vertical-align:top;width: 175px')
+					#AddFormHandBackup.content(style='width:auto;padding:5px;display:none')
+						table
+							tr
+								td
+									a.ButtonNucleo(onclick='MakeBackup()' tkey='MakeBackup')
+								td
+									label#BackupTimestamp(style='color:black;width:auto;padding-left:20px')
