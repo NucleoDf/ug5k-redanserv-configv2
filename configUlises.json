@@ -34,6 +34,60 @@
 	"logfile_path": "./logs/ug5kserv.log",
 	"logfile_maxfiles": 4,
 	"logfile_sizefile": 10000000,
-	"log2con"  : true
+	"log2con"  : true,
+    "JsonData": {
+      "tipo": 1,
+      "general": {
+        "dualidad": 1,
+        "ips": "",
+        "acGrupoMulticast": "224.100.10.1",
+        "acGrupoMulticast": "1000",
+        "nivelconsola": 0,
+        "puertoconsola": 19710,
+        "nivelincidencias": 3,
+        "cpu[0]": {
+          "tlan": 1,
+          "ip0": "",
+          "ms0": "",
+          "ip1": "",
+          "ms1": ""
+        },
+        "cpu[1]": {
+          "tlan": 1,
+          "ip0": "",
+          "ms0": "",
+          "ip1": "",
+          "ms1": ""
+        }
+      },
+      "recursos[0..16] (radio)": {
+        "Radio_o_Telefonia": 1,
+        "TamRTP": 0,
+        "radio": {
+          "modoConfPtt": 0,
+          "repSqBss": 1,
+          "desactivacionSq": 1,
+          "timeoutPtt": 200,
+          "numFlujosAudio": 1,
+          "bssRtp": 0,
+          "colateral": {
+            "tipoConmutacion": 0,
+            "emplazamientos[i]": {
+              "activoTx": 0,
+              "activoRx":0
+            }
+          },
+          "FrqTonoSQ": -1,
+          "UmbralTonoSQ": -1
+          "FrqTonoPTT": -1,
+          "UmbralTonoPtt": -1,
+          "SupervPortadoraTx": -1,
+          "SupervModuladoraTx": -1
+        },
+        "telefonia": {
+
+        }
+      }
+    }
   }
 }
