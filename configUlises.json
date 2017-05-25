@@ -72,10 +72,13 @@
           "bssRtp": 0,
           "colateral": {
             "tipoConmutacion": 0,
-            "emplazamientos[i]": {
+            "emplazamientos":
+            [
+              {
               "activoTx": 0,
               "activoRx":0
-            }
+              }
+            ]
           },
           "FrqTonoSQ": -1,
           "UmbralTonoSQ": -1,
@@ -152,7 +155,7 @@
                   "uriTxA": "",
                   "uriTxB": "",
                   "uriRxA": "",
-                  "uriRxB": "",
+                  "uriRxB": ""
                 },
                 {
                   "activoTx": 0,
@@ -160,7 +163,7 @@
                   "uriTxA": "",
                   "uriTxB": "",
                   "uriRxA": "",
-                  "uriRxB": "",
+                  "uriRxB": ""
                 },
                 {
                   "activoTx": 0,
@@ -168,7 +171,7 @@
                   "uriTxA": "",
                   "uriTxB": "",
                   "uriRxA": "",
-                  "uriRxB": "",
+                  "uriRxB": ""
                 }
               ]
             },
