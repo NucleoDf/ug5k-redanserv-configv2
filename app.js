@@ -20,6 +20,7 @@ var radioDestinations = require('./routes/destinations/radioDestinations');
 var historics = require('./routes/historics/historics');
 var version = require('./routes/version/version');
 var logging = require('./lib/loggingDate.js');
+var jsonTemplate = require('./lib/jsonTemplate');
 
 
 var config = require('./configUlises.json');
@@ -27,6 +28,8 @@ var config = require('./configUlises.json');
 var myLibHistorics = require('./lib/historics.js');
 var myLibConfig = require('./lib/configurations.js');
 var myLibHardwareGateways = require('./lib/hardware.js');
+
+//var a = jsonTemplate.emptyTemplate();
 
 var app = express();
 
