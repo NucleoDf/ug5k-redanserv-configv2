@@ -60,7 +60,7 @@
           "ms1": ""
         }
       },
-      "recursos[0..16] (radio)": {
+      "recursos": [{
         "Radio_o_Telefonia": 1,
         "TamRTP": 0,
         "radio": {
@@ -78,7 +78,7 @@
             }
           },
           "FrqTonoSQ": -1,
-          "UmbralTonoSQ": -1
+          "UmbralTonoSQ": -1,
           "FrqTonoPTT": -1,
           "UmbralTonoPtt": -1,
           "SupervPortadoraTx": -1,
@@ -101,9 +101,87 @@
           "tm_inactividad": 2,
           "superv_options": 1,
           "tm_superv_options": 5,
-          "colaterla_scv": 0,
-        }
-      }
+          "colateral_scv": 0,
+          "iT_Int_Warning": 5,
+          "idRed": -1,
+          "idTroncal": -1,
+          "listaEnlacesInternos":[],
+          "ats_rangos_operador":[],
+          "ats_rangos_privilegiados":[],
+          "ats_rangos_directos_ope":[],
+          "ats_rangos_directos_pri":[]
+        },
+        "LlamadaAutomatica": 0,
+        "iFlgUsarDiffServ": 0,
+        "szDestino": ""
+      },
+        {
+          "Radio_o_Telefonia": 2,
+          "TamRTP": 0,
+          "radio": {
+            "tipo": 0,
+            "sq": 0,
+            "ptt": 0,
+            "bss": 0,
+            "modoConfPtt": 0,
+            "repSqBss": 1,
+            "desactivacionSq": 1,
+            "timeoutPtt": 200,
+            "metodoBss": 0,
+            "umbralVad": 0,
+            "numFlujosAudio": 1,
+            "tiempoPtt": 0,
+            "tmVentanaRx": 100,
+            "climaxDelay": 0,
+            "tmRetardoFijo": 0,
+            "bssRtp": 0,
+            "retrasoSqOff": 10,
+            "evtPTT": 0,
+            "tjbd": 0,
+            "tGRSid": 0,
+            "iEnableGI": 0,
+            "iSesionPrio": 0,
+            "iPttPrio": 0,
+            "colateral": {
+              "name": "",
+              "tipoConmutacion": 0,
+              "emplazamientos": [
+                {
+                  "activoTx": 0,
+                  "activoRx": 0,
+                  "uriTxA": "",
+                  "uriTxB": "",
+                  "uriRxA": "",
+                  "uriRxB": "",
+                },
+                {
+                  "activoTx": 0,
+                  "activoRx": 0,
+                  "uriTxA": "",
+                  "uriTxB": "",
+                  "uriRxA": "",
+                  "uriRxB": "",
+                },
+                {
+                  "activoTx": 0,
+                  "activoRx": 0,
+                  "uriTxA": "",
+                  "uriTxB": "",
+                  "uriRxA": "",
+                  "uriRxB": "",
+                }
+              ]
+            },
+            "iPrecisionAudio": 1,
+            "iModoCalculoClimax": 0,
+            "FrqTonoSQ": -1,
+            "UmbralTonoSQ": -1,
+            "FrqTonoPTT": -1,
+            "UmbralTonoPTT": -1,
+            "SupervPortadoraTx": -1,
+            "SupervModuladoraTx": -1
+          }
+        }]
     }
   }
 }
