@@ -180,8 +180,75 @@
             "UmbralTonoPTT": -1,
             "SupervPortadoraTx": -1,
             "SupervModuladoraTx": -1
-          }
-        }]
+          },
+          "telefonia": {
+            "t_eym": 0,
+            "h2h4": 0,
+            "ladoeym": 0,
+            "modo": 0,
+            "colateral_scv": 0,
+            "idRed": -1,
+            "idTroncal": -1,
+            "listaEnlacesInternos2": [],
+            "ats_rangos_operador": [],
+            "ats_rangos_privilegiados": [],
+            "ats_rangos_directos_ope": [],
+            "ats_rangos_directos_pri": []
+          },
+          "LlamadaAutomatica": 0,
+          "restriccion": 0,
+          "blanca": [],
+          "negra": [],
+          "iFlgUsarDiffServ": 0,
+          "szDestino": ""
+        }],
+      "servicios": {
+        "sip": {
+          "KeepAlivePeriod": 200,
+          "KeepAliveMultiplier": 10,
+          "SupresionSilencio": 0,
+          "proxys":
+          [
+            {
+              "selected": 0
+            },
+            {
+              "selected": 0
+            }
+          ],
+          "registrars":
+          [
+            {
+              "selected": 0
+            },
+            {
+              "selected": 0
+            }
+          ]
+        },
+        "snmp": {
+          "agcomm": "public"
+        },
+        "grab": {
+          "rtsp_uri": "",
+          "sport": 65001,
+          "rtsp_rtp": 1,
+          "rtp_pl": 8,
+          "rtp_sr": 8000
+        },
+        "grab": {
+          "ntp": 2,
+          "servidores":
+          [
+            {
+              "selected": 0
+            },
+            {
+              "selected": 0
+            }
+          ]
+        }
+      }
     }
   }
 }
