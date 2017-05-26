@@ -919,11 +919,23 @@ void CommConversor::ActualizaRecordIni()
 	//setInt(recini, "RTP", "SAMPLE_RATE", p_cfg_in->servicios.grab.rtp_sr, INCI_MPGP, "GRABADOR MUESTREO RTP");
 	//setInt(recini, "RTP", "PAYLOAD_FORMAT", p_cfg_in->servicios.grab.rtp_pl, INCI_MPGP, "GRABADOR PAYLOAD RTP");
 	
-	if (Tools::ValidateIpAddress(p_cfg_in->servicios.grab.rtsp_ip)==true)
+	int numRecorder = 0;
+	if (Tools::ValidateIpAddress(p_cfg_in->servicios.grab.rtsp_ip)==true) {
 		SetString(recini, "RTSP", "IP_REC_A", p_cfg_in->servicios.grab.rtsp_ip, INCI_MPGP, "IP GRABADOR A");
-	if (Tools::ValidateIpAddress(p_cfg_in->servicios.grab.rtspb_ip)==true)
+		numRecorder += 1;
+	}
+	else {
+		recini.set("RTSP", "IP_REC_A", "");
+	}
+	if (Tools::ValidateIpAddress(p_cfg_in->servicios.grab.rtspb_ip)==true) {
 		SetString(recini, "RTSP", "IP_REC_B", p_cfg_in->servicios.grab.rtspb_ip, INCI_MPGP, "IP GRABADOR B");
-	
+		numRecorder += 1;
+	}
+	else {
+		recini.set("RTSP", "IP_REC_B", "");
+	}
+	recini.set("GENERAL", "DUAL_RECORDER", numRecorder==2 ? "1" : "0");
+
 	SetInt(recini, "RTSP", "PORT_RTSP", p_cfg_in->servicios.grab.rtsp_port, INCI_MPGP, "GRABADOR PUERTO RTSP");
 	recini.save();
 }
