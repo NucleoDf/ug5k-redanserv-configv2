@@ -35,6 +35,225 @@
 	"logfile_maxfiles": 4,
 	"logfile_sizefile": 1000000,
 	"log2con"  : true,
-  "morgan" : false
+  "morgan" : false,
+    "JsonData":
+    {
+      "tipo": 1,
+      "general": {
+        "dualidad": 1,
+        "ips": "",
+        "acGrupoMulticast": "224.100.10.1",
+        "acGrupoMulticast": "1000",
+        "nivelconsola": 0,
+        "puertoconsola": 19710,
+        "nivelincidencias": 3,
+        "cpu[0]": {
+          "tlan": 1,
+          "ip0": "",
+          "ms0": "",
+          "ip1": "",
+          "ms1": ""
+        },
+        "cpu[1]": {
+          "tlan": 1,
+          "ip0": "",
+          "ms0": "",
+          "ip1": "",
+          "ms1": ""
+        }
+      },
+      "recursos": [{
+        "Radio_o_Telefonia": 1,
+        "TamRTP": 0,
+        "radio": {
+          "modoConfPtt": 0,
+          "repSqBss": 1,
+          "desactivacionSq": 1,
+          "timeoutPtt": 200,
+          "numFlujosAudio": 1,
+          "bssRtp": 0,
+          "colateral": {
+            "tipoConmutacion": 0,
+            "emplazamientos":
+            [
+              {
+                "activoTx": 0,
+                "activoRx":0
+              }
+            ]
+          },
+          "FrqTonoSQ": -1,
+          "UmbralTonoSQ": -1,
+          "FrqTonoPTT": -1,
+          "UmbralTonoPtt": -1,
+          "SupervPortadoraTx": -1,
+          "SupervModuladoraTx": -1
+        },
+        "telefonia": {
+          "tipo": 0,
+          "lado": 1,
+          "t_eym": 0,
+          "h2h4": 0,
+          "ladoeym": 0,
+          "modo": 0,
+          "r_automatica": 1,
+          "no_test_local": "",
+          "no_test_remoto": "",
+          "it_release": 5,
+          "uri_remota": "",
+          "detect_vox": 1,
+          "umbral_vox": -20,
+          "tm_inactividad": 2,
+          "superv_options": 1,
+          "tm_superv_options": 5,
+          "colateral_scv": 0,
+          "iT_Int_Warning": 5,
+          "idRed": -1,
+          "idTroncal": -1,
+          "listaEnlacesInternos":[],
+          "ats_rangos_operador":[],
+          "ats_rangos_privilegiados":[],
+          "ats_rangos_directos_ope":[],
+          "ats_rangos_directos_pri":[]
+        },
+        "LlamadaAutomatica": 0,
+        "iFlgUsarDiffServ": 0,
+        "szDestino": ""
+      },
+        {
+          "Radio_o_Telefonia": 2,
+          "TamRTP": 0,
+          "radio": {
+            "tipo": 0,
+            "sq": 0,
+            "ptt": 0,
+            "bss": 0,
+            "modoConfPtt": 0,
+            "repSqBss": 1,
+            "desactivacionSq": 1,
+            "timeoutPtt": 200,
+            "metodoBss": 0,
+            "umbralVad": 0,
+            "numFlujosAudio": 1,
+            "tiempoPtt": 0,
+            "tmVentanaRx": 100,
+            "climaxDelay": 0,
+            "tmRetardoFijo": 0,
+            "bssRtp": 0,
+            "retrasoSqOff": 10,
+            "evtPTT": 0,
+            "tjbd": 0,
+            "tGRSid": 0,
+            "iEnableGI": 0,
+            "iSesionPrio": 0,
+            "iPttPrio": 0,
+            "colateral": {
+              "name": "",
+              "tipoConmutacion": 0,
+              "emplazamientos": [
+                {
+                  "activoTx": 0,
+                  "activoRx": 0,
+                  "uriTxA": "",
+                  "uriTxB": "",
+                  "uriRxA": "",
+                  "uriRxB": ""
+                },
+                {
+                  "activoTx": 0,
+                  "activoRx": 0,
+                  "uriTxA": "",
+                  "uriTxB": "",
+                  "uriRxA": "",
+                  "uriRxB": ""
+                },
+                {
+                  "activoTx": 0,
+                  "activoRx": 0,
+                  "uriTxA": "",
+                  "uriTxB": "",
+                  "uriRxA": "",
+                  "uriRxB": ""
+                }
+              ]
+            },
+            "iPrecisionAudio": 1,
+            "iModoCalculoClimax": 0,
+            "FrqTonoSQ": -1,
+            "UmbralTonoSQ": -1,
+            "FrqTonoPTT": -1,
+            "UmbralTonoPTT": -1,
+            "SupervPortadoraTx": -1,
+            "SupervModuladoraTx": -1
+          },
+          "telefonia": {
+            "t_eym": 0,
+            "h2h4": 0,
+            "ladoeym": 0,
+            "modo": 0,
+            "colateral_scv": 0,
+            "idRed": -1,
+            "idTroncal": -1,
+            "listaEnlacesInternos2": [],
+            "ats_rangos_operador": [],
+            "ats_rangos_privilegiados": [],
+            "ats_rangos_directos_ope": [],
+            "ats_rangos_directos_pri": []
+          },
+          "LlamadaAutomatica": 0,
+          "restriccion": 0,
+          "blanca": [],
+          "negra": [],
+          "iFlgUsarDiffServ": 0,
+          "szDestino": ""
+        }],
+      "servicios": {
+        "sip": {
+          "KeepAlivePeriod": 200,
+          "KeepAliveMultiplier": 10,
+          "SupresionSilencio": 0,
+          "proxys":
+          [
+            {
+              "selected": 0
+            },
+            {
+              "selected": 0
+            }
+          ],
+          "registrars":
+          [
+            {
+              "selected": 0
+            },
+            {
+              "selected": 0
+            }
+          ]
+        },
+        "snmp": {
+          "agcomm": "public"
+        },
+        "grab": {
+          "rtsp_uri": "",
+          "sport": 65001,
+          "rtsp_rtp": 1,
+          "rtp_pl": 8,
+          "rtp_sr": 8000
+        },
+        "grab": {
+          "ntp": 2,
+          "servidores":
+          [
+            {
+              "selected": 0
+            },
+            {
+              "selected": 0
+            }
+          ]
+        }
+      }
+    }
   }
 }
