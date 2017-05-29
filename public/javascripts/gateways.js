@@ -607,6 +607,7 @@ var PostGateway = function (f){
 
 };
 
+
 var GetGateways = function(cfg,f) {
 	translateWord('Gateways',function(result){
 		$('#GatewaysH3').text(result);	
@@ -651,6 +652,11 @@ var GetGateways = function(cfg,f) {
 	}
 };
 
+/************************************/
+/*	FUNCTION: GetGateway 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var GetGateway = function (gtw,lastUpdate,f){
 //	if ($('#AddFormGateway').is(':visible')){
 //			$('#DivGateways').animate({width: '145px'});
@@ -672,84 +678,84 @@ var GetGateway = function (gtw,lastUpdate,f){
 	if (gtw != null){
 		var urlString = '/gateways/'+gtw;
 		$.ajax({type: 'GET', 
-				url: urlString, 
-				success: function(gtw) {
-					// Recoger el idCGW de la pasarela
-					$('#DivGateways').data('idCgw',gtw.general.idCGW);
-					
-					$.ajax({type: 'GET',
-						url: '/sites',
-						success: function(data) {
-							// Load Site list
-							loadSiteList(data.data, gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO);
-						}
-					});
-					ReinitFormGateways();
-
-					/* Si la función es llamada desde site form no se muestra FormGateway */
-					//$('#FormGateway').show();
-					//$("#AddFormGateway").show();
-					//$('#AddFormsite').animate({width: '680px', height: '380px'});
-					$('#RemoveGateway').show();
-
-					$("#nameGw").val(gtw.general.name);
-					$('#ipv').val(gtw.general.ipv);
-					$('#ips').val(gtw.general.ips);
-					$('#dual').prop('checked', gtw.general.dualidad);
-					//$('#CBEmplazamiento option[value="' + gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO + '"]').prop('selected', true);
-
-					//GetServices(false);
-
-					// CPU-0
-					$('#ipg1').val(gtw.general.cpus[0].ipg);
-					//$("#Lan1 option[value='" + gtw.general.cpus[0].tlan +"']").prop('selected',true);
-					$('#bound1').prop('checked', !gtw.general.cpus[0].tlan);
-					$('#ip01').val(gtw.general.cpus[0].ip0);
-					$('#ms01').val(gtw.general.cpus[0].ms0);
-					$('#ip11').val(gtw.general.cpus[0].ip1);
-					$('#ms11').val(gtw.general.cpus[0].ms1);
-					$('#ipb1').val(gtw.general.cpus[0].ipb);
-					$('#msb1').val(gtw.general.cpus[0].msb);
-
-					$('#lan11').hide();
-					$('#lan21').hide();
-					$('#nic1').show();
-
-					if (gtw.general.cpus.length === 2){
-						// CPU-1
-						$('#lan12').hide();
-						$('#lan22').hide();
-						$('#nic2').show();
-
-						//$("#Lan2 option[value='" + gtw.general.cpus[1].tlan +"']").prop('selected',true);
-						$('#bound2').prop('checked', !gtw.general.cpus[1].tlan);
-						$('#ip02').val(gtw.general.cpus[1].ip0);
-						$('#ms02').val(gtw.general.cpus[1].ms0);
-						$('#ip12').val(gtw.general.cpus[1].ip1);
-						$('#ms12').val(gtw.general.cpus[1].ms1);
-						$('#ipg2').val(gtw.general.cpus[1].ipg);
-						$('#ipb2').val(gtw.general.cpus[1].ipb);
-						$('#msb2').val(gtw.general.cpus[1].msb);
+			url: urlString,
+			success: function(gtw) {
+				// Recoger el idCGW de la pasarela
+				$('#DivGateways').data('idCgw',gtw.general.idCGW);
+				
+				$.ajax({type: 'GET',
+					url: '/sites',
+					success: function(data) {
+						// Load Site list
+						loadSiteList(data.data, gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO);
 					}
+				});
+				ReinitFormGateways();
 
-					translateWord('Update',function(result){
-						$('#UpdateGtwButton').text(result)
-											.attr('onclick','UpdateGateway(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})');
-					});
+				/* Si la función es llamada desde site form no se muestra FormGateway */
+				//$('#FormGateway').show();
+				//$("#AddFormGateway").show();
+				//$('#AddFormsite').animate({width: '680px', height: '380px'});
+				$('#RemoveGateway').show();
 
-					if (gtw.general.dualidad)
-						$('#liCpu2').show();
-					else
-						$('#liCpu2').hide();
+				$("#nameGw").val(gtw.general.name);
+				$('#ipv').val(gtw.general.ipv);
+				$('#ips').val(gtw.general.ips);
+				$('#dual').prop('checked', gtw.general.dualidad);
+				//$('#CBEmplazamiento option[value="' + gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO + '"]').prop('selected', true);
 
-					// Reset .oldValue of input tags to check any changes
-					ResetOldValue('GeneralContent');
+				//GetServices(false);
 
+				// CPU-0
+				$('#ipg1').val(gtw.general.cpus[0].ipg);
+				//$("#Lan1 option[value='" + gtw.general.cpus[0].tlan +"']").prop('selected',true);
+				$('#bound1').prop('checked', !gtw.general.cpus[0].tlan);
+				$('#ip01').val(gtw.general.cpus[0].ip0);
+				$('#ms01').val(gtw.general.cpus[0].ms0);
+				$('#ip11').val(gtw.general.cpus[0].ip1);
+				$('#ms11').val(gtw.general.cpus[0].ms1);
+				$('#ipb1').val(gtw.general.cpus[0].ipb);
+				$('#msb1').val(gtw.general.cpus[0].msb);
 
-					if (f != null)
-						f();
+				$('#lan11').hide();
+				$('#lan21').hide();
+				$('#nic1').show();
+
+				if (gtw.general.cpus.length === 2){
+					// CPU-1
+					$('#lan12').hide();
+					$('#lan22').hide();
+					$('#nic2').show();
+
+					//$("#Lan2 option[value='" + gtw.general.cpus[1].tlan +"']").prop('selected',true);
+					$('#bound2').prop('checked', !gtw.general.cpus[1].tlan);
+					$('#ip02').val(gtw.general.cpus[1].ip0);
+					$('#ms02').val(gtw.general.cpus[1].ms0);
+					$('#ip12').val(gtw.general.cpus[1].ip1);
+					$('#ms12').val(gtw.general.cpus[1].ms1);
+					$('#ipg2').val(gtw.general.cpus[1].ipg);
+					$('#ipb2').val(gtw.general.cpus[1].ipb);
+					$('#msb2').val(gtw.general.cpus[1].msb);
 				}
-			});
+
+				translateWord('Update',function(result){
+					$('#UpdateGtwButton').text(result)
+										.attr('onclick','UpdateGateway(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})');
+				});
+
+				if (gtw.general.dualidad)
+					$('#liCpu2').show();
+				else
+					$('#liCpu2').hide();
+
+				// Reset .oldValue of input tags to check any changes
+				ResetOldValue('GeneralContent');
+
+
+				if (f != null)
+					f();
+			}
+		});
 	}
 	else {
 		$('#DivGateways').data('idCgw','');
