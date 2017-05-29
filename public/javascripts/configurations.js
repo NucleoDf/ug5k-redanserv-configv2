@@ -123,6 +123,11 @@ var GetConfiguration = function(cfg){
 	}
 };
 
+/************************************/
+/*	FUNCTION: getConfigurations 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var ShowCfg = function(cfg){
 	translateWord('Configurations',function(result){
 		$('#TitleH3').text(result + ': ' + cfg.name);	
@@ -163,39 +168,54 @@ var ShowCfg = function(cfg){
 	$('.gtwList').hide();
 	$(lista).empty();
 
+	//VMG en vez de por nombre se lo mandamos por id
 	$.ajax({type: 'GET', 
-		 		url: '/configurations/' + cfg.name, 
-		 		success: function(data){
-		 			if (data != 'NO_DATA'){
-		 				translateWord('LoadConfig',function(result){
-							$('#BtnActivate').text(result);
+		url: '/configurations/' + cfg.idCFG,
+		success: function(data){
+			if (data.error == null) {
+				if (data != 'NO_DATA') {
+					translateWord('LoadConfig', function (result) {
+						$('#BtnActivate').text(result);
+					});
+					var idCFGCopy = '';
+					//VMG No hay config o emplazamientos que es lo mas normal.
+					if (data != 'Configuration not found.' || data != 'Site not found.') {
+						$('#CancelGtwButton').attr('onclick', 'ShowSite(\'' + data.result[0].nameSite + '\',\'' + data.result[0].idEMPLAZAMIENTO + '\')');
+						/*$('#CancelGtwButton').click(function(nameSite, idSite) {
+						 ShowSite(nameSite, idSite);
+						 });*/
+						$.each(data.result, function (index, value) {
+							var item = $('<li data-texto="' + value.idEMPLAZAMIENTO + '"  >' +
+								'<a draggable="false" ondragstart="dragGatewayToSite(event)" ondrop="dropGatewayToSite(event)" ondragover="getOverDropC(event)" style="display:block; color:#b70028" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowSite(\'' + value.nameSite + '\',\'' + value.idEMPLAZAMIENTO + '\')})"' + '>' + value.nameSite + '</a>' +
+								'<ul class="gtwList" id="site-' + value.idEMPLAZAMIENTO + '" style="display:none"></ul>' +
+								'</li>');
+							
+							item.appendTo($(lista));
+							idCFGCopy = value.idCFG;
 						});
-						var idCFGCopy='';
-		 				if (data != 'Configuration not found.'){
-							$('#CancelGtwButton').attr('onclick', 'ShowSite(\'' + data.result[0].nameSite + '\',\'' + data.result[0].idEMPLAZAMIENTO + '\')');
-							/*$('#CancelGtwButton').click(function(nameSite, idSite) {
-								ShowSite(nameSite, idSite);
-							});*/
-							$.each(data.result, function(index, value){
-								var item = $('<li data-texto="' + value.idEMPLAZAMIENTO + '"  >' + 
-												'<a draggable="false" ondragstart="dragGatewayToSite(event)" ondrop="dropGatewayToSite(event)" ondragover="getOverDropC(event)" style="display:block; color:#b70028" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowSite(\'' + value.nameSite + '\',\'' + value.idEMPLAZAMIENTO + '\')})"' + '>' + value.nameSite + '</a>' +
-												'<ul class="gtwList" id="site-' + value.idEMPLAZAMIENTO + '" style="display:none"></ul>' + 
-											'</li>');
-								
-								item.appendTo($(lista));	
-								idCFGCopy = value.idCFG;									
-							});
-							$(lista).show();
-
-							$('#DivConfigurations').data('idCFG',idCFGCopy);
-							GetGatewaysBelongConfiguration(true, idCFGCopy);
-							$('#CBFreeGateways option[value="0"]').prop('selected', true);
-							ClickCBFreeGateways();
-						}
-						else
-							GetGatewaysBelongConfiguration(false);
+						$(lista).show();
+						
+						$('#DivConfigurations').data('idCFG', idCFGCopy);
+						//VMG esta parte es la que rellena las pasarelas de la config de abajo
+						//GetGatewaysBelongConfiguration(true, idCFGCopy);
+						$('#CBFreeGateways option[value="0"]').prop('selected', true);
+						//VMG esta parte nos dirá si estan activas a o no.
+						//ClickCBFreeGateways();
 					}
-			 	}
+					else
+						GetGatewaysBelongConfiguration(false);
+				}
+				else {
+					alertify.error('La configuración no existe');
+				}
+			}
+			else {
+				alertify.error('Error SQL: ' + data.error);
+			}
+		},
+		error: function(data){
+			alertify.error('Se ha producido un error al intentar recuperar los emplazamientos.');
+		}
 	});
 };
 
