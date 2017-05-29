@@ -683,13 +683,14 @@ var GetGateway = function (gtw,lastUpdate,f){
 				// Recoger el idCGW de la pasarela
 				$('#DivGateways').data('idCgw',gtw.general.idCGW);
 				
-				$.ajax({type: 'GET',
+				//VMG Carga de cambios de emplazamiento
+				/*$.ajax({type: 'GET',
 					url: '/sites',
 					success: function(data) {
 						// Load Site list
 						loadSiteList(data.data, gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO);
 					}
-				});
+				});*/
 				ReinitFormGateways();
 
 				/* Si la función es llamada desde site form no se muestra FormGateway */
