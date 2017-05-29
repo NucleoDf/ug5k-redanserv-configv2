@@ -131,32 +131,40 @@ function ShowSite(site,id){
 	$(lista).empty()
 		.show();
 	$.ajax({type: 'GET', 
-		 		url: '/sites/' + $('#IdSite').data('idSite') + '/gateways', 
-		 		success: function(data){
-		 			if (data.data != 'NO_DATA'){
-						$.each(data.data, function(index, value){
-							if(value.name.length > 14 && value.name.length < 28){
-                                var name1 = value.name.substring(0,14);
-                                var name2 = value.name.substring(14,28);
-                                var item = $('<li data-texto="' + value.idCGW + '">' +
-                                    '<a draggable="false" ondragstart="dragGatewayToSite(event)" style="display:block; color:#89001e" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowHardwareGateway(\'' + value.idCGW + '\',\'' + value.name + '\')})"' + '>' + name1 + '<br>' + name2 + '</a></li>');
-							}
-							else if(value.name.length < 14){
-                                var item = $('<li data-texto="' + value.idCGW + '">' +
-                                    '<a draggable="false" ondragstart="dragGatewayToSite(event)" style="display:block; color:#89001e" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowHardwareGateway(\'' + value.idCGW + '\',\'' + value.name + '\')})"' + '>' + value.name + '</a></li>');
-
-                            }
-							else{
-                                var name1 = value.name.substring(0,14);
-                                var name2 = value.name.substring(14,28);
-                                var name3 = value.name.substring(28,31);
-                                var item = $('<li data-texto="' + value.idCGW + '">' +
-                                    '<a draggable="false" ondragstart="dragGatewayToSite(event)" style="display:block; color:#89001e" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowHardwareGateway(\'' + value.idCGW + '\',\'' + value.name + '\')})"' + '>' + name1 + '<br>' + name2 + '<br>' + name3 + '</a></li>');
-							}
-							item.appendTo($(lista));
-						});
-					}
-			 	}
+		url: '/sites/' + $('#IdSite').data('idSite') + '/gateways',
+		success: function(data){
+			if (data.error == null) {
+				if (data.data.length != 0) {
+					$.each(data.data, function (index, value) {
+						if (value.name.length > 14 && value.name.length < 28) {
+							var name1 = value.name.substring(0, 14);
+							var name2 = value.name.substring(14, 28);
+							var item = $('<li data-texto="' + value.idCGW + '">' +
+								'<a draggable="false" ondragstart="dragGatewayToSite(event)" style="display:block; color:#89001e" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowHardwareGateway(\'' + value.idCGW + '\',\'' + value.name + '\')})"' + '>' + name1 + '<br>' + name2 + '</a></li>');
+						}
+						else if (value.name.length < 14) {
+							var item = $('<li data-texto="' + value.idCGW + '">' +
+								'<a draggable="false" ondragstart="dragGatewayToSite(event)" style="display:block; color:#89001e" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowHardwareGateway(\'' + value.idCGW + '\',\'' + value.name + '\')})"' + '>' + value.name + '</a></li>');
+							
+						}
+						else {
+							var name1 = value.name.substring(0, 14);
+							var name2 = value.name.substring(14, 28);
+							var name3 = value.name.substring(28, 31);
+							var item = $('<li data-texto="' + value.idCGW + '">' +
+								'<a draggable="false" ondragstart="dragGatewayToSite(event)" style="display:block; color:#89001e" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowHardwareGateway(\'' + value.idCGW + '\',\'' + value.name + '\')})"' + '>' + name1 + '<br>' + name2 + '<br>' + name3 + '</a></li>');
+						}
+						item.appendTo($(lista));
+					});
+				}
+			}
+			else
+				alertify.error('Error SQL: '+data.error);
+			//VMG No hay pasarelas para este emplazamiento
+		},
+		error: function(data){
+			alertify.error('Se ha producido un error al intentar recuperar las configuraciones.');
+		}
 	//TimeStamp de las pasarelas
 	});	
 }
