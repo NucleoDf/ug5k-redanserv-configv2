@@ -28,12 +28,6 @@ var GetConfigurations = function(f) {
 			if (data.error == null) {
 				$("#listConfigurations").empty();
 				$('#CBFreeGateways').empty();
-				/*translateWord('AliveGateways',function(result){
-				 $('#CBFreeGateways').append($('<option>',{
-				 text: result,
-				 value: 0
-				 }));
-				 })*/
 				
 				$.each(data.result, function (index, value) {
 					var item = $('<li>' +
@@ -177,33 +171,36 @@ var ShowCfg = function(cfg){
 					translateWord('LoadConfig', function (result) {
 						$('#BtnActivate').text(result);
 					});
-					var idCFGCopy = '';
-					//VMG No hay config o emplazamientos que es lo mas normal.
-					if (data != 'Configuration not found.' || data != 'Site not found.') {
-						$('#CancelGtwButton').attr('onclick', 'ShowSite(\'' + data.result[0].nameSite + '\',\'' + data.result[0].idEMPLAZAMIENTO + '\')');
-						/*$('#CancelGtwButton').click(function(nameSite, idSite) {
-						 ShowSite(nameSite, idSite);
-						 });*/
-						$.each(data.result, function (index, value) {
-							var item = $('<li data-texto="' + value.idEMPLAZAMIENTO + '"  >' +
-								'<a draggable="false" ondragstart="dragGatewayToSite(event)" ondrop="dropGatewayToSite(event)" ondragover="getOverDropC(event)" style="display:block; color:#b70028" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowSite(\'' + value.nameSite + '\',\'' + value.idEMPLAZAMIENTO + '\')})"' + '>' + value.nameSite + '</a>' +
-								'<ul class="gtwList" id="site-' + value.idEMPLAZAMIENTO + '" style="display:none"></ul>' +
-								'</li>');
+					//VMG La configuracion tiene al menos un emplazamiento
+					if(data.result[0].nameSite!=null) {
+						var idCFGCopy = '';
+						//VMG No hay config o emplazamientos que es lo mas normal.
+						if (data != 'Configuration not found.' || data != 'Site not found.') {
+							$('#CancelGtwButton').attr('onclick', 'ShowSite(\'' + data.result[0].nameSite + '\',\'' + data.result[0].idEMPLAZAMIENTO + '\')');
+							/*$('#CancelGtwButton').click(function(nameSite, idSite) {
+							 ShowSite(nameSite, idSite);
+							 });*/
+							$.each(data.result, function (index, value) {
+								var item = $('<li data-texto="' + value.idEMPLAZAMIENTO + '"  >' +
+									'<a draggable="false" ondragstart="dragGatewayToSite(event)" ondrop="dropGatewayToSite(event)" ondragover="getOverDropC(event)" style="display:block; color:#b70028" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowSite(\'' + value.nameSite + '\',\'' + value.idEMPLAZAMIENTO + '\')})"' + '>' + value.nameSite + '</a>' +
+									'<ul class="gtwList" id="site-' + value.idEMPLAZAMIENTO + '" style="display:none"></ul>' +
+									'</li>');
+								
+								item.appendTo($(lista));
+								idCFGCopy = value.idCFG;
+							});
+							$(lista).show();
 							
-							item.appendTo($(lista));
-							idCFGCopy = value.idCFG;
-						});
-						$(lista).show();
-						
-						$('#DivConfigurations').data('idCFG', idCFGCopy);
-						//VMG esta parte es la que rellena las pasarelas de la config de abajo
-						//GetGatewaysBelongConfiguration(true, idCFGCopy);
-						$('#CBFreeGateways option[value="0"]').prop('selected', true);
-						//VMG esta parte nos dirá si estan activas a o no.
-						//ClickCBFreeGateways();
+							$('#DivConfigurations').data('idCFG', idCFGCopy);
+							//VMG esta parte es la que rellena las pasarelas de la config de abajo
+							//GetGatewaysBelongConfiguration(true, idCFGCopy);
+							$('#CBFreeGateways option[value="0"]').prop('selected', true);
+							//VMG esta parte nos dirá si estan activas a o no.
+							//ClickCBFreeGateways();
+						}
+						else
+							GetGatewaysBelongConfiguration(false);
 					}
-					else
-						GetGatewaysBelongConfiguration(false);
 				}
 				else {
 					alertify.error('La configuración no existe');
