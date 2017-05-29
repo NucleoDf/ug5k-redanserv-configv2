@@ -63,6 +63,12 @@ function getOverDropS(ev){
 	//window.alert('Desde Sites');
 }
 
+
+/************************************/
+/*	FUNCTION: ShowSite 				*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 function ShowSite(site,id){
 	translateWord('Configurations',function(result){
 		var titulo = result + ': ' + $('#name').val();

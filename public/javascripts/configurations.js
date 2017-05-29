@@ -124,7 +124,7 @@ var GetConfiguration = function(cfg){
 };
 
 /************************************/
-/*	FUNCTION: getConfigurations 	*/
+/*	FUNCTION: ShowCfg 				*/
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
