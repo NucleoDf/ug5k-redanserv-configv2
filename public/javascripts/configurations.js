@@ -6,6 +6,11 @@
 
 var blockDrag = false;
 
+/************************************/
+/*	FUNCTION: getConfigurations 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var GetConfigurations = function(f) {
 	var cfgString = '';
 	translateWord('Configurations',function(result){
@@ -18,39 +23,47 @@ var GetConfigurations = function(f) {
 
 	$('#FormConfiguration').show();
 	$.ajax({type: 'GET', 
-			url: '/configurations', 
-			success: function(data){
-					$("#listConfigurations").empty();
-					$('#CBFreeGateways').empty();
-					/*translateWord('AliveGateways',function(result){
-						$('#CBFreeGateways').append($('<option>',{
-							text: result,
-							value: 0
-						}));	
-					})*/
-
-					$.each(data.result, function(index, value){
-						var item = $('<li>' + 
-							'<a data-cfg=' + value.idCFG + ' ondrop="dropSiteToCfg(event)" ondragover="getOverDropC(event)" style="display:block" onclick=\'CheckingAnyChange("GeneralContent", function(){ShowCfg(' + JSON.stringify(value) + ')})\'>' + value.name + '</a>' +
-								'<ul class="gtwList" id="cfg-' + value.name + '" style="display:none"></ul>' + 
-								'</li>');
-						if (value.activa)
-							item.addClass('active');
-						item.appendTo($("#listConfigurations"));		
-
-						// Preparar la lista de configuraciones para filtrar las pasarelas 
-						// en la asignación de pasarelas a una configuración			
-						$('#CBFreeGateways').append($('<option>',{
-							text: cfgString + ' ' + value.name,
-							value: value.idCFG
-						}));	
-					});
-					$('#Add').attr("onclick","GetConfiguration(-1)");
-					if (f != null)
-						f();
-				}
+			url: '/configurations',
+		success: function(data){
+			if (data.error == null) {
+				$("#listConfigurations").empty();
+				$('#CBFreeGateways').empty();
+				/*translateWord('AliveGateways',function(result){
+				 $('#CBFreeGateways').append($('<option>',{
+				 text: result,
+				 value: 0
+				 }));
+				 })*/
+				
+				$.each(data.result, function (index, value) {
+					var item = $('<li>' +
+						'<a data-cfg=' + value.idCFG + ' ondrop="dropSiteToCfg(event)" ondragover="getOverDropC(event)" style="display:block" onclick=\'CheckingAnyChange("GeneralContent", function(){ShowCfg(' + JSON.stringify(value) + ')})\'>' + value.name + '</a>' +
+						'<ul class="gtwList" id="cfg-' + value.name + '" style="display:none"></ul>' +
+						'</li>');
+					if (value.activa)
+						item.addClass('active');
+					item.appendTo($("#listConfigurations"));
+					
+					// Preparar la lista de configuraciones para filtrar las pasarelas
+					// en la asignación de pasarelas a una configuración
+					$('#CBFreeGateways').append($('<option>', {
+						text: cfgString + ' ' + value.name,
+						value: value.idCFG
+					}));
+				});
+				$('#Add').attr("onclick", "GetConfiguration(-1)");
+				if (f != null)
+					f();
+			}
+			else
+				alertify.error('Error SQL: '+data.error);
+		},
+		error: function(data){
+			alertify.error('Se ha producido un error al intentar recuperar las configuraciones.');
+		}
 	});
 };
+
 
 var GetConfiguration = function(cfg){
 	if (cfg != '-1'){
