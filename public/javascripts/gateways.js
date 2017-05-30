@@ -704,6 +704,27 @@ var GetGateway = function (gtw,lastUpdate,f){
 				$('#ips').val(gtw.result[0].ips);
 				$('#dual').prop('checked', true);
 				$('#dual').prop('disabled', true);
+				
+				$('#lan12').hide();
+				$('#lan22').hide();
+				$('#nic2').show();
+				$('#liCpu2').show();
+				$('#lan11').hide();
+				$('#lan21').hide();
+				$('#nic1').show();
+				
+				// CPU-1
+				$('#ipb1').val(gtw.result[0].ip_cpu0);
+				$('#ipg1').val(gtw.result[0].ip_gtw0);
+				$('#msb1').val(gtw.result[0].mask_cpu0);
+				
+				// CPU-2
+				$('#ipb2').val(gtw.result[0].ip_cpu1);
+				$('#ipg2').val(gtw.result[0].ip_gtw1);
+				$('#msb2').val(gtw.result[0].mask_cpu1);
+				
+				//Services   
+				$('#snmpp').val(gtw.result[0].puerto_snmp);
 				//$('#CBEmplazamiento option[value="' + gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO + '"]').prop('selected', true);
 
 				//GetServices(false);
@@ -745,11 +766,11 @@ var GetGateway = function (gtw,lastUpdate,f){
 										.attr('onclick','UpdateGateway(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})');
 				});
 
-				if (gtw.general.dualidad)
+				/*if (gtw.general.dualidad)
 					$('#liCpu2').show();
 				else
 					$('#liCpu2').hide();
-
+				*/
 				// Reset .oldValue of input tags to check any changes
 				ResetOldValue('GeneralContent');
 
