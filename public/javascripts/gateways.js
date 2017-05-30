@@ -681,7 +681,7 @@ var GetGateway = function (gtw,lastUpdate,f){
 			url: urlString,
 			success: function(gtw) {
 				// Recoger el idCGW de la pasarela
-				$('#DivGateways').data('idCgw',gtw.general.idCGW);
+				$('#DivGateways').data('idCgw',gtw.result[0].idCGW);
 				
 				//VMG Carga de cambios de emplazamiento
 				/*$.ajax({type: 'GET',
@@ -699,14 +699,15 @@ var GetGateway = function (gtw,lastUpdate,f){
 				//$('#AddFormsite').animate({width: '680px', height: '380px'});
 				$('#RemoveGateway').show();
 
-				$("#nameGw").val(gtw.general.name);
-				$('#ipv').val(gtw.general.ipv);
-				$('#ips').val(gtw.general.ips);
-				$('#dual').prop('checked', gtw.general.dualidad);
+				$("#nameGw").val(gtw.result[0].name);
+				$('#ipv').val(gtw.result[0].ipv);
+				$('#ips').val(gtw.result[0].ips);
+				$('#dual').prop('checked', true);
+				$('#dual').prop('disabled', true);
 				//$('#CBEmplazamiento option[value="' + gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO + '"]').prop('selected', true);
 
 				//GetServices(false);
-
+				/*
 				// CPU-0
 				$('#ipg1').val(gtw.general.cpus[0].ipg);
 				//$("#Lan1 option[value='" + gtw.general.cpus[0].tlan +"']").prop('selected',true);
@@ -738,7 +739,7 @@ var GetGateway = function (gtw,lastUpdate,f){
 					$('#ipb2').val(gtw.general.cpus[1].ipb);
 					$('#msb2').val(gtw.general.cpus[1].msb);
 				}
-
+				*/
 				translateWord('Update',function(result){
 					$('#UpdateGtwButton').text(result)
 										.attr('onclick','UpdateGateway(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})');
