@@ -89,6 +89,14 @@ router.route('/operator/:idOperator')
 		});
 	});
 
+router.route('/iplist/:idGtw')
+	.get(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		myLibGateways.getIpList4Gateway(req.params.idGtw,function(result){
+			res.json(result);
+		});
+	});
+
 router.route('/:sourceIdGateway/:targetNameGateway')
 	.copy(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);

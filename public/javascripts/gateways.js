@@ -736,6 +736,9 @@ var GetGateway = function (gtw,lastUpdate,f){
 					$('#TbUpdatePeriod').prop('disabled', true);
 				}
 				$('#TbUpdatePeriod').val(gtw.result[0].periodo_supervision.toString());
+				
+				//Lista de Ips para proxys
+				var list=GetIps4Gateway(gtw.result[0].idCGW);
 				//$('#CBEmplazamiento option[value="' + gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO + '"]').prop('selected', true);
 
 				//GetServices(false);
@@ -860,6 +863,20 @@ var GetGateway = function (gtw,lastUpdate,f){
 	}
 };
 
+var GetIps4Gateway = function(idCgw){
+	var listOfIps=[];
+	if (idCgw != null){
+		var urlString = '/gateways/iplist/'+idCgw;
+		$.ajax({
+			type: 'GET',
+			url: urlString,
+			success: function (data) {
+				
+			}
+		});
+	}
+	return listOfIps;
+}
 /*******************************************************************************/
 /****** Function: AddGatewayToList											****/
 /****** Description: Añade el idCgw a la lista de pasarelas modificadas o	****/
