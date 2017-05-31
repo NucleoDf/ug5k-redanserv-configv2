@@ -871,7 +871,10 @@ var GetIps4Gateway = function(idCgw){
 			type: 'GET',
 			url: urlString,
 			success: function (data) {
-				
+				var a = data;
+			},
+			error: function(data){
+				alertify.error('Se ha producido recuperando los datos de las ips.');
 			}
 		});
 	}
