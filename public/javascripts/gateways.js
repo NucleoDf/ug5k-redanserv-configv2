@@ -725,7 +725,17 @@ var GetGateway = function (gtw,lastUpdate,f){
 				
 				
 				//Services
+				RenderSipService(null,true);//Para mostrar el primer item.
 				$('#snmpp').val(gtw.result[0].puerto_snmp);
+				if(gtw.result[0].periodo_supervision!=0) {
+					$('#CbRUpdatePeriod').prop('checked', true);
+					$('#TbUpdatePeriod').prop('disabled', false);
+				}
+				else {
+					$('#CbRUpdatePeriod').prop('checked', false);
+					$('#TbUpdatePeriod').prop('disabled', true);
+				}
+				$('#TbUpdatePeriod').val(gtw.result[0].periodo_supervision.toString());
 				//$('#CBEmplazamiento option[value="' + gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO + '"]').prop('selected', true);
 
 				//GetServices(false);
