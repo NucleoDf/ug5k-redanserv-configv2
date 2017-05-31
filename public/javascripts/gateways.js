@@ -723,7 +723,8 @@ var GetGateway = function (gtw,lastUpdate,f){
 				$('#ipg2').val(gtw.result[0].ip_gtw1);
 				$('#msb2').val(gtw.result[0].mask_cpu1);
 				
-				//Services   
+				
+				//Services
 				$('#snmpp').val(gtw.result[0].puerto_snmp);
 				//$('#CBEmplazamiento option[value="' + gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO + '"]').prop('selected', true);
 
