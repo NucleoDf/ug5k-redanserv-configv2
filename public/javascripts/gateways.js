@@ -653,7 +653,7 @@ var GetGateways = function(cfg,f) {
 };
 
 /************************************/
-/*	FUNCTION: GetGateway 	*/
+/*	FUNCTION: GetGateway 			*/
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
@@ -738,7 +738,12 @@ var GetGateway = function (gtw,lastUpdate,f){
 				$('#TbUpdatePeriod').val(gtw.result[0].periodo_supervision.toString());
 				
 				//Lista de Ips para proxys
-				var list=GetIps4Gateway(gtw.result[0].idCGW);
+				GetIps4Gateway(gtw.result[0].idCGW);
+				
+				/*$('#ProxysList').append($('<option>', {
+					value: 1,
+					text: 'My option'
+				}));*/
 				//$('#CBEmplazamiento option[value="' + gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO + '"]').prop('selected', true);
 
 				//GetServices(false);
@@ -863,6 +868,11 @@ var GetGateway = function (gtw,lastUpdate,f){
 	}
 };
 
+/************************************/
+/*	FUNCTION: GetGateway 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var GetIps4Gateway = function(idCgw){
 	var listOfIps=[];
 	if (idCgw != null){
@@ -871,15 +881,46 @@ var GetIps4Gateway = function(idCgw){
 			type: 'GET',
 			url: urlString,
 			success: function (data) {
-				var a = data;
+				$.each(data, function (i, data) {
+					if(data.tipo == 'PRX') {
+						$('#ProxysList').append($('<option>', {
+							value: data.ip,
+							text: data.ip
+						}));
+					}
+					else if(data.tipo == 'REG') {
+						$('#RegistrarsList').append($('<option>', {
+							value: data.ip,
+							text: data.ip
+						}));
+					}
+					else if(data.tipo == 'NTP') {
+						$('#NtpServersList').append($('<option>', {
+							value: data.ip,
+							text: data.ip
+						}));
+					}
+					else if(data.tipo == 'TRPV1') {
+						$('#TrapsList').append($('<option>', {
+							value: data.ip,
+							text: '1,'+data.ip+'/'+data.puerto
+						}));
+					}
+					else if(data.tipo == 'TRPV2') {
+						$('#TrapsList').append($('<option>', {
+							value: data.ip,
+							text: '2,'+data.ip+'/'+data.puerto
+						}));
+					}
+				});
 			},
 			error: function(data){
 				alertify.error('Se ha producido recuperando los datos de las ips.');
 			}
 		});
 	}
-	return listOfIps;
 }
+
 /*******************************************************************************/
 /****** Function: AddGatewayToList											****/
 /****** Description: Añade el idCgw a la lista de pasarelas modificadas o	****/
