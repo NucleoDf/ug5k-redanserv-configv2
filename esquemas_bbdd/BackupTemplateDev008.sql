@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `ug5kv2` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_spanish_ci */;
+USE `ug5kv2`;
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
 -- Host: localhost    Database: ug5kv2
@@ -58,6 +60,7 @@ CREATE TABLE `configuraciones` (
 
 LOCK TABLES `configuraciones` WRITE;
 /*!40000 ALTER TABLE `configuraciones` DISABLE KEYS */;
+INSERT INTO `configuraciones` VALUES (2,'CONFIGURACION1','Descripción 1','1',1,NULL),(3,'CONFIGURACION2','Descripción 2','1',0,NULL),(4,'CONFIGURACION3','Descripcion3','1',0,NULL);
 /*!40000 ALTER TABLE `configuraciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,6 +101,7 @@ CREATE TABLE `emplazamientos` (
 
 LOCK TABLES `emplazamientos` WRITE;
 /*!40000 ALTER TABLE `emplazamientos` DISABLE KEYS */;
+INSERT INTO `emplazamientos` VALUES (3,'EMPLAZAMIENTO1',2),(4,'EMPLAZAMIENTO2',3),(5,'EMPLAZAMIENTO3',2),(6,'EMPLAZAMIENTO4',4);
 /*!40000 ALTER TABLE `emplazamientos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,6 +214,7 @@ CREATE TABLE `lista_ips` (
 
 LOCK TABLES `lista_ips` WRITE;
 /*!40000 ALTER TABLE `lista_ips` DISABLE KEYS */;
+INSERT INTO `lista_ips` VALUES (1,1,'1.2.3.4',NULL,'PRX'),(2,1,'1.3.4.5',2234,'REG'),(3,1,'2.3.4.5',NULL,'NTP'),(4,1,'1.1.1.1',3321,'TRPV1'),(5,1,'2.2.2.2',223,'TRPV2'),(6,2,'4.4.4.4',112,'TRPV1'),(7,1,'1.4.2.5',NULL,'PRX');
 /*!40000 ALTER TABLE `lista_ips` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,6 +244,7 @@ CREATE TABLE `lista_uris` (
 
 LOCK TABLES `lista_uris` WRITE;
 /*!40000 ALTER TABLE `lista_uris` DISABLE KEYS */;
+INSERT INTO `lista_uris` VALUES (1,1,'1',1,'1','1');
 /*!40000 ALTER TABLE `lista_uris` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,6 +348,7 @@ CREATE TABLE `pasarelas` (
 
 LOCK TABLES `pasarelas` WRITE;
 /*!40000 ALTER TABLE `pasarelas` DISABLE KEYS */;
+INSERT INTO `pasarelas` VALUES (1,3,'PASARELA','1.1.1.1','2017-05-12 13:27:24','1.1.1.2','1.1.1.3','1.1.1.3','1.1.1.4','1.1.1.5','1.1.1.6',5061,11,65003,163,0,'public','ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',1234,22,12,'1.11.111.1','1.11.111.222'),(2,4,'PASARELA2','2.2.2.2','2017-05-13 13:27:24','2.2.2.2','2.2.2.3','2.2.2.4','2.2.2.5','2.2.2.6','2.2.2.7',5062,240,65001,162,0,'public','ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',234,21,13,'2.12.112.2','1.11.111.21'),(3,3,'PASARELA3','33.33.33.33','2017-05-14 13:27:24','3.3.3.3','3.3.3.4','3.3.3.5','3.3.3.6','3.3.3.7','3.3.3.8',5063,234,65002,161,0,'public','ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',12,23,14,'3.13.113.3','1.2.11.222');
 /*!40000 ALTER TABLE `pasarelas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -427,6 +434,7 @@ CREATE TABLE `recursos_radio` (
 
 LOCK TABLES `recursos_radio` WRITE;
 /*!40000 ALTER TABLE `recursos_radio` DISABLE KEYS */;
+INSERT INTO `recursos_radio` VALUES (1,1,3,3,'RecursoRadio',0,NULL,135.000,NULL,NULL,1,1,1,1,NULL,NULL,NULL,0,NULL,0,1,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0);
 /*!40000 ALTER TABLE `recursos_radio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,6 +480,7 @@ CREATE TABLE `recursos_telefono` (
 
 LOCK TABLES `recursos_telefono` WRITE;
 /*!40000 ALTER TABLE `recursos_telefono` DISABLE KEYS */;
+INSERT INTO `recursos_telefono` VALUES (1,1,1,2,'tfno1',0,NULL,NULL,NULL,'',1,NULL,NULL,1,NULL,'',NULL,NULL,NULL,NULL,0,NULL),(2,1,2,1,'tfno2',0,NULL,NULL,NULL,'',1,NULL,NULL,1,NULL,'',NULL,NULL,NULL,NULL,0,'sip:1'),(3,2,0,0,'tfno3',0,NULL,NULL,NULL,'',1,NULL,NULL,1,NULL,'',NULL,NULL,NULL,NULL,0,'sip: 1.1');
 /*!40000 ALTER TABLE `recursos_telefono` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -692,4 +701,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-01 12:11:59
+-- Dump completed on 2017-06-01 12:11:27
