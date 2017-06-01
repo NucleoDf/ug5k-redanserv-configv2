@@ -748,14 +748,16 @@ var CopyConfiguration = function(){
 		data: JSON.stringify( { "name": $('#nameCopy').val(),
 								"description": $('#descCopy').val() }),
 	success: function(data){
-				if (data.error === null) {
-					alertify.success('La configuración \"' + data.data.name + '\" ha sido copiada.');
+				if (data=='COPY_OK') {
+					alertify.success('La configuración ha sido copiada.');
 					ShowCopyConfiguration(false);
 					GetConfigurations();
 					//GetConfiguration(data.data.name);
 					ShowCfg(data.data);
 					
 				}
+				else
+					alertify.error('Error: '+data);
 			},
 	error: function(data){
 					alertify.error('La configuración \"'+ data.data.name + '\" no existe.');

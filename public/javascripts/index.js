@@ -111,7 +111,7 @@ function indexInitUserData(username, userprofile) {
 		$('.New *:first-child').removeClass('NotAllowedBtn');
 	}
 	/** 20170512 AGL. OCULTAR BOTONES COPIA / IMPORT / EXPORT */
-	$('#BtnCopyCfg').hide();		// Copia Configuracion
+	//$('#BtnCopyCfg').hide();		// Copia Configuracion
 	$('#BtnCopySite').hide();		// Copia Emplazamiento.
 	$('#BtnImport').hide();			// Boton IMPORT.
 	$('#ExportGateway').hide();		// Boton EXPORT.
@@ -480,7 +480,7 @@ function myEncode(e){
 					//$('#MenuOpciones ul li').removeClass('menuListDisabled');
 
 					/** 20170512 AGL. OCULTAR BOTONES COPIA / IMPORT / EXPORT */
-					$('#BtnCopyCfg').hide();		// Copia Configuracion
+					//$('#BtnCopyCfg').hide();		// Copia Configuracion
 					$('#BtnCopySite').hide();		// Copia Emplazamiento.
 					$('#BtnImport').hide();			// Boton IMPORT.
 					$('#ExportGateway').hide();		// Boton EXPORT.
