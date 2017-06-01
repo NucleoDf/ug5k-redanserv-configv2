@@ -724,9 +724,14 @@ var GetGateway = function (gtw,lastUpdate,f){
 				$('#msb2').val(gtw.result[0].mask_cpu1);
 				
 				
-				//Services
+				//SERVICES
+				//Lista de Ips para proxys, registrars, ntp y traps
+				GetIps4Gateway(gtw.result[0].idCGW);
+				//SIP
 				RenderSipService(null,true);//Para mostrar el primer item.
-				$('#snmpp').val(gtw.result[0].puerto_snmp);
+				
+				$('#PuertoLocalSIP').val(gtw.result[0].puerto_proxy.toString());
+				
 				if(gtw.result[0].periodo_supervision!=0) {
 					$('#CbRUpdatePeriod').prop('checked', true);
 					$('#TbUpdatePeriod').prop('disabled', false);
@@ -737,9 +742,30 @@ var GetGateway = function (gtw,lastUpdate,f){
 				}
 				$('#TbUpdatePeriod').val(gtw.result[0].periodo_supervision.toString());
 				
-				//Lista de Ips para proxys
-				GetIps4Gateway(gtw.result[0].idCGW);
+				//SNMP
+				$('#sport').val(gtw.result[0].puerto_servicio_snmp);
+				$('#snmpp').val(gtw.result[0].puerto_snmp);
+				$('#agname').val(gtw.result[0].nombre_snmp);
+				$('#agloc').val(gtw.result[0].localizacion_snmp);
+				$('#agcont').val(gtw.result[0].contacto_snmp);
 				
+				$('#agcomm').val(gtw.result[0].comunidad_snmp);
+				if(gtw.result[0].snmpv2==1) {
+					$('#agv2').prop('checked', true);
+					$('#agcomm').prop('disabled', false);
+				}
+				else {
+					$('#agv2').prop('checked', false);
+					$('#agcomm').prop('disabled', true);
+				}
+				//WEB
+				$('#wport').val(gtw.result[0].puerto_servicio_web.toString());
+				$('#stime').val(gtw.result[0].tiempo_sesion.toString());
+				
+				//GRABACION
+				$('#rtsp_port').val(gtw.result[0].puerto_rtsp.toString());
+				$('#rtsp_ip').val(gtw.result[0].servidor_rtsp.toString());
+				$('#rtspb_ip').val(gtw.result[0].servidor_rtspb.toString());
 				/*$('#ProxysList').append($('<option>', {
 					value: 1,
 					text: 'My option'
@@ -1510,6 +1536,15 @@ function RenderSipService(sip,visible){
 	if (visible){
 		$('#AddFormsite').animate({width: '790px', height: '500px'});
 		$('#SipServiceGateway').show();
+		$('#sipService').addClass('selected');
+		$('#sincrService').removeClass('selected');
+		$('#snmppService').removeClass('selected');
+		$('#webService').removeClass('selected');
+		$('#grabService').removeClass('selected');
+		$('#SincrServiceGateway').hide();
+		$('#SnmpServiceGateway').hide();
+		$('#WebServiceGateway').hide();
+		$('#RecordingServiceGateway').hide();
 	}
 	else
 		$('#SipServiceGateway').hide();
@@ -2002,10 +2037,12 @@ function OnChangeVersionSnmp(){
 	if ($('#agv2').prop('checked')){
 		$('#agLabelComm').show();
 		$('#agcomm').show();
+		$('#agcomm').prop('disabled', false);
 	}
 	else{
-		$('#agLabelComm').hide();
-		$('#agcomm').hide();
+		//$('#agLabelComm').hide();
+		//$('#agcomm').hide();
+		$('#agcomm').prop('disabled', true);
 	}
 }
 

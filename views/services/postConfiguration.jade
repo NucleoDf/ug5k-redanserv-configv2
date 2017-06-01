@@ -413,19 +413,19 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 															#tabs
 																ul#ListMenuServices
 																	li
-																		a(href='#', rel='SipServiceGateway', onclick='loadit(this)') SIP
+																		a#sipService(href='#', rel='SipServiceGateway', onclick='loadit(this)') SIP
 																	|      
 																	li
-																		a(href='#', rel='SincrServiceGateway', onclick='loadit(this)' tkey='Sincronization')
+																		a#sincrService(href='#', rel='SincrServiceGateway', onclick='loadit(this)' tkey='Sincronization')
 																	|      
 																	li
-																		a(href='#', rel='SnmpServiceGateway', onclick='loadit(this)') SNMP
+																		a#snmppService(href='#', rel='SnmpServiceGateway', onclick='loadit(this)') SNMP
 																	|      
 																	li
-																		a(href='#', rel='WebServiceGateway', onclick='loadit(this)') WEB
+																		a#webService(href='#', rel='WebServiceGateway', onclick='loadit(this)') WEB
 																	|      
 																	li
-																		a(href='#', rel='RecordingServiceGateway', onclick='loadit(this)' tkey='Recording')
+																		a#grabService(href='#', rel='RecordingServiceGateway', onclick='loadit(this)' tkey='Recording')
 															.contentTab(style='height: inherit')
 																#SipServiceGateway(style='display:none; padding:10px 10px; height: 93%')
 																	table
