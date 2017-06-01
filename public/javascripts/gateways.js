@@ -1907,7 +1907,7 @@ function ShowAssignedSlaves(data){
 
 			if (idCgw != null && value.CGW_idCGW == idCgw){
 				$('#DivGateways').data('noSlaves',false);
-				$('.Slave'+value.rank).data('idSLAVE',value.idSLAVES);
+				$('.Slave'+value.rank).data('idSLAVE',value.idSLAVES);//Aquí se pinta la IA4
 
 				//assignedSlaves.push(value.name);
 				//$('.listHardware li').filter(function() { return $.text([this]) === value.name; }).remove();

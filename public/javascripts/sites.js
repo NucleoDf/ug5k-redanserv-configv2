@@ -543,19 +543,23 @@ function Close(){
 	})
 }
 
+/************************************/
+/*	FUNCTION: GetMySlaves 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 function GetMySlaves(){
 	Close();
 	$('#AddFormsite').animate({width: '790px', height: '410px'});
 
-	$.ajax({type: 'GET', 
-					// Pasar la ipv de la pasarela
-					url: '/gateways/' + $('#DivGateways').data('idCgw') + '/hardware',
-					success: function(data){
-						ResetHardware();
-						if (data.hardware != null && data.hardware.length > 0){
-							ShowAssignedSlaves(data);
-						}
-					}
+	$.ajax({type: 'GET',
+		url: '/gateways/' + $('#DivGateways').data('idCgw') + '/hardware',
+		success: function(data){
+			ResetHardware();
+			if (data.hardware != null && data.hardware.length > 0){
+				ShowAssignedSlaves(data);
+			}
+		}
 	});
 }
 

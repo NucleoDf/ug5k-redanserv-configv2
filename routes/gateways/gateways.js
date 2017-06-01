@@ -290,7 +290,6 @@ router.route('/:gateway/site/:site')
 var hardwareRouter=express.Router({mergeParams:true});
 router.use('/:gateway/hardware',hardwareRouter);
 
-
 hardwareRouter.route('/')
 	///
 	/// GET gateways/:ipv/hardware
