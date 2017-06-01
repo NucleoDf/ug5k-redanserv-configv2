@@ -22,8 +22,9 @@
 #endif
 	#include <dirent.h>
 
-
 using namespace std;
+
+#include "../base/code-base.h"
 
 /** */
 class url 
@@ -41,7 +42,7 @@ public:
 };
 
 /** */
-class Tools
+class Tools : public CodeBase
 {
 public:
 	Tools(void){}
@@ -83,6 +84,8 @@ public:
 	static void tm2String(struct tm* timeptr, string format, string &date);
 
 	static void append2file(string name, string msg);
+
+	static void fatalerror(string msg);
 
 };
 

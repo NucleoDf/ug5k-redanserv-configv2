@@ -187,7 +187,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 3:             // URI
                 return true;
             case 4:             // Enable Registro
-                return true;
+                return MantService.hide_on_ulises();
             case 5:             // Clave.
                 return vm.show_clave();
         }

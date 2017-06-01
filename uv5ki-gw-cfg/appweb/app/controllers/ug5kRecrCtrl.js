@@ -144,7 +144,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 4:     // URI.
                 return true;
             case 5:     // Enable Registro.
-                return true;
+                return MantService.hide_on_ulises();
             case 6:     // Clave
                 return vm.show_clave();
             case 7:     // Eventos PTT/SQH
@@ -620,7 +620,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					{
 					    Name: /*'Precision Audio:'*/transerv.translate('RCTRL_P01_AUDP'),
 					    Value: vm.rdata.radio.iPrecisionAudio.toString(),
-					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
+					    Enable: false /*authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE])*/,
 					    Input: 1,
 					    Inputs: [/*"Estricto"*/transerv.translate('RCTRL_P01_AUDPS'), /*"Normal"*/transerv.translate('RCTRL_P01_AUDPN')],
 					    Show: vm.p1_rad_show,
@@ -691,10 +691,11 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 					    Inputs: isLocal() ? [
                             /*"Ninguno"*/transerv.translate('RCTRL_P02_BSSN'),
                             /*"RSSI"*/transerv.translate('RCTRL_P02_BSSR'),
-                            /*"RSSI y NUCLEO"*/transerv.translate('RCTRL_P02_BSSC')
+                            /*"RSSI y NUCLEO"*/transerv.translate('RCTRL_P02_BSSC'),
+                            /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1'),
 					    ] : [
-                            /*"RSSI"*/transerv.translate('RCTRL_P02_BSSR'),
-                            /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1')
+                            /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1'),
+                            /*"RSSI"*/transerv.translate('RCTRL_P02_BSSR')
 					    ],
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval

@@ -91,7 +91,7 @@ void CodeBase::_Log(plog::Severity level, const char *from, int line, const char
 	if (plog_queue.size() < 100)
 		plog_queue.push(evento);
 	else
-		Tools::append2file(onflash("fatalerrors.log"), string("Cola de Log llena... Tamaño Maximo: ") + string(""));
+		Tools::fatalerror(string("Cola de Log llena... Tamaño Maximo: ") + string(""));
 }
 
 /** */
@@ -106,7 +106,7 @@ void CodeBase::_FormatLog(plog::Severity level, const char *file, int line, cons
 		/** 
 			20170418. Si la función genera una excepción, no puedo volver a llamarla porque podría dar lugar a un bucle infinito.
 		 */
-		Tools::append2file(onflash("fatalerrors.log"), "Error en _FormatLog");
+		Tools::fatalerror("Error en _FormatLog");
 		return;
 	}
 }
@@ -156,10 +156,10 @@ void *CodeBase::plog_thread_routine(void *arg)
 		catch(...) {
 #if !defined(_WIN32)
 //			PLOG_ERROR("PlogThread (%d) Exception...", (int )getpid());
-			Tools::append2file(onflash("fatalerrors.log"), "PlogThread Exception...");
+			Tools::fatalerror("PlogThread Exception...");
 #else
 //			PLOG_ERROR("PlogThread Exception...");
-			Tools::append2file(onflash("fatalerrors.log"), "PlogThread Exception...");
+			Tools::fatalerror("PlogThread Exception...");
 #endif
 		}
 		Sleep(10);

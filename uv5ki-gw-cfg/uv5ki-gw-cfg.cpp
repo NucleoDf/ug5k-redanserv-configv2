@@ -99,6 +99,10 @@ public:
 				/** Lazo de Windows */		
 			while (std::cin.rdbuf()->in_avail()==0)
 			{
+				CThread::sleep(1000);
+
+				//Tools::fatalerror("Test FATALERROR");
+
 				SupervisaProcesos();
 			}
 	#else
@@ -311,23 +315,23 @@ private:
 #endif
 	void SupervisaProcesos() {
 		if (HistClient::p_hist->Tick.elapsed(hangup_timeout)==true) {
-			Tools::append2file(onflash("fatalerrors.log"), "Reset por HISTCLIENT Colgado...");
+			Tools::fatalerror("Reset por HISTCLIENT Colgado...");
 			exit(-1);
 		}
 		if (CfgProc::p_cfg_proc->Tick.elapsed(hangup_timeout)==true) {
-			Tools::append2file(onflash("fatalerrors.log"), "Reset por CFGPROC Colgado...");
+			Tools::fatalerror("Reset por CFGPROC Colgado...");
 			exit(-1);
 		}
 		if (ManProc::p_man->Tick.elapsed(hangup_timeout)==true) {
-			Tools::append2file(onflash("fatalerrors.log"), "Reset por MANPROC Colgado...");
+			Tools::fatalerror("Reset por MANPROC Colgado...");
 			exit(-1);
 		}
 		if (FileSupervisor::p_fspv->Tick.elapsed(hangup_timeout)==true) {
-			Tools::append2file(onflash("fatalerrors.log"), "Reset por FILESUP Colgado...");
+			Tools::fatalerror("Reset por FILESUP Colgado...");
 			exit(-1);
 		}
 		if (pwebApp->Tick.elapsed(hangup_timeout)==true) {
-			Tools::append2file(onflash("fatalerrors.log"), "Reset por WEBSRV Colgado...");
+			Tools::fatalerror("Reset por WEBSRV Colgado...");
 			exit(-1);
 		}
 	}
