@@ -322,41 +322,44 @@ var PutConfiguration = function(){
 			});
 };
 
-/*******************/
-/*	DELETE Method  */
-/*******************/
+/************************************/
+/*	FUNCTION: DelConfiguration 		*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var DelConfiguration = function(){
 	if ($('#activa').prop('checked')){
 		// La configuración activa no se puede borrar
 		alertify.alert('Ulises G 5000 R',"No se permite eliminar la configuración activa.");
 		alertify.error("No se permite eliminar la configuración activa.");
 	}
-	else{
+	else {
 		alertify.confirm('Ulises G 5000 R', "ATENCION. ¿Desea eliminar la configuración \"" + $('#name').val() + "\"? " +
-			"También se eliminarán todos los emplazamientos y pasarelas asociadas a dicha configuración.",
-			function(){ 
-						$.ajax({type: 'DELETE', 
-						url: '/configurations/' + $('#DivConfigurations').data('idCFG'),
-						success: function(data){
-									if (data.error === 0)
-										alertify.error('La configuración \"'+ data.data + '\" no existe.');
-									else {
-										alertify.success('Configuración \"'+ $('#name').val()+ '\" elminada.');
-										$('#AddFormConfiguration').hide();
-										$('#tableTools').hide();
-
-										GetConfigurations();
-									}
-								},
-						error: function(data){
-										alertify.error('La configuración \"'+ data.data + '\" no existe.');
-								}
-			       		});
-
-				//alertify.success('Ok'); 
-			}, 
-			function(){alertify.error('Cancelado');}
-	    );
+			"<br />También se eliminarán todos los emplazamientos y pasarelas asociadas a dicha configuración.",
+		function(){
+			$.ajax({type: 'DELETE',
+				url: '/configurations/' + $('#DivConfigurations').data('idCFG'),
+				success: function(data){
+					if (data.error != null)
+						alertify.error('Error: '+data.error);
+					else{
+						//TODO Queda pendiente ver si se genera códigos de incidencia para borrar o modificar configs
+						//GenerateHistoricEvent(ID_HW,REMOVE_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
+						alertify.success('Configuración \"'+ $('#name').val()+ '\" elminada.');
+						$('#AddFormConfiguration').hide();
+						$('#tableTools').hide();
+						
+						GetConfigurations();
+					}
+				},
+				error: function(data){
+					alertify.error('Error eliminando la configuración.');
+				}
+			});
+		},
+		function(){
+			alertify.error('Cancelado');
+		});
 	}
 };
 
