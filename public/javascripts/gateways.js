@@ -80,37 +80,41 @@ var ChangeGateWaySite = function(data){
 	});
 };
 
+/************************************/
+/*	FUNCTION: DelGateway 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var DelGateway = function(){
 
 	alertify.confirm('Ulises G 5000 R', "¿Eliminar la gateway \"" + $('#LblIdGateway').text() + "\"?", 
-		function(){ 
-			$.ajax({type: 'DELETE', 
-				url: '/gateways/' + $('#DivGateways').data('idCgw'),
-				success: function(data){
-							if (data.data == 0)
-								alertify.error('Una pasarela asignada a la configuración activa no puede ser eliminada.');	
-							else{
-								GenerateHistoricEvent(ID_HW,REMOVE_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
-						
-								alertify.success('Gateway \"' + $('#nameGw').val() + '\" eliminada.');
+	function(){
+		$.ajax({type: 'DELETE',
+		url: '/gateways/' + $('#DivGateways').data('idCgw'),
+		success: function(data){
+			if (data.data == 0)
+				alertify.error('Una pasarela asignada a la configuración activa no puede ser eliminada.');
+			else{
+				GenerateHistoricEvent(ID_HW,REMOVE_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
+		
+				alertify.success('Gateway \"' + $('#nameGw').val() + '\" eliminada.');
 
-								ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
+				ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
 
-								//GetGateways();
-								// Ocultar div con los datos de una CGW
-								//$('#GeneralContent,#TableToolsGateway').hide();
-								//$('#DivComponents').attr('class','fadeNucleo divNucleo');
-							}
-						},
-				error: function(data){
-								alertify.error('Gateway \"' + data.data.name + '\" no existe.');
-						}
-	       		});
-			//alertify.success('Ok'); 
-		}, 
-		function(){ alertify.error('Cancelado');}
-        );
-
+				//GetGateways();
+				// Ocultar div con los datos de una CGW
+				//$('#GeneralContent,#TableToolsGateway').hide();
+				//$('#DivComponents').attr('class','fadeNucleo divNucleo');
+			}
+		},
+		error: function(data){
+					alertify.error('Gateway \"' + data.data.name + '\" no existe.');
+				}
+		});
+	},
+	function(){
+		alertify.error('Cancelado');
+	});
 };
 
 var CloseCopy = function(){
