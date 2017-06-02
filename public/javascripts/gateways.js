@@ -92,19 +92,12 @@ var DelGateway = function(){
 		$.ajax({type: 'DELETE',
 		url: '/gateways/' + $('#DivGateways').data('idCgw'),
 		success: function(data){
-			if (data.data == 0)
-				alertify.error('Una pasarela asignada a la configuración activa no puede ser eliminada.');
+			if (data.error != null)
+				alertify.error('Error: '+data.error);
 			else{
 				GenerateHistoricEvent(ID_HW,REMOVE_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
-		
 				alertify.success('Gateway \"' + $('#nameGw').val() + '\" eliminada.');
-
 				ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
-
-				//GetGateways();
-				// Ocultar div con los datos de una CGW
-				//$('#GeneralContent,#TableToolsGateway').hide();
-				//$('#DivComponents').attr('class','fadeNucleo divNucleo');
 			}
 		},
 		error: function(data){
