@@ -183,4 +183,6 @@ div(id="FormTableBss", style="display: none; width: 1250px")
 									td
 										a.ButtonNucleo(id='UpdateTableButton', onclick='PostTable()' tkey='Add') 
 									td
-										a.ButtonNucleo(onclick="DelTable()" , style="width:50px" tkey='Remove')
+										a.ButtonNucleo(id='DeleteTableButton' onclick="DelTable()" , style="width:50px" tkey='Remove')
+									td
+										a.ButtonNucleo(id='CancelTableButton', onclick='GetTablesBss()' tkey='Cancel')

@@ -74,6 +74,12 @@ var GetTable = function (idTable){
 			$('#UpdateTableButton').text(result)
 									.attr('onclick','PostTable()');
 		});
+		translateWord('Cancel',function(result){
+			$('#CancelTableButton').text(result)
+				.attr('onclick','GetTablesBss()');
+		});
+		
+		$('#DeleteTableButton').hide();
 		$('#FormTableBss').data('idtabla_bss',null);
 		$('#IdTable').val('');
 		$('#DescTable').val('');
@@ -81,7 +87,7 @@ var GetTable = function (idTable){
 		$('#RowCreationDate').hide();
 		$('#RowModificationUser').hide();
 		$('#RowModificationDate').hide();
-		$('#RowValuesTable').hide();
+		$('#RowValuesTable').show();
 	}
 };
 
