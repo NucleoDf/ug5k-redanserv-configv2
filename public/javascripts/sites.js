@@ -317,6 +317,7 @@ var DelSite = function(){
 				if (data.error != null)
 					alertify.error('Error: '+data.error);
 				else{
+					//TODO Queda pendiente ver si se genera códigos de incidencia para borrar o modificar emplazamientos
 					//GenerateHistoricEvent(ID_HW,REMOVE_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
 					alertify.success('El emplazamiento \"'+ $('#IdSite').val() + '\" ha sido eliminado.');
 					$('#IdSite').val('');
