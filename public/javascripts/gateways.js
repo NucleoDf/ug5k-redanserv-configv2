@@ -101,7 +101,7 @@ var DelGateway = function(){
 			}
 		},
 		error: function(data){
-					alertify.error('Gateway \"' + data.data.name + '\" no existe.');
+			alertify.error('Error eliminando la pasarela.');
 				}
 		});
 	},

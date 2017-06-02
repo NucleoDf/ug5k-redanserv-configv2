@@ -301,7 +301,39 @@ function CancelAddSite(){
 	$('#NavConfiguration').removeClass('disabledDiv')
 }
 
-function DelSite(){
+/************************************/
+/*	FUNCTION: DelSite	 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+var DelSite = function(){
+	
+	alertify.confirm('Ulises G 5000 R', "¿Eliminar el emplazamiento \"" +$('#IdSite').val() + "\"?"+
+		"<br />Tenga en cuenta que se eliminarán todas las pasarelas asociadas a dicho emplazamiento.",
+		function(){
+		$.ajax({type: 'DELETE',
+			url: '/sites/' + $('#IdSite').data('idSite'),
+			success: function(data){
+				if (data.error != null)
+					alertify.error('Error: '+data.error);
+				else{
+					//GenerateHistoricEvent(ID_HW,REMOVE_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
+					alertify.success('El emplazamiento \"'+ $('#IdSite').val() + '\" ha sido eliminado.');
+					$('#IdSite').val('');
+					ShowCfg($('#DivConfigurations').data('cfgJson'));
+				}
+			},
+			error: function(data){
+				alertify.error('Error eliminando emplazamiento.');
+			}
+		});
+	},
+	function(){
+		alertify.error('Cancelado');
+	});
+};
+
+/*function DelSite(){
 	if ($('#IdSite').data('idSite') == 1){
 		// Obligatorio para RCS tener en base de datos el emplazamiento con id=1
 		alertify.alert('Ulises G 5000 R',"No es posible eliminar el emplazamiento con identificador 1.");
@@ -335,7 +367,7 @@ function DelSite(){
 		}
         , function(){ alertify.error('Cancelado')}
     );
-}
+}*/
 
 function NewSite(){
 	if (!$('#AddFormsite').is(':visible')){
