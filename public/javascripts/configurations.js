@@ -723,6 +723,11 @@ var GetGatewaysBelongConfiguration = function(show, cfgId){
 	}
 };
 
+/************************************/
+/*	FUNCTION: CopyConfiguration	 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var CopyConfiguration = function(){
 	if ($('#nameCopy').val().length == 0){
 		alertify.alert('Ulises G 5000 R',"Identificador de la configuración no válido.");
@@ -748,7 +753,7 @@ var CopyConfiguration = function(){
 		data: JSON.stringify( { "name": $('#nameCopy').val(),
 								"description": $('#descCopy').val() }),
 	success: function(data){
-				if (data=='COPY_OK') {
+				if (data.error==null) {
 					alertify.success('La configuración ha sido copiada.');
 					ShowCopyConfiguration(false);
 					GetConfigurations();
@@ -757,10 +762,10 @@ var CopyConfiguration = function(){
 					
 				}
 				else
-					alertify.error('Error: '+data);
+					alertify.error('Error: '+data.error);
 			},
 	error: function(data){
-					alertify.error('La configuración \"'+ data.data.name + '\" no existe.');
+					alertify.error('Error en la aplicación copiando la configuración.');
 			}
 	});
 };

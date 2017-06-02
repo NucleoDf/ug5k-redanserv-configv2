@@ -324,7 +324,7 @@ var DelSite = function(){
 				}
 			},
 			error: function(data){
-				alertify.error('Error eliminando emplazamiento.');
+				alertify.error('Error en la aplicación eliminando el emplazamiento.');
 			}
 		});
 	},
