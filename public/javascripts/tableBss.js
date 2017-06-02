@@ -85,37 +85,42 @@ var GetTable = function (idTable){
 	}
 };
 
+/************************************/
+/*	FUNCTION: PostTable	 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var PostTable = function(){
 	var listValues=[];
 	for (var i=0;i<6;i++){
 		listValues[i] = $('#CbRssi' + i + ' option:selected').val();
 	}
 	$.ajax({type: 'POST', 
-			dataType: 'json', 
-			contentType:'application/json',
-			url: '/tableBss', 
-			data: JSON.stringify( {
-									name: $('#IdTable').val(),
-									description: $('#DescTable').val(),
-									UsuarioCreacion: $('#user').val(),
-									UsuarioModificacion: $('#user').val(),
-									TableValues: listValues
-								}),
-			success: function(data){
-					if (data.error == null){
-						if (data.idTable != null){
-							alertify.success('Tabla de calificación ' + $('#IdTable').val() + ' generada.');
-							/** 20170516. AGL. Activar Cambios... */
-							tbbssModified = true;
-							GetTablesBss(function(){
-								GetTable(data.idTable);
-							});
-						}
-						else{
-							alertify.error('Sobrepasado el número máximo de tablas de calificación');
-						}
-					}
+		dataType: 'json',
+		contentType:'application/json',
+		url: '/tableBss',
+		data: JSON.stringify({
+								name: $('#IdTable').val(),
+								description: $('#DescTable').val(),
+								UsuarioCreacion: $('#user').val(),
+								UsuarioModificacion: $('#user').val(),
+								TableValues: listValues
+							}),
+		success: function(data){
+			if (data.error == null) {
+				if (data.idTable != null) {
+					alertify.success('Tabla de calificación ' + $('#IdTable').val() + ' generada.');
+					/** 20170516. AGL. Activar Cambios... */
+					tbbssModified = true;
+					GetTablesBss(function(){
+						GetTable(data.idTable);
+					});
+				}
+				else {
+					alertify.error('Sobrepasado el número máximo de tablas de calificación');
+				}
 			}
+		}
 	});
 };
 
