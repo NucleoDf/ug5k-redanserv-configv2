@@ -5,6 +5,11 @@
 /** 20170516. AGL Gestor 'Aplicar cambios' */
 var tbbssModified = false;
 
+/************************************/
+/*	FUNCTION: GetTablesBss	 		*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var GetTablesBss = function(f) {
 	/** 20170511 AGL PERFILES */
 	if (Authorize($('#BodyRedan').data('perfil'),[ccAdminProfMsc,ccConfiProfMsc])==false) {
@@ -19,22 +24,27 @@ var GetTablesBss = function(f) {
 	$('#DivTableBss').animate({width: '535px'});
 
 	$.ajax({type: 'GET', 
-				url: '/tableBss'})
-			.done(function(data){
-				$("#listTablesBss").empty();
-				if (data.tables != null && data.tables.length > 0){
-					$.each(data.tables, function(index, value){
-						var item = $("<li><a onclick='GetTable(" + value.idtabla_bss + ")'>" + value.name + "</li>");
-						item.appendTo($("#listTablesBss"));
-			   		});
-			   		if (f != null)
-			   			f();
-				}
-				else if (f != null)
-					f();
-		});
+		url: '/tableBss'})
+		.done(function(data){
+		$("#listTablesBss").empty();
+		if (data.tables != null && data.tables.length > 0){
+			$.each(data.tables, function(index, value){
+				var item = $("<li><a onclick='GetTable(" + value.idtabla_bss + ")'>" + value.name + "</li>");
+				item.appendTo($("#listTablesBss"));
+			});
+			if (f != null)
+				f();
+		}
+		else if (f != null)
+			f();
+	});
 };
 
+/************************************/
+/*	FUNCTION: GetTablesBss	 		*/
+/*  PARAMS: idTable (IN)			*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var GetTable = function (idTable){
 	$('#DivTableBss').animate({width:'950px'});
 	$('#AddTableBss').show();
@@ -52,24 +62,34 @@ var GetTable = function (idTable){
 					$('#FormTableBss').data('idtabla_bss',data.tables[0].idtabla_bss);
 					$('#IdTable').val(data.tables[0].name);
 					$('#DescTable').val(data.tables[0].description);
-					$('#RowCreationUser').show();
+					$('#RowCreationUser').hide();
 					$('#RowCreationDate').show();
-					$('#RowModificationUser').show();
-					$('#RowModificationDate').show();
-					$('#LblCreationUser').text(data.tables[0].UsuarioCreacion);
+					$('#RowModificationUser').hide();
+					$('#RowModificationDate').hide();
+					//$('#LblCreationUser').text(data.tables[0].UsuarioCreacion);
 					$('#LblCreationDate').text(data.tables[0].FechaCreacion);
-					$('#LblModificationUser').text(data.tables[0].UsuarioModificacion);
-					$('#LblModificationDate').text(data.tables[0].FechaModificacion);
-
-					for (var i=0;i<data.tables.length;i++){
-						$('#CbRssi'+i+' option[value="' + data.tables[i].valor_rssi + '"]').prop('selected', true);
-					}
+					//$('#LblModificationUser').text(data.tables[0].UsuarioModificacion);
+					//$('#LblModificationDate').text(data.tables[0].FechaModificacion);
+					
+					$('#CbRssi0 option[value="' + data.tables[0].valor0 +'"]').prop('selected', true);
+					$('#CbRssi1 option[value="' + data.tables[0].valor1 +'"]').prop('selected', true);
+					$('#CbRssi2 option[value="' + data.tables[0].valor2 +'"]').prop('selected', true);
+					$('#CbRssi3 option[value="' + data.tables[0].valor3 +'"]').prop('selected', true);
+					$('#CbRssi4 option[value="' + data.tables[0].valor4 +'"]').prop('selected', true);
+					$('#CbRssi5 option[value="' + data.tables[0].valor5 +'"]').prop('selected', true);
+					$('#DeleteTableButton').show();
 					$('#RowValuesTable').show();
 				}
 			}
 		});
 	}
 	else{
+		$('#CbRssi0 option[value="0"]').prop('selected', true);
+		$('#CbRssi1 option[value="0"]').prop('selected', true);
+		$('#CbRssi2 option[value="0"]').prop('selected', true);
+		$('#CbRssi3 option[value="0"]').prop('selected', true);
+		$('#CbRssi4 option[value="0"]').prop('selected', true);
+		$('#CbRssi5 option[value="0"]').prop('selected', true);
 		translateWord('Add',function(result){
 			$('#UpdateTableButton').text(result)
 									.attr('onclick','PostTable()');
