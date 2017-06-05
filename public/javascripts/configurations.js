@@ -289,16 +289,24 @@ var PostConfiguration = function (){
 	});
 };
 
-/****************/
-/*	PUT Method  */
-/****************/
+/************************************/
+/*	FUNCTION: PutConfiguration 		*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var PutConfiguration = function(){
 	if ($('#name').val().length == 0){
 		alertify.alert('Ulises G 5000 R',"Identificador de la configuración no válido.");
 		alertify.error("Identificador de la configuración no válido.");
 		return;
 	}
-
+	for (var i = 0; i < $("#listConfigurations").children().length; i++) {
+		if ($('#name').val() == ($("#listConfigurations").children()[i]).childNodes[0].text) {
+			alertify.alert('Ulises G 5000 R', "Ya existe una configuración con ese nombre.");
+			alertify.error("Identificador de la configuración no válido.");
+			return;
+		}
+	}
 	$.ajax({type: 'PUT', 
 		url: '/configurations/' + $('#DivConfigurations').data('idCFG'),
 		dataType: 'json',
@@ -309,18 +317,23 @@ var PutConfiguration = function(){
 								"activa": $('#activa').prop('checked')
 							} ),
 		success: function(data){
-					alertify.success('Configuración \"' +  data.data.name + '\" actualizada.');
-					GetConfigurations(function(){
-						ShowCfg(data.data);
-					});
-					// Añadir a la lista de pasarelas a reconfigurar
-					// todas las que pertenecen a la configuración activa
-					// (Poder "aplicar cambios" en la configuración activa después de un restore)
-					AddGatewaysFromActiveToListOfGateways();
-				},
+			if(data.error==null) {
+				alertify.success('Configuración \"' + data.data.name + '\" actualizada.');
+				GetConfigurations(function () {
+					ShowCfg(data.data);
+				});
+				// Añadir a la lista de pasarelas a reconfigurar
+				// todas las que pertenecen a la configuración activa
+				// (Poder "aplicar cambios" en la configuración activa después de un restore)
+				AddGatewaysFromActiveToListOfGateways();
+			}
+			else if (data.error) {
+				alertify.error('Error: '+data.error);
+			}
+		},
 		error: function(data){
-					alertify.error('La configuración \"'+ data.data.name + '\" ya existe.');
-				}
+			alertify.error('La configuración \"'+ data.data.name + '\" ya existe.');
+		}
 	});
 };
 
