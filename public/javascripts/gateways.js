@@ -2131,3 +2131,75 @@ var ImportConfiguration = function(){
 	});
 
 };
+
+/************************************/
+/*	FUNCTION: NewGateway 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+function NewGateway (id,name){
+	translateWord('Configurations',function(result){
+		var titulo = result + ': ' + $('#name').val();
+		translateWord('Sites',function(result){
+			var titulo2 = titulo + ".\t" + result + ': ' + $('#IdSite').val() + '.';
+			translateWord('Gateways',function(result){
+				$('#TitleH3').text(titulo2 + '\t' + result + ': ' + name + '.')
+			})
+		})
+	})
+	
+	translateWord('CreateGateway',function(result){
+		$('#UpdateGtwButton').text(result)//TODO Create Gateway
+			.attr('onclick','UpdateGateway(function(){AddGatewayToList($(\'#IdSite\').data(\'idSite\'))})');
+	});
+	$('#IdSite').data('gatewayName',name)
+	$('#IdSite').data('gatewayId',id)
+	
+	$('#DivSites').animate({width: '1150px'},function(){
+		$('#TrCreateGateway').hide()
+		$('#TrToolsSite').hide()
+		$('#TrSite').hide();
+		if (id == null){
+			$('#LblIdGateway').text('');
+			$('#ListMenuGateways li:nth-child(3)').attr('style','display:none');
+		}
+		else
+			$('#ListMenuGateways li:nth-child(3)').attr('style','display:block');
+		
+		//GetGateways(null,function(){
+		$('#AddFormGateway').show();
+		$('#AddFormsite').animate({width: '790px', height: '410px'});
+		$('#DivGateways').animate({width: '1015px'});
+		$('#GeneralContent').show();
+		$('#TableToolsGateway').show();
+		
+		$('#lips').hide();
+		$('#ips').hide();
+		
+		ReinitFormGateways();
+		
+		$('#RemoveGateway').hide();
+		
+		$('#dual').prop('checked', true);
+		$('#dual').prop('disabled', true);
+		
+		$('#lan12').hide();
+		$('#lan22').hide();
+		$('#nic2').show();
+		$('#liCpu2').show();
+		$('#lan11').hide();
+		$('#lan21').hide();
+		$('#nic1').show();
+		
+		RenderSipService(null,true);//Para mostrar el primer item.
+		$('#LblIdGateway').text(name);
+		$('#hwGateway').fadeIn(500,function(){
+			// translateWord('Sites',function(result1){
+			// 	translateWord('Gateways',function(result2){
+			// 		$('#TitleSite').text(result1 + ": " + $('#IdSite').val() + '. ' + result2 + ': ' + name)
+			// 	})
+			// })
+		});
+		//})
+	})
+}
