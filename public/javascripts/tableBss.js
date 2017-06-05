@@ -114,18 +114,19 @@ var PostTable = function(){
 							}),
 		success: function(data){
 			if (data.error == null) {
-				if (data.idTable != null) {
-					alertify.success('Tabla de calificación ' + $('#IdTable').val() + ' generada.');
-					/** 20170516. AGL. Activar Cambios... */
-					tbbssModified = true;
-					GetTablesBss(function(){
-						GetTable(data.idTable);
-					});
-				}
-				else {
-					alertify.error('Sobrepasado el número máximo de tablas de calificación');
-				}
+				alertify.success('Tabla de calificación ' + $('#IdTable').val() + ' generada.');
+				/** 20170516. AGL. Activar Cambios... */
+				tbbssModified = true;
+				GetTablesBss(function(){
+					GetTable(data.idTable);
+				});
 			}
+			else {
+				alertify.error('Error: '+data.error);
+			}
+		},
+		error: function(data){
+			alertify.error('Error generando la tabla de calificación de audio.');
 		}
 	});
 };
