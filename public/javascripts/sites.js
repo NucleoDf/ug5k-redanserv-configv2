@@ -235,25 +235,30 @@ function dropSiteToCfg(ev){
 
 }
 
+/************************************/
+/*	FUNCTION: UpdateSingleSite 		*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 function UpdateSingleSite(){
 	if ($('#IdSite').val().length > 0){
 		$.ajax({type: 'PUT', 
-		 		url: '/sites/' + $('#IdSite').data('idSite'), 
-				dataType: 'json', 
-				contentType:'application/json',
-				data: JSON.stringify( {
-					name: $('#IdSite').val()
-				}),
-		 		success: function(data){
-		 			// Añade las pasarelas que pertenecen a este site y 
-		 			// están vivas y en la configuración activa a la lista de pasarelas a activar
-		 			AddGatewaysFromActiveToListOfGateways($('#IdSite').data('idSite'))
-		 			alertify.success('Emplazamiento \"' + data.data + '\" modificado.');
-		 			//ShowSite(data.data,$('#IdSite').data('idSite'))
-		 		},
-		 		error: function(data){
-		 			alertify.error('Error modificando emplazamiento \"' + data.data + '\".');
-		 		}
+			url: '/sites/' + $('#IdSite').data('idSite'),
+			dataType: 'json',
+			contentType:'application/json',
+			data: JSON.stringify( {
+				name: $('#IdSite').val()
+			}),
+			success: function(data){
+				// Añade las pasarelas que pertenecen a este site y
+				// están vivas y en la configuración activa a la lista de pasarelas a activar
+				AddGatewaysFromActiveToListOfGateways($('#IdSite').data('idSite'))
+				alertify.success('Emplazamiento \"' + data.data + '\" modificado.');
+				//ShowSite(data.data,$('#IdSite').data('idSite'))
+			},
+			error: function(data){
+				alertify.error('Error modificando emplazamiento \"' + data.data + '\".');
+			}
 		});
 	}
 }
