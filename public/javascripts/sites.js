@@ -258,30 +258,35 @@ function UpdateSingleSite(){
 	}
 }
 
+/************************************/
+/*	FUNCTION: AddSite 				*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 function AddSite(){
 	if ($('#NewSite').val().length > 0){
 		$.ajax({type: 'POST', 
-		 		url: '/sites/' + $('#NewSite').val(), 
-				dataType: 'json', 
-				contentType:'application/json',
-				data: JSON.stringify( {
-					cfg_idCFG: $('#DivConfigurations').data('idCFG'),
-					name: $('#NewSite').val()
-				}),
-		 		success: function(data){
-		 			if (data.error == 'ER_DUP_ENTRY'){
-						alertify.error('Emplazamiento \"' + $('#NewSite').val() + '\" ya existe en esta configuración.');
-		 			}
-		 			else{
-			 			alertify.success('Emplazamiento \"'+ $('#NewSite').val() + '\" creado.');
-			 			$('#NewSite').val('');
-						CancelAddSite();
-			 			ShowCfg($('#DivConfigurations').data('cfgJson'));
-			 		}
-		 		},
-		 		error: function(data){
-		 			alertify.error('Error añadiendo emplazamiento \"'+ $('#NewSite').val() +'\".')
-		 		}
+			url: '/sites/' + $('#NewSite').val(),
+			dataType: 'json',
+			contentType:'application/json',
+			data: JSON.stringify( {
+				cfg_idCFG: $('#DivConfigurations').data('idCFG'),
+				name: $('#NewSite').val()
+			}),
+			success: function(data){
+				if (data.error == 'ER_DUP_ENTRY'){
+					alertify.error('Emplazamiento \"' + $('#NewSite').val() + '\" ya existe en esta configuración.');
+				}
+				else{
+					alertify.success('Emplazamiento \"'+ $('#NewSite').val() + '\" creado.');
+					$('#NewSite').val('');
+					CancelAddSite();
+					ShowCfg($('#DivConfigurations').data('cfgJson'));
+				}
+			},
+			error: function(data){
+				alertify.error('Error añadiendo emplazamiento.')
+			}
 		});
 	}
 }
