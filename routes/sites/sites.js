@@ -26,16 +26,18 @@ router.route('/groups')
   		});
 	});
 
+router.route('/:site/:cfg')
+	.put(function(req, res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		myLibSites.putSite(req.params.site,req.params.cfg,req.body.name,function(data){
+			res.json(data);
+		});
+	})
+
 router.route('/:site')
 	.post(function(req, res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		myLibSites.postSite(req.body,function(data){
-			res.json(data);
-		});
-	})
-	.put(function(req, res){
-		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibSites.putSite(req.params.site,req.body.name,function(data){
 			res.json(data);
 		});
 	})

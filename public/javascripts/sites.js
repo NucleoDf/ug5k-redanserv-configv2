@@ -242,7 +242,7 @@ function dropSiteToCfg(ev){
 function UpdateSingleSite(){
 	if ($('#IdSite').val().length > 0){
 		$.ajax({type: 'PUT', 
-			url: '/sites/' + $('#IdSite').data('idSite'),
+			url: '/sites/' + $('#IdSite').data('idSite') + '/' + $('#DivConfigurations').data('idCFG'),
 			dataType: 'json',
 			contentType:'application/json',
 			data: JSON.stringify( {
@@ -258,6 +258,7 @@ function UpdateSingleSite(){
 					//ShowSite(data.data,$('#IdSite').data('idSite'));//TODO esto no chuta
 				}
 				else if (data.error == 'ER_DUP_ENTRY'){
+					$('#IdSite').val('');
 					alertify.error('Ya existe un emplazamiento \"' + data.dupNmae+ '\" en esta configuración.');
 				}
 				else
