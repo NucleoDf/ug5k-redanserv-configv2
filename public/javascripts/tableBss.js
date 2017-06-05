@@ -151,30 +151,43 @@ var PostTable = function(){
 	});
 };
 
+/************************************/
+/*	FUNCTION: PutTable	 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var PutTable = function(){
 	var listValues=[];
 	for (var i=0;i<6;i++){
 		listValues[i] = $('#CbRssi' + i + ' option:selected').val();
 	}
 	$.ajax({type: 'PUT', 
-			dataType: 'json', 
-			contentType:'application/json',
-			url: '/tableBss', 
-			data: JSON.stringify( {
-									idtabla_bss: $('#FormTableBss').data('idtabla_bss'),
-									name: $('#IdTable').val(),
-									description: $('#DescTable').val(),
-									UsuarioModificacion: $('#user').val(),
-									TableValues: listValues
-								}),
-			success: function(data){
-					alertify.success('Datos de la tabla \"' +  $('#IdTable').val() + '\" actualizados.');
-					/** 20170516. AGL. Activar Cambios... */
-					tbbssModified = true;
-					GetTablesBss(function(){
-						GetTable($('#FormTableBss').data('idtabla_bss'));
-					});
+		dataType: 'json',
+		contentType:'application/json',
+		url: '/tableBss',
+		data: JSON.stringify( {
+								idtabla_bss: $('#FormTableBss').data('idtabla_bss'),
+								name: $('#IdTable').val(),
+								description: $('#DescTable').val(),
+								UsuarioModificacion: $('#user').val(),
+								TableValues: listValues
+							}),
+		success: function(data){
+			if (data.error == null) {
+				alertify.success('Datos de la tabla \"' + $('#IdTable').val() + '\" actualizados.');
+				/** 20170516. AGL. Activar Cambios... */
+				tbbssModified = true;
+				GetTablesBss(function () {
+					GetTable($('#FormTableBss').data('idtabla_bss'));
+				});
 			}
+			else {
+				alertify.error('Error: '+data.error);
+			}
+		},
+		error: function(data){
+			alertify.error('Error modificando la tabla de calificación de audio.');
+		}
 	});
 };
 
