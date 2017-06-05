@@ -218,7 +218,6 @@ function dropSiteToCfg(ev){
 			 		success: function(data){			 			
 			 			if (data.error == "ER_DUP_ENTRY") {
 			 				alertify.error('El emplazamiento ya existe en la configuración destino.')	;
-
 			 			}
 			 			else{
 							alertify.success('Emplazamiento modificado.');
@@ -250,14 +249,22 @@ function UpdateSingleSite(){
 				name: $('#IdSite').val()
 			}),
 			success: function(data){
-				// Añade las pasarelas que pertenecen a este site y
-				// están vivas y en la configuración activa a la lista de pasarelas a activar
-				AddGatewaysFromActiveToListOfGateways($('#IdSite').data('idSite'))
-				alertify.success('Emplazamiento \"' + data.data + '\" modificado.');
-				//ShowSite(data.data,$('#IdSite').data('idSite'))
+				if(data.error==null) {
+					// Añade las pasarelas que pertenecen a este site y
+					// están vivas y en la configuración activa a la lista de pasarelas a activar
+					//AddGatewaysFromActiveToListOfGateways($('#IdSite').data('idSite'))//TODO he comentado esto porque no creo que haga falta.
+					alertify.success('Emplazamiento \"' + data.data + '\" modificado.');
+					//TODO esto no chuta
+					ShowSite(data.data,$('#IdSite').data('idSite'));
+				}
+				else if (data.error == 'ER_DUP_ENTRY'){
+					alertify.error('Ya existe un emplazamiento \"' + data.dupNmae+ '\" en esta configuración.');
+				}
+				else
+					alertify.error('Error: '+data.error);
 			},
 			error: function(data){
-				alertify.error('Error modificando emplazamiento \"' + data.data + '\".');
+				alertify.error('Error modificando emplazamiento.');
 			}
 		});
 	}
