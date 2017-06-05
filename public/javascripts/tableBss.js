@@ -178,29 +178,34 @@ var PutTable = function(){
 	});
 };
 
+/************************************/
+/*	FUNCTION: DelTable	 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var DelTable = function(){
 	alertify.confirm ('Ulises G 5000 R','¿Eliminar la tabla de calificación de audio ' + $('#IdTable').val() + '?',
 		function(){
 			$.ajax({type: 'DELETE', 
-					url: '/tableBss/' + $('#FormTableBss').data('idtabla_bss'), 
-					success: function(data){
-							if (data.error == 'CANT_DELETE'){
-								var mensaje = 'La tabla ' + data.TableName + 
-											' está asignada al recurso [Recurso/Pasarela/Emplazamiento/Configuracion]: ' + data.ResourceName + '/' + 
-											'/' + data.CgwName + 
-											'/' + data.SiteName + 
-											'/' + data.CfgName;
-								alertify.alert(mensaje);
-								alertify.error('No se puede eliminar una tabla asignada a un recurso');
-							}
-							else if (data.error == null){
-								GenerateHistoricEvent(ID_HW,REMOVE_CALIFICATION_AUDIO_TABLE,$('#IdTable').val(),$('#loggedUser').text());
-								alertify.success('Tabla \"' +  $('#IdTable').val() + '\" eliminada.');
-								/** 20170516. AGL. Activar Cambios... */
-								tbbssModified = true;
-								GetTablesBss();
-							}
+				url: '/tableBss/' + $('#FormTableBss').data('idtabla_bss'),
+				success: function(data){
+					if (data.error == 'CANT_DELETE'){
+						var mensaje = 'La tabla ' + $('#IdTable').val() +
+									' está asignada al recurso: ' + data.ResourceName;
+						alertify.alert(mensaje);
+						alertify.error('No se puede eliminar una tabla asignada a un recurso');
 					}
+					else if (data.error == null){
+						GenerateHistoricEvent(ID_HW,REMOVE_CALIFICATION_AUDIO_TABLE,$('#IdTable').val(),$('#loggedUser').text());
+						alertify.success('Tabla \"' +  $('#IdTable').val() + '\" eliminada.');
+						/** 20170516. AGL. Activar Cambios... */
+						tbbssModified = true;
+						GetTablesBss();
+					}
+				},
+				error: function(data){
+					alertify.error('Error eliminando la tabla de calificación de audio.');
+				}
 			});
 		}, 
 		function(){ 
