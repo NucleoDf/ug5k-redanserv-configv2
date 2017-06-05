@@ -245,7 +245,7 @@ var ShowCfgByName = function(cfgName,cfgId){
 };
 
 /************************************/
-/*	FUNCTION: ShowCfg 				*/
+/*	FUNCTION: PostConfiguration 	*/
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
@@ -271,21 +271,21 @@ var PostConfiguration = function (){
 								"description": $('#desc').val()
 								}
 							),
-	success: function(data){
-				if (data.error === null) {
-					alertify.success('La configuración \"' +  data.data.name + '\" ha sido cargada.');
-					GetConfigurations();
+		success: function(data){
+			if (data.error === null) {
+				alertify.success('La configuración \"' +  data.data.name + '\" ha sido cargada.');
+				GetConfigurations();
 
-					$('#DivConfigurations').data('idCFG',data.data.idCFG);
-					GetConfiguration(data.data.name);
-				}
-				else if (data.error == "ER_DUP_ENTRY") {
-					alertify.error('La configuración \"'+ data.data.name + '\" ya existe.');
-				}
-			},
-	error: function(data){
-					alertify.error('La configuración \"'+ data.data.name + '\" no existe.');
+				$('#DivConfigurations').data('idCFG',data.data.idCFG);
+				GetConfiguration(data.data.name);
 			}
+			else if (data.error) {
+				alertify.error('Error: '+data.error);
+			}
+		},
+		error: function(data){
+			alertify.error('Error creando la configuración.');
+		}
 	});
 };
 
