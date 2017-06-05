@@ -244,9 +244,11 @@ var ShowCfgByName = function(cfgName,cfgId){
 	});
 };
 
-/*****************/
-/*	POST Method  */
-/*****************/
+/************************************/
+/*	FUNCTION: ShowCfg 				*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var PostConfiguration = function (){
 	if ($('#name').val().length == 0){
 		alertify.alert('Ulises G 5000 R',"Identificador de la configuración no válido.");
@@ -298,28 +300,28 @@ var PutConfiguration = function(){
 	}
 
 	$.ajax({type: 'PUT', 
-			url: '/configurations/' + $('#DivConfigurations').data('idCFG'),
-			dataType: 'json', 
-			contentType:'application/json',
-			data: JSON.stringify( { "idCFG": $('#DivConfigurations').data('idCFG'),
-									"name": $('#name').val(),
-									"description": $('#desc').val(),
-									"activa": $('#activa').prop('checked')
-								} ),
-			success: function(data){
-						alertify.success('Configuración \"' +  data.data.name + '\" actualizada.');
-						GetConfigurations(function(){
-							ShowCfg(data.data);	
-						});
-						// Añadir a la lista de pasarelas a reconfigurar 
-						// todas las que pertenecen a la configuración activa
-						// (Poder "aplicar cambios" en la configuración activa después de un restore)
-						AddGatewaysFromActiveToListOfGateways();
-					},
-			error: function(data){
-						alertify.error('La configuración \"'+ data.data.name + '\" ya existe.');
-					}
-			});
+		url: '/configurations/' + $('#DivConfigurations').data('idCFG'),
+		dataType: 'json',
+		contentType:'application/json',
+		data: JSON.stringify( { "idCFG": $('#DivConfigurations').data('idCFG'),
+								"name": $('#name').val(),
+								"description": $('#desc').val(),
+								"activa": $('#activa').prop('checked')
+							} ),
+		success: function(data){
+					alertify.success('Configuración \"' +  data.data.name + '\" actualizada.');
+					GetConfigurations(function(){
+						ShowCfg(data.data);
+					});
+					// Añadir a la lista de pasarelas a reconfigurar
+					// todas las que pertenecen a la configuración activa
+					// (Poder "aplicar cambios" en la configuración activa después de un restore)
+					AddGatewaysFromActiveToListOfGateways();
+				},
+		error: function(data){
+					alertify.error('La configuración \"'+ data.data.name + '\" ya existe.');
+				}
+	});
 };
 
 /************************************/
