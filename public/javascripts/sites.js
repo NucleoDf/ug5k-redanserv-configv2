@@ -254,8 +254,8 @@ function UpdateSingleSite(){
 					// están vivas y en la configuración activa a la lista de pasarelas a activar
 					//AddGatewaysFromActiveToListOfGateways($('#IdSite').data('idSite'))//TODO he comentado esto porque no creo que haga falta.
 					alertify.success('Emplazamiento \"' + data.data + '\" modificado.');
-					//TODO esto no chuta
-					ShowSite(data.data,$('#IdSite').data('idSite'));
+					ShowCfg($('#DivConfigurations').data('cfgJson'));
+					//ShowSite(data.data,$('#IdSite').data('idSite'));//TODO esto no chuta
 				}
 				else if (data.error == 'ER_DUP_ENTRY'){
 					alertify.error('Ya existe un emplazamiento \"' + data.dupNmae+ '\" en esta configuración.');
