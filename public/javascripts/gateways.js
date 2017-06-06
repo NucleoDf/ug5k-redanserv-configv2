@@ -2350,7 +2350,7 @@ function PostGateWay (idSite) {
 				ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
 				//GetGateways(null,function(){
 				//	ShowHardwareGateway(data.insertId, data.name);
-				//});
+				//});//TODO esto no muestra nada de lo que tiene que mostrar
 			}
 			else if (data.error) {
 				alertify.error('Error: '+data.error);
