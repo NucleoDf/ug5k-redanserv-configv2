@@ -2344,12 +2344,13 @@ function PostGateWay (idSite) {
 								}
 		),
 		success: function(data){
-			if (data.error === null) {
-				alertify.success('La pasarela \"' +  data.data.name + '\" ha sido creada.');
-				GetConfigurations();
+			if (data.error == null) {
+				alertify.success('La pasarela \"' +  data.name + '\" ha sido creada.');
 				
-				$('#DivConfigurations').data('idCFG',data.data.idCFG);
-				GetConfiguration(data.data.name);
+				ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
+				//GetGateways(null,function(){
+				//	ShowHardwareGateway(data.insertId, data.name);
+				//});
 			}
 			else if (data.error) {
 				alertify.error('Error: '+data.error);
