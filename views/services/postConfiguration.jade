@@ -518,7 +518,7 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 																			td(style="width:150px")
 																				label#agLabelComm(tkey='ReadWriteCommunity')
 																			td.New
-																				input.textbox#agcomm(style="width:60px" type="text")
+																				input.textbox#agcomm(style="width:60px" disabled='disabled' type="text" value="public")
 																		tr
 																			td
 																				label(tkey='SNMPPort')
@@ -536,7 +536,7 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 																							td
 																								select#TrapVersion(type='text')
 																									option 1
-																									option 2
+																									option(selected="true") 2
 																						tr
 																							td(style="width: 150px; padding:2px 5px")
 																								label(tkey='IPAddress')
@@ -546,7 +546,7 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 																							td(style="width: 150px; padding:2px 5px")
 																								label(tkey='Port')
 																							td
-																								input.textbox#TrapPort(type='text' style='width: 50px' onblur='ValidateNumber(this,"ErrorValue")' onfocus='this.oldValue=this.value')
+																								input.textbox#TrapPort(type='text' style='width: 50px' onblur='ValidateNumber(this,"ErrorValue")' onfocus='this.oldValue=this.value' value="162")
 																						tr
 																							td(style='padding:5px')
 																								button.ButtonNucleo(type="button" onclick='RemoveTrap()' style='width:100px; height: 25px' tkey='RemoveTrap')

@@ -2211,36 +2211,23 @@ function NewGateway (){
 /************************************/
 function PostGateWay (idSite) {
 	var newGateway={};
-	var cpus=[];
-	var sip={};
 	var proxys=[];
 	var registrars=[];
-	var web={};
-	var snmp={};
 	var traps=[];
-	var rec={};
-	var grab={};
-	var sincr={};
 	var listServers=[];
-	var mensaje='';
-	var mensajeNoName='';
-	var mensajeNoIp='';
-	var mensajeServiceError='';
 	
 	///////////////////////////
 	//PESTAÑA GENERAL
-	translateWord('ErrorGatewayHaveNoName',function(result){
-		mensajeNoName = result;
-	});
-	translateWord('ErrorGatewayHaveNoIP',function(result){
-		mensajeNoIp = result;
-	});
 	if ($('#nameGw').val() == ''){
-		alertify.error(mensajeNoName);
+		translateWord('ErrorGatewayHaveNoName',function(result){
+			alertify.error(result);
+		});
 		return;
 	}
 	if ($('#ipv').val() == ''){
-		alertify.error(mensajeNoIp);
+		translateWord('ErrorGatewayHaveNoIP',function(result){
+			alertify.error(result);
+		});
 		return;
 	}
 	//CPU 0
@@ -2303,12 +2290,21 @@ function PostGateWay (idSite) {
 		registrars.push({'ip':$(this).val(),'selected':selected});
 	});
 	//SINCRONIZACION
+	//Ntp
 	$('#NtpServersList option').each(function() {
 		var selected = $("#NtpServersList option:selected").val() == $(this).val();
 		listServers.push({'ip':$(this).val(),'selected':selected});
 	});
-
+	//SNMP
+	// Traps list
+	$('#TrapsList option').each(function() {
+		traps.push($(this).val());
+	});
+	//WEB
+	//GRABACION
+	
 	//Insertamos los datos
+	//GENERAL
 	newGateway.nombre=$('#nameGw').val();
 	newGateway.ipv=$('#ipv').val();
 	newGateway.ipb1=$('#ipb1').val();
@@ -2317,28 +2313,25 @@ function PostGateWay (idSite) {
 	newGateway.ipb2=$('#ipb2').val();
 	newGateway.ipg2=$('#ipg2').val();
 	newGateway.msb2=$('#msb2').val();
-	
-	newGateway.rtsp_port=$('#rtsp_port').val();
+	//SIP
+	newGateway.PuertoLocalSIP=$('#PuertoLocalSIP').val();//Fixed
 	newGateway.proxys=proxys;
 	newGateway.registrars=registrars;
 	if($('#CbRUpdatePeriod').prop('checked'))
 		newGateway.TbUpdatePeriod=$('#TbUpdatePeriod').val();
+	//SINCRONIZACION
 	newGateway.listServers=listServers;
-	// RECORDING SERVICE
-	// SNMP
-	grab={
-		"rtsp_port": $('#rtsp_port').val(),
-		//"rtsp_uri": $('#rtsp_uri').val(),
-		"rtsp_uri": '',
-		"rtsp_ip": $('#rtsp_ip').val(),
-		/** 20170517. AGL. Segundo Servidor */
-		"rtspb_ip" : $('#rtspb_ip').val(),
-		//"rtsp_rtp": $('#rtp_tramas').prop('checked') ? 1 : 0
-		"rtsp_rtp": 1
-	};
-	// SINCR. SERVICE
-	$('#NtpServersList option').each(function() {
-		var selected = $("#NtpServersList option:selected").val() == $(this).val();
-		listServers.push({'ip':$(this).val(),'selected':selected});
-	});
+	//SNMP
+	newGateway.sport=$('#sport').val();
+	newGateway.snmpp=$('#snmpp').val();
+	if($('#agv2').prop('checked'))
+		newGateway.agcomm=$('#agcomm').val();
+	newGateway.traps=traps;
+	//WEB
+	newGateway.wport=$('#wport').val();
+	newGateway.stime=$('#stime').val();
+	//GRABACION
+	newGateway.rtsp_port=$('#rtsp_port').val();
+	newGateway.rtsp_ip=$('#rtsp_ip').val();
+	newGateway.rtsp_ipb=$('#rtsp_ipb').val();
 }

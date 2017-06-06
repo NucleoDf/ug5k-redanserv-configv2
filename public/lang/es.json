@@ -281,6 +281,7 @@
 	"ErrorGatewayHaveNoName":	"La pasarela debe tener un nombre.",
 	"ErrorGeneratingService":	"Error creando el servicio.",
 	"ErrorEqualCPUIp"		:	"Error. Las Ips de las CPUS 0 y 1 deben ser distintas.",
+	"ErrorProxyServiceToGateway"		:	"Error. Debe haber al menos una dirección proxy configurada.",
 	"ConfirmDeleteLog"		: "¿Eliminar definitivamente el archivo log?",
 	"Backup"				: "Backup base de datos",
 	"BackupService"			: "Servicio de Backup",
