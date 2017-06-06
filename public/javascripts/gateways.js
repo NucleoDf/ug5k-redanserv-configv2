@@ -2137,7 +2137,7 @@ var ImportConfiguration = function(){
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-function NewGateway (id,name){
+function NewGateway (){
 	translateWord('Configurations',function(result){
 		var titulo = result + ': ' + $('#name').val();
 		translateWord('Sites',function(result){
@@ -2147,24 +2147,24 @@ function NewGateway (id,name){
 			})
 		})
 	})
-	
+	var idSite=$('#IdSite') .data('idSite');
 	translateWord('CreateGateway',function(result){
-		$('#UpdateGtwButton').text(result)//TODO Create Gateway
-			.attr('onclick','UpdateGateway(function(){AddGatewayToList($(\'#IdSite\').data(\'idSite\'))})');
+		$('#UpdateGtwButton').text(result)//TsODO Create Gateway
+			.attr('onclick','PostGateWay('+idSite+')');
 	});
-	$('#IdSite').data('gatewayName',name)
-	$('#IdSite').data('gatewayId',id)
+	//$('#IdSite').data('gatewayName',name)
+	//$('#IdSite').data('gatewayId',id)
 	
 	$('#DivSites').animate({width: '1150px'},function(){
 		$('#TrCreateGateway').hide()
 		$('#TrToolsSite').hide()
 		$('#TrSite').hide();
-		if (id == null){
-			$('#LblIdGateway').text('');
-			$('#ListMenuGateways li:nth-child(3)').attr('style','display:none');
-		}
-		else
-			$('#ListMenuGateways li:nth-child(3)').attr('style','display:block');
+		//if (id == null){
+		$('#LblIdGateway').text('');
+		$('#ListMenuGateways li:nth-child(3)').attr('style','display:none');
+		//}
+		//else
+		//	$('#ListMenuGateways li:nth-child(3)').attr('style','display:block');
 		
 		//GetGateways(null,function(){
 		$('#AddFormGateway').show();
@@ -2192,7 +2192,7 @@ function NewGateway (id,name){
 		$('#nic1').show();
 		
 		RenderSipService(null,true);//Para mostrar el primer item.
-		$('#LblIdGateway').text(name);
+		//$('#LblIdGateway').text(name);
 		$('#hwGateway').fadeIn(500,function(){
 			// translateWord('Sites',function(result1){
 			// 	translateWord('Gateways',function(result2){
@@ -2202,4 +2202,117 @@ function NewGateway (id,name){
 		});
 		//})
 	})
+}
+
+/************************************/
+/*	FUNCTION: NewGateway 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+function PostGateWay (idSite) {
+	var newGateway={};
+	var cpus=[];
+	var sip={};
+	var proxys=[];
+	var registrars=[];
+	var web={};
+	var snmp={};
+	var traps=[];
+	var rec={};
+	var grab={};
+	var sincr={};
+	var listServers=[];
+	var mensaje='';
+	var mensajeNoName='';
+	var mensajeNoIp='';
+	var mensajeServiceError='';
+	
+	///////////////////////////
+	//PESTAÑA GENERAL
+	translateWord('ErrorGatewayHaveNoName',function(result){
+		mensajeNoName = result;
+	});
+	translateWord('ErrorGatewayHaveNoIP',function(result){
+		mensajeNoIp = result;
+	});
+	if ($('#nameGw').val() == ''){
+		alertify.error(mensajeNoName);
+		return;
+	}
+	if ($('#ipv').val() == ''){
+		alertify.error(mensajeNoIp);
+		return;
+	}
+	//CPU 0
+	if ($('#ipb1').val() == ''){
+		translateWord('ErrorIPCPU',function(result){
+			alertify.error(result + " 0");
+		});
+		return;
+	}
+	if ($('#ipg1').val() == ''){
+		translateWord('ErrorIPGateway',function(result){
+			alertify.error(result + " 0");
+		});
+		return;
+	}
+	if ($('#msb1').val() == ''){
+		translateWord('ErrorCPUMask',function(result){
+			alertify.error(result + " 0");
+		});
+		return;
+	}
+	if ($('#dual').prop('checked')){
+		//CPU 1
+		if ($('#ipb2').val() == ''){
+			translateWord('ErrorIPCPU',function(result){
+				alertify.error(result + " 1");
+			});
+			return;
+		}
+		if ($('#ipg2').val() == ''){
+			translateWord('ErrorIPGateway',function(result){
+				alertify.error(result + " 1");
+			});
+			return;
+		}
+		if ($('#msb2').val() == ''){
+			translateWord('ErrorCPUMask',function(result){
+				alertify.error(result + " 1");
+			});
+			return;
+		}
+		if($('#ipb1').val() == $('#ipb2').val() && $('#ipb1').val()!=''){
+			translateWord('ErrorEqualCPUIp',function(result){
+				alertify.error(result);
+			});
+			return;
+		}
+	}
+	///////////////////////////
+	//PESTAÑA SERVICIOS
+	newGateway.nombre=$('#nameGw').val();
+	newGateway.ipv=$('#ipv').val();
+	newGateway.ipb1=$('#ipb1').val();
+	newGateway.ipg1=$('#ipg1').val();
+	newGateway.msb1=$('#msb1').val();
+	newGateway.ipb2=$('#ipb2').val();
+	newGateway.ipg2=$('#ipg2').val();
+	newGateway.msb2=$('#msb2').val();
+	// RECORDING SERVICE
+	grab={
+		"rtsp_port": $('#rtsp_port').val(),
+		//"rtsp_uri": $('#rtsp_uri').val(),
+		"rtsp_uri": '',
+		"rtsp_ip": $('#rtsp_ip').val(),
+		/** 20170517. AGL. Segundo Servidor */
+		"rtspb_ip" : $('#rtspb_ip').val(),
+		//"rtsp_rtp": $('#rtp_tramas').prop('checked') ? 1 : 0
+		"rtsp_rtp": 1
+	};
+	// SINCR. SERVICE
+	$('#NtpServersList option').each(function() {
+		var selected = $("#NtpServersList option:selected").val() == $(this).val();
+		listServers.push({'ip':$(this).val(),'selected':selected});
+	});
 }

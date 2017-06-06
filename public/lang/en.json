@@ -280,6 +280,7 @@
 	"ErrorGatewayHaveNoIP"	:	"The gateway has no IP address.",
 	"ErrorGatewayHaveNoName":	"The gateway has no name.",
 	"ErrorGeneratingService":	"The service cannot be created.",
+	"ErrorEqualCPUIp"		:	"Ip for CPU 0 and 1 must be different.",
 	"ConfirmDeleteLog"		: "Log file will be removed permanently?",
 	"Backup"				: "Data base backup",
 	"BackupService"			: "Backup service",
