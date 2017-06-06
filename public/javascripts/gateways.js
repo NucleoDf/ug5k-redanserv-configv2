@@ -2291,6 +2291,24 @@ function PostGateWay (idSite) {
 	}
 	///////////////////////////
 	//PESTAÑA SERVICIOS
+	//SIP
+	// Proxy list
+	$('#ProxysList option').each(function() {
+		var selected = $("#ProxysList option:selected").val() == $(this).val();
+		proxys.push({'ip':$(this).val(),'selected':selected});
+	});
+	// Registrars list
+	$('#RegistrarsList option').each(function() {
+		var selected = $("#RegistrarsList option:selected").val() == $(this).val();
+		registrars.push({'ip':$(this).val(),'selected':selected});
+	});
+	//SINCRONIZACION
+	$('#NtpServersList option').each(function() {
+		var selected = $("#NtpServersList option:selected").val() == $(this).val();
+		listServers.push({'ip':$(this).val(),'selected':selected});
+	});
+
+	//Insertamos los datos
 	newGateway.nombre=$('#nameGw').val();
 	newGateway.ipv=$('#ipv').val();
 	newGateway.ipb1=$('#ipb1').val();
@@ -2299,7 +2317,15 @@ function PostGateWay (idSite) {
 	newGateway.ipb2=$('#ipb2').val();
 	newGateway.ipg2=$('#ipg2').val();
 	newGateway.msb2=$('#msb2').val();
+	
+	newGateway.rtsp_port=$('#rtsp_port').val();
+	newGateway.proxys=proxys;
+	newGateway.registrars=registrars;
+	if($('#CbRUpdatePeriod').prop('checked'))
+		newGateway.TbUpdatePeriod=$('#TbUpdatePeriod').val();
+	newGateway.listServers=listServers;
 	// RECORDING SERVICE
+	// SNMP
 	grab={
 		"rtsp_port": $('#rtsp_port').val(),
 		//"rtsp_uri": $('#rtsp_uri').val(),
