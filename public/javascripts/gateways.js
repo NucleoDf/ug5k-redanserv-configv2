@@ -2205,7 +2205,7 @@ function NewGateway (){
 }
 
 /************************************/
-/*	FUNCTION: NewGateway 			*/
+/*	FUNCTION: PostGateWay 			*/
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/

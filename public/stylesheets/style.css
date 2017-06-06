@@ -528,7 +528,14 @@ color: #FFF;
   width: auto;
   border: 1px solid #C1022C;
   border-radius: 0 5px 0 0;
+    animation-name: active_transition;
+    animation-duration: 3s;
  }
+
+@keyframes active_transition {
+    from {background-color: white;}
+    to {background-color: #99FF66;}
+}
 
 .divNucleo {
     position:relative;
