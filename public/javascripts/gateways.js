@@ -2334,4 +2334,29 @@ function PostGateWay (idSite) {
 	newGateway.rtsp_port=$('#rtsp_port').val();
 	newGateway.rtsp_ip=$('#rtsp_ip').val();
 	newGateway.rtsp_ipb=$('#rtsp_ipb').val();
+	
+	$.ajax({type: 'POST',
+		dataType: 'json',
+		contentType:'application/json',
+		url: '/gateways/createNewGateway/:newGateway/:idSite',
+		data: JSON.stringify( {	"newGateway": newGateway,
+								"idSite": idSite
+								}
+		),
+		success: function(data){
+			if (data.error === null) {
+				alertify.success('La pasarela \"' +  data.data.name + '\" ha sido creada.');
+				GetConfigurations();
+				
+				$('#DivConfigurations').data('idCFG',data.data.idCFG);
+				GetConfiguration(data.data.name);
+			}
+			else if (data.error) {
+				alertify.error('Error: '+data.error);
+			}
+		},
+		error: function(data){
+			alertify.error('Error creando la pasarela.');
+		}
+	});
 }
