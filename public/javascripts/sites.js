@@ -604,12 +604,15 @@ function GetMySlaves(){
 	$('#AddFormsite').animate({width: '790px', height: '410px'});
 
 	$.ajax({type: 'GET',
-		url: '/gateways/' + $('#DivGateways').data('idCgw') + '/hardware',
+		url: '/gateways/' + $('#DivGateways').data('idCgw') + '/hardwareResume',
 		success: function(data){
 			ResetHardware();
 			if (data.hardware != null && data.hardware.length > 0){
 				ShowAssignedSlaves(data);
 			}
+		},
+		error: function(data){
+			alertify.error('Error: ');
 		}
 	});
 }

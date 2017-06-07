@@ -297,7 +297,20 @@ router.route('/:gateway/site/:site')
 
 // Nesting routers by attaching them as middleware:
 var hardwareRouter=express.Router({mergeParams:true});
+var hardwareResumeRouter=express.Router({mergeParams:true});
 router.use('/:gateway/hardware',hardwareRouter);
+router.use('/:gateway/hardwareResume',hardwareResumeRouter);
+
+hardwareResumeRouter.route('/')
+	///
+	/// GET gateways/:ipv/hardwareResume
+	///
+	.get(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		myLibGateways.getHardwareResume(req.params.gateway,function(result){
+			res.json(result);
+		});
+	});
 
 hardwareRouter.route('/')
 	///
