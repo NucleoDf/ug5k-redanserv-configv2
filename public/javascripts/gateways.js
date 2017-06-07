@@ -1922,7 +1922,23 @@ function ShowAssignedSlaves(data){
 	}
 	
 	if (data.radio != null || data.tfno!=null) {
-		
+		$.each(data.radio, function (index, value) {
+			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('idResource', value.idrecurso_radio);
+			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('updated', true);
+			$('.Res' + value.numero_ia4 + value.posicion_ia4 + ' a').text(value.nombre).append(' - ' + value.frecuencia + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
+			// No viene de una operacion de D&D sobre otra pasarela
+			/*$('.Res' + fila + col)//.attr('onclick','GotoSlave(' + idSlave + ')')
+			 .data('pos', r.POS_idPOS)
+			 .attr('draggable', true)
+			 .attr('ondragstart', "dragResource(event," + r.POS_idPOS + "," + fila + "," + idSlave + ")")
+			 .attr('onclick', "GotoResource('" + fila + "','" + col + "',true" + ")");*/
+			//.attr('onclick',"UpdateResource('" + idSlave + "','" + fila + "')");
+		});
+		$.each(data.tfno, function (index, value) {
+			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('idResource', value.idrecurso_telefono);
+			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('updated', true);
+			$('.Res' + value.numero_ia4 + value.posicion_ia4 + ' a').text(value.nombre).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
+		});
 	}
 	//Terminamos aquí
 	
