@@ -1900,15 +1900,33 @@ function ShowAssignedSlaves(data){
 
 	// Se utiliza en el click de cambio de recurso entre pasarelas
 	$('#DivGateways').data('noSlaves',true);
-
 	
 	//Empezamos desde aquí
-	for(var i=0;i<4;i++){
+	//Inicializar las IA4
+	for(var i=0;i<4;i++) {
+		$('.Slave'+i+' a:first-child').text(i)
+			.attr('style','color:black')
+			.attr('id',i)
+			.data('idSLAVE',i);
+		
+		$('.Slave'+i+' a:first-child').text('IA4')
+			.attr('style','color:black; font-size: 8px; margin-right: 0')
+			.attr('id',i)
+			.data('idSLAVE',i);
+		
+		$('.Slave'+i).addClass('dragableItem occuped')
+			.attr('draggable',true)
+			.attr('ondrop',"SlaveAssigned(event," + i + "," + i + ")")
+			.attr('ondragstart',"dragSlave(event," + i + "," + i + ")")
+			.data('idSLAVE',i);
+	}
+	
+	if (data.radio != null || data.tfno!=null) {
 		
 	}
 	//Terminamos aquí
 	
-	if (data.hardware != null){
+	/*if (data.hardware != null){
 		$.each(data.hardware, function(index, value){
 			//i++;
 			// Guardar idSLAVE en la columna correspondiente
@@ -1966,7 +1984,7 @@ function ShowAssignedSlaves(data){
 		});
 		//}
 		//
-	}
+	}*/
 }
 
 function ShowResourcesFromSlave(idSlave,slave, data, isFirstLoad, f){
