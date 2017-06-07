@@ -607,12 +607,15 @@ function GetMySlaves(){
 		url: '/gateways/' + $('#DivGateways').data('idCgw') + '/hardwareResume',
 		success: function(data){
 			ResetHardware();
-			if (data.hardware != null && data.hardware.length > 0){
+			if (data.error != null){
+				alertify.error('Error: '+data.error);
+			}
+			else {
 				ShowAssignedSlaves(data);
 			}
 		},
 		error: function(data){
-			alertify.error('Error: ');
+			alertify.error('Error al obtener los recursos de la pasarela.');
 		}
 	});
 }

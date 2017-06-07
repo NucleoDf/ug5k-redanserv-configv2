@@ -1886,6 +1886,11 @@ function ResetHardware(f){
 	}
 }
 
+/************************************/
+/*	FUNCTION: ShowAssignedSlaves 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 function ShowAssignedSlaves(data){
 	var idCgw = $('#DivGateways').data('idCgw');
 	//var assignedSlaves=[];
@@ -1896,6 +1901,13 @@ function ShowAssignedSlaves(data){
 	// Se utiliza en el click de cambio de recurso entre pasarelas
 	$('#DivGateways').data('noSlaves',true);
 
+	
+	//Empezamos desde aquí
+	for(var i=0;i<4;i++){
+		
+	}
+	//Terminamos aquí
+	
 	if (data.hardware != null){
 		$.each(data.hardware, function(index, value){
 			//i++;
