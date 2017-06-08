@@ -2566,14 +2566,32 @@ function OnChangeGroup(){
 }
 
 function OnChangeResourceType(sel){
-	if (sel.value == 1){
-		$('#DestinationRow').attr('style','display:table-row');
-		$('#BlackWhiteRow').attr('style','display:table-row');
+	if (sel.value == 1){//Radio
+		$('#DestinationRow').show();
+		$('#BlackWhiteRow').show();
+		$('#ListMenuParameters li:nth-child(1)').show();//Audio
+		$('#ListMenuParameters li:nth-child(2)').show();//Radio
+		$('#ListMenuParameters li:nth-child(3)').hide();//Telefonico
+		$('#ListMenuParameters li:nth-child(4)').hide();
+		$('#ListMenuParameters li:nth-child(5)').hide();
+		$('#ListMenuParameters li:nth-child(6)').hide();
+		//$('#DestinationRow').attr('style','display:table-row');
+		//$('#BlackWhiteRow').attr('style','display:table-row');
 	}
-	else{
-		$('#DestinationRow').attr('style','display:table-column');
-		$('#BlackWhiteRow').attr('style','display:table-column');
+	else{//Telefono
+		$('#DestinationRow').hide();
+		$('#BlackWhiteRow').hide();
+		$('#ListMenuParameters li:nth-child(1)').show();//Audio
+		$('#ListMenuParameters li:nth-child(2)').hide();//Radio
+		$('#ListMenuParameters li:nth-child(3)').show();//Telefonico
+		$('#ListMenuParameters li:nth-child(4)').hide();
+		$('#ListMenuParameters li:nth-child(5)').hide();
+		$('#ListMenuParameters li:nth-child(6)').hide();
+		//$('#DestinationRow').attr('style','display:table-column');
+		//$('#BlackWhiteRow').attr('style','display:table-column');
 	}
+	var element=$('#aHw');
+	loadParam(element[0]);
 }
 
 function OnChangeRestriccion(sel){

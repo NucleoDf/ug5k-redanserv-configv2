@@ -2465,12 +2465,18 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 					$('#SResourceType option[value="' + resourceType + '"]').prop('selected', true);
 					$('#TbNameResource').val(data.nombre);
 					
+					$('#ListMenuParameters li:nth-child(1)').show();
 					if (resourceType == '1') {
-						
+						$('#ListMenuParameters li:nth-child(2)').show();//Radio
+						$('#ListMenuParameters li:nth-child(3)').hide();//Telefono
+						$('#ListMenuParameters li:nth-child(4)').hide();
+						$('#ListMenuParameters li:nth-child(5)').hide();
+						$('#ListMenuParameters li:nth-child(6)').hide();
 					}
 					else if (resourceType == '2') {
 						$('#DestinationRow').hide();
 						$('#ListMenuParameters li:nth-child(2)').hide();
+						$('#ListMenuParameters li:nth-child(3)').show();
 						$('#ListMenuParameters li:nth-child(4)').hide();
 						$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
@@ -2490,6 +2496,14 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#ButtonCommit').text('Insertar');
 		$('#BtnRemoveResource').hide();
 		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + $('.Slave' + col).data('idCgw') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
+		
+		//Por defecto metemos Radio
+		$('#ListMenuParameters li:nth-child(1)').show();//Audio
+		$('#ListMenuParameters li:nth-child(2)').show();//Radio
+		$('#ListMenuParameters li:nth-child(3)').hide();
+		$('#ListMenuParameters li:nth-child(4)').hide();
+		$('#ListMenuParameters li:nth-child(5)').hide();
+		$('#ListMenuParameters li:nth-child(6)').hide();
 	}
 }
 
