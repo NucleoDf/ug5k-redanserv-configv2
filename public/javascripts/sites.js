@@ -471,6 +471,11 @@ function ShowHardwareGateway(id,name){
 	})
 }
 
+/************************************/
+/*	FUNCTION: ShowAssignedSlaves 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG		NO TOCADO	*/
+/************************************/
 function GotoResource(row,col,update){
 	
 	if(update)
@@ -620,11 +625,16 @@ function GetMySlaves(){
 	});
 }
 
+/************************************/
+/*	FUNCTION: ShowAssignedSlaves 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG		NO TOCADO	*/
+/************************************/
 function GetResource(rsc,f){
 //	GetFrequencies(function(){
 		if (rsc > 0){
-			$.ajax({type: 'GET', 
-							url: '/resources/'+rsc, 
+			$.ajax({type: 'GET',
+							url: '/resources/'+rsc,
 							success: function(data){
 								if (data != 'NO_DATA'){
 									ShowDataOfResource(data,function(){

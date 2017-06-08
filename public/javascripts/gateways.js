@@ -1925,7 +1925,7 @@ function ShowAssignedSlaves(data){
 		$.each(data.radio, function (index, value) {
 			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('idResource', value.idrecurso_radio);
 			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('updated', true)
-				.attr('onclick',"GotoResource('" + value.numero_ia4 + "','" + value.posicion_ia4 + "',true" + ")");
+				.attr('onclick',"GetResourceFromGateway('2','"+value.idrecurso_radio+"')");
 			$('.Res' + value.numero_ia4 + value.posicion_ia4 + ' a').text(value.nombre).append(' - ' + value.frecuencia + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
 			// No viene de una operacion de D&D sobre otra pasarela
 			/*$('.Res' + fila + col)//.attr('onclick','GotoSlave(' + idSlave + ')')
@@ -1938,7 +1938,7 @@ function ShowAssignedSlaves(data){
 		$.each(data.tfno, function (index, value) {
 			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('idResource', value.idrecurso_telefono);
 			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('updated', true)
-				.attr('onclick',"GotoResource('" + value.numero_ia4 + "','" + value.posicion_ia4 + "',true" + ")");
+				.attr('onclick',"GetResourceFromGateway('1','"+value.idrecurso_telefono+"')");
 			$('.Res' + value.numero_ia4 + value.posicion_ia4 + ' a').text(value.nombre).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
 		});
 	}
@@ -2406,6 +2406,22 @@ function PostGateWay (idSite) {
 		},
 		error: function(data){
 			alertify.error('Error creando la pasarela.');
+		}
+	});
+}
+
+/****************************************/
+/*	FUNCTION: GetResourceFromGateway 	*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function GetResourceFromGateway(resourceType, resourceId ){
+	
+	$.ajax({type: 'GET',
+		url: '/gateways/getResource/'+resourceType+'/'+resourceId,
+		success: function(data){
+			//ResetHardware();
+			//ShowAssignedSlaves(data);
 		}
 	});
 }
