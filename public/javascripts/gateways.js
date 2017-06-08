@@ -2520,12 +2520,34 @@ var InsertNewResource = function(col, row) {
 	var newidCgw = idCgw;
 	var radioResource={};
 	var telephoneResource={};
+	var resourceType=0;
 	var idCgw=$('#DivGateways').data('idCgw');
+	
 	if ($('#SResourceType option:selected').val() == 1)	{
+		radioResource.nombre=$('#TbNameResource').val();
 		radioResource.frecuencia=$('#IdDestination').val();
+		resourceType=1;
 	}
 	else {
-		
+		telephoneResource.nombre=$('#TbNameResource').val();
+		resourceType=2;
 	}
-		
+	
+	var resource2Insert={radio: radioResource, telephone: telephoneResource};
+	
+	$.ajax({type: 'POST',
+		dataType: 'json',
+		contentType:'application/json',
+		url: '/gateways/insertNewResource/:resource2Insert/:resourceType',
+		data: JSON.stringify( {	"resource2Insert": resource2Insert,
+								"resourceType": resourceType
+			}
+		),
+		success: function (data) {
+			var a=1;
+		},
+		error: function (data) {
+			alertify.error('Error insertando el nuevo recurso.');
+		}
+	});
 }

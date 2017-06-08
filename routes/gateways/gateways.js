@@ -263,6 +263,25 @@ router.route('/getResource/:resourceType/:resourceId')
 			});
 		}
 	});
+//////////////////
+//Otra nueva para mandar el nuevo recurso a insertar
+router.route('/insertNewResource/:resource2Insert/:resourceType')
+	.post(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		var newResource = req.body.resource2Insert;
+		if(req.params.resourceType=='1') {//RADIO
+			myLibGateways.insertRadioRes4Gateway(req.params.resourceId, req.body.resource2Insert.radio,
+				function (result) {
+					res.json(result);
+			});
+		}
+		else if(req.params.resourceType=='2'){//TELEFONO
+			myLibGateways.insertTfnoRes4Gateway(req.params.resourceId, req.body.resource2Insert.telephone,
+				function (result) {
+					res.json(result);
+			});
+		}
+	});
 /********************************/
 /*  Routes relating to hardware */
 /********************************/
