@@ -50,6 +50,7 @@ var GetResource = function(rsc, gtw) {
 	});
 };
 
+
 /*
 var GetResourcesBelongsGateway = function(){
 	var alto = $('#DivComponents').height();

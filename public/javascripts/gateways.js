@@ -1824,7 +1824,7 @@ function UpdateAssignedSlaves(data){
 																				.attr('ondragstart',"");
 														//if(loadIndex>=totalRecursos)
 														//	totalRecursos = loadIndex;
-														$('.Res' + i + j).attr('onclick',"GotoResource('" + i + "','" + j + "',false" + ")");													}
+														$('.Res' + i + j).attr('onclick',"GetResourceFromGateway('" + i + "','" + j + "',false" + ")");													}
 												}
 											}
 										});
@@ -1864,7 +1864,7 @@ function ResetHardware(f){
 							.data('idResource',null)
 							.attr('draggable',false)
 							.attr('ondragstart',"")
-							.attr('onclick',"GotoResource('" + h + "','" + j + "',false)");
+							.attr('onclick',"GetResourceFromGateway('" + h + "','" + j + "',false)");
 			}
 		}
 
@@ -2045,7 +2045,7 @@ function ShowResourcesFromSlave(idSlave,slave, data, isFirstLoad, f){
 									.data('pos',r.POS_idPOS)
 									.attr('draggable',true)
 									.attr('ondragstart',"dragResource(event," + r.POS_idPOS + "," + fila + "," + idSlave + ")")
-									.attr('onclick',"GotoResource('" + fila + "','" + col + "',true" + ")");
+									.attr('onclick',"GetResourceFromGateway('" + fila + "','" + col + "',true" + ")");
 									//.attr('onclick',"UpdateResource('" + idSlave + "','" + fila + "')");
 				}
 				else{
@@ -2434,66 +2434,70 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	
 	$('#LblIdResouce').text('Slot: ' + col + ' Interfaz: ' + row);
 	
-	$.ajax({type: 'GET',
-		url: '/gateways/getResource/'+resourceType+'/'+resourceId,
-		success: function(data){
-			if(data.error==null) {
-				if ($('#TbEnableRegister').prop('checked'))
-					$('#KeyRow').show();
-				else
-					$('#KeyRow').hide();
-				if (update == true) {
-					$('#ButtonCommit').attr('onclick', "UpdateResource('" + $('.Slave' + col).data('idSLAVE') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
-					var t = ($('.Res' + row + col).offset().top - 94) + 'px';
-					var l = ($('.Res' + row + col).offset().left - 145) + 'px';
-					$('#BigSlavesZone').data('t', t);
-					$('#BigSlavesZone').data('l', l);
-					$('#BigSlavesZone').attr('style', 'display:none;position:absolute;width:0px;height:0px;top:' + t + ';left:' + l);
-					$('#BigSlavesZone').show();
-					$('#BigSlavesZone').animate({
-						top: '40px',
-						left: '90px',
-						width: '90%',
-						height: '510px'
-					}, 500, function () {
-						$('#BigSlavesZone').addClass('divNucleo')
-					})
-					
-					$('#TbNameResource').val(data.nombre);
+	var t = ($('.Res' + row + col).offset().top - 94) + 'px';
+	var l = ($('.Res' + row + col).offset().left - 145) + 'px';
+	$('#BigSlavesZone').data('t', t);
+	$('#BigSlavesZone').data('l', l);
+	$('#BigSlavesZone').attr('style', 'display:none;position:absolute;width:0px;height:0px;top:' + t + ';left:' + l);
+	$('#BigSlavesZone').show();
+	$('#BigSlavesZone').animate({
+		top: '40px',
+		left: '90px',
+		width: '90%',
+		height: '510px'
+	}, 500, function () {
+		$('#BigSlavesZone').addClass('divNucleo')
+	})
+	
+	if(update) {
+		$('#ButtonCommit').text('Actualizar');
+		$('#ButtonCommit').attr('onclick', "UpdateResource('" + $('.Slave' + col).data('idSLAVE') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
+		$.ajax({
+			type: 'GET',
+			url: '/gateways/getResource/' + resourceType + '/' + resourceId,
+			success: function (data) {
+				if (data.error == null) {
+					if ($('#TbEnableRegister').prop('checked'))
+						$('#KeyRow').show();
+					else
+						$('#KeyRow').hide();
+					//1 RADIO y 2 TFNO
 					$('#SResourceType option[value="' + resourceType + '"]').prop('selected', true);
-					$('#ListMenuParameters li:nth-child(2)').hide();
-					$('#ListMenuParameters li:nth-child(4)').hide();
-				}
-				else {
-					$('#ButtonCommit').attr('onclick', "AddResource('" + $('.Slave' + col).data('idSLAVE') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
-					$('#FormParameters').hide();
-					$('#BtnRemoveResource').hide();
-					$('#UriSipRow').hide();
+					$('#TbNameResource').val(data.nombre);
 					
-					var t = ($('.Res' + row + col).offset().top - 94) + 'px';
-					var l = ($('.Res' + row + col).offset().left - 145) + 'px';
-					$('#BigSlavesZone').data('t', t);
-					$('#BigSlavesZone').data('l', l);
-					$('#BigSlavesZone').attr('style', 'position:absolute;width:0px;height:0px;top:' + t + ';left:' + l);
-					$('#BigSlavesZone').show();
-					$('#BigSlavesZone').animate({
-						top: '40px',
-						left: '120px',
-						width: '23%',
-						height: '510px'
-					}, 500, function () {
-						$('#BigSlavesZone').addClass('divNucleo')
-					})
+					if (resourceType == '1') {
+						
+					}
+					else if (resourceType == '2') {
+						$('#DestinationRow').hide();
+						$('#ListMenuParameters li:nth-child(2)').hide();
+						$('#ListMenuParameters li:nth-child(4)').hide();
+						$('#ListMenuParameters li:nth-child(5)').hide();
+						$('#ListMenuParameters li:nth-child(6)').hide();
+					}
+					
 				}
-				//ResetHardware();
-				//ShowAssignedSlaves(data);
+				else if (data.error) {
+					alertify.error('Error: ' + data.error);
+				}
+			},
+			error: function (data) {
+				alertify.error('Error cconsultando los recursos.');
 			}
-			else if (data.error) {
-				alertify.error('Error: '+data.error);
-			}
-		},
-		error: function(data){
-			alertify.error('Error cconsultando los recursos.');
-		}
-	});
+		});
+	}
+	else {
+		$('#ButtonCommit').text('Insertar');
+		$('#BtnRemoveResource').hide();
+		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + $('.Slave' + col).data('idCgw') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
+	}
+}
+
+/****************************************/
+/*	FUNCTION: GetResourceFromGateway 	*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+var InsertNewResource = function(idCgw, col, row) {
+	var newidCgw = idCgw;
 }
