@@ -2451,7 +2451,9 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	
 	if(update) {
 		$('#ButtonCommit').text('Actualizar');
-		$('#ButtonCommit').attr('onclick', "UpdateResource('" + $('.Slave' + col).data('idSLAVE') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
+		$('#ButtonCommit').attr('onclick', "UpdateResource('" + $('.Slave' +
+				col).data('idSLAVE') + "','" + col + "','" + row +
+			"',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
 		$.ajax({
 			type: 'GET',
 			url: '/gateways/getResource/' + resourceType + '/' + resourceId,
@@ -2495,10 +2497,12 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	else {
 		$('#ButtonCommit').text('Insertar');
 		$('#BtnRemoveResource').hide();
-		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + $('.Slave' + col).data('idCgw') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
+		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + $('.Slave' +
+				col).data('idCgw') + "','" + col + "','" + row +
+				"',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
 		
 		//Por defecto metemos Radio
-		SelectBss();//Inicializar
+		SelectBss();//Inicializar. Recarga el tipo de radio para ponerlo en el primero.
 		$('#ListMenuParameters li:nth-child(1)').show();//Audio
 		$('#ListMenuParameters li:nth-child(2)').show();//Radio
 		$('#ListMenuParameters li:nth-child(3)').hide();

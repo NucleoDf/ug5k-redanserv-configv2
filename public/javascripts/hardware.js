@@ -2565,6 +2565,11 @@ function OnChangeGroup(){
 	$('#TBGroup').val($('#CBGroupOfSlave option:selected').text());
 }
 
+/****************************************/
+/*	FUNCTION: GetResourceFromGateway 	*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
 function OnChangeResourceType(sel){
 	if (sel.value == 1){//Radio
 		SelectBss();
@@ -2592,6 +2597,8 @@ function OnChangeResourceType(sel){
 		//$('#DestinationRow').attr('style','display:table-column');
 		//$('#BlackWhiteRow').attr('style','display:table-column');
 	}
+	//Esto recarga la pestaña de audio y la pone en el
+	// foco para reiniciar la de radio o la de tfno.
 	var element=$('#aHw');
 	loadParam(element[0]);
 }
