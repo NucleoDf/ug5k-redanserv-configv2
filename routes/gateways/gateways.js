@@ -247,8 +247,8 @@ router.route('/createNewGateway/:newGateway/:idSite')
 			res.json(result);
 		});
 	});
-
-
+//////////////////
+//Esta es nueva para recoger todos los datos del recurso
 router.route('/getResource/:resourceType/:resourceId')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);

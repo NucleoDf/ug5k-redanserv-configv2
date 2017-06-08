@@ -2497,8 +2497,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	else {
 		$('#ButtonCommit').text('Insertar');
 		$('#BtnRemoveResource').hide();
-		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + $('.Slave' +
-				col).data('idCgw') + "','" + col + "','" + row +
+		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + col + "','" + row +
 				"',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
 		
 		//Por defecto metemos Radio
@@ -2517,6 +2516,16 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 /*  PARAMS: 							*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
-var InsertNewResource = function(idCgw, col, row) {
+var InsertNewResource = function(col, row) {
 	var newidCgw = idCgw;
+	var radioResource={};
+	var telephoneResource={};
+	var idCgw=$('#DivGateways').data('idCgw');
+	if ($('#SResourceType option:selected').val() == 1)	{
+		radioResource.frecuencia=$('#IdDestination').val();
+	}
+	else {
+		
+	}
+		
 }
