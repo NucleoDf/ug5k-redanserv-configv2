@@ -1926,7 +1926,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('idResource', value.idrecurso_radio);
 			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('updated', true)
 				.attr('onclick',"GetResourceFromGateway('" + value.numero_ia4 + "','"
-					+ value.posicion_ia4 + "',true,'2','"+value.idrecurso_radio+"')");
+					+ value.posicion_ia4 + "',true,'1','"+value.idrecurso_radio+"')");
 			$('.Res' + value.numero_ia4 + value.posicion_ia4 + ' a').text(value.nombre).append(' - ' + value.frecuencia + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
 			// No viene de una operacion de D&D sobre otra pasarela
 			/*$('.Res' + fila + col)//.attr('onclick','GotoSlave(' + idSlave + ')')
@@ -1940,7 +1940,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('idResource', value.idrecurso_telefono);
 			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('updated', true)
 				.attr('onclick',"GetResourceFromGateway('" + value.numero_ia4 + "','"
-					+ value.posicion_ia4 + "',true,'1','"+value.idrecurso_telefono+"')");
+					+ value.posicion_ia4 + "',true,'2','"+value.idrecurso_telefono+"')");
 			$('.Res' + value.numero_ia4 + value.posicion_ia4 + ' a').text(value.nombre).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
 		});
 	}
@@ -2437,50 +2437,61 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	$.ajax({type: 'GET',
 		url: '/gateways/getResource/'+resourceType+'/'+resourceId,
 		success: function(data){
-			if($('#TbEnableRegister').prop('checked'))
-				$('#KeyRow').show();
-			else
-				$('#KeyRow').hide();
-			if (update == true) {
-				$('#ButtonCommit').attr('onclick', "UpdateResource('" + $('.Slave' + col).data('idSLAVE') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
-				var t = ($('.Res' + row + col).offset().top - 94) + 'px';
-				var l = ($('.Res' + row + col).offset().left - 145) + 'px';
-				$('#BigSlavesZone').data('t', t);
-				$('#BigSlavesZone').data('l', l);
-				$('#BigSlavesZone').attr('style', 'display:none;position:absolute;width:0px;height:0px;top:' + t + ';left:' + l);
-				$('#BigSlavesZone').show();
-				$('#BigSlavesZone').animate({
-					top: '40px',
-					left: '90px',
-					width: '90%',
-					height: '510px'
-				}, 500, function () {
-					$('#BigSlavesZone').addClass('divNucleo')
-				})
+			if(data.error==null) {
+				if ($('#TbEnableRegister').prop('checked'))
+					$('#KeyRow').show();
+				else
+					$('#KeyRow').hide();
+				if (update == true) {
+					$('#ButtonCommit').attr('onclick', "UpdateResource('" + $('.Slave' + col).data('idSLAVE') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
+					var t = ($('.Res' + row + col).offset().top - 94) + 'px';
+					var l = ($('.Res' + row + col).offset().left - 145) + 'px';
+					$('#BigSlavesZone').data('t', t);
+					$('#BigSlavesZone').data('l', l);
+					$('#BigSlavesZone').attr('style', 'display:none;position:absolute;width:0px;height:0px;top:' + t + ';left:' + l);
+					$('#BigSlavesZone').show();
+					$('#BigSlavesZone').animate({
+						top: '40px',
+						left: '90px',
+						width: '90%',
+						height: '510px'
+					}, 500, function () {
+						$('#BigSlavesZone').addClass('divNucleo')
+					})
+					
+					$('#TbNameResource').val(data.nombre);
+					$('#SResourceType option[value="' + resourceType + '"]').prop('selected', true);
+				}
+				else {
+					$('#ButtonCommit').attr('onclick', "AddResource('" + $('.Slave' + col).data('idSLAVE') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
+					$('#FormParameters').hide();
+					$('#BtnRemoveResource').hide();
+					$('#UriSipRow').hide();
+					
+					var t = ($('.Res' + row + col).offset().top - 94) + 'px';
+					var l = ($('.Res' + row + col).offset().left - 145) + 'px';
+					$('#BigSlavesZone').data('t', t);
+					$('#BigSlavesZone').data('l', l);
+					$('#BigSlavesZone').attr('style', 'position:absolute;width:0px;height:0px;top:' + t + ';left:' + l);
+					$('#BigSlavesZone').show();
+					$('#BigSlavesZone').animate({
+						top: '40px',
+						left: '120px',
+						width: '23%',
+						height: '510px'
+					}, 500, function () {
+						$('#BigSlavesZone').addClass('divNucleo')
+					})
+				}
+				//ResetHardware();
+				//ShowAssignedSlaves(data);
 			}
-			else {
-				$('#ButtonCommit').attr('onclick', "AddResource('" + $('.Slave' + col).data('idSLAVE') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
-				$('#FormParameters').hide();
-				$('#BtnRemoveResource').hide();
-				$('#UriSipRow').hide();
-				
-				var t = ($('.Res' + row + col).offset().top - 94) + 'px';
-				var l = ($('.Res' + row + col).offset().left - 145) + 'px';
-				$('#BigSlavesZone').data('t', t);
-				$('#BigSlavesZone').data('l', l);
-				$('#BigSlavesZone').attr('style', 'position:absolute;width:0px;height:0px;top:' + t + ';left:' + l);
-				$('#BigSlavesZone').show();
-				$('#BigSlavesZone').animate({
-					top: '40px',
-					left: '120px',
-					width: '23%',
-					height: '510px'
-				}, 500, function () {
-					$('#BigSlavesZone').addClass('divNucleo')
-				})
+			else if (data.error) {
+				alertify.error('Error: '+data.error);
 			}
-			//ResetHardware();
-			//ShowAssignedSlaves(data);
+		},
+		error: function(data){
+			alertify.error('Error cconsultando los recursos.');
 		}
 	});
 }

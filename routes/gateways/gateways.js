@@ -253,12 +253,12 @@ router.route('/getResource/:resourceType/:resourceId')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		if(req.params.resourceType=='1') {//TELEFONO
-			myLibGateways.getTfnoRes4Gateway(req.params.resourceId, function (result) {
+			myLibGateways.getRadioRes4Gateway(req.params.resourceId, function (result) {
 				res.json(result);
 			});
 		}
 		else if(req.params.resourceType=='2'){//RADIO
-			myLibGateways.getRadioRes4Gateway(req.params.resourceId, function (result) {
+			myLibGateways.getTfnoRes4Gateway(req.params.resourceId, function (result) {
 				res.json(result);
 			});
 		}
