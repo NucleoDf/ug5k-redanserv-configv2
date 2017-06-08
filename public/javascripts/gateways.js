@@ -2461,6 +2461,8 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 					
 					$('#TbNameResource').val(data.nombre);
 					$('#SResourceType option[value="' + resourceType + '"]').prop('selected', true);
+					$('#ListMenuParameters li:nth-child(2)').hide();
+					$('#ListMenuParameters li:nth-child(4)').hide();
 				}
 				else {
 					$('#ButtonCommit').attr('onclick', "AddResource('" + $('.Slave' + col).data('idSLAVE') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
