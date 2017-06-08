@@ -2567,6 +2567,7 @@ function OnChangeGroup(){
 
 function OnChangeResourceType(sel){
 	if (sel.value == 1){//Radio
+		SelectBss();
 		$('#DestinationRow').show();
 		$('#BlackWhiteRow').show();
 		$('#ListMenuParameters li:nth-child(1)').show();//Audio
@@ -2579,6 +2580,7 @@ function OnChangeResourceType(sel){
 		//$('#BlackWhiteRow').attr('style','display:table-row');
 	}
 	else{//Telefono
+		ShowOptions('0');//Opciones de telefono por defecto
 		$('#DestinationRow').hide();
 		$('#BlackWhiteRow').hide();
 		$('#ListMenuParameters li:nth-child(1)').show();//Audio

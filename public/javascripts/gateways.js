@@ -2498,11 +2498,12 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + $('.Slave' + col).data('idCgw') + "','" + col + "','" + row + "',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
 		
 		//Por defecto metemos Radio
+		SelectBss();//Inicializar
 		$('#ListMenuParameters li:nth-child(1)').show();//Audio
 		$('#ListMenuParameters li:nth-child(2)').show();//Radio
 		$('#ListMenuParameters li:nth-child(3)').hide();
 		$('#ListMenuParameters li:nth-child(4)').hide();
-		$('#ListMenuParameters li:nth-child(5)').hide();
+		$('#ListMenuParameters li:nth-child(5)').show();
 		$('#ListMenuParameters li:nth-child(6)').hide();
 	}
 }
