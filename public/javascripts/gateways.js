@@ -2498,6 +2498,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#ButtonCommit').text('Insertar');
 		$('#BtnRemoveResource').hide();
 		$('#KeyRow').hide();
+		$('#CbGranularity').prop("disabled",true);
 		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + col + "','" + row +
 				"',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
 		
@@ -2545,7 +2546,7 @@ var InsertNewResource = function(col, row) {
 			telephoneResource.ajuste_ad=$('#TbAdGain').val();
 		if ($('#CbDaAgc').prop('checked', false))
 			telephoneResource.ajuste_da=$('#TbDaGain').val();
-		telephoneResource.tipo_interfaz_tel=
+		/*telephoneResource.tipo_interfaz_tel=
 		telephoneResource.deteccion_vox=
 		telephoneResource.umbral_vox=
 		telephoneResource.cola_vox=
@@ -2558,7 +2559,7 @@ var InsertNewResource = function(col, row) {
 		telephoneResource.tiempo_supervision=
 		telephoneResource.duracion_tono_interrup=
 		telephoneResource.uri_telefonica=
-		resourceType=2;
+		*/resourceType=2;
 	}
 	
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
