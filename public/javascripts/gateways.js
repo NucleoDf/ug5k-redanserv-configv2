@@ -2497,6 +2497,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	else {
 		$('#ButtonCommit').text('Insertar');
 		$('#BtnRemoveResource').hide();
+		$('#KeyRow').hide();
 		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + col + "','" + row +
 				"',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
 		
@@ -2521,15 +2522,42 @@ var InsertNewResource = function(col, row) {
 	var radioResource={};
 	var telephoneResource={};
 	var resourceType=0;
+	//Para no tener que hacer ningún SELECT
 	var idCgw=$('#DivGateways').data('idCgw');
 	
 	if ($('#SResourceType option:selected').val() == 1)	{
+		radioResource.pasarela_id=idCgw
+		radioResource.numero_ia4=col;
+		radioResource.posicion_ia4=row;
 		radioResource.nombre=$('#TbNameResource').val();
 		radioResource.frecuencia=$('#IdDestination').val();
 		resourceType=1;
 	}
 	else {
-		telephoneResource.nombre=$('#TbNameResource').val();
+		telephoneResource.pasarela_id=		idCgw;
+		telephoneResource.numero_ia4=		col;
+		telephoneResource.posicion_ia4=		row;
+		telephoneResource.nombre=			$('#TbNameResource').val();
+		telephoneResource.codec=			0;//SCodec
+		if ($('#TbEnableRegister').prop('checked'))
+			telephoneResource.clave_registro=$('#TbKey').val();
+		if ($('#CbAdAgc').prop('checked', false))
+			telephoneResource.ajuste_ad=$('#TbAdGain').val();
+		if ($('#CbDaAgc').prop('checked', false))
+			telephoneResource.ajuste_da=$('#TbDaGain').val();
+		telephoneResource.tipo_interfaz_tel=
+		telephoneResource.deteccion_vox=
+		telephoneResource.umbral_vox=
+		telephoneResource.cola_vox=
+		telephoneResource.respuesta_automatica=
+		telephoneResource.periodo_tonos=
+		telephoneResource.lado=
+		telephoneResource.origen_test=
+		telephoneResource.destino_test=
+		telephoneResource.supervisa_colateral=
+		telephoneResource.tiempo_supervision=
+		telephoneResource.duracion_tono_interrup=
+		telephoneResource.uri_telefonica=
 		resourceType=2;
 	}
 	
