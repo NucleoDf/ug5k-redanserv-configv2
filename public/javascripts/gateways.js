@@ -2546,6 +2546,30 @@ var InsertNewResource = function(col, row) {
 			telephoneResource.ajuste_ad=$('#TbAdGain').val();
 		if ($('#CbDaAgc').prop('checked', false))
 			telephoneResource.ajuste_da=$('#TbDaGain').val();
+		switch($('#LbTypeTel option:selected').val()) {
+			case 0:
+				telephoneResource.tipo_interfaz_tel='PP-BL';
+				telephoneResource.uri_telefonica=$('#TbRemoteUri').val();
+				break;
+			case 1:
+				telephoneResource.tipo_interfaz_tel='PP-BC';
+				break;
+			case 2:
+				telephoneResource.tipo_interfaz_tel='PP-AB';
+				break;
+			case 3:
+				telephoneResource.tipo_interfaz_tel='ATS-R2';
+				break;
+			case 4:
+				telephoneResource.tipo_interfaz_tel='ATS-N5';
+				break;
+			case 5:
+				telephoneResource.tipo_interfaz_tel='LCEN';
+				break;
+			case 6:
+				telephoneResource.tipo_interfaz_tel='ATS-QSIG';
+				break;
+		}
 		/*telephoneResource.tipo_interfaz_tel=
 		telephoneResource.deteccion_vox=
 		telephoneResource.umbral_vox=
