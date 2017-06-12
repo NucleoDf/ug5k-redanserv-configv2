@@ -2597,7 +2597,10 @@ var InsertNewResource = function(col, row) {
 			}
 		),
 		success: function (data) {
-			var a=1;
+			if(data.error==null)
+				alertify.success('Se ha insertado el nuevo recurso.');
+			else
+				alertify.error('Error: '+data.error);
 		},
 		error: function (data) {
 			alertify.error('Error insertando el nuevo recurso.');
