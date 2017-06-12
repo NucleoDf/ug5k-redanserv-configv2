@@ -756,13 +756,17 @@ var GetGateway = function (gtw,lastUpdate,f){
 					$('#agcomm').prop('disabled', true);
 				}
 				//WEB
-				$('#wport').val(gtw.result[0].puerto_servicio_web.toString());
+				if(gtw.result[0].puerto_servicio_web!=null)
+					$('#wport').val(gtw.result[0].puerto_servicio_web.toString());
 				$('#stime').val(gtw.result[0].tiempo_sesion.toString());
 				
 				//GRABACION
-				$('#rtsp_port').val(gtw.result[0].puerto_rtsp.toString());
-				$('#rtsp_ip').val(gtw.result[0].servidor_rtsp.toString());
-				$('#rtspb_ip').val(gtw.result[0].servidor_rtspb.toString());
+				if(gtw.result[0].puerto_rtsp!=null)
+					$('#rtsp_port').val(gtw.result[0].puerto_rtsp.toString());
+				if(gtw.result[0].servidor_rtsp!=null)
+					$('#rtsp_ip').val(gtw.result[0].servidor_rtsp.toString());
+				if(gtw.result[0].servidor_rtspb!=null)
+					$('#rtspb_ip').val(gtw.result[0].servidor_rtspb.toString());
 				/*$('#ProxysList').append($('<option>', {
 					value: 1,
 					text: 'My option'
