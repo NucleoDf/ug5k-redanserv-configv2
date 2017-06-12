@@ -2541,6 +2541,7 @@ var InsertNewResource = function(col, row) {
 				break;
 		}
 		radioResource.indicacion_entrada_audio	=	$('#LbSquelchType option:selected').val();
+		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
 		resourceType=1;
 	}
 	else {
