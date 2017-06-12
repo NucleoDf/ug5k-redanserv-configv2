@@ -2527,19 +2527,28 @@ var InsertNewResource = function(col, row) {
 	var idCgw=$('#DivGateways').data('idCgw');
 	
 	if ($('#SResourceType option:selected').val() == 1)	{
-		radioResource.pasarela_id=idCgw
-		radioResource.fila=row;
-		radioResource.columna=col;
-		radioResource.nombre=$('#TbNameResource').val();
-		radioResource.frecuencia=$('#IdDestination').val();
+		radioResource.pasarela_id		=		idCgw
+		radioResource.fila				=		row;
+		radioResource.columna			=		col;
+		radioResource.nombre			=		$('#TbNameResource').val();
+		radioResource.frecuencia		=		$('#IdDestination').val();
+		switch($('#LbTypeRadio option:selected').val()) {
+			case '0':
+				radioResource.tipo_agente = 0;
+				break;
+			case '1':
+				radioResource.tipo_agente = 1;
+				break;
+		}
+		radioResource.indicacion_entrada_audio	=	$('#LbSquelchType option:selected').val();
 		resourceType=1;
 	}
 	else {
-		telephoneResource.pasarela_id=		idCgw;
-		telephoneResource.fila=		row;
-		telephoneResource.columna=		col;
-		telephoneResource.nombre=			$('#TbNameResource').val();
-		telephoneResource.codec=			0;//SCodec
+		telephoneResource.pasarela_id	=		idCgw;
+		telephoneResource.fila			=		row;
+		telephoneResource.columna		=		col;
+		telephoneResource.nombre		=		$('#TbNameResource').val();
+		telephoneResource.codec			=		0;//SCodec
 		if ($('#TbEnableRegister').prop('checked'))
 			telephoneResource.clave_registro=$('#TbKey').val();
 		if ($('#CbAdAgc').prop('checked', false))

@@ -268,7 +268,6 @@ router.route('/getResource/:resourceType/:resourceId')
 router.route('/insertNewResource/:resource2Insert/:resourceType')
 	.post(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		var newResource = req.body.resource2Insert;
 		if(req.body.resourceType=='1') {//RADIO
 			myLibGateways.insertRadioRes4Gateway(req.body.resource2Insert.radio,
 				function (result) {
