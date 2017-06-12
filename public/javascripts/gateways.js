@@ -1923,11 +1923,11 @@ function ShowAssignedSlaves(data){
 	
 	if (data.radio != null || data.tfno!=null) {
 		$.each(data.radio, function (index, value) {
-			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('idResource', value.idrecurso_radio);
-			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('updated', true)
-				.attr('onclick',"GetResourceFromGateway('" + value.numero_ia4 + "','"
-					+ value.posicion_ia4 + "',true,'1','"+value.idrecurso_radio+"')");
-			$('.Res' + value.numero_ia4 + value.posicion_ia4 + ' a').text(value.nombre).append(' - ' + value.frecuencia + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
+			$('.Res' + value.fila + value.columna).data('idResource', value.idrecurso_radio);
+			$('.Res' + value.fila + value.columna).data('updated', true)
+				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
+					+ value.columna + "',true,'1','"+value.idrecurso_radio+"')");
+			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
 			// No viene de una operacion de D&D sobre otra pasarela
 			/*$('.Res' + fila + col)//.attr('onclick','GotoSlave(' + idSlave + ')')
 			 .data('pos', r.POS_idPOS)
@@ -1937,11 +1937,11 @@ function ShowAssignedSlaves(data){
 			//.attr('onclick',"UpdateResource('" + idSlave + "','" + fila + "')");
 		});
 		$.each(data.tfno, function (index, value) {
-			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('idResource', value.idrecurso_telefono);
-			$('.Res' + value.numero_ia4 + value.posicion_ia4).data('updated', true)
-				.attr('onclick',"GetResourceFromGateway('" + value.numero_ia4 + "','"
-					+ value.posicion_ia4 + "',true,'2','"+value.idrecurso_telefono+"')");
-			$('.Res' + value.numero_ia4 + value.posicion_ia4 + ' a').text(value.nombre).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
+			$('.Res' + value.fila + value.columna).data('idResource', value.idrecurso_telefono);
+			$('.Res' + value.fila + value.columna).data('updated', true)
+				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
+					+ value.columna + "',true,'2','"+value.idrecurso_telefono+"')");
+			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
 		});
 	}
 	//Terminamos aquí
@@ -2528,16 +2528,16 @@ var InsertNewResource = function(col, row) {
 	
 	if ($('#SResourceType option:selected').val() == 1)	{
 		radioResource.pasarela_id=idCgw
-		radioResource.numero_ia4=col;
-		radioResource.posicion_ia4=row;
+		radioResource.fila=row;
+		radioResource.columna=col;
 		radioResource.nombre=$('#TbNameResource').val();
 		radioResource.frecuencia=$('#IdDestination').val();
 		resourceType=1;
 	}
 	else {
 		telephoneResource.pasarela_id=		idCgw;
-		telephoneResource.numero_ia4=		col;
-		telephoneResource.posicion_ia4=		row;
+		telephoneResource.fila=		row;
+		telephoneResource.columna=		col;
 		telephoneResource.nombre=			$('#TbNameResource').val();
 		telephoneResource.codec=			0;//SCodec
 		if ($('#TbEnableRegister').prop('checked'))
@@ -2547,27 +2547,27 @@ var InsertNewResource = function(col, row) {
 		if ($('#CbDaAgc').prop('checked', false))
 			telephoneResource.ajuste_da=$('#TbDaGain').val();
 		switch($('#LbTypeTel option:selected').val()) {
-			case 0:
-				telephoneResource.tipo_interfaz_tel='PP-BL';
+			case '0':
+				telephoneResource.tipo_interfaz_tel=0;
 				telephoneResource.uri_telefonica=$('#TbRemoteUri').val();
 				break;
-			case 1:
-				telephoneResource.tipo_interfaz_tel='PP-BC';
+			case '1':
+				telephoneResource.tipo_interfaz_tel=1;
 				break;
-			case 2:
-				telephoneResource.tipo_interfaz_tel='PP-AB';
+			case '2':
+				telephoneResource.tipo_interfaz_tel=2;
 				break;
-			case 3:
-				telephoneResource.tipo_interfaz_tel='ATS-R2';
+			case '3':
+				telephoneResource.tipo_interfaz_tel=3;
 				break;
-			case 4:
-				telephoneResource.tipo_interfaz_tel='ATS-N5';
+			case '4':
+				telephoneResource.tipo_interfaz_tel=4;
 				break;
-			case 5:
-				telephoneResource.tipo_interfaz_tel='LCEN';
+			case '5':
+				telephoneResource.tipo_interfaz_tel=5;
 				break;
-			case 6:
-				telephoneResource.tipo_interfaz_tel='ATS-QSIG';
+			case '6':
+				telephoneResource.tipo_interfaz_tel=6;
 				break;
 		}
 		/*
