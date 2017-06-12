@@ -269,14 +269,14 @@ router.route('/insertNewResource/:resource2Insert/:resourceType')
 	.post(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		var newResource = req.body.resource2Insert;
-		if(req.params.resourceType=='1') {//RADIO
-			myLibGateways.insertRadioRes4Gateway(req.params.resourceId, req.body.resource2Insert.radio,
+		if(req.body.resourceType=='1') {//RADIO
+			myLibGateways.insertRadioRes4Gateway(req.body.resource2Insert.radio,
 				function (result) {
 					res.json(result);
 			});
 		}
-		else if(req.params.resourceType=='2'){//TELEFONO
-			myLibGateways.insertTfnoRes4Gateway(req.params.resourceId, req.body.resource2Insert.telephone,
+		else if(req.body.resourceType=='2'){//TELEFONO
+			myLibGateways.insertTfnoRes4Gateway(req.body.resource2Insert.telephone,
 				function (result) {
 					res.json(result);
 			});

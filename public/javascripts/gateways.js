@@ -2570,7 +2570,7 @@ var InsertNewResource = function(col, row) {
 				telephoneResource.tipo_interfaz_tel='ATS-QSIG';
 				break;
 		}
-		/*telephoneResource.tipo_interfaz_tel=
+		/*
 		telephoneResource.deteccion_vox=
 		telephoneResource.umbral_vox=
 		telephoneResource.cola_vox=
