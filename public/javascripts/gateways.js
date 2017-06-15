@@ -2531,43 +2531,67 @@ var InsertNewResource = function(col, row) {
 	var idCgw=$('#DivGateways').data('idCgw');
 	
 	if ($('#SResourceType option:selected').val() == 1)	{
+		//Campos para identificar el recurso
 		radioResource.pasarela_id				=	idCgw
 		radioResource.fila						=	row;
 		radioResource.columna					=	col;
+		//Nombre
 		radioResource.nombre					=	$('#TbNameResource').val();
+		//Codec
 		radioResource.codec						=	$('#SCodec option:selected').val();
+		//Habilitar registro?
 		if($('#TbEnableRegister').prop('checked'))
 			radioResource.clave_registro		=	$('#TbKey').val();
+		//Frecuencia
 		radioResource.frecuencia				=	$('#IdDestination').val();
+		//AGC en A/D
 		if (!$('#CbAdAgc').prop('checked')) {
 			if($('#TbAdGain').val()=='')
-				radioResource.ajuste_ad=0;
+				radioResource.ajuste_ad			=	0;//Valor Defecto
 			else
-				radioResource.ajuste_ad=$('#TbAdGain').val();
+				radioResource.ajuste_ad			=	$('#TbAdGain').val();
 		}
+		//AGC en D/A
 		if (!$('#CbDaAgc').prop('checked')) {
 			if($('#TbDaGain').val()=='')
-				radioResource.ajuste_da=0;
+				radioResource.ajuste_da			=	0;//Valor Defecto
 			else
-				radioResource.ajuste_da=$('#TbDaGain').val();
+				radioResource.ajuste_da			=	$('#TbDaGain').val();
 		}
-			
+		//Precisión audio
+		radioResource.precision_audio 			=	$('#CbGranularity option:selected').val();
+		//Tipo de Agente Radio
 		radioResource.tipo_agente 				=	$('#LbTypeRadio option:selected').val();
+		//Indicación entrada audio
 		radioResource.indicacion_entrada_audio	=	$('#LbSquelchType option:selected').val();
-		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
-		
+		//Umbral VAD (dB)
 		if($('#TbDaGain').val()=='')
-			radioResource.umbral_vad			=	0;
+			radioResource.umbral_vad			=	0;//Valor Defecto
 		else
 			radioResource.umbral_vad			=	$('#TbVad').val();
-
+		//Indicación salida audio
+		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
+		//Métodos BSS disponibles
 		radioResource.metodo_bss				=	$('#CbBssMethodAvailable option:selected').val();
+		//Eventos PTT/Squelch
 		if($('#CbPttSquelchEvents').prop('checked'))
 			radioResource.evento_ptt_squelch	=	1;
 		else
 			radioResource.evento_ptt_squelch	=	0;
+		//Prioridad PTT
 		radioResource.prioridad_ptt				=	$('#LbPttPriority option:selected').val();
+		//Prioridad Sesion SIP
 		radioResource.prioridad_sesion_sip		=	$('#LbSipPriority option:selected').val();
+		//BSS/CLIMAX
+		if($('#CbBssEnable').prop('checked'))
+			radioResource.climax_bss			=	1;
+		else
+			radioResource.climax_bss			=	0;
+		//Retraso interno GRS
+		if($('#TbGrsInternalDelay').val()=='')
+			radioResource.retraso_interno_grs	=	0;//Valor Defecto
+		else
+			radioResource.retraso_interno_grs	=	$('#retraso_interno_grs').val();
 		resourceType=1;
 	}
 	else {
