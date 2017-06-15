@@ -2220,7 +2220,8 @@ function SelectBss(){
 		
 		
 		if ($('#LbTypeRadio option:selected').val() == 6){
-			$('#TbGrsInternalDelay').prop('disabled',true);		
+			//$('#TbGrsInternalDelay').prop('disabled',true);
+			$('#InternalDelayRow').attr('style','display:table-column');
 			$('#TbGrsInternalDelay').val(0);
 		}
 		else
