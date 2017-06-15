@@ -2548,7 +2548,12 @@ var InsertNewResource = function(col, row) {
 		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
 		radioResource.umbral_vad				=	$('#TbVad').val();
 		radioResource.metodo_bss				=	$('#CbBssMethodAvailable option:selected').val();
-		
+		if($('#CbPttSquelchEvents').prop('checked'))
+			radioResource.evento_ptt_squelch	=	1;
+		else
+			radioResource.evento_ptt_squelch	=	0;
+		radioResource.prioridad_ptt				=	$('#LbPttPriority option:selected').val();
+		radioResource.prioridad_sesion_sip		=	$('#LbSipPriority option:selected').val();
 		resourceType=1;
 	}
 	else {
