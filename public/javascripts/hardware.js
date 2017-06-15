@@ -2267,6 +2267,9 @@ function SelectBss(){
 		}
 	}
 	else{
+		if ($('#LbTypeRadio option:selected').val() == 4 || $('#LbTypeRadio option:selected').val() == 6){
+			SetAudioTableCB(function(){ });
+		}
 		$('#BSSEnableRow').attr('style','display:table-column');
 		//$('#BSSMethodRow').attr('style','display:table-column');
 		//$('#SquelchDeactRow').attr('style','display:table-column');
@@ -2282,6 +2285,7 @@ function SelectBss(){
 		//}
 		$('#ModoCalculoClimaxRow').attr('style','display:table-column');
 	}
+	
 }
 
 

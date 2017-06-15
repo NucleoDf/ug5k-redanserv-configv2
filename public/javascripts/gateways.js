@@ -2587,11 +2587,21 @@ var InsertNewResource = function(col, row) {
 			radioResource.climax_bss			=	1;
 		else
 			radioResource.climax_bss			=	0;
+		//Método BSS preferido
+		// **Es el Métodos BSS disponibles pero para Rxs
+		
+		//Tabla calificación audio
+		radioResource.tabla_bss_id				=	$('#CbBssAudioTable option:selected').val();
 		//Retraso interno GRS
 		if($('#TbGrsInternalDelay').val()=='')
 			radioResource.retraso_interno_grs	=	0;//Valor Defecto
 		else
 			radioResource.retraso_interno_grs	=	$('#retraso_interno_grs').val();
+		//Habilita grabación
+		if($('#CbEnableRecording').prop('checked'))
+			radioResource.habilita_grabacion	=	1;
+		else
+			radioResource.habilita_grabacion	=	0;
 		resourceType=1;
 	}
 	else {
