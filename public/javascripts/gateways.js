@@ -2527,7 +2527,7 @@ var InsertNewResource = function(col, row) {
 	var radioResource={};
 	var telephoneResource={};
 	var resourceType=0;
-	//Para no tener que hacer ningún SELECT
+	//Para no tener que hacer ningún SELECT de la id de la pasarela
 	var idCgw=$('#DivGateways').data('idCgw');
 	
 	if ($('#SResourceType option:selected').val() == 1)	{
@@ -2547,6 +2547,8 @@ var InsertNewResource = function(col, row) {
 		radioResource.indicacion_entrada_audio	=	$('#LbSquelchType option:selected').val();
 		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
 		radioResource.umbral_vad				=	$('#TbVad').val();
+		radioResource.metodo_bss				=	$('#CbBssMethodAvailable option:selected').val();
+		
 		resourceType=1;
 	}
 	else {
