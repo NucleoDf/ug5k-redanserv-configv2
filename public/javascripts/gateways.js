@@ -2531,22 +2531,36 @@ var InsertNewResource = function(col, row) {
 	var idCgw=$('#DivGateways').data('idCgw');
 	
 	if ($('#SResourceType option:selected').val() == 1)	{
-		radioResource.pasarela_id		=		idCgw
-		radioResource.fila				=		row;
-		radioResource.columna			=		col;
-		radioResource.nombre			=		$('#TbNameResource').val();
-		radioResource.frecuencia		=		$('#IdDestination').val();
-		switch($('#LbTypeRadio option:selected').val()) {
-			case '0':
-				radioResource.tipo_agente = 0;
-				break;
-			case '1':
-				radioResource.tipo_agente = 1;
-				break;
+		radioResource.pasarela_id				=	idCgw
+		radioResource.fila						=	row;
+		radioResource.columna					=	col;
+		radioResource.nombre					=	$('#TbNameResource').val();
+		radioResource.codec						=	$('#SCodec option:selected').val();
+		if($('#TbEnableRegister').prop('checked'))
+			radioResource.clave_registro		=	$('#TbKey').val();
+		radioResource.frecuencia				=	$('#IdDestination').val();
+		if (!$('#CbAdAgc').prop('checked')) {
+			if($('#TbAdGain').val()=='')
+				radioResource.ajuste_ad=0;
+			else
+				radioResource.ajuste_ad=$('#TbAdGain').val();
 		}
+		if (!$('#CbDaAgc').prop('checked')) {
+			if($('#TbDaGain').val()=='')
+				radioResource.ajuste_da=0;
+			else
+				radioResource.ajuste_da=$('#TbDaGain').val();
+		}
+			
+		radioResource.tipo_agente 				=	$('#LbTypeRadio option:selected').val();
 		radioResource.indicacion_entrada_audio	=	$('#LbSquelchType option:selected').val();
 		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
-		radioResource.umbral_vad				=	$('#TbVad').val();
+		
+		if($('#TbDaGain').val()=='')
+			radioResource.umbral_vad			=	0;
+		else
+			radioResource.umbral_vad			=	$('#TbVad').val();
+
 		radioResource.metodo_bss				=	$('#CbBssMethodAvailable option:selected').val();
 		if($('#CbPttSquelchEvents').prop('checked'))
 			radioResource.evento_ptt_squelch	=	1;
@@ -2557,11 +2571,11 @@ var InsertNewResource = function(col, row) {
 		resourceType=1;
 	}
 	else {
-		telephoneResource.pasarela_id	=		idCgw;
-		telephoneResource.fila			=		row;
-		telephoneResource.columna		=		col;
-		telephoneResource.nombre		=		$('#TbNameResource').val();
-		telephoneResource.codec			=		0;//SCodec
+		telephoneResource.pasarela_id			=	idCgw;
+		telephoneResource.fila					=	row;
+		telephoneResource.columna				=	col;
+		telephoneResource.nombre				=	$('#TbNameResource').val();
+		telephoneResource.codec					=	0;//SCodec
 		if ($('#TbEnableRegister').prop('checked'))
 			telephoneResource.clave_registro=$('#TbKey').val();
 		if ($('#CbAdAgc').prop('checked', false))
