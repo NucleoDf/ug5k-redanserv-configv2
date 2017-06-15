@@ -2532,18 +2532,25 @@ var InsertNewResource = function(col, row) {
 	
 	if ($('#SResourceType option:selected').val() == 1)	{
 		//Campos para identificar el recurso
+		resourceType							=	1;
 		radioResource.pasarela_id				=	idCgw
 		radioResource.fila						=	row;
 		radioResource.columna					=	col;
 		//Nombre
-		radioResource.nombre					=	$('#TbNameResource').val();
+		if($('#TbNameResource').val()=='')
+			radioResource.nombre				=	'Recurso';//Valor Defecto
+		else
+			radioResource.nombre				=	$('#TbNameResource').val();
 		//Codec
 		radioResource.codec						=	$('#SCodec option:selected').val();
 		//Habilitar registro?
 		if($('#TbEnableRegister').prop('checked'))
 			radioResource.clave_registro		=	$('#TbKey').val();
 		//Frecuencia
-		radioResource.frecuencia				=	$('#IdDestination').val();
+		if($('#IdDestination').val()=='')
+			radioResource.frecuencia			=	0;//Valor Defecto
+		else
+			radioResource.frecuencia			=	$('#IdDestination').val();
 		//AGC en A/D
 		if (!$('#CbAdAgc').prop('checked')) {
 			if($('#TbAdGain').val()=='')
@@ -2605,20 +2612,38 @@ var InsertNewResource = function(col, row) {
 			radioResource.habilita_grabacion	=	1;
 		else
 			radioResource.habilita_grabacion	=	0;
-		resourceType=1;
 	}
 	else {
-		telephoneResource.pasarela_id			=	idCgw;
-		telephoneResource.fila					=	row;
-		telephoneResource.columna				=	col;
-		telephoneResource.nombre				=	$('#TbNameResource').val();
-		telephoneResource.codec					=	0;//SCodec
-		if ($('#TbEnableRegister').prop('checked'))
-			telephoneResource.clave_registro=$('#TbKey').val();
-		if ($('#CbAdAgc').prop('checked', false))
-			telephoneResource.ajuste_ad=$('#TbAdGain').val();
-		if ($('#CbDaAgc').prop('checked', false))
-			telephoneResource.ajuste_da=$('#TbDaGain').val();
+		//Campos para identificar el recurso
+		resourceType								=	2;
+		telephoneResource.pasarela_id				=	idCgw;
+		telephoneResource.fila						=	row;
+		telephoneResource.columna					=	col;
+		//Nombre
+		if($('#TbNameResource').val()=='')
+			telephoneResource.nombre				=	'Recurso';//Valor Defecto
+		else
+			telephoneResource.nombre				=	$('#TbNameResource').val();
+		//Codec
+		telephoneResource.codec						=	$('#SCodec option:selected').val();
+		//Habilitar registro?
+		if($('#TbEnableRegister').prop('checked'))
+			telephoneResource.clave_registro		=	$('#TbKey').val();
+		//AGC en A/D
+		if (!$('#CbAdAgc').prop('checked')) {
+			if($('#TbAdGain').val()=='')
+				telephoneResource.ajuste_ad			=	0;//Valor Defecto
+			else
+				telephoneResource.ajuste_ad			=	$('#TbAdGain').val();
+		}
+		//AGC en D/A
+		if (!$('#CbDaAgc').prop('checked')) {
+			if($('#TbDaGain').val()=='')
+				telephoneResource.ajuste_da			=	0;//Valor Defecto
+			else
+				telephoneResource.ajuste_da			=	$('#TbDaGain').val();
+		}
+		
 		switch($('#LbTypeTel option:selected').val()) {
 			case '0':
 				telephoneResource.tipo_interfaz_tel=0;
@@ -2656,7 +2681,7 @@ var InsertNewResource = function(col, row) {
 		telephoneResource.tiempo_supervision=
 		telephoneResource.duracion_tono_interrup=
 		telephoneResource.uri_telefonica=
-		*/resourceType=2;
+		*/
 	}
 	
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
