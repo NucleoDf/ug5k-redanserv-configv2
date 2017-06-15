@@ -2591,7 +2591,10 @@ var InsertNewResource = function(col, row) {
 		// **Es el Métodos BSS disponibles pero para Rxs
 		
 		//Tabla calificación audio
-		radioResource.tabla_bss_id				=	$('#CbBssAudioTable option:selected').val();
+		if($('#CbBssAudioTable option:selected').val() == -1)
+			radioResource.tabla_bss_id				=	null;
+		else
+			radioResource.tabla_bss_id				=	$('#CbBssAudioTable option:selected').val();
 		//Retraso interno GRS
 		if($('#TbGrsInternalDelay').val()=='')
 			radioResource.retraso_interno_grs	=	0;//Valor Defecto
