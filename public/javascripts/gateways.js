@@ -2643,31 +2643,27 @@ var InsertNewResource = function(col, row) {
 			else
 				telephoneResource.ajuste_da			=	$('#TbDaGain').val();
 		}
+		//Tipo de Interfaz Telefónico
+		telephoneResource.tipo_interfaz_tel			=	$('#LbTypeTel option:selected').val();
+		//URI remota
+		telephoneResource.uri_telefonica			=	$('#TbRemoteUri').val();
+		//Detección VOX
+		if($('#CbVox').prop('checked'))
+			telephoneResource.deteccion_vox			=	1;
+		else
+			telephoneResource.deteccion_vox			=	0;
+		//Umbral Vox (dB)
+		telephoneResource.umbral_vox				=	$('#TbUmbral').val();
+		//Cola Vox (sg.)
+		telephoneResource.cola_vox					=	$('#TbInactividad').val();
+		//Respuesta automática
+		if($('#CbResp').prop('checked'))
+			telephoneResource.respuesta_automatica	=	1;
+		else
+			telephoneResource.respuesta_automatica	=	0;
+		//Periodo tonos resp. estado (sg.)
+		telephoneResource.periodo_tonos				=	$('#TbOptionsInterval').val();
 		
-		switch($('#LbTypeTel option:selected').val()) {
-			case '0':
-				telephoneResource.tipo_interfaz_tel=0;
-				telephoneResource.uri_telefonica=$('#TbRemoteUri').val();
-				break;
-			case '1':
-				telephoneResource.tipo_interfaz_tel=1;
-				break;
-			case '2':
-				telephoneResource.tipo_interfaz_tel=2;
-				break;
-			case '3':
-				telephoneResource.tipo_interfaz_tel=3;
-				break;
-			case '4':
-				telephoneResource.tipo_interfaz_tel=4;
-				break;
-			case '5':
-				telephoneResource.tipo_interfaz_tel=5;
-				break;
-			case '6':
-				telephoneResource.tipo_interfaz_tel=6;
-				break;
-		}
 		/*
 		telephoneResource.deteccion_vox=
 		telephoneResource.umbral_vox=
