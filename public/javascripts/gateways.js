@@ -2352,6 +2352,8 @@ function PostGateWay (idSite, isUpdate) {
 		listServers.push({'ip':$(this).val(),'selected':selected});
 	});
 	//SNMP
+	//Aquí ponemos el text porque parseamos las ips luego en modo 1,2.2.2.2/345 y el
+	//	value una vez las guarda así (en la creación) y en el update guarda solo la ip :S
 	// Traps list
 	$('#TrapsList option').each(function() {
 		traps.push($(this).text());
