@@ -2258,6 +2258,15 @@ function NewGateway (){
 		});
 		//})
 	})
+	//ResetAllFields();
+	$('#nameGw').val('');
+	$('#ipv').val('');
+	$('#ipb1').val('');
+	$('#ipg1').val('');
+	$('#msb1').val('');
+	$('#ipb2').val('');
+	$('#ipg2').val('');
+	$('#msb2').val('');
 }
 
 /************************************/
