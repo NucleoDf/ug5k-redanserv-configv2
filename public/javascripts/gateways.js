@@ -2428,10 +2428,9 @@ function PostGateWay (idSite, isUpdate) {
 			type: 'POST',
 			dataType: 'json',
 			contentType: 'application/json',
-			url: '/gateways/updateGateway/:newGateway/:idSite',
+			url: '/gateways/updateGateway/:newGateway/:idGtw',
 			data: JSON.stringify({
 					"newGateway": newGateway,
-					"idSite": idSite,
 					"idGtw": idGtw
 				}
 			),

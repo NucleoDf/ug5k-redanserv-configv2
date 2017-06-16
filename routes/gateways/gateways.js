@@ -247,6 +247,15 @@ router.route('/createNewGateway/:newGateway/:idSite')
 			res.json(result);
 		});
 	});
+router.route('/updateGateway/:newGateway/:idGtw')
+	.post(function(req,res){
+		logging.LoggingDate('POST /createNewGateway/:newGateway/:idGtw');
+		var newGateway = req.body.newGateway;
+		var idGtw = req.body.idGtw;
+		myLibGateways.updateGateWayonSite(newGateway,idGtw,function(result){
+			res.json(result);
+		});
+	});
 //////////////////
 //Esta es nueva para recoger todos los datos del recurso
 router.route('/getResource/:resourceType/:resourceId')
