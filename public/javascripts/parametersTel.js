@@ -46,6 +46,7 @@ function ShowOptions(tipo){
 	$('.EyM').attr('style','display:none');
 	$('.QSIG').attr('style','display:none');
 	$('#ListMenuParameters li:nth-child(6)').hide();
+	$('#ReleaseRow').hide();
 
 	switch (tipo){
 		case '0': //BL	

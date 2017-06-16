@@ -2663,6 +2663,32 @@ var InsertNewResource = function(col, row) {
 			telephoneResource.respuesta_automatica	=	0;
 		//Periodo tonos resp. estado (sg.)
 		telephoneResource.periodo_tonos				=	$('#TbOptionsInterval').val();
+		//Lado
+		if($('#LbLado option:selected').val() == 0)
+			telephoneResource.lado						=	'A';
+		else
+			telephoneResource.lado						=	'B';
+		//Origen llamadas salientes de test
+		telephoneResource.origen_test					=	$('#TbLocalNumText').val();
+		//Destino llamadas salientes de test
+		telephoneResource.destino_test					=	$('#TbRemoteNumText').val();
+		//Supervisa colateral
+		if($('#CbOptionsSupervision').prop('checked')) {
+			telephoneResource.supervisa_colateral 		= 	1;
+		//Tiempo supervisión (sg.)
+			if($('#TbReleaseTime').val() == '')
+				telephoneResource.tiempo_supervision	=	0;//Valor por defecto
+			else
+				telephoneResource.tiempo_supervision	=	$('#TbReleaseTime').val();
+		}
+		else {
+			telephoneResource.supervisa_colateral		=	0;
+			telephoneResource.tiempo_supervision		=	null;
+		}
+		//Duración tono interrupción (sg.)
+		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val();
+		
+		
 		
 		/*
 		telephoneResource.deteccion_vox=
