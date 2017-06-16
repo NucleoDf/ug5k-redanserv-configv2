@@ -165,7 +165,8 @@ var CopyMethodGateway = function(idSourceGateway,nameTargetGateway){
 	});
 };
 
-var PostGateway = function (f){
+
+var PostGateway2 = function (f){
 	var cpus=[];
 	var sip={};
 	var proxys=[];
@@ -807,9 +808,10 @@ var GetGateway = function (gtw,lastUpdate,f){
 					$('#msb2').val(gtw.general.cpus[1].msb);
 				}
 				*/
+				var idSite=$('#IdSite') .data('idSite');
 				translateWord('Update',function(result){
 					$('#UpdateGtwButton').text(result)
-										.attr('onclick','UpdateGateway(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})');
+										.attr('onclick','PostGateWay('+idSite+',true)');
 				});
 
 				/*if (gtw.general.dualidad)
@@ -1015,8 +1017,8 @@ var AddGatewaysFromActiveToListOfGateways = function(idSite){
 		});
 };
 
-function UpdateGateway(f){
-	var serviceId = $("#ListServices option:selected").val();
+function UpdateGateway(){
+	var idGtw = $('#DivGateways').data('idCgw');
 	if (serviceId != null){
 		$.ajax({type: 'PUT',
 					//url: '/gateways/' + $('#Component').text() + '/services/' + serviceId,
@@ -2204,7 +2206,7 @@ function NewGateway (){
 	var idSite=$('#IdSite') .data('idSite');
 	translateWord('CreateGateway',function(result){
 		$('#UpdateGtwButton').text(result)//TsODO Create Gateway
-			.attr('onclick','PostGateWay('+idSite+')');
+			.attr('onclick','PostGateWay('+idSite+',false)');
 	});
 	//$('#IdSite').data('gatewayName',name)
 	//$('#IdSite').data('gatewayId',id)
@@ -2263,7 +2265,7 @@ function NewGateway (){
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-function PostGateWay (idSite) {
+function PostGateWay (idSite, isUpdate) {
 	var newGateway={};
 	var proxys=[];
 	var registrars=[];
@@ -2389,31 +2391,68 @@ function PostGateWay (idSite) {
 	newGateway.rtsp_ip=$('#rtsp_ip').val();
 	newGateway.rtsp_ipb=$('#rtsp_ipb').val();
 	
-	$.ajax({type: 'POST',
-		dataType: 'json',
-		contentType:'application/json',
-		url: '/gateways/createNewGateway/:newGateway/:idSite',
-		data: JSON.stringify( {	"newGateway": newGateway,
-								"idSite": idSite
-								}
-		),
-		success: function(data){
-			if (data.error == null) {
-				alertify.success('La pasarela \"' +  data.name + '\" ha sido creada.');
-				
-				ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
-				//GetGateways(null,function(){
-				//	ShowHardwareGateway(data.insertId, data.name);
-				//});//TODO esto no muestra nada de lo que tiene que mostrar
+	//Nueva Pasarela
+	if(isUpdate == false) {
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			contentType: 'application/json',
+			url: '/gateways/createNewGateway/:newGateway/:idSite',
+			data: JSON.stringify({
+					"newGateway": newGateway,
+					"idSite": idSite
+				}
+			),
+			success: function (data) {
+				if (data.error == null) {
+					alertify.success('La pasarela \"' + data.name + '\" ha sido creada.');
+					
+					ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+					//GetGateways(null,function(){
+					//	ShowHardwareGateway(data.insertId, data.name);
+					//});//TODO esto no muestra nada de lo que tiene que mostrar
+				}
+				else if (data.error) {
+					alertify.error('Error: ' + data.error);
+				}
+			},
+			error: function (data) {
+				alertify.error('Error creando la pasarela.');
 			}
-			else if (data.error) {
-				alertify.error('Error: '+data.error);
+		});
+	}
+	//Modifica Pasarela
+	else {
+		var idGtw = $('#DivGateways').data('idCgw');
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			contentType: 'application/json',
+			url: '/gateways/updateGateway/:newGateway/:idSite',
+			data: JSON.stringify({
+					"newGateway": newGateway,
+					"idSite": idSite,
+					"idGtw": idGtw
+				}
+			),
+			success: function (data) {
+				if (data.error == null) {
+					alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
+					
+					ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+					//GetGateways(null,function(){
+					//	ShowHardwareGateway(data.insertId, data.name);
+					//});//TODO esto no muestra nada de lo que tiene que mostrar
+				}
+				else if (data.error) {
+					alertify.error('Error: ' + data.error);
+				}
+			},
+			error: function (data) {
+				alertify.error('Error modificando la pasarela.');
 			}
-		},
-		error: function(data){
-			alertify.error('Error creando la pasarela.');
-		}
-	});
+		});
+	}
 }
 
 /****************************************/
@@ -2690,24 +2729,7 @@ var InsertNewResource = function(col, row) {
 			telephoneResource.tiempo_supervision		=	null;
 		}
 		//Duración tono interrupción (sg.)
-		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val();
-		
-		
-		
-		/*
-		telephoneResource.deteccion_vox=
-		telephoneResource.umbral_vox=
-		telephoneResource.cola_vox=
-		telephoneResource.respuesta_automatica=
-		telephoneResource.periodo_tonos=
-		telephoneResource.lado=
-		telephoneResource.origen_test=
-		telephoneResource.destino_test=
-		telephoneResource.supervisa_colateral=
-		telephoneResource.tiempo_supervision=
-		telephoneResource.duracion_tono_interrup=
-		telephoneResource.uri_telefonica=
-		*/
+		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val()
 	}
 	
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
@@ -2722,7 +2744,7 @@ var InsertNewResource = function(col, row) {
 		),
 		success: function (data) {
 			if(data.error==null)
-				alertify.success('Se ha insertado el nuevo recurso.');
+				alertify.success('El recurso se ha añadido correctamente.');
 			else
 				alertify.error('Error: '+data.error);
 		},
@@ -2730,4 +2752,5 @@ var InsertNewResource = function(col, row) {
 			alertify.error('Error insertando el nuevo recurso.');
 		}
 	});
+	GetMySlaves();
 }
