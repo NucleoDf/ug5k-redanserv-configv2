@@ -2354,7 +2354,7 @@ function PostGateWay (idSite, isUpdate) {
 	//SNMP
 	// Traps list
 	$('#TrapsList option').each(function() {
-		traps.push($(this).val());
+		traps.push($(this).text());
 	});
 	//WEB
 	//GRABACION
