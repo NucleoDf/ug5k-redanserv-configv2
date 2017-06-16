@@ -2530,6 +2530,8 @@ var InsertNewResource = function(col, row) {
 	//Para no tener que hacer ningún SELECT de la id de la pasarela
 	var idCgw=$('#DivGateways').data('idCgw');
 	
+	////////////////////
+	//RADIO
 	if ($('#SResourceType option:selected').val() == 1)	{
 		//Campos para identificar el recurso
 		resourceType							=	1;
@@ -2613,6 +2615,8 @@ var InsertNewResource = function(col, row) {
 		else
 			radioResource.habilita_grabacion	=	0;
 	}
+	////////////////////
+	//TELEFONO
 	else {
 		//Campos para identificar el recurso
 		resourceType								=	2;
