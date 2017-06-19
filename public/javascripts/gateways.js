@@ -730,16 +730,21 @@ var GetGateway = function (gtw,lastUpdate,f){
 				
 				$('#PuertoLocalSIP').val(gtw.result[0].puerto_sip.toString());
 				
-				if(gtw.result[0].periodo_supervision!=0) {
-					$('#CbRUpdatePeriod').prop('checked', true);
-					$('#TbUpdatePeriod').prop('disabled', false);
-				}
-				else {
+				if(gtw.result[0].periodo_supervision==null) {
 					$('#CbRUpdatePeriod').prop('checked', false);
 					$('#TbUpdatePeriod').prop('disabled', true);
 				}
-				$('#TbUpdatePeriod').val(gtw.result[0].periodo_supervision.toString());
-				
+				else {
+					if (gtw.result[0].periodo_supervision != 0) {
+						$('#CbRUpdatePeriod').prop('checked', true);
+						$('#TbUpdatePeriod').prop('disabled', false);
+					}
+					else {
+						$('#CbRUpdatePeriod').prop('checked', false);
+						$('#TbUpdatePeriod').prop('disabled', true);
+					}
+					$('#TbUpdatePeriod').val(gtw.result[0].periodo_supervision.toString());
+				}
 				//SNMP
 				$('#sport').val(gtw.result[0].puerto_servicio_snmp);
 				$('#snmpp').val(gtw.result[0].puerto_snmp);
@@ -2247,6 +2252,7 @@ function NewGateway (){
 		$('#lan21').hide();
 		$('#nic1').show();
 		
+		$('#TbUpdatePeriod').prop('disabled', true);
 		RenderSipService(null,true);//Para mostrar el primer item.
 		//$('#LblIdGateway').text(name);
 		$('#hwGateway').fadeIn(500,function(){
