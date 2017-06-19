@@ -295,8 +295,7 @@ router.route('/insertNewResource/:resource2Insert/:resourceType')
 router.route('/getAll/:idGtw')
 	.get(function(req,res){
 		logging.LoggingDate('POST /getAll/:idGtw');
-		var newGateway = req.body.newGateway;
-		var idGtw = req.body.idGtw;
+		var idGtw = req.params.idGtw;
 		myLibGateways.getAll(idGtw,function(result){
 			res.json(result);
 		});
