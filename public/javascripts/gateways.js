@@ -2409,12 +2409,12 @@ function PostGateWay (idSite, isUpdate) {
 		
 	newGateway.traps=traps;
 	//WEB
-	newGateway.wport=$('#wport').val();
-	newGateway.stime=$('#stime').val();
+	newGateway.puerto_servicio_web=$('#wport').val();
+	newGateway.tiempo_sesion=$('#stime').val();
 	//GRABACION
-	newGateway.rtsp_port=$('#rtsp_port').val();
-	newGateway.rtsp_ip=$('#rtsp_ip').val();
-	newGateway.rtsp_ipb=$('#rtsp_ipb').val();
+	newGateway.puerto_rtsp=$('#rtsp_port').val();
+	newGateway.servidor_rtsp=$('#rtsp_ip').val();
+	newGateway.servidor_rtspb=$('#rtspb_ip').val();
 	
 	//Nueva Pasarela
 	if(isUpdate == false) {
