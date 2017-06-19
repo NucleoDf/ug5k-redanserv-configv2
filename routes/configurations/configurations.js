@@ -235,7 +235,7 @@ gatewaysRouter.route('/:gateway/all')
 		
 		//TODO pasar la ip
 		myLibGateways.getAll(idGtw,function(result) {
-			res.status(200).json(result.data);
+			res.status(200).json(result);
 		});
 			/*/ Obtener IPv
 			myLibGateways.getIpv(req.params.gateway,function(result){
