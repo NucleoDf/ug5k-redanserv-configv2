@@ -200,6 +200,7 @@ router.route('/:gateway/services/:service')
 /*************************************************/
 /*  Routes relating to test active configuration */
 /*************************************************/
+////*  REV 1.0.2 VMG
 router.route('/:gateway/testconfig')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);

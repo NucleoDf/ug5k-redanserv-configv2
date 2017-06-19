@@ -728,7 +728,7 @@ var GetGateway = function (gtw,lastUpdate,f){
 				//SIP
 				RenderSipService(null,true);//Para mostrar el primer item.
 				
-				$('#PuertoLocalSIP').val(gtw.result[0].puerto_proxy.toString());
+				$('#PuertoLocalSIP').val(gtw.result[0].puerto_sip.toString());
 				
 				if(gtw.result[0].periodo_supervision!=0) {
 					$('#CbRUpdatePeriod').prop('checked', true);
@@ -2385,14 +2385,22 @@ function PostGateWay (idSite, isUpdate) {
 	newGateway.proxys=proxys;
 	newGateway.registrars=registrars;
 	if($('#CbRUpdatePeriod').prop('checked'))
-		newGateway.TbUpdatePeriod=$('#TbUpdatePeriod').val();
+		if($('#TbUpdatePeriod').val()=='')
+			newGateway.periodo_supervision=0;
+		else
+			newGateway.periodo_supervision=$('#TbUpdatePeriod').val();
 	//SINCRONIZACION
 	newGateway.listServers=listServers;
 	//SNMP
-	newGateway.sport=$('#sport').val();
-	newGateway.snmpp=$('#snmpp').val();
-	if($('#agv2').prop('checked'))
-		newGateway.agcomm=$('#agcomm').val();
+	newGateway.puerto_servicio_snmp=$('#sport').val();
+	newGateway.puerto_snmp=$('#snmpp').val();
+	if($('#agv2').prop('checked')){
+		newGateway.snmpv2=1;
+		newGateway.comunidad_snmp=$('#agcomm').val();
+	}
+	else
+		newGateway.snmpv2=0;
+		
 	newGateway.traps=traps;
 	//WEB
 	newGateway.wport=$('#wport').val();

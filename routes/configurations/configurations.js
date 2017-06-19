@@ -228,6 +228,7 @@ gatewaysRouter.route('/:gateway')
     	});
 
 // Proporciona la configuración completa de :gateway (general, servicios, hardware, recursos)
+///*  REV 1.0.2 VMG
 gatewaysRouter.route('/:gateway/all')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
