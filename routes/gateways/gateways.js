@@ -291,6 +291,16 @@ router.route('/insertNewResource/:resource2Insert/:resourceType')
 			});
 		}
 	});
+
+router.route('/getAll/:idGtw')
+	.post(function(req,res){
+		logging.LoggingDate('POST /getAll/:idGtw');
+		var newGateway = req.body.newGateway;
+		var idGtw = req.body.idGtw;
+		myLibGateways.getAll(idGtw,function(result){
+			res.json(result);
+		});
+	});
 /********************************/
 /*  Routes relating to hardware */
 /********************************/

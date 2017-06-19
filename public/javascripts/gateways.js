@@ -137,6 +137,9 @@ var CopyGateway = function(){
 	});
 };
 
+var CopyGateway2 = function(){
+	
+}
 var Copy = function(){
 	if ($('#nameCopyGw').val().length > 0){
 		CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val());
