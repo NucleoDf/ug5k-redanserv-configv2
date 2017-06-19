@@ -138,7 +138,18 @@ var CopyGateway = function(){
 };
 
 var CopyGateway2 = function(){
-	
+	$.ajax({
+		type: 'GET',
+		url: '/gateways/getAll/' + $('#DivGateways').data('idCgw'),
+		success: function (data) {
+			if (data.error != null)
+				var a =data;
+			}
+			else {
+				alertify.error('Error en la consulta');
+			}
+				
+	});
 }
 var Copy = function(){
 	if ($('#nameCopyGw').val().length > 0){
