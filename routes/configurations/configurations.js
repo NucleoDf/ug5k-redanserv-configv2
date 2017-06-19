@@ -232,191 +232,196 @@ gatewaysRouter.route('/:gateway')
 gatewaysRouter.route('/:gateway/all')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		// Obtener IPv
-		myLibGateways.getIpv(req.params.gateway,function(result){
-			var ipv = result.ipv;
-			var idCgw = result.idCGW;
-			if (ipv != -1 && ipv != -2 && ipv != null){
-				// Datos de la configuracion activa
-				myLibGateways.getTestConfig(ipv,function(data){
-					// Usuarios
-					myLibUsuarios.getUsers(req,res,idCgw, function(users){
-						// General
-						myLibGateways.getGateway(req,res,null,idCgw,function(gtw){
-							// Servicios
-							myLibServicesGateways.getServices(idCgw,null,function(servicios){
-								// Hardware y recursos
-								myLibHardwareGateways.getSlaves(ipv,idCgw,function(hardware){
-									var cfg = 	{
-												idConf: data.idConf,
-												fechaHora: data.fechaHora,
-												users:users.users,
-												general: gtw,
-												servicios: servicios.services,
-												hardware: hardware.hardware,
-												recursos: hardware.resources
-									};
-									res.status(200).json(cfg);
-
-									myLibGateways.sinchroGateways(idCgw);
-									//logging.LoggingDate(JSON.stringify(cfg,null,'\t'));
-									//res.json(cfg);
+		
+		//TODO pasar la ip
+		myLibGateways.getAll(idGtw,function(result) {
+			res.status(200).json(result.data);
+		});
+			/*/ Obtener IPv
+			myLibGateways.getIpv(req.params.gateway,function(result){
+				var ipv = result.ipv;
+				var idCgw = result.idCGW;
+				if (ipv != -1 && ipv != -2 && ipv != null){
+					// Datos de la configuracion activa
+					myLibGateways.getTestConfig(ipv,function(data){
+						// Usuarios
+						myLibUsuarios.getUsers(req,res,idCgw, function(users){
+							// General
+							myLibGateways.getGateway(req,res,null,idCgw,function(gtw){
+								// Servicios
+								myLibServicesGateways.getServices(idCgw,null,function(servicios){
+									// Hardware y recursos
+									myLibHardwareGateways.getSlaves(ipv,idCgw,function(hardware){
+										var cfg = 	{
+													idConf: data.idConf,
+													fechaHora: data.fechaHora,
+													users:users.users,
+													general: gtw,
+													servicios: servicios.services,
+													hardware: hardware.hardware,
+													recursos: hardware.resources
+										};
+										res.status(200).json(cfg);
+	
+										myLibGateways.sinchroGateways(idCgw);
+										//logging.LoggingDate(JSON.stringify(cfg,null,'\t'));
+										//res.json(cfg);
+									});
 								});
 							});
 						});
 					});
-				});
-			}
-			else
-				res.status(200).json({});
-		});
-	})
-	// Generado por la actualización desde la configuracion local de la gateway
-	.post(function(req,res){
-		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		logging.LoggingDate((JSON.stringify(req.body,null,'\t')),"LastConfig-" + req.params.gateway);
-		var general = req.body.general;
-		var servicios = req.body.servicios;
-		var hardware = req.body.hardware;
-		var recursos = req.body.recursos;
-
-		// Solo se admiten configuraciones provenientes de una pasarela si !existe configuración activa 
-		// (base de datos vacía, por ejemplo) o la pasarela pertenece a la configuración activa
-		// 
-		myLibConfigurations.getActiveConfiguration(req,res,function(result){
-			if (result == null){	// No existe configuración activa
-				if (req.body.general.emplazamiento==""){
-					res.status(422).json({error:null, ipv: ipv});	//	emplazamiento vacio
-					logging.loggingError('(422). Gateway ' + req.params.gateway + ' has no site.');
-					return;
 				}
-				// Responder antes de que el cliente cierre la conexión por time-out
-				res.status(200).json({idConf:'-2', fechaHora:''});
-
-				//
-				// Crear configuracion de la pasarela
-				// 
-				myLibConfigurations.postConfigurationFromGateway(req, res, general, servicios, hardware, function(result){
-					if (result.error)	{
-						logging.loggingError('Error adding gateway configuration from gateway ' + req.params.gateway);
+				else
+					res.status(200).json({});
+			});
+		})
+		// Generado por la actualización desde la configuracion local de la gateway
+		.post(function(req,res){
+			logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+			logging.LoggingDate((JSON.stringify(req.body,null,'\t')),"LastConfig-" + req.params.gateway);
+			var general = req.body.general;
+			var servicios = req.body.servicios;
+			var hardware = req.body.hardware;
+			var recursos = req.body.recursos;
+	
+			// Solo se admiten configuraciones provenientes de una pasarela si !existe configuración activa
+			// (base de datos vacía, por ejemplo) o la pasarela pertenece a la configuración activa
+			//
+			myLibConfigurations.getActiveConfiguration(req,res,function(result){
+				if (result == null){	// No existe configuración activa
+					if (req.body.general.emplazamiento==""){
+						res.status(422).json({error:null, ipv: ipv});	//	emplazamiento vacio
+						logging.loggingError('(422). Gateway ' + req.params.gateway + ' has no site.');
+						return;
 					}
-					else{
-						myLibHardwareGateways.setResources(result.slaves,recursos,function(result){
-							
-							if (req.body.fechaHora != ''){
-								var dia=(req.body.fechaHora).split("/")[0];
-								var mes=(req.body.fechaHora).split("/")[1];
-								var anio=(req.body.fechaHora).split("/")[2].split(" ")[0];
-								var hora=(req.body.fechaHora).split("/")[2].split(" ")[1];
-								var nuevaFecha=anio + '/'+ mes + '/' + dia + ' ' + hora;
+					// Responder antes de que el cliente cierre la conexión por time-out
+					res.status(200).json({idConf:'-2', fechaHora:''});
+	
+					//
+					// Crear configuracion de la pasarela
+					//
+					myLibConfigurations.postConfigurationFromGateway(req, res, general, servicios, hardware, function(result){
+						if (result.error)	{
+							logging.loggingError('Error adding gateway configuration from gateway ' + req.params.gateway);
+						}
+						else{
+							myLibHardwareGateways.setResources(result.slaves,recursos,function(result){
 								
-								myLibGateways.setLastUpdateToGateway(req.body.idConf, nuevaFecha, req.params.gateway, function(result){
-									if (result)	
-										logging.LoggingSuccess('Gateway ' + req.params.gateway + ' updated.');
-									else
-										logging.loggingError('Configuration ' + req.body.idConf + ' is not in data base.');
-								});
-							}
-							else
-								logging.loggingError('fechaHora field empty.');
-						});
-					}
-				});
-			}
-			else{
-				myLibGateways.getIpv(req.params.gateway,function(result){
-					
-					var ipv = result.ipv;
-					if (ipv != -1 && ipv != -2){
-						myLibGateways.getTestConfig(ipv,function(data){
-							if (data.idConf == '-1' || data.idConf == '-2'){	// La pasarela no pertenece a la configuración activa
-								res.status(422).json({error:null, ipv: ipv});	//	Unprocessable Entity
-								logging.loggingError('(422). Gateway ' + req.params.gateway + ' is not in active configuration.');
-								return;
-							}
-							else{
-
-								if (req.body.general.emplazamiento==""){
-									res.status(422).json({error:null, ipv: ipv});	//	emplazamiento vacio
-									logging.loggingError('(422). Gateway ' + req.params.gateway + ' has no site.');
+								if (req.body.fechaHora != ''){
+									var dia=(req.body.fechaHora).split("/")[0];
+									var mes=(req.body.fechaHora).split("/")[1];
+									var anio=(req.body.fechaHora).split("/")[2].split(" ")[0];
+									var hora=(req.body.fechaHora).split("/")[2].split(" ")[1];
+									var nuevaFecha=anio + '/'+ mes + '/' + dia + ' ' + hora;
+									
+									myLibGateways.setLastUpdateToGateway(req.body.idConf, nuevaFecha, req.params.gateway, function(result){
+										if (result)
+											logging.LoggingSuccess('Gateway ' + req.params.gateway + ' updated.');
+										else
+											logging.loggingError('Configuration ' + req.body.idConf + ' is not in data base.');
+									});
+								}
+								else
+									logging.loggingError('fechaHora field empty.');
+							});
+						}
+					});
+				}
+				else{
+					myLibGateways.getIpv(req.params.gateway,function(result){
+						
+						var ipv = result.ipv;
+						if (ipv != -1 && ipv != -2){
+							myLibGateways.getTestConfig(ipv,function(data){
+								if (data.idConf == '-1' || data.idConf == '-2'){	// La pasarela no pertenece a la configuración activa
+									res.status(422).json({error:null, ipv: ipv});	//	Unprocessable Entity
+									logging.loggingError('(422). Gateway ' + req.params.gateway + ' is not in active configuration.');
 									return;
 								}
-
-								res.status(200).json(data);
-
-								//
-								// Crear configuracion de la pasarela
-								// 
-								myLibConfigurations.postConfigurationFromGateway(req, res, general, servicios, hardware, function(result){
-									if (result.error)	{
-										logging.loggingError('Error adding gateway configuration from gateway ' + req.params.gateway);
+								else{
+	
+									if (req.body.general.emplazamiento==""){
+										res.status(422).json({error:null, ipv: ipv});	//	emplazamiento vacio
+										logging.loggingError('(422). Gateway ' + req.params.gateway + ' has no site.');
+										return;
 									}
-									else{
-										myLibHardwareGateways.setResources(result.slaves,recursos,function(result){
-											
-											if (req.body.fechaHora != ''){
-												var dia=(req.body.fechaHora).split("/")[0];
-												var mes=(req.body.fechaHora).split("/")[1];
-												var anio=(req.body.fechaHora).split("/")[2].split(" ")[0];
-												var hora=(req.body.fechaHora).split("/")[2].split(" ")[1];
-												var nuevaFecha=anio + '/'+ mes + '/' + dia + ' ' + hora;
+	
+									res.status(200).json(data);
+	
+									//
+									// Crear configuracion de la pasarela
+									//
+									myLibConfigurations.postConfigurationFromGateway(req, res, general, servicios, hardware, function(result){
+										if (result.error)	{
+											logging.loggingError('Error adding gateway configuration from gateway ' + req.params.gateway);
+										}
+										else{
+											myLibHardwareGateways.setResources(result.slaves,recursos,function(result){
 												
-												myLibGateways.setLastUpdateToGateway(req.body.idConf, nuevaFecha, req.params.gateway, function(result){
-													if (result)	
-														logging.LoggingSuccess('Gateway ' + req.params.gateway + ' updated.');
-													else
-														logging.loggingError('Configuration ' + req.body.idConf + ' is not in data base.');
-												});
-											}
-											else
-												logging.loggingError('fechaHora field empty.');
-										});
-									}
-								});
-							}
-						});
-					}
-					else{
-						//
-						// Crear configuracion de la pasarela
-						//
-						var randName=generatesRandomName(req.body.general.name);
-						if(req.body.general.emplazamiento=='') {
-							var randEmp='EMP'+req.body.general.name;
-							req.body.general.emplazamiento=randEmp;
+												if (req.body.fechaHora != ''){
+													var dia=(req.body.fechaHora).split("/")[0];
+													var mes=(req.body.fechaHora).split("/")[1];
+													var anio=(req.body.fechaHora).split("/")[2].split(" ")[0];
+													var hora=(req.body.fechaHora).split("/")[2].split(" ")[1];
+													var nuevaFecha=anio + '/'+ mes + '/' + dia + ' ' + hora;
+													
+													myLibGateways.setLastUpdateToGateway(req.body.idConf, nuevaFecha, req.params.gateway, function(result){
+														if (result)
+															logging.LoggingSuccess('Gateway ' + req.params.gateway + ' updated.');
+														else
+															logging.loggingError('Configuration ' + req.body.idConf + ' is not in data base.');
+													});
+												}
+												else
+													logging.loggingError('fechaHora field empty.');
+											});
+										}
+									});
+								}
+							});
 						}
-							
-						req.body.general.name = randName;
-						myLibConfigurations.postConfigurationFromGateway(req, res, general, servicios, hardware, function(result){
-							if (result.error)	{
-								logging.loggingError('Error adding gateway configuration from gateway ' + req.params.gateway);
+						else{
+							//
+							// Crear configuracion de la pasarela
+							//
+							var randName=generatesRandomName(req.body.general.name);
+							if(req.body.general.emplazamiento=='') {
+								var randEmp='EMP'+req.body.general.name;
+								req.body.general.emplazamiento=randEmp;
 							}
-							else{
-								myLibHardwareGateways.setResources(result.slaves,recursos,function(result){
-									
-									if (req.body.fechaHora != ''){
-										var dia=(req.body.fechaHora).split("/")[0];
-										var mes=(req.body.fechaHora).split("/")[1];
-										var anio=(req.body.fechaHora).split("/")[2].split(" ")[0];
-										var hora=(req.body.fechaHora).split("/")[2].split(" ")[1];
-										var nuevaFecha=anio + '/'+ mes + '/' + dia + ' ' + hora;
+								
+							req.body.general.name = randName;
+							myLibConfigurations.postConfigurationFromGateway(req, res, general, servicios, hardware, function(result){
+								if (result.error)	{
+									logging.loggingError('Error adding gateway configuration from gateway ' + req.params.gateway);
+								}
+								else{
+									myLibHardwareGateways.setResources(result.slaves,recursos,function(result){
 										
-										myLibGateways.setLastUpdateToGateway(req.body.idConf, nuevaFecha, req.params.gateway, function(result){
-											if (result)
-												logging.LoggingSuccess('Gateway ' + req.params.gateway + ' updated.');
-											else
-												logging.loggingError('Configuration ' + req.body.idConf + ' is not in data base.');
-										});
-									}
-									else
-										logging.loggingError('fechaHora field empty.');
-								});
-							}
-						});
-					}
-				});
-			}
-		});
+										if (req.body.fechaHora != ''){
+											var dia=(req.body.fechaHora).split("/")[0];
+											var mes=(req.body.fechaHora).split("/")[1];
+											var anio=(req.body.fechaHora).split("/")[2].split(" ")[0];
+											var hora=(req.body.fechaHora).split("/")[2].split(" ")[1];
+											var nuevaFecha=anio + '/'+ mes + '/' + dia + ' ' + hora;
+											
+											myLibGateways.setLastUpdateToGateway(req.body.idConf, nuevaFecha, req.params.gateway, function(result){
+												if (result)
+													logging.LoggingSuccess('Gateway ' + req.params.gateway + ' updated.');
+												else
+													logging.loggingError('Configuration ' + req.body.idConf + ' is not in data base.');
+											});
+										}
+										else
+											logging.loggingError('fechaHora field empty.');
+									});
+								}
+							});
+						}
+					});
+				}
+			});*/
 	});
 
 gatewaysRouter.route('/:gateway/general')
