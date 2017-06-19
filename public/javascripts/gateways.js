@@ -138,19 +138,24 @@ var CopyGateway = function(){
 };
 
 var CopyGateway2 = function(){
+	alertify.success('Test!');
 	$.ajax({
 		type: 'GET',
 		url: '/gateways/getAll/' + $('#DivGateways').data('idCgw'),
 		success: function (data) {
 			if (data.error != null)
-				var a =data;
-			}
+				alertify.error('Error: ' + data.error);
 			else {
-				alertify.error('Error en la consulta');
-			}
+				alertify.success('Success');
 				
+			}
+		},
+		error: function(data){
+			alertify.error('Error en el test.');
+		}
 	});
-}
+};
+
 var Copy = function(){
 	if ($('#nameCopyGw').val().length > 0){
 		CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val());

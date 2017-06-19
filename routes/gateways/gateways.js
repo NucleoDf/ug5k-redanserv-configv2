@@ -293,7 +293,7 @@ router.route('/insertNewResource/:resource2Insert/:resourceType')
 	});
 
 router.route('/getAll/:idGtw')
-	.post(function(req,res){
+	.get(function(req,res){
 		logging.LoggingDate('POST /getAll/:idGtw');
 		var newGateway = req.body.newGateway;
 		var idGtw = req.body.idGtw;
