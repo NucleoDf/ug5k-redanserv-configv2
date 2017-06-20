@@ -2765,6 +2765,22 @@ function showDataForTelephoneResource(data) {
 		$('#CbResp').prop('checked', true);
 	else
 		$('#CbResp').prop('checked', false);
+	//Periodo tonos resp. estado (sg.)
+	$('#TbOptionsInterval').val(data.periodo_tonos);
+	//Lado
+	$('#LbLado option[value="' +data.lado +'"]').prop('selected', true);
+	//Origen llamadas salientes de test
+	$('#TbLocalNumText').val(data.origen_test);
+	//Destino llamadas salientes de test
+	$('#TbRemoteNumText').val(data.destino_test);
+	//Supervisa colateral
+	if(data.supervisa_colateral==1)
+		$('#CbOptionsSupervision').prop('checked', true);
+	else
+		$('#CbOptionsSupervision').prop('checked', false);
+	//Duración tono interrupción (sg.)
+	$('#CbInterruptToneTime option[value="' +data.duracion_tono_interrup +'"]').prop('selected', true);
+	
 }
 /****************************************/
 /*	FUNCTION: GetResourceFromGateway 	*/
@@ -2917,10 +2933,7 @@ var InsertNewResource = function(col, row) {
 		//Periodo tonos resp. estado (sg.)
 		telephoneResource.periodo_tonos				=	$('#TbOptionsInterval').val();
 		//Lado
-		if($('#LbLado option:selected').val() == 0)
-			telephoneResource.lado						=	'A';
-		else
-			telephoneResource.lado						=	'B';
+		telephoneResource.lado						=	$('#LbLado option:selected').val();
 		//Origen llamadas salientes de test
 		telephoneResource.origen_test					=	$('#TbLocalNumText').val();
 		//Destino llamadas salientes de test
