@@ -2670,7 +2670,20 @@ function showDataForRadioResource(data) {
 		$('#CbBssEnable').prop('checked', true);
 	else
 		$('#CbBssEnable').prop('checked', false);
-	
+	//Ventana BSS (ms)
+	if(data.ventana_bss==null)
+		$('#TbBssWindow').val('');
+	else
+		$('#TbBssWindow').val(data.ventana_bss);
+	//BSS Cola Squelch (ms)
+	if(data.cola_bss_sqh==null)
+		$('#TbBssSquelchQueue').val('');
+	else
+		$('#TbBssSquelchQueue').val(data.cola_bss_sqh);
+	//Retraso Climax
+	$('#TbClimaxDelay option[value="' + data.tipo_climax + '"]').prop('selected', true);
+	//Retraso Climax
+	$('#TbModoCalculoClimax option[value="' + data.metodo_climax + '"]').prop('selected', true);
 	//Retraso interno GRS
 	$('#TbGrsInternalDelay').val(data.retraso_interno_grs);
 	//Tabla Calificacion de audio
@@ -2680,14 +2693,11 @@ function showDataForRadioResource(data) {
 		else
 			$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
 	});
-	
 	//Habilita grabación
 	if(data.habilita_grabacion==1)
 		$('#CbEnableRecording').prop('checked', true);
 	else
 		$('#CbEnableRecording').prop('checked', false);
-	//Prioridad PTT
-	
 }
 
 /****************************************/
