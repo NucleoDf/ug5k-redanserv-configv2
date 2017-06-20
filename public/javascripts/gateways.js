@@ -2659,7 +2659,10 @@ function showDataForRadioResource(data) {
 	//Retraso interno GRS
 	$('#TbGrsInternalDelay').val(data.retraso_interno_grs);
 	//Tabla Calificacion de audio
-	var a=data.tabla_bss_id;
+	SetAudioTableCB(function() {
+		$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
+	});
+	
 }
 
 /****************************************/
