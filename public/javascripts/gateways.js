@@ -2641,12 +2641,15 @@ function showDataForRadioResource(data) {
 		$('#CbDaAgc').prop('checked', true);
 	}
 	//Precisión Audio
-	$('#CbGranularity option').val(data.precision_audio).prop('selected', true);
+	$('#CbGranularity option[value="' +data.precision_audio +'"]').prop('selected', true);
 	
 	//PESTAÑA RADIO
+	//Tipo de Agente Radio
 	$('#LbTypeRadio option[value="' + data.tipo_agente +'"]').prop('selected', true);
-	SelectBss() //Ponemos todos los campos en su sitio
-	
+	//Ponemos todos los campos en su sitio
+	SelectBss();
+	//Indicación entrada audio
+	$('#LbSquelchType option[value="' +data.indicacion_entrada_audio +'"]').prop('selected', true);
 }
 
 /****************************************/
