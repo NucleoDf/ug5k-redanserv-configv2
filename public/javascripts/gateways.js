@@ -2650,6 +2650,14 @@ function showDataForRadioResource(data) {
 	SelectBss();
 	//Indicación entrada audio
 	$('#LbSquelchType option[value="' +data.indicacion_entrada_audio +'"]').prop('selected', true);
+	//Umbral VAD (dB)
+	 $('#TbVad').val(data.umbral_vad);
+	//Indicación salida audio 
+	$('#LbPttType option[value="' +data.indicacion_salida_audio +'"]').prop('selected', true); 
+	//Método BSS preferido 
+	$('#CbBssMethod option[value="' +data.metodo_bss +'"]').prop('selected', true); 
+	//Retraso interno GRS
+	 $('#TbGrsInternalDelay').val(data.retraso_interno_grs); 
 }
 
 /****************************************/
