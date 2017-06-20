@@ -2545,16 +2545,11 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 			url: '/gateways/getResource/' + resourceType + '/' + resourceId,
 			success: function (data) {
 				if (data.error == null) {
-					if ($('#TbEnableRegister').prop('checked'))
-						$('#KeyRow').show();
-					else
-						$('#KeyRow').hide();
 					//1 RADIO y 2 TFNO
 					$('#SResourceType option[value="' + resourceType + '"]').prop('selected', true);
-					$('#TbNameResource').val(data.nombre);
-					
 					$('#ListMenuParameters li:nth-child(1)').show();
 					if (resourceType == '1') {
+						showDataForRadioResource(data);
 						$('#ListMenuParameters li:nth-child(2)').show();//Radio
 						$('#ListMenuParameters li:nth-child(3)').hide();//Telefono
 						$('#ListMenuParameters li:nth-child(4)').hide();
@@ -2597,6 +2592,58 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#ListMenuParameters li:nth-child(5)').show();
 		$('#ListMenuParameters li:nth-child(6)').hide();
 	}
+}
+
+/****************************************/
+/*	FUNCTION: showDataForRadioResource 	*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function showDataForRadioResource(data) {
+	//Nombre
+	$('#TbNameResource').val(data.nombre);
+	//Codec
+	//$('#SCodec option').val(data.codec).prop('selected', true);
+	//Frecuencia
+	$('#IdDestination').val(data.frecuencia.toFixed(3));
+	//Habilitar Registro
+	if(data.clave_registro!=null) {
+		$('#KeyRow').show();
+		$('#TbEnableRegister').prop('checked', true);
+		$('#TbKey').val(data.clave_registro);
+	}
+	else {
+		$('#TbEnableRegister').prop('checked', false);
+		$('#KeyRow').hide();
+	}
+	//Ajuste A/D
+	if(data.ajuste_ad!=null) {
+		$('#LblAD').show();
+		$('#TbAdGain').show();
+		$('#CbAdAgc').prop('checked', false);
+		$('#TbAdGain').val(data.ajuste_ad);
+	}
+	else {
+		$('#LblAD').hide();
+		$('#TbAdGain').hide();
+		$('#CbAdAgc').prop('checked', true);
+	}
+	//Ajuste D/A
+	if(data.ajuste_da!=null) {
+		$('#LblDA').show();
+		$('#TbDaGain').show();
+		$('#CbDaAgc').prop('checked', false);
+		$('#TbDaGain').val(data.ajuste_ad);
+	}
+	else {
+		$('#LblDA').hide();
+		$('#TbDaGain').hide();
+		$('#CbDaAgc').prop('checked', true);
+	}
+	//Precisión Audio
+	$('#CbGranularity option').val(data.precision_audio).prop('selected', true);
+	
+	//PESTAÑA RADIO
 }
 
 /****************************************/
