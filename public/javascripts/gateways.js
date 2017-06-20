@@ -2654,8 +2654,23 @@ function showDataForRadioResource(data) {
 	$('#TbVad').val(data.umbral_vad);
 	//Indicación salida audio 
 	$('#LbPttType option[value="' +data.indicacion_salida_audio +'"]').prop('selected', true);
-	//Método BSS preferido 
+	//Método BSS disponible/preferido 
 	$('#CbBssMethod option[value="' +data.metodo_bss +'"]').prop('selected', true);
+	//Eventos PTT/Squelch
+	if(data.evento_ptt_squelch==1)
+		$('#CbPttSquelchEvents').prop('checked', true);
+	else
+		$('#CbPttSquelchEvents').prop('checked', false);
+	//Prioridad PTT
+	$('#LbPttPriority option[value="' + data.prioridad_ptt + '"]').prop('selected', true);
+	//Prioridad Sesion SIP
+	$('#LbSipPriority option[value="' + data.prioridad_sesion_sip + '"]').prop('selected', true);
+	//BSS/CLIMAX
+	if(data.climax_bss==1)
+		$('#CbBssEnable').prop('checked', true);
+	else
+		$('#CbBssEnable').prop('checked', false);
+	
 	//Retraso interno GRS
 	$('#TbGrsInternalDelay').val(data.retraso_interno_grs);
 	//Tabla Calificacion de audio
@@ -2665,16 +2680,14 @@ function showDataForRadioResource(data) {
 		else
 			$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
 	});
-	//Eventos PTT/Squelch
-	if(data.evento_ptt_squelch==1)
-		$('#CbPttSquelchEvents').prop('checked', true);
-	else
-		$('#CbPttSquelchEvents').prop('checked', false);
+	
 	//Habilita grabación
 	if(data.habilita_grabacion==1)
 		$('#CbEnableRecording').prop('checked', true);
 	else
 		$('#CbEnableRecording').prop('checked', false);
+	//Prioridad PTT
+	
 }
 
 /****************************************/
