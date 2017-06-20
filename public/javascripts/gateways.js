@@ -2659,10 +2659,22 @@ function showDataForRadioResource(data) {
 	//Retraso interno GRS
 	$('#TbGrsInternalDelay').val(data.retraso_interno_grs);
 	//Tabla Calificacion de audio
-	SetAudioTableCB(function() {
-		$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
+	SetAudioTableCB(function() {//Primero hay que inicializar los valores de la tabla.
+		if(data.tabla_bss_id==null)
+			$('#CbBssAudioTable option[value="-1"]').prop('selected', true);
+		else
+			$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
 	});
-	
+	//Eventos PTT/Squelch
+	if(data.evento_ptt_squelch==1)
+		$('#CbPttSquelchEvents').prop('checked', true);
+	else
+		$('#CbPttSquelchEvents').prop('checked', false);
+	//Habilita grabación
+	if(data.habilita_grabacion==1)
+		$('#CbEnableRecording').prop('checked', true);
+	else
+		$('#CbEnableRecording').prop('checked', false);
 }
 
 /****************************************/
