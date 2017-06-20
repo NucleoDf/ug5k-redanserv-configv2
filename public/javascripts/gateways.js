@@ -2557,6 +2557,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(6)').hide();
 					}
 					else if (resourceType == '2') {
+						showDataForTelephoneResource(data);
 						$('#DestinationRow').hide();
 						$('#ListMenuParameters li:nth-child(2)').hide();
 						$('#ListMenuParameters li:nth-child(3)').show();
@@ -2699,7 +2700,53 @@ function showDataForRadioResource(data) {
 	else
 		$('#CbEnableRecording').prop('checked', false);
 }
-
+/********************************************/
+/*	FUNCTION: showDataForTelephoneResource 	*/
+/*  PARAMS: 								*/
+/*  REV 1.0.2 VMG							*/
+/********************************************/
+function showDataForTelephoneResource(data) {
+	//Nombre
+	$('#TbNameResource').val(data.nombre);
+	//Codec
+	//$('#SCodec option').val(data.codec).prop('selected', true);
+	//Habilitar Registro
+	if(data.clave_registro!=null) {
+		$('#KeyRow').show();
+		$('#TbEnableRegister').prop('checked', true);
+		$('#TbKey').val(data.clave_registro);
+	}
+	else {
+		$('#TbEnableRegister').prop('checked', false);
+		$('#KeyRow').hide();
+	}
+	//Ajuste A/D
+	if(data.ajuste_ad!=null) {
+		$('#LblAD').show();
+		$('#TbAdGain').show();
+		$('#CbAdAgc').prop('checked', false);
+		$('#TbAdGain').val(data.ajuste_ad);
+	}
+	else {
+		$('#LblAD').hide();
+		$('#TbAdGain').hide();
+		$('#CbAdAgc').prop('checked', true);
+	}
+	//Ajuste D/A
+	if(data.ajuste_da!=null) {
+		$('#LblDA').show();
+		$('#TbDaGain').show();
+		$('#CbDaAgc').prop('checked', false);
+		$('#TbDaGain').val(data.ajuste_ad);
+	}
+	else {
+		$('#LblDA').hide();
+		$('#TbDaGain').hide();
+		$('#CbDaAgc').prop('checked', true);
+	}
+	//Precisión Audio
+	$('#CbGranularity option[value="' +data.precision_audio +'"]').prop('selected', true);
+}
 /****************************************/
 /*	FUNCTION: GetResourceFromGateway 	*/
 /*  PARAMS: 							*/
