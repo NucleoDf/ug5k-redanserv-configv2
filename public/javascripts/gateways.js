@@ -2749,6 +2749,22 @@ function showDataForTelephoneResource(data) {
 	ShowOptions(data.tipo_interfaz_tel.toString());//Opciones de telefono por defecto
 	//Tipo de Interfaz Telefónico
 	$('#LbTypeTel option[value="' +data.tipo_interfaz_tel +'"]').prop('selected', true);
+	//URI remota
+	$('#TbRemoteUri').val(data.uri_telefonica);
+	//Detección VOX
+	if(data.deteccion_vox==1)
+		$('#CbVox').prop('checked', true);
+	else
+		$('#CbVox').prop('checked', false);
+	//Umbral Vox (dB) umbral_vox
+	$('#TbUmbral').val(data.umbral_vox);
+	//Cola Vox (sg.) cola_vox
+	$('#TbInactividad').val(data.cola_vox);
+	//Respuesta automática
+	if(data.respuesta_automatica==1)
+		$('#CbResp').prop('checked', true);
+	else
+		$('#CbResp').prop('checked', false);
 }
 /****************************************/
 /*	FUNCTION: GetResourceFromGateway 	*/
