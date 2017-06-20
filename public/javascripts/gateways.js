@@ -956,13 +956,13 @@ var GetIps4Gateway = function(idCgw){
 					else if(data.tipo == 'TRPV1') {
 						$('#TrapsList').append($('<option>', {
 							value: data.ip,
-							text: '1,'+data.ip+'/'+data.puerto
+							text: data.ip
 						}));
 					}
 					else if(data.tipo == 'TRPV2') {
 						$('#TrapsList').append($('<option>', {
 							value: data.ip,
-							text: '2,'+data.ip+'/'+data.puerto
+							text: data.ip
 						}));
 					}
 				});
