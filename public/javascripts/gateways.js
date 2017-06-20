@@ -2746,6 +2746,9 @@ function showDataForTelephoneResource(data) {
 	}
 	//Precisión Audio
 	$('#CbGranularity option[value="' +data.precision_audio +'"]').prop('selected', true);
+	ShowOptions(data.tipo_interfaz_tel.toString());//Opciones de telefono por defecto
+	//Tipo de Interfaz Telefónico
+	$('#LbTypeTel option[value="' +data.tipo_interfaz_tel +'"]').prop('selected', true);
 }
 /****************************************/
 /*	FUNCTION: GetResourceFromGateway 	*/
