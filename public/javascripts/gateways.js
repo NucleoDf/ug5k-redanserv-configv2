@@ -2644,6 +2644,9 @@ function showDataForRadioResource(data) {
 	$('#CbGranularity option').val(data.precision_audio).prop('selected', true);
 	
 	//PESTAÑA RADIO
+	$('#LbTypeRadio option[value="' + data.tipo_agente +'"]').prop('selected', true);
+	SelectBss() //Ponemos todos los campos en su sitio
+	
 }
 
 /****************************************/
