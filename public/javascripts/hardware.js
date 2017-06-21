@@ -1633,11 +1633,10 @@ function UpdateResourceReally(slaveId, col, fila, f){
 
 /****************************************/
 /*	FUNCTION: removeRadioResource 		*/
-/*  PARAMS: 							*/
+/*  PARAMS: idResource					*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
 function removeRadioResource(idResource) {
-	var a = idResource;
 	alertify.confirm('Ulises G 5000 R', "¿Eliminar el recurso \"" + $('#TbNameResource').val() + "\"?",
 	function(){
 		$.ajax({
@@ -1645,10 +1644,10 @@ function removeRadioResource(idResource) {
 			url: '/resources/deleteRadioResource/' + idResource,
 			success: function (data) {
 				if (data.error == null) {
-					
+					alertify.success('El recurso se ha eliminado correctamente.');
 				}
 				else {
-					alertify.success('Eel recurso se ha eliminado correctamente.');
+					alertify.error('Error: '+data.error);
 				}
 			},
 			error: function(data){
@@ -1661,11 +1660,30 @@ function removeRadioResource(idResource) {
 }
 /****************************************/
 /*	FUNCTION: removePhoneResource 		*/
-/*  PARAMS: 							*/
+/*  PARAMS: idResource					*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
 function removePhoneResource(idResource) {
-	var a = idResource;
+	alertify.confirm('Ulises G 5000 R', "¿Eliminar el recurso \"" + $('#TbNameResource').val() + "\"?",
+		function(){
+			$.ajax({
+				type: 'DELETE',
+				url: '/resources/deletePhoneResource/' + idResource,
+				success: function (data) {
+					if (data.error == null) {
+						alertify.success('El recurso se ha eliminado correctamente.');
+					}
+					else {
+						alertify.error('Error: '+data.error);
+					}
+				},
+				error: function(data){
+					alertify.error('Error eliminando el recurso.');
+				}
+			});
+		},
+		function(){ alertify.error('Cancelado');}
+	);
 }
 
 function RemoveResource(f){
