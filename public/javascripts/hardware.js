@@ -1645,6 +1645,7 @@ function removeRadioResource(idResource) {
 			success: function (data) {
 				if (data.error == null) {
 					alertify.success('El recurso se ha eliminado correctamente.');
+					GetMySlaves();
 				}
 				else {
 					alertify.error('Error: '+data.error);
@@ -1675,6 +1676,7 @@ function removePhoneResource(idResource) {
 					}
 					else {
 						alertify.error('Error: '+data.error);
+						GetMySlaves();
 					}
 				},
 				error: function(data){

@@ -20,22 +20,22 @@ router.route('/')	// The root path is relative the path where it's mounted in ap
 //REV 1.0.2 VMG
 router.route('/deleteRadioResource/:idResource')
 	.delete(function(req, res){
-		var resource = req.params.idResources;
 		logging.LoggingDate("DELETE resources/deleteRadioResource/:idResource");
-		myLibResources.delRadioResource(resource,function(rsc){
-			res.json(rsc);
+		myLibResources.delRadioResource(req.params.idResource,function(result){
+			res.json(result);
 	});
 });
+
 ////////////////////////
 //REV 1.0.2 VMG
 router.route('/deletePhoneResource/:idResource')
 	.delete(function(req, res){
-		var resource = req.params.idResource;
 		logging.LoggingDate("DELETE resources/deletePhoneResource/:idResource");
-		myLibResources.delPhoneResource(resource,function(rsc){
-			res.json(rsc);
+		myLibResources.delPhoneResource(req.params.idResource,function(result){
+			res.json(result);
 		});
 	})
+
 router.route('/free')
 	.get(function(req, res) {
   		logging.LoggingDate("GET resources/free");
