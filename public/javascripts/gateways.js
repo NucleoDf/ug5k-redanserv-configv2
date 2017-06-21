@@ -2505,11 +2505,15 @@ function PostGateWay (idSite, isUpdate) {
 /****************************************/
 function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	
-	if(update)
+	if(update) {
 		$('#SResourceType').prop("disabled", true);
-	else
+		$('#BtnRemoveResource').show();
+	}
+		
+	else {
 		$('#SResourceType').prop("disabled", false);
-	
+		$('#BtnRemoveResource').hide();
+	}
 	$('#AddFormsite').addClass('disabledDiv')
 	$('#SitesList').addClass('disabledDiv')
 	$('#NavMenu').addClass('disabledDiv')
