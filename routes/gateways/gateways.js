@@ -292,7 +292,7 @@ router.route('/insertNewResource/:resource2Insert/:resourceType')
 		}
 	});
 //////////////////
-//Otra nueva para editar el nuevo recurso a insertar
+//Otra nueva para editar el recurso a insertar
 router.route('/updateResource/:resource2Insert/:resourceType/:resourceId')
 	.put(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
