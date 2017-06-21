@@ -2559,6 +2559,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(4)').hide();
 						$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
+						$('#BtnRemoveResource').attr('onclick', "removeRadioResource('" + data.idrecurso_radio + "')");
 					}
 					else if (resourceType == '2') {
 						showDataForTelephoneResource(data);
@@ -2568,6 +2569,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(4)').hide();
 						$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
+						$('#BtnRemoveResource').attr('onclick', "removePhoneResource('" + data.idrecurso_telefono + "')");
 					}
 					
 				}
@@ -2599,6 +2601,22 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	}
 }
 
+/****************************************/
+/*	FUNCTION: removeRadioResource 		*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function removeRadioResource(idResource) {
+	var a = idResource;
+}
+/****************************************/
+/*	FUNCTION: removePhoneResource 		*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function removePhoneResource(idResource) {
+	var a = idResource;
+}
 /****************************************/
 /*	FUNCTION: showDataForRadioResource 	*/
 /*  PARAMS: 							*/
