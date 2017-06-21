@@ -2561,7 +2561,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removeRadioResource('" + data.idrecurso_radio + "')");
-						$('#ButtonCommit').attr('onclick', "InsertNewResource('1'," + data.idrecurso_radio + "','true')");
+						$('#ButtonCommit').attr('onclick', "InsertNewResource('1','" + data.idrecurso_radio + "','true')");
 					}
 					else if (resourceType == '2') {
 						showDataForTelephoneResource(data);
@@ -2572,7 +2572,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removePhoneResource('" + data.idrecurso_telefono + "')");
-						$('#ButtonCommit').attr('onclick', "InsertNewResource('2'," + data.idrecurso_telefono + "','true')");
+						$('#ButtonCommit').attr('onclick', "InsertNewResource('2','" + data.idrecurso_telefono + "','true')");
 					}
 					
 				}
@@ -2804,7 +2804,7 @@ function showDataForTelephoneResource(data) {
 /*  REV 1.0.2 VMG								*/
 /************************************************/
 var InsertNewResource = function(col, row, isUpdate) {
-	var newidCgw = idCgw;
+	var resourceId=row;
 	var radioResource={};
 	var telephoneResource={};
 	var resourceType=0;
@@ -2973,23 +2973,50 @@ var InsertNewResource = function(col, row, isUpdate) {
 	
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
 	
-	$.ajax({type: 'POST',
-		dataType: 'json',
-		contentType:'application/json',
-		url: '/gateways/insertNewResource/:resource2Insert/:resourceType',
-		data: JSON.stringify( {	"resource2Insert": resource2Insert,
-								"resourceType": resourceType
+	if(!isUpdate) {
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			contentType: 'application/json',
+			url: '/gateways/insertNewResource/:resource2Insert/:resourceType',
+			data: JSON.stringify({
+					"resource2Insert": resource2Insert,
+					"resourceType": resourceType
+				}
+			),
+			success: function (data) {
+				if (data.error == null)
+					alertify.success('El recurso se ha añadido correctamente.');
+				else
+					alertify.error('Error: ' + data.error);
+			},
+			error: function (data) {
+				alertify.error('Error insertando el nuevo recurso.');
 			}
-		),
-		success: function (data) {
-			if(data.error==null)
-				alertify.success('El recurso se ha añadido correctamente.');
-			else
-				alertify.error('Error: '+data.error);
-		},
-		error: function (data) {
-			alertify.error('Error insertando el nuevo recurso.');
-		}
-	});
+		});
+	}
+	else {
+		$.ajax({
+			type: 'PUT',
+			dataType: 'json',
+			contentType: 'application/json',
+			url: '/gateways/updateResource/:resource2Insert/:resourceType/:resourceId',
+			data: JSON.stringify({
+					"resource2Insert": resource2Insert,
+					"resourceType": resourceType,
+					"resourceId": resourceId
+				}
+			),
+			success: function (data) {
+				if (data.error == null)
+					alertify.success('El recurso se ha añadido correctamente.');
+				else
+					alertify.error('Error: ' + data.error);
+			},
+			error: function (data) {
+				alertify.error('Error insertando el nuevo recurso.');
+			}
+		});
+	}
 	GetMySlaves();
 }

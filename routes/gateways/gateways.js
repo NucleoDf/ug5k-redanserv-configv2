@@ -291,7 +291,24 @@ router.route('/insertNewResource/:resource2Insert/:resourceType')
 			});
 		}
 	});
-
+//////////////////
+//Otra nueva para editar el nuevo recurso a insertar
+router.route('/updateResource/:resource2Insert/:resourceType/:resourceId')
+	.put(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		if(req.body.resourceType=='1') {//RADIO
+			myLibGateways.updateRadioRes4Gateway(req.body.resource2Insert.radio,req.body.resourceId,
+				function (result) {
+					res.json(result);
+				});
+		}
+		else if(req.body.resourceType=='2'){//TELEFONO
+			myLibGateways.updateTfnoRes4Gateway(req.body.resource2Insert.telephone,req.body.resourceId,
+				function (result) {
+					res.json(result);
+				});
+		}
+	});
 router.route('/getAll/:idGtw')
 	.get(function(req,res){
 		logging.LoggingDate('POST /getAll/:idGtw');
