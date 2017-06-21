@@ -2542,9 +2542,9 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	
 	if(update) {
 		$('#ButtonCommit').text('Actualizar');
-		$('#ButtonCommit').attr('onclick', "UpdateResource('" + $('.Slave' +
-				col).data('idSLAVE') + "','" + col + "','" + row +
-			"',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
+		//$('#ButtonCommit').attr('onclick', "UpdateResource('" + $('.Slave' +
+		//		col).data('idSLAVE') + "','" + col + "','" + row +
+		//	"',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
 		$.ajax({
 			type: 'GET',
 			url: '/gateways/getResource/' + resourceType + '/' + resourceId,
@@ -2561,6 +2561,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removeRadioResource('" + data.idrecurso_radio + "')");
+						$('#ButtonCommit').attr('onclick', "InsertNewResource('1'," + data.idrecurso_radio + "','true')");
 					}
 					else if (resourceType == '2') {
 						showDataForTelephoneResource(data);
@@ -2571,6 +2572,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removePhoneResource('" + data.idrecurso_telefono + "')");
+						$('#ButtonCommit').attr('onclick', "InsertNewResource('2'," + data.idrecurso_telefono + "','true')");
 					}
 					
 				}
@@ -2589,7 +2591,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#KeyRow').hide();
 		$('#CbGranularity').prop("disabled",true);
 		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + col + "','" + row +
-				"',function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})")
+				"','false')")
 		
 		//Por defecto metemos Radio
 		SelectBss();//Inicializar. Recarga el tipo de radio para ponerlo en el primero.
@@ -2789,12 +2791,19 @@ function showDataForTelephoneResource(data) {
 	$('#CbInterruptToneTime option[value="' +data.duracion_tono_interrup +'"]').prop('selected', true);
 	
 }
-/****************************************/
-/*	FUNCTION: GetResourceFromGateway 	*/
-/*  PARAMS: 							*/
-/*  REV 1.0.2 VMG						*/
-/****************************************/
-var InsertNewResource = function(col, row) {
+/************************************************/
+/*	FUNCTION: InsertNewResource 				*/
+/*  PARAMS: 									*/
+/*	Si es nuevo recurso, isUpdate=false			*/
+/* 	col y row son la columna y la fila donde	*/
+/*	se va a insertar el recurso.				*/
+/*	Si es editar, isUpdate=true y:				*/
+/*	col es tipo de recurso 1 radio y 2 tfno		*/
+/*	row es el id del recurso a editar			*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+var InsertNewResource = function(col, row, isUpdate) {
 	var newidCgw = idCgw;
 	var radioResource={};
 	var telephoneResource={};
