@@ -2978,6 +2978,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
 	
+	
 	//Nuevo Recurso
 	if(!isUpdate) {
 		$.ajax({
