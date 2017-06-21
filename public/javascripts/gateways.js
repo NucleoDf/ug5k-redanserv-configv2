@@ -2971,8 +2971,11 @@ var InsertNewResource = function(col, row, isUpdate) {
 		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val()
 	}
 	
+	//Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda
+	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
 	
+	//Nuevo Recurso
 	if(!isUpdate) {
 		$.ajax({
 			type: 'POST',
@@ -2995,6 +2998,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 			}
 		});
 	}
+	//Actualizar Recurso
 	else {
 		$.ajax({
 			type: 'PUT',
@@ -3009,12 +3013,12 @@ var InsertNewResource = function(col, row, isUpdate) {
 			),
 			success: function (data) {
 				if (data.error == null)
-					alertify.success('El recurso se ha añadido correctamente.');
+					alertify.success('El recurso se ha actualizado correctamente.');
 				else
 					alertify.error('Error: ' + data.error);
 			},
 			error: function (data) {
-				alertify.error('Error insertando el nuevo recurso.');
+				alertify.error('Error actualizando el recurso.');
 			}
 		});
 	}
