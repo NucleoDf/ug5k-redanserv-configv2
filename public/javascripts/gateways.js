@@ -2860,9 +2860,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 		//Indicación entrada audio
 		radioResource.indicacion_entrada_audio	=	$('#LbSquelchType option:selected').val();
 		//Umbral VAD (dB)
-		if($('#TbDaGain').val()=='')
-			radioResource.umbral_vad			=	0;//Valor Defecto
-		else
+		if($('#TbVad').val()!='')
 			radioResource.umbral_vad			=	$('#TbVad').val();
 		//Indicación salida audio
 		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
