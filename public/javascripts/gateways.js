@@ -2783,10 +2783,15 @@ function showDataForTelephoneResource(data) {
 	//Destino llamadas salientes de test
 	$('#TbRemoteNumText').val(data.destino_test);
 	//Supervisa colateral
-	if(data.supervisa_colateral==1)
+	if(data.supervisa_colateral==1) {
 		$('#CbOptionsSupervision').prop('checked', true);
-	else
+		$('#ReleaseRow').show();
+		$('#TbReleaseTime').val(data.tiempo_supervision);
+	}
+	else {
 		$('#CbOptionsSupervision').prop('checked', false);
+		$('#ReleaseRow').hide();
+	}
 	//Duración tono interrupción (sg.)
 	$('#CbInterruptToneTime option[value="' +data.duracion_tono_interrup +'"]').prop('selected', true);
 	
