@@ -2980,7 +2980,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 	
 	
 	//Nuevo Recurso
-	if(!isUpdate) {
+	if(isUpdate=='false') {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json',
