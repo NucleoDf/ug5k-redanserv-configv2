@@ -2892,7 +2892,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 		if($('#TbGrsInternalDelay').val()=='')
 			radioResource.retraso_interno_grs	=	0;//Valor Defecto
 		else
-			radioResource.retraso_interno_grs	=	$('#retraso_interno_grs').val();
+			radioResource.retraso_interno_grs	=	$('#TbGrsInternalDelay').val();
 		//Habilita grabación
 		if($('#CbEnableRecording').prop('checked'))
 			radioResource.habilita_grabacion	=	1;
