@@ -2602,22 +2602,6 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 }
 
 /****************************************/
-/*	FUNCTION: removeRadioResource 		*/
-/*  PARAMS: 							*/
-/*  REV 1.0.2 VMG						*/
-/****************************************/
-function removeRadioResource(idResource) {
-	var a = idResource;
-}
-/****************************************/
-/*	FUNCTION: removePhoneResource 		*/
-/*  PARAMS: 							*/
-/*  REV 1.0.2 VMG						*/
-/****************************************/
-function removePhoneResource(idResource) {
-	var a = idResource;
-}
-/****************************************/
 /*	FUNCTION: showDataForRadioResource 	*/
 /*  PARAMS: 							*/
 /*  REV 1.0.2 VMG						*/

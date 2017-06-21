@@ -1631,6 +1631,43 @@ function UpdateResourceReally(slaveId, col, fila, f){
 	// $('#BtnListasBN').hide();
 }
 
+/****************************************/
+/*	FUNCTION: removeRadioResource 		*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function removeRadioResource(idResource) {
+	var a = idResource;
+	alertify.confirm('Ulises G 5000 R', "¿Eliminar el recurso \"" + $('#TbNameResource').val() + "\"?",
+	function(){
+		$.ajax({
+			type: 'DELETE',
+			url: '/resources/deleteRadioResource/' + idResource,
+			success: function (data) {
+				if (data.error == null) {
+					
+				}
+				else {
+					alertify.success('Eel recurso se ha eliminado correctamente.');
+				}
+			},
+			error: function(data){
+				alertify.error('Error eliminando el recurso.');
+			}
+		});
+	},
+		function(){ alertify.error('Cancelado');}
+	);
+}
+/****************************************/
+/*	FUNCTION: removePhoneResource 		*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function removePhoneResource(idResource) {
+	var a = idResource;
+}
+
 function RemoveResource(f){
 
 	alertify.confirm('Ulises G 5000 R', "¿Eliminar el recurso \"" + $('#TbNameResource').val() + "\"?", 
