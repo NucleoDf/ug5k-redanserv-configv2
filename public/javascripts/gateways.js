@@ -2536,7 +2536,8 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		width: '90%',
 		height: '510px'
 	}, 500, function () {
-		$('#BigSlavesZone').addClass('divNucleo')
+		$('#BigSlavesZone').addClass('divNucleo');
+		$('#FormParameters').show();
 	})
 	
 	if(update) {
