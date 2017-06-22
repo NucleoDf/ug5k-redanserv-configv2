@@ -2929,6 +2929,28 @@ var InsertNewResource = function(col, row, isUpdate) {
 			radioResource.habilita_grabacion	=	1;
 		else
 			radioResource.habilita_grabacion	=	0;
+		
+		//Lista de URIS
+		var listaUris=[];
+		var uri2Insert={};
+		
+		if($('#UriTxA1').val()!='') {
+			uri2Insert.uri = $('#UriTxA1').val();
+			uri2Insert.tipo = 'TX';
+			uri2Insert.nivel_colateral = 1;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxA1').val()!='') {
+			uri2Insert.uri = $('#UriRxA1').val();
+			uri2Insert.tipo = 'RX';
+			uri2Insert.nivel_colateral = 1;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		radioResource.listaUris=listaUris;
 	}
 	////////////////////
 	//TELEFONO
