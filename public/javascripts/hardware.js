@@ -2430,6 +2430,7 @@ function RemoveSite(f){
 function ShowUris(data){
 	var cuantos = 0;
 	
+	destinationUris=[];
 	for (var j=0;j<data.uris.length;j++) {
 		var miUri={};
 		if(data.uris[j].tipo=='TXA')
@@ -2440,7 +2441,7 @@ function ShowUris(data){
 	}
 
 	// Reset pagina comunicaciones
-	ShowUriNumber(0);
+	//ShowUriNumber(0);
 
 	if (destinationUris == null)
 		return;
@@ -2487,8 +2488,10 @@ function ShowUris(data){
 		if ($('#ListMenuSites').children().length == 4)
 			$('#ListMenuSites li:last-child').remove();
 
-		ShowUriNumber(destinationUris.length > 0 ? 1 : 0);
+		//ShowUriNumber(destinationUris.length > 0 ? 1 : 0);
 	});
+	
+	$('#UriTxA').val(destinationUris[page-1].uriTxA);
 }
 
 function ShowUriNumber(page){
