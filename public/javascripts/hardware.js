@@ -1764,18 +1764,18 @@ function GetRadioResourceParameters(idRecurso,name){
 		}
 	});	
 
-	GetUris(idRecurso);
+	//GetUris(idRecurso);
 }
 
 function GetUris(idRecurso){
 	// Obtener los emplazamientos del recurso
-	$.ajax({type: 'GET', 
+	/*$.ajax({type: 'GET',
 		url: '/resources/' + idRecurso + '/uris',
 		success: function(data){
 			if (data != null)
 				ShowUris(data);
 		}
-	});	
+	});*/
 }
 
 function ShowRadioParamsOfResource(data){
@@ -2429,7 +2429,15 @@ function RemoveSite(f){
 
 function ShowUris(data){
 	var cuantos = 0;
-	destinationUris = data.uris;
+	
+	for (var j=0;j<data.uris.length;j++) {
+		var miUri={};
+		if(data.uris[j].tipo=='TXA')
+			miUri.uriTxA=data.uris[j].uri;
+		if(data.uris[j].tipo=='RXA')
+			miUri.uriRxA=data.uris[j].uri;
+		destinationUris.push(miUri);
+	}
 
 	// Reset pagina comunicaciones
 	ShowUriNumber(0);
@@ -2487,10 +2495,10 @@ function ShowUriNumber(page){
 	if (page > 0){
 		$('#FormCommunications').data('idUri',destinationUris[page-1].idUBICACIONES);
 
-		$('#UriTxA').val(destinationUris[page-1].uriTxA.substring(4));
-		$('#UriTxB').val(destinationUris[page-1].uriTxB.substring(4));
-		$('#UriRxA').val(destinationUris[page-1].uriRxA.substring(4));
-		$('#UriRxB').val(destinationUris[page-1].uriRxB.substring(4));
+		$('#UriTxA').val(destinationUris[page-1].uriTxA);
+		$('#UriTxB').val(destinationUris[page-1].uriTxB);
+		$('#UriRxA').val(destinationUris[page-1].uriRxA);
+		$('#UriRxB').val(destinationUris[page-1].uriRxB);
 
 		// $('#TxA').prop('checked',destinationUris[page-1].activoTx==0);
 		// $('#TxB').prop('checked',destinationUris[page-1].activoTx==1);

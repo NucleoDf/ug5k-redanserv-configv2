@@ -224,10 +224,18 @@ router.route('/:resource/uris/:uri')
 		});
 	});
 
-router.route('/:resource/uris')
+router.route('/:idRecurso/loadUriList')
+	.get(function(req, res) {
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		myLibResources.getResourceUriList(req.params.idRecurso, function(data){
+			res.json(data);
+		});
+	})
+
+router.route('/:idRecurso/uris')
 	.get(function(req, res) {
 	  	logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibResources.getResourceUris(req.params.resource, function(data){
+		myLibResources.getResourceUris(req.params.idRecurso, function(data){
 			res.json(data);
 		});
 	})

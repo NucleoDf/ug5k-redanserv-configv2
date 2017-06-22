@@ -2501,12 +2501,19 @@ function PostGateWay (idSite, isUpdate) {
 }
 
 /****************************************/
-/*	FUNCTION: GetResourceFromGateway 	*/
-/*  PARAMS: 							*/
+/*	FUNCTION: loadUriList 				*/
+/*  PARAMS: idRecurso					*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
-function loadUriList(resourceId){
-	var a = resourceId;
+function loadUriList(idRecurso){
+	// Obtener la lista de uris del recurso
+	$.ajax({type: 'GET',
+		url: '/resources/' + idRecurso + '/loadUriList',
+		success: function(data){
+			if (data != null)
+				ShowUris(data);
+		}
+	});
 }
 /****************************************/
 /*	FUNCTION: GetResourceFromGateway 	*/
@@ -2569,6 +2576,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						showDataForRadioResource(data);
 						$('#ListMenuParameters li:nth-child(2)').show();//Radio
 						$('#ListMenuParameters li:nth-child(3)').hide();//Telefono
+						//Mostrar pestaña listas B/N
 						if(data.tipo_agente==4||data.tipo_agente==5||data.tipo_agente==6)
 							$('#ListMenuParameters li:nth-child(4)').show();
 						else
