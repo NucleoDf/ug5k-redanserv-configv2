@@ -544,13 +544,9 @@ div(id="FormParameters")
 						td
 							div(style='border-top: 1px solid black; width:97%;')
 								table#paramCommunications(style='padding: 5px 0') 
-									tr
-										td
-											#tabs
-												ul#ListMenuSites
-													li
-														a.selected(href='#', rel='-1', onclick='ShowDestinationSite(this)') +
-									tr
+									tr#LabelSite1
+										td(style='font-weight: bold') EMPLAZAMIENTO 1
+									tr#RowSite1
 										td(style='width:100%')
 											table(style="border-spacing: 10px 15px;width:100%")
 												tr(align="center")
@@ -558,39 +554,125 @@ div(id="FormParameters")
 														label(style='color:#bf2a36')  Tx
 														div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
 															table
-																tr
+																tr#TxARow1
 																	td
 																		label URI A:
 																	td.New
-																		input.UriTextbox#UriTxA(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriTxA1(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
-																		a.ButtonNucleo#BtnSelectTxA(onclick='MakeFacedUri("#UriTxA")') <
-																tr#TxBRow
+																		a.ButtonNucleo#BtnSelectTxA1(onclick='MakeFacedUri("#UriTxA")') <
+																tr#TxBRow1
 																	td
 																		label URI B:
 																	td.New
-																		input.UriTextbox#UriTxB(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriTxB1(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
-																		a.ButtonNucleo#BtnSelectTxB(onclick='MakeFacedUri("#UriTxB")') <
+																		a.ButtonNucleo#BtnSelectTxB1(onclick='MakeFacedUri("#UriTxB")') <
 												tr(align="center")
 													td(style='width:100%')
 														label(style='color:#bf2a36')  Rx
 														div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
 															table
-																tr
+																tr#RxBRow1
 																	td
 																		label URI A:
 																	td.New
-																		input.UriTextbox#UriRxA(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriRxA1(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
-																		a.ButtonNucleo#BtnSelectRxA(onclick='MakeFacedUri("#UriRxA")') <
-																tr#RxBRow
+																		a.ButtonNucleo#BtnSelectRxA1(onclick='MakeFacedUri("#UriRxA")') <
+																tr#RxBRow1
 																	td
 																		label URI B:
 																	td.New
-																		input.UriTextbox#UriRxB(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriRxB1(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
-																		a.ButtonNucleo#BtnSelectRxB(onclick='MakeFacedUri("#UriRxB")') <
+																		a.ButtonNucleo#BtnSelectRxB1(onclick='MakeFacedUri("#UriRxB")') <
+									tr#LabelSite2
+										td(style='font-weight: bold') EMPLAZAMIENTO 2
+									tr#RowSite2
+										td(style='width:100%')
+											table(style="border-spacing: 10px 15px;width:100%")
+												tr(align="center")
+													td(style='width:100%')
+														label(style='color:#bf2a36')  Tx
+														div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
+															table
+																tr#TxARow2
+																	td
+																		label URI A:
+																	td.New
+																		input.UriTextbox#UriTxA2(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																	td.New
+																		a.ButtonNucleo#BtnSelectTxA2(onclick='MakeFacedUri("#UriTxA")') <
+																tr#TxBRow2
+																	td
+																		label URI B:
+																	td.New
+																		input.UriTextbox#UriTxB2(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																	td.New
+																		a.ButtonNucleo#BtnSelectTxB2(onclick='MakeFacedUri("#UriTxB")') <
+												tr(align="center")
+													td(style='width:100%')
+														label(style='color:#bf2a36')  Rx
+														div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
+															table
+																tr#RxARow2
+																	td
+																		label URI A:
+																	td.New
+																		input.UriTextbox#UriRxA2(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																	td.New
+																		a.ButtonNucleo#BtnSelectRxA2(onclick='MakeFacedUri("#UriRxA")') <
+																tr#RxBRow2
+																	td
+																		label URI B:
+																	td.New
+																		input.UriTextbox#UriRxB2(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																	td.New
+																		a.ButtonNucleo#BtnSelectRxB2(onclick='MakeFacedUri("#UriRxB")') <
+									tr#LabelSite3
+										td(style='font-weight: bold') EMPLAZAMIENTO 3
+									tr#RowSite3
+										td(style='width:100%')
+											table(style="border-spacing: 10px 15px;width:100%")
+												tr(align="center")
+													td(style='width:100%')
+														label(style='color:#bf2a36')  Tx
+														div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
+															table
+																tr#TxARow3
+																	td
+																		label URI A:
+																	td.New
+																		input.UriTextbox#UriTxA3(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																	td.New
+																		a.ButtonNucleo#BtnSelectTxA3(onclick='MakeFacedUri("#UriTxA")') <
+																tr#TxBRow3
+																	td
+																		label URI B:
+																	td.New
+																		input.UriTextbox#UriTxB3(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																	td.New
+																		a.ButtonNucleo#BtnSelectTxB3(onclick='MakeFacedUri("#UriTxB")') <
+												tr(align="center")
+													td(style='width:100%')
+														label(style='color:#bf2a36')  Rx
+														div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
+															table
+																tr#RxARow3
+																	td
+																		label URI A:
+																	td.New
+																		input.UriTextbox#UriRxA3(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																	td.New
+																		a.ButtonNucleo#BtnSelectRxA3(onclick='MakeFacedUri("#UriRxA")') <
+																tr#RxBRow3
+																	td
+																		label URI B:
+																	td.New
+																		input.UriTextbox#UriRxB3(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																	td.New
+																		a.ButtonNucleo#BtnSelectRxB3(onclick='MakeFacedUri("#UriRxB")') <
 									tr
 										td
 											table#TblEmplazamiento(style='width:100%;padding-bottom:15px')

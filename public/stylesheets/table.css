@@ -175,6 +175,7 @@ table.slavetable th {
 table.slavetable td {
 	padding: 0px;
 	background: white;
+	min-width: 80px;
 	/*min-width: 100px;*/
 	/*border: 1px solid #999999;*/
 }

@@ -2491,6 +2491,19 @@ function ShowUris(data){
 		//ShowUriNumber(destinationUris.length > 0 ? 1 : 0);
 	});
 	
+	
+	//Inicializar
+	$('#LabelSite1').show();
+	$('#RowSite1').show();
+	$('#LabelSite2').hide();
+	$('#RowSite2').hide();
+	$('#LabelSite3').hide();
+	$('#RowSite3').hide();
+	
+	if($('#LbTypeRadio option:selected').val() == '0')){
+	
+	}
+	
 	$('#UriTxA').val(destinationUris[page-1].uriTxA);
 }
 
