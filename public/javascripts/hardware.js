@@ -2428,7 +2428,7 @@ function RemoveSite(f){
 }
 
 function ShowUris(data){
-	var cuantos = 0;
+	/*var cuantos = 0;
 	
 	destinationUris=[];
 	for (var j=0;j<data.uris.length;j++) {
@@ -2489,8 +2489,21 @@ function ShowUris(data){
 			$('#ListMenuSites li:last-child').remove();
 
 		//ShowUriNumber(destinationUris.length > 0 ? 1 : 0);
-	});
+	});*/
 	
+	//Limpiar Campos
+	$('#UriTxA1').val('');
+	$('#UriRxA1').val('');
+	$('#UriTxA2').val('');
+	$('#UriRxA2').val('');
+	$('#UriTxA3').val('');
+	$('#UriRxA3').val('');
+	$('#UriTxB1').val('');
+	$('#UriRxB1').val('');
+	$('#UriTxB2').val('');
+	$('#UriRxB2').val('');
+	$('#UriTxB3').val('');
+	$('#UriRxB3').val('');
 	
 	//Inicializar
 	$('#LabelSite1').show();
@@ -2552,7 +2565,46 @@ function ShowUris(data){
 		$('#TxBRow3').show();
 		$('#RxBRow3').show();
 	}
-	$('#UriTxA').val(destinationUris[page-1].uriTxA);
+	if(data!=null) {
+		for(var i=0;i<data.uris.length;i++) {
+			if(data.uris[i].nivel_colateral==1) {
+				if(data.uris[i].tipo=='TXA')
+					$('#UriTxA1').val(data.uris[i].uri);
+				if(data.uris[i].tipo=='RXA')
+					$('#UriRxA1').val(data.uris[i].uri);
+			}
+			if(data.uris[i].nivel_colateral==2) {
+				if(data.uris[i].tipo=='TXA')
+					$('#UriTxB1').val(data.uris[i].uri);
+				if(data.uris[i].tipo=='RXA')
+					$('#UriRxB1').val(data.uris[i].uri);
+			}
+			if(data.uris[i].nivel_colateral==3) {
+				if(data.uris[i].tipo=='TXA')
+					$('#UriTxA2').val(data.uris[i].uri);
+				if(data.uris[i].tipo=='RXA')
+					$('#UriRxA2').val(data.uris[i].uri);
+			}
+			if(data.uris[i].nivel_colateral==4) {
+				if(data.uris[i].tipo=='TXA')
+					$('#UriTxB2').val(data.uris[i].uri);
+				if(data.uris[i].tipo=='RXA')
+					$('#UriRxB2').val(data.uris[i].uri);
+			}
+			if(data.uris[i].nivel_colateral==5) {
+				if(data.uris[i].tipo=='TXA')
+					$('#UriTxA3').val(data.uris[i].uri);
+				if(data.uris[i].tipo=='RXA')
+					$('#UriRxA3').val(data.uris[i].uri);
+			}
+			if(data.uris[i].nivel_colateral==6) {
+				if(data.uris[i].tipo=='TXA')
+					$('#UriTxB3').val(data.uris[i].uri);
+				if(data.uris[i].tipo=='RXA')
+					$('#UriRxB3').val(data.uris[i].uri);
+			}
+		}
+	}
 }
 
 function ShowUriNumber(page){

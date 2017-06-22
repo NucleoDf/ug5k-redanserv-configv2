@@ -2521,6 +2521,9 @@ function loadUriList(idRecurso){
 /*  REV 1.0.2 VMG						*/
 /****************************************/
 function GetResourceFromGateway(row, col, update, resourceType, resourceId){
+	//Inicializar la primera pestaña para obligar a la carga de uris
+	var element={rel:"FormHw"};
+	loadParam(element);
 	
 	if(update) {
 		$('#FormComm').attr('onclick', "loadParam(this);loadUriList('"+resourceId+"')");
@@ -2529,7 +2532,8 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	}
 		
 	else {
-		$('#FormComm').attr('onclick', "loadParam(this)");
+		$('#LbTypeRadio option:selected').val('0');
+		$('#FormComm').attr('onclick', "loadParam(this);ShowUris(null)");
 		$('#SResourceType').prop("disabled", false);
 		$('#BtnRemoveResource').hide();
 	}
