@@ -3,6 +3,8 @@ var listOfGateways = '';
 var totalRecursos = 0;
 var cicloCompleto = 0;
 
+var listaUris=[];
+
 /******************************************************************************************************/
 /****** Module: gateways.js												*******************************/
 /****** Description: Módulo de soporte a la gestion de pasarelas		*******************************/
@@ -2503,14 +2505,24 @@ function PostGateWay (idSite, isUpdate) {
 /*  PARAMS: 							*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
+function loadUriList(resourceId){
+	var a = resourceId;
+}
+/****************************************/
+/*	FUNCTION: GetResourceFromGateway 	*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
 function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	
 	if(update) {
+		$('#FormComm').attr('onclick', "loadParam(this);loadUriList('"+resourceId+"')");
 		$('#SResourceType').prop("disabled", true);
 		$('#BtnRemoveResource').show();
 	}
 		
 	else {
+		$('#FormComm').attr('onclick', "loadParam(this)");
 		$('#SResourceType').prop("disabled", false);
 		$('#BtnRemoveResource').hide();
 	}
@@ -2557,8 +2569,15 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						showDataForRadioResource(data);
 						$('#ListMenuParameters li:nth-child(2)').show();//Radio
 						$('#ListMenuParameters li:nth-child(3)').hide();//Telefono
-						$('#ListMenuParameters li:nth-child(4)').hide();
-						$('#ListMenuParameters li:nth-child(5)').hide();
+						if(data.tipo_agente==4||data.tipo_agente==5||data.tipo_agente==6)
+							$('#ListMenuParameters li:nth-child(4)').show();
+						else
+							$('#ListMenuParameters li:nth-child(4)').hide();
+						//Mostrar pestaña de comunicaciones
+						if(data.tipo_agente==0||data.tipo_agente==1||data.tipo_agente==2||data.tipo_agente==3)
+							$('#ListMenuParameters li:nth-child(5)').show();
+						else
+							$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removeRadioResource('" + data.idrecurso_radio + "')");
 						$('#ButtonCommit').attr('onclick', "InsertNewResource('1','" + data.idrecurso_radio + "','true')");
