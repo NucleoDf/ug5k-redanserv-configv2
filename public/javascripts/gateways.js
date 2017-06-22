@@ -2936,7 +2936,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 		
 		if($('#UriTxA1').val()!='') {
 			uri2Insert.uri = $('#UriTxA1').val();
-			uri2Insert.tipo = 'TX';
+			uri2Insert.tipo = 'TXA';
 			uri2Insert.nivel_colateral = 1;
 			
 			listaUris.push(uri2Insert);
@@ -2944,7 +2944,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 		}
 		if($('#UriRxA1').val()!='') {
 			uri2Insert.uri = $('#UriRxA1').val();
-			uri2Insert.tipo = 'RX';
+			uri2Insert.tipo = 'RXA';
 			uri2Insert.nivel_colateral = 1;
 			
 			listaUris.push(uri2Insert);
