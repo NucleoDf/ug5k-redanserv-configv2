@@ -2499,11 +2499,59 @@ function ShowUris(data){
 	$('#RowSite2').hide();
 	$('#LabelSite3').hide();
 	$('#RowSite3').hide();
+	$('#TxARow2').hide();
+	$('#RxARow2').hide();
+	$('#TxARow3').hide();
+	$('#RxARow3').hide();
+	$('#TxBRow2').hide();
+	$('#RxBRow2').hide();
+	$('#TxBRow3').hide();
+	$('#RxBRow3').hide();
 	
-	if($('#LbTypeRadio option:selected').val() == '0')){
-	
+	//Local-Simple
+	if($('#LbTypeRadio option:selected').val() == '0'){
+		$('#TxBRow1').hide();
+		$('#RxBRow1').hide();
 	}
-	
+	//Local-PR
+	else if($('#LbTypeRadio option:selected').val() == '1'){
+		$('#TxBRow1').show();
+		$('#RxBRow1').show();
+	}
+	else {
+		$('#TxARow2').show();
+		$('#RxARow2').show();
+		$('#TxARow3').show();
+		$('#RxARow3').show();
+	}
+	//Local FD-Simple
+	if($('#LbTypeRadio option:selected').val() == '2'){
+		$('#LabelSite2').show();
+		$('#RowSite2').show();
+		$('#LabelSite3').show();
+		$('#RowSite3').show();
+		
+		$('#TxBRow1').hide();
+		$('#RxBRow1').hide();
+		$('#TxBRow2').hide();
+		$('#RxBRow2').hide();
+		$('#TxBRow3').hide();
+		$('#RxBRow3').hide();
+	}
+	//Local FD-Simple
+	if($('#LbTypeRadio option:selected').val() == '3'){
+		$('#LabelSite2').show();
+		$('#RowSite2').show();
+		$('#LabelSite3').show();
+		$('#RowSite3').show();
+		
+		$('#TxBRow1').show();
+		$('#RxBRow1').show();
+		$('#TxBRow2').show();
+		$('#RxBRow2').show();
+		$('#TxBRow3').show();
+		$('#RxBRow3').show();
+	}
 	$('#UriTxA').val(destinationUris[page-1].uriTxA);
 }
 

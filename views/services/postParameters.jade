@@ -573,7 +573,7 @@ div(id="FormParameters")
 														label(style='color:#bf2a36')  Rx
 														div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
 															table
-																tr#RxBRow1
+																tr#RxARow1
 																	td
 																		label URI A:
 																	td.New
@@ -673,16 +673,16 @@ div(id="FormParameters")
 																		input.UriTextbox#UriRxB3(type="text" placeholder="<resourceName@IP:port>" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectRxB3(onclick='MakeFacedUri("#UriRxB")') <
-									tr
-										td
-											table#TblEmplazamiento(style='width:100%;padding-bottom:15px')
-												tr(align="center")
-													td.New
-														a.ButtonNucleo#BtnUpdateSite(style='display:none' onclick='UpdateSite(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})' tkey='UpdateSite')
-													td.New
-														a.ButtonNucleo#BtnAddSite(onclick='CommitSite(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})' tkey='AddSite')
-													td.New
-														a.ButtonNucleo#BtnRemoveSite(onclick='RemoveSite(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})' tkey='RemoveSite')
+									//tr
+									//	td
+									//		table#TblEmplazamiento(style='width:100%;padding-bottom:15px')
+									//			tr(align="center")
+									//				td.New
+									//					a.ButtonNucleo#BtnUpdateSite(style='display:none' onclick='UpdateSite(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})' tkey='UpdateSite')
+									//				td.New
+									//					a.ButtonNucleo#BtnAddSite(onclick='CommitSite(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})' tkey='AddSite')
+									//				td.New
+									//					a.ButtonNucleo#BtnRemoveSite(onclick='RemoveSite(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})' tkey='RemoveSite')
 
 						td(style='vertical-align:top')
 							table#facedResources(style='padding: 5px 0; height:210px')
