@@ -2950,6 +2950,86 @@ var InsertNewResource = function(col, row, isUpdate) {
 			listaUris.push(uri2Insert);
 			uri2Insert={};
 		}
+		if($('#UriTxB1').val()!='') {
+			uri2Insert.uri = $('#UriTxB1').val();
+			uri2Insert.tipo = 'TXB';
+			uri2Insert.nivel_colateral = 2;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxB1').val()!='') {
+			uri2Insert.uri = $('#UriRxB1').val();
+			uri2Insert.tipo = 'RXB';
+			uri2Insert.nivel_colateral = 2;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriTxA2').val()!='') {
+			uri2Insert.uri = $('#UriTxA2').val();
+			uri2Insert.tipo = 'TXA';
+			uri2Insert.nivel_colateral = 3;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxA2').val()!='') {
+			uri2Insert.uri = $('#UriRxA2').val();
+			uri2Insert.tipo = 'RXA';
+			uri2Insert.nivel_colateral = 3;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriTxB2').val()!='') {
+			uri2Insert.uri = $('#UriTxB2').val();
+			uri2Insert.tipo = 'TXB';
+			uri2Insert.nivel_colateral = 4;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxB2').val()!='') {
+			uri2Insert.uri = $('#UriRxB2').val();
+			uri2Insert.tipo = 'RXB';
+			uri2Insert.nivel_colateral = 4;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriTxA3').val()!='') {
+			uri2Insert.uri = $('#UriTxA3').val();
+			uri2Insert.tipo = 'TXA';
+			uri2Insert.nivel_colateral = 5;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxA3').val()!='') {
+			uri2Insert.uri = $('#UriRxA3').val();
+			uri2Insert.tipo = 'RXA';
+			uri2Insert.nivel_colateral = 5;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriTxB3').val()!='') {
+			uri2Insert.uri = $('#UriTxB3').val();
+			uri2Insert.tipo = 'TXB';
+			uri2Insert.nivel_colateral = 6;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxB3').val()!='') {
+			uri2Insert.uri = $('#UriRxB3').val();
+			uri2Insert.tipo = 'RXB';
+			uri2Insert.nivel_colateral = 6;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
 		radioResource.listaUris=listaUris;
 	}
 	////////////////////
