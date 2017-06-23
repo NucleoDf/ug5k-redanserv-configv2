@@ -725,7 +725,7 @@ div(id="FormParameters")
 									td.New(align='center')
 										input(type='text' style='width:55px' onblur='ValidateAtsNumber(this,"ErrorATSNumber")' onfocus='this.oldValue=this.value')
 									td.New(align='center' colspan=2) 
-											a.ButtonNucleo(onclick='AddRange(this,true)' tkey='AddRange')
+											a.ButtonNucleo#ButtonAddRange(onclick='AddRange(this,true)' tkey='AddRange')
 						form#FormDestino(style='display:none')
 							table#rangeAtsDestination.range
 								tr(style='height:20px')

@@ -134,7 +134,11 @@ function AddPhoneParameters(){
 			}
 	});
 }
-
+/********************************************/
+/*	FUNCTION: AddRange 						*/
+/*  PARAMS: 								*/
+/*  REV 1.0.2 VMG							*/
+/********************************************/
 function AddRange(item,origin){
 	var inicial='';
 	var final='';
@@ -188,6 +192,9 @@ function AddRange(item,origin){
 	else{
 		alertify.error('Rango ATS incorrecto.');
 	}
+	
+	var data;
+	ShowRangeAts(data);
 }
 
 function UpdateRank(index,origen){
