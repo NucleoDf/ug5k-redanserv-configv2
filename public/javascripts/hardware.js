@@ -2574,9 +2574,9 @@ function ShowUris(data){
 					$('#UriRxA1').val(data.uris[i].uri);
 			}
 			if(data.uris[i].nivel_colateral==2) {
-				if(data.uris[i].tipo=='TXA')
+				if(data.uris[i].tipo=='TXB')
 					$('#UriTxB1').val(data.uris[i].uri);
-				if(data.uris[i].tipo=='RXA')
+				if(data.uris[i].tipo=='RXB')
 					$('#UriRxB1').val(data.uris[i].uri);
 			}
 			if(data.uris[i].nivel_colateral==3) {
@@ -2586,9 +2586,9 @@ function ShowUris(data){
 					$('#UriRxA2').val(data.uris[i].uri);
 			}
 			if(data.uris[i].nivel_colateral==4) {
-				if(data.uris[i].tipo=='TXA')
+				if(data.uris[i].tipo=='TXB')
 					$('#UriTxB2').val(data.uris[i].uri);
-				if(data.uris[i].tipo=='RXA')
+				if(data.uris[i].tipo=='RXB')
 					$('#UriRxB2').val(data.uris[i].uri);
 			}
 			if(data.uris[i].nivel_colateral==5) {
@@ -2598,9 +2598,9 @@ function ShowUris(data){
 					$('#UriRxA3').val(data.uris[i].uri);
 			}
 			if(data.uris[i].nivel_colateral==6) {
-				if(data.uris[i].tipo=='TXA')
+				if(data.uris[i].tipo=='TXB')
 					$('#UriTxB3').val(data.uris[i].uri);
-				if(data.uris[i].tipo=='RXA')
+				if(data.uris[i].tipo=='RXB')
 					$('#UriRxB3').val(data.uris[i].uri);
 			}
 		}
