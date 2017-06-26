@@ -1,3 +1,4 @@
+var dataAtsRange={};
 function ResetTelParameters(){
 	$('#NameResource').text('Resource: ');
 
@@ -193,8 +194,13 @@ function AddRange(item,origin){
 		alertify.error('Rango ATS incorrecto.');
 	}
 	
-	var data;
-	ShowRangeAts(data);
+	
+	var ranks={idRANGOS:'1',origen:'1',inicial:inicial,final:final};
+	var dataAtsRangeTemp=dataAtsRange;
+	dataAtsRange.ranks=[];
+	dataAtsRange.ranks.push(ranks);
+	dataAtsRangeTemp.ranks.push(dataAtsRange.ranks);
+	ShowRangeAts(dataAtsRangeTemp);
 }
 
 function UpdateRank(index,origen){

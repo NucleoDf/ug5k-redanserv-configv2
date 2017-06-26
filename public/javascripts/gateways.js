@@ -2604,8 +2604,10 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removePhoneResource('" + data.idrecurso_telefono + "')");
 						$('#ButtonCommit').attr('onclick', "InsertNewResource('2','" + data.idrecurso_telefono + "','true')");
+						if ($('#LbTypeTel')[0].value == 3 || $('#LbTypeTel')[0].value == 4) {
+							$('#ListMenuParameters li:nth-child(6)').show();
+						}
 					}
-					
 				}
 				else if (data.error) {
 					alertify.error('Error: ' + data.error);

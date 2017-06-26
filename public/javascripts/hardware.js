@@ -2752,7 +2752,7 @@ function OnChangeGroup(){
 }
 
 /****************************************/
-/*	FUNCTION: GetResourceFromGateway 	*/
+/*	FUNCTION: OnChangeResourceType 		*/
 /*  PARAMS: 							*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
@@ -2773,6 +2773,7 @@ function OnChangeResourceType(sel){
 	}
 	else{//Telefono
 		ShowOptions('0');//Opciones de telefono por defecto
+		$('#LbTypeTel option[value="0"]').prop('selected', true);
 		$('#GranularityRow').hide();//Precisión de audio desactivado para tfno
 		$('#DestinationRow').hide();
 		$('#BlackWhiteRow').hide();
