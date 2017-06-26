@@ -2634,6 +2634,8 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#ListMenuParameters li:nth-child(4)').hide();
 		$('#ListMenuParameters li:nth-child(5)').show();
 		$('#ListMenuParameters li:nth-child(6)').hide();
+		
+		// Borrar valores residuales en el insertar new
 	}
 }
 
@@ -3107,6 +3109,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 		}
 		//Duración tono interrupción (sg.)
 		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val()
+		
+		telephoneResource.ranks						=	dataAtsRange.ranks;
 	}
 	
 	//Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda

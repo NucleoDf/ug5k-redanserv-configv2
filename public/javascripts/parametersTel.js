@@ -1,4 +1,5 @@
 var dataAtsRange={};
+dataAtsRange.ranks=[];
 function ResetTelParameters(){
 	$('#NameResource').text('Resource: ');
 
@@ -172,7 +173,13 @@ function AddRange(item,origin){
 	
 	if ((inicial != '' && final!='') &&
 		(inicial <= final)){
-		$.ajax({type: 'POST',
+		if(origin)
+			var ranks={idRANGOS:'1',origen: true,inicial:inicial,final:final};
+		else
+			var ranks={idRANGOS:'1',origen: false,inicial:inicial,final:final};
+		
+		dataAtsRange.ranks.push(ranks);
+		/*$.ajax({type: 'POST',
 			dataType: 'json',
 			contentType:'application/json',
 			url: '/resources/' + $('#DivParameters').data('idRecurso') + '/phoneParameters/range',
@@ -188,20 +195,15 @@ function AddRange(item,origin){
 					GetAtsRange($('#DivParameters').data('idRecurso'));
 				}
 			}
-		});
+		});*/
 	}
 	else{
 		alertify.error('Rango ATS incorrecto.');
 	}
-	
-	
-	var ranks={idRANGOS:'1',origen:'1',inicial:inicial,final:final};
-	var dataAtsRangeTemp=dataAtsRange;
-	dataAtsRange.ranks=[];
-	dataAtsRange.ranks.push(ranks);
-	dataAtsRangeTemp.ranks.push(dataAtsRange.ranks);
-	ShowRangeAts(dataAtsRangeTemp);
+	ShowRangeAts();
 }
+
+
 
 function UpdateRank(index,origen){
 	var inicial='';

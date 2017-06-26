@@ -2048,10 +2048,12 @@ function GetAtsRange(rsc){
 	});	
 }
 
-function ShowRangeAts(data){
+function ShowRangeAts(){
 	var indexOrigen = 1;
 	var indexDestino = 1;
-
+	
+	var data = dataAtsRange;
+	
 	var cuantos = $('#rangeAtsOrigin tr').length;
 	var i=0;
 	for (i=2;i<cuantos;i++)
@@ -2059,14 +2061,14 @@ function ShowRangeAts(data){
 	cuantos = $('#rangeAtsDestination tr').length;
 	for (i=2;i<cuantos;i++)
 		$('#rangeAtsDestination tr:nth-child(2)').remove();
-
+	
 	$('#rangeAtsOrigin tr:last td:nth-child(1) input').val('');
 	$('#rangeAtsOrigin tr:last td:nth-child(2) input').val('');
 	$('#rangeAtsDestination tr:last td:nth-child(1) input').val('');
 	$('#rangeAtsDestination tr:last td:nth-child(2) input').val('');
-
+	
 	translateWord('Update',function(result){
-		var actualiza=result;	
+		var actualiza=result;
 		translateWord('Remove',function(result){
 			var remove=result;
 			/** 20170511 AGL. PERFILES */
@@ -2074,9 +2076,9 @@ function ShowRangeAts(data){
 			var clase_a = Authorize($('#BodyRedan').data('perfil'),[ccAdminProfMsc,ccConfiProfMsc]) == false ? " class='ButtonNucleo NotAllowedBtn'" : "class='ButtonNucleo'";
 			var clase_ = Authorize($('#BodyRedan').data('perfil'),[ccAdminProfMsc,ccConfiProfMsc]) == false ? " class='NotAllowedBtn'" : "";
 			/*var clase = ($('#BodyRedan').data('perfil') & 1) == 1 ? " class='New NotAllowedTd'" : "";
-			var clase_a = ($('#BodyRedan').data('perfil') & 1) == 1 ? " class='ButtonNucleo NotAllowedBtn'" : "class='ButtonNucleo'";
-			var clase_ = ($('#BodyRedan').data('perfil') & 1) == 1 ? " class='NotAllowedBtn'" : "";
-			*************************************************/
+			 var clase_a = ($('#BodyRedan').data('perfil') & 1) == 1 ? " class='ButtonNucleo NotAllowedBtn'" : "class='ButtonNucleo'";
+			 var clase_ = ($('#BodyRedan').data('perfil') & 1) == 1 ? " class='NotAllowedBtn'" : "";
+			 *************************************************/
 			if(data!='NO_DATA') {
 				$.each(data.ranks, function (index, value) {
 					if (value.origen) {
