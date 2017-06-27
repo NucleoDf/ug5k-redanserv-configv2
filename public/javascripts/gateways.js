@@ -2836,7 +2836,7 @@ function showDataForTelephoneResource(data) {
 		$('#LbTypeTel option:selected').val() == 4) {
 		$('#ListMenuParameters li:nth-child(5)').show();
 		$.ajax({type: 'GET',
-			url: '/resources/' + rsc + '/phoneParameters/range',
+			url: '/resources/' + data.idrecurso_telefono + '/phoneParameters/range',
 			success: function(data){
 				if (data != null)
 					ShowRangeAts(data);
