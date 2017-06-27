@@ -174,9 +174,9 @@ function AddRange(item,origin){
 	if ((inicial != '' && final!='') &&
 		(inicial <= final)){
 		if(origin)
-			var ranks={idRANGOS:'1',origen: true,inicial:inicial,final:final};
+			var ranks={idRANGOS:'1',origen: true,inicial:inicial,final:final,tipo:1};
 		else
-			var ranks={idRANGOS:'1',origen: false,inicial:inicial,final:final};
+			var ranks={idRANGOS:'1',origen: false,inicial:inicial,final:final,tipo:0};
 		
 		dataAtsRange.ranks.push(ranks);
 		/*$.ajax({type: 'POST',
