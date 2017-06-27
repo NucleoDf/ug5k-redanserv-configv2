@@ -2858,23 +2858,51 @@ function showDataForTelephoneResource(data) {
 				if (data != null) {
 					//ShowRangeAts(data);
 					//dataAtsRange = data;
-					$('#OrigenInicio1').val('');
-					$('#OrigenInicio2').val('');
-					$('#OrigenInicio3').val('');
-					$('#OrigenInicio4').val('');
-					$('#OrigenFinal1').val('');
-					$('#OrigenFinal2').val('');
-					$('#OrigenFinal3').val('');
-					$('#OrigenFinal4').val('');
-					$('#DestinoInicio1').val('');
-					$('#DestinoInicio2').val('');
-					$('#DestinoInicio3').val('');
-					$('#DestinoInicio4').val('');
-					$('#DestinoFinal1').val('');
-					$('#DestinoFinal2').val('');
-					$('#DestinoFinal3').val('');
-					$('#DestinoFinal4').val('');
-				}
+					var kOrigen=0, kDestino=0;
+					data.ranks.forEach(function (rango) {
+						if(rango.tipo==0){//Origen
+							kOrigen++;
+							if(kOrigen==1){
+								$('#OrigenInicio1').val(rango.inicial);
+								$('#OrigenFinal1').val(rango.final);
+							}
+							if(kOrigen==2){
+								$('#OrigenInicio2').val(rango.inicial);
+								$('#OrigenFinal2').val(rango.final);
+							}
+							if(kOrigen==3){
+								$('#OrigenInicio3').val(rango.inicial);
+								$('#OrigenFinal3').val(rango.final);
+							}
+							if(kOrigen==4){
+								$('#OrigenInicio4').val(rango.inicial);
+								$('#OrigenFinal4').val(rango.final);
+							}
+						}
+						else {//Destino
+							kDestino++;
+							if(kDestino==1){
+								$('#DestinoInicio1').val(rango.inicial);
+								$('#DestinoFinal1').val(rango.final);
+							}
+							if(kDestino==2){
+								$('#DestinoInicio2').val(rango.inicial);
+								$('#DestinoFinal2').val(rango.final);
+							}
+							if(kDestino==3){
+								$('#DestinoInicio3').val(rango.inicial);
+								$('#DestinoFinal3').val(rango.final);
+							}
+							if(kDestino==4){
+								$('#DestinoInicio4').val(rango.inicial);
+								$('#DestinoFinal4').val(rango.final);
+							}
+						}
+					});
+				}//else no data
+			},
+			error: function (data) {
+				alertify.error('Error cconsultando los rangos ATS.');
 			}
 		});
 	}
@@ -3163,7 +3191,105 @@ var InsertNewResource = function(col, row, isUpdate) {
 		//Duración tono interrupción (sg.)
 		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val()
 		
-		telephoneResource.ranks						=	dataAtsRange.ranks;
+		var rank={};
+		var atsRanks=[];
+		if( ($('#OrigenInicio1').val()!=''&& $('#OrigenFinal1').val()=='') ||
+			($('#OrigenInicio1').val()==''&& $('#OrigenFinal1').val()!='')) {
+			alertify.error('El Rango 1 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			rank.inicial = $('#OrigenInicio1').val();
+			rank.final = $('#OrigenFinal1').val();
+			rank.tipo=0;
+			atsRanks.push(rank);
+			rank={};
+		}
+		if( ($('#OrigenInicio2').val()!=''&& $('#OrigenFinal2').val()=='') ||
+			($('#OrigenInicio2').val()==''&& $('#OrigenFinal2').val()!='')) {
+			alertify.error('El Rango 2 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			rank.inicial = $('#OrigenInicio2').val();
+			rank.final = $('#OrigenFinal2').val();
+			rank.tipo=0;
+			atsRanks.push(rank);
+			rank={};
+		}
+		if( ($('#OrigenInicio3').val()!=''&& $('#OrigenFinal3').val()=='') ||
+			($('#OrigenInicio3').val()==''&& $('#OrigenFinal3').val()!='')) {
+			alertify.error('El Rango 3 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			rank.inicial = $('#OrigenInicio3').val();
+			rank.final = $('#OrigenFinal3').val();
+			rank.tipo=0;
+			atsRanks.push(rank);
+			rank={};
+		}
+		if( ($('#OrigenInicio4').val()!=''&& $('#OrigenFinal4').val()=='') ||
+			($('#OrigenInicio4').val()==''&& $('#OrigenFinal4').val()!='')) {
+			alertify.error('El Rango 4 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			rank.inicial = $('#OrigenInicio4').val();
+			rank.final = $('#OrigenFinal4').val();
+			rank.tipo=0;
+			atsRanks.push(rank);
+			rank={};
+		}
+		if( ($('#DestinoInicio1').val()!=''&& $('#DestinoFinal1').val()=='') ||
+			($('#DestinoInicio1').val()==''&& $('#DestinoFinal1').val()!='')) {
+			alertify.error('El Rango 1 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			rank.inicial = $('#DestinoInicio1').val();
+			rank.final = $('#DestinoFinal1').val();
+			rank.tipo=1;
+			atsRanks.push(rank);
+			rank={};
+		}
+		if( ($('#DestinoInicio2').val()!=''&& $('#DestinoFinal2').val()=='') ||
+			($('#DestinoInicio2').val()==''&& $('#DestinoFinal2').val()!='')) {
+			alertify.error('El Rango 2 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			rank.inicial = $('#DestinoInicio2').val();
+			rank.final = $('#DestinoFinal2').val();
+			rank.tipo=1;
+			atsRanks.push(rank);
+			rank={};
+		}
+		if( ($('#DestinoInicio3').val()!=''&& $('#DestinoFinal3').val()=='') ||
+			($('#DestinoInicio3').val()==''&& $('#DestinoFinal3').val()!='')) {
+			alertify.error('El Rango 3 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			rank.inicial = $('#DestinoInicio3').val();
+			rank.final = $('#DestinoFinal3').val();
+			rank.tipo=1;
+			atsRanks.push(rank);
+			rank={};
+		}
+		if( ($('#DestinoInicio4').val()!=''&& $('#DestinoFinal4').val()=='') ||
+			($('#DestinoInicio4').val()==''&& $('#DestinoFinal4').val()!='')) {
+			alertify.error('El Rango 4 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			rank.inicial = $('#DestinoInicio4').val();
+			rank.final = $('#DestinoFinal4').val();
+			rank.tipo=1;
+			atsRanks.push(rank);
+			rank={};
+		}
+		telephoneResource.ranks						=	atsRanks;
 	}
 	//Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda
 	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
