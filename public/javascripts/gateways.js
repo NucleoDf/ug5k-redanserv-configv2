@@ -2865,6 +2865,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 	var radioResource={};
 	var telephoneResource={};
 	var resourceType=0;
+	
 	//Para no tener que hacer ningún SELECT de la id de la pasarela
 	var idCgw=$('#DivGateways').data('idCgw');
 	
@@ -3129,7 +3130,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 		
 		telephoneResource.ranks						=	dataAtsRange.ranks;
 	}
-	
+	//Reset el array de rangos ATS
+	dataAtsRange=[];
 	//Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda
 	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};

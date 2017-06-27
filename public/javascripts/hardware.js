@@ -2085,7 +2085,7 @@ function ShowRangeAts(dataReceived){
 			 *************************************************/
 			if(data!='NO_DATA') {
 				$.each(data.ranks, function (index, value) {
-					if (value.origen) {
+					if (value.origen==1) {
 						indexOrigen++;
 						$('#rangeAtsOrigin tr:last').before('<tr data-idrango=' + value.idRANGOS + ' style="height:45px">' +
 							'<td align="center"' + clase + '><input ' + clase_ + ' value="' + value.inicial + '" style="width:55px;text-align: right"/></td>' +
