@@ -2532,6 +2532,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	}
 		
 	else {
+		ShowRangeAts();//Llamamos para resetear los valores...
 		$('#LbTypeRadio option:selected').val('0');
 		$('#FormComm').attr('onclick', "loadParam(this);ShowUris(null)");
 		$('#SResourceType').prop("disabled", false);
