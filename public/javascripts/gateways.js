@@ -2532,7 +2532,23 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	}
 		
 	else {
-		ShowRangeAts();//Llamamos para resetear los valores...
+		//Resetear los valores ATS...
+		$('#OrigenInicio1').val('');
+		$('#OrigenInicio2').val('');
+		$('#OrigenInicio3').val('');
+		$('#OrigenInicio4').val('');
+		$('#OrigenFinal1').val('');
+		$('#OrigenFinal2').val('');
+		$('#OrigenFinal3').val('');
+		$('#OrigenFinal4').val('');
+		$('#DestinoInicio1').val('');
+		$('#DestinoInicio2').val('');
+		$('#DestinoInicio3').val('');
+		$('#DestinoInicio4').val('');
+		$('#DestinoFinal1').val('');
+		$('#DestinoFinal2').val('');
+		$('#DestinoFinal3').val('');
+		$('#DestinoFinal4').val('');
 		$('#LbTypeRadio option:selected').val('0');
 		$('#FormComm').attr('onclick', "loadParam(this);ShowUris(null)");
 		$('#SResourceType').prop("disabled", false);
@@ -2839,8 +2855,26 @@ function showDataForTelephoneResource(data) {
 		$.ajax({type: 'GET',
 			url: '/resources/' + data.idrecurso_telefono + '/phoneParameters/range',
 			success: function(data){
-				if (data != null)
-					ShowRangeAts(data);
+				if (data != null) {
+					//ShowRangeAts(data);
+					//dataAtsRange = data;
+					$('#OrigenInicio1').val('');
+					$('#OrigenInicio2').val('');
+					$('#OrigenInicio3').val('');
+					$('#OrigenInicio4').val('');
+					$('#OrigenFinal1').val('');
+					$('#OrigenFinal2').val('');
+					$('#OrigenFinal3').val('');
+					$('#OrigenFinal4').val('');
+					$('#DestinoInicio1').val('');
+					$('#DestinoInicio2').val('');
+					$('#DestinoInicio3').val('');
+					$('#DestinoInicio4').val('');
+					$('#DestinoFinal1').val('');
+					$('#DestinoFinal2').val('');
+					$('#DestinoFinal3').val('');
+					$('#DestinoFinal4').val('');
+				}
 			}
 		});
 	}
@@ -3131,8 +3165,6 @@ var InsertNewResource = function(col, row, isUpdate) {
 		
 		telephoneResource.ranks						=	dataAtsRange.ranks;
 	}
-	//Reset el array de rangos ATS
-	dataAtsRange=[];
 	//Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda
 	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};

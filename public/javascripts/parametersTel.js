@@ -244,7 +244,14 @@ function UpdateRank(index,origen){
 	if ((inicial != '' && final!='') && 
 		(inicial <= final) &&
 		((matchValinicial!=null) || (matchValfinal!=null)) ) {
-		$.ajax({type: 'PUT', 
+		if(origen)
+			var ranks={idRANGOS:'1',origen: 1,inicial:inicial,final:final,tipo:1};
+		else
+			var ranks={idRANGOS:'1',origen: 0,inicial:inicial,final:final,tipo:0};
+		
+		dataAtsRange.ranks.push(ranks);
+		RemoveRank(idRango,origen)
+		/*$.ajax({type: 'PUT',
 				dataType: 'json', 
 				contentType:'application/json',
 				url: '/resources/' + $('#DivParameters').data('idRecurso') + '/phoneParameters/range', 
@@ -261,7 +268,7 @@ function UpdateRank(index,origen){
 						GetAtsRange($('#DivParameters').data('idRecurso'));
 					}
 				}
-		});
+		});*/
 	}
 	else{
 		if (origen) {
@@ -275,6 +282,7 @@ function UpdateRank(index,origen){
 			
 		alertify.error('Rango ATS incorrecto.');
 	}
+	ShowRangeAts();
 }
 
 function RemoveRank(index,origen){
@@ -282,12 +290,15 @@ function RemoveRank(index,origen){
 
 	if (origen){
 		idRango = $('#rangeAtsOrigin tr:nth-child(' + (index) +')').data('idrango');
+		$('#rangeAtsOrigin tr:nth-child(' + (index) +')').remove();
 	}
 	else{
 		idRango = $('#rangeAtsDestination tr:nth-child(' + (index) +')').data('idrango');
+		$('#rangeAtsDestination tr:nth-child(' + (index) +')').remove();
 	}
-
-	$.ajax({type: 'DELETE', 
+	
+	
+	/*$.ajax({type: 'DELETE',
 			url: '/resources/' + $('#DivParameters').data('idRecurso') + '/phoneParameters/range/' + idRango, 
 			success: function (data){
 				if (data.error == null){
@@ -296,7 +307,7 @@ function RemoveRank(index,origen){
 					GetAtsRange($('#DivParameters').data('idRecurso'));
 				}
 			}
-	});
+	});*/
 }
 
 function OnVoxDetection(cb){
