@@ -9,7 +9,7 @@ function ResetTelParameters(){
 	//  Mostrar tab de telefonia
 	$('#ListMenuParameters li:nth-child(3)').show();
 	
-
+	//TODO esto está al reves?
 	// Ocultar/Mostrar tab ATS dependiendo del tipo de recurso telefonico
 	if ($('#LbTypeTel option:selected').val() == 3 ||
 		$('#LbTypeTel option:selected').val() == 4)

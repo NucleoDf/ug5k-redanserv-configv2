@@ -2048,11 +2048,15 @@ function GetAtsRange(rsc){
 	});	
 }
 
-function ShowRangeAts(){
+function ShowRangeAts(dataReceived){
 	var indexOrigen = 1;
 	var indexDestino = 1;
+	var data;
 	
-	var data = dataAtsRange;
+	if(dataReceived==null)
+		data = dataAtsRange;
+	else
+		data = dataReceived;
 	
 	var cuantos = $('#rangeAtsOrigin tr').length;
 	var i=0;

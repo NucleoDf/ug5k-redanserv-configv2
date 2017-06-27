@@ -2830,6 +2830,23 @@ function showDataForTelephoneResource(data) {
 	//Duración tono interrupción (sg.)
 	$('#CbInterruptToneTime option[value="' +data.duracion_tono_interrup +'"]').prop('selected', true);
 	
+	//Peticion rangos ATS
+	// Ocultar/Mostrar tab ATS dependiendo del tipo de recurso telefonico
+	if ($('#LbTypeTel option:selected').val() == 3 ||
+		$('#LbTypeTel option:selected').val() == 4) {
+		$('#ListMenuParameters li:nth-child(5)').show();
+		$.ajax({type: 'GET',
+			url: '/resources/' + rsc + '/phoneParameters/range',
+			success: function(data){
+				if (data != null)
+					ShowRangeAts(data);
+			}
+		});
+	}
+		
+	else
+		$('#ListMenuParameters li:nth-child(5)').hide();
+	
 }
 /************************************************/
 /*	FUNCTION: InsertNewResource 				*/
