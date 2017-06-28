@@ -2534,6 +2534,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		resetUrisValues();
 		$('#SRestriccion option[value="0"]').prop('selected', true);
 		$('#LbTypeRadio option[value="0"]').prop('selected', true);
+		$('#SRestriccion option[value="0"]').prop('selected', true);
 		$('#FormComm').attr('onclick', "loadParam(this);ShowUris(null)");
 		$('#SResourceType').prop("disabled", false);
 		$('#BtnRemoveResource').hide();
@@ -2745,11 +2746,19 @@ function showDataForRadioResource(data) {
 	else
 		$('#CbEnableRecording').prop('checked', false);
 	
-	if($('#SRestriccion option:selected').val() == 1) {//Lista Negra
-		
+	if(data.restriccion_entrantes == 0) {
+		$('#BlackList').attr('style', 'display:table-column');
+		$('#WhiteList').attr('style', 'display:table-column');
 	}
-	if($('#SRestriccion option:selected').val() == 2) {//Lista Blanca
-		
+	if(data.restriccion_entrantes == 1) {
+		$('#BlackList').attr('style', 'display:table');
+		$('#WhiteList').attr('style', 'display:table-column');
+		showWhiteBlackList(data.idrecurso_radio, 1);
+	}
+	if(data.restriccion_entrantes == 2) {
+		$('#BlackList').attr('style', 'display:table-column');
+		$('#WhiteList').attr('style', 'display:table');
+		showWhiteBlackList(data.idrecurso_radio, 2);
 	}
 }
 /********************************************/
@@ -3415,6 +3424,127 @@ function insertBNList(listaUris){
 		listaUris.push(uri2Insert);
 		uri2Insert={};
 	}
+	if($('#Uri2BL').val()!='') {
+		uri2Insert.uri = $('#Uri2BL').val();
+		uri2Insert.tipo = 'LSN';
+		uri2Insert.nivel_colateral = 0;
+		
+		listaUris.push(uri2Insert);
+		uri2Insert={};
+	}
+	if($('#Uri3BL').val()!='') {
+		uri2Insert.uri = $('#Uri3BL').val();
+		uri2Insert.tipo = 'LSN';
+		uri2Insert.nivel_colateral = 0;
+		
+		listaUris.push(uri2Insert);
+		uri2Insert={};
+	}
+	if($('#Uri4BL').val()!='') {
+		uri2Insert.uri = $('#Uri4BL').val();
+		uri2Insert.tipo = 'LSN';
+		uri2Insert.nivel_colateral = 0;
+		
+		listaUris.push(uri2Insert);
+		uri2Insert={};
+	}
+	if($('#Uri5BL').val()!='') {
+		uri2Insert.uri = $('#Uri5BL').val();
+		uri2Insert.tipo = 'LSN';
+		uri2Insert.nivel_colateral = 0;
+		
+		listaUris.push(uri2Insert);
+		uri2Insert={};
+	}
+	if($('#Uri6BL').val()!='') {
+		uri2Insert.uri = $('#Uri6BL').val();
+		uri2Insert.tipo = 'LSN';
+		uri2Insert.nivel_colateral = 0;
+		
+		listaUris.push(uri2Insert);
+		uri2Insert={};
+	}
+	if($('#Uri7BL').val()!='') {
+		uri2Insert.uri = $('#Uri7BL').val();
+		uri2Insert.tipo = 'LSN';
+		uri2Insert.nivel_colateral = 0;
+		
+		listaUris.push(uri2Insert);
+		uri2Insert={};
+	}
+	if($('#Uri8BL').val()!='') {
+		uri2Insert.uri = $('#Uri8BL').val();
+		uri2Insert.tipo = 'LSN';
+		uri2Insert.nivel_colateral = 0;
+		
+		listaUris.push(uri2Insert);
+		uri2Insert={};
+	}
+	//Lista Blanca
+	if($('#Uri1WL').val()!='') {
+		uri2Insert.uri = $('#Uri1WL').val();
+		uri2Insert.tipo = 'LSB';
+		uri2Insert.nivel_colateral = 0;
+		
+		listaUris.push(uri2Insert);
+		uri2Insert={};
+	}
+	if($('#Uri2WL').val()!='') {
+ 		uri2Insert.uri = $('#Uri2WL').val();
+		 uri2Insert.tipo = 'LSB';
+		 uri2Insert.nivel_colateral = 0;
+		 
+		 listaUris.push(uri2Insert);
+		 uri2Insert={};
+	 }
+	 if($('#Uri3WL').val()!='') {
+		 uri2Insert.uri = $('#Uri3WL').val();
+		 uri2Insert.tipo = 'LSB';
+		 uri2Insert.nivel_colateral = 0;
+		 
+		 listaUris.push(uri2Insert);
+		 uri2Insert={};
+	 }
+	 if($('#Uri4WL').val()!='') {
+		 uri2Insert.uri = $('#Uri4WL').val();
+		 uri2Insert.tipo = 'LSB';
+		 uri2Insert.nivel_colateral = 0;
+		 
+		 listaUris.push(uri2Insert);
+		 uri2Insert={};
+	 }
+	 if($('#Uri5WL').val()!='') {
+		 uri2Insert.uri = $('#Uri5WL').val();
+		 uri2Insert.tipo = 'LSB';
+		 uri2Insert.nivel_colateral = 0;
+		 
+		 listaUris.push(uri2Insert);
+		 uri2Insert={};
+	 }
+	 if($('#Uri6WL').val()!='') {
+		 uri2Insert.uri = $('#Uri6WL').val();
+		 uri2Insert.tipo = 'LSB';
+		 uri2Insert.nivel_colateral = 0;
+		 
+		 listaUris.push(uri2Insert);
+		 uri2Insert={};
+	 }
+	 if($('#Uri7WL').val()!='') {
+		 uri2Insert.uri = $('#Uri7WL').val();
+		 uri2Insert.tipo = 'LSB';
+		 uri2Insert.nivel_colateral = 0;
+		 
+		 listaUris.push(uri2Insert);
+		 uri2Insert={};
+	 }
+	 if($('#Uri8WL').val()!='') {
+		 uri2Insert.uri = $('#Uri8WL').val();
+		 uri2Insert.tipo = 'LSB';
+		 uri2Insert.nivel_colateral = 0;
+		 
+		 listaUris.push(uri2Insert);
+		 uri2Insert={};
+	}
 	return listaUris
 }
 
@@ -3453,4 +3583,23 @@ function resetUrisValues() {
 	$('#Uri6WL').val('');
 	$('#Uri7WL').val('');
 	$('#Uri8WL').val('');
+}
+
+function showWhiteBlackList(idRecurso, listType) {
+	
+	$.ajax({
+		type: 'GET',
+		url: '/resources/' + idRecurso + '/radioParameters/wblist/'+listType,
+		success: function (data) {
+			if (data != null) {
+				
+			}
+			/*else {
+				alertify.error('Error.');
+			}*/
+		},
+		error: function (data) {
+			alertify.error('Error al obtener las listas Blancas y Negras.');
+		}
+	});
 }

@@ -156,6 +156,15 @@ router.route('/:resource/phoneParameters')
 		});
 	});
 
+router.route('/:resource/radioParameters/wblist/:listType')
+	.get(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		var rsc = req.params.resource;
+		var listType = req.params.listType;
+		myLibResources.getRadioWBList(rsc,listType,function(ranks){
+			res.json(ranks);
+		});
+	})
 router.route('/:resource/phoneParameters/range')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
