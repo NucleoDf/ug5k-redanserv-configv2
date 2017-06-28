@@ -2799,8 +2799,22 @@ function OnChangeResourceType(sel){
 }
 
 function OnChangeRestriccion(sel){
-	if (sel.value != 0){
-		$('#WhiteBlackList').attr('style','display:table');
+	switch(sel.value) {
+		case '0':
+			$('#BlackList').attr('style','display:table-column');
+			$('#WhiteList').attr('style','display:table-column');
+			break;
+		case '1':
+			$('#BlackList').attr('style','display:table');
+			$('#WhiteList').attr('style','display:table-column');
+			break;
+		case '2':
+			$('#BlackList').attr('style','display:table-column');
+			$('#WhiteList').attr('style','display:table');
+			break;
+	}
+	//if (sel.value != 0){
+	//	$('#WhiteBlackList').attr('style','display:table');
 		/*$('#NewsUris').attr('style','display:table');
 		$.ajax({type: 'GET', 
 							url: '/resources/lists', 
@@ -2808,11 +2822,11 @@ function OnChangeRestriccion(sel){
 									LoadUri(data)
 							}
 						});*/
-		var rsc=$('table.resource').data('idRecurso');
+	/*	var rsc=$('table.resource').data('idRecurso');
 		GetListsFromResource(rsc);
-		
+*/
 		/** 20170517 AGL buscando 'undefined' */
-		if (sel.value) {
+/*		if (sel.value) {
 			$.ajax({type: 'GET', 
 								url: '/resources/assignedlists/'+rsc+'/'+sel.value, 
 								success: function(data1){
@@ -2829,6 +2843,7 @@ function OnChangeRestriccion(sel){
 		$('#WhiteBlackList').attr('style','display:table-column');
 		//$('#NewsUris').attr('style','display:table-column');	
 	}
+	*/
 }
 
 // Mostrar u ocultar CB selección tabla calificación audio
