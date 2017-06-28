@@ -3200,11 +3200,17 @@ var InsertNewResource = function(col, row, isUpdate) {
 		}
 		else{
 			if($('#OrigenInicio1').val()!='' && $('#OrigenFinal1').val()!='') {
-				rank.inicial = $('#OrigenInicio1').val();
-				rank.final = $('#OrigenFinal1').val();
-				rank.tipo = 0;
-				atsRanks.push(rank);
-				rank = {};
+				if($('#OrigenInicio1').val()>$('#OrigenFinal1').val()!='') {
+					alertify.error('El valor inicial del rango 1 debe de tener un valor menor o igual al valor final.');
+					return;
+				}
+				else {
+					rank.inicial = $('#OrigenInicio1').val();
+					rank.final = $('#OrigenFinal1').val();
+					rank.tipo = 0;
+					atsRanks.push(rank);
+					rank = {};
+				}
 			}
 		}
 		if( ($('#OrigenInicio2').val()!=''&& $('#OrigenFinal2').val()=='') ||
@@ -3213,12 +3219,18 @@ var InsertNewResource = function(col, row, isUpdate) {
 			return;
 		}
 		else{
-			if($('#OrigenInicio2').val()!='' && $('#OrigenFinal2').val()!='') {
-				rank.inicial = $('#OrigenInicio2').val();
-				rank.final = $('#OrigenFinal2').val();
-				rank.tipo = 0;
-				atsRanks.push(rank);
-				rank = {};
+			if($('#OrigenInicio2').val()>$('#OrigenFinal2').val()!='') {
+				alertify.error('El valor inicial del rango 2 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#OrigenInicio2').val() != '' && $('#OrigenFinal2').val() != '') {
+					rank.inicial = $('#OrigenInicio2').val();
+					rank.final = $('#OrigenFinal2').val();
+					rank.tipo = 0;
+					atsRanks.push(rank);
+					rank = {};
+				}
 			}
 		}
 		if( ($('#OrigenInicio3').val()!=''&& $('#OrigenFinal3').val()=='') ||
@@ -3227,12 +3239,18 @@ var InsertNewResource = function(col, row, isUpdate) {
 			return;
 		}
 		else{
-			if($('#OrigenInicio3').val()!='' && $('#OrigenFinal3').val()!='') {
-				rank.inicial = $('#OrigenInicio3').val();
-				rank.final = $('#OrigenFinal3').val();
-				rank.tipo = 0;
-				atsRanks.push(rank);
-				rank = {};
+			if($('#OrigenInicio3').val()>$('#OrigenFinal3').val()!='') {
+				alertify.error('El valor inicial del rango 3 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#OrigenInicio3').val() != '' && $('#OrigenFinal3').val() != '') {
+					rank.inicial = $('#OrigenInicio3').val();
+					rank.final = $('#OrigenFinal3').val();
+					rank.tipo = 0;
+					atsRanks.push(rank);
+					rank = {};
+				}
 			}
 		}
 		if( ($('#OrigenInicio4').val()!=''&& $('#OrigenFinal4').val()=='') ||
@@ -3241,12 +3259,18 @@ var InsertNewResource = function(col, row, isUpdate) {
 			return;
 		}
 		else{
-			if($('#OrigenInicio4').val()!='' && $('#OrigenFinal4').val()!='') {
-				rank.inicial = $('#OrigenInicio4').val();
-				rank.final = $('#OrigenFinal4').val();
-				rank.tipo = 0;
-				atsRanks.push(rank);
-				rank = {};
+			if($('#OrigenInicio4').val()>$('#OrigenFinal4').val()!='') {
+				alertify.error('El valor inicial del rango 4 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#OrigenInicio4').val() != '' && $('#OrigenFinal4').val() != '') {
+					rank.inicial = $('#OrigenInicio4').val();
+					rank.final = $('#OrigenFinal4').val();
+					rank.tipo = 0;
+					atsRanks.push(rank);
+					rank = {};
+				}
 			}
 		}
 		if( ($('#DestinoInicio1').val()!=''&& $('#DestinoFinal1').val()=='') ||
@@ -3255,12 +3279,18 @@ var InsertNewResource = function(col, row, isUpdate) {
 			return;
 		}
 		else{
-			if($('#DestinoInicio1').val()!='' && $('#DestinoFinal1').val()!='') {
-				rank.inicial = $('#DestinoInicio1').val();
-				rank.final = $('#DestinoFinal1').val();
-				rank.tipo = 1;
-				atsRanks.push(rank);
-				rank = {};
+			if($('#DestinoInicio1').val()>$('#DestinoFinal1').val()!='') {
+				alertify.error('El valor inicial del rango 1 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#DestinoInicio1').val() != '' && $('#DestinoFinal1').val() != '') {
+					rank.inicial = $('#DestinoInicio1').val();
+					rank.final = $('#DestinoFinal1').val();
+					rank.tipo = 1;
+					atsRanks.push(rank);
+					rank = {};
+				}
 			}
 		}
 		if( ($('#DestinoInicio2').val()!=''&& $('#DestinoFinal2').val()=='') ||
@@ -3269,12 +3299,18 @@ var InsertNewResource = function(col, row, isUpdate) {
 			return;
 		}
 		else{
-			if($('#DestinoInicio2').val()!='' && $('#DestinoFinal2').val()!='') {
-				rank.inicial = $('#DestinoInicio2').val();
-				rank.final = $('#DestinoFinal2').val();
-				rank.tipo = 1;
-				atsRanks.push(rank);
-				rank = {};
+			if($('#DestinoInicio2').val()>$('#DestinoFinal2').val()!='') {
+				alertify.error('El valor inicial del rango 2 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#DestinoInicio2').val() != '' && $('#DestinoFinal2').val() != '') {
+					rank.inicial = $('#DestinoInicio2').val();
+					rank.final = $('#DestinoFinal2').val();
+					rank.tipo = 1;
+					atsRanks.push(rank);
+					rank = {};
+				}
 			}
 		}
 		if( ($('#DestinoInicio3').val()!=''&& $('#DestinoFinal3').val()=='') ||
@@ -3283,12 +3319,18 @@ var InsertNewResource = function(col, row, isUpdate) {
 			return;
 		}
 		else{
-			if($('#DestinoInicio3').val()!='' && $('#DestinoFinal3').val()!='') {
-				rank.inicial = $('#DestinoInicio3').val();
-				rank.final = $('#DestinoFinal3').val();
-				rank.tipo = 1;
-				atsRanks.push(rank);
-				rank = {};
+			if($('#DestinoInicio3').val()>$('#DestinoFinal3').val()!='') {
+				alertify.error('El valor inicial del rango 3 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#DestinoInicio3').val() != '' && $('#DestinoFinal3').val() != '') {
+					rank.inicial = $('#DestinoInicio3').val();
+					rank.final = $('#DestinoFinal3').val();
+					rank.tipo = 1;
+					atsRanks.push(rank);
+					rank = {};
+				}
 			}
 		}
 		if( ($('#DestinoInicio4').val()!=''&& $('#DestinoFinal4').val()=='') ||
@@ -3297,12 +3339,18 @@ var InsertNewResource = function(col, row, isUpdate) {
 			return;
 		}
 		else{
-			if($('#DestinoInicio4').val()!='' && $('#DestinoFinal4').val()!='') {
-				rank.inicial = $('#DestinoInicio4').val();
-				rank.final = $('#DestinoFinal4').val();
-				rank.tipo = 1;
-				atsRanks.push(rank);
-				rank = {};
+			if($('#DestinoInicio4').val()>$('#DestinoFinal4').val()!='') {
+				alertify.error('El valor inicial del rango 4 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#DestinoInicio4').val() != '' && $('#DestinoFinal4').val() != '') {
+					rank.inicial = $('#DestinoInicio4').val();
+					rank.final = $('#DestinoFinal4').val();
+					rank.tipo = 1;
+					atsRanks.push(rank);
+					rank = {};
+				}
 			}
 		}
 		telephoneResource.ranks						=	atsRanks;
