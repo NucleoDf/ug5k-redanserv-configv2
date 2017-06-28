@@ -2530,25 +2530,9 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#SResourceType').prop("disabled", true);
 		$('#BtnRemoveResource').show();
 	}
-		
 	else {
-		//Resetear los valores ATS...
-		$('#OrigenInicio1').val('');
-		$('#OrigenInicio2').val('');
-		$('#OrigenInicio3').val('');
-		$('#OrigenInicio4').val('');
-		$('#OrigenFinal1').val('');
-		$('#OrigenFinal2').val('');
-		$('#OrigenFinal3').val('');
-		$('#OrigenFinal4').val('');
-		$('#DestinoInicio1').val('');
-		$('#DestinoInicio2').val('');
-		$('#DestinoInicio3').val('');
-		$('#DestinoInicio4').val('');
-		$('#DestinoFinal1').val('');
-		$('#DestinoFinal2').val('');
-		$('#DestinoFinal3').val('');
-		$('#DestinoFinal4').val('');
+		resetUrisValues();
+		$('#SRestriccion option:selected').val('0');
 		$('#LbTypeRadio option:selected').val('0');
 		$('#FormComm').attr('onclick', "loadParam(this);ShowUris(null)");
 		$('#SResourceType').prop("disabled", false);
@@ -2760,6 +2744,13 @@ function showDataForRadioResource(data) {
 		$('#CbEnableRecording').prop('checked', true);
 	else
 		$('#CbEnableRecording').prop('checked', false);
+	
+	if($('#SRestriccion option:selected').val() == 1) {//Lista Negra
+		
+	}
+	if($('#SRestriccion option:selected').val() == 2) {//Lista Blanca
+		
+	}
 }
 /********************************************/
 /*	FUNCTION: showDataForTelephoneResource 	*/
@@ -3115,7 +3106,9 @@ var InsertNewResource = function(col, row, isUpdate) {
 			listaUris.push(uri2Insert);
 			uri2Insert={};
 		}
-		radioResource.listaUris=listaUris;
+		
+		radioResource.listaUris=insertBNList(listaUris);
+		radioResource.restriccion_entrantes = $('#SRestriccion option:selected').val();
 	}
 	////////////////////
 	//TELEFONO
@@ -3408,4 +3401,56 @@ var InsertNewResource = function(col, row, isUpdate) {
 		});
 	}
 	GetMySlaves();
+}
+
+function insertBNList(listaUris){
+	var uri2Insert={};
+	
+	//Lista negra
+	if($('#Uri1BL').val()!='') {
+		uri2Insert.uri = $('#Uri1BL').val();
+		uri2Insert.tipo = 'LSN';
+		uri2Insert.nivel_colateral = 0;
+		
+		listaUris.push(uri2Insert);
+		uri2Insert={};
+	}
+	return listaUris
+}
+
+function resetUrisValues() {
+	//Resetear los valores ATS...
+	$('#OrigenInicio1').val('');
+	$('#OrigenInicio2').val('');
+	$('#OrigenInicio3').val('');
+	$('#OrigenInicio4').val('');
+	$('#OrigenFinal1').val('');
+	$('#OrigenFinal2').val('');
+	$('#OrigenFinal3').val('');
+	$('#OrigenFinal4').val('');
+	$('#DestinoInicio1').val('');
+	$('#DestinoInicio2').val('');
+	$('#DestinoInicio3').val('');
+	$('#DestinoInicio4').val('');
+	$('#DestinoFinal1').val('');
+	$('#DestinoFinal2').val('');
+	$('#DestinoFinal3').val('');
+	$('#DestinoFinal4').val('');
+	//Reset los valores Listas B/N...
+	$('#Uri1BL').val('');
+	$('#Uri2BL').val('');
+	$('#Uri3BL').val('');
+	$('#Uri4BL').val('');
+	$('#Uri5BL').val('');
+	$('#Uri6BL').val('');
+	$('#Uri7BL').val('');
+	$('#Uri8BL').val('');
+	$('#Uri1WL').val('');
+	$('#Uri2WL').val('');
+	$('#Uri3WL').val('');
+	$('#Uri4WL').val('');
+	$('#Uri5WL').val('');
+	$('#Uri6WL').val('');
+	$('#Uri7WL').val('');
+	$('#Uri8WL').val('');
 }

@@ -74,7 +74,18 @@ script.
 				$('#FormTel').hide();
 				//$('#FormJitter').hide();
 				$('#FormATS').hide();
-
+				if($("#SRestriccion option:selected").val() == 0) {
+						$('#BlackList').attr('style', 'display:table-column');
+						$('#WhiteList').attr('style', 'display:table-column');
+				}
+				if($("#SRestriccion option:selected").val() == 1) {
+					$('#BlackList').attr('style', 'display:table');
+					$('#WhiteList').attr('style', 'display:table-column');
+				}
+				if($("#SRestriccion option:selected").val() == 2) {
+					$('#BlackList').attr('style', 'display:table-column');
+					$('#WhiteList').attr('style', 'display:table');
+				}
 				//$('#SRestriccion option:eq(0)').prop('selected', true);
 				//$('#DivContent').animate({height:'300px'});
 			break;
