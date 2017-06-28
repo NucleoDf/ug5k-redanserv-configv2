@@ -2532,8 +2532,8 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	}
 	else {
 		resetUrisValues();
-		$('#SRestriccion option:selected').val('0');
-		$('#LbTypeRadio option:selected').val('0');
+		$('#SRestriccion option[value="0"]').prop('selected', true);
+		$('#LbTypeRadio option[value="0"]').prop('selected', true);
 		$('#FormComm').attr('onclick', "loadParam(this);ShowUris(null)");
 		$('#SResourceType').prop("disabled", false);
 		$('#BtnRemoveResource').hide();
