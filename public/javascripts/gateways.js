@@ -3594,7 +3594,55 @@ function showWhiteBlackList(idRecurso, listType) {
 		url: '/resources/' + idRecurso + '/radioParameters/wblist/'+listType,
 		success: function (data) {
 			if (data != null) {
-				var a=0;
+				var kNegra=0, kBlanca=0;
+				data.list.forEach(function (lista) {
+					if(listType=='LSN'){//Lista Negra
+						kNegra++;
+						if(kNegra==1)
+							$('#Uri1BL').val(lista.uri);
+						if(kNegra==2)
+							$('#Uri2BL').val(lista.uri);
+						if(kNegra==3)
+							$('#Uri3BL').val(lista.uri);
+						if(kNegra==4)
+							$('#Uri4BL').val(lista.uri);
+						if(kNegra==5)
+							$('#Uri5BL').val(lista.uri);
+						if(kNegra==6)
+							$('#Uri6BL').val(lista.uri);
+						if(kNegra==7)
+							$('#Uri7BL').val(lista.uri);
+						if(kNegra==8)
+							$('#Uri8BL').val(lista.uri);
+					}
+					if(listType=='LSB'){//Lista Blanca
+						kBlanca++;
+						/*$('#Uri1BL').val('');
+						$('#Uri2BL').val('');
+						$('#Uri3BL').val('');
+						$('#Uri4BL').val('');
+						$('#Uri5BL').val('');
+						$('#Uri6BL').val('');
+						$('#Uri7BL').val('');
+						$('#Uri8BL').val('');*/
+						if(kBlanca==1)
+							$('#Uri1WL').val(lista.uri);
+						if(kBlanca==2)
+							$('#Uri1WL').val(lista.uri);
+						if(kBlanca==3)
+							$('#Uri1WL').val(lista.uri);
+						if(kBlanca==4)
+							$('#Uri1WL').val(lista.uri);
+						if(kBlanca==5)
+							$('#Uri5WL').val(lista.uri);
+						if(kBlanca==6)
+							$('#Uri6WL').val(lista.uri);
+						if(kBlanca==7)
+							$('#Uri7WL').val(lista.uri);
+						if(kBlanca==8)
+							$('#Uri8WL').val(lista.uri);
+					}
+				});
 			}
 			/*else {
 				alertify.error('Error.');
