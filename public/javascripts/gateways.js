@@ -2746,6 +2746,8 @@ function showDataForRadioResource(data) {
 	else
 		$('#CbEnableRecording').prop('checked', false);
 	
+	$('#SRestriccion option[value="' + data.restriccion_entrantes+'"]').prop('selected', true);
+	
 	if(data.restriccion_entrantes == 0) {
 		$('#BlackList').attr('style', 'display:table-column');
 		$('#WhiteList').attr('style', 'display:table-column');
@@ -2753,12 +2755,12 @@ function showDataForRadioResource(data) {
 	if(data.restriccion_entrantes == 1) {
 		$('#BlackList').attr('style', 'display:table');
 		$('#WhiteList').attr('style', 'display:table-column');
-		showWhiteBlackList(data.idrecurso_radio, 1);
+		showWhiteBlackList(data.idrecurso_radio, 'LSN');
 	}
 	if(data.restriccion_entrantes == 2) {
 		$('#BlackList').attr('style', 'display:table-column');
 		$('#WhiteList').attr('style', 'display:table');
-		showWhiteBlackList(data.idrecurso_radio, 2);
+		showWhiteBlackList(data.idrecurso_radio, 'LSB');
 	}
 }
 /********************************************/
@@ -3592,7 +3594,7 @@ function showWhiteBlackList(idRecurso, listType) {
 		url: '/resources/' + idRecurso + '/radioParameters/wblist/'+listType,
 		success: function (data) {
 			if (data != null) {
-				
+				var a=0;
 			}
 			/*else {
 				alertify.error('Error.');
