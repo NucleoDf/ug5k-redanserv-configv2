@@ -3593,7 +3593,7 @@ function showWhiteBlackList(idRecurso, listType) {
 		type: 'GET',
 		url: '/resources/' + idRecurso + '/radioParameters/wblist/'+listType,
 		success: function (data) {
-			if (data != null) {
+			if (data.list != null && data.list.length>0) {
 				var kNegra=0, kBlanca=0;
 				data.list.forEach(function (lista) {
 					if(listType=='LSN'){//Lista Negra
