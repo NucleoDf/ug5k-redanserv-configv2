@@ -141,15 +141,20 @@ function OnSelectSQActivation(sel){
 	else
 		$('#VadRow').attr('style','display:table-row');
 }
-
+/************************************************/
+/*	FUNCTION: GetRemoteRadioResources 			*/
+/*  PARAMS: 									*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
 function GetRemoteRadioResources(){
-	var cfgName = $('#name').val();
+	var cfgId = $('#DivConfigurations').data('idCFG');
 	
 	$('#CBFacedSite').empty();
 	$('#CBFacedGtw').empty();
 	$('#CBFacedResources').empty();
 
-	SelectSite(cfgName);
+	SelectSite(cfgId);
 	
 	/*$.ajax({type: 'GET', 
 		url: '/resources/remote/' + cfgName + '/null/null',
@@ -177,7 +182,12 @@ function GetRemoteRadioResources(){
 		}
 	});	*/
 }
-
+/************************************************/
+/*	FUNCTION: GetRemoteRadioResources 			*/
+/*  PARAMS: cfgId: id de la configuración		*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
 function SelectSite(cfgName){
 	$.ajax({type: 'GET', 
 		url: '/resources/remote/' + cfgName + '/null/null',
