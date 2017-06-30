@@ -226,15 +226,23 @@ void Uv5kiGwCfgWebApp::stCb_config(struct mg_connection *conn, string user, web_
 			P_HIS_PROC->SetEventosHistoricos(user, ev);				// Generar los historicos de cambios.
 
 			PLOG_INFO("Uv5kiGwCfgWebApp: Orden de Cambio de Configuracion ejecutada...");
-				// Sincronizar Fichero....
-			if (P_CFG_PROC->GetStdLocalConfig() != slcAislado && P_WORKING_CONFIG->DualCpu())
+
+			// 20170630. Las condiciones estan mal seleccionadas. Se cambian
+			if (P_WORKING_CONFIG->DualCpu() && P_CFG_PROC->GetStdLocalConfig() == slcAislado) 
 			{
+				PLOG_INFO("Uv5kiGwCfgWebApp: Sincronizando Cambio de Configuracion...");
 				WorkingThread(Uv5kiGwCfgWebApp::ConfigSync, NULL).Do();
 			}
-			else 
-			{
-				PLOG_ERROR("Uv5kiGwCfgWebApp: Error Sincronizando Cambio de Configuracion");
-			}
+			//	// Sincronizar Fichero....
+			//if (P_CFG_PROC->GetStdLocalConfig() != slcAislado && P_WORKING_CONFIG->DualCpu())
+			//{
+			//	WorkingThread(Uv5kiGwCfgWebApp::ConfigSync, NULL).Do();
+			//}
+			//else 
+			//{
+			//	PLOG_ERROR("Uv5kiGwCfgWebApp: Error Sincronizando Cambio de Configuracion");
+			//}
+			/****************/
 		}
 		else {
 			PLOG_ERROR("Uv5kiGwCfgWebApp: Error procesando Orden de Cambio de Configuracion. Formato Incorrecto...");
