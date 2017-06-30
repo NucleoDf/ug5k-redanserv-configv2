@@ -205,7 +205,7 @@ function SelectSite(cfgName){
 					var encontrado = false;
 
 					if ($("#CBFacedSite option[value='" + value.eName + "']").length == 0){
-						options = '<option value="' + value.eName + '">' + value.eName + '</option>';
+						options = '<option value="' + value.idemplazamiento + '">' + value.eName + '</option>';
 						$('#CBFacedSite').append(options);
 					}
 				});
