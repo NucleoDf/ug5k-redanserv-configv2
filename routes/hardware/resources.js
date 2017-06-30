@@ -66,10 +66,11 @@ router.route('/lists')
 		});
 	});
 
-router.route('/remote/:cfg/:site/:gtw')
+router.route('/remote/:cfg/:site/:gtw/:resId')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibResources.getRemoteRadioResources(req.params.cfg,req.params.site,req.params.gtw,function(data){
+		myLibResources.getRemoteRadioResources(req.params.cfg,req.params.site,
+			req.params.gtw,req.params.resId,function(data){
 			res.json(data);
 		});
 	});

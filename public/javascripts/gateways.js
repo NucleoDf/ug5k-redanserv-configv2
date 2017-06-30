@@ -2595,6 +2595,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removeRadioResource('" + data.idrecurso_radio + "')");
 						$('#ButtonCommit').attr('onclick', "InsertNewResource('1','" + data.idrecurso_radio + "','true')");
+						$('#ResId').attr('res-id',data.idrecurso_radio);
 					}
 					else if (resourceType == '2') {
 						showDataForTelephoneResource(data);

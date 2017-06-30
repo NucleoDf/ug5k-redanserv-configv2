@@ -190,7 +190,7 @@ function GetRemoteRadioResources(){
 /************************************************/
 function SelectSite(cfgId){
 	$.ajax({type: 'GET', 
-		url: '/resources/remote/' + cfgId + '/null/null',
+		url: '/resources/remote/' + cfgId + '/null/null/null',
 		success: function(data){
 			$('#CBFacedSite').empty();$('#CBFacedSite').text('');
 			$('#CBFacedGtw').empty();$('#CBFacedGtw').text('');
@@ -221,7 +221,7 @@ function SelectSite(cfgId){
 /************************************************/
 function SelectGtw(siteId){
 	$.ajax({type: 'GET', 
-		url: '/resources/remote/null/' + siteId + '/null',
+		url: '/resources/remote/null/' + siteId + '/null/null',
 		success: function(data){
 			$('#CBFacedGtw').empty();$('#CBFacedGtw').text('');
 			$('#CBFacedResources').empty();$('#CBFacedResources').text('');
@@ -247,11 +247,17 @@ function SelectGtw(siteId){
 /*	FUNCTION: SelectResource 					*/
 /*  PARAMS: gtwId: id de la pasarela			*/
 /*												*/
+/*			***resId: id del recurso que no hay */
+/*			que mostrar 						*/
+/*												*/
 /*  REV 1.0.2 VMG								*/
 /************************************************/
 function SelectResource (gtw){
+	
+	var resId = $('#ResId').attr('res-id');
+	
 	$.ajax({type: 'GET', 
-		url: '/resources/remote/null/null/' + gtw,
+		url: '/resources/remote/null/null/' + gtw + '/' + resId,
 		success: function(data){
 			$('#CBFacedResources').empty();$('#CBFacedResources').text('');
 			
@@ -264,7 +270,8 @@ function SelectResource (gtw){
 					var encontrado = false;
 
 					if ($("#CBFacedResources option[value='" + value.gIpv + "']").length == 0){
-						options = '<option value="' + value.rName + '@' + value.gIpv + '">' + value.rName + '</option>';
+						options = '<option value="' + value.rName + '@' + value.gIpv + ':'+
+							value.puerto_sip +'">' + value.rName + '</option>';
 						$('#CBFacedResources').append(options);
 					}
 				});
