@@ -183,14 +183,14 @@ function GetRemoteRadioResources(){
 	});	*/
 }
 /************************************************/
-/*	FUNCTION: GetRemoteRadioResources 			*/
+/*	FUNCTION: SelectSite 						*/
 /*  PARAMS: cfgId: id de la configuración		*/
 /*												*/
 /*  REV 1.0.2 VMG								*/
 /************************************************/
-function SelectSite(cfgName){
+function SelectSite(cfgId){
 	$.ajax({type: 'GET', 
-		url: '/resources/remote/' + cfgName + '/null/null',
+		url: '/resources/remote/' + cfgId + '/null/null',
 		success: function(data){
 			$('#CBFacedSite').empty();$('#CBFacedSite').text('');
 			$('#CBFacedGtw').empty();$('#CBFacedGtw').text('');
@@ -213,10 +213,15 @@ function SelectSite(cfgName){
 		}
 	});
 }
-
-function SelectGtw(cfgName,site){
+/************************************************/
+/*	FUNCTION: SelectGtw 						*/
+/*  PARAMS: siteId: id del emplazamiento		*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function SelectGtw(siteId){
 	$.ajax({type: 'GET', 
-		url: '/resources/remote/' + cfgName + '/' + site + '/null',
+		url: '/resources/remote/null/' + siteId + '/null',
 		success: function(data){
 			$('#CBFacedGtw').empty();$('#CBFacedGtw').text('');
 			$('#CBFacedResources').empty();$('#CBFacedResources').text('');
@@ -230,7 +235,7 @@ function SelectGtw(cfgName,site){
 					var encontrado = false;
 
 					if ($("#CBFacedGtw option[value='" + value.gName + "']").length == 0){
-						options = '<option value="' + value.gName + '">' + value.gName + '</option>';
+						options = '<option value="' + value.idpasarela + '">' + value.gName + '</option>';
 						$('#CBFacedGtw').append(options);
 					}
 				});
@@ -238,10 +243,15 @@ function SelectGtw(cfgName,site){
 		}
 	});
 }
-
-function SelectResource (cfgName,site,gtw){
+/************************************************/
+/*	FUNCTION: SelectResource 					*/
+/*  PARAMS: gtwId: id de la pasarela			*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function SelectResource (gtw){
 	$.ajax({type: 'GET', 
-		url: '/resources/remote/' + cfgName + '/' + site + '/' + gtw,
+		url: '/resources/remote/null/null/' + gtw,
 		success: function(data){
 			$('#CBFacedResources').empty();$('#CBFacedResources').text('');
 			
