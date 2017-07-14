@@ -41,12 +41,13 @@ CommGenConfig::CommGenConfig(soap_config &sc)
 	// this->dualidad = datos_locales.dualidad==true ? 1 : 0;	// Leer DatosLocales.ini
 	this->ipv = sc.IpVirt;
 	this->ips = sc.Server;
-	this->dualidad = (sc.IpVirt == sc.IpCol ? 0 : 1);
+	/** 20170714. AGL. En las nuevas versiones sc.IpCol puede venir vacio para Para pasarelas simples. */
+	this->dualidad = ((sc.IpCol=="" || sc.IpVirt == sc.IpCol)  ? 0 : 1);
 
 	//this->acGrupoMulticast = sc.ParametrosMulticast.GrupoMulticastConfiguracion;
 	//this->uiPuertoMulticast = sc.ParametrosMulticast.PuertoMulticastConfiguracion;
 
-	this->nivelconsola = datos_locales.nivel_consola;		// Leer DatosLocales.ini
+	this->nivelconsola = datos_locales.nivel_consola;			// Leer DatosLocales.ini
 	this->puertoconsola = datos_locales.puerto_consola;
 	this->nivelIncidencias = datos_locales.nivel_incidencias;
 
