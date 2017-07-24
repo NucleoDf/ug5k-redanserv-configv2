@@ -285,7 +285,7 @@ app.get('/logout',
 
 app.use('/users', isAuthenticated, users);
 app.use('/gateways', gateways);
-app.use('/configurations', isAuthenticated, configurations);
+app.use('/configurations', configurations);
 app.use('/services', isAuthenticated, services);
 app.use('/hardware', isAuthenticated, hardware);
 app.use('/resources', isAuthenticated, resources);
