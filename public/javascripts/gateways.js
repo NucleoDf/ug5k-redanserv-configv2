@@ -144,7 +144,7 @@ var CopyGateway2 = function(){
 	//Prueba del Json completo
 	$.ajax({
 	 	type: 'GET',
-	 	url: '/gateways/5.5.5.14/testconfig',
+	 	url: '/gateways/1.1.1.2/testconfig',
 	 	success: function (data) {
 	 		if (data.error != null)
 	 			alertify.error('Error: ' + data.error);
