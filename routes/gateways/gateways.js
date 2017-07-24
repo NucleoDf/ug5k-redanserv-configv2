@@ -204,7 +204,8 @@ router.route('/:gateway/services/:service')
 router.route('/:gateway/testconfig')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibGateways.getIpv(req.params.gateway,function(result){
+		//myLibGateways.getIpv(req.params.gateway,function(result){
+		myLibGateways.getIpv2(req.params.gateway,function(result){
 			if (result.toLocal == -1){
 				// No en BD
 				logging.LoggingDate(JSON.stringify({idConf:result.ipv.toString(), fechaHora:''},null,'\t'));
@@ -214,15 +215,15 @@ router.route('/:gateway/testconfig')
 			else if (result.toLocal == -2){
 				// No en configurción activa
 				logging.LoggingDate(JSON.stringify({idConf:result.toLocal.toString(), fechaHora:''},null,'\t'));
-					myLibGateways.getTestConfig(result.ipv,function(data){
-				 		res.json({idConf: result.toLocal.toString(), fechaHora:''});
-			 		});
+					//myLibGateways.getTestConfig(result.ipv,function(data){
+				res.json({idConf: result.toLocal.toString(), fechaHora:''});
+			 		//});
 			}
 			else{
 				// En configuracion activa
-				myLibGateways.getTestConfig(result.ipv,function(data){
-		 			res.json(data);
-		 		});
+				//myLibGateways.getTestConfig(result.ipv,function(data){
+		 		res.json(result.data);
+		 		//});
 			}
 			/*
 			var ipv = result.ipv;

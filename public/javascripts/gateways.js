@@ -141,7 +141,23 @@ var CopyGateway = function(){
 
 var CopyGateway2 = function(){
 	alertify.success('Test!');
+	//Prueba del Json completo
 	$.ajax({
+	 	type: 'GET',
+	 	url: '/gateways/5.5.5.14/testconfig',
+	 	success: function (data) {
+	 		if (data.error != null)
+	 			alertify.error('Error: ' + data.error);
+			 else {
+	 			alertify.success('Success');
+			}
+	 	},
+	 	error: function(data){
+	 		alertify.error('Error en el test.');
+	 	}
+	 });
+	//Prueba del Json completo
+	/*$.ajax({
 		type: 'GET',
 		url: '/gateways/getAll/' + $('#DivGateways').data('idCgw'),
 		success: function (data) {
@@ -155,7 +171,7 @@ var CopyGateway2 = function(){
 		error: function(data){
 			alertify.error('Error en el test.');
 		}
-	});
+	});*/
 };
 
 var Copy = function(){
