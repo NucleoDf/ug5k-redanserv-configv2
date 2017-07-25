@@ -344,11 +344,11 @@ CREATE TABLE `pasarelas` (
   `ip_gtw1` varchar(15) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Dirección ip de la puerta de enlace para la cpu1.',
   `mask_cpu1` varchar(15) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Máscara de red para la cpu0.',
   `puerto_sip` int(5) DEFAULT '5060' COMMENT 'Valor del puerto para el campo SIP',
-  `periodo_supervision` int(6) DEFAULT '0' COMMENT 'Tiempo en segundos para el valor supervisión.',
+  `periodo_supervision` int(6) NOT NULL DEFAULT '90' COMMENT 'Tiempo en segundos para el valor supervisión. Entre 90 y 1800.',
   `puerto_servicio_snmp` int(5) DEFAULT '65000' COMMENT 'Valor del puerto para el servicio snmp.',
   `puerto_snmp` int(5) DEFAULT '161' COMMENT 'Valor del puerto para el snmp.',
   `snmpv2` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Indica si usa snmp versión 2. (1) Verdadero, (0) Falso.',
-  `comunidad_snmp` varchar(45) COLLATE latin1_spanish_ci DEFAULT 'public' COMMENT 'Comunidad SNMP V2. Por defecto public',
+  `comunidad_snmp` varchar(45) COLLATE latin1_spanish_ci NOT NULL DEFAULT 'public' COMMENT 'Comunidad SNMP V2. Por defecto public',
   `nombre_snmp` varchar(45) COLLATE latin1_spanish_ci NOT NULL DEFAULT 'ULISESG5000i' COMMENT 'Nombre del servicio snmp.',
   `localizacion_snmp` varchar(45) COLLATE latin1_spanish_ci NOT NULL DEFAULT 'NUCLEO-DF LABS' COMMENT 'Localización del servicio snmp.',
   `contacto_snmp` varchar(45) COLLATE latin1_spanish_ci NOT NULL DEFAULT 'NUCLEO-DF DT. MADRID. SPAIN' COMMENT 'Dirección de contacto del servicio snmp.',
@@ -369,7 +369,7 @@ CREATE TABLE `pasarelas` (
 
 LOCK TABLES `pasarelas` WRITE;
 /*!40000 ALTER TABLE `pasarelas` DISABLE KEYS */;
-INSERT INTO `pasarelas` VALUES (10,13,'PASARELA1','1.1.1.1','2017-06-20 09:22:46','1.1.1.5','1.1.1.2','1.1.1.2','1.1.1.3','1.1.1.3','1.1.1.3',5060,NULL,65000,161,0,NULL,'ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,554,'',''),(11,13,'PASARELA2','2.2.2.2','2017-06-20 09:22:46','2.2.2.3','2.2.2.3','2.2.2.3','2.2.2.4','2.2.2.4','2.2.2.4',5060,NULL,65000,161,0,'public','ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,554,'2.2.2.48','2.2.2.49'),(12,14,'PASARELA3','3.3.3.3','2017-06-20 09:22:46','3.3.3.1','3.3.3.1','3.3.3.1','3.3.3.2','3.3.3.2','3.3.3.2',5060,NULL,65000,161,0,NULL,'ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,554,'3.3.3.27',''),(13,15,'PASARELA4','4.4.4.4','2017-06-20 09:22:46','4.4.4.1','4.4.4.1','4.4.4.1','4.4.4.2','4.4.4.2','4.4.4.2',5060,NULL,65000,161,0,NULL,'ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,555,'4.4.4.21','4.4.4.22'),(14,17,'PASARELA5','5.5.5.5','2017-06-20 09:22:46','5.5.5.1','5.5.5.1','5.5.5.1','5.5.5.2','5.5.5.2','5.5.5.2',5060,NULL,65000,161,0,NULL,'ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,554,'','5.5.5.2');
+INSERT INTO `pasarelas` VALUES (10,13,'PASARELA1','1.1.1.1','2017-06-20 09:22:46','1.1.1.2','1.1.1.2','1.1.1.2','1.1.1.3','1.1.1.3','1.1.1.3',5060,90,65000,161,0,'public','ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,554,'',''),(11,13,'PASARELA2','2.2.2.2','2017-06-20 09:22:46','2.2.2.3','2.2.2.3','2.2.2.3','2.2.2.4','2.2.2.4','2.2.2.4',5060,90,65000,161,0,'public','ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,554,'2.2.2.48','2.2.2.49'),(12,14,'PASARELA3','3.3.3.3','2017-06-20 09:22:46','3.3.3.1','3.3.3.1','3.3.3.1','3.3.3.2','3.3.3.2','3.3.3.2',5060,90,65000,161,0,'public','ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,554,'3.3.3.27',''),(13,15,'PASARELA4','4.4.4.4','2017-06-20 09:22:46','4.4.4.1','4.4.4.1','4.4.4.1','4.4.4.2','4.4.4.2','4.4.4.2',5060,90,65000,161,0,'public','ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,555,'4.4.4.21','4.4.4.22'),(14,17,'PASARELA5','5.5.5.5','2017-06-20 09:22:46','5.5.5.1','5.5.5.1','5.5.5.1','5.5.5.2','5.5.5.2','5.5.5.2',5060,90,65000,161,0,'public','ULISESG5000i','NUCLEO-DF LABS','NUCLEO-DF DT. MADRID. SPAIN',8080,0,554,'','5.5.5.2');
 /*!40000 ALTER TABLE `pasarelas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -430,17 +430,17 @@ CREATE TABLE `recursos_radio` (
   `climax_bss` tinyint(1) DEFAULT '0' COMMENT 'Habilita BSS/CLIMAX. (1) Habilitado, (0) No Habilitado.',
   `retraso_interno_grs` int(3) NOT NULL DEFAULT '0' COMMENT 'Retraso interno GRS en mili segundos. Rango min: 0, max: 250.',
   `evento_ptt_squelch` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Evento PTT/Squelch. (1) Activado, (0) No Activado.',
-  `habilita_grabacion` tinyint(1) DEFAULT '1' COMMENT 'Habilita grabación. (1) Si habilita, (0) No Habilita.',
+  `habilita_grabacion` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Habilita grabación. (1) Si habilita, (0) No Habilita.',
   `tabla_bss_id` int(11) DEFAULT NULL COMMENT 'Clave ajena a la tabla bss de calificación de audio.',
   `max_jitter` int(3) DEFAULT '0' COMMENT 'Rango 0 < val < 200.',
   `min_jitter` int(3) DEFAULT '0' COMMENT 'Rango 0 < val < 200.',
-  `umbral_vad` float(3,1) DEFAULT NULL COMMENT 'Umbral Vad. Rango min: -35.0, max: -15.0.',
-  `tiempo_max_ptt` int(4) DEFAULT NULL COMMENT 'Tiempo máximo PTT. Rango de min: 0, max: 1000',
-  `ventana_bss` int(4) DEFAULT NULL COMMENT 'Ventana BSS. Rango min: 10, max: 5000.',
+  `umbral_vad` float(3,1) NOT NULL DEFAULT '-20.0' COMMENT 'Umbral Vad. Rango min: -35.0, max: -15.0.',
+  `tiempo_max_ptt` int(4) NOT NULL DEFAULT '0' COMMENT 'Tiempo máximo PTT. Rango de min: 0, max: 1000',
+  `ventana_bss` int(4) NOT NULL DEFAULT '500' COMMENT 'Ventana BSS. Rango min: 10, max: 5000.',
   `tipo_climax` int(1) NOT NULL DEFAULT '0' COMMENT 'Tipo de climax. 0 (No), 1(ASAP), 2(TIEMPO FIJO).',
-  `retardo_fijo_climax` int(3) DEFAULT NULL COMMENT 'Retardo fijo climax. Rango min: 0, max: 250',
-  `cola_bss_sqh` int(4) DEFAULT NULL COMMENT 'Cola BSS SQH. Rango min: 10, max: 5000.',
-  `retardo_jitter` int(3) DEFAULT NULL COMMENT 'Retardo jitter. Rango min: 0, max: 100.',
+  `retardo_fijo_climax` int(3) NOT NULL DEFAULT '100' COMMENT 'Retardo fijo climax. Rango min: 0, max: 250',
+  `cola_bss_sqh` int(4) NOT NULL DEFAULT '500' COMMENT 'Cola BSS SQH. Rango min: 10, max: 5000.',
+  `retardo_jitter` int(3) NOT NULL DEFAULT '30' COMMENT 'Retardo jitter. Rango min: 0, max: 100.',
   `metodo_climax` int(1) NOT NULL DEFAULT '0' COMMENT 'Método climax. Valores 0 (Relativo), 1 (Absoluto).',
   `restriccion_entrantes` int(1) DEFAULT '0' COMMENT 'Restricción entrantes. Valores: 0 (Ninguna), 1 (Lista Negra), 2 (Lista Blanca)',
   PRIMARY KEY (`idrecurso_radio`),
@@ -456,7 +456,7 @@ CREATE TABLE `recursos_radio` (
 
 LOCK TABLES `recursos_radio` WRITE;
 /*!40000 ALTER TABLE `recursos_radio` DISABLE KEYS */;
-INSERT INTO `recursos_radio` VALUES (6,10,0,0,'Radio80',0,'1233',30.025,NULL,0.00,0,5,1,0,0,1,0,1,0,0,0,NULL,0,0,NULL,NULL,NULL,1,NULL,NULL,NULL,1,2),(7,10,1,0,'Radio2',0,NULL,136.000,0.00,0.00,0,3,0,0,0,0,0,0,0,0,0,NULL,0,0,0.0,NULL,NULL,0,NULL,NULL,NULL,0,0),(8,14,0,0,'Radio_Test',0,NULL,135.000,0.00,0.00,0,0,0,0,0,0,0,0,0,0,0,NULL,0,0,0.0,NULL,NULL,0,NULL,NULL,NULL,0,0),(41,11,0,0,'123',0,NULL,0.000,NULL,0.00,0,0,1,0,0,1,0,1,0,0,0,1,0,0,NULL,NULL,NULL,0,NULL,NULL,NULL,0,0);
+INSERT INTO `recursos_radio` VALUES (6,10,0,0,'Radio80',0,'1233',30.025,NULL,0.00,0,5,1,0,0,1,0,1,0,0,0,NULL,0,0,-20.0,0,500,1,100,500,30,1,2),(7,10,1,0,'Radio2',0,NULL,136.000,0.00,0.00,0,3,0,0,0,0,0,0,0,0,0,NULL,0,0,-20.0,0,500,0,100,500,30,0,0),(8,14,0,0,'Radio_Test',0,NULL,135.000,0.00,0.00,0,0,0,0,0,0,0,0,0,0,0,NULL,0,0,-20.0,0,500,0,100,500,30,0,0),(41,11,0,0,'123',0,NULL,0.000,NULL,0.00,0,0,1,0,0,1,0,1,0,0,0,1,0,0,-20.0,0,500,0,100,500,30,0,0);
 /*!40000 ALTER TABLE `recursos_radio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -488,7 +488,7 @@ CREATE TABLE `recursos_telefono` (
   `origen_test` varchar(6) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Origen llamadas salientes de test. STRING (ATS-USER). De "200000" a "399999”',
   `destino_test` varchar(6) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Destino llamadas salientes de test. STRING (ATS-USER). De "200000" a "399999”',
   `supervisa_colateral` tinyint(1) DEFAULT NULL COMMENT 'Indica si supervisa colateral. (1) Supervisa, (0) No Supervisa.',
-  `tiempo_supervision` int(2) DEFAULT NULL COMMENT 'Tiempo de supervisión en segundos. Rango min: 1, max: 10',
+  `tiempo_supervision` int(2) NOT NULL DEFAULT '5' COMMENT 'Tiempo de supervisión en segundos. Rango min: 1, max: 10',
   `duracion_tono_interrup` int(2) NOT NULL DEFAULT '0' COMMENT 'Duración en segundos del tono de interrupción. Rango min: 5, max: 15.',
   `uri_telefonica` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Uri para el recurso telefónico.',
   PRIMARY KEY (`idrecurso_telefono`),
@@ -503,7 +503,7 @@ CREATE TABLE `recursos_telefono` (
 
 LOCK TABLES `recursos_telefono` WRITE;
 /*!40000 ALTER TABLE `recursos_telefono` DISABLE KEYS */;
-INSERT INTO `recursos_telefono` VALUES (11,10,2,0,'Telefono12',0,'1234',0,0,1,3,0,-16,4,0,10,0,'200000','200001',0,NULL,10,'res@1.2.3.4'),(12,14,1,0,'Telefonico_Test',0,NULL,0,0,1,0,1,-15,0,0,0,0,'','',0,NULL,5,'sip:');
+INSERT INTO `recursos_telefono` VALUES (11,10,2,0,'Telefono12',0,'1234',0,0,1,3,0,-16,4,0,10,0,'200000','200001',0,5,10,'res@1.2.3.4'),(12,14,1,0,'Telefonico_Test',0,NULL,0,0,1,0,1,-15,0,0,0,0,'','',0,5,5,'sip:');
 /*!40000 ALTER TABLE `recursos_telefono` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -800,4 +800,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-25 10:09:01
+-- Dump completed on 2017-07-25 10:51:48
