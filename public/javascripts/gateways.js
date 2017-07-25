@@ -1023,7 +1023,7 @@ var AddGatewayToList = function(idCgw){
 				success: function(data){
 					if (data){
 						listOfGateways = listOfGateways.concat(idCgw + ',');
-						$.ajax({type: 'PUT', 
+						/*$.ajax({type: 'PUT',
 								url: '/configurations/listOfGateways/',
 								dataType: 'json', 
 								contentType:'application/json',
@@ -1033,6 +1033,17 @@ var AddGatewayToList = function(idCgw){
 										},
 								error: function(data){
 										}
+						});*/
+						$.ajax({type: 'PUT',
+							url: '/configurations/setUpdateGateway/',
+							dataType: 'json',
+							contentType:'application/json',
+							data: JSON.stringify( {Gateway:idCgw} ),
+							
+							success: function(data){
+							},
+							error: function(data){
+							}
 						});
 					}
 				}

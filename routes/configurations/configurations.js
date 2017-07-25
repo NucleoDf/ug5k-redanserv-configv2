@@ -115,6 +115,15 @@ router.route('/listOfGateways')
   		});
   	});
 
+router.route('/setUpdateGateway')
+	.put(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		var gtw = req.body;
+		myLibConfigurations.setUpdateGateway(gtw, function(name){
+			res.json(name);
+		});
+	});
+
 router.route('/:configuration')
 	.post(function(req,res){
   		logging.LoggingDate("POST configurations/:configuration");
