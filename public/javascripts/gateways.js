@@ -2441,9 +2441,10 @@ function PostGateWay (idSite, isUpdate) {
 		newGateway.snmpv2=1;
 		newGateway.comunidad_snmp=$('#agcomm').val();
 	}
-	else
-		newGateway.snmpv2=0;
-		
+	else {
+		newGateway.snmpv2 = 0;
+		newGateway.comunidad_snmp=$('#agcomm').val();
+	}
 	newGateway.traps=traps;
 	//WEB
 	newGateway.puerto_servicio_web=$('#wport').val();
@@ -2504,7 +2505,7 @@ function PostGateWay (idSite, isUpdate) {
 					//GetGateways(null,function(){
 					//	ShowHardwareGateway(data.insertId, data.name);
 					//});//TODO esto no muestra nada de lo que tiene que mostrar
-					$('#aplicaCambios').removeClass('menuListDisabled');
+					AddGatewayToList(idGtw);
 				}
 				else if (data.error) {
 					alertify.error('Error: ' + data.error);
