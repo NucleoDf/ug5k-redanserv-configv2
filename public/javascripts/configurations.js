@@ -854,8 +854,10 @@ var ExistGatewaysOut = function(f){
 						var gtwOnline=0;
 						$.each(result.data, function(index, value){
 							for(var i=0;i<aliveGateways.length;i++) {
-								if (value.ip_cpu0 == aliveGateways.ip || value.ip_cpu1 == aliveGateways.ip)
-									gtwOnline = 1;
+								if (value.ip_cpu0 == aliveGateways[i].ip || value.ip_cpu1 == aliveGateways[i].ip) {
+									if (aliveGateways[i].online)
+										gtwOnline = 1;
+								}
 							}
 								
 							if(gtwOnline==0) {
@@ -947,6 +949,9 @@ var GetActiveCfgAndActivate = function(){
 					alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + data.name + "\" en las gateways?", 
 						function(){ 
 							ExistGatewaysOut(function(existe){
+								if (existe.Aplicar){
+									var a =1;
+								}
 							});
 								/*if (existe.Aplicar){
 									// Comprobar si existe alguna pasarela de la configuración
