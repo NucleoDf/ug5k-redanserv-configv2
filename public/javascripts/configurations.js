@@ -950,7 +950,14 @@ var GetActiveCfgAndActivate = function(){
 						function(){ 
 							ExistGatewaysOut(function(existe){
 								if (existe.Aplicar){
-									var a =1;
+									// Comprobar si existe alguna pasarela de la configuración
+									// a activar sin recursos configurados
+									ExistGatewayWithoutResources(function(gateways) {
+										if (gateways.Aplicar) {
+											//TODO Vamos por aqui... que basicamente es ir a
+											//la func esta y hacer el select en condiciones...
+										}
+									});
 								}
 							});
 								/*if (existe.Aplicar){
