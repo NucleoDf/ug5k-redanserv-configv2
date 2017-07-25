@@ -851,15 +851,20 @@ var ExistGatewaysOut = function(f){
 			success: function(result){
 						var strGateways='Las siguientes pasarelas no tiene comunicación con el servidor:' + '<br />';
 						var gtw=[];
-
-						$.each(result.general, function(index, value){
-							if (value.Viva == 0){
+						var gtwOnline=0;
+						$.each(result.data, function(index, value){
+							for(var i=0;i<aliveGateways.length;i++) {
+								if (value.ip_cpu0 == aliveGateways.ip || value.ip_cpu1 == aliveGateways.ip)
+									gtwOnline = 1;
+							}
+								
+							if(gtwOnline==0) {
 								retorno = true;
 								gtw.push(value.name);
 								strGateways += value.name + ' - ' + value.ipv + '<br />';
 							}
+							gtwOnline=0;
 						});
-
 						if (retorno){
 							strGateways += '¿Desea activar la configuración de todas formas?';
 							alertify.confirm('Ulises G 5000 R',strGateways,function(){
@@ -942,7 +947,8 @@ var GetActiveCfgAndActivate = function(){
 					alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + data.name + "\" en las gateways?", 
 						function(){ 
 							ExistGatewaysOut(function(existe){
-								if (existe.Aplicar){
+							});
+								/*if (existe.Aplicar){
 									// Comprobar si existe alguna pasarela de la configuración
 									// a activar sin recursos configurados
 									ExistGatewayWithoutResources(function(gateways){
@@ -960,9 +966,9 @@ var GetActiveCfgAndActivate = function(){
 														alertify.success('Configuración \"'+ data.name + '\" activada.');
 														// Reset list of gateways to activate
 														AddGatewayToList(null);
-														/** 20170509. AGL Gestor 'Aplicar cambios' en usuarios */
+														// 20170509. AGL Gestor 'Aplicar cambios' en usuarios
 														usersModified = false;
-														/** 20170516. AGL. Activar Cambios... */
+														// 20170516. AGL. Activar Cambios...
 														tbbssModified = false;														
 														// Generar histórico con cada pasarela que no se pudo configurar
 														// por estar desconectada del servidor
@@ -981,7 +987,7 @@ var GetActiveCfgAndActivate = function(){
 										}		
 									});
 							 	}
-							});
+							});*/
 						},
 						 function(){ alertify.error('Cancelado');}
 					);

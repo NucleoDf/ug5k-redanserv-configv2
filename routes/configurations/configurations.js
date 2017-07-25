@@ -214,8 +214,9 @@ router.route('/:configuration/siteName/:siteName')
 gatewaysRouter.route('/')	// The root path is relative the path where it's mounted in router.use('/:configuration/gateways',gatewaysRouter')
 	.get(function (req, res) {
 		logging.LoggingDate("GET configurations/:configuration/gateways");
-		if (req.params.configuration != null)
-			myLibGateways.getGateways(req,res,req.params.configuration);
+		if (req.params.configuration != "null")
+			//myLibGateways.getGateways(req,res,req.params.configuration);
+			myLibGateways.getGatewaysOnDB(req,res,req.params.configuration);
     	});
 
 gatewaysRouter.route('/:gateway')
