@@ -924,14 +924,19 @@ var ActiveCfg = function(){
 			 function(){ alertify.error('Cancelado');}
 	);
 };
-
+/****************************************/
+/*	FUNCTION: GetActiveCfgAndActivate 	*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
 var GetActiveCfgAndActivate = function(){
 	/** 20170516 AGL Este filtro ya no parece tener sentido. Comprobar... */
 	// if (listOfGateways.length > 0)
 	{
 		$.ajax({
 			type: 'GET',
-			url: '/configurations/active',
+			//url: '/configurations/active',
+			url: '/configurations/pendingActive',
 			success: function(data){
 				if (data != null){
 					alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + data.name + "\" en las gateways?", 
