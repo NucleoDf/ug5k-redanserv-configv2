@@ -2504,6 +2504,7 @@ function PostGateWay (idSite, isUpdate) {
 					//GetGateways(null,function(){
 					//	ShowHardwareGateway(data.insertId, data.name);
 					//});//TODO esto no muestra nada de lo que tiene que mostrar
+					$('#aplicaCambios').removeClass('menuListDisabled');
 				}
 				else if (data.error) {
 					alertify.error('Error: ' + data.error);
