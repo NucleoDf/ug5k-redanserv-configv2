@@ -806,12 +806,20 @@ var ShowCopyConfiguration = function(on){
 	}
 };
 
+/********************************************/
+/*	FUNCTION: ExistGatewayWithoutResources	*/
+/*  PARAMS: 								*/
+/*  REV 1.0.2 VMG							*/
+/********************************************/
 var ExistGatewayWithoutResources = function(f){
 	$.ajax({
-			type: 'GET',
-			url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/gateways',
-			success: function(result){
-						var aplicar = true;
+		type: 'GET',
+		url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/gateways',
+		success:
+		function(result){
+			var aplicar = true;
+						
+						/*var aplicar = true;
 						if(result.general.length == 0)
 							f({Aplicar:true});
 						$.each(result.general, function(index, value){
@@ -838,11 +846,16 @@ var ExistGatewayWithoutResources = function(f){
 										}
 								});
 							}
-						});
-					}
+						});*/
+		}
 	});
 };
 
+/************************************/
+/*	FUNCTION: ExistGatewaysOut	 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var ExistGatewaysOut = function(f){
 	var retorno = false;
 	$.ajax({
