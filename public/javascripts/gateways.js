@@ -816,6 +816,12 @@ var GetGateway = function (gtw,lastUpdate,f){
 					$('#rtsp_ip').val(gtw.result[0].servidor_rtsp.toString());
 				if(gtw.result[0].servidor_rtspb!=null)
 					$('#rtspb_ip').val(gtw.result[0].servidor_rtspb.toString());
+				
+				var title = $('#TitleH3').text().split(" ");
+				var aux = title[1].replace(".	Emplazamientos:", "-");
+				var site = '<option value="">'+aux+title[2].replace(".	Pasarelas:", "")+'</option>';
+				$('#ListSites').html(site);
+				
 				/*$('#ProxysList').append($('<option>', {
 					value: 1,
 					text: 'My option'
@@ -875,6 +881,7 @@ var GetGateway = function (gtw,lastUpdate,f){
 					f();
 			}
 		});
+		
 	}
 	else {
 		$('#DivGateways').data('idCgw','');
