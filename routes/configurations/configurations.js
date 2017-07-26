@@ -99,6 +99,21 @@ router.route('/pendingActive')
 			res.json(name);
 		});
 	});
+router.route('/pendingActive')
+	.get(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		myLibConfigurations.getPendingActiveConfiguration(req, res, function(name){
+			res.json(name);
+		});
+	});
+router.route('/:configuration/gatewaysHasResources')
+	.get(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		myLibConfigurations.gatewaysHasResources(req, res, function(name){
+			res.json(name);
+		});
+	});
+
 router.route('/SP_cfg/:cfg')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);

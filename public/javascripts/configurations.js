@@ -811,10 +811,19 @@ var ShowCopyConfiguration = function(on){
 /*  PARAMS: 								*/
 /*  REV 1.0.2 VMG							*/
 /********************************************/
-var ExistGatewayWithoutResources = function(f){
+var ExistGatewayWithoutResources = function(f) {
+	
 	$.ajax({
 		type: 'GET',
-		url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/gateways',
+		url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/gatewaysHasResources',
+		success: function (result) {
+			var aplicar = true;
+		}
+	});
+}
+/*	$.ajax({
+		type: 'GET',
+		url: '/configurations/gatewaysHasResources/',
 		success:
 		function(result){
 			var aplicar = true;
@@ -847,9 +856,9 @@ var ExistGatewayWithoutResources = function(f){
 								});
 							}
 						});*/
-		}
+/*		}
 	});
-};
+};*/
 
 /************************************/
 /*	FUNCTION: ExistGatewaysOut	 	*/
