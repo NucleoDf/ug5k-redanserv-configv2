@@ -1002,9 +1002,24 @@ var GetActiveCfgAndActivate = function(){
 									// a activar sin recursos configurados
 									ExistGatewayWithoutResources(function(gateways) {
 										if (gateways.Aplicar) {
-											//TODO Vamos por aqui... que basicamente es ir a
-											//la func esta y hacer el select en condiciones...
-											var a=1;
+											//TODO esto quita solo la coma del final...
+											listOfGateways = listOfGateways.substr(0,listOfGateways.length - 1);
+											$.ajax({
+												type: 'GET',
+												url: '/configurations/' + data.idCFG + '/loadChangestoGtws',
+												success: function (result) {
+													if (result) {
+														GenerateHistoricEvent(ID_HW,LOAD_REMOTE_CONFIGURATION,data.name,$('#loggedUser').text());
+														alertify.success('Configuración \"'+ data.name + '\" activada.');
+														// Reset list of gateways to activate
+														AddGatewayToList(null);
+														// 20170509. AGL Gestor 'Aplicar cambios' en usuarios
+														usersModified = false;
+														// 20170516. AGL. Activar Cambios...
+														tbbssModified = false;
+													}
+												}
+											});
 										}
 									});
 								}

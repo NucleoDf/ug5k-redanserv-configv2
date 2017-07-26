@@ -194,6 +194,15 @@ router.route('/:configuration/activate/:listOfGateways')
 			});
 		});
 
+router.route('/:configuration/loadChangestoGtws')
+	.get(function(req, res) {
+		logging.LoggingDate("GET configurations/:configuration/loadChangestoGtws");
+		myLibConfigurations.loadChangestoGtws(req.params.configuration,function(result){
+				res.json(result);
+			});
+	});
+
+
 router.route('/:configuration/activate')
 	.get(function(req, res) {
   		logging.LoggingDate("GET configurations/:configuration/activate");
