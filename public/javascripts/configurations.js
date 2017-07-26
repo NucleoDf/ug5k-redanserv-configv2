@@ -193,7 +193,7 @@ var ShowCfg = function(cfg){
 							
 							$('#DivConfigurations').data('idCFG', idCFGCopy);
 							//VMG esta parte es la que rellena las pasarelas de la config de abajo
-							//GetGatewaysBelongConfiguration(true, idCFGCopy);
+							GetGatewaysBelongConfiguration(true, idCFGCopy);
 							$('#CBFreeGateways option[value="0"]').prop('selected', true);
 							//VMG esta parte nos dirá si estan activas a o no.
 							//ClickCBFreeGateways();
