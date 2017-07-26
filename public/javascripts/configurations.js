@@ -812,12 +812,38 @@ var ShowCopyConfiguration = function(on){
 /*  REV 1.0.2 VMG							*/
 /********************************************/
 var ExistGatewayWithoutResources = function(f) {
-	
+	var retorno = false;
 	$.ajax({
 		type: 'GET',
 		url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/gatewaysHasResources',
 		success: function (result) {
-			var aplicar = true;
+			var strGateways='Las siguientes pasarelas no tienen recursos asignados:' + '<br />';
+			var gtw=[];
+			if(result.data!=null){
+				$.each(result.data, function(index, value){
+					if(value.radio==0 && value.telefono==0) {
+						retorno = true;
+						gtw.push(value.nombre);
+						strGateways += value.nombre + '<br />';
+					}
+				});
+				if (retorno){
+					strGateways += '¿Desea activar la configuración de todas formas?';
+					alertify.confirm('Ulises G 5000 R',strGateways,function(){
+							f({Aplicar:true,gateways:gtw});
+						},
+						function(){
+							f({Aplicar:false,gateways:null});
+						});
+				}
+				else
+					f({Aplicar:true,gateways:null});
+			}
+			else {//No hay datos de pasarelas... No aplicamos sacando un mensaje de error.
+				alertify.error('No se han encontrado datos de recursos para esta configuración. ' +
+					'Operación cancelada.');
+				f({Aplicar:false,gateways:null});
+			}
 		}
 	});
 }
@@ -978,6 +1004,7 @@ var GetActiveCfgAndActivate = function(){
 										if (gateways.Aplicar) {
 											//TODO Vamos por aqui... que basicamente es ir a
 											//la func esta y hacer el select en condiciones...
+											var a=1;
 										}
 									});
 								}
