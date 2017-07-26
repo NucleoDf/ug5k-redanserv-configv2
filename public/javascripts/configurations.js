@@ -895,7 +895,7 @@ var ExistGatewaysOut = function(f){
 	var retorno = false;
 	$.ajax({
 			type: 'GET',
-			url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/gateways',
+			url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/gatewaysOut',
 			success: function(result){
 						var strGateways='Las siguientes pasarelas no tiene comunicación con el servidor:' + '<br />';
 						var gtw=[];
