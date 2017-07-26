@@ -4,7 +4,18 @@ block configuration
 script.
 
 	function SynchronizedGateways(){
-		$.ajax({type: 'GET', 
+		$.each(aliveGateways, function(index, value){
+			if(value.online) {
+				if(value.time>5000) {
+					value.online = false;
+					value.time = 0;
+				}
+				else {
+					value.time = value.time + 2500;
+				}
+			}
+		});
+		/*$.ajax({type: 'GET',
 				url: '/configurations/' + 'null' + '/gateways', 
 				success: function(data){
 					if (data.general != null){
@@ -13,17 +24,17 @@ script.
 						UpdateSynchroStateInSites(data);
 					}
 					else {
-						/** 20170515 AGL. La session ha expirado.....*/
+						// 20170515 AGL. La session ha expirado.....
 						//$(location).attr('href', '/login');
 					}
 				}
 		});
-
+		*/
 
 		if ($('#HardwareZone').is(':visible')){
 			//ResetHardware();
 
-			$.ajax({type: 'GET', 
+			$.ajax({type: 'GET',
 				// Pasar la ipv de la pasarela
 				url: '/gateways/' + $('#DivGateways').data('idCgw') + '/hardware',
 				success: function(data){

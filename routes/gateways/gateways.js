@@ -203,6 +203,11 @@ router.route('/:gateway/services/:service')
 ////*  REV 1.0.2 VMG
 router.route('/:gateway/testconfig')
 	.get(function(req,res){
+		/*var onlineGtw = {};
+		onlineGtw.ip='1.1.1.1';
+		onlineGtw.online=true;
+		onlineGtw.time=0;
+		global.onlineGtws=1;*/
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		//myLibGateways.getIpv(req.params.gateway,function(result){
 		myLibGateways.getIpv2(req.params.gateway,function(result){
