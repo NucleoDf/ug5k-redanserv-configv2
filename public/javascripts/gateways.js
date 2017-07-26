@@ -817,10 +817,19 @@ var GetGateway = function (gtw,lastUpdate,f){
 				if(gtw.result[0].servidor_rtspb!=null)
 					$('#rtspb_ip').val(gtw.result[0].servidor_rtspb.toString());
 				
-				var title = $('#TitleH3').text().split(" ");
+				/*var title = $('#TitleH3').text().split(" ");
 				var aux = title[1].replace(".	Emplazamientos:", "-");
 				var site = '<option value="">'+aux+title[2].replace(".	Pasarelas:", "")+'</option>';
 				$('#ListSites').html(site);
+				*/
+				//TODO peticion de sites
+				$.ajax({type: 'GET',
+					url: '/sites',
+					success: function(data) {
+						// Load Site list
+						loadSiteList(data.data, gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO);
+					}
+				});
 				
 				/*$('#ProxysList').append($('<option>', {
 					value: 1,
