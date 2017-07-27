@@ -24,6 +24,11 @@ function Site2Config(mySite, sites) {
 	return cfgName;
 }
 
+/************************************/
+/*	FUNCTION: ChangeGateWaySite 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var ChangeGateWaySite = function(data){
 	var oldIndex = data[data.oldValue].value;
 	var newIndex = data[data.selectedIndex].value;
@@ -61,23 +66,32 @@ var ChangeGateWaySite = function(data){
 						$.ajax({type: 'POST',
 							url: '/gateways/changesite/'+idCgw+'/'+oldIndex+'/'+newIndex,
 							success: function(data){
-								if(data.data == 'DUP_ENTRY_NAME')
+								if(data.data == 'DUP_ENTRY_NAME') {
+									$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
 									alertify.error('Ya existe una pasarela con el mismo nombre en el emplazamiento de destino seleccionado.');
+								}
 								else
 									alertify.success('La pasarela ha sido cambiada de emplazamiento.');
-								ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
+									ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
 							},
 							error: function(data){
+								$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
 								alertify.error('Error en la operacion');
 							}
 						});
 						//alertify.success('Ok');
 					},
-					function(){ alertify.error('Cancelado');}
+					
+					function(){
+						$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+						//ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
+						alertify.error('Cancelado');
+					}
 				);
 			}
 		},
 		error: function (data) {
+			$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
 			alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
 		}
 	});
