@@ -18,6 +18,15 @@ router.route('/')	// The root path is relative the path where it's mounted in ap
 	  	});
 	});
 
+router.route('/:configuration')
+	.get(function(req, res) {
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		myLibSites.getSites4Config(req, res, req.params.configuration, function(result){
+			logging.LoggingDate(JSON.stringify(result,null,'\t'));
+			res.json(result);
+		});
+	});
+
 router.route('/groups')
 	.post(function(req, res) {
   		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);

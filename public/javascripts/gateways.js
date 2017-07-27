@@ -824,10 +824,10 @@ var GetGateway = function (gtw,lastUpdate,f){
 				*/
 				//TODO peticion de sites
 				$.ajax({type: 'GET',
-					url: '/sites',
+					url: '/sites/'+$('#DivConfigurations').data('idCFG'),
 					success: function(data) {
 						// Load Site list
-						loadSiteList(data.data, gtw.general.EMPLAZAMIENTO_idEMPLAZAMIENTO);
+						loadSiteList(data.data, gtw.result[0].EMPLAZAMIENTO_idEMPLAZAMIENTO);
 					}
 				});
 				
