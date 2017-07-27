@@ -329,7 +329,7 @@ script.
 		}
 
 		function ValidatePort(element, label) {
-			if ($(element).val() > 65535) {
+			if ($(element).val() < 0 || $(element).val() > 65535) {
 				Fade(element, label)
 			}
 		}
