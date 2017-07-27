@@ -61,7 +61,7 @@ var ChangeGateWaySite = function(data){
 				alertify.error('La dirección ip: ' + ipb2 + ' ya se encuentra dada de alta en el emplazamiento de destino.');
 			}
 			else {
-				alertify.confirm('Ulises G 5000 R', "¿Quiere cambiar la pasarela del emplazamiento \"" + oldEmpl +
+				alertify.confirm('Ulises G 5000 R', "¿Quiere trasladar la pasarela del emplazamiento \"" + oldEmpl +
 					"\" al emplazamiento \"" + newEmpl + "\"?",
 					function(){
 						$.ajax({type: 'POST',
