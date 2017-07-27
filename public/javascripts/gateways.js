@@ -53,10 +53,12 @@ var ChangeGateWaySite = function(data){
 		url: '/gateways/checkipaddr4changesite/' + ipb1 + '/' + ipb2 + '/' + newIndex,
 		success: function (data) {
 			if (data == "IP_DUP_1" ) {
-				alertify.error('La dirección ip: ' + ipb1 + ' ya se encuentra dada de alta en la configuración de destino.');
+				$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+				alertify.error('La dirección ip: ' + ipb1 + ' ya se encuentra dada de alta en el emplazamiento de destino.');
 			}
 			else if (data == "IP_DUP_2" ) {
-					alertify.error('La dirección ip: ' + ipb2 + ' ya se encuentra dada de alta en la configuración de destino.');
+				$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+				alertify.error('La dirección ip: ' + ipb2 + ' ya se encuentra dada de alta en el emplazamiento de destino.');
 			}
 			else {
 				alertify.confirm('Ulises G 5000 R', "¿Quiere cambiar la pasarela del emplazamiento \"" + oldEmpl +
