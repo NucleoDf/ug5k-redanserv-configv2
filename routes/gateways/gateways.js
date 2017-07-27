@@ -40,14 +40,15 @@ router.route('/checkgtwname/:name/:idCfg')
 		});
 	});
 
-router.route('/checkipaddr4changesite/:ipb1/:ipb2/:idEmp/:idOldCfg')
+router.route('/checkipaddr4changesite/:ipb1/:ipb2/:idEmp')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibGateways.getGatewaysIp4ChangeSite(req.params.ipb1,req.params.ipb2,req.params.idEmp, req.params.idOldCfg, function(gtw){
-			res.json(gtw.error);
-		});
+		myLibGateways.getGatewaysIp4ChangeSite(req.params.ipb1,req.params.ipb2,req.params.idEmp,
+			function(gtw){
+				res.json(gtw.error);
+			}
+		);
 	});
-
 
 router.route('/activeCfg')
 	.get(function(req,res){
