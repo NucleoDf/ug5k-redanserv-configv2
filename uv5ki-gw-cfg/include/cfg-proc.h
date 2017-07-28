@@ -77,6 +77,7 @@ public:
 
 protected:
 	void StdSincrSet(eStdLocalConfig nstd/*, jgw_config &local*/);
+	string StdSincrGet();
 	void GeneraAvisosCpu(string host, string cmd);
 	void ResourcesConfigClear();
 

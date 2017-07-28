@@ -138,6 +138,12 @@ void CfgProc::StdSincrSet(eStdLocalConfig nstd)
 }
 
 /** */
+string CfgProc::StdSincrGet() 
+{
+	return Tools::Int2String((int )_stdLocalConfig);
+}
+
+/** */
 void CfgProc::GeneraAvisosCpu(string host, string cmd) 
 {
 	/** Generar el comando y Espera Respuesta... */
@@ -302,7 +308,7 @@ void JsonClientProc::PedirConfiguracion(string cfg)
 /** */
 void JsonClientProc::ChequearConfiguracion() 
 {
-	string request = "GET /gateways/" + _ip_propia + "/" + MAIN_TEST_CONFIG + " HTTP/1.1\r\nHost: " + SERVER_URL/*_host_config*/ + "\r\nContent-Type: application/json\r\n\r\n";
+	string request = "GET /gateways/" + _ip_propia + "/" + MAIN_TEST_CONFIG + "?std=" + StdSincrGet() + " HTTP/1.1\r\nHost: " + SERVER_URL/*_host_config*/ + "\r\nContent-Type: application/json\r\n\r\n";
 	ParseResponse response = HttpClient(SERVER_URL).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemRedanHttpGetTimeout, "5000"));
 	if (response.Status() != "200")
 	{
