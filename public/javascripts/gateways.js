@@ -71,9 +71,14 @@ var ChangeGateWaySite = function(data){
 									$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
 									alertify.error('Ya existe una pasarela con el mismo nombre en el emplazamiento de destino seleccionado.');
 								}
-								else
+								else if(data.error!=null) {
+									$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+									alertify.error('Error en la operacion');
+								}
+								else {
 									alertify.success('La pasarela ha sido cambiada de emplazamiento.');
-									ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
+									ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+								}
 							},
 							error: function(data){
 								$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
