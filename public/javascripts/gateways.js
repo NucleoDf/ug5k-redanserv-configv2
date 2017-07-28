@@ -77,7 +77,8 @@ var ChangeGateWaySite = function(data){
 								}
 								else {
 									alertify.success('La pasarela ha sido cambiada de emplazamiento.');
-									ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+									PostGateWay('"'+idCgw+'"',true);
+									//ShowCfg($('#DivConfigurations').data('idCFG'));
 								}
 							},
 							error: function(data){
