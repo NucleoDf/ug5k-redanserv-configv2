@@ -483,36 +483,38 @@ var deleteGatewayFromConfig = function(cfgId, gtwId){
 };
 
 var UpdateSynchroStateInActiveConfig = function(data){
-	$.each(data.general,function(index,value){
-		$(".list li" ).each(function( index ) {
-			if ($( this ).data('texto') == value.idCGW && 
-				value.CFG_idCFG == $('#DivConfigurations').data('idCFG')){
-
-				if (value.Viva == 1){
-					if (value.Activa == 1){
-						if (value.Sincro == 2){
-							$( this ).find('div:first').prop('class','dragableItem VivaSincro');	// Verde claro
+	if(data.length!=0) {
+		$.each(data, function (index, value) {
+			$(".list li").each(function (index) {
+				if ($(this).data('texto') == value.idCGW &&
+					value.CFG_idCFG == $('#DivConfigurations').data('idCFG')) {
+					
+					if (value.Viva == 1) {
+						if (value.Activa == 1) {
+							if (value.Sincro == 2) {
+								$(this).find('div:first').prop('class', 'dragableItem VivaSincro');	// Verde claro
+							}
+							else if (value.Sincro == 1) {
+								$(this).find('div:first').prop('class', 'dragableItem apply');			// Naranja
+							}
+							else
+								$(this).find('div:first').prop('class', 'dragableItem VivaNoSincro');	// Amarillo
 						}
-						else if (value.Sincro == 1){
-							$( this ).find('div:first').prop('class','dragableItem apply');			// Naranja
-						}						
-						else
-							$( this ).find('div:first').prop('class','dragableItem VivaNoSincro');	// Amarillo
+					}
+					else {	// No viva
+						if (value.Activa) {
+							// Si antes estaba como 'Viva' mensaje de aviso
+							if ($(this).find('div:first').prop('class').indexOf('VivaSincro') != -1 ||
+								$(this).find('div:first').prop('class').indexOf('VivaNoSincro') != -1)
+								alertify.alert('Ulises G 5000 R', 'La pasarela ' + value.name + ' ha dejado de comunicar con el servidor.');
+							
+							$(this).find('div:first').prop('class', 'dragableItem NoVivaActiva');		// Azul claro
+						}
 					}
 				}
-				else{	// No viva
-					if (value.Activa){
-						// Si antes estaba como 'Viva' mensaje de aviso
-						if ($( this ).find('div:first').prop('class').indexOf('VivaSincro') != -1 || 
-							$( this ).find('div:first').prop('class').indexOf('VivaNoSincro') != -1)
-								alertify.alert('Ulises G 5000 R','La pasarela ' + value.name + ' ha dejado de comunicar con el servidor.');
-
-						$( this ).find('div:first').prop('class','dragableItem NoVivaActiva');		// Azul claro
-					}
-				}
-			}
+			});
 		});
-	});
+	}
 };
 
 var ClickViewFreeGateways = function(){
@@ -643,9 +645,10 @@ var GetGatewaysBelongConfiguration = function(show, cfgId){
 								link_enlaces[value.idCGW]={idCFG: cfgId, valor: value};
 								var item = '';
 								var clase = '';
-
-								if (value.Activa == null)
-									value.Activa = 0;
+								
+								//Por defecto
+								//UpdateSynchroStateInActiveConfig
+								value.Activa = 0;
 
 								if (value.Viva == 1){
 									if (value.Activa == 1){

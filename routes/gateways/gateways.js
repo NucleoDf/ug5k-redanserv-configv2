@@ -20,8 +20,9 @@ var async=require('async');
 
 router.route('/syncGateways/:refreshTime')
 	.get(function(req,res){
-		logging.LoggingDate('GET /syncGateways/:refreshTime');
+		//logging.LoggingDate('GET /syncGateways/:refreshTime');
 		var aliveGtws=req.app.get('aliveGtws');
+		updateAliveGtws(aliveGtws, req.params.refreshTime);
 		res.json(aliveGtws);
 	});
 
@@ -212,10 +213,10 @@ router.route('/:gateway/services/:service')
 router.route('/:gateway/testconfig')
 	.get(function(req,res){
 		var aliveGtws=req.app.get('aliveGtws');
-		updateSincGtws(aliveGtws, req.params.gateway);
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		//myLibGateways.getIpv(req.params.gateway,function(result){
 		myLibGateways.getIpv2(req.params.gateway,function(result){
+			updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw);
 			if (result.toLocal == -1){
 				// No en BD
 				logging.LoggingDate(JSON.stringify({idConf:result.ipv.toString(), fechaHora:''},null,'\t'));
@@ -232,7 +233,7 @@ router.route('/:gateway/testconfig')
 			else{
 				// En configuracion activa
 				//myLibGateways.getTestConfig(result.ipv,function(data){
-		 		res.json(result.data);
+		 		res.json({idConf: result.data.idConf, fechaHora:result.data.fechaHora});
 		 		//});
 			}
 			/*
@@ -433,7 +434,7 @@ hardwareRouter.route('/:hardware')
 /*  									*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
-function updateSincGtws(aliveGtws, gtw){
+function updateSincGtws(aliveGtws, gtw, idGtw){
 	var isGtwFound=false;
 	
 	for(var i=0;i<aliveGtws.length && !isGtwFound;i++) {
@@ -445,10 +446,19 @@ function updateSincGtws(aliveGtws, gtw){
 	}
 	if(!isGtwFound) {
 		var onlineGtw = {};
+		onlineGtw.idGtw=idGtw;
 		onlineGtw.ip=gtw;
 		onlineGtw.online=true;
 		onlineGtw.time=0;
 		aliveGtws.push(onlineGtw);
+	}
+}
+
+function updateAliveGtws(aliveGtws, refreshTime) {
+	for (var i = 0; i < aliveGtws.length && aliveGtws[i].online; i++) {
+		aliveGtws[i].time=(aliveGtws[i].time+parseInt(refreshTime));
+		if(aliveGtws[i].time>=6000)
+			aliveGtws[i].online=false;
 	}
 }
 
