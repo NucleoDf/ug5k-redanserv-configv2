@@ -498,6 +498,7 @@ var UpdateSynchroStateInActiveConfig = function(data){
 					else
 						$(this).find('div:first').prop('class', 'dragableItem');
 				}
+				//TODO Vamos por aqui!!!
 				/*
 					if (value.Viva == 1) {
 						if (value.Activa == 1) {

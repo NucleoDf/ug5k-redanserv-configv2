@@ -117,22 +117,22 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 						table#tableTools(width="100%",style='display:none;table-layout:fixed')
 
 							tr
-								td.New(style='padding-top: 15px' align="center")
+								td.New(style='padding-top: 15px' align="center" width="20%")
 									a.ButtonNucleo(id='UpdateCfgButton', onclick="PutConfiguration()" , style="text-align: center; padding: 5px 10px" tkey='Update')
-								td.New(style='padding-top: 15px' align="center")
+								td.New(style='padding-top: 15px' align="center" width="20%")
 									a.ButtonNucleo#BtnCopyCfg(onclick="ShowCopyConfiguration(true)" , style="text-align: center; padding: 5px 10px" tkey='Copy') 
-								td.New(style='padding-top: 15px' align="center")
+								td.New(style='padding-top: 15px' align="center" width="20%")
 									a.ButtonNucleo(onclick="DelConfiguration()" , style="text-align: center; padding: 5px 10px" tkey='Remove') 
 								//
 									td.New(style='padding-top: 15px' align="center")
 										a.ButtonNucleo(onclick="ExportConfiguration()" , style="text-align: center; padding: 5px 10px" tkey='Export') 
-								td.New(style='padding-top: 15px' align="center" colspan=2)
+								td.New(style='padding-top: 15px' align="center" width="20%" colspan=2)
 									a.ButtonNucleo(onclick="ExportCfgToPdf($('#DivConfigurations').data('idCFG'))" , style="text-align: center; padding: 5px 10px") PDF
-								td.New(style='padding-top: 15px' align="center" colspan=2)
+								td.New(style='padding-top: 15px' align="center" width="20%" colspan=2)
 									a.ButtonNucleo(onclick="ExportCfgToExcel($('#DivConfigurations').data('idCFG'),'')" , style="text-align: center; padding: 5px 10px") EXCEL
 							tr
-								td.New(style='padding-top: 30px;' align="center" colspan=5)
-									a.ButtonNucleo(id='AddSiteButton', onclick='CreateSite()' style="text-align: center; padding: 5px 10px; width:100px" tkey='NewSite') 
+								td.New(style='padding-top: 30px;' align="center" width="100%" colspan=8)
+									a.ButtonNucleo(id='AddSiteButton', onclick='CreateSite()' style="text-align: center; padding: 5px 10px; width:120px" tkey='NewSite')
 							tr
 								td.New(style='padding-top: 15px' colspan=5)
 									.content.fadeFormNucleo#AssignatedGatewaysDiv(style='height: 280px;width: 672px')
