@@ -151,9 +151,9 @@ var CopyGateway = function(){
 	$('#NavMenu').addClass('disabledDiv');
 	$('#NavConfiguration').addClass('disabledDiv');
 	
-	$('#CopyGatewayZone').attr('style','position:absolute;width:0px;height:0px;top:380px;left:460px');
+	$('#CopyGatewayZone').attr('style','position:absolute;width:0px;height:0px;top:180px;left:260px');
 	$('#CopyGatewayZone').show();
-	$('#CopyGatewayZone').animate({width: '35%', height: '175px'},500,function(){
+	$('#CopyGatewayZone').animate({width: '35%', height: '200px'},500,function(){
 		$('#LblIpvCopyGateway').text($('#ipv').val());
 		$('#LblNameCopyGateway').text($('#nameGw').val());
 
@@ -203,7 +203,11 @@ var CopyGateway2 = function(){
 
 var Copy = function(){
 	if ($('#nameCopyGw').val().length > 0){
+		//TODO nos quedamos por aquí en la copia
 		CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val());
+	}
+	else {
+		alertify.error('Tiene que introducirse un nombre válido.');
 	}
 
 	CloseCopy();

@@ -688,7 +688,7 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 																a.ButtonNucleo#CancelGtwButton(onclick="ShowSite(\'EMPCGW5\',\'232\')" , style = "text-align: center; padding: 5px 10px" tkey='Cancel')
 
 															td.New(style='padding-top: 5px' align="center")
-																a.ButtonNucleo#CopyGtwButton(onclick="CopyGateway2()" , style="text-align: center; padding: 5px 10px" tkey="Copy")
+																a.ButtonNucleo#CopyGtwButton(onclick="CopyGateway()" , style="text-align: center; padding: 5px 10px" tkey="Copy")
 															td.New(style='padding-top: 5px' align="center")
 																a.ButtonNucleo#RemoveGateway(onclick="DelGateway()" , style="text-align: center; padding: 5px 10px" tkey="Remove")
 															td.New(style='padding-top: 5px' align="center")
@@ -807,10 +807,10 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 								td.New
 									input.textbox(id="nameCopyGw", type="text")
 							tr
-								td
-									a.ButtonNucleo#RemoveGateway(onclick="Copy()" , style="text-align: center; padding: 5px 10px" tkey="Copy")
-								td
-									a.ButtonNucleo#RemoveGateway(onclick="CloseCopy()" , style="text-align: center; padding: 5px 10px" tkey="Cancel")
+								td(style='padding-top: 8px' align='right')
+									a.ButtonNucleo#CopyGateway(onclick="Copy()" , style="text-align: center; padding: 5px 10px" tkey="Copy")
+								td(style='padding-top: 8px' align="right")
+									a.ButtonNucleo#CloseCopyGateway(onclick="CloseCopy()" , style="text-align: center; padding: 5px 10px" tkey="Cancel")
 				td#ColumnImportZone(style='display:none') 
 					.content#ImportZone(style='overflow:hidden;display:none')
 						table(style='width: 100%;border-spacing: 10px 10px')
