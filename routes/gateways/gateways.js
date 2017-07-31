@@ -243,6 +243,13 @@ router.route('/:gateway/testconfig')
 	 	});
 	});
 
+router.route('/syncGateways')
+	.get(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		var aliveGtws=req.app.get('aliveGtws');
+		res.json(aliveGtws);
+	});
+
 router.route('/createNewGateway/:newGateway/:idSite')
 	.post(function(req,res){
 		logging.LoggingDate('POST /createNewGateway//:newGateway/:idSite');
