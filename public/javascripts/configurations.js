@@ -482,13 +482,23 @@ var deleteGatewayFromConfig = function(cfgId, gtwId){
 	});
 };
 
+/************************************************/
+/*	FUNCTION: UpdateSynchroStateInActiveConfig 	*/
+/*  PARAMS: data								*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
 var UpdateSynchroStateInActiveConfig = function(data){
 	if(data.length!=0) {
 		$.each(data, function (index, value) {
 			$(".list li").each(function (index) {
-				if ($(this).data('texto') == value.idCGW &&
-					value.CFG_idCFG == $('#DivConfigurations').data('idCFG')) {
-					
+				if ($(this).data('texto') == value.idGtw ) {
+					if(value.online)
+						$(this).find('div:first').prop('class', 'dragableItem VivaSincro');
+					else
+						$(this).find('div:first').prop('class', 'dragableItem');
+				}
+				/*
 					if (value.Viva == 1) {
 						if (value.Activa == 1) {
 							if (value.Sincro == 2) {
@@ -511,7 +521,7 @@ var UpdateSynchroStateInActiveConfig = function(data){
 							$(this).find('div:first').prop('class', 'dragableItem NoVivaActiva');		// Azul claro
 						}
 					}
-				}
+				}*/
 			});
 		});
 	}
