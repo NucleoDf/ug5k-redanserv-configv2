@@ -198,14 +198,17 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 								td.New
 									input.textbox(id="IdSite", type="text", name="IdSite", style='width:220px' onblur='ValidateIds(this,"ErrorSiteId")' onfocus='this.oldValue=this.value')
 						table(style="border-spacing: 0 15px; width:100%")
-							tr#TrToolsSite(style="height: 20px", align="center")
+							tr#TrCreateGateway(style="height: 20px", align="center")
+								td.New
+									a.ButtonNucleo#BtnAddGateway(onclick="NewGateway()" , style="width:auto;position:relative" tkey='CreateGateway')
 								td.New
 									a.ButtonNucleo#BtnAdd(onclick="UpdateSingleSite()" , style="width:auto" tkey='Update')
 								td.New
 									a.ButtonNucleo#BtnCopySite(onclick="CopySingleSite()" , style="width:auto" tkey='Copy')
 								td.New
 									a.ButtonNucleo#BtnRemove(onclick="DelSite()" , style="width:50px" tkey='Remove')
-							tr#TrCreateGateway(style="height: 20px", align="center")
+							tr#TrToolsSite(style="height: 20px", align="center")
+							//tr#TrCreateGateway(style="height: 20px", align="center")
 								td.New(colspan=2 align='center' style='padding-top: 20px')
 									a.ButtonNucleo#BtnAddGateway(onclick="NewGateway()" , style="width:auto;position:relative" tkey='CreateGateway')
 								td.New(style='padding-top: 20px' align="center")
