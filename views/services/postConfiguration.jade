@@ -4,17 +4,12 @@ block configuration
 script.
 
 	function SynchronizedGateways(){
-		$.each(aliveGateways, function(index, value){
-			if(value.online) {
-				if(value.time>5000) {
-					value.online = false;
-					value.time = 0;
-				}
-				else {
-					value.time = value.time + 2500;
-				}
+		$.ajax({
+			type: 'GET',
+			url: '/gateways/syncGateways',
+			success: function (data) {
+				var a=data;
 			}
-		});
 		/*$.ajax({type: 'GET',
 				url: '/configurations/' + 'null' + '/gateways', 
 				success: function(data){
@@ -47,10 +42,10 @@ script.
 			})
 		}
 
-		setTimeout(function(){SynchronizedGateways()},2500);
+		setTimeout(function(){SynchronizedGateways()},2000);
 	}
 
-	setTimeout(SynchronizedGateways(),2500);
+	setTimeout(SynchronizedGateways(),2000);
 
 	function EnableAplicarCambios(){//Quitamos el translate para no pedir continuamente el fichero de lang
 		//translateWord('Activate',function(result){

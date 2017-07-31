@@ -33,6 +33,8 @@ var Strategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 var moment = require('moment');
 var ctrlSesiones = {user: null, localSession: null};
+var aliveGtws = [];
+//{ip:'',online:'',time:''}
 
 /***/
 // Configure the local strategy for use by Passport.
@@ -123,6 +125,8 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.set('aliveGtws', aliveGtws);
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/images/favicon.ico'));

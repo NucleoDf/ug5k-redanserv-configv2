@@ -204,11 +204,8 @@ router.route('/:gateway/services/:service')
 ////*  REV 1.0.2 VMG
 router.route('/:gateway/testconfig')
 	.get(function(req,res){
-		/*var onlineGtw = {};
-		onlineGtw.ip='1.1.1.1';
-		onlineGtw.online=true;
-		onlineGtw.time=0;
-		global.onlineGtws=1;*/
+		var aliveGtws=req.app.get('aliveGtws');
+		updateSincGtws(aliveGtws, req.params.gateway);
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		//myLibGateways.getIpv(req.params.gateway,function(result){
 		myLibGateways.getIpv2(req.params.gateway,function(result){
@@ -421,5 +418,31 @@ hardwareRouter.route('/:hardware')
 			res.json(result);			
 		});
 	});
+
+/****************************************/
+/*	FUNCTION: updateSincGtws 			*/
+/*  PARAMS: aliveGtws					*/
+/*  PARAMS: gtw							*/
+/*  									*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function updateSincGtws(aliveGtws, gtw){
+	var isGtwFound=false;
+	
+	for(var i=0;i<aliveGtws.length && !isGtwFound;i++) {
+		if(aliveGtws[i].ip==gtw) {
+			aliveGtws[i].online=true;
+			aliveGtws[i].time=0;
+			isGtwFound=true;
+		}
+	}
+	if(!isGtwFound) {
+		var onlineGtw = {};
+		onlineGtw.ip=gtw;
+		onlineGtw.online=true;
+		onlineGtw.time=0;
+		aliveGtws.push(onlineGtw);
+	}
+}
 
 module.exports = router;
