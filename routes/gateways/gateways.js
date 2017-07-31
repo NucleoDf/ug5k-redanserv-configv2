@@ -18,6 +18,13 @@ var async=require('async');
 // Nest routers by attaching them as middleware:
 //router.use('/:gatewayId/resources', myGatewaysModule);
 
+router.route('/syncGateways/:refreshTime')
+	.get(function(req,res){
+		logging.LoggingDate('GET /syncGateways/:refreshTime');
+		var aliveGtws=req.app.get('aliveGtws');
+		res.json(aliveGtws);
+	});
+
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/gateways', gateways);)
 	.get(function(req, res) {
   		logging.LoggingDate("GET gateways");

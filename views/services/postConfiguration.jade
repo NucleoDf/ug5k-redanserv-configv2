@@ -2,14 +2,15 @@
 block configuration
 
 script.
-
+	var refreshTime=2000;
 	function SynchronizedGateways(){
 		$.ajax({
 			type: 'GET',
-			url: '/gateways/syncGateways',
+			url: '/gateways/syncGateways/'+refreshTime,
 			success: function (data) {
-				var a=data;
+				var a = data;
 			}
+		});
 		/*$.ajax({type: 'GET',
 				url: '/configurations/' + 'null' + '/gateways', 
 				success: function(data){
@@ -26,7 +27,7 @@ script.
 		});
 		*/
 
-		if ($('#HardwareZone').is(':visible')){
+		/*if ($('#HardwareZone').is(':visible')){
 			//ResetHardware();
 
 			$.ajax({type: 'GET',
@@ -40,12 +41,12 @@ script.
 					})
 				}
 			})
-		}
+		}*/
 
-		setTimeout(function(){SynchronizedGateways()},2000);
+		setTimeout(function(){SynchronizedGateways()},refreshTime);
 	}
 
-	setTimeout(SynchronizedGateways(),2000);
+	setTimeout(SynchronizedGateways(),refreshTime);
 
 	function EnableAplicarCambios(){//Quitamos el translate para no pedir continuamente el fichero de lang
 		//translateWord('Activate',function(result){
