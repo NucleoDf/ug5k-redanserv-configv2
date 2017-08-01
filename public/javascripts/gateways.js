@@ -1,6 +1,5 @@
 var dataOfResource = null;
 var listOfGateways = '';
-var aliveGateways = [];
 var totalRecursos = 0;
 var cicloCompleto = 0;
 
@@ -162,11 +161,6 @@ var CopyGateway = function(){
 };
 
 var CopyGateway2 = function(){
-	//TODO añadida lista de alives
-	var connGtw={ip:'1.1.1.2',online:true,time:0};
-	aliveGateways.push(connGtw);
-	var connGtw={ip:'1.1.1.3',online:true,time:0};
-	aliveGateways.push(connGtw);
 	alertify.success('Test!');
 	//Prueba del Json completo
 	$.ajax({
