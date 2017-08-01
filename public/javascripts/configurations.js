@@ -914,9 +914,9 @@ var ExistGatewaysOut = function(f){
 						var strGateways='Las siguientes pasarelas no tiene comunicación con el servidor:' + '<br />';
 						var gtw=[];
 						var gtwOnline=0;
-						$.each(result.data, function(index, value){
-							for(var i=0;i<aliveGateways.length;i++) {
-								if (value.ip_cpu0 == aliveGateways[i].ip || value.ip_cpu1 == aliveGateways[i].ip) {
+						$.each(result.gtwsInConfig.data, function(index, value){
+							for(var i=0;i<result.aliveGateways.length;i++) {
+								if (value.ip_cpu0 == result.aliveGateways[i].ip || value.ip_cpu1 == result.aliveGateways[i].ip) {
 									if (aliveGateways[i].online)
 										gtwOnline = 1;
 								}

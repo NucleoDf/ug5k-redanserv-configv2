@@ -117,7 +117,8 @@ router.route('/:configuration/gatewaysOut')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		myLibConfigurations.gatewaysOut(req, res, req.params.configuration, function(name){
-			res.json(name);
+			var aliveGtws=req.app.get('aliveGtws');
+			res.json({gtwsInConfig: name, aliveGateways:aliveGtws});
 		});
 	});
 
