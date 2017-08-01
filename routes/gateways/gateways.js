@@ -111,9 +111,16 @@ router.route('/:sourceIdGateway/:targetNameGateway')
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		var sourceIdGateway = req.params.sourceIdGateway;
 		var targetNameGateway = req.params.targetNameGateway;
-		//var sourceIpvGateway = req.body.ipv;
-		myLibGateways.copyGateway(sourceIdGateway, targetNameGateway, function(result){
-			res.json(result);
+		
+		myLibGateways.checkGatewayName(sourceIdGateway, targetNameGateway, function(result) {
+			if (result.error!=null) {
+				res.json(result);
+			}
+			else {
+				myLibGateways.copyGateway(sourceIdGateway, targetNameGateway, function (result) {
+					res.json(result);
+				});
+			}
 		});
 	});
 
