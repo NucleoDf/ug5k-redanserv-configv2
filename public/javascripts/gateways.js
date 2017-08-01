@@ -214,6 +214,7 @@ var Copy = function(){
 };
 
 var CopyMethodGateway = function(idSourceGateway,nameTargetGateway){
+	$('#nameCopyGw').val('');
 	$.ajax({type: 'COPY',
 			dataType: 'json', 
 			//contentType:'application/json',
@@ -221,7 +222,7 @@ var CopyMethodGateway = function(idSourceGateway,nameTargetGateway){
 			url: '/gateways/' + idSourceGateway + '/' + nameTargetGateway, 
 			success: function(data){
 				if (data.error == 'ER_DUP_ENTRY')
-					alertify.error('Gateway \"' + nameTargetGateway + '\" ya existe.');
+					alertify.error('El nombre \"' + nameTargetGateway + '\" ya existe en esta configuración.');
 				else{
 					ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
 					alertify.success('Gateway clonado.');
