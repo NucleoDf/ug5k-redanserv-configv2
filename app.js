@@ -376,7 +376,7 @@ var intervalObject = setInterval(function () {
       // console.log(moment().toString() + ": " +
       //   (ctrlSesiones.localSession ? ("Sesion Activa hasta : " + moment(ctrlSesiones.localSession.cookie._expires).toString() ): "No Session"));
     }, 5000);
-/*********************/
+/*************************/
 
 app.set('port', process.env.PORT || 5050);
 
