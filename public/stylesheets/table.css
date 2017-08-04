@@ -197,5 +197,17 @@ table.slavetable td a{
 	margin:0px;
 	padding:8px;
 	text-decoration:none;
-  	text-align: center;/*
+  	text-align: center;
+}
+
+/** AGL. Tabla Historicos */
+table#TableHistorics tr:first-child {
+	height: 3em;
+}
+table#TableHistorics tr {
+	height: 2em;
+}
+table#TableHistorics tr td {
+	font-size: 90%;
+	padding-left: 3px;
 }
