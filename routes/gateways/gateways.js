@@ -106,13 +106,13 @@ router.route('/iplist/:idGtw')
 		});
 	});
 
-router.route('/:sourceIdGateway/:targetNameGateway')
+router.route('/:sourceIdGateway/:targetNameGateway/:ipTargetGateway')
 	.copy(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		var sourceIdGateway = req.params.sourceIdGateway;
 		var targetNameGateway = req.params.targetNameGateway;
-		
-		myLibGateways.checkGatewayName(sourceIdGateway, targetNameGateway, function(result) {
+		var ipTargetGateway = req.params.ipTargetGateway;
+		myLibGateways.checkGatewayNameIp(sourceIdGateway, targetNameGateway, ipTargetGateway, function(result) {
 			if (result.error!=null) {
 				res.json(result);
 			}

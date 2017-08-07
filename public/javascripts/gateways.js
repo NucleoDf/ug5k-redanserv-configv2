@@ -199,7 +199,7 @@ var Copy = function(){
 	if ($('#nameCopyGw').val().length > 0){
 		if ($('#ipCopyCpu0').val().length > 0){
 			//TODO nos quedamos por aquí en la copia
-			CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val());
+			CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val(),$('#ipCopyCpu0').val());
 		}
 		else {
 			alertify.error('Tiene que introducirse una ip.');
@@ -211,16 +211,23 @@ var Copy = function(){
 	CloseCopy();
 };
 
-var CopyMethodGateway = function(idSourceGateway,nameTargetGateway){
+/************************************/
+/*	FUNCTION: CopyMethodGateway 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+var CopyMethodGateway = function(idSourceGateway,nameTargetGateway,ipTargetGateway){
 	$('#nameCopyGw').val('');
 	$.ajax({type: 'COPY',
 			dataType: 'json', 
 			//contentType:'application/json',
 			//data: JSON.stringify({ipv: $('#ipv').val()}),
-			url: '/gateways/' + idSourceGateway + '/' + nameTargetGateway, 
+			url: '/gateways/' + idSourceGateway + '/' + nameTargetGateway+ '/' + ipTargetGateway,
 			success: function(data){
 				if (data.error == 'ER_DUP_ENTRY')
 					alertify.error('El nombre \"' + nameTargetGateway + '\" ya existe en esta configuración.');
+				else if (data.error == 'ER_DUP_IP_ENTRY')
+					alertify.error('La ip \"' + ipTargetGateway + '\" ya existe en esta configuración.');
 				else{
 					ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
 					alertify.success('Gateway clonado.');
