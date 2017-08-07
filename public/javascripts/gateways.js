@@ -2373,6 +2373,7 @@ function NewGateway (){
 		value: 1,
 		text: 'My option'
 	}));
+	$('#CopyGtwButton').hide();
 }
 
 /************************************/
