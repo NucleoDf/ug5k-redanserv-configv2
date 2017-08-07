@@ -223,7 +223,8 @@ router.route('/:gateway/testconfig')
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		//myLibGateways.getIpv(req.params.gateway,function(result){
 		myLibGateways.getIpv2(req.params.gateway,function(result){
-			updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw);
+			if(result.data!=null)
+					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw);
 			if (result.toLocal == -1){
 				// No en BD
 				logging.LoggingDate(JSON.stringify({idConf:result.ipv.toString(), fechaHora:''},null,'\t'));
