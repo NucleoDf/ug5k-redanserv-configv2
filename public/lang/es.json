@@ -197,6 +197,8 @@
 	"ServerIPPort"			: "Servidor de configuración",
 	"VirtualIP"				: "Dirección IP Virtual",
 	"IdGateway"				: "Id. pasarela",
+	"IpCpu0"				: "Ip Cpu0",
+	"IpCpu1"				: "Ip Cpu1",
 	"Resources"				: "Recursos",
 	"Hardware"				: "Hardware",
 	"Services"				: "Servicios",

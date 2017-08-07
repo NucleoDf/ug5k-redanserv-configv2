@@ -152,7 +152,7 @@ var CopyGateway = function(){
 	
 	$('#CopyGatewayZone').attr('style','position:absolute;width:0px;height:0px;top:180px;left:260px');
 	$('#CopyGatewayZone').show();
-	$('#CopyGatewayZone').animate({width: '30%', height: '200px'},500,function(){
+	$('#CopyGatewayZone').animate({width: '30%', height: '270px'},500,function(){
 		$('#LblIpvCopyGateway').text($('#ipv').val());
 		$('#LblNameCopyGateway').text($('#nameGw').val());
 
@@ -197,13 +197,17 @@ var CopyGateway2 = function(){
 
 var Copy = function(){
 	if ($('#nameCopyGw').val().length > 0){
-		//TODO nos quedamos por aquí en la copia
-		CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val());
+		if ($('#ipCopyCpu0').val().length > 0){
+			//TODO nos quedamos por aquí en la copia
+			CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val());
+		}
+		else {
+			alertify.error('Tiene que introducirse una ip.');
+		}
 	}
 	else {
 		alertify.error('Tiene que introducirse un nombre válido.');
 	}
-
 	CloseCopy();
 };
 
