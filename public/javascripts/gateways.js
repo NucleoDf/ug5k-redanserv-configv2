@@ -2363,6 +2363,16 @@ function NewGateway (){
 	$('#ipb2').val('');
 	$('#ipg2').val('');
 	$('#msb2').val('');
+	//ToDo No funciona el inicializar el valor del emplazamiento, se resetea despues...
+	/*var title = $('#TitleH3').text().split(" ");
+	var aux = title[1].replace(".	Emplazamientos:", "-");
+	var site = '<option value="">'+aux+title[2].replace(".	Pasarelas:", "")+'</option>';
+	$('#ListSites').html(site);
+	$('#ListSites').html(options);
+	*/$('#ListSites').append($('<option>', {
+		value: 1,
+		text: 'My option'
+	}));
 }
 
 /************************************/
@@ -2482,9 +2492,11 @@ function PostGateWay (idSite, isUpdate) {
 	newGateway.registrars=registrars;
 	if($('#CbRUpdatePeriod').prop('checked'))
 		if($('#TbUpdatePeriod').val()=='')
-			newGateway.periodo_supervision=0;
+			newGateway.periodo_supervision=90;
 		else
 			newGateway.periodo_supervision=$('#TbUpdatePeriod').val();
+	else
+		newGateway.periodo_supervision=90;
 	//SINCRONIZACION
 	newGateway.listServers=listServers;
 	//SNMP

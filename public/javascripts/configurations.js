@@ -944,13 +944,49 @@ var ExistGatewaysOut = function(f){
 	});
 };
 
-var ActiveCfg = function(){
-	alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + $('#name').val() + "\".?", 
-			function(){ 
-						// Obtener aquellas pasarelas que no tiene comunicación con el servidor
-						ExistGatewaysOut(function(existe){
-							if (existe.Aplicar){
-								// Comprobar si existe alguna pasarela de la configuración
+/************************************/
+/*	FUNCTION: ActiveCfg	 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+var ActiveCfg = function() {
+	alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + $('#name').val() + "\".?",
+	function () {
+		$.ajax({
+			type: 'GET',
+			url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/activate',
+			success: function (data) {
+				if (data.result) {
+					GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, $('#name').val(), $('#loggedUser').text());
+					alertify.success('Configuración \"' + $('#name').val() + '\" activada.');
+					// Generar histórico con cada pasarela que no se pudo configurar
+					// por estar desconectada del servidor
+					if (existe.gateways != null) {
+						$.each(existe.gateways, function (index, value) {
+							GenerateHistoricEventArray(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, [$('#name').val(), value], $('#loggedUser').text());
+						});
+					}
+				}
+				else {
+					GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, $('#name').val(), $('#loggedUser').text());
+					if (data.count == 0)
+						alertify.error('No ha sido posible activar la configuración \"' + $('#name').val() + '\" al estar vacía.');
+					else {
+						alertify.error('No ha sido posible activar la configuración \"' + $('#name').val() + '\".');
+						alertify.error('¿Tiene la configuración \"' + $('#name').val() + '\" alguna pasarela asignada?.');
+					}
+				}
+				// Provocar una actualización  en la lista de configuraciones si hubiera un cambio de configuración activa
+				GetConfigurations();
+				ShowCfg($('#DivConfigurations').data('cfgJson'));
+			}
+		});
+	});
+}
+	// Obtener aquellas pasarelas que no tiene comunicación con el servidor
+	/*ExistGatewaysOut(function(existe){
+	if (existe.Aplicar){
+				// Comprobar si existe alguna pasarela de la configuración
 								// a activar sin recursos configurados
 								ExistGatewayWithoutResources(function(gateways){
 									if (gateways.Aplicar){
