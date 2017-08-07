@@ -460,6 +460,7 @@ function ShowHardwareGateway(id,name){
 		//GetGateways(null,function(){
 			GetGateway(id);
 			$('#LblIdGateway').text(name);
+			$('#CopyGtwButton').show();
 			$('#hwGateway').fadeIn(500,function(){
 				// translateWord('Sites',function(result1){
 				// 	translateWord('Gateways',function(result2){
