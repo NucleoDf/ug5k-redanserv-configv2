@@ -1104,6 +1104,8 @@ var GetActiveCfgAndActivate = function(){
 														usersModified = false;
 														// 20170516. AGL. Activar Cambios...
 														tbbssModified = false;
+														// 20170516. AGL. Activar Cambios...
+														configModified = false;
 													}
 												}
 											});
