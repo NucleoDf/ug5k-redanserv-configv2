@@ -1,7 +1,7 @@
 {
   "Ulises": {
     "HistoricsDeep": 30,
-    "LoginTimeOut": 300,
+    "LoginTimeOut": 1,
     "Region": "Región Centro",
     "BackupServiceDomain": "192.168.0.212:8082",
     "Version": "1.0",
