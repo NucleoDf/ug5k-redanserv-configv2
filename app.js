@@ -287,6 +287,16 @@ app.get('/logout',
     res.redirect('/');
   });
 
+  /** 20170808 AGL. TICK de Sesion Activa */
+app.get('/alive', 
+  isAuthenticated,
+    function(req, res, next) {
+    res.json(
+        {
+            alive: "ok"
+        });
+ });
+  
 app.use('/users', isAuthenticated, users);
 app.use('/gateways', gateways);
 app.use('/configurations', configurations);

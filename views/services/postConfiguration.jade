@@ -45,7 +45,15 @@ script.
 				}
 			})
 		}*/
-
+		/** AGL. Polling de Sesion Activa */
+		$.ajax({
+			type: 'GET',
+			url: '/alive',
+			success: function (data) {
+				if (!data.alive)
+					$(location).attr('href', '/login');
+			}
+		});
 		setTimeout(function(){SynchronizedGateways()},refreshTime);
 	}
 
