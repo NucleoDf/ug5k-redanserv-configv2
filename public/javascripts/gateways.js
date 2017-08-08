@@ -153,7 +153,7 @@ var CopyGateway = function(){
 	$('#CopyGatewayZone').attr('style','position:absolute;width:0px;height:0px;top:180px;left:260px');
 	$('#CopyGatewayZone').show();
 	$('#CopyGatewayZone').animate({width: '30%', height: '290px'},500,function(){
-		$('#LblIpvCopyGateway').val($('#ipv').val());
+		$('#IpvCopyGateway').val($('#ipv').val());
 		$('#LblNameCopyGateway').text($('#nameGw').val());
 
 		$('#CopyGatewayZone').addClass('divNucleo');
@@ -204,8 +204,12 @@ var Copy = function(){
 	if ($('#nameCopyGw').val().length > 0){
 		if ($('#ipCopyCpu0').val().length > 0){
 			if ($('#ipCopyCpu1').val().length > 0) {
-				CopyMethodGateway($('#DivGateways').data('idCgw'),
-					$('#nameCopyGw').val(),$('#ipCopyCpu0').val(),$('#ipCopyCpu1').val());
+				if ($('#IpvCopyGateway').val().length > 0) {
+					CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val(),
+						$('#ipCopyCpu0').val(),$('#ipCopyCpu1').val(),$('#IpvCopyGateway').val());
+				}
+				else
+					alertify.error('El valor de la Ip virtual no puede ser vacío.');
 			}
 			else
 				alertify.error('El valor de la Ip para la CPU1 no puede ser vacío.');
@@ -224,11 +228,13 @@ var Copy = function(){
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var CopyMethodGateway = function(idSourceGateway,nameTargetGateway,ip0TargetGateway,ip1TargetGateway) {
+var CopyMethodGateway = function(idSourceGateway,nameTargetGateway,ip0TargetGateway,
+								 ip1TargetGateway,ipvTargetGateway) {
 	
 	$.ajax({type: 'COPY',
 		dataType: 'json',
-		url: '/gateways/' + idSourceGateway+'/'+nameTargetGateway+'/'+ip0TargetGateway+'/'+ip1TargetGateway,
+		url: '/gateways/' + idSourceGateway+'/'+nameTargetGateway+'/'+ip0TargetGateway+
+		'/'+ip1TargetGateway+'/'+ipvTargetGateway,
 		success: function(data){
 			if (data.error == 'ER_DUP_ENTRY')
 				alertify.error('El nombre \"' + nameTargetGateway + '\" ya existe en esta configuración.');
