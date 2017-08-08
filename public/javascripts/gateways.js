@@ -198,16 +198,19 @@ var CopyGateway2 = function(){
 var Copy = function(){
 	if ($('#nameCopyGw').val().length > 0){
 		if ($('#ipCopyCpu0').val().length > 0){
-			//TODO nos quedamos por aquí en la copia
-			CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val(),$('#ipCopyCpu0').val());
+			if ($('#ipCopyCpu1').val().length > 0) {
+				CopyMethodGateway($('#DivGateways').data('idCgw'),
+					$('#nameCopyGw').val(),$('#ipCopyCpu0').val(),$('#ipCopyCpu1').val());
+			}
+			else
+				alertify.error('El valor de la Ip para la CPU1 no puede ser vacío.');
 		}
-		else {
-			alertify.error('Tiene que introducirse una ip.');
-		}
+		else
+			alertify.error('El valor de la Ip para la CPU0 no puede ser vacío.');
 	}
-	else {
-		alertify.error('Tiene que introducirse un nombre válido.');
-	}
+	else
+		alertify.error('El identificador de la pasarela no puede ser vacío.');
+	
 	CloseCopy();
 };
 
