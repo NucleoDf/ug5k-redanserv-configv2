@@ -917,7 +917,7 @@ var ExistGatewaysOut = function(f){
 						$.each(result.gtwsInConfig.data, function(index, value){
 							for(var i=0;i<result.aliveGateways.length;i++) {
 								if (value.ip_cpu0 == result.aliveGateways[i].ip || value.ip_cpu1 == result.aliveGateways[i].ip) {
-									if (aliveGateways[i].online)
+									if (result.aliveGateways[i].online)
 										gtwOnline = 1;
 								}
 							}
