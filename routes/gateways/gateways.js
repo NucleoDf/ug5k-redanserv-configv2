@@ -106,18 +106,22 @@ router.route('/iplist/:idGtw')
 		});
 	});
 
-router.route('/:sourceIdGateway/:targetNameGateway/:ipTargetGateway')
+router.route('/:sourceIdGateway/:targetNameGateway/:ip0TargetGateway/:ip1TargetGateway')
 	.copy(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		var sourceIdGateway = req.params.sourceIdGateway;
 		var targetNameGateway = req.params.targetNameGateway;
-		var ipTargetGateway = req.params.ipTargetGateway;
-		myLibGateways.checkGatewayNameIp(sourceIdGateway, targetNameGateway, ipTargetGateway, function(result) {
+		var ip0TargetGateway = req.params.ip0TargetGateway;
+		var ip1TargetGateway = req.params.ip1TargetGateway;
+		
+		myLibGateways.checkGatewayNameIp(sourceIdGateway,targetNameGateway,ip0TargetGateway,ip1TargetGateway,
+		function(result) {
 			if (result.error!=null) {
 				res.json(result);
 			}
 			else {
-				myLibGateways.copyGateway(sourceIdGateway, targetNameGateway, function (result) {
+				myLibGateways.copyGateway(sourceIdGateway,targetNameGateway,ip0TargetGateway,ip1TargetGateway,
+				function (result) {
 					res.json(result);
 				});
 			}

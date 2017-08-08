@@ -195,6 +195,11 @@ var CopyGateway2 = function(){
 	});*/
 };
 
+/************************************/
+/*	FUNCTION: Copy 					*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var Copy = function(){
 	if ($('#nameCopyGw').val().length > 0){
 		if ($('#ipCopyCpu0').val().length > 0){
@@ -219,26 +224,26 @@ var Copy = function(){
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var CopyMethodGateway = function(idSourceGateway,nameTargetGateway,ipTargetGateway){
-	$('#nameCopyGw').val('');
+var CopyMethodGateway = function(idSourceGateway,nameTargetGateway,ip0TargetGateway,ip1TargetGateway) {
+	
 	$.ajax({type: 'COPY',
-			dataType: 'json', 
-			//contentType:'application/json',
-			//data: JSON.stringify({ipv: $('#ipv').val()}),
-			url: '/gateways/' + idSourceGateway + '/' + nameTargetGateway+ '/' + ipTargetGateway,
-			success: function(data){
-				if (data.error == 'ER_DUP_ENTRY')
-					alertify.error('El nombre \"' + nameTargetGateway + '\" ya existe en esta configuración.');
-				else if (data.error == 'ER_DUP_IP_ENTRY')
-					alertify.error('La ip \"' + ipTargetGateway + '\" ya existe en esta configuración.');
-				else{
-					ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
-					alertify.success('Gateway clonado.');
-					GetGateways(null,function(){
-						ShowHardwareGateway(data.data,nameTargetGateway);
-					});				
-				}
+		dataType: 'json',
+		url: '/gateways/' + idSourceGateway+'/'+nameTargetGateway+'/'+ip0TargetGateway+'/'+ip1TargetGateway,
+		success: function(data){
+			if (data.error == 'ER_DUP_ENTRY')
+				alertify.error('El nombre \"' + nameTargetGateway + '\" ya existe en esta configuración.');
+			else if (data.error == 'ER_DUP_IP0_ENTRY')
+				alertify.error('La ip \"' + ipTargetGateway + '\" ya existe en esta configuración.');
+			else if (data.error == 'ER_DUP_IP1_ENTRY')
+				alertify.error('La ip \"' + ipTargetGateway + '\" ya existe en esta configuración.');
+			else{
+				ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
+				alertify.success('Gateway clonado.');
+				GetGateways(null,function(){
+					ShowHardwareGateway(data.data,nameTargetGateway);
+				});
 			}
+		}
 	});
 };
 
