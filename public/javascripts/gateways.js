@@ -153,7 +153,7 @@ var CopyGateway = function(){
 	$('#CopyGatewayZone').attr('style','position:absolute;width:0px;height:0px;top:180px;left:260px');
 	$('#CopyGatewayZone').show();
 	$('#CopyGatewayZone').animate({width: '30%', height: '290px'},500,function(){
-		$('#LblIpvCopyGateway').text($('#ipv').val());
+		$('#LblIpvCopyGateway').val($('#ipv').val());
 		$('#LblNameCopyGateway').text($('#nameGw').val());
 
 		$('#CopyGatewayZone').addClass('divNucleo');
