@@ -40,6 +40,21 @@ function Authorize(currentProfile, authorizedProfiles) {
 	return false;
 }
 
+function strProfile(pv, pg, pa, ph, pb, pc, pl) {
+	var str = " (";
+
+	str += (pv ? "v" : "");
+	str += (pg ? "u" : "");
+	str += (pa ? "a" : "");
+	str += (ph ? "h" : "");
+	str += (pb ? "b" : "");
+	str += (pc ? "c" : "");
+	str += (pl ? "l" : "");
+
+	str += ')';
+	return str;
+}
+
 function indexInitUserData(username, userprofile) {
 	var perfilVisualizacion        = ((userprofile & visualProfMsc) ? true : false);
 	var perfilGestUsuarios         = ((userprofile & ccUsersProfMsc)? true : false);
@@ -81,6 +96,10 @@ function indexInitUserData(username, userprofile) {
 	$('#loggedUser').text(username);
 
 	/** 20170511 AGL. PERFILES. */
+	$('#loggedUser').text(username + 
+		strProfile(perfilVisualizacion, perfilGestUsuarios, perfilAdministracion,
+			perfilHistoricos, perfilBackup, perfilConfiguraciones, perfilCargaConfiguraciones));
+
 	$('#MenuGeneral').attr('style','display:table-cell;width:11%');
 	$('#MenuGeneral').removeClass('menuListDisabled')
 	$('#MenuOpciones').removeClass('menuListDisabled');
