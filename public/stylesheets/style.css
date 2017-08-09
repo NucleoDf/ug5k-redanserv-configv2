@@ -597,7 +597,7 @@ color: #FFF;
 }
 
 .fadeNucleo {
-  background: -webkit-gradient(linear, left top, left bottom, from(#FFCCCC), to(transparent));
+    background: -webkit-gradient(linear, left top, left bottom, from(#FFCCCC), to(transparent));
     -webkit-animation: fade 2s;
     animation: fade 2s;
 /*  background-size: 50% 60%;
