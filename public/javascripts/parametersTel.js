@@ -40,6 +40,54 @@ function ResetTelParameters(){
 	*/
 }
 
+/************************************************/
+/*	FUNCTION: GetRemoteTfnoResources 			*/
+/*  PARAMS: 									*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function GetRemoteTfnoResources() {
+	var cfgId = $('#DivConfigurations').data('idCFG');
+	
+	$('#CBFacedTelSite').empty();
+	$('#CBFacedTelGtw').empty();
+	$('#CBFacedTelResources').empty();
+	
+	SelectPhoneSite(cfgId);
+}
+
+/************************************************/
+/*	FUNCTION: SelectPhoneSite 					*/
+/*  PARAMS: cfgId: id de la configuración		*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function SelectPhoneSite(cfgId){
+	$.ajax({type: 'GET',
+		url: '/resources/remote/' + cfgId + '/null/null/null',
+		success: function(data){
+			$('#CBFacedTelSite').empty();$('#CBFacedTelSite').text('');
+			$('#CBFacedTelGtw').empty();$('#CBFacedTelGtw').text('');
+			$('#CBFacedTelResources').empty();$('#CBFacedTelResources').text('');
+			
+			if (data.data != null){
+				var numCfg = 0;
+				var options = '<option value="" disabled selected>Seleccione emplazamiento</option>';
+				
+				$('#CBFacedTelSite').append(options);
+				$.each(data.data, function(index, value){
+					var encontrado = false;
+					
+					if ($("#CBFacedTelSite option[value='" + value.eName + "']").length == 0){
+						options = '<option value="' + value.idemplazamiento + '">' + value.eName + '</option>';
+						$('#CBFacedTelSite').append(options);
+					}
+				});
+			}
+		}
+	});
+}
+
 function ShowOptions(tipo){
 	$('.BL').attr('style','display:none');
 	$('.BC').attr('style','display:none');
