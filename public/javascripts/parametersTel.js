@@ -376,6 +376,11 @@ function OnClickSupervision(cb){
 		$('#ReleaseRow').hide();
 }
 
+/****************************************/
+/*	FUNCTION: GetTelephonicResources 	*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
 function GetTelephonicResources(){
 	var cfgName = $('#name').val();
 
@@ -412,6 +417,11 @@ function GetTelephonicResources(){
 	});*/	
 }
 
+/****************************************/
+/*	FUNCTION: SelectTelSite 			*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
 function SelectTelSite(cfgName){
 	$.ajax({type: 'GET', 
 		url: '/resources/tel/' + cfgName + '/null/null',
@@ -438,6 +448,11 @@ function SelectTelSite(cfgName){
 	});
 }
 
+/****************************************/
+/*	FUNCTION: SelectTelGtw 				*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
 function SelectTelGtw(cfgName,site){
 	$.ajax({type: 'GET', 
 		url: '/resources/tel/' + cfgName + '/' + site + '/null',
