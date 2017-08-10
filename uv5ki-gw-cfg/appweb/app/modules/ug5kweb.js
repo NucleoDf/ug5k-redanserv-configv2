@@ -71,7 +71,7 @@ var pr_da_rng = { min: -24.3, max: 1.10 };
 var pr_vad_rng = { min: -35, max: -15 };
 var pr_vxq_rng = { min: 0, max: 30 };
 var pr_ptre_rng = { min: 1, max: 10 };
-var pr_tsup_rng = { min: 1, max: 10 };
+var pr_tsup_rng = { min: 90, max: 180 };
 var pr_iwp_rng = { min: 5, max: 15 };
 
 

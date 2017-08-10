@@ -13,9 +13,9 @@ webData_VersionNucleoNew Uv5kiGwCfgWebApp::_versiones;
 void *Uv5kiGwCfgWebApp::file_version_load_thread_routine(void *arg) 
 {
 	PLOG_INFO("Uv5kiGwCfgWebApp. Cargando Fichero de versiones...");
-	 _versiones.loadfrom(FILEOFVERSION);
+	_versiones.loadfrom(FILEOFVERSION);
 	PLOG_INFO("Uv5kiGwCfgWebApp. Fichero de versiones cargado...");
-	 return NULL;
+	return NULL;
 }
 
 /** */

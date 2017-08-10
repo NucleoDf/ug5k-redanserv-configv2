@@ -3,6 +3,7 @@
 
 #include "../base/code-base.h"
 #include "../base/sistema.h"
+#include "../base/md5.h"
 #include "../tools/tools.h"
 #include "../rapidjson/document.h"
 #include "../rapidjson/writer.h"
@@ -469,9 +470,12 @@ public:
 				read_key(base, "Modo", Modo);
 				read_key(base, "Date", Date);
 				read_key(base, "Size", Size);
-				if (Date == "") {
+				read_key(base, "Hash", md5);
+				/** 20170807. Siempre calculo la versión por si han cambiado algun fichero... */
+				/*if (Date == "") */{
 					try {
 						sistema::fileattr(onfs(Path), Modo, Date, Size);
+						md5 = MD5(onfs(Path), true).hexdigest();
 					}
 					catch(...) {
 					}
@@ -484,6 +488,7 @@ public:
 				write_key(writer, "Date", Date);
 				write_key(writer, "Modo", Modo);
 				write_key(writer, "Size", Size);
+				write_key(writer, "Hash", md5);
 			}
 			bool wasUnloaded(){return _wasUnloaded;}
 		protected:
@@ -493,6 +498,7 @@ public:
 			string Date;
 			string Size;
 			int Modo;
+			string md5;
 		};
 
 	public:
