@@ -245,9 +245,9 @@ var CopyMethodGateway = function(idSourceGateway,nameTargetGateway,ip0TargetGate
 			else{
 				ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
 				alertify.success('Gateway clonado.');
-				GetGateways(null,function(){
+				/*GetGateways(null,function(){
 					ShowHardwareGateway(data.data,nameTargetGateway);
-				});
+				});*/
 			}
 		}
 	});
