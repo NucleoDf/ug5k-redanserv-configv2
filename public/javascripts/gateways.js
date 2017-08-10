@@ -23,6 +23,507 @@ function Site2Config(mySite, sites) {
 	return cfgName;
 }
 
+/************************************************/
+/*	FUNCTION: InsertNewResource 				*/
+/*  PARAMS: 									*/
+/*	Si es nuevo recurso, isUpdate=false			*/
+/* 	col y row son la columna y la fila donde	*/
+/*	se va a insertar el recurso.				*/
+/*	Si es editar, isUpdate=true y:				*/
+/*	col es tipo de recurso 1 radio y 2 tfno		*/
+/*	row es el id del recurso a editar			*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+var InsertNewResource = function(col, row, isUpdate) {
+	var resourceId=row;
+	var radioResource={};
+	var telephoneResource={};
+	var resourceType=0;
+	
+	//Para no tener que hacer ningún SELECT de la id de la pasarela
+	var idCgw=$('#DivGateways').data('idCgw');
+	
+	////////////////////
+	//RADIO
+	if ($('#SResourceType option:selected').val() == 1)	{
+		//Campos para identificar el recurso
+		resourceType							=	1;
+		radioResource.pasarela_id				=	idCgw
+		radioResource.fila						=	row;
+		radioResource.columna					=	col;
+		//Nombre
+		if($('#TbNameResource').val()=='')
+			radioResource.nombre				=	'Recurso';//Valor Defecto
+		else
+			radioResource.nombre				=	$('#TbNameResource').val();
+		//Codec
+		radioResource.codec						=	$('#SCodec option:selected').val();
+		//Habilitar registro?
+		if($('#TbEnableRegister').prop('checked'))
+			radioResource.clave_registro		=	$('#TbKey').val();
+		//Frecuencia
+		if($('#IdDestination').val()=='')
+			radioResource.frecuencia			=	0;//Valor Defecto
+		else
+			radioResource.frecuencia			=	$('#IdDestination').val();
+		//AGC en A/D
+		if (!$('#CbAdAgc').prop('checked')) {
+			if($('#TbAdGain').val()=='')
+				radioResource.ajuste_ad			=	0;//Valor Defecto
+			else
+				radioResource.ajuste_ad			=	$('#TbAdGain').val();
+		}
+		//AGC en D/A
+		if (!$('#CbDaAgc').prop('checked')) {
+			if($('#TbDaGain').val()=='')
+				radioResource.ajuste_da			=	0;//Valor Defecto
+			else
+				radioResource.ajuste_da			=	$('#TbDaGain').val();
+		}
+		//Precisión audio
+		radioResource.precision_audio 			=	$('#CbGranularity option:selected').val();
+		//Tipo de Agente Radio
+		radioResource.tipo_agente 				=	$('#LbTypeRadio option:selected').val();
+		//Indicación entrada audio
+		radioResource.indicacion_entrada_audio	=	$('#LbSquelchType option:selected').val();
+		//Umbral VAD (dB)
+		if($('#TbVad').val()!='')
+			radioResource.umbral_vad			=	$('#TbVad').val();
+		//Indicación salida audio
+		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
+		//Métodos BSS disponibles
+		radioResource.metodo_bss				=	$('#CbBssMethodAvailable option:selected').val();
+		//Eventos PTT/Squelch
+		if($('#CbPttSquelchEvents').prop('checked'))
+			radioResource.evento_ptt_squelch	=	1;
+		else
+			radioResource.evento_ptt_squelch	=	0;
+		//Prioridad PTT
+		radioResource.prioridad_ptt				=	$('#LbPttPriority option:selected').val();
+		//Prioridad Sesion SIP
+		radioResource.prioridad_sesion_sip		=	$('#LbSipPriority option:selected').val();
+		//BSS/CLIMAX
+		if($('#CbBssEnable').prop('checked'))
+			radioResource.climax_bss			=	1;
+		else
+			radioResource.climax_bss			=	0;
+		//Método BSS preferido
+		// **Es el Métodos BSS disponibles pero para Rxs
+		
+		//Tabla calificación audio
+		if($('#CbBssAudioTable option:selected').val() == -1)
+			radioResource.tabla_bss_id				=	null;
+		else
+			radioResource.tabla_bss_id				=	$('#CbBssAudioTable option:selected').val();
+		//Retraso interno GRS
+		if($('#TbGrsInternalDelay').val()=='')
+			radioResource.retraso_interno_grs	=	0;//Valor Defecto
+		else
+			radioResource.retraso_interno_grs	=	$('#TbGrsInternalDelay').val();
+		//Habilita grabación
+		if($('#CbEnableRecording').prop('checked'))
+			radioResource.habilita_grabacion	=	1;
+		else
+			radioResource.habilita_grabacion	=	0;
+		
+		//Lista de URIS
+		var listaUris=[];
+		var uri2Insert={};
+		
+		if($('#UriTxA1').val()!='') {
+			uri2Insert.uri = $('#UriTxA1').val();
+			uri2Insert.tipo = 'TXA';
+			uri2Insert.nivel_colateral = 1;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxA1').val()!='') {
+			uri2Insert.uri = $('#UriRxA1').val();
+			uri2Insert.tipo = 'RXA';
+			uri2Insert.nivel_colateral = 1;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriTxB1').val()!='') {
+			uri2Insert.uri = $('#UriTxB1').val();
+			uri2Insert.tipo = 'TXB';
+			uri2Insert.nivel_colateral = 2;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxB1').val()!='') {
+			uri2Insert.uri = $('#UriRxB1').val();
+			uri2Insert.tipo = 'RXB';
+			uri2Insert.nivel_colateral = 2;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriTxA2').val()!='') {
+			uri2Insert.uri = $('#UriTxA2').val();
+			uri2Insert.tipo = 'TXA';
+			uri2Insert.nivel_colateral = 3;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxA2').val()!='') {
+			uri2Insert.uri = $('#UriRxA2').val();
+			uri2Insert.tipo = 'RXA';
+			uri2Insert.nivel_colateral = 3;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriTxB2').val()!='') {
+			uri2Insert.uri = $('#UriTxB2').val();
+			uri2Insert.tipo = 'TXB';
+			uri2Insert.nivel_colateral = 4;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxB2').val()!='') {
+			uri2Insert.uri = $('#UriRxB2').val();
+			uri2Insert.tipo = 'RXB';
+			uri2Insert.nivel_colateral = 4;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriTxA3').val()!='') {
+			uri2Insert.uri = $('#UriTxA3').val();
+			uri2Insert.tipo = 'TXA';
+			uri2Insert.nivel_colateral = 5;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxA3').val()!='') {
+			uri2Insert.uri = $('#UriRxA3').val();
+			uri2Insert.tipo = 'RXA';
+			uri2Insert.nivel_colateral = 5;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriTxB3').val()!='') {
+			uri2Insert.uri = $('#UriTxB3').val();
+			uri2Insert.tipo = 'TXB';
+			uri2Insert.nivel_colateral = 6;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		if($('#UriRxB3').val()!='') {
+			uri2Insert.uri = $('#UriRxB3').val();
+			uri2Insert.tipo = 'RXB';
+			uri2Insert.nivel_colateral = 6;
+			
+			listaUris.push(uri2Insert);
+			uri2Insert={};
+		}
+		
+		radioResource.listaUris=insertBNList(listaUris);
+		radioResource.restriccion_entrantes = $('#SRestriccion option:selected').val();
+	}
+	////////////////////
+	//TELEFONO
+	else {
+		//Campos para identificar el recurso
+		resourceType								=	2;
+		telephoneResource.pasarela_id				=	idCgw;
+		telephoneResource.fila						=	row;
+		telephoneResource.columna					=	col;
+		//Nombre
+		if($('#TbNameResource').val()=='')
+			telephoneResource.nombre				=	'Recurso';//Valor Defecto
+		else
+			telephoneResource.nombre				=	$('#TbNameResource').val();
+		//Codec
+		telephoneResource.codec						=	$('#SCodec option:selected').val();
+		//Habilitar registro?
+		if($('#TbEnableRegister').prop('checked'))
+			telephoneResource.clave_registro		=	$('#TbKey').val();
+		//AGC en A/D
+		if (!$('#CbAdAgc').prop('checked')) {
+			if($('#TbAdGain').val()=='')
+				telephoneResource.ajuste_ad			=	0;//Valor Defecto
+			else
+				telephoneResource.ajuste_ad			=	$('#TbAdGain').val();
+		}
+		//AGC en D/A
+		if (!$('#CbDaAgc').prop('checked')) {
+			if($('#TbDaGain').val()=='')
+				telephoneResource.ajuste_da			=	0;//Valor Defecto
+			else
+				telephoneResource.ajuste_da			=	$('#TbDaGain').val();
+		}
+		//Tipo de Interfaz Telefónico
+		telephoneResource.tipo_interfaz_tel			=	$('#LbTypeTel option:selected').val();
+		//URI remota
+		telephoneResource.uri_telefonica			=	$('#TbRemoteUri').val();
+		//Detección VOX
+		if($('#CbVox').prop('checked'))
+			telephoneResource.deteccion_vox			=	1;
+		else
+			telephoneResource.deteccion_vox			=	0;
+		//Umbral Vox (dB)
+		telephoneResource.umbral_vox				=	$('#TbUmbral').val();
+		//Cola Vox (sg.)
+		telephoneResource.cola_vox					=	$('#TbInactividad').val();
+		//Respuesta automática
+		if($('#CbResp').prop('checked'))
+			telephoneResource.respuesta_automatica	=	1;
+		else
+			telephoneResource.respuesta_automatica	=	0;
+		//Periodo tonos resp. estado (sg.)
+		telephoneResource.periodo_tonos				=	$('#TbOptionsInterval').val();
+		//Lado
+		telephoneResource.lado						=	$('#LbLado option:selected').val();
+		//Origen llamadas salientes de test
+		telephoneResource.origen_test					=	$('#TbLocalNumText').val();
+		//Destino llamadas salientes de test
+		telephoneResource.destino_test					=	$('#TbRemoteNumText').val();
+		//Supervisa colateral
+		if($('#CbOptionsSupervision').prop('checked')) {
+			telephoneResource.supervisa_colateral 		= 	1;
+			//Tiempo supervisión (sg.)
+			if($('#TbReleaseTime').val() == '')
+				telephoneResource.tiempo_supervision	=	0;//Valor por defecto
+			else
+				telephoneResource.tiempo_supervision	=	$('#TbReleaseTime').val();
+		}
+		else {
+			telephoneResource.supervisa_colateral		=	0;
+			telephoneResource.tiempo_supervision		=	null;
+		}
+		//Duración tono interrupción (sg.)
+		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val()
+		
+		var rank={};
+		var atsRanks=[];
+		if( ($('#OrigenInicio1').val()!=''&& $('#OrigenFinal1').val()=='') ||
+			($('#OrigenInicio1').val()==''&& $('#OrigenFinal1').val()!='')) {
+			alertify.error('El Rango 1 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			if($('#OrigenInicio1').val()!='' && $('#OrigenFinal1').val()!='') {
+				if($('#OrigenInicio1').val()>$('#OrigenFinal1').val()!='') {
+					alertify.error('El valor inicial del rango 1 debe de tener un valor menor o igual al valor final.');
+					return;
+				}
+				else {
+					rank.inicial = $('#OrigenInicio1').val();
+					rank.final = $('#OrigenFinal1').val();
+					rank.tipo = 0;
+					atsRanks.push(rank);
+					rank = {};
+				}
+			}
+		}
+		if( ($('#OrigenInicio2').val()!=''&& $('#OrigenFinal2').val()=='') ||
+			($('#OrigenInicio2').val()==''&& $('#OrigenFinal2').val()!='')) {
+			alertify.error('El Rango 2 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			if($('#OrigenInicio2').val()>$('#OrigenFinal2').val()!='') {
+				alertify.error('El valor inicial del rango 2 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#OrigenInicio2').val() != '' && $('#OrigenFinal2').val() != '') {
+					rank.inicial = $('#OrigenInicio2').val();
+					rank.final = $('#OrigenFinal2').val();
+					rank.tipo = 0;
+					atsRanks.push(rank);
+					rank = {};
+				}
+			}
+		}
+		if( ($('#OrigenInicio3').val()!=''&& $('#OrigenFinal3').val()=='') ||
+			($('#OrigenInicio3').val()==''&& $('#OrigenFinal3').val()!='')) {
+			alertify.error('El Rango 3 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			if($('#OrigenInicio3').val()>$('#OrigenFinal3').val()!='') {
+				alertify.error('El valor inicial del rango 3 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#OrigenInicio3').val() != '' && $('#OrigenFinal3').val() != '') {
+					rank.inicial = $('#OrigenInicio3').val();
+					rank.final = $('#OrigenFinal3').val();
+					rank.tipo = 0;
+					atsRanks.push(rank);
+					rank = {};
+				}
+			}
+		}
+		if( ($('#OrigenInicio4').val()!=''&& $('#OrigenFinal4').val()=='') ||
+			($('#OrigenInicio4').val()==''&& $('#OrigenFinal4').val()!='')) {
+			alertify.error('El Rango 4 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			if($('#OrigenInicio4').val()>$('#OrigenFinal4').val()!='') {
+				alertify.error('El valor inicial del rango 4 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#OrigenInicio4').val() != '' && $('#OrigenFinal4').val() != '') {
+					rank.inicial = $('#OrigenInicio4').val();
+					rank.final = $('#OrigenFinal4').val();
+					rank.tipo = 0;
+					atsRanks.push(rank);
+					rank = {};
+				}
+			}
+		}
+		if( ($('#DestinoInicio1').val()!=''&& $('#DestinoFinal1').val()=='') ||
+			($('#DestinoInicio1').val()==''&& $('#DestinoFinal1').val()!='')) {
+			alertify.error('El Rango 1 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			if($('#DestinoInicio1').val()>$('#DestinoFinal1').val()!='') {
+				alertify.error('El valor inicial del rango 1 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#DestinoInicio1').val() != '' && $('#DestinoFinal1').val() != '') {
+					rank.inicial = $('#DestinoInicio1').val();
+					rank.final = $('#DestinoFinal1').val();
+					rank.tipo = 1;
+					atsRanks.push(rank);
+					rank = {};
+				}
+			}
+		}
+		if( ($('#DestinoInicio2').val()!=''&& $('#DestinoFinal2').val()=='') ||
+			($('#DestinoInicio2').val()==''&& $('#DestinoFinal2').val()!='')) {
+			alertify.error('El Rango 2 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			if($('#DestinoInicio2').val()>$('#DestinoFinal2').val()!='') {
+				alertify.error('El valor inicial del rango 2 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#DestinoInicio2').val() != '' && $('#DestinoFinal2').val() != '') {
+					rank.inicial = $('#DestinoInicio2').val();
+					rank.final = $('#DestinoFinal2').val();
+					rank.tipo = 1;
+					atsRanks.push(rank);
+					rank = {};
+				}
+			}
+		}
+		if( ($('#DestinoInicio3').val()!=''&& $('#DestinoFinal3').val()=='') ||
+			($('#DestinoInicio3').val()==''&& $('#DestinoFinal3').val()!='')) {
+			alertify.error('El Rango 3 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			if($('#DestinoInicio3').val()>$('#DestinoFinal3').val()!='') {
+				alertify.error('El valor inicial del rango 3 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#DestinoInicio3').val() != '' && $('#DestinoFinal3').val() != '') {
+					rank.inicial = $('#DestinoInicio3').val();
+					rank.final = $('#DestinoFinal3').val();
+					rank.tipo = 1;
+					atsRanks.push(rank);
+					rank = {};
+				}
+			}
+		}
+		if( ($('#DestinoInicio4').val()!=''&& $('#DestinoFinal4').val()=='') ||
+			($('#DestinoInicio4').val()==''&& $('#DestinoFinal4').val()!='')) {
+			alertify.error('El Rango 4 debe de tener un valor inicial y final.');
+			return;
+		}
+		else{
+			if($('#DestinoInicio4').val()>$('#DestinoFinal4').val()!='') {
+				alertify.error('El valor inicial del rango 4 debe de tener un valor menor o igual al valor final.');
+				return;
+			}
+			else {
+				if ($('#DestinoInicio4').val() != '' && $('#DestinoFinal4').val() != '') {
+					rank.inicial = $('#DestinoInicio4').val();
+					rank.final = $('#DestinoFinal4').val();
+					rank.tipo = 1;
+					atsRanks.push(rank);
+					rank = {};
+				}
+			}
+		}
+		telephoneResource.ranks						=	atsRanks;
+	}
+	//Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda
+	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
+	var resource2Insert={radio: radioResource, telephone: telephoneResource};
+	
+	
+	//Nuevo Recurso
+	if(isUpdate=='false') {
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			contentType: 'application/json',
+			url: '/gateways/insertNewResource/:resource2Insert/:resourceType',
+			data: JSON.stringify({
+					"resource2Insert": resource2Insert,
+					"resourceType": resourceType
+				}
+			),
+			success: function (data) {
+				if (data.error == null)
+					alertify.success('El recurso se ha añadido correctamente.');
+				else
+					alertify.error('Error: ' + data.error);
+			},
+			error: function (data) {
+				alertify.error('Error insertando el nuevo recurso.');
+			}
+		});
+	}
+	//Actualizar Recurso
+	else {
+		$.ajax({
+			type: 'PUT',
+			dataType: 'json',
+			contentType: 'application/json',
+			url: '/gateways/updateResource/:resource2Insert/:resourceType/:resourceId',
+			data: JSON.stringify({
+					"resource2Insert": resource2Insert,
+					"resourceType": resourceType,
+					"resourceId": resourceId
+				}
+			),
+			success: function (data) {
+				if (data.error == null)
+					alertify.success('El recurso se ha actualizado correctamente.');
+				else
+					alertify.error('Error: ' + data.error);
+			},
+			error: function (data) {
+				alertify.error('Error actualizando el recurso.');
+			}
+		});
+	}
+	GetMySlaves();
+}
+
 /************************************/
 /*	FUNCTION: ChangeGateWaySite 	*/
 /*  PARAMS: 						*/
@@ -3023,506 +3524,7 @@ function showDataForTelephoneResource(data) {
 		$('#ListMenuParameters li:nth-child(5)').hide();
 	
 }
-/************************************************/
-/*	FUNCTION: InsertNewResource 				*/
-/*  PARAMS: 									*/
-/*	Si es nuevo recurso, isUpdate=false			*/
-/* 	col y row son la columna y la fila donde	*/
-/*	se va a insertar el recurso.				*/
-/*	Si es editar, isUpdate=true y:				*/
-/*	col es tipo de recurso 1 radio y 2 tfno		*/
-/*	row es el id del recurso a editar			*/
-/*												*/
-/*  REV 1.0.2 VMG								*/
-/************************************************/
-var InsertNewResource = function(col, row, isUpdate) {
-	var resourceId=row;
-	var radioResource={};
-	var telephoneResource={};
-	var resourceType=0;
-	
-	//Para no tener que hacer ningún SELECT de la id de la pasarela
-	var idCgw=$('#DivGateways').data('idCgw');
-	
-	////////////////////
-	//RADIO
-	if ($('#SResourceType option:selected').val() == 1)	{
-		//Campos para identificar el recurso
-		resourceType							=	1;
-		radioResource.pasarela_id				=	idCgw
-		radioResource.fila						=	row;
-		radioResource.columna					=	col;
-		//Nombre
-		if($('#TbNameResource').val()=='')
-			radioResource.nombre				=	'Recurso';//Valor Defecto
-		else
-			radioResource.nombre				=	$('#TbNameResource').val();
-		//Codec
-		radioResource.codec						=	$('#SCodec option:selected').val();
-		//Habilitar registro?
-		if($('#TbEnableRegister').prop('checked'))
-			radioResource.clave_registro		=	$('#TbKey').val();
-		//Frecuencia
-		if($('#IdDestination').val()=='')
-			radioResource.frecuencia			=	0;//Valor Defecto
-		else
-			radioResource.frecuencia			=	$('#IdDestination').val();
-		//AGC en A/D
-		if (!$('#CbAdAgc').prop('checked')) {
-			if($('#TbAdGain').val()=='')
-				radioResource.ajuste_ad			=	0;//Valor Defecto
-			else
-				radioResource.ajuste_ad			=	$('#TbAdGain').val();
-		}
-		//AGC en D/A
-		if (!$('#CbDaAgc').prop('checked')) {
-			if($('#TbDaGain').val()=='')
-				radioResource.ajuste_da			=	0;//Valor Defecto
-			else
-				radioResource.ajuste_da			=	$('#TbDaGain').val();
-		}
-		//Precisión audio
-		radioResource.precision_audio 			=	$('#CbGranularity option:selected').val();
-		//Tipo de Agente Radio
-		radioResource.tipo_agente 				=	$('#LbTypeRadio option:selected').val();
-		//Indicación entrada audio
-		radioResource.indicacion_entrada_audio	=	$('#LbSquelchType option:selected').val();
-		//Umbral VAD (dB)
-		if($('#TbVad').val()!='')
-			radioResource.umbral_vad			=	$('#TbVad').val();
-		//Indicación salida audio
-		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
-		//Métodos BSS disponibles
-		radioResource.metodo_bss				=	$('#CbBssMethodAvailable option:selected').val();
-		//Eventos PTT/Squelch
-		if($('#CbPttSquelchEvents').prop('checked'))
-			radioResource.evento_ptt_squelch	=	1;
-		else
-			radioResource.evento_ptt_squelch	=	0;
-		//Prioridad PTT
-		radioResource.prioridad_ptt				=	$('#LbPttPriority option:selected').val();
-		//Prioridad Sesion SIP
-		radioResource.prioridad_sesion_sip		=	$('#LbSipPriority option:selected').val();
-		//BSS/CLIMAX
-		if($('#CbBssEnable').prop('checked'))
-			radioResource.climax_bss			=	1;
-		else
-			radioResource.climax_bss			=	0;
-		//Método BSS preferido
-		// **Es el Métodos BSS disponibles pero para Rxs
-		
-		//Tabla calificación audio
-		if($('#CbBssAudioTable option:selected').val() == -1)
-			radioResource.tabla_bss_id				=	null;
-		else
-			radioResource.tabla_bss_id				=	$('#CbBssAudioTable option:selected').val();
-		//Retraso interno GRS
-		if($('#TbGrsInternalDelay').val()=='')
-			radioResource.retraso_interno_grs	=	0;//Valor Defecto
-		else
-			radioResource.retraso_interno_grs	=	$('#TbGrsInternalDelay').val();
-		//Habilita grabación
-		if($('#CbEnableRecording').prop('checked'))
-			radioResource.habilita_grabacion	=	1;
-		else
-			radioResource.habilita_grabacion	=	0;
-		
-		//Lista de URIS
-		var listaUris=[];
-		var uri2Insert={};
-		
-		if($('#UriTxA1').val()!='') {
-			uri2Insert.uri = $('#UriTxA1').val();
-			uri2Insert.tipo = 'TXA';
-			uri2Insert.nivel_colateral = 1;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriRxA1').val()!='') {
-			uri2Insert.uri = $('#UriRxA1').val();
-			uri2Insert.tipo = 'RXA';
-			uri2Insert.nivel_colateral = 1;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriTxB1').val()!='') {
-			uri2Insert.uri = $('#UriTxB1').val();
-			uri2Insert.tipo = 'TXB';
-			uri2Insert.nivel_colateral = 2;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriRxB1').val()!='') {
-			uri2Insert.uri = $('#UriRxB1').val();
-			uri2Insert.tipo = 'RXB';
-			uri2Insert.nivel_colateral = 2;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriTxA2').val()!='') {
-			uri2Insert.uri = $('#UriTxA2').val();
-			uri2Insert.tipo = 'TXA';
-			uri2Insert.nivel_colateral = 3;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriRxA2').val()!='') {
-			uri2Insert.uri = $('#UriRxA2').val();
-			uri2Insert.tipo = 'RXA';
-			uri2Insert.nivel_colateral = 3;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriTxB2').val()!='') {
-			uri2Insert.uri = $('#UriTxB2').val();
-			uri2Insert.tipo = 'TXB';
-			uri2Insert.nivel_colateral = 4;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriRxB2').val()!='') {
-			uri2Insert.uri = $('#UriRxB2').val();
-			uri2Insert.tipo = 'RXB';
-			uri2Insert.nivel_colateral = 4;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriTxA3').val()!='') {
-			uri2Insert.uri = $('#UriTxA3').val();
-			uri2Insert.tipo = 'TXA';
-			uri2Insert.nivel_colateral = 5;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriRxA3').val()!='') {
-			uri2Insert.uri = $('#UriRxA3').val();
-			uri2Insert.tipo = 'RXA';
-			uri2Insert.nivel_colateral = 5;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriTxB3').val()!='') {
-			uri2Insert.uri = $('#UriTxB3').val();
-			uri2Insert.tipo = 'TXB';
-			uri2Insert.nivel_colateral = 6;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		if($('#UriRxB3').val()!='') {
-			uri2Insert.uri = $('#UriRxB3').val();
-			uri2Insert.tipo = 'RXB';
-			uri2Insert.nivel_colateral = 6;
-			
-			listaUris.push(uri2Insert);
-			uri2Insert={};
-		}
-		
-		radioResource.listaUris=insertBNList(listaUris);
-		radioResource.restriccion_entrantes = $('#SRestriccion option:selected').val();
-	}
-	////////////////////
-	//TELEFONO
-	else {
-		//Campos para identificar el recurso
-		resourceType								=	2;
-		telephoneResource.pasarela_id				=	idCgw;
-		telephoneResource.fila						=	row;
-		telephoneResource.columna					=	col;
-		//Nombre
-		if($('#TbNameResource').val()=='')
-			telephoneResource.nombre				=	'Recurso';//Valor Defecto
-		else
-			telephoneResource.nombre				=	$('#TbNameResource').val();
-		//Codec
-		telephoneResource.codec						=	$('#SCodec option:selected').val();
-		//Habilitar registro?
-		if($('#TbEnableRegister').prop('checked'))
-			telephoneResource.clave_registro		=	$('#TbKey').val();
-		//AGC en A/D
-		if (!$('#CbAdAgc').prop('checked')) {
-			if($('#TbAdGain').val()=='')
-				telephoneResource.ajuste_ad			=	0;//Valor Defecto
-			else
-				telephoneResource.ajuste_ad			=	$('#TbAdGain').val();
-		}
-		//AGC en D/A
-		if (!$('#CbDaAgc').prop('checked')) {
-			if($('#TbDaGain').val()=='')
-				telephoneResource.ajuste_da			=	0;//Valor Defecto
-			else
-				telephoneResource.ajuste_da			=	$('#TbDaGain').val();
-		}
-		//Tipo de Interfaz Telefónico
-		telephoneResource.tipo_interfaz_tel			=	$('#LbTypeTel option:selected').val();
-		//URI remota
-		telephoneResource.uri_telefonica			=	$('#TbRemoteUri').val();
-		//Detección VOX
-		if($('#CbVox').prop('checked'))
-			telephoneResource.deteccion_vox			=	1;
-		else
-			telephoneResource.deteccion_vox			=	0;
-		//Umbral Vox (dB)
-		telephoneResource.umbral_vox				=	$('#TbUmbral').val();
-		//Cola Vox (sg.)
-		telephoneResource.cola_vox					=	$('#TbInactividad').val();
-		//Respuesta automática
-		if($('#CbResp').prop('checked'))
-			telephoneResource.respuesta_automatica	=	1;
-		else
-			telephoneResource.respuesta_automatica	=	0;
-		//Periodo tonos resp. estado (sg.)
-		telephoneResource.periodo_tonos				=	$('#TbOptionsInterval').val();
-		//Lado
-		telephoneResource.lado						=	$('#LbLado option:selected').val();
-		//Origen llamadas salientes de test
-		telephoneResource.origen_test					=	$('#TbLocalNumText').val();
-		//Destino llamadas salientes de test
-		telephoneResource.destino_test					=	$('#TbRemoteNumText').val();
-		//Supervisa colateral
-		if($('#CbOptionsSupervision').prop('checked')) {
-			telephoneResource.supervisa_colateral 		= 	1;
-		//Tiempo supervisión (sg.)
-			if($('#TbReleaseTime').val() == '')
-				telephoneResource.tiempo_supervision	=	0;//Valor por defecto
-			else
-				telephoneResource.tiempo_supervision	=	$('#TbReleaseTime').val();
-		}
-		else {
-			telephoneResource.supervisa_colateral		=	0;
-			telephoneResource.tiempo_supervision		=	null;
-		}
-		//Duración tono interrupción (sg.)
-		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val()
-		
-		var rank={};
-		var atsRanks=[];
-		if( ($('#OrigenInicio1').val()!=''&& $('#OrigenFinal1').val()=='') ||
-			($('#OrigenInicio1').val()==''&& $('#OrigenFinal1').val()!='')) {
-			alertify.error('El Rango 1 debe de tener un valor inicial y final.');
-			return;
-		}
-		else{
-			if($('#OrigenInicio1').val()!='' && $('#OrigenFinal1').val()!='') {
-				if($('#OrigenInicio1').val()>$('#OrigenFinal1').val()!='') {
-					alertify.error('El valor inicial del rango 1 debe de tener un valor menor o igual al valor final.');
-					return;
-				}
-				else {
-					rank.inicial = $('#OrigenInicio1').val();
-					rank.final = $('#OrigenFinal1').val();
-					rank.tipo = 0;
-					atsRanks.push(rank);
-					rank = {};
-				}
-			}
-		}
-		if( ($('#OrigenInicio2').val()!=''&& $('#OrigenFinal2').val()=='') ||
-			($('#OrigenInicio2').val()==''&& $('#OrigenFinal2').val()!='')) {
-			alertify.error('El Rango 2 debe de tener un valor inicial y final.');
-			return;
-		}
-		else{
-			if($('#OrigenInicio2').val()>$('#OrigenFinal2').val()!='') {
-				alertify.error('El valor inicial del rango 2 debe de tener un valor menor o igual al valor final.');
-				return;
-			}
-			else {
-				if ($('#OrigenInicio2').val() != '' && $('#OrigenFinal2').val() != '') {
-					rank.inicial = $('#OrigenInicio2').val();
-					rank.final = $('#OrigenFinal2').val();
-					rank.tipo = 0;
-					atsRanks.push(rank);
-					rank = {};
-				}
-			}
-		}
-		if( ($('#OrigenInicio3').val()!=''&& $('#OrigenFinal3').val()=='') ||
-			($('#OrigenInicio3').val()==''&& $('#OrigenFinal3').val()!='')) {
-			alertify.error('El Rango 3 debe de tener un valor inicial y final.');
-			return;
-		}
-		else{
-			if($('#OrigenInicio3').val()>$('#OrigenFinal3').val()!='') {
-				alertify.error('El valor inicial del rango 3 debe de tener un valor menor o igual al valor final.');
-				return;
-			}
-			else {
-				if ($('#OrigenInicio3').val() != '' && $('#OrigenFinal3').val() != '') {
-					rank.inicial = $('#OrigenInicio3').val();
-					rank.final = $('#OrigenFinal3').val();
-					rank.tipo = 0;
-					atsRanks.push(rank);
-					rank = {};
-				}
-			}
-		}
-		if( ($('#OrigenInicio4').val()!=''&& $('#OrigenFinal4').val()=='') ||
-			($('#OrigenInicio4').val()==''&& $('#OrigenFinal4').val()!='')) {
-			alertify.error('El Rango 4 debe de tener un valor inicial y final.');
-			return;
-		}
-		else{
-			if($('#OrigenInicio4').val()>$('#OrigenFinal4').val()!='') {
-				alertify.error('El valor inicial del rango 4 debe de tener un valor menor o igual al valor final.');
-				return;
-			}
-			else {
-				if ($('#OrigenInicio4').val() != '' && $('#OrigenFinal4').val() != '') {
-					rank.inicial = $('#OrigenInicio4').val();
-					rank.final = $('#OrigenFinal4').val();
-					rank.tipo = 0;
-					atsRanks.push(rank);
-					rank = {};
-				}
-			}
-		}
-		if( ($('#DestinoInicio1').val()!=''&& $('#DestinoFinal1').val()=='') ||
-			($('#DestinoInicio1').val()==''&& $('#DestinoFinal1').val()!='')) {
-			alertify.error('El Rango 1 debe de tener un valor inicial y final.');
-			return;
-		}
-		else{
-			if($('#DestinoInicio1').val()>$('#DestinoFinal1').val()!='') {
-				alertify.error('El valor inicial del rango 1 debe de tener un valor menor o igual al valor final.');
-				return;
-			}
-			else {
-				if ($('#DestinoInicio1').val() != '' && $('#DestinoFinal1').val() != '') {
-					rank.inicial = $('#DestinoInicio1').val();
-					rank.final = $('#DestinoFinal1').val();
-					rank.tipo = 1;
-					atsRanks.push(rank);
-					rank = {};
-				}
-			}
-		}
-		if( ($('#DestinoInicio2').val()!=''&& $('#DestinoFinal2').val()=='') ||
-			($('#DestinoInicio2').val()==''&& $('#DestinoFinal2').val()!='')) {
-			alertify.error('El Rango 2 debe de tener un valor inicial y final.');
-			return;
-		}
-		else{
-			if($('#DestinoInicio2').val()>$('#DestinoFinal2').val()!='') {
-				alertify.error('El valor inicial del rango 2 debe de tener un valor menor o igual al valor final.');
-				return;
-			}
-			else {
-				if ($('#DestinoInicio2').val() != '' && $('#DestinoFinal2').val() != '') {
-					rank.inicial = $('#DestinoInicio2').val();
-					rank.final = $('#DestinoFinal2').val();
-					rank.tipo = 1;
-					atsRanks.push(rank);
-					rank = {};
-				}
-			}
-		}
-		if( ($('#DestinoInicio3').val()!=''&& $('#DestinoFinal3').val()=='') ||
-			($('#DestinoInicio3').val()==''&& $('#DestinoFinal3').val()!='')) {
-			alertify.error('El Rango 3 debe de tener un valor inicial y final.');
-			return;
-		}
-		else{
-			if($('#DestinoInicio3').val()>$('#DestinoFinal3').val()!='') {
-				alertify.error('El valor inicial del rango 3 debe de tener un valor menor o igual al valor final.');
-				return;
-			}
-			else {
-				if ($('#DestinoInicio3').val() != '' && $('#DestinoFinal3').val() != '') {
-					rank.inicial = $('#DestinoInicio3').val();
-					rank.final = $('#DestinoFinal3').val();
-					rank.tipo = 1;
-					atsRanks.push(rank);
-					rank = {};
-				}
-			}
-		}
-		if( ($('#DestinoInicio4').val()!=''&& $('#DestinoFinal4').val()=='') ||
-			($('#DestinoInicio4').val()==''&& $('#DestinoFinal4').val()!='')) {
-			alertify.error('El Rango 4 debe de tener un valor inicial y final.');
-			return;
-		}
-		else{
-			if($('#DestinoInicio4').val()>$('#DestinoFinal4').val()!='') {
-				alertify.error('El valor inicial del rango 4 debe de tener un valor menor o igual al valor final.');
-				return;
-			}
-			else {
-				if ($('#DestinoInicio4').val() != '' && $('#DestinoFinal4').val() != '') {
-					rank.inicial = $('#DestinoInicio4').val();
-					rank.final = $('#DestinoFinal4').val();
-					rank.tipo = 1;
-					atsRanks.push(rank);
-					rank = {};
-				}
-			}
-		}
-		telephoneResource.ranks						=	atsRanks;
-	}
-	//Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda
-	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
-	var resource2Insert={radio: radioResource, telephone: telephoneResource};
-	
-	
-	//Nuevo Recurso
-	if(isUpdate=='false') {
-		$.ajax({
-			type: 'POST',
-			dataType: 'json',
-			contentType: 'application/json',
-			url: '/gateways/insertNewResource/:resource2Insert/:resourceType',
-			data: JSON.stringify({
-					"resource2Insert": resource2Insert,
-					"resourceType": resourceType
-				}
-			),
-			success: function (data) {
-				if (data.error == null)
-					alertify.success('El recurso se ha añadido correctamente.');
-				else
-					alertify.error('Error: ' + data.error);
-			},
-			error: function (data) {
-				alertify.error('Error insertando el nuevo recurso.');
-			}
-		});
-	}
-	//Actualizar Recurso
-	else {
-		$.ajax({
-			type: 'PUT',
-			dataType: 'json',
-			contentType: 'application/json',
-			url: '/gateways/updateResource/:resource2Insert/:resourceType/:resourceId',
-			data: JSON.stringify({
-					"resource2Insert": resource2Insert,
-					"resourceType": resourceType,
-					"resourceId": resourceId
-				}
-			),
-			success: function (data) {
-				if (data.error == null)
-					alertify.success('El recurso se ha actualizado correctamente.');
-				else
-					alertify.error('Error: ' + data.error);
-			},
-			error: function (data) {
-				alertify.error('Error actualizando el recurso.');
-			}
-		});
-	}
-	GetMySlaves();
-}
+
 
 function insertBNList(listaUris){
 	var uri2Insert={};
