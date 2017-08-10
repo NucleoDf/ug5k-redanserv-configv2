@@ -821,12 +821,12 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 								td(style="width: 120px; padding:10px 10px")
 									label(tkey='IpCpu0')
 								td.New
-									input.textbox(id="ipCopyCpu0", type="text" placeholder=" . . . ")
+									input.textbox(id="ipCopyCpu0", type="text" placeholder=" . . . " onblur='ValidateIp(this,"ErrorIP")' onfocus='this.oldValue=this.value')
 							tr
 								td(style="width: 120px; padding:10px 10px")
 									label(tkey='IpCpu1')
 								td.New
-									input.textbox(id="ipCopyCpu1", type="text" placeholder=" . . . ")
+									input.textbox(id="ipCopyCpu1", type="text" placeholder=" . . . " onblur='ValidateIp(this,"ErrorIP")' onfocus='this.oldValue=this.value')
 							tr
 								td(style='padding-top: 8px' align='right')
 									a.ButtonNucleo#CopyGateway(onclick="Copy()" , style="text-align: center; padding: 5px 10px" tkey="Copy")

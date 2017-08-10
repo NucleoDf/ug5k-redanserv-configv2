@@ -706,8 +706,12 @@ var Copy = function(){
 		if ($('#ipCopyCpu0').val().length > 0){
 			if ($('#ipCopyCpu1').val().length > 0) {
 				if ($('#IpvCopyGateway').val().length > 0) {
-					CopyMethodGateway($('#DivGateways').data('idCgw'),$('#nameCopyGw').val(),
-						$('#ipCopyCpu0').val(),$('#ipCopyCpu1').val(),$('#IpvCopyGateway').val());
+					if ($('#ipCopyCpu0').val() != $('#ipCopyCpu1').val()) {
+						CopyMethodGateway($('#DivGateways').data('idCgw'), $('#nameCopyGw').val(),
+							$('#ipCopyCpu0').val(), $('#ipCopyCpu1').val(), $('#IpvCopyGateway').val());
+					}
+					else
+						alertify.error('Los valores para la CPU0 y la CPU1 deben ser diferentes.');
 				}
 				else
 					alertify.error('El valor de la Ip virtual no puede ser vacío.');
@@ -740,9 +744,9 @@ var CopyMethodGateway = function(idSourceGateway,nameTargetGateway,ip0TargetGate
 			if (data.error == 'ER_DUP_ENTRY')
 				alertify.error('El nombre \"' + nameTargetGateway + '\" ya existe en esta configuración.');
 			else if (data.error == 'ER_DUP_IP0_ENTRY')
-				alertify.error('La ip \"' + ipTargetGateway + '\" ya existe en esta configuración.');
+				alertify.error('La ip \"' + ip0TargetGateway + '\" ya existe en esta configuración.');
 			else if (data.error == 'ER_DUP_IP1_ENTRY')
-				alertify.error('La ip \"' + ipTargetGateway + '\" ya existe en esta configuración.');
+				alertify.error('La ip \"' + ip1TargetGateway + '\" ya existe en esta configuración.');
 			else{
 				ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
 				alertify.success('Gateway clonado.');
