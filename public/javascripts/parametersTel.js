@@ -455,7 +455,7 @@ function SelectTelSite(cfgName){
 /****************************************/
 function SelectTelGtw(cfgName,site){
 	$.ajax({type: 'GET', 
-		url: '/resources/tel/' + cfgName + '/' + site + '/null',
+		url: '/resources/tel/' + cfgName + '/' + site + '/null/null',
 		success: function(data){
 			$('#CBFacedTelGtw').empty();$('#CBFacedTelGtw').text('');
 			$('#CBFacedTelResources').empty();$('#CBFacedTelResources').text('');
@@ -484,8 +484,15 @@ function SelectTelGtw(cfgName,site){
 /*  REV 1.0.2 VMG						*/
 /****************************************/
 function SelectTelResource (cfgName,site,gtw){
-	$.ajax({type: 'GET', 
-		url: '/resources/tel/' + cfgName + '/' + site + '/' + gtw,
+	var buttonText=$('#ButtonCommit')[0].outerHTML;
+	
+	var splitIndex=buttonText.search('InsertNewResource');
+	var subString=buttonText.substring(splitIndex, buttonText.length);
+	var array=subString.split(',');
+	var radioId = array[1].replace (/\'/g, '');
+	//Mandamos el id del recurso actual para no sacarlo en la lista
+		$.ajax({type: 'GET',
+		url: '/resources/tel/' + cfgName + '/' + site + '/' + gtw + '/' + radioId,
 		success: function(data){
 			$('#CBFacedTelResources').empty();$('#CBFacedTelResources').text('');
 			

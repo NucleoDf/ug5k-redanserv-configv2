@@ -75,10 +75,11 @@ router.route('/remote/:cfg/:site/:gtw/:resId')
 		});
 	});
 
-router.route('/tel/:cfg/:site/:gtw')
+router.route('/tel/:cfg/:site/:gtw/:radioId')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibResources.getTelephonicResources(req.params.cfg,req.params.site,req.params.gtw,function(data){
+		myLibResources.getTelephonicResources(req.params.cfg,req.params.site,req.params.gtw,
+			req.params.radioId,function(data){
 			res.json(data);
 		});
 	});
