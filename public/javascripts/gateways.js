@@ -53,8 +53,10 @@ var InsertNewResource = function(col, row, isUpdate) {
 		radioResource.fila						=	row;
 		radioResource.columna					=	col;
 		//Nombre
-		if($('#TbNameResource').val()=='')
-			radioResource.nombre				=	'Recurso';//Valor Defecto
+		if($('#TbNameResource').val()=='') {
+			alertify.error('El nombre del recurso no puede ser vacío.');
+			return;
+		}
 		else
 			radioResource.nombre				=	$('#TbNameResource').val();
 		//Codec
@@ -240,8 +242,10 @@ var InsertNewResource = function(col, row, isUpdate) {
 		telephoneResource.fila						=	row;
 		telephoneResource.columna					=	col;
 		//Nombre
-		if($('#TbNameResource').val()=='')
-			telephoneResource.nombre				=	'Recurso';//Valor Defecto
+		if($('#TbNameResource').val()=='') {
+			alertify.error('El nombre del recurso no puede ser vacío.');
+			return;
+		}
 		else
 			telephoneResource.nombre				=	$('#TbNameResource').val();
 		//Codec
