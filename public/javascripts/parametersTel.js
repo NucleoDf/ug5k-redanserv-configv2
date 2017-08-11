@@ -468,8 +468,8 @@ function SelectTelGtw(cfgName,site){
 				$.each(data.data, function(index, value){
 					var encontrado = false;
 
-					if ($("#CBFacedTelGtw option[value='" + value.gName + "']").length == 0){
-						options = '<option value="' + value.gName + '">' + value.gName + '</option>';
+					if ($("#CBFacedTelGtw option[value='" + value.idpasarela + "']").length == 0){
+						options = '<option value="' + value.idpasarela + '">' + value.gName + '</option>';
 						$('#CBFacedTelGtw').append(options);
 					}
 				});
@@ -478,6 +478,11 @@ function SelectTelGtw(cfgName,site){
 	});
 }
 
+/****************************************/
+/*	FUNCTION: SelectTelGtw 				*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
 function SelectTelResource (cfgName,site,gtw){
 	$.ajax({type: 'GET', 
 		url: '/resources/tel/' + cfgName + '/' + site + '/' + gtw,
