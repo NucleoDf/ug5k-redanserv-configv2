@@ -37,11 +37,17 @@ router.route('/checkresname/:name/:idCfg')
 /**********************************/
 /*  Routes relating to positions  */
 /**********************************/
-router.route('/positions')
+router.route('/positions/:idCgw')
 	.put(function(req,res){
 		var position = req.body;
-		logging.LoggingDate('PUT hardware/positions');
-		myLibHardware.updatePosition(position,function(result){
+		logging.LoggingDate('PUT hardware/positions/:idCgw');
+		var newPosition = new Object();
+		newPosition.colOrig=position.dataFrom.SLAVES_idSLAVES;
+		newPosition.rowOrig=position.dataFrom.rank;
+		newPosition.colDest=position.SLAVES_idSLAVES;
+		newPosition.rowDest=position.rank;
+		newPosition.idCgw=req.params.idCgw;
+		myLibHardware.updatePosition(newPosition,function(result){
 			res.json(result);
 		});
 	});

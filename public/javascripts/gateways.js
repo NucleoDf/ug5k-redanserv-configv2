@@ -1814,29 +1814,14 @@ function ResourceAssigned(ev,fila,columna){
 
 	data.SLAVES_idSLAVES=slaveTo;
 	data.rank=fila;
+	data.dataFrom=dataFrom;
 
 	$.ajax({type: 'PUT', 
-			url: '/hardware/positions',
+			url: '/hardware/positions/'+$('#DivGateways').data('idCgw'),
 			dataType: 'json', 
 			contentType:'application/json',
 			data: JSON.stringify(data),
 			success: function(data){
-				if ($('.Res' + fila + columna).data('pos') != null){
-					// El slot no está vacío. Se intercambian las posiciones
-					var pos = $('.Res' + fila + columna).data('pos');
-					dataFrom.idPOS = pos;
-					
-					$.ajax({type: 'PUT', 
-							url: '/hardware/positions',
-							dataType: 'json', 
-							contentType:'application/json',
-							data: JSON.stringify(dataFrom),
-							success: function(data){
-										GetAllSlaves();
-									}
-					});
-				}
-				else
 					GetAllSlaves();
 			}
 	});
@@ -2565,6 +2550,9 @@ function ShowAssignedSlaves(data){
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
 					+ value.columna + "',true,'1','"+value.idrecurso_radio+"')");
 			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
+			$('.Res' + value.fila + value.columna + ' a')
+				.attr('draggable', true)
+				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ")")
 			// No viene de una operacion de D&D sobre otra pasarela
 			/*$('.Res' + fila + col)//.attr('onclick','GotoSlave(' + idSlave + ')')
 			 .data('pos', r.POS_idPOS)
@@ -2579,6 +2567,10 @@ function ShowAssignedSlaves(data){
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
 					+ value.columna + "',true,'2','"+value.idrecurso_telefono+"')");
 			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
+			$('.Res' + value.fila + value.columna + ' a')
+				.attr('draggable', true)
+				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ")")
+			
 		});
 	}
 	//Terminamos aquí
