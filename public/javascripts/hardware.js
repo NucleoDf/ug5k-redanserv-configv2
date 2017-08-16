@@ -360,7 +360,13 @@ function ReleaseSlaveFromGateway(idCgw, idSlave, rank){
 	});
 }
 
-function PutSlaveFromGateway(rank,idSlave,idCgw){
+
+/****************************************/
+/*	FUNCTION: changeSlaveFromGateway 	*/
+/*  PARAMS: idResource					*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function changeSlaveFromGateway(rank,idSlave,idCgw){
 	var url = '/gateways/' + idCgw + '/hardware/' + idSlave;
 	$.ajax({type: 'PUT', 
 			dataType: 'json', 

@@ -1947,13 +1947,15 @@ function SlaveAssigned(ev, rank, idSlave) {
 		source.rank=JSON.parse(ev.dataTransfer.getData('slaveDragging')).rank;
 		target.idSlave=idSlave; //$('#'+ev.target.id).data('idSLAVE');
 		target.rank=rank;
-
-		PutSlaveFromGateway(target.rank,source.idSlave,idCgw);
+	
+		//VMG Vamos a hacerlo solo una vez, que sea la query la que haga todo el trabajo ;)
+		changeSlaveFromGateway(target.rank,source.idSlave,idCgw);
 		//if (target.idSlave != ""){
-			// El slot destino está ocupado. => Intercambio de slaves
-			PutSlaveFromGateway(source.rank,target.idSlave,idCgw);
+			// El slot destino está ocupado. => Intercambio de slave
+		
+			//PutSlaveFromGateway(source.rank,target.idSlave,idCgw);
 		//}
-		GetAllSlaves();
+		GetMySlaves();
 	//}
 }
 
