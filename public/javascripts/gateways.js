@@ -1945,10 +1945,12 @@ function SlaveAssigned(ev, rank, idSlave) {
 }
 
 
-function dragResource(ev,idPos,rank,idSLAVES){
+function dragResource(ev,idPos,rank,idSLAVES,type,resId){
 	ev.dataTransfer.setData("resourceDragging", JSON.stringify({"idPOS": idPos,
 																"SLAVES_idSLAVES":idSLAVES,
-																"rank":rank
+																"rank":rank,
+																"type":type,
+																"resId":resId
 																}
 												)
 	);
@@ -2552,7 +2554,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
-				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ")")
+				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1,"+value.idrecurso_radio+")")
 			// No viene de una operacion de D&D sobre otra pasarela
 			/*$('.Res' + fila + col)//.attr('onclick','GotoSlave(' + idSlave + ')')
 			 .data('pos', r.POS_idPOS)
@@ -2569,7 +2571,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
-				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ")")
+				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1,"+value.idrecurso_radio+")")
 			
 		});
 	}

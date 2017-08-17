@@ -46,7 +46,10 @@ router.route('/positions/:idCgw')
 		newPosition.rowOrig=position.dataFrom.rank;
 		newPosition.colDest=position.SLAVES_idSLAVES;
 		newPosition.rowDest=position.rank;
+		newPosition.type=position.type;
+		newPosition.resId=position.resId;
 		newPosition.idCgw=req.params.idCgw;
+		
 		myLibHardware.updatePosition(newPosition,function(result){
 			res.json(result);
 		});
