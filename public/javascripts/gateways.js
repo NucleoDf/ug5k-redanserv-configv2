@@ -1822,7 +1822,7 @@ function ResourceAssigned(ev,fila,columna){
 			contentType:'application/json',
 			data: JSON.stringify(data),
 			success: function(data){
-					GetAllSlaves();
+					GetMySlaves();
 			}
 	});
 }
@@ -2571,7 +2571,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
-				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1,"+value.idrecurso_radio+")")
+				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",2,"+value.idrecurso_telefono+")")
 			
 		});
 	}
