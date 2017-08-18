@@ -26,10 +26,11 @@ router.route('/site/:siteId')
   		});
 	});
 
-router.route('/checkresname/:name/:idCfg')
+router.route('/checkresname/:name/:idCgw/:idRes')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibHardware.getResNamesInConfig(req.params.name,req.params.idCfg, function(hardware){
+		myLibHardware.getResNamesInConfig(req.params.name,req.params.idCgw,req.params.idRes,
+			function(hardware){
 			res.json(hardware.error);
 		});
 	});

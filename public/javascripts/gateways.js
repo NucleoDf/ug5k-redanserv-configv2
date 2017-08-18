@@ -23,6 +23,25 @@ function Site2Config(mySite, sites) {
 	return cfgName;
 }
 
+/********************************************/
+/*	FUNCTION: isResNameDup 					*/
+/*  PARAMS: 								*/
+/*											*/
+/*  REV 1.0.2 VMG							*/
+/********************************************/
+function isResNameDup (resourceName,idCgw,idRes) {
+	$.ajax({
+		type: 'GET',
+		url: '/hardware/checkresname/'+resourceName+'/'+idCgw+'/'+idRes,
+		success: function (data) {
+			if (data == "NAME_DUP")
+				return true;
+			else
+				return false;
+		}
+	});
+}
+
 /************************************************/
 /*	FUNCTION: InsertNewResource 				*/
 /*  PARAMS: 									*/
@@ -485,47 +504,75 @@ var InsertNewResource = function(col, row, isUpdate) {
 	//Nuevo Recurso
 	if(isUpdate=='false') {
 		$.ajax({
-			type: 'POST',
-			dataType: 'json',
-			contentType: 'application/json',
-			url: '/gateways/insertNewResource/:resource2Insert/:resourceType',
-			data: JSON.stringify({
-					"resource2Insert": resource2Insert,
-					"resourceType": resourceType
-				}
-			),
+			type: 'GET',
+			url: '/hardware/checkresname/'+$('#TbNameResource').val()+'/'+$('#DivGateways').data('idCgw')+'/0',
 			success: function (data) {
-				if (data.error == null)
-					alertify.success('El recurso se ha añadido correctamente.');
-				else
-					alertify.error('Error: ' + data.error);
-			},
-			error: function (data) {
-				alertify.error('Error insertando el nuevo recurso.');
+				if (data == "NAME_DUP"){
+					alertify.error('El nombre del recurso ' + $('#TbNameResource').val() +
+						' ya se encuentra dada de alta en la pasarela. Utilize otro nombre.');
+					return;
+				}
+				else {
+					$.ajax({
+						type: 'POST',
+						dataType: 'json',
+						contentType: 'application/json',
+						url: '/gateways/insertNewResource/:resource2Insert/:resourceType',
+						data: JSON.stringify({
+								"resource2Insert": resource2Insert,
+								"resourceType": resourceType
+							}
+						),
+						success: function (data) {
+							if (data.error == null)
+								alertify.success('El recurso se ha añadido correctamente.');
+							else
+								alertify.error('Error: ' + data.error);
+						},
+						error: function (data) {
+							alertify.error('Error insertando el nuevo recurso.');
+						}
+					});
+					GetMySlaves();
+				}
 			}
 		});
 	}
 	//Actualizar Recurso
 	else {
 		$.ajax({
-			type: 'PUT',
-			dataType: 'json',
-			contentType: 'application/json',
-			url: '/gateways/updateResource/:resource2Insert/:resourceType/:resourceId',
-			data: JSON.stringify({
-					"resource2Insert": resource2Insert,
-					"resourceType": resourceType,
-					"resourceId": resourceId
-				}
-			),
+			type: 'GET',
+			url: '/hardware/checkresname/'+$('#TbNameResource').val()+'/'+$('#DivGateways').data('idCgw')+'/'+resourceId,
 			success: function (data) {
-				if (data.error == null)
-					alertify.success('El recurso se ha actualizado correctamente.');
-				else
-					alertify.error('Error: ' + data.error);
-			},
-			error: function (data) {
-				alertify.error('Error actualizando el recurso.');
+				if (data == "NAME_DUP"){
+					alertify.error('El nombre del recurso ' + $('#TbNameResource').val() +
+						' ya se encuentra dada de alta en la pasarela. Utilize otro nombre.');
+					return;
+				}
+				else {
+					$.ajax({
+						type: 'PUT',
+						dataType: 'json',
+						contentType: 'application/json',
+						url: '/gateways/updateResource/:resource2Insert/:resourceType/:resourceId',
+						data: JSON.stringify({
+								"resource2Insert": resource2Insert,
+								"resourceType": resourceType,
+								"resourceId": resourceId
+							}
+						),
+						success: function (data) {
+							if (data.error == null)
+								alertify.success('El recurso se ha actualizado correctamente.');
+							else
+								alertify.error('Error: ' + data.error);
+						},
+						error: function (data) {
+							alertify.error('Error actualizando el recurso.');
+						}
+					});
+					GetMySlaves();
+				}
 			}
 		});
 	}
@@ -3773,3 +3820,4 @@ function showWhiteBlackList(idRecurso, listType) {
 		}
 	});
 }
+
