@@ -65,8 +65,10 @@ var InsertNewResource = function(col, row, isUpdate) {
 		if($('#TbEnableRegister').prop('checked'))
 			radioResource.clave_registro		=	$('#TbKey').val();
 		//Frecuencia
-		if($('#IdDestination').val()=='')
-			radioResource.frecuencia			=	0;//Valor Defecto
+		if($('#IdDestination').val()==''){
+			alertify.error('El recurso debe de tener un valor de frecuencia válido.');
+			return;
+		}
 		else
 			radioResource.frecuencia			=	$('#IdDestination').val();
 		//AGC en A/D
@@ -92,6 +94,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 		//Umbral VAD (dB)
 		if($('#TbVad').val()!='')
 			radioResource.umbral_vad			=	$('#TbVad').val();
+		else
+			radioResource.umbral_vad			=	-20;
 		//Indicación salida audio
 		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
 		//Métodos BSS disponibles
@@ -298,13 +302,13 @@ var InsertNewResource = function(col, row, isUpdate) {
 			telephoneResource.supervisa_colateral 		= 	1;
 			//Tiempo supervisión (sg.)
 			if($('#TbReleaseTime').val() == '')
-				telephoneResource.tiempo_supervision	=	0;//Valor por defecto
+				telephoneResource.tiempo_supervision	=	5;//Valor por defecto
 			else
 				telephoneResource.tiempo_supervision	=	$('#TbReleaseTime').val();
 		}
 		else {
 			telephoneResource.supervisa_colateral		=	0;
-			telephoneResource.tiempo_supervision		=	null;
+			telephoneResource.tiempo_supervision		=	5;
 		}
 		//Duración tono interrupción (sg.)
 		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val()
