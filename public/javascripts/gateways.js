@@ -508,8 +508,9 @@ var InsertNewResource = function(col, row, isUpdate) {
 			url: '/hardware/checkresname/'+$('#TbNameResource').val()+'/'+$('#DivGateways').data('idCgw')+'/0',
 			success: function (data) {
 				if (data == "NAME_DUP"){
-					alertify.error('El nombre del recurso ' + $('#TbNameResource').val() +
-						' ya se encuentra dada de alta en la pasarela. Utilize otro nombre.');
+					
+					alertify.alert('El nombre del recurso \"' + $('#TbNameResource').val() +
+						'\" ya se encuentra dada de alta en la pasarela. Utilize otro nombre.');
 					return;
 				}
 				else {
@@ -545,8 +546,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 			url: '/hardware/checkresname/'+$('#TbNameResource').val()+'/'+$('#DivGateways').data('idCgw')+'/'+resourceId,
 			success: function (data) {
 				if (data == "NAME_DUP"){
-					alertify.error('El nombre del recurso ' + $('#TbNameResource').val() +
-						' ya se encuentra dada de alta en la pasarela. Utilize otro nombre.');
+					alertify.alert('El nombre del recurso \"' + $('#TbNameResource').val() +
+						'\" ya se encuentra dada de alta en la pasarela. Utilize otro nombre.');
 					return;
 				}
 				else {
