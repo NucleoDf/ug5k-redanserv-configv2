@@ -853,8 +853,10 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 											input#config(type="hidden",name="config")
 											input#site(type="hidden",name="site")
 											input#cfgData(type="hidden",name="cfgData")
-										p(align='center')
-											input.ButtonNucleo(type="submit")
-										p(align='center')
-											a.ButtonNucleo(onclick='CloseImportConfiguration()' tkey='Close') 
+										table(style='width: 100%;border-spacing: 10px 10px')
+											tr
+												td
+													input.ButtonNucleo(style='width: 100px' type="submit")
+												td
+													a.ButtonNucleo(style='width: 100px' onclick='CloseImportConfiguration()' tkey='Close')
 
