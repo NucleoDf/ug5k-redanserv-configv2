@@ -607,7 +607,7 @@ function Close(){
 /************************************/
 function GetMySlaves(){
 	Close();
-	$('#AddFormsite').animate({width: '790px', height: '410px'});
+	$('#AddFormsite').animate({width: '790px', height: '470px'});
 
 	$.ajax({type: 'GET',
 		url: '/gateways/' + $('#DivGateways').data('idCgw') + '/hardwareResume',
