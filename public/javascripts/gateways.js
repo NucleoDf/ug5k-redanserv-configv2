@@ -2824,7 +2824,7 @@ var ExportConfiguration = function(){
 
 		success: function (data) {
 			var myLink=document.createElement('a');
-			myLink.download = data.result[0].emplazamiento + '_' + data.result[0].name + '_' + data.result[0].ultima_actualizacion + '.json';
+			myLink.download = data.general.emplazamiento + '_' + data.general.name + '_' + data.fechaHora + '.json';
 			myLink.href = "data:application/json," + JSON.stringify(data,null,'\t');
 			myLink.click();
 		},
