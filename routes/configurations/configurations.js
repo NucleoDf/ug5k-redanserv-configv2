@@ -40,7 +40,15 @@ router.route('/')	// The root path is relative the path where it's mounted in ap
   		myLibConfigurations.getConfigurations(req, res);
 	});
 
-router.route('/export/:gateway/:cfg')
+router.route('/export/:idGtw')
+	.get(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		myLibGateways.getAll(null,req.params.idGtw,function(result){
+			res.json(result);
+		});
+	});
+
+/*router.route('/export/:gateway/:cfg')
 	.put(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		// Obtener IPv
@@ -82,7 +90,7 @@ router.route('/export/:gateway/:cfg')
 			//	res.status(200).json({});
 		});
 	//})
-
+*/
 
 router.route('/active')
 	.get(function(req,res){

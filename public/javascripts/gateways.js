@@ -2810,16 +2810,17 @@ function isIpvIn(ipv,lista){
 	return false;
 }
 
+/************************************/
+/*	FUNCTION: ExportConfiguration 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var ExportConfiguration = function(){
 	var idGateway=$('#IdSite').data('gatewayId');
-	var nameCfg=$('#DivConfigurations').data('cfgJson').name;
 
 	$.ajax({
-		type: 'PUT',
-		url: '/configurations/export/' + idGateway + '/' + nameCfg,
-		dataType: 'json', 
-		contentType:'application/json',
-		data: JSON.stringify( { ipGtw: $('#ipv').val() } ),
+		type: 'GET',
+		url: '/configurations/export/'+idGateway,
 
 		success: function (data) {
 			var myLink=document.createElement('a');
