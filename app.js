@@ -139,18 +139,30 @@ app.post('/',[
             }).single('upl'),
         function(req,res){
             logging.LoggingDate(req.file); //form files
-            /* example output:
-                    { fieldname: 'upl',
-                      originalname: 'grumpy.png',
-                      encoding: '7bit',
-                      mimetype: 'image/png',
-                      destination: './uploads/',
-                      filename: '436ec561793aa4dc475a88e84776b1b9',
-                      path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
-                      size: 277056 }
-             */
+           
             fs.readFile(req.file.path, 'utf8', function(err, contents) {
-                //  console.log(contents);
+				myLibConfig.checkExportGtwNamesOrIpDup(req.body.config, req.body.site, JSON.parse(contents),function(result){
+					if (result.data=='OK'){
+						logging.LoggingSuccess('Comprobación de importación correcta');
+						myLibConfig.postConfigurationFromJsonFile(req.body.config, req.body.site, JSON.parse(contents),function(result) {
+							if (result.error == null) {
+								logging.LoggingSuccess('Configuracion importada correctamente');
+							}
+							else {
+								logging.loggingError(req.file.message);
+							}
+						});
+					}
+					else if (result.data=='DUPLICATED') {
+						logging.loggingError('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
+							'Elimine la pasarela o cambie los datos antes de importar');
+                    }
+					else {
+						logging.loggingError('Configuracion no importada. Error en la operación.');
+					}
+				});
+					    
+                /*/  console.log(contents);
                 myLibConfig.postConfigurationFromJsonFile(req.body.config, req.body.site, JSON.parse(contents),function(result){
                     if (result.error == null){
                         myLibHardwareGateways.setResources(result.slaves,JSON.parse(contents).recursos,function(result){
@@ -211,7 +223,7 @@ app.post('/',[
                             file: req.file.originalname
                         });                        
                     }
-                });
+                });*/
             });
             //res.json({size:req.file.size});
         }
