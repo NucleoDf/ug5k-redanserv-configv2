@@ -1559,7 +1559,7 @@ var GetGateway = function (gtw,lastUpdate,f){
 		$('#ipb2').val('');
 		$('#msb2').val('');
 		
-		$('#ExportGateway').hide();
+		$('#ExportGateway').show();
 		var title = $('#TitleH3').text().split(" ");
 		var aux = title[1].replace(".	Emplazamientos:", "-");
 		var site = '<option value="">'+aux+title[2].replace(".	Pasarelas:", "")+'</option>';
@@ -2823,7 +2823,7 @@ var ExportConfiguration = function(){
 
 		success: function (data) {
 			var myLink=document.createElement('a');
-			myLink.download = data.idConf + '_' + data.general.name + '_' + data.fechaHora + '.json';
+			myLink.download = data.result[0].emplazamiento + '_' + data.result[0].name + '_' + data.result[0].ultima_actualizacion + '.json';
 			myLink.href = "data:application/json," + JSON.stringify(data,null,'\t');
 			myLink.click();
 		},

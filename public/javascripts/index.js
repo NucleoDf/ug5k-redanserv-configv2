@@ -132,8 +132,8 @@ function indexInitUserData(username, userprofile) {
 	/** 20170512 AGL. OCULTAR BOTONES COPIA / IMPORT / EXPORT */
 	//$('#BtnCopyCfg').hide();		// Copia Configuracion
 	$('#BtnCopySite').hide();		// Copia Emplazamiento.
-	$('#BtnImport').hide();			// Boton IMPORT.
-	$('#ExportGateway').hide();		// Boton EXPORT.
+	$('#BtnImport').show();			// Boton IMPORT.
+	$('#ExportGateway').show();		// Boton EXPORT.
 }
 function LogoutUser() {
 	$(location).attr('href', '/logout');
@@ -501,8 +501,8 @@ function myEncode(e){
 					/** 20170512 AGL. OCULTAR BOTONES COPIA / IMPORT / EXPORT */
 					//$('#BtnCopyCfg').hide();		// Copia Configuracion
 					$('#BtnCopySite').hide();		// Copia Emplazamiento.
-					$('#BtnImport').hide();			// Boton IMPORT.
-					$('#ExportGateway').hide();		// Boton EXPORT.
+					$('#BtnImport').show();			// Boton IMPORT.
+					$('#ExportGateway').show();		// Boton EXPORT.
 
 					return;
 
