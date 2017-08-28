@@ -1171,12 +1171,17 @@ var GotoGateway = function (id,name,idSite,nameSite){
 };
 
 
+/************************************/
+/*	FUNCTION: GenerateData 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var GenerateData = function(idCfg, f){
 	$.ajax({
 		type: 'GET',
 		url: '/configurations/SP_cfg/' + idCfg,
 		success: function(data){
-			if (data != null && data.result[0].length > 0){
+			if (data != null){
 				f(data);
 			}
 			else{
@@ -1305,7 +1310,7 @@ var ExportCfgToPdf = function(idCfg){
 		}
 		var start = 0;
 		var cuantos = 300;
-		var rows = result.result[0];
+		var rows = result.result;
 		var items = rows.slice(start,cuantos);
 		var lastGateway = '';
 		var cfgName = items[0].cfg_name;
@@ -1328,31 +1333,31 @@ var ExportCfgToPdf = function(idCfg){
 					row.push({text: value.resource_name, color:red});
 					row.push({text: "TELEFONICO", color:red});
 					switch (value.tipo_tel){
-						case 0:
+						case "0":
 							row.push({text: 'PP-BL', color:red});
 						break;
-						case 1:
+						case "1":
 							row.push({text: 'PP-BC', color:red});
 						break;
-						case 2:
+						case "2":
 							row.push({text: 'PP-AB', color:red});
 						break;
-						case 3:
+						case "3":
 							row.push({text: 'ATS-R2', color:red});
 						break;
-						case 4:
+						case "4":
 							row.push({text: 'ATS-N5', color:red});
 						break;
-						case 5:
+						case "5":
 							row.push({text: 'LCEN', color:red});
 						break;
-						case 6:
+						case "6":
 							row.push({text: 'ATS-QSIG', color:red});
 						break;
-						case 7:
+						case "7":
 							row.push({text: 'TUN-LOC', color:red});
 						break;
-						case 8:
+						case "8":
 							row.push({text: 'TUN-REM', color:red});
 						break;
 					}
@@ -1363,7 +1368,7 @@ var ExportCfgToPdf = function(idCfg){
 				else{
 					// Radio
 					switch (value.tipo_rad){
-						case 0: // Local-Simple
+						case "0": // Local-Simple
 							red = ((value.uriTxA == null || value.uriRxA == null) ? 'red' : 'black');
 
 							row.push({text: value.cgw_name, color:red});
@@ -1376,7 +1381,7 @@ var ExportCfgToPdf = function(idCfg){
 								uris.push({ text: 'Rx:' + (value.uriRxA != null ? value.uriRxA : ''),color:red});
 								row.push(uris);
 						break;
-						case 1: // Local-P/R
+						case "1": // Local-P/R
 							red = (value.uriTxA == null || value.uriRxA == null || value.uriTxB == null || value.uriRxB == null) ? 'red' : 'black';
 
 							row.push({text: value.cgw_name, color:red});
@@ -1391,7 +1396,7 @@ var ExportCfgToPdf = function(idCfg){
 								uris.push({ text: 'Rx B:' + (value.uriRxB != null ? value.uriRxB : ''),color:red});
 								row.push(uris);
 						break;
-						case 2: // Local FD-Simple
+						case "2": // Local FD-Simple
 							red = (value.uriTxA == null || value.uriRxA == null) ? 'red' : 'black';
 
 							row.push({text: value.cgw_name, color:red});
@@ -1404,7 +1409,7 @@ var ExportCfgToPdf = function(idCfg){
 								uris.push({ text: 'Rx:' + (value.uriRxA != null ? value.uriRxA : ''),color:red});
 								row.push(uris);
 						break;
-						case 3: // Local FD-P/R
+						case "3": // Local FD-P/R
 							red = (value.uriTxA == null || value.uriRxA == null || value.uriTxB == null || value.uriRxB == null);
 
 							row.push({text:value.cgw_name,color:red});
@@ -1419,7 +1424,7 @@ var ExportCfgToPdf = function(idCfg){
 								uris.push({ text: 'Rx B:' + (value.uriRxB != null ? value.uriRxB : ''),color:red});
 								row.push(uris);
 						break;
-						case 4: // Remoto RxTx
+						case "4": // Remoto RxTx
 							row.push({text: value.cgw_name, color:red});
 							row.push({text: value.slave.toString(), color:red});
 							row.push({text: value.posicion.toString(), color:red});
@@ -1428,7 +1433,7 @@ var ExportCfgToPdf = function(idCfg){
 							row.push('Remoto RxTx');
 							row.push('');
 						break;
-						case 5: // Remoto Tx
+						case "5": // Remoto Tx
 							row.push({text: value.cgw_name, color:red});
 							row.push({text: value.slave.toString(), color:red});
 							row.push({text: value.posicion.toString(), color:red});
@@ -1438,7 +1443,7 @@ var ExportCfgToPdf = function(idCfg){
 							row.push('Remoto Tx');
 							row.push('');
 						break;
-						case 6: // Remoto Rx
+						case "6": // Remoto Rx
 							row.push({text: value.cgw_name, color:red});
 							row.push({text: value.slave.toString(), color:red});
 							row.push({text: value.posicion.toString(), color:red});
@@ -1520,8 +1525,8 @@ var ExportCfgToPdf = function(idCfg){
 				}
 			};
 
-			pdfMake.createPdf(docDefinition).open();	
-			//pdfMake.createPdf(docDefinition).download('U5K-G-' + start + '.pdf');	
+			//pdfMake.createPdf(docDefinition).open();
+			pdfMake.createPdf(docDefinition).download('U5K-G-' + start + '.pdf');
 			items = rows.slice(++start * cuantos,(start * cuantos) + cuantos);
 		}
 	});
