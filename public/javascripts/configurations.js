@@ -1249,7 +1249,7 @@ var resColateralString = function(tipo, subtipo, reg) {
 }
 var ExportCfgToExcel = function(idCfg, empl) {
 	GenerateData(idCfg, function(result){
-		var rows = result.result[0];
+		var rows = result.result;
 		var cfgName = "";
 		var csvData = "Configuracion;"+
 					  // "Emplazamiento;"+
@@ -1282,9 +1282,9 @@ var ExportCfgToExcel = function(idCfg, empl) {
 		});
 
 		var myLink=document.createElement('a');
-		myLink.download = 'Cfg_' + cfgName +'_InformeCfg.csv';
+		myLink.download = 'Cfg_' + cfgName + '-'+$('#_hfecha').text()+'_InformeCfg.csv';
 		myLink.href = "data:application/csv," + escape(csvData);
-		myLink.click();		
+		myLink.click();
 	});
 }
 
