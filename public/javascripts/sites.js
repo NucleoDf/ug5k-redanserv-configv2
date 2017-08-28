@@ -445,7 +445,10 @@ function ShowHardwareGateway(id,name){
 	
 	$('#IdSite').data('gatewayName',name)
 	$('#IdSite').data('gatewayId',id)
-
+	
+	
+	$('#labelSites').show();
+	$('#ListSites').show();
 	$('#DivSites').animate({width: '1150px'},function(){
 		$('#TrCreateGateway').hide()
 		$('#TrToolsSite').hide()

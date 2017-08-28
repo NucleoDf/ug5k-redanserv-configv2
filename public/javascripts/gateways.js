@@ -2959,6 +2959,9 @@ function NewGateway (){
 		value: 1,
 		text: 'My option'
 	}));
+	
+	$('#labelSites').hide();
+	$('#ListSites').hide();
 	$('#CopyGtwButton').hide();
 }
 

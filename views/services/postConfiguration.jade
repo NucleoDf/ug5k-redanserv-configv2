@@ -253,7 +253,7 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 																	td.New(style="width: 220px")
 																		input.textbox(id="nameGw", type="text", style='width:inherit' name="nameGw" onblur='ValidateIds(this,"ErrorGatewayId")' onfocus='this.oldValue=this.value')
 																	td(style="width: 120px; padding:10px 5px")
-																		label(tkey='Site')
+																		label#labelSites(tkey='Site')
 																	td.New
 																		//label#LblEmplazamiento(style='color:black')
 																		select#ListSites.toReset(style='width:18em' onchange='ChangeGateWaySite(this)' onmousedown='this.oldValue=this.selectedIndex' title="Lista de emplazamientos, dentro de la configuración, a los que se puede trasladar la pasarela.")
