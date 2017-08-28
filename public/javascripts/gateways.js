@@ -1626,7 +1626,7 @@ var GetIps4Gateway = function(idCgw){
 /****** 			 reset la lista si idCgw == null						****/
 /****** Parameters: idCgw 													****/
 /*******************************************************************************/
-var AddGatewayToList = function(idCgw){
+/*var AddGatewayToList = function(idCgw){
 	if (idCgw == null){
 		listOfGateways='';
 		$.ajax({type: 'PUT', 
@@ -1651,17 +1651,17 @@ var AddGatewayToList = function(idCgw){
 				success: function(data){
 					if (data){
 						listOfGateways = listOfGateways.concat(idCgw + ',');
-						/*$.ajax({type: 'PUT',
-								url: '/configurations/listOfGateways/',
-								dataType: 'json', 
-								contentType:'application/json',
-								data: JSON.stringify( {Gateway:idCgw} ),
+						//$.ajax({type: 'PUT',
+						//		url: '/configurations/listOfGateways/',
+						//		dataType: 'json',
+						//		contentType:'application/json',
+						//		data: JSON.stringify( {Gateway:idCgw} ),
 
-								success: function(data){
+						//		success: function(data){
 										},
-								error: function(data){
+						//		error: function(data){
 										}
-						});*/
+						//});
 						$.ajax({type: 'PUT',
 							url: '/configurations/setUpdateGateway/',
 							dataType: 'json',
@@ -1678,7 +1678,7 @@ var AddGatewayToList = function(idCgw){
 			});
 		}
 	}
-};
+};*/
 
 /***********************************************************************************/
 /****** Function: AddGatewaysFromActiveToListOfGateways							****/
@@ -1686,7 +1686,7 @@ var AddGatewayToList = function(idCgw){
 /****** 			 y vivas en el sistema a la lista de pasarelas a activar	****/
 /****** Parameters: 	 														****/
 /***********************************************************************************/
-var AddGatewaysFromActiveToListOfGateways = function(idSite){
+/*var AddGatewaysFromActiveToListOfGateways = function(idSite){
 	$.ajax({type: 'GET', 
 			url: '/gateways/activeCfg',
 			success: function(data){
@@ -1697,7 +1697,7 @@ var AddGatewaysFromActiveToListOfGateways = function(idSite){
 			}
 		});
 };
-
+*/
 function UpdateGateway(){
 	var idGtw = $('#DivGateways').data('idCgw');
 	if (serviceId != null){

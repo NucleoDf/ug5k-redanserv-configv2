@@ -236,7 +236,7 @@ var GetUsuario = function (ind,valor){
 
 					translateWord('Update',function(result){
 						$('#UpdateUserButton').text(result)
-												.attr('onclick','PutUser();AddGatewaysFromActiveToListOfGateways()');
+												.attr('onclick','PutUser()');
 					});
 				}
 		});
@@ -267,7 +267,7 @@ var GetUsuario = function (ind,valor){
 		/*****************/
 		translateWord('Add',function(result){
 			$('#UpdateUserButton').text(result)
-								.attr('onclick','PostUser();AddGatewaysFromActiveToListOfGateways()');
+								.attr('onclick','PostUser()');
 		});
 		$('#IdOperador').val('');
 		$('#ClaveUser').val('');
@@ -288,7 +288,7 @@ var GetUsuarios = function() {
 	$("#FormOperador").show();
 	translateWord('Update',function(result){
 		$('#UpdateUserButton').text(result)
-								.attr('onclick','PutUser();AddGatewaysFromActiveToListOfGateways()');
+								.attr('onclick','PutUser()');
 	});
 
 	$.ajax({type: 'GET', 

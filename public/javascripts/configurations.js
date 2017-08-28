@@ -325,7 +325,7 @@ var PutConfiguration = function(){
 				// Añadir a la lista de pasarelas a reconfigurar
 				// todas las que pertenecen a la configuración activa
 				// (Poder "aplicar cambios" en la configuración activa después de un restore)
-				AddGatewaysFromActiveToListOfGateways();
+				//AddGatewaysFromActiveToListOfGateways();
 			}
 			else if (data.error) {
 				alertify.error('Error: '+data.error);
