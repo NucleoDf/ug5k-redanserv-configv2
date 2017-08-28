@@ -1526,7 +1526,7 @@ var ExportCfgToPdf = function(idCfg){
 			};
 
 			//pdfMake.createPdf(docDefinition).open();
-			pdfMake.createPdf(docDefinition).download('U5K-G-' + start + '.pdf');
+			pdfMake.createPdf(docDefinition).download('U5K-G-' + cfgName + '-'+$('#_hfecha').text()+ '.pdf');
 			items = rows.slice(++start * cuantos,(start * cuantos) + cuantos);
 		}
 	});
