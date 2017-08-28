@@ -3118,7 +3118,7 @@ function PostGateWay (idSite, isUpdate) {
 			success: function (data) {
 				if (data.error == null) {
 					alertify.success('La pasarela \"' + data.name + '\" ha sido creada.');
-					
+					GenerateHistoricEvent(ID_HW,ADD_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
 					ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
 					//GetGateways(null,function(){
 					//	ShowHardwareGateway(data.insertId, data.name);
@@ -3149,12 +3149,12 @@ function PostGateWay (idSite, isUpdate) {
 			success: function (data) {
 				if (data.error == null) {
 					alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
-					
+					GenerateHistoricEvent(ID_HW,MODIFY_GATEWAY_COMMON_PARAM,$('#nameGw').val(),$('#loggedUser').text());
 					ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
 					//GetGateways(null,function(){
 					//	ShowHardwareGateway(data.insertId, data.name);
 					//});//TODO esto no muestra nada de lo que tiene que mostrar
-					AddGatewayToList(idGtw);
+					//AddGatewayToList(idGtw);
 				}
 				else if (data.error) {
 					alertify.error('Error: ' + data.error);

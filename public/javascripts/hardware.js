@@ -1651,6 +1651,7 @@ function removeRadioResource(idResource) {
 			success: function (data) {
 				if (data.error == null) {
 					alertify.success('El recurso se ha eliminado correctamente.');
+					GenerateHistoricEvent(ID_HW,REMOVE_HARDWARE_RESOURCE,$('#TbNameResource').val(),$('#loggedUser').text());
 					GetMySlaves();
 				}
 				else {
@@ -1679,6 +1680,7 @@ function removePhoneResource(idResource) {
 				success: function (data) {
 					if (data.error == null) {
 						alertify.success('El recurso se ha eliminado correctamente.');
+						GenerateHistoricEvent(ID_HW,REMOVE_HARDWARE_RESOURCE,$('#TbNameResource').val(),$('#loggedUser').text());
 						GetMySlaves();
 					}
 					else {
