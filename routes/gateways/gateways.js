@@ -28,12 +28,17 @@ router.route('/syncGateways/:refreshTime')
 router.route('/availableservices')
 	.get(function(req,res){
 		//logging.LoggingDate('GET /syncGateways/:refreshTime');
-		var aliveGtws=req.app.get('aliveGtws');
 		myLibGateways.getSiteName4ServiceCopy(function(result){
 			res.json(result);
 		});
 	});
-
+router.route('/getServiceData/:idSourceCgw')
+	.get(function(req,res){
+		//logging.LoggingDate('GET /syncGateways/:refreshTime');
+		myLibGateways.getServiceDataFromGtw(req.params.idSourceCgw,function(result){
+			res.json(result);
+		});
+	});
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/gateways', gateways);)
 	.get(function(req, res) {
   		logging.LoggingDate("GET gateways");

@@ -2966,7 +2966,7 @@ function NewGateway (){
 }
 
 /************************************/
-/*	FUNCTION: PostGateWay 			*/
+/*	FUNCTION: getServices4Copy 		*/
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
@@ -2996,6 +2996,11 @@ function getServices4Copy () {
 	});
 }
 
+/************************************/
+/*	FUNCTION: copyServiceData 		*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 function copyServiceData () {
 	var idSourceCgw = $('#ListServices')[0].value;
 	
@@ -3007,7 +3012,7 @@ function copyServiceData () {
 				alertify.error('Error ' + data.error + '. Al recuperar los datos del servicio.');
 			}
 			else {
-				
+				var a = data.result[0].idpasarela;
 			}
 		}
 	});
