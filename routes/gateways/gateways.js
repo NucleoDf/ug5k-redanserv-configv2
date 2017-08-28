@@ -25,6 +25,14 @@ router.route('/syncGateways/:refreshTime')
 		updateAliveGtws(aliveGtws, req.params.refreshTime);
 		res.json(aliveGtws);
 	});
+router.route('/availableservices')
+	.get(function(req,res){
+		//logging.LoggingDate('GET /syncGateways/:refreshTime');
+		var aliveGtws=req.app.get('aliveGtws');
+		myLibGateways.getSiteName4ServiceCopy(function(result){
+			res.json(result);
+		});
+	});
 
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/gateways', gateways);)
 	.get(function(req, res) {
@@ -350,6 +358,7 @@ router.route('/getAll/:idGtw')
 			res.json(result);
 		});
 	});
+
 /********************************/
 /*  Routes relating to hardware */
 /********************************/

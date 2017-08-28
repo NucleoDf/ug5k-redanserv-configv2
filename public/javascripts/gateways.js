@@ -2970,6 +2970,54 @@ function NewGateway (){
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
+function getServices4Copy () {
+	var options = '';
+	$.ajax({
+		type: 'GET',
+		url: '/gateways/availableservices',
+		success: function (data) {
+			if (data.error != null) {
+				options =  '<option value="" disabled selected>Error seleccionando los servicios.</option>';
+				alertify.error('Error ' + data.error + '. Al recuperar los servicios.');
+			}
+			else {
+				translateWord('SelectService',function(result){
+					options =  '<option value="" disabled selected>'+ result +'</option>';
+					
+					$.each(data.result, function(index, value){
+						if (value.nombre != null)
+							options += '<option value="' + value.idpasarela + '">' + value.nombre + '</option>';
+					});
+					
+					$('#ListServices').html(options);
+				});
+			}
+		}
+	});
+}
+
+function copyServiceData () {
+	var idSourceCgw = $('#ListServices')[0].value;
+	
+	$.ajax({
+		type: 'GET',
+		url: '/gateways/getServiceData/'+idSourceCgw,
+		success: function (data) {
+			if (data.error != null) {
+				alertify.error('Error ' + data.error + '. Al recuperar los datos del servicio.');
+			}
+			else {
+				
+			}
+		}
+	});
+}
+
+/************************************/
+/*	FUNCTION: PostGateWay 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 function PostGateWay (idSite, isUpdate) {
 	var newGateway={};
 	var proxys=[];
