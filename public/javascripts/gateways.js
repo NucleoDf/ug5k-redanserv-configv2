@@ -525,8 +525,11 @@ var InsertNewResource = function(col, row, isUpdate) {
 							}
 						),
 						success: function (data) {
-							if (data.error == null)
+							if (data.error == null) {
 								alertify.success('El recurso se ha añadido correctamente.');
+								GenerateHistoricEvent(ID_HW,ADD_HARDWARE_RESOURCE,$('#TbNameResource').val(),$('#loggedUser').text());
+								GetMySlaves();
+							}
 							else
 								alertify.error('Error: ' + data.error);
 						},
