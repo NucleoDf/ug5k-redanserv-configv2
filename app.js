@@ -27,6 +27,8 @@ var myLibConfig = require('./lib/configurations.js');
 var myLibHardwareGateways = require('./lib/hardware.js');
 var jsonTemplate = require('./lib/jsonTemplate');
 
+var jsgtw = require('./public/javascripts/gateways.js');
+
 /** 20170525. AGL. Para el control de Sesiones. */
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
@@ -146,7 +148,7 @@ app.post('/',[
 						logging.LoggingSuccess('Comprobación de importación correcta');
 						myLibConfig.postConfigurationFromJsonFile(req.body.config, req.body.site, JSON.parse(contents),function(result) {
 							if (result.error == null) {
-								alertify.success('Configuracion no importada. Error en la operación.');
+								//alertify.success('Configuracion no importada. Error en la operación.');
 								logging.LoggingSuccess('Configuracion importada correctamente');
 							}
 							else {
@@ -155,13 +157,13 @@ app.post('/',[
 						});
 					}
 					else if (result.data=='DUPLICATED') {
-						alertify.error('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
-							'Elimine la pasarela o cambie los datos antes de importar.');
+						//alertify.error('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
+						//	'Elimine la pasarela o cambie los datos antes de importar.');
 						logging.loggingError('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
 							'Elimine la pasarela o cambie los datos antes de importar');
                     }
 					else {
-						alertify.error('Configuracion no importada. Error en la operación.');
+						//alertify.error('Configuracion no importada. Error en la operación.');
 						logging.loggingError('Configuracion no importada. Error en la operación.');
 					}
 				});
