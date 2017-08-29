@@ -39,6 +39,13 @@ router.route('/getServiceData/:idSourceCgw')
 			res.json(result);
 		});
 	});
+router.route('/getServiceDataListaIps/:idSourceCgw')
+	.get(function(req,res){
+		//logging.LoggingDate('GET /syncGateways/:refreshTime');
+		myLibGateways.getServiceDataListaIpsFromGtw(req.params.idSourceCgw,function(result){
+			res.json(result);
+		});
+	});
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/gateways', gateways);)
 	.get(function(req, res) {
   		logging.LoggingDate("GET gateways");

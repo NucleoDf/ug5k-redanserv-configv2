@@ -3012,7 +3012,20 @@ function copyServiceData () {
 				alertify.error('Error ' + data.error + '. Al recuperar los datos del servicio.');
 			}
 			else {
-				var a = data.result[0].idpasarela;
+				//Peticion de las uris
+				$.ajax({
+					type: 'GET',
+					url: '/gateways/getServiceDataListaIps/'+idSourceCgw,
+					success: function (dataUris) {
+						if (dataUris.error != null) {
+							alertify.error('Error ' + dataUris.error + '. Al recuperar los datos del servicio.');
+						}
+						else {
+							var a = data;
+							var b = dataUris;
+						}
+					}
+				});
 			}
 		}
 	});
