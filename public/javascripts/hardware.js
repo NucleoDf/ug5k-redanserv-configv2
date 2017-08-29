@@ -1215,6 +1215,11 @@ function ResetResourcePanel(){
 	//$('#DestinationRow').attr('style','display:table-row');
 	//$('#BlackWhiteRow').attr('style','display:table-row');
 	$('#CbLlamadaAutomatica').prop('checked',false);
+	//Defecto por tfno
+	$('#TbRemoteUri').val('');
+	$('#TbUmbral').val('-15');
+	$('#TbInactividad').val('0');
+	
 }
 /*
 var ShowFrequencies = function(data){
