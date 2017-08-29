@@ -3012,20 +3012,58 @@ function copyServiceData () {
 				alertify.error('Error ' + data.error + '. Al recuperar los datos del servicio.');
 			}
 			else {
+				//Borramos todos los selects antes
+				$('#ProxysList').empty();
+				$('#RegistrarsList').empty();
+				$('#NtpServersList').empty();
+				$('#TrapsList').empty();
 				//Peticion de las uris
-				$.ajax({
-					type: 'GET',
-					url: '/gateways/getServiceDataListaIps/'+idSourceCgw,
-					success: function (dataUris) {
-						if (dataUris.error != null) {
-							alertify.error('Error ' + dataUris.error + '. Al recuperar los datos del servicio.');
-						}
-						else {
-							var a = data;
-							var b = dataUris;
-						}
+				GetIps4Gateway(idSourceCgw);
+				$('#PuertoLocalSIP').val(data.result[0].puerto_sip.toString());
+				
+				if(data.result[0].periodo_supervision==null) {
+					$('#CbRUpdatePeriod').prop('checked', false);
+					$('#TbUpdatePeriod').prop('disabled', true);
+				}
+				else {
+					if (data.result[0].periodo_supervision != 0) {
+						$('#CbRUpdatePeriod').prop('checked', true);
+						$('#TbUpdatePeriod').prop('disabled', false);
 					}
-				});
+					else {
+						$('#CbRUpdatePeriod').prop('checked', false);
+						$('#TbUpdatePeriod').prop('disabled', true);
+					}
+					$('#TbUpdatePeriod').val(data.result[0].periodo_supervision.toString());
+				}
+				//SNMP
+				$('#sport').val(data.result[0].puerto_servicio_snmp);
+				$('#snmpp').val(data.result[0].puerto_snmp);
+				$('#agname').val(data.result[0].nombre_snmp);
+				$('#agloc').val(data.result[0].localizacion_snmp);
+				$('#agcont').val(data.result[0].contacto_snmp);
+				
+				$('#agcomm').val(data.result[0].comunidad_snmp);
+				if(data.result[0].snmpv2==1) {
+					$('#agv2').prop('checked', true);
+					$('#agcomm').prop('disabled', false);
+				}
+				else {
+					$('#agv2').prop('checked', false);
+					$('#agcomm').prop('disabled', true);
+				}
+				//WEB
+				if(data.result[0].puerto_servicio_web!=null)
+					$('#wport').val(data.result[0].puerto_servicio_web.toString());
+				$('#stime').val(data.result[0].tiempo_sesion.toString());
+				
+				//GRABACION
+				if(data.result[0].puerto_rtsp!=null)
+					$('#rtsp_port').val(data.result[0].puerto_rtsp.toString());
+				if(data.result[0].servidor_rtsp!=null)
+					$('#rtsp_ip').val(data.result[0].servidor_rtsp.toString());
+				if(data.result[0].servidor_rtspb!=null)
+					$('#rtspb_ip').val(data.result[0].servidor_rtspb.toString());
 			}
 		}
 	});
