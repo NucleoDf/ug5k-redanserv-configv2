@@ -2850,6 +2850,9 @@ var CloseImportConfiguration = function(){
 };
 
 var ImportConfiguration = function(){
+	
+	$('#fileselectbtn').val('');
+	
 	$('#AddFormsite').addClass('disabledDiv');
 	$('#SitesList').addClass('disabledDiv');
 	$('#NavMenu').addClass('disabledDiv');
