@@ -5,6 +5,129 @@ var blockZone = false;
 var lastSelectedResource = 0;
 var originalResourceType = 0;
 
+/****************************************/
+/*	FUNCTION: ShowUris 					*/
+/*  PARAMS: data: datos de las urls		*/
+/*										*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function ShowUris(data){
+	//Limpiar Campos
+	$('#UriTxA1').val('');
+	$('#UriRxA1').val('');
+	$('#UriTxA2').val('');
+	$('#UriRxA2').val('');
+	$('#UriTxA3').val('');
+	$('#UriRxA3').val('');
+	$('#UriTxB1').val('');
+	$('#UriRxB1').val('');
+	$('#UriTxB2').val('');
+	$('#UriRxB2').val('');
+	$('#UriTxB3').val('');
+	$('#UriRxB3').val('');
+	
+	//Inicializar
+	$('#LabelSite1').show();
+	$('#RowSite1').show();
+	$('#LabelSite2').hide();
+	$('#RowSite2').hide();
+	$('#LabelSite3').hide();
+	$('#RowSite3').hide();
+	$('#TxARow2').hide();
+	$('#RxARow2').hide();
+	$('#TxARow3').hide();
+	$('#RxARow3').hide();
+	$('#TxBRow2').hide();
+	$('#RxBRow2').hide();
+	$('#TxBRow3').hide();
+	$('#RxBRow3').hide();
+	
+	//Local-Simple
+	if($('#LbTypeRadio option:selected').val() == '0'){
+		$('#TxBRow1').hide();
+		$('#RxBRow1').hide();
+	}
+	//Local-PR
+	else if($('#LbTypeRadio option:selected').val() == '1'){
+		$('#TxBRow1').show();
+		$('#RxBRow1').show();
+	}
+	else {
+		$('#TxARow2').show();
+		$('#RxARow2').show();
+		$('#TxARow3').show();
+		$('#RxARow3').show();
+	}
+	//Local FD-Simple
+	if($('#LbTypeRadio option:selected').val() == '2'){
+		$('#LabelSite2').show();
+		$('#RowSite2').show();
+		$('#LabelSite3').show();
+		$('#RowSite3').show();
+		
+		$('#TxBRow1').hide();
+		$('#RxBRow1').hide();
+		$('#TxBRow2').hide();
+		$('#RxBRow2').hide();
+		$('#TxBRow3').hide();
+		$('#RxBRow3').hide();
+	}
+	//Local FD-Simple
+	if($('#LbTypeRadio option:selected').val() == '3'){
+		$('#LabelSite2').show();
+		$('#RowSite2').show();
+		$('#LabelSite3').show();
+		$('#RowSite3').show();
+		
+		$('#TxBRow1').show();
+		$('#RxBRow1').show();
+		$('#TxBRow2').show();
+		$('#RxBRow2').show();
+		$('#TxBRow3').show();
+		$('#RxBRow3').show();
+	}
+	if (data!=null&&data.uris!=null) {
+		for (var i = 0; i < data.uris.length; i++) {
+			if (data.uris[i].nivel_colateral == 1) {
+				if (data.uris[i].tipo == 'TXA')
+					$('#UriTxA1').val(data.uris[i].uri);
+				if (data.uris[i].tipo == 'RXA')
+					$('#UriRxA1').val(data.uris[i].uri);
+			}
+			if (data.uris[i].nivel_colateral == 2) {
+				if (data.uris[i].tipo == 'TXB')
+					$('#UriTxB1').val(data.uris[i].uri);
+				if (data.uris[i].tipo == 'RXB')
+					$('#UriRxB1').val(data.uris[i].uri);
+			}
+			if (data.uris[i].nivel_colateral == 3) {
+				if (data.uris[i].tipo == 'TXA')
+					$('#UriTxA2').val(data.uris[i].uri);
+				if (data.uris[i].tipo == 'RXA')
+					$('#UriRxA2').val(data.uris[i].uri);
+			}
+			if (data.uris[i].nivel_colateral == 4) {
+				if (data.uris[i].tipo == 'TXB')
+					$('#UriTxB2').val(data.uris[i].uri);
+				if (data.uris[i].tipo == 'RXB')
+					$('#UriRxB2').val(data.uris[i].uri);
+			}
+			if (data.uris[i].nivel_colateral == 5) {
+				if (data.uris[i].tipo == 'TXA')
+					$('#UriTxA3').val(data.uris[i].uri);
+				if (data.uris[i].tipo == 'RXA')
+					$('#UriRxA3').val(data.uris[i].uri);
+			}
+			if (data.uris[i].nivel_colateral == 6) {
+				if (data.uris[i].tipo == 'TXB')
+					$('#UriTxB3').val(data.uris[i].uri);
+				if (data.uris[i].tipo == 'RXB')
+					$('#UriRxB3').val(data.uris[i].uri);
+			}
+		}
+	}
+}
+
 var GetHardware = function() {
 	//$('#Component').text('Hardware');	// Titulo
 	//$("#NewHardware").show();
@@ -2446,185 +2569,7 @@ function RemoveSite(f){
 
 }
 
-function ShowUris(data){
-	/*var cuantos = 0;
-	
-	destinationUris=[];
-	for (var j=0;j<data.uris.length;j++) {
-		var miUri={};
-		if(data.uris[j].tipo=='TXA')
-			miUri.uriTxA=data.uris[j].uri;
-		if(data.uris[j].tipo=='RXA')
-			miUri.uriRxA=data.uris[j].uri;
-		destinationUris.push(miUri);
-	}
 
-	// Reset pagina comunicaciones
-	//ShowUriNumber(0);
-
-	if (destinationUris == null)
-		return;
-
-	translateWord('Site',function(result){
-		var i=0;
-		for (i=0;i<destinationUris.length;i++){
-			if (destinationUris[i].uriTxA == '' &&
-				destinationUris[i].uriRxA == '')
-				continue;
-
-			cuantos++;
-		}
-
-		for (i=0;i<destinationUris.length;i++){
-			if (destinationUris[i].uriTxA == '' &&
-				destinationUris[i].uriRxA == '')
-				continue;
-
-			if ($('#ListMenuSites li:eq(' + i + ') a').attr('rel') == -1){
-				// Si el tipo radio Simple no desplazada, se deshabilita la posibilidad de dar de alta más emplazamientos.
-				if ($('#LbTypeRadio option:selected').val() == '1' ||
-					$('#LbTypeRadio option:selected').val() == '0'){
-					$('#ListMenuSites li:first-child').find("a").text('Colateral')
-																.attr('onclick','');
-					break;
-				}
-				else{
-					var item = $('#ListMenuSites').find("li").eq(0).clone();
-					
-					item.find("a").attr('rel',cuantos - i)
-									.attr('style','width: 125px')
-									.removeClass('selected')
-									.attr('onclick','ShowDestinationSite(this)')
-									.text(result + (cuantos - i).toString());
-
-					$('#ListMenuSites').prepend(item);
-				}
-			}
-			//item.appendTo($('#ListMenuSites'));
-		}
-		$('#ListMenuSites').find("li").eq(0).find("a").addClass("selected");
-		$('#ListMenuSites li:last-child a').removeClass('selected');
-		if ($('#ListMenuSites').children().length == 4)
-			$('#ListMenuSites li:last-child').remove();
-
-		//ShowUriNumber(destinationUris.length > 0 ? 1 : 0);
-	});*/
-	
-	//Limpiar Campos
-	$('#UriTxA1').val('');
-	$('#UriRxA1').val('');
-	$('#UriTxA2').val('');
-	$('#UriRxA2').val('');
-	$('#UriTxA3').val('');
-	$('#UriRxA3').val('');
-	$('#UriTxB1').val('');
-	$('#UriRxB1').val('');
-	$('#UriTxB2').val('');
-	$('#UriRxB2').val('');
-	$('#UriTxB3').val('');
-	$('#UriRxB3').val('');
-	
-	//Inicializar
-	$('#LabelSite1').show();
-	$('#RowSite1').show();
-	$('#LabelSite2').hide();
-	$('#RowSite2').hide();
-	$('#LabelSite3').hide();
-	$('#RowSite3').hide();
-	$('#TxARow2').hide();
-	$('#RxARow2').hide();
-	$('#TxARow3').hide();
-	$('#RxARow3').hide();
-	$('#TxBRow2').hide();
-	$('#RxBRow2').hide();
-	$('#TxBRow3').hide();
-	$('#RxBRow3').hide();
-	
-	//Local-Simple
-	if($('#LbTypeRadio option:selected').val() == '0'){
-		$('#TxBRow1').hide();
-		$('#RxBRow1').hide();
-	}
-	//Local-PR
-	else if($('#LbTypeRadio option:selected').val() == '1'){
-		$('#TxBRow1').show();
-		$('#RxBRow1').show();
-	}
-	else {
-		$('#TxARow2').show();
-		$('#RxARow2').show();
-		$('#TxARow3').show();
-		$('#RxARow3').show();
-	}
-	//Local FD-Simple
-	if($('#LbTypeRadio option:selected').val() == '2'){
-		$('#LabelSite2').show();
-		$('#RowSite2').show();
-		$('#LabelSite3').show();
-		$('#RowSite3').show();
-		
-		$('#TxBRow1').hide();
-		$('#RxBRow1').hide();
-		$('#TxBRow2').hide();
-		$('#RxBRow2').hide();
-		$('#TxBRow3').hide();
-		$('#RxBRow3').hide();
-	}
-	//Local FD-Simple
-	if($('#LbTypeRadio option:selected').val() == '3'){
-		$('#LabelSite2').show();
-		$('#RowSite2').show();
-		$('#LabelSite3').show();
-		$('#RowSite3').show();
-		
-		$('#TxBRow1').show();
-		$('#RxBRow1').show();
-		$('#TxBRow2').show();
-		$('#RxBRow2').show();
-		$('#TxBRow3').show();
-		$('#RxBRow3').show();
-	}
-	if(data!=null) {
-		for(var i=0;i<data.uris.length;i++) {
-			if(data.uris[i].nivel_colateral==1) {
-				if(data.uris[i].tipo=='TXA')
-					$('#UriTxA1').val(data.uris[i].uri);
-				if(data.uris[i].tipo=='RXA')
-					$('#UriRxA1').val(data.uris[i].uri);
-			}
-			if(data.uris[i].nivel_colateral==2) {
-				if(data.uris[i].tipo=='TXB')
-					$('#UriTxB1').val(data.uris[i].uri);
-				if(data.uris[i].tipo=='RXB')
-					$('#UriRxB1').val(data.uris[i].uri);
-			}
-			if(data.uris[i].nivel_colateral==3) {
-				if(data.uris[i].tipo=='TXA')
-					$('#UriTxA2').val(data.uris[i].uri);
-				if(data.uris[i].tipo=='RXA')
-					$('#UriRxA2').val(data.uris[i].uri);
-			}
-			if(data.uris[i].nivel_colateral==4) {
-				if(data.uris[i].tipo=='TXB')
-					$('#UriTxB2').val(data.uris[i].uri);
-				if(data.uris[i].tipo=='RXB')
-					$('#UriRxB2').val(data.uris[i].uri);
-			}
-			if(data.uris[i].nivel_colateral==5) {
-				if(data.uris[i].tipo=='TXA')
-					$('#UriTxA3').val(data.uris[i].uri);
-				if(data.uris[i].tipo=='RXA')
-					$('#UriRxA3').val(data.uris[i].uri);
-			}
-			if(data.uris[i].nivel_colateral==6) {
-				if(data.uris[i].tipo=='TXB')
-					$('#UriTxB3').val(data.uris[i].uri);
-				if(data.uris[i].tipo=='RXB')
-					$('#UriRxB3').val(data.uris[i].uri);
-			}
-		}
-	}
-}
 
 function ShowUriNumber(page){
 	if (page > 0){
