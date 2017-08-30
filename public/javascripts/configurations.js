@@ -499,8 +499,13 @@ var UpdateSynchroStateInActiveConfig = function(data){
 						else
 							$(this).find('div:first').prop('class', 'dragableItem VivaSincro');
 					}
-					else
-						$(this).find('div:first').prop('class', 'dragableItem');
+					else {
+						if (value.isNotActiveCfg)
+							$(this).find('div:first').prop('class', 'dragableItem');
+						else
+							$(this).find('div:first').prop('class', 'dragableItem NoVivaActiva');
+					}
+						
 				}
 				//TODO Vamos por aqui!!!
 				/*
