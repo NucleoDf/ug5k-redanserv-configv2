@@ -232,6 +232,7 @@ app.post('/',[
                 });*/
             });
             //res.json({size:req.file.size});
+			res.status(200).redirect('/');
         }
 ]);
 
