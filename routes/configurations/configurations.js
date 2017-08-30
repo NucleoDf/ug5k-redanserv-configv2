@@ -283,6 +283,7 @@ gatewaysRouter.route('/:gateway')
     	}   
     	});
 
+//TEST: GET localhost:3000/configurations/CONFIGURACION1/gateways/1.1.1.2/all
 // Proporciona la configuración completa de :gateway (general, servicios, hardware, recursos)
 ///*  REV 1.0.2 VMG
 gatewaysRouter.route('/:gateway/all')

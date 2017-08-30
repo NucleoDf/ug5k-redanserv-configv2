@@ -362,11 +362,14 @@ router.route('/updateResource/:resource2Insert/:resourceType/:resourceId')
 				});
 		}
 	});
+
+//TEST: GET http://localhost:3000/gateways/1.1.1.2/testconfig
+///TEST: GET gateways/getAll/10
 router.route('/getAll/:idGtw')
 	.get(function(req,res){
 		logging.LoggingDate('GET /getAll/:idGtw');
 		var idGtw = req.params.idGtw;
-		myLibGateways.getAll(idGtw,function(result){
+		myLibGateways.getAll(null,idGtw,function(result){
 			res.json(result);
 		});
 	});
