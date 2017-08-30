@@ -493,8 +493,12 @@ var UpdateSynchroStateInActiveConfig = function(data){
 		$.each(data, function (index, value) {
 			$(".list li").each(function (index) {
 				if ($(this).data('texto') == value.idGtw ) {
-					if(value.online)
-						$(this).find('div:first').prop('class', 'dragableItem VivaSincro');
+					if (value.online) {
+						if (value.isNotActiveCfg)
+							$(this).find('div:first').prop('class', 'dragableItem VivaNoActiva');
+						else
+							$(this).find('div:first').prop('class', 'dragableItem VivaSincro');
+					}
 					else
 						$(this).find('div:first').prop('class', 'dragableItem');
 				}

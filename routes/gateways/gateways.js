@@ -249,8 +249,6 @@ router.route('/:gateway/testconfig')
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		//myLibGateways.getIpv(req.params.gateway,function(result){
 		myLibGateways.getIpv2(req.params.gateway,function(result){
-			if(result.data!=null)
-					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw);
 			if (result.toLocal == -1){
 				// No en BD
 				logging.LoggingDate(JSON.stringify({idConf:result.ipv.toString(), fechaHora:''},null,'\t'));
@@ -258,17 +256,16 @@ router.route('/:gateway/testconfig')
 		 		res.json({idConf: result.ipv.toString(), fechaHora:''});
 			}
 			else if (result.toLocal == -2){
+				updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, true, false);
 				// No en configurción activa
 				logging.LoggingDate(JSON.stringify({idConf:result.toLocal.toString(), fechaHora:''},null,'\t'));
 					//myLibGateways.getTestConfig(result.ipv,function(data){
 				res.json({idConf: result.toLocal.toString(), fechaHora:''});
 			 		//});
 			}
-			else{
-				// En configuracion activa
-				//myLibGateways.getTestConfig(result.ipv,function(data){
-		 		res.json({idConf: result.data.idConf, fechaHora:result.data.fechaHora});
-		 		//});
+			if(result.data!=null && result.toLocal == null) {
+				updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, false, false);
+				res.json({idConf: result.data.idConf, fechaHora: result.data.fechaHora});
 			}
 			/*
 			var ipv = result.ipv;
@@ -479,7 +476,7 @@ hardwareRouter.route('/:hardware')
 /*  									*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
-function updateSincGtws(aliveGtws, gtw, idGtw){
+function updateSincGtws(aliveGtws, gtw, idGtw, isNotActiveCfg, isSinch){
 	var isGtwFound=false;
 	
 	for(var i=0;i<aliveGtws.length && !isGtwFound;i++) {
@@ -495,6 +492,8 @@ function updateSincGtws(aliveGtws, gtw, idGtw){
 		onlineGtw.ip=gtw;
 		onlineGtw.online=true;
 		onlineGtw.time=0;
+		onlineGtw.isNotActiveCfg=isNotActiveCfg;
+		onlineGtw.isSinch=isSinch;
 		aliveGtws.push(onlineGtw);
 	}
 }
@@ -503,7 +502,7 @@ function updateAliveGtws(aliveGtws, refreshTime) {
 	for (var i = 0;i<aliveGtws.length;i++) {
 		if(aliveGtws[i].online==true) {
 			aliveGtws[i].time = (aliveGtws[i].time + parseInt(refreshTime));
-			if (aliveGtws[i].time >= 6000)
+			if (aliveGtws[i].time >= 8000)
 				aliveGtws[i].online = false;
 		}
 	}
