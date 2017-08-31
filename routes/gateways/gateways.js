@@ -480,7 +480,7 @@ function updateSincGtws(aliveGtws, gtw, idGtw, isNotActiveCfg, isSinch){
 	var isGtwFound=false;
 	
 	for(var i=0;i<aliveGtws.length && !isGtwFound;i++) {
-		if(aliveGtws[i].ip==gtw) {
+		if(aliveGtws[i].idGtw==idGtw) {
 			aliveGtws[i].online=true;
 			aliveGtws[i].time=0;
 			isGtwFound=true;
@@ -489,7 +489,6 @@ function updateSincGtws(aliveGtws, gtw, idGtw, isNotActiveCfg, isSinch){
 	if(!isGtwFound) {
 		var onlineGtw = {};
 		onlineGtw.idGtw=idGtw;
-		onlineGtw.ip=gtw;
 		onlineGtw.online=true;
 		onlineGtw.time=0;
 		onlineGtw.isNotActiveCfg=isNotActiveCfg;
