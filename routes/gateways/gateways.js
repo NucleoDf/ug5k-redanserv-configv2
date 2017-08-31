@@ -509,9 +509,13 @@ function updateAliveGtws(aliveGtws, refreshTime) {
 	for (var i = 0;i<aliveGtws.length;i++) {
 		if(aliveGtws[i].online==true) {
 			aliveGtws[i].time = (aliveGtws[i].time + parseInt(refreshTime));
-			if (aliveGtws[i].time >= 8000)
+			if (aliveGtws[i].time >= 8000) {
 				aliveGtws[i].online = false;
+				aliveGtws[i].isSinch = false;
+			}
 		}
+		else
+			aliveGtws[i].isSinch = false;
 	}
 }
 

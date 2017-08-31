@@ -496,6 +496,8 @@ var UpdateSynchroStateInActiveConfig = function(data){
 					if (value.online) {
 						if (value.isNotActiveCfg)
 							$(this).find('div:first').prop('class', 'dragableItem VivaNoActiva');
+						else if(value.isSinch)
+							$(this).find('div:first').prop('class', 'dragableItem apply');
 						else if(value.updatePend)
 							$(this).find('div:first').prop('class', 'dragableItem VivaNoSincro');
 						else if(value.InConflict&&!value.updatePend)

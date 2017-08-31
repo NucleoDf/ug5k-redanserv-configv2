@@ -298,6 +298,7 @@ gatewaysRouter.route('/:gateway/all')
 				if(aliveGtws[i].idGtw==idGtw) {
 					isGtwFound=true;
 					aliveGtws[i].isSinch=true;
+					aliveGtws[i].online=true;
 				}
 			}
 			res.status(200).json(result);
