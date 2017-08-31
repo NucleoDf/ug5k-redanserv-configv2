@@ -291,7 +291,15 @@ gatewaysRouter.route('/:gateway/all')
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		
 		//TODO pasar la ip
-		myLibGateways.getAll(req.params.configuration,req.params.gateway,function(result) {
+		myLibGateways.getAll(req.params.configuration,req.params.gateway,function(result,idGtw) {
+			var aliveGtws=req.app.get('aliveGtws');
+			var isGtwFound=false;
+			for(var i=0;i<aliveGtws.length && !isGtwFound;i++) {
+				if(aliveGtws[i].idGtw==idGtw) {
+					isGtwFound=true;
+					aliveGtws[i].isSinch=true;
+				}
+			}
 			res.status(200).json(result);
 		});
 			/*/ Obtener IPv

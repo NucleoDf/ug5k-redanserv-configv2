@@ -256,15 +256,18 @@ router.route('/:gateway/testconfig')
 		 		res.json({idConf: result.ipv.toString(), fechaHora:''});
 			}
 			else if (result.toLocal == -2){
-				updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, true, false);
+				updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, 0, true, false);
 				// No en configurción activa
 				logging.LoggingDate(JSON.stringify({idConf:result.toLocal.toString(), fechaHora:''},null,'\t'));
 					//myLibGateways.getTestConfig(result.ipv,function(data){
 				res.json({idConf: result.toLocal.toString(), fechaHora:''});
 			 		//});
 			}
-			if(result.data!=null && result.toLocal == null) {
-				updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, false, false);
+			if(result.data!=null && result.toLocal == null ) {
+				if (req.query.std=="-4")
+					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, result.data.updatePend, false, true);
+				else
+					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, result.data.updatePend, false, false);
 				res.json({idConf: result.data.idConf, fechaHora: result.data.fechaHora});
 			}
 			/*
@@ -476,13 +479,17 @@ hardwareRouter.route('/:hardware')
 /*  									*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
-function updateSincGtws(aliveGtws, gtw, idGtw, isNotActiveCfg, isSinch){
+function updateSincGtws(aliveGtws,gtw,idGtw,updatePend,isNotActiveCfg,InConflict){
 	var isGtwFound=false;
 	
 	for(var i=0;i<aliveGtws.length && !isGtwFound;i++) {
 		if(aliveGtws[i].idGtw==idGtw) {
 			aliveGtws[i].online=true;
 			aliveGtws[i].time=0;
+			aliveGtws[i].updatePend=updatePend;
+			aliveGtws[i].isNotActiveCfg=isNotActiveCfg;
+			aliveGtws[i].InConflict=InConflict;
+			aliveGtws[i].isSinch=false;
 			isGtwFound=true;
 		}
 	}
@@ -491,8 +498,9 @@ function updateSincGtws(aliveGtws, gtw, idGtw, isNotActiveCfg, isSinch){
 		onlineGtw.idGtw=idGtw;
 		onlineGtw.online=true;
 		onlineGtw.time=0;
+		onlineGtw.updatePend=updatePend;
 		onlineGtw.isNotActiveCfg=isNotActiveCfg;
-		onlineGtw.isSinch=isSinch;
+		onlineGtw.InConflict=InConflict;
 		aliveGtws.push(onlineGtw);
 	}
 }
