@@ -4,7 +4,8 @@ var totalRecursos = 0;
 var cicloCompleto = 0;
 
 var listaUris=[];
-
+var cgwModified=false;
+var resModified=false;
 /******************************************************************************************************/
 /****** Module: gateways.js												*******************************/
 /****** Description: Módulo de soporte a la gestion de pasarelas		*******************************/
@@ -529,6 +530,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 								alertify.success('El recurso se ha añadido correctamente.');
 								GenerateHistoricEvent(ID_HW,ADD_HARDWARE_RESOURCE,$('#TbNameResource').val(),$('#loggedUser').text());
 								GetMySlaves();
+								resModified=true;
 							}
 							else
 								alertify.error('Error: ' + data.error);
@@ -570,6 +572,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 								//var paramHistoric={0:}
 								GenerateHistoricEvent(ID_HW, MODIFY_HARDWARE_RESOURCE_LOGIC_PARAM, $('#TbNameResource').val(), $('#loggedUser').text());
 								alertify.success('El recurso se ha actualizado correctamente.');
+								resModified=true;
 							}
 							else
 								alertify.error('Error: ' + data.error);
@@ -3236,6 +3239,7 @@ function PostGateWay (idSite, isUpdate) {
 					alertify.success('La pasarela \"' + data.name + '\" ha sido creada.');
 					GenerateHistoricEvent(ID_HW,ADD_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
 					ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+					cgwModified = true;
 					//GetGateways(null,function(){
 					//	ShowHardwareGateway(data.insertId, data.name);
 					//});//TODO esto no muestra nada de lo que tiene que mostrar
@@ -3267,6 +3271,7 @@ function PostGateWay (idSite, isUpdate) {
 					alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
 					GenerateHistoricEvent(ID_HW,MODIFY_GATEWAY_COMMON_PARAM,$('#nameGw').val(),$('#loggedUser').text());
 					ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+					cgwModified = true;
 					//GetGateways(null,function(){
 					//	ShowHardwareGateway(data.insertId, data.name);
 					//});//TODO esto no muestra nada de lo que tiene que mostrar

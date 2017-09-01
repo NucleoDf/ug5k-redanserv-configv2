@@ -1116,13 +1116,17 @@ var GetActiveCfgAndActivate = function(){
 														GenerateHistoricEvent(ID_HW,LOAD_REMOTE_CONFIGURATION,data.name,$('#loggedUser').text());
 														alertify.success('Configuración \"'+ data.name + '\" activada.');
 														// Reset list of gateways to activate
-														AddGatewayToList(null);
+														//AddGatewayToList(null);
 														// 20170509. AGL Gestor 'Aplicar cambios' en usuarios
 														usersModified = false;
 														// 20170516. AGL. Activar Cambios...
 														tbbssModified = false;
 														// 20170516. AGL. Activar Cambios...
 														configModified = false;
+														// 20170516. AGL. Activar Cambios...
+														cgwModified = false;
+														// 20170516. AGL. Activar Cambios...
+														resModified = false;
 													}
 												}
 											});
