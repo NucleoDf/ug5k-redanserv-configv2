@@ -135,6 +135,7 @@ var PostTable = function(){
 		success: function(data){
 			if (data.error == null) {
 				alertify.success('Tabla de calificación ' + $('#IdTable').val() + ' generada.');
+				GenerateHistoricEvent(ID_HW, ADD_CALIFICATION_AUDIO_TABLE, $('#IdTable').val(), $('#loggedUser').text());
 				/** 20170516. AGL. Activar Cambios... */
 				tbbssModified = true;
 				GetTablesBss(function(){
