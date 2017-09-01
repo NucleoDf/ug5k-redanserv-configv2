@@ -566,8 +566,10 @@ var InsertNewResource = function(col, row, isUpdate) {
 							}
 						),
 						success: function (data) {
-							if (data.error == null)
+							if (data.error == null) {
+								GenerateHistoricEvent(ID_HW, MODIFY_HARDWARE_RESOURCE_LOGIC_PARAM, $('#TbNameResource').val(), $('#loggedUser').text());
 								alertify.success('El recurso se ha actualizado correctamente.');
+							}
 							else
 								alertify.error('Error: ' + data.error);
 						},

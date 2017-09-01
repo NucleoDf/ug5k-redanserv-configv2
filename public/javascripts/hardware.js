@@ -412,7 +412,7 @@ function DeleteSlave(){
 						alertify.alert('Ulises G 5000 R',"Una tarjeta esclava que pertenece a un gateway activo no se puede eliminar.");
 						alertify.error("Una tarjeta esclava que pertenece a un gateway activo no se puede eliminar.");
 					}else{
-						GenerateHistoricEvent(ID_HW,REMOVE_IA4_SLAVE,$('#IdSlave').val(),$('#loggedUser').text());
+						//GenerateHistoricEvent(ID_HW,REMOVE_IA4_SLAVE,$('#IdSlave').val(),$('#loggedUser').text());
 						alertify.success('La tarjeta esclava \"'+ $('#IdSlave').val() +'\" ha sido eliminada.');
 						GetHardware();
 						$('#BigSlavesZone').hide();
