@@ -11,6 +11,7 @@ var myLibServicesGateways = require('../../lib/services.js');
 var myLibHardware = require('../../lib/hardware.js');
 
 var async=require('async');
+var gcfg = require('../../configUlises.json');
 
 // Middleware Resources
 //var myGatewaysModule = require('./resources.js');
@@ -506,10 +507,11 @@ function updateSincGtws(aliveGtws,gtw,idGtw,updatePend,isNotActiveCfg,InConflict
 }
 
 function updateAliveGtws(aliveGtws, refreshTime) {
+	var maxCycleTime=gcfg.Ulises.maxCycleTime;
 	for (var i = 0;i<aliveGtws.length;i++) {
 		if(aliveGtws[i].online==true) {
 			aliveGtws[i].time = (aliveGtws[i].time + parseInt(refreshTime));
-			if (aliveGtws[i].time >= 8000) {
+			if (aliveGtws[i].time >= maxCycleTime) {
 				aliveGtws[i].online = false;
 				aliveGtws[i].isSinch = false;
 			}
