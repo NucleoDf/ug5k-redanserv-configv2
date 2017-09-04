@@ -373,6 +373,11 @@ app.use(function(err, req, res, next) {
     });
 });
 
+/*function synchGateways() {
+	v
+	setTimeout(function(){synchGateways()},config.Ulises.refreshTime);
+}*/
+
 // Prepare historics deep
 setImmediate(function(){
     logging.LoggingDate('Running once a day. Historics deep: ' + config.Ulises.HistoricsDeep + ' days.');
@@ -405,6 +410,26 @@ var intervalObject = setInterval(function () {
       // console.log(moment().toString() + ": " +
       //   (ctrlSesiones.localSession ? ("Sesion Activa hasta : " + moment(ctrlSesiones.localSession.cookie._expires).toString() ): "No Session"));
     }, 5000);
+
+var synch = setInterval(function () {
+    var maxCycleTime = config.Ulises.maxCycleTime;
+	for (var i = 0; i < aliveGtws.length; i++) {
+		if (aliveGtws[i].online == true) {
+			aliveGtws[i].time = (aliveGtws[i].time + parseInt(config.Ulises.refreshTime));
+			if (aliveGtws[i].time >= maxCycleTime) {
+				aliveGtws[i].online = false;
+				aliveGtws[i].isSinch = false;
+			}
+		}
+		else
+			aliveGtws[i].isSinch = false;
+	}
+	/*logging.LoggingDate('Tick. Pasarelas='+aliveGtws.length);
+	if(aliveGtws.length>0){
+	    logging.LoggingDate(aliveGtws[0].time);
+	    logging.LoggingDate(aliveGtws[0].online);
+    }*/
+}, config.Ulises.refreshTime);
 /*************************/
 
 app.set('port', process.env.PORT || 5050);

@@ -23,7 +23,7 @@ router.route('/syncGateways/:refreshTime')
 	.get(function(req,res){
 		//logging.LoggingDate('GET /syncGateways/:refreshTime');
 		var aliveGtws=req.app.get('aliveGtws');
-		updateAliveGtws(aliveGtws, req.params.refreshTime);
+		//updateAliveGtws(aliveGtws, req.params.refreshTime);
 		res.json(aliveGtws);
 	});
 router.route('/availableservices')
@@ -506,7 +506,7 @@ function updateSincGtws(aliveGtws,gtw,idGtw,updatePend,isNotActiveCfg,InConflict
 	}
 }
 
-function updateAliveGtws(aliveGtws, refreshTime) {
+/*function updateAliveGtws(aliveGtws, refreshTime) {
 	var maxCycleTime=gcfg.Ulises.maxCycleTime;
 	for (var i = 0;i<aliveGtws.length;i++) {
 		if(aliveGtws[i].online==true) {
@@ -519,6 +519,6 @@ function updateAliveGtws(aliveGtws, refreshTime) {
 		else
 			aliveGtws[i].isSinch = false;
 	}
-}
+}*/
 
 module.exports = router;
