@@ -1268,7 +1268,9 @@ var resColateralString = function(tipo, subtipo, reg) {
 	}
 	return "????;????;????;????;????";
 }
-var ExportCfgToExcel = function(idCfg, empl) {
+
+/** 20170904. Obsoleta-eliminar */
+var ExportCfgToExcel_v0 = function(idCfg, empl) {
 	GenerateData(idCfg, function(result){
 		var rows = result.result;
 		var cfgName = "";
@@ -1309,7 +1311,8 @@ var ExportCfgToExcel = function(idCfg, empl) {
 	});
 }
 
-var ExportCfgToPdf = function(idCfg){
+/** 20170904. Obsoleta-eliminar */
+var ExportCfgToPdf_v0 = function(idCfg){
 	// Llamar al SP para generar la tabla con los datos necesarios
 	GenerateData(idCfg,function(result){
 
@@ -1552,3 +1555,239 @@ var ExportCfgToPdf = function(idCfg){
 		}
 	});
 };
+
+/** 20170904. Nuevas Versiones de Informes de Configuracion*/
+/** */
+/* */
+var RdTypes = [
+	"Local Simple", "Local P/R", "Local FD Simple", "Local FD P/R",
+  	"Remoto Tx", "Remoto Rx", "Remoto TxRx"
+];
+var PhTypes = [
+   	"BL","BC","AB","LCEN","ATS-R2","ATS-N5","ATS-QSIG"
+];
+/***/
+function PdfPrintGws(gws) {
+	var content = [];
+	content.push({text: gws.length.toString() + ' Pasarelas en la configuracion', style: 'level0'})
+	for(igw=0; igw<gws.length; igw++){
+  		var gw = gws[igw];
+    	PdfPrintGw(content, gw);
+    	if (igw < (gws.length-1))
+    		content.push({text: "", pageBreak: 'after'});
+  	}
+	return content;
+}
+/**/
+function PdfPrintGw(content, gw){
+	content.push({text: 'Pasarela ' + gw.gw + ', en ' + gw.site, style: 'level1'});
+  	content.push({text: 'Configuracion Radio. ' + gw.radios.length + ' Recursos.', style: 'level2'});
+  	for (ir=0; ir<gw.radios.length; ir++){
+  		var rr = gw.radios[ir];
+    	PdfPrintRadioRs(content, rr);
+  	}
+  	content.push({text: 'Configuracion Telefonia. ' + gw.telef.length + ' Recursos.', style: 'level2'});
+  	for (it=0; it<gw.telef.length; it++){
+  		var rt = gw.telef[it];
+    	PdfPrintPhoneRs(content, rt);
+  	}
+}
+/** */
+function PdfPrintRadioRs(content, rd){
+	var rdInfo = ('(' + (rd.columna.toString()+'/'+rd.fila) + ')');
+  	rdInfo += (': ' + rd.nombre);
+  	rdInfo += (', Frecuencia ' + rd.frecuencia + ' Mhz.');
+  	rdInfo += (' Tipo: '+ RdTypes[rd.tipo_agente]);
+  
+	content.push({text: rdInfo, style: 'level3'});
+	if (rd.tipo_agente <= 4){
+  		content.push({text: rd.col.length.toString() + ' Colaterales', style: 'level4'});
+    	for (ic = 0; ic<rd.col.length; ic++){
+    		var col = rd.col[ic];
+    	PdfPrintRadioCol(content, col);
+    	}
+  	}
+}
+/** */
+function PdfPrintPhoneRs(content, ph){
+	var phInfo = ('(' + (ph.columna.toString()+'/'+ph.fila) + ')');
+	phInfo += (': ' + ph.nombre);
+  	phInfo += (' Tipo: '+ PhTypes[ph.tipo_interfaz_tel]);
+  	phInfo += (", Colateral Remoto: " + ph.uri_telefonica)
+	content.push({text: phInfo, style: 'level3'});
+}
+
+/** */
+function PdfPrintRadioCol(content, col){
+	var clInfo = 'EMPL ' + Math.round(col.nivel_colateral/2);
+  	clInfo += (', ' + col.tipo);
+  	clInfo += (': '+ col.uri);
+	content.push({text: clInfo, style: 'level5'});
+}
+
+/** */
+var ExportCfgToExcel = function(idCfg, empl) {
+	GenerateData(idCfg, function(gws){
+		var cfgName = gws.length==0 ? "NO-GW" : gws[0].cfg;
+    var strData = 	'Config' +
+                    ';Emplazamiento' +
+                    ';Pasarela' +
+                    ';P-R-T-C' +
+                    ';Recurso' +
+                    ';Frecuencia' +
+                    ';Tipo' +
+                    ';Colateral' + '\r\n';
+      for(igw=0; igw<gws.length; igw++){
+        var gw = gws[igw];
+        // Registro de la Pasarela.
+        strData += (gw.cfg + ';' + 
+                    gw.site + ';' + 
+                    gw.gw + ';' + 
+                    '0' + ';' + 
+                    '---' + ';' + 
+                    '---' + ';' + 
+                    '---' + ';' + 
+                    '---' + '\r\n');
+        // Registro Recursos RD
+        for (ir=0; ir<gw.radios.length; ir++) {
+          	var rr = gw.radios[ir];
+          	// Registro del Recurso
+          	strData += (gw.cfg + ';' + 
+                      gw.site + ';' + 
+                      gw.gw + ';' + 
+                      '1' + ';' + 
+                      rr.nombre + ';' + 
+                      rr.frecuencia + ';' + 
+                      RdTypes[rr.tipo_agente] + ';' + 
+                      '---' + '\r\n');
+          	if (rr.tipo_agente <= 4) {
+            	for (ic = 0; ic<rr.col.length; ic++){
+            		var col = rr.col[ic];
+              		var clInfo = 'EMPL ' + Math.round(col.nivel_colateral/2);
+              		clInfo += (', ' + col.tipo);
+              		clInfo += (': '+ col.uri);          // Registro del Colateral
+              		strData += (gw.cfg + ';' + 
+                          gw.site + ';' + 
+                          gw.gw + ';' + 
+                          '3' + ';' + 
+                          rr.nombre + ';' + 
+                          rr.frecuencia + ';' + 
+                          RdTypes[rr.tipo_agente] + ';' + 
+                          clInfo + '\r\n');
+              	}
+            }
+        }
+        // Registro Recursos TF
+        for (it=0; it<gw.telef.length; it++){
+          	var rt = gw.telef[it];
+          	// Registro del Recurso
+          	strData += (gw.cfg + ';' + 
+                      gw.site + ';' + 
+                      gw.gw + ';' + 
+                      '2' + ';' + 
+                      rt.nombre + ';' + 
+                      '---' + ';' + 
+                      PhTypes[rt.tipo_interfaz_tel] + ';' +
+                      rt.uri_telefonica + '\r\n');
+        	}
+
+      	}
+  
+  	// Salvar el fichero...
+	var myLink=document.createElement('a');
+	myLink.download = 'Cfg_' + cfgName + '-'+$('#_hfecha').text()+'_InformeCfg.csv';
+	myLink.href = "data:application/csv," + escape(strData);
+	myLink.click();
+	// var hiddenElement = document.createElement('a');
+ //    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(strData);
+ //    hiddenElement.target = '_blank';
+ //    hiddenElement.download = 'redan-cfg.csv';
+ //    document.body.appendChild(hiddenElement);
+ //    hiddenElement.click();		
+	});
+}
+
+var ExportCfgToPdf = function(idCfg){
+	// Llamar al SP para generar la tabla con los datos necesarios
+	GenerateData(idCfg,function(data){
+		var cfgName = data.length==0 ? "NO-GW" : data[0].cfg;
+			// var logo = getBase64Image(document.getElementById("logo"));
+      	var docDefinition = {
+        	pageSize: 'A4',
+          	pageOrientation: 'portrait',
+          	//pageMargins: [10,10,10,10],
+          	styles: {
+            	header: {
+              		fontSize: 16,
+              		bold: true,
+              		color: 'red', alignment: 'center',
+              		margin: [0,20,0,10]
+            	},
+            	footer: {
+            		fontSize: 9, color: 'red',
+              		margin: [10,10,10,20]
+            	},
+            	level0:{
+            		fontSize: 14,
+            		bold: true,
+            		alignment: 'center',
+            		margin: [0,20,0,10]
+            	},
+            	level1:{
+            		fontSize: 12,
+            		bold: true, color:'blue', 
+            		alignment: 'left',
+            		margin: [20,20,0,0]
+            	},
+	            level2:{
+	            	fontSize: 12,
+	            	bold: true,
+	            	alignment: 'left',
+	              	margin: [40,10,0,0]
+	            },
+	            level3:{
+	            	fontSize: 10,
+	              	bold: true,
+	              	alignment: 'left',
+	              	margin: [50,2,0,0]
+	            },
+            level4:{
+            	fontSize: 10,
+              bold: true,
+              alignment: 'left',
+              margin: [60,0,0,0]
+            },
+            level5:{
+            	fontSize: 9,
+              bold: true,
+              alignment: 'left',
+              margin: [90,0,0,0]
+            },
+          defaultStyle: {
+          	fontSize: 12,
+            color: 'green',
+            alignment: 'justify'
+            }
+          },
+          header: {
+            margin: [10,10,10,10],
+            text: "Ulises G 5000. Informe de Configuracion: " + cfgName, style: 'header'
+          },
+          footer:	function(currentPage, pageCount) { 
+            return {
+            	margin: [10,10,10,10],
+            	columns: [
+                { text: (new Date()).toLocaleString(), style: 'footer', alignment: 'left'},
+                { text: "DF-Nucleo. 2017. All rights reserved.", style: 'footer', alignment: 'center'},
+                { text: 'Pg ' + currentPage.toString() + ' de ' + pageCount, style: 'footer', alignment: 'right' }              
+              ]
+            };
+          },
+          content: PdfPrintGws(data)      
+      };
+
+    pdfMake.createPdf(docDefinition).download('U5K-G-' + cfgName + '-'+$('#_hfecha').text()+ '.pdf');
+    //pdfMake.createPdf(docDefinition).open();
+    
+	});
+}
