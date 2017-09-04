@@ -483,12 +483,12 @@ var deleteGatewayFromConfig = function(cfgId, gtwId){
 };
 
 /************************************************/
-/*	FUNCTION: UpdateSynchroStateInActiveConfig 	*/
+/*	FUNCTION: UpdateSynchroStateInConfig 		*/
 /*  PARAMS: data								*/
 /*												*/
 /*  REV 1.0.2 VMG								*/
 /************************************************/
-var UpdateSynchroStateInActiveConfig = function(data){
+var UpdateSynchroStateInConfig = function(data){
 	if(data.length!=0) {
 		$.each(data, function (index, value) {
 			$(".list li").each(function (index) {

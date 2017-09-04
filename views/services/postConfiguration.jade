@@ -8,7 +8,8 @@ script.
 			type: 'GET',
 			url: '/gateways/syncGateways/'+refreshTime,
 			success: function (data) {
-					UpdateSynchroStateInActiveConfig(data);
+				UpdateSynchroStateInConfig(data);
+				UpdateSynchroStateInSites(data);
 			}
 		});
 		/*$.ajax({type: 'GET',

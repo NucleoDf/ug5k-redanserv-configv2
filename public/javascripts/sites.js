@@ -9,32 +9,44 @@ var GetSites = function(f) {
 	});
 }
 
-var UpdateSynchroStateInSites = function(data){
-	$.each(data.general,function(index,value){
-		$(".gtwList li" ).each(function( index ) {
-			if ($( this ).data('texto') == value.idCGW){
-
-				if (value.Viva == 1){
-					if (value.Activa == 1){
-						if (value.Sincro == 2){
-							$( this ).prop('class','dragableItem VivaSincro');		// Verde claro
+/************************************************/
+/*	FUNCTION: UpdateSynchroStateInSites 		*/
+/*  PARAMS: data								*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+var UpdateSynchroStateInSites = function(data) {
+	if (data.length != 0) {
+		$.each(data, function (index, value) {
+			$(".gtwList li").each(function (index) {
+				if(index!=0) {
+					if ($(this).data('texto') == value.idGtw) {
+						if (value.online) {
+							if (value.isNotActiveCfg)
+								$(this).find('a:first').prop('class', 'VivaNoActiva');
+							else if (value.isSinch)
+								$(this).find('a:first').prop('class', 'apply');
+							else if (value.updatePend)
+								$(this).find('a:first').prop('class', 'VivaNoSincro');
+							else if (value.InConflict && !value.updatePend)
+								$(this).find('a:first').prop('class', 'InConflict');
+							else
+								$(this).find('a:first').prop('class', 'VivaSincroSite');
 						}
-						else if (value.Sincro == 1){
-							$( this ).prop('class','dragableItem apply');			// Naranja
+						else if (value.isSinch)
+							$(this).find('a:first').prop('class', 'apply');
+						else {
+							if (value.isNotActiveCfg)
+								$(this).find('a:first').prop('class', '');
+							else
+								$(this).find('a:first').prop('class', 'NoVivaActivaSite');
 						}
-						else
-							$( this ).prop('class','dragableItem VivaNoSincro');	// Amarillo
 					}
 				}
-				else{	// No viva
-					if (value.Activa)
-						$( this ).prop('class','dragableItem NoVivaActiva');		// Azul claro
-				}
-			}
+			});
 		});
-	})
+	}
 }
-
 
 function ShowSites(data,f){
 	$("#listSites").empty();

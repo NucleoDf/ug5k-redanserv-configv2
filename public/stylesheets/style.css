@@ -454,6 +454,16 @@ color: #FFF;
   border: 1px solid #C1022C;
   border-radius: 0 5px 0 0;
  }
+/* Verde claro */
+.VivaSincroSite{
+    font: bold 12px verdana, sans-serif;
+    display: block;
+    background-color:#99FF66 !important;
+    color: #C1022C !important;
+    width: auto;
+    border: 0px solid #C1022C;
+    border-radius: 0 5px 0 0;
+}
 
 /*
   Amarillo
@@ -519,6 +529,19 @@ color: #FFF;
   border: 1px solid #C1022C;
   border-radius: 0 5px 0 0;
  }
+
+/*
+  Azul claro
+ */
+.NoVivaActivaSite{
+    font: bold 12px verdana, sans-serif;
+    display: block;
+    background-color:#80BFFF !important;
+    color:  #C1022C !important;
+    width: auto;
+    border: 0px solid #C1022C;
+    border-radius: 0 5px 0 0;
+}
 
 /*
   Rojo claro
