@@ -1090,98 +1090,55 @@ var ActiveCfg = function(f) {
 /****************************************/
 var GetActiveCfgAndActivate = function(){
 	/** 20170516 AGL Este filtro ya no parece tener sentido. Comprobar... */
-	// if (listOfGateways.length > 0)
-	{
-		$.ajax({
-			type: 'GET',
-			//url: '/configurations/active',
-			url: '/configurations/pendingActive',
-			success: function(data){
-				if (data != null){
-					alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + data.name + "\" en las gateways?", 
-						function(){ 
-							ExistGatewaysOut(function(existe){
-								if (existe.Aplicar){
-									// Comprobar si existe alguna pasarela de la configuración
-									// a activar sin recursos configurados
-									ExistGatewayWithoutResources(function(gateways) {
-										if (gateways.Aplicar) {
-											//TODO esto quita solo la coma del final...
-											listOfGateways = listOfGateways.substr(0,listOfGateways.length - 1);
-											$.ajax({
-												type: 'GET',
-												url: '/configurations/' + data.idCFG + '/loadChangestoGtws',
-												success: function (result) {
-													if (result) {
-														GenerateHistoricEvent(ID_HW,LOAD_REMOTE_CONFIGURATION,data.name,$('#loggedUser').text());
-														alertify.success('Configuración \"'+ data.name + '\" activada.');
-														// Reset list of gateways to activate
-														//AddGatewayToList(null);
-														// 20170509. AGL Gestor 'Aplicar cambios' en usuarios
-														usersModified = false;
-														// 20170516. AGL. Activar Cambios...
-														tbbssModified = false;
-														// 20170516. AGL. Activar Cambios...
-														configModified = false;
-														// 20170516. AGL. Activar Cambios...
-														cgwModified = false;
-														// 20170516. AGL. Activar Cambios...
-														resModified = false;
-													}
+	$.ajax({
+		type: 'GET',
+		//url: '/configurations/active',
+		url: '/configurations/pendingActive',
+		success: function(data){
+			if (data != null){
+				alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + data.name + "\" en las gateways?",
+					function(){
+						ExistGatewaysOut(function(existe){
+							if (existe.Aplicar){
+								// Comprobar si existe alguna pasarela de la configuración
+								// a activar sin recursos configurados
+								ExistGatewayWithoutResources(function(gateways) {
+									if (gateways.Aplicar) {
+										//TODO esto quita solo la coma del final...
+										listOfGateways = listOfGateways.substr(0,listOfGateways.length - 1);
+										$.ajax({
+											type: 'GET',
+											url: '/configurations/' + data.idCFG + '/loadChangestoGtws',
+											success: function (result) {
+												if (result) {
+													GenerateHistoricEvent(ID_HW,LOAD_REMOTE_CONFIGURATION,data.name,$('#loggedUser').text());
+													alertify.success('Configuración \"'+ data.name + '\" activada.');
+													// Reset list of gateways to activate
+													//AddGatewayToList(null);
+													// 20170509. AGL Gestor 'Aplicar cambios' en usuarios
+													usersModified = false;
+													// 20170516. AGL. Activar Cambios...
+													tbbssModified = false;
+													// 20170516. AGL. Activar Cambios...
+													configModified = false;
+													// 20170516. AGL. Activar Cambios...
+													cgwModified = false;
+													// 20170516. AGL. Activar Cambios...
+													resModified = false;
 												}
-											});
-										}
-									});
-								}
-							});
-								/*if (existe.Aplicar){
-									// Comprobar si existe alguna pasarela de la configuración
-									// a activar sin recursos configurados
-									ExistGatewayWithoutResources(function(gateways){
-										if (gateways.Aplicar){
-											if (listOfGateways.endsWith(','))
-												// Eliminar el último -
-												listOfGateways = listOfGateways.substr(0,listOfGateways.length - 1);
-
-									 		$.ajax({
-												type: 'GET',
-												url: '/configurations/' + data.idCFG + '/activate/' + listOfGateways,
-												success: function(result){
-													if (result){
-														GenerateHistoricEvent(ID_HW,LOAD_REMOTE_CONFIGURATION,data.name,$('#loggedUser').text());
-														alertify.success('Configuración \"'+ data.name + '\" activada.');
-														// Reset list of gateways to activate
-														AddGatewayToList(null);
-														// 20170509. AGL Gestor 'Aplicar cambios' en usuarios
-														usersModified = false;
-														// 20170516. AGL. Activar Cambios...
-														tbbssModified = false;														
-														// Generar histórico con cada pasarela que no se pudo configurar
-														// por estar desconectada del servidor
-														if (existe.gateways != null){
-															$.each(existe.gateways, function(index, value){
-																GenerateHistoricEventArray(ID_HW,LOAD_REMOTE_CONFIGURATION_FAIL,[$('#name').val(),value],$('#loggedUser').text());
-															});
-														}
-													}
-													else{
-														GenerateHistoricEvent(ID_HW,LOAD_REMOTE_CONFIGURATION_FAIL,data.name,$('#loggedUser').text());
-														alertify.error('No ha sido posible activar la configuración \"'+ data.name + '\".');
-													}
-												}
-											});
-										}		
-									});
-							 	}
-							});*/
-						},
-						 function(){ alertify.error('Cancelado');}
-					);
-				}
+											}
+										});
+									}
+								});
+							}
+						});
+					},
+					 function(){ alertify.error('Cancelado');}
+				);
 			}
-		});
-	}
-};
+		}
+	});
+}
 
 var GotoGateway = function (id,name,idSite,nameSite){
 	 hidePrevious('#FormSites','#AddFormsite','#DivSites'); 

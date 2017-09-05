@@ -4,71 +4,7 @@ block sites
 
 script.
 		function CheckingAnyChange(element,f){
-			f();
-			/*
-			var tabs=[];
-			var changes = false;
-			
-			var myElement=document.getElementById(element)
-
-			if ($('#DivConfigurations').data('cfgJson') == null || $('#DivConfigurations').data('cfgJson').activa == false)
-				f()
-			else if (myElement != null){
-				tabs = myElement.getElementsByTagName("input");
-		 
-				for (var i=0; i < tabs.length; i++){
-					if(tabs[i].oldValue != null && tabs[i].oldValue != tabs[i].value ){
-						changes = true;
-
-						translateWord('ChangeWithoutValidate',function(result){
-							alertify.confirm('Ulises G 5000 R', result, 
-							function(){ 
-								//tabs[i].oldValue = null;
-								return f()
-							}
-					        , function(){ alertify.error('Cancelado'); return}
-					        );
-						});
-
-						// if (confirm('Changes without validate. Continue?') == true){
-						// 	tabs[i].oldValue = null;
-						// 	return f()
-						// }
-						// else
-						// 	return;
-					}
-				}
-
-				if (!changes){
-					tabs = myElement.getElementsByTagName("select");
-			 
-					for (var i=0; i < tabs.length; i++){
-						if(tabs[i].oldValue != null && tabs[i].oldValue != tabs[i].selectedIndex ){
-							changes = true;
-
-							translateWord('ChangeWithoutValidate',function(result){
-								alertify.confirm('Ulises G 5000 R', result, 
-								function(){ 
-									//tabs[i].oldValue = null;
-									return f()
-								}
-						        , function(){ alertify.error('Cancelado'); return}
-						        );
-							});
-							
-							// if (confirm('Changes without validate. Continue?') == true){
-							// 	tabs[i].oldValue = null;
-							// 	return f()
-							// }
-							// else
-							// 	return;
-						}
-					}
-
-					if (!changes)
-						f();
-				}
-			}*/
+			f();//Llama directamente a GetActiveCfgAndActivate
 		}
 
 		function ResetOldValue(element){
