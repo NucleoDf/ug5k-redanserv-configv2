@@ -458,9 +458,9 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 																			td.New
 																				input.textbox#PuertoLocalSIP(style="width:60px" type="text" onblur='ValidateNumber(this,"ErrorValue")' onfocus='this.oldValue=this.value' disabled='disabled' value='5060')
 																			td(style='padding-left:50px')
-																				label(tkey='SIPSupervisionPeriod')
+																				label(tkey='SIPSupervisionPeriodSg')
 																			td.New
-																				input#CbRUpdatePeriod(type='checkbox' onclick='OnClickUpdatePeriod(this)')
+																				input.textbox#TbUpdatePeriod(type='text' style='width:50px' onblur='ValidateUpdatePeriod(this,"ErrorSIPSupervisionPeriod")' onfocus='this.oldValue=this.value' enabled)
 																			//
 																				tr
 																					td
@@ -486,10 +486,6 @@ div(id="FormConfiguration", style="display: none; width: 350px")
 																			td
 																				label(tkey='ProxysList')
 																			td
-																			td(style='padding-left:50px')
-																				label(tkey='SIPSupervisionPeriodSg')
-																			td.New
-																				input.textbox#TbUpdatePeriod(type='text' style='width:50px' onblur='ValidateUpdatePeriod(this,"ErrorSIPSupervisionPeriod")' onfocus='this.oldValue=this.value' disabled)
 																		tr
 																			td.New
 																				select.toReset#ProxysList(style="width: 170px" onchange="modify(ProxyEdit,ProxysList)")
