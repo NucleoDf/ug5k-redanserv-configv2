@@ -1388,21 +1388,8 @@ var GetGateway = function (gtw,lastUpdate,f){
 				
 				$('#PuertoLocalSIP').val(gtw.result[0].puerto_sip.toString());
 				
-				if(gtw.result[0].periodo_supervision==null) {
-					$('#CbRUpdatePeriod').prop('checked', false);
-					$('#TbUpdatePeriod').prop('disabled', true);
-				}
-				else {
-					if (gtw.result[0].periodo_supervision != 0) {
-						$('#CbRUpdatePeriod').prop('checked', true);
-						$('#TbUpdatePeriod').prop('disabled', false);
-					}
-					else {
-						$('#CbRUpdatePeriod').prop('checked', false);
-						$('#TbUpdatePeriod').prop('disabled', true);
-					}
-					$('#TbUpdatePeriod').val(gtw.result[0].periodo_supervision.toString());
-				}
+				$('#TbUpdatePeriod').val(gtw.result[0].periodo_supervision.toString());
+				
 				//SNMP
 				$('#sport').val(gtw.result[0].puerto_servicio_snmp);
 				$('#snmpp').val(gtw.result[0].puerto_snmp);
@@ -3030,21 +3017,9 @@ function copyServiceData () {
 				GetIps4Gateway(idSourceCgw);
 				$('#PuertoLocalSIP').val(data.result[0].puerto_sip.toString());
 				
-				if(data.result[0].periodo_supervision==null) {
-					$('#CbRUpdatePeriod').prop('checked', false);
-					$('#TbUpdatePeriod').prop('disabled', true);
-				}
-				else {
-					if (data.result[0].periodo_supervision != 0) {
-						$('#CbRUpdatePeriod').prop('checked', true);
-						$('#TbUpdatePeriod').prop('disabled', false);
-					}
-					else {
-						$('#CbRUpdatePeriod').prop('checked', false);
-						$('#TbUpdatePeriod').prop('disabled', true);
-					}
-					$('#TbUpdatePeriod').val(data.result[0].periodo_supervision.toString());
-				}
+				
+				$('#TbUpdatePeriod').val(data.result[0].periodo_supervision.toString());
+				
 				//SNMP
 				$('#sport').val(data.result[0].puerto_servicio_snmp);
 				$('#snmpp').val(data.result[0].puerto_snmp);
@@ -3193,13 +3168,8 @@ function PostGateWay (idSite, isUpdate) {
 	newGateway.PuertoLocalSIP=$('#PuertoLocalSIP').val();//Fixed
 	newGateway.proxys=proxys;
 	newGateway.registrars=registrars;
-	if($('#CbRUpdatePeriod').prop('checked'))
-		if($('#TbUpdatePeriod').val()=='')
-			newGateway.periodo_supervision=90;
-		else
-			newGateway.periodo_supervision=$('#TbUpdatePeriod').val();
-	else
-		newGateway.periodo_supervision=90;
+	
+	newGateway.periodo_supervision=$('#TbUpdatePeriod').val();
 	//SINCRONIZACION
 	newGateway.listServers=listServers;
 	//SNMP
