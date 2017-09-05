@@ -1136,6 +1136,18 @@ var GetActiveCfgAndActivate = function(){
 					 function(){ alertify.error('Cancelado');}
 				);
 			}
+			else {
+				alertify.error('No existe una configuración activa en el sistema.');
+				usersModified = false;
+				// 20170516. AGL. Activar Cambios...
+				tbbssModified = false;
+				// 20170516. AGL. Activar Cambios...
+				configModified = false;
+				// 20170516. AGL. Activar Cambios...
+				cgwModified = false;
+				// 20170516. AGL. Activar Cambios...
+				resModified = false;
+			}
 		}
 	});
 }
