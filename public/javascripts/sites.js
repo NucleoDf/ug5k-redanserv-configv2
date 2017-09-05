@@ -23,23 +23,23 @@ var UpdateSynchroStateInSites = function(data) {
 					if ($(this).data('texto') == value.idGtw) {
 						if (value.online) {
 							if (value.isNotActiveCfg)
-								$(this).find('a:first').prop('class', 'VivaNoActiva');
+								$(this).prop('class', 'VivaNoActiva');
 							else if (value.isSinch)
-								$(this).find('a:first').prop('class', 'apply');
+								$(this).prop('class', 'apply');
 							else if (value.updatePend)
-								$(this).find('a:first').prop('class', 'VivaNoSincro');
+								$(this).prop('class', 'VivaNoSincro');
 							else if (value.InConflict && !value.updatePend)
-								$(this).find('a:first').prop('class', 'InConflict');
+								$(this).prop('class', 'InConflict');
 							else
-								$(this).find('a:first').prop('class', 'VivaSincroSite');
+								$(this).prop('class', 'VivaSincroSite');
 						}
 						else if (value.isSinch)
-							$(this).find('a:first').prop('class', 'apply');
+							$(this).prop('class', 'apply');
 						else {
 							if (value.isNotActiveCfg)
-								$(this).find('a:first').prop('class', '');
+								$(this).prop('class', '');
 							else
-								$(this).find('a:first').prop('class', 'NoVivaActivaSite');
+								$(this).prop('class', 'NoVivaActivaSite');
 						}
 					}
 				}
