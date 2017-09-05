@@ -320,6 +320,7 @@ var PutConfiguration = function(){
 		success: function(data){
 			if(data.error==null) {
 				alertify.success('Configuración \"' + data.data.name + '\" actualizada.');
+				configModified=true;
 				GetConfigurations(function () {
 					ShowCfg(data.data);
 				});
