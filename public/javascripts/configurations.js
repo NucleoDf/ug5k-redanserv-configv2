@@ -6,6 +6,7 @@
 
 var blockDrag = false;
 var configModified = false;
+var isActiveConfig = false;
 /************************************/
 /*	FUNCTION: getConfigurations 	*/
 /*  PARAMS: 						*/
@@ -984,6 +985,7 @@ var ActiveCfg = function(f) {
 					//	});
 					//}
 					configModified = true;
+					isActiveConfig = true;
 				}
 				else {
 					GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, $('#name').val(), $('#loggedUser').text());
@@ -1096,7 +1098,12 @@ var GetActiveCfgAndActivate = function(){
 		url: '/configurations/pendingActive',
 		success: function(data){
 			if (data != null){
-				alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + data.name + "\" en las gateways?",
+				var strmsg='';
+				if(isActiveConfig)
+					strmsg='¿Desea activar la configuración \"'+data.name+'\" en las gateways?';
+				else
+					strmsg='¿Desea aplicar los cambios a las gateways de \"'+data.name+'\"?';
+				alertify.confirm('Ulises G 5000 R',strmsg,
 					function(){
 						ExistGatewaysOut(function(existe){
 							if (existe.Aplicar){
@@ -1112,7 +1119,13 @@ var GetActiveCfgAndActivate = function(){
 											success: function (result) {
 												if (result) {
 													GenerateHistoricEvent(ID_HW,LOAD_REMOTE_CONFIGURATION,data.name,$('#loggedUser').text());
-													alertify.success('Configuración \"'+ data.name + '\" activada.');
+													var strmsg='';
+													if(isActiveConfig)
+														strmsg='Configuración \"'+ data.name + '\" activada.';
+													else
+														strmsg='Cambios aplicados en \"'+ data.name + '\".';
+													alertify.success(strmsg);
+													isActiveConfig=false;
 													// Reset list of gateways to activate
 													//AddGatewayToList(null);
 													// 20170509. AGL Gestor 'Aplicar cambios' en usuarios
