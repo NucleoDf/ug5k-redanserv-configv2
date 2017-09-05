@@ -267,11 +267,12 @@ function UpdateSingleSite(){
 					//AddGatewaysFromActiveToListOfGateways($('#IdSite').data('idSite'))//TODO he comentado esto porque no creo que haga falta.
 					alertify.success('Emplazamiento \"' + data.data + '\" modificado.');
 					ShowCfg($('#DivConfigurations').data('cfgJson'));
+					configModified = true;
 					//ShowSite(data.data,$('#IdSite').data('idSite'));//TODO esto no chuta
 				}
 				else if (data.error == 'ER_DUP_ENTRY'){
 					$('#IdSite').val('');
-					alertify.error('Ya existe un emplazamiento \"' + data.dupNmae+ '\" en esta configuración.');
+					alertify.error('Ya existe un emplazamiento \"' + data.dupName+ '\" en esta configuración.');
 				}
 				else
 					alertify.error('Error: '+data.error);
