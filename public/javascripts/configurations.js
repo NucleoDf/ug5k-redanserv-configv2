@@ -182,7 +182,7 @@ var ShowCfg = function(cfg){
 							 ShowSite(nameSite, idSite);
 							 });*/
 							$.each(data.result, function (index, value) {
-								var item = $('<li data-texto="' + value.idEMPLAZAMIENTO + '"  >' +
+								var item = $('<li data-texto-emp="' + value.idEMPLAZAMIENTO + '"  >' +
 									'<a draggable="false" ondragstart="dragGatewayToSite(event)" ondrop="dropGatewayToSite(event)" ondragover="getOverDropC(event)" style="display:block; color:#b70028" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowSite(\'' + value.nameSite + '\',\'' + value.idEMPLAZAMIENTO + '\')})"' + '>' + value.nameSite + '</a>' +
 									'<ul class="gtwList" id="site-' + value.idEMPLAZAMIENTO + '" style="display:none"></ul>' +
 									'</li>');
@@ -231,7 +231,7 @@ var ShowCfgByName = function(cfgName,cfgId){
 								//var item = $('<li data-texto="' + value.EMPLAZAMIENTO_idEMPLAZAMIENTO + '" draggable="true" ondragstart="dragSiteToCfg(event)"><a style="display:block; color:#ff8c1a" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowSite(\'' + value.nameSite + '\',\'' + value.EMPLAZAMIENTO_idEMPLAZAMIENTO + '\')})"' + '>' + value.nameSite + '</a></li>');
 								//item.appendTo($(lista));
 								//var item = $('<li>' + 
-								var item = $('<li data-texto="' + value.idEMPLAZAMIENTO + '" draggable="true" ondragstart="dragSiteToCfg(event)">' + 
+								var item = $('<li data-texto-emp="' + value.idEMPLAZAMIENTO + '" draggable="true" ondragstart="dragSiteToCfg(event)">' +
 												'<a style="display:block; color:#b70028" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowSite(\'' + value.nameSite + '\',\'' + value.idEMPLAZAMIENTO + '\')})"' + '>' + value.nameSite + '</a>' +
 												'<ul class="gtwList" id="site-' + value.idEMPLAZAMIENTO + '" style="display:none"></ul>' + 
 											'</li>');
