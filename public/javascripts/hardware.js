@@ -504,6 +504,9 @@ function changeSlaveFromGateway(rank,idSlave,idCgw){
 				if (data.error) {
 					alertify.error('Error desasignando tarjeta esclava \"' + data.data.SLAVES_idSLAVES + '\"');
 				}
+				else {
+					resModified = true;
+				}
 			},
 			error: function(data){
 				alertify.error('La tarjeta esclava \"' + data.data.SLAVES_idSLAVES + '\" no existe.');

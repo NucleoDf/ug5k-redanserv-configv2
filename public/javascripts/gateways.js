@@ -1870,6 +1870,7 @@ function ResourceAssigned(ev,fila,columna){
 			contentType:'application/json',
 			data: JSON.stringify(data),
 			success: function(data){
+				resModified = true;
 					GetMySlaves();
 			}
 	});
