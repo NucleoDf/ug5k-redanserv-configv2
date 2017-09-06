@@ -3439,7 +3439,7 @@ function showDataForRadioResource(data) {
 		$('#LblDA').show();
 		$('#TbDaGain').show();
 		$('#CbDaAgc').prop('checked', false);
-		$('#TbDaGain').val(data.ajuste_ad);
+		$('#TbDaGain').val(data.ajuste_da);
 	}
 	else {
 		$('#LblDA').hide();
@@ -3559,7 +3559,7 @@ function showDataForTelephoneResource(data) {
 		$('#LblDA').show();
 		$('#TbDaGain').show();
 		$('#CbDaAgc').prop('checked', false);
-		$('#TbDaGain').val(data.ajuste_ad);
+		$('#TbDaGain').val(data.ajuste_da);
 	}
 	else {
 		$('#LblDA').hide();
