@@ -1328,6 +1328,12 @@ function ResetResourcePanel(){
 	$('#TbNameResource').val('');
 	$('#TbAdGain').val('');
 	$('#TbDaGain').val('');
+	$('#CbAdAgc').prop('checked',false);
+	$('#CbDaAgc').prop('checked',false);
+	$('#LblAD').show();
+	$('#LblAD').show();
+	$('#TbAdGain').show();
+	$('#TbDaGain').show();
 	
 	$('#SCodec option:eq(1)').prop('selected', true);
 	$('#SResourceType option:eq(0)').prop('selected', true);
