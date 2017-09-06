@@ -2924,7 +2924,8 @@ function NewGateway (){
 		$('#lan21').hide();
 		$('#nic1').show();
 		
-		$('#TbUpdatePeriod').prop('disabled', true);
+		//$('#TbUpdatePeriod').prop('disabled', true);
+		$('#TbUpdatePeriod').val('90');
 		RenderSipService(null,true);//Para mostrar el primer item.
 		//$('#LblIdGateway').text(name);
 		$('#hwGateway').fadeIn(500,function(){

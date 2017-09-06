@@ -51,7 +51,7 @@ CREATE TABLE `configuraciones` (
   `fecha_activacion` datetime DEFAULT NULL COMMENT 'Fecha en la que se ha activado la configuración.',
   PRIMARY KEY (`idconfiguracion`),
   UNIQUE KEY `name_UNIQUE` (`nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +113,7 @@ CREATE TABLE `emplazamientos` (
   PRIMARY KEY (`idemplazamiento`),
   KEY `fk_gateway_id_idx` (`configuracion_id`),
   CONSTRAINT `fk_config_emp` FOREIGN KEY (`configuracion_id`) REFERENCES `configuraciones` (`idconfiguracion`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ CREATE TABLE `historicoincidencias` (
   KEY `HistoricoIncidencias_FKIndex1` (`IdIncidencia`),
   KEY `HistoricoIncidenciasIndex` (`IdHw`,`TipoHw`,`IdIncidencia`,`FechaHora`),
   CONSTRAINT `historicoincidencias_ibfk_1` FOREIGN KEY (`IdIncidencia`) REFERENCES `incidencias` (`IdIncidencia`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,6 +155,7 @@ CREATE TABLE `historicoincidencias` (
 
 LOCK TABLES `historicoincidencias` WRITE;
 /*!40000 ALTER TABLE `historicoincidencias` DISABLE KEYS */;
+INSERT INTO `historicoincidencias` VALUES (1,NULL,'CFG','SEGURIDAD',50,'2017-09-04 09:03:59',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(2,NULL,'CFG','CONF-R',107,'2017-09-04 09:06:31',NULL,'Alta de Pasarela PASARELA1.','1 (a)'),(3,NULL,'CFG','CONF-R',107,'2017-09-04 09:07:51',NULL,'Alta de Pasarela PASARELA2.','1 (a)'),(4,NULL,'CFG','CONF-R',107,'2017-09-04 09:09:00',NULL,'Alta de Pasarela PASARELA3.','1 (a)'),(5,NULL,'CFG','CONF-R',107,'2017-09-04 09:09:59',NULL,'Alta de Pasarela PASARELA4.','1 (a)'),(6,NULL,'CFG','SEGURIDAD',50,'2017-09-04 09:33:54',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(7,NULL,'CFG','CONF-R',105,'2017-09-04 09:34:11',NULL,'Carga de Configuración Remota CONFIGURACION1.','1 (a)'),(8,NULL,'CFG','SEGURIDAD',50,'2017-09-04 09:40:51',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(9,NULL,'CFG','CONF-R',109,'2017-09-04 09:41:36',NULL,'Modificación de Parámetros Generales de Pasarela PASARELA1.','1 (a)'),(10,NULL,'CFG','CONF-R',105,'2017-09-04 09:42:21',NULL,'Carga de Configuración Remota CONFIGURACION1.','1 (a)'),(11,NULL,'CFG','CONF-R',113,'2017-09-04 09:43:57',NULL,'Alta de Recurso tees.','1 (a)'),(12,NULL,'CFG','CONF-R',109,'2017-09-04 09:43:59',NULL,'Modificación de Parámetros Generales de Pasarela PASARELA1.','1 (a)'),(13,NULL,'CFG','CONF-R',105,'2017-09-04 09:44:10',NULL,'Carga de Configuración Remota CONFIGURACION1.','1 (a)'),(14,NULL,'CFG','SEGURIDAD',55,'2017-09-04 11:20:54',NULL,'Fin sesion  Configuración Centralizada  del usuario  La Session ha expirado.....','1'),(15,NULL,'CFG','SEGURIDAD',50,'2017-09-05 07:55:13',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(16,NULL,'CFG','SEGURIDAD',50,'2017-09-05 08:08:27',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(17,NULL,'CFG','CONF-R',107,'2017-09-05 08:10:18',NULL,'Alta de Pasarela TELEFONIA-ATS.','1 (a)'),(18,NULL,'CFG','CONF-R',107,'2017-09-05 08:11:31',NULL,'Alta de Pasarela RADIO-LOCAL.','1 (a)'),(19,NULL,'CFG','CONF-R',107,'2017-09-05 08:12:41',NULL,'Alta de Pasarela TORRE-NORTE.','1 (a)'),(20,NULL,'CFG','CONF-R',107,'2017-09-05 08:14:19',NULL,'Alta de Pasarela RADIO-REMOTOS.','1 (a)'),(21,NULL,'CFG','SEGURIDAD',50,'2017-09-05 14:33:58',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(22,NULL,'CFG','CONF-R',105,'2017-09-05 14:34:11',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(23,NULL,'CFG','CONF-R',105,'2017-09-05 14:37:01',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(24,NULL,'CFG','CONF-R',105,'2017-09-05 14:37:42',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(25,NULL,'CFG','SEGURIDAD',50,'2017-09-05 14:42:27',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(26,NULL,'CFG','CONF-R',105,'2017-09-05 14:42:59',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(27,NULL,'CFG','CONF-R',105,'2017-09-05 14:43:08',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(28,NULL,'CFG','SEGURIDAD',50,'2017-09-05 15:48:18',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(29,NULL,'CFG','SEGURIDAD',50,'2017-09-05 15:49:09',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(30,NULL,'CFG','SEGURIDAD',50,'2017-09-05 15:51:10',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(31,NULL,'CFG','SEGURIDAD',50,'2017-09-05 15:54:13',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(32,NULL,'CFG','CONF-R',109,'2017-09-05 16:03:27',NULL,'Modificación de Parámetros Generales de Pasarela TELEFONIA-ATS.','1 (a)'),(33,NULL,'CFG','SEGURIDAD',50,'2017-09-05 16:04:07',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(34,NULL,'CFG','CONF-R',109,'2017-09-05 16:04:23',NULL,'Modificación de Parámetros Generales de Pasarela TELEFONIA-ATS.','1 (a)'),(35,NULL,'CFG','SEGURIDAD',50,'2017-09-05 16:05:43',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(36,NULL,'CFG','CONF-R',105,'2017-09-05 16:10:30',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(37,NULL,'CFG','SEGURIDAD',50,'2017-09-05 16:15:43',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(38,NULL,'CFG','CONF-R',105,'2017-09-05 16:16:24',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(39,NULL,'CFG','CONF-R',105,'2017-09-05 16:16:39',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(40,NULL,'CFG','CONF-R',109,'2017-09-05 16:16:45',NULL,'Modificación de Parámetros Generales de Pasarela TELEFONIA-ATS.','1 (a)'),(41,NULL,'CFG','SEGURIDAD',50,'2017-09-05 16:17:08',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(42,NULL,'CFG','CONF-R',109,'2017-09-05 16:17:16',NULL,'Modificación de Parámetros Generales de Pasarela TELEFONIA-ATS.','1 (a)'),(43,NULL,'CFG','SEGURIDAD',50,'2017-09-05 16:19:43',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(44,NULL,'CFG','CONF-R',109,'2017-09-05 16:19:53',NULL,'Modificación de Parámetros Generales de Pasarela TELEFONIA-ATS.','1 (a)'),(45,NULL,'CFG','CONF-R',105,'2017-09-05 16:20:00',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(46,NULL,'CFG','CONF-R',105,'2017-09-05 16:20:29',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(47,NULL,'CFG','CONF-R',105,'2017-09-05 16:20:34',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(48,NULL,'CFG','SEGURIDAD',50,'2017-09-05 17:21:56',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(49,NULL,'CFG','SEGURIDAD',50,'2017-09-05 17:34:43',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(50,NULL,'CFG','SEGURIDAD',50,'2017-09-05 17:36:02',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(51,NULL,'CFG','SEGURIDAD',50,'2017-09-05 17:38:42',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(52,NULL,'CFG','CONF-R',105,'2017-09-05 17:39:01',NULL,'Carga de Configuración Remota MADRID-CENTRO.','1 (a)'),(53,NULL,'CFG','SEGURIDAD',50,'2017-09-05 17:41:43',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(54,NULL,'CFG','SEGURIDAD',50,'2017-09-05 17:46:12',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(55,NULL,'CFG','SEGURIDAD',50,'2017-09-05 17:47:56',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(56,NULL,'CFG','SEGURIDAD',50,'2017-09-06 08:39:52',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(57,NULL,'CFG','CONF-R',113,'2017-09-06 08:42:26',NULL,'Alta de Recurso Telefono1.','1 (a)'),(58,NULL,'CFG','CONF-R',116,'2017-09-06 08:42:37',NULL,'Modificación de Parámetros Lógicos de  Recurso Telefono1.','1 (a)'),(59,NULL,'CFG','CONF-R',116,'2017-09-06 08:42:45',NULL,'Modificación de Parámetros Lógicos de  Recurso Telefono1.','1 (a)'),(60,NULL,'CFG','CONF-R',116,'2017-09-06 08:44:40',NULL,'Modificación de Parámetros Lógicos de  Recurso Telefono1.','1 (a)'),(61,NULL,'CFG','CONF-R',116,'2017-09-06 09:40:38',NULL,'Modificación de Parámetros Lógicos de  Recurso Telefono1.','1 (a)'),(62,NULL,'CFG','CONF-R',116,'2017-09-06 10:03:54',NULL,'Modificación de Parámetros Lógicos de  Recurso Telefono1.','1 (a)'),(63,NULL,'CFG','SEGURIDAD',50,'2017-09-06 10:08:58',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(64,NULL,'CFG','SEGURIDAD',50,'2017-09-06 10:10:20',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(65,NULL,'CFG','SEGURIDAD',50,'2017-09-06 10:19:20',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(66,NULL,'CFG','SEGURIDAD',50,'2017-09-06 10:20:46',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(67,NULL,'CFG','CONF-R',114,'2017-09-06 10:20:57',NULL,'Baja de Recurso Telefono1.','1 (a)'),(68,NULL,'CFG','CONF-R',113,'2017-09-06 10:21:30',NULL,'Alta de Recurso ttt.','1 (a)'),(69,NULL,'CFG','CONF-R',113,'2017-09-06 10:22:14',NULL,'Alta de Recurso rad.','1 (a)'),(70,NULL,'CFG','SEGURIDAD',50,'2017-09-06 10:24:13',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(71,NULL,'CFG','CONF-R',116,'2017-09-06 10:24:44',NULL,'Modificación de Parámetros Lógicos de  Recurso ttt.','1 (a)'),(72,NULL,'CFG','SEGURIDAD',50,'2017-09-06 10:57:36',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(73,NULL,'CFG','SEGURIDAD',50,'2017-09-06 10:58:33',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(74,NULL,'CFG','SEGURIDAD',50,'2017-09-06 10:59:08',NULL,'Inicio sesión Configuración Centralizada  del usuario .','1'),(75,NULL,'CFG','CONF-R',107,'2017-09-06 11:00:19',NULL,'Alta de Pasarela TELEFONIA-ATS.','1 (a)'),(76,NULL,'CFG','CONF-R',109,'2017-09-06 11:04:27',NULL,'Modificación de Parámetros Generales de Pasarela RADIO-LOCAL.','1 (a)'),(77,NULL,'CFG','CONF-R',109,'2017-09-06 11:07:03',NULL,'Modificación de Parámetros Generales de Pasarela RADIO-LOCAL.','1 (a)'),(78,NULL,'CFG','CONF-R',109,'2017-09-06 11:07:39',NULL,'Modificación de Parámetros Generales de Pasarela RADIO-LOCAL.','1 (a)'),(79,NULL,'CFG','CONF-R',109,'2017-09-06 11:07:49',NULL,'Modificación de Parámetros Generales de Pasarela TORRE-NORTE.','1 (a)'),(80,NULL,'CFG','CONF-R',109,'2017-09-06 11:08:38',NULL,'Modificación de Parámetros Generales de Pasarela RADIO-LOCAL.','1 (a)'),(81,NULL,'CFG','CONF-R',109,'2017-09-06 11:09:28',NULL,'Modificación de Parámetros Generales de Pasarela RADIO-REMOTOS.','1 (a)');
 /*!40000 ALTER TABLE `historicoincidencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,6 +184,7 @@ CREATE TABLE `incidencias` (
 
 LOCK TABLES `incidencias` WRITE;
 /*!40000 ALTER TABLE `incidencias` DISABLE KEYS */;
+INSERT INTO `incidencias` VALUES (47,'Inicio sesión RCS2010 UG5KR','Inicio sesión RCS2010 UG5KR  del usuario: {0}',0,'SEGURIDAD',0,0),(48,'Recahazada sesión RCS2010 UG5KR','Rechazada sesión RCS2010 UG5KR  al usuario: {0}',0,'SEGURIDAD',0,0),(49,'Fin sesion RCS2010 UG5KR','Fin sesion RCS2010 UG5KR  del usuario: {0}',0,'SEGURIDAD',0,0),(50,'Inicio sesión Configuración Centralizada','Inicio sesión Configuración Centralizada  del usuario',0,'SEGURIDAD',0,0),(51,'Rechazado  sesión Configuración Centralizada','Rechazada sesión Configuración Centralizada  del usuario ',0,'SEGURIDAD',0,0),(52,'Alta Usuario','Alta Usuario',0,'SEGURIDAD',0,0),(53,'Borrado Usuario','Borrado Usuario ',0,'SEGURIDAD',0,0),(54,'Modificado Usuario','Modificado Usuario',0,'SEGURIDAD',0,0),(55,'Fin sesion  Configuración Centralizada ','Fin sesion  Configuración Centralizada  del usuario ',0,'SEGURIDAD',0,0),(105,'Carga de Configuración Remota','Carga de Configuración Remota',0,'CONF-R',0,0),(106,'Error Carga Configuración Remota','Error Carga Configuración Remota',0,'CONF-R',0,0),(107,'Alta de Pasarela','Alta de Pasarela',0,'CONF-R',0,0),(108,'Baja de Pasarela','Baja de Pasarela',0,'CONF-R',0,0),(109,'Modificación de Parámetros Generales de Pasarela','Modificación de Parámetros Generales de Pasarela',0,'CONF-R',0,0),(110,'Modificación Rutas ATS','Modificación Rutas ATS',0,'CONF-R',0,0),(113,'Alta de Recurso','Alta de Recurso',0,'CONF-R',0,0),(114,'Baja de Recurso','Baja de Recurso',0,'CONF-R',0,0),(115,'Modificación de Parámetros de Recurso','Modificación de Parámetros de Recurso',0,'CONF-R',0,0),(116,'Modificación de Parámetros Lógicos de  Recurso','Modificación de Parámetros Lógicos de  Recurso',0,'CONF-R',0,0),(117,'Baja de Tabla de Calificación de Audio','Baja de Tabla de Calificación de Audio',0,'CONF-R',0,0),(118,'Alta de Tabla de Calificación de Audio','Alta de Tabla de Calificación de Audio',0,'CONF-R',0,0),(150,'Modificación de Parámetros Generales de Pasarela.','Modificación Parámetro en: {0}. {1}',0,'CONF-L',0,0),(153,'Modificación de Parámetros Lógico de Recurso','Modificación SW en Recurso: {0}. {1}. {2}',0,'CONF-L',0,0),(154,'Generación de Configuración por Defecto.','Generación de Configuración por Defecto: {0}. {1}',0,'CONF-L',0,0),(155,'Activación de Configuración por Defecto.','Activación de Configuración por Defecto: {0}. {1}',0,'CONF-L',0,0),(156,'Borrado de Configuración por Defecto','Borrado de Configuración por Defecto: {0}. {1}',0,'CONF-L',0,0),(157,'Alta Recurso Radio','Recurso Radio  Añadido: {0}. {1}. {2}',0,'CONF-L',0,0),(158,'Baja Recurso Radio','Recurso Radio Eliminado: {0}. {1}. {2}',0,'CONF-L',0,0),(159,'Alta Recurso Telefonía','Recurso Telefónico Añadido: {0}. {1}. {2}',0,'CONF-L',0,0),(160,'Baja Recurso Telefonía','Recurso Telefónico  Eliminado: {0} . {1} . {2}',0,'CONF-L',0,0),(161,'Conflicto de configuraciones','Conflicto de Configuración en GW: {0}. {1}. {2}',0,'CONF-L',0,0),(180,'Carga versión Software Pasarela','Carga de Versión Software Pasarela: {0} {1}',0,'MAN-L',0,0),(182,'Reset Remoto','Reset Remoto: {0}',0,'MAN-L',0,0),(183,'Selección Bucle Prueba','Selección Bucle: {0} {1}  en {2}.',0,'MAN-L',0,0),(184,'Comando Bite','Selección  BITE: {0}',0,'MAN-L',0,0),(185,'Conmutacion P/R','Selección Conmutación P/R: {0}',0,'MAN-L',0,0),(186,'Selección Modo','Selección Modo: {0}',0,'MAN-L',0,0),(187,'Resultado Comando Bite','Resultado  BITE: {0} : {1}',0,'MAN-L',0,0),(193,'Resultado  bucle prueba','Resultado Bucle: {0} en {1} : {2}',0,'MAN-L',0,0),(195,'Resultado Conmutacion P/R','Resultado  Conmutación P/R: {0}, {1}',0,'MAN-L',0,0),(196,'Resultado  Modo','Resultado  Modo: {0}',0,'MAN-L',0,0),(201,'Arranque APP RCS2010','Arranque APP RCS2010 UG5KR en puesto: {0}',1,'SP-GEN',0,2),(202,'Cierre Aplicacion APP RCS2010','Cierre Aplicacion APP RCS2010 UG5KR  en puesto: {0}',1,'SP-GEN',0,2),(2000,'Cambio estado Pasarela','Cambio estado pasarela: {0}',1,'SP-PASARELA',0,2),(2003,'Cambio Estado LAN','Cambio Estado LANs. CGW: {0} : LAN1 {1}  : LAN2 {2}',1,'SP-PASARELA',0,1),(2005,'Cambio Estado CPU','Cambio Estado CPUs. CGW: {0} : CPU Local {1}  : CPU Dual {2}',1,'SP-PASARELA',0,2),(2007,'Conexión Recurso Radio','Conexión Recurso Radio: {0}',1,'SP-PASARELA',0,0),(2008,'Desconexión Recurso Radio','Desconexión Recurso Radio: {0}',1,'SP-PASARELA',1,0),(2009,'Conexión Recurso Telefonía','Conexión Recurso Telefonía: {0}',1,'SP-PASARELA',0,0),(2010,'Desconexión Recurso Telefonía','Desconexión Recurso Telefonía: {0}',1,'SP-PASARELA',1,0),(2011,'Conexión Tarjeta Interfaz (esclava-tipo)','Conexión Tarjeta Interfaz. Número: {0}: Tipo: {1}',1,'SP-PASARELA',0,0),(2012,'Desconexión Tarjeta Interfaz (esclava-tipo)','Desconexión Tarjeta Interfaz. Número: {0}: Tipo: {1}',1,'SP-PASARELA',1,0),(2013,'Conexión Recurso R2','Conexión Recurso R2: {0}',1,'SP-PASARELA',0,0),(2014,'Desconexión Recurso R2.','Desconexión Recurso R2: {0}',1,'SP-PASARELA',1,0),(2015,'Conexión Recurso N5','Conexión Recurso N5: {0}',1,'SP-PASARELA',0,0),(2016,'Desconexión Recurso N5','Desconexión Recurso N5: {0}',1,'SP-PASARELA',1,0),(2017,'Conexión Recurso QSIG','Conexión Recurso QSIG: {0}',1,'SP-PASARELA',0,0),(2018,'Desconexión Recurso  QSIG','Desconexión Recurso QSIG: {0}',1,'SP-PASARELA',1,0),(2019,'Conexión Recurso LCEN','Conexión Recurso LCEN: {0}',1,'SP-PASARELA',0,0),(2020,'Desconexión Recurso  LCEN','Desconexión Recurso  LCEN: {0}',1,'SP-PASARELA',1,0),(2021,'Servicio NTP Conectado','Servicio NTP Conectado',1,'SP-PASARELA',0,0),(2022,'Servicio NTP Desconectado','Servicio NTP Desconectado',1,'SP-PASARELA',1,0),(2027,'Cambio estado Sincro BD.','Cambio estado Sincro BD: {0}',1,'SP-PASARELA',0,0),(2101,'Caída/establecimiento sesión SIP','Cambio sesión SIP. Recurso: {0}; Sesión:  {1}, {2}, {3} ',1,'SP-RADIO',0,0),(2102,'Cambio PTT','Cambio estado PTT. Recurso: {0}; Estado: {1}',0,'SP-RADIO',0,0),(2103,'Cambio SQU','Cambio estado SQU. Recurso: {0}; Estado: {1}',0,'SP-RADIO',0,0),(2200,'Error Protocolo LCEN','Error Protocolo LCEN. Recurso: {0}',1,'SP-TELEFONIA',1,0),(2202,'Fallo test LCEN VoIP (mensaje Options)','Fallo test LCEN VoIP. Recurso: {0}',1,'SP-TELEFONIA',1,0),(2203,'Error Protocolo R2','Error Protocolo R2. Recurso: {0}.',1,'SP-TELEFONIA',1,0),(2204,'Fallo llamada de test R2 SCV','Fallo llamada de test R2 SCV. Recurso: {0}',1,'SP-TELEFONIA',1,0),(2205,'Fallo llamada de test R2 VoIP (mensaje Options)','Fallo llamada de test R2 VoIP. Recurso: {0}',1,'SP-TELEFONIA',1,0),(2206,'Error Protocolo N5','Error Protocolo N5. Recurso: {0}.',1,'SP-TELEFONIA',1,0),(2207,'Fallo llamada de test N5 SCV','Fallo llamada de test N5 SCV. Recurso: {0}',1,'SP-TELEFONIA',1,0),(2208,'Fallo llamada de test N5 VoIP (mensaje Options)','Fallo llamada de test N5 VoIP. Recurso: {0}',1,'SP-TELEFONIA',1,0);
 /*!40000 ALTER TABLE `incidencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +225,7 @@ CREATE TABLE `lista_ips` (
   PRIMARY KEY (`idlista_ips`),
   KEY `fk_pasarela_lista_ips_idx` (`pasarela_id`),
   CONSTRAINT `fk_pasarela_lista_ips` FOREIGN KEY (`pasarela_id`) REFERENCES `pasarelas` (`idpasarela`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=657 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +253,7 @@ CREATE TABLE `lista_uris` (
   PRIMARY KEY (`idlista_uris`),
   KEY `fk_recurso_radio_uri` (`recurso_radio_id`),
   CONSTRAINT `fk_recurso_radio_uri` FOREIGN KEY (`recurso_radio_id`) REFERENCES `recursos_radio` (`idrecurso_radio`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -355,7 +357,7 @@ CREATE TABLE `pasarelas` (
   PRIMARY KEY (`idpasarela`),
   KEY `fk_emp_pasarela_idx` (`emplazamiento_id`),
   CONSTRAINT `fk_emp_pasarela` FOREIGN KEY (`emplazamiento_id`) REFERENCES `emplazamientos` (`idemplazamiento`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -440,7 +442,7 @@ CREATE TABLE `recursos_radio` (
   KEY `fk_pasarela_radio_idx` (`pasarela_id`),
   KEY `fk_radio_tabla_bss_idx` (`tabla_bss_id`),
   CONSTRAINT `fk_pasarela_radio` FOREIGN KEY (`pasarela_id`) REFERENCES `pasarelas` (`idpasarela`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -467,8 +469,8 @@ CREATE TABLE `recursos_telefono` (
   `nombre` varchar(64) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Nombre del recurso telefónico. Único dentro de la pasarela.',
   `codec` int(1) NOT NULL DEFAULT '0' COMMENT 'Codec de audio para el recurso radio. 0: G711-A',
   `clave_registro` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Valor para la clave del registro.',
-  `ajuste_ad` int(10) DEFAULT NULL COMMENT 'Ajuste cero digital en A/D',
-  `ajuste_da` int(10) DEFAULT NULL COMMENT 'Ajuste cero digital en D/A',
+  `ajuste_ad` float(4,2) DEFAULT NULL COMMENT 'Ajuste cero digital en A/D',
+  `ajuste_da` float(4,2) DEFAULT NULL COMMENT 'Ajuste cero digital en D/A',
   `precision_audio` int(1) unsigned NOT NULL DEFAULT '1' COMMENT 'Precisión de Audio: (0) Estricto o (1) Normal. Por ahora no lo utilizamos',
   `tipo_interfaz_tel` int(1) NOT NULL COMMENT 'Tipo de interfaz telefónico. 0 (BL), 1(BC), 2(AB), 3(R2), 4(N5), 5(LCEN), 6 (QSIG)',
   `deteccion_vox` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Detección Vox. (1) Si, (0) No.',
@@ -486,7 +488,7 @@ CREATE TABLE `recursos_telefono` (
   PRIMARY KEY (`idrecurso_telefono`),
   KEY `fk_pasarela_tfno_idx` (`pasarela_id`),
   CONSTRAINT `fk_pasarela_tfno` FOREIGN KEY (`pasarela_id`) REFERENCES `pasarelas` (`idpasarela`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -586,6 +588,86 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'ug5kv2'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `SP_CopyConfiguration` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CopyConfiguration`(in cfg_id int, in cfg_name VARCHAR(64), in cfg_description VARCHAR(100))
+BEGIN
+    DECLARE copy_config_id INT DEFAUlT 0;
+    DECLARE done INT DEFAULT 0;
+    DECLARE v_nuevos INT(11);
+    DECLARE v_antiguos INT(11);
+    
+    DECLARE emplazamiento_cursor CURSOR FOR
+    SELECT e.idemplazamiento as nuevo, e1.idemplazamiento as viejo
+    FROM emplazamientos e, emplazamientos e1
+    WHERE e.configuracion_id = copy_config_id
+    AND e1.configuracion_id = cfg_id
+    AND e1.nombre = e.nombre;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;    
+    
+    INSERT INTO configuraciones (nombre, descripcion, region, activa)
+    SELECT cfg_name, cfg_description, cfg.region, 0
+    FROM configuraciones cfg
+    WHERE cfg.idconfiguracion=cfg_id;
+    
+    SELECT LAST_INSERT_ID() INTO copy_config_id;
+    
+    INSERT INTO emplazamientos (nombre, configuracion_id)
+    SELECT emp.nombre, copy_config_id
+    FROM emplazamientos emp
+    WHERE emp.configuracion_id=cfg_id;
+
+    OPEN emplazamiento_cursor;
+    get_emp: LOOP
+    FETCH emplazamiento_cursor INTO v_nuevos, v_antiguos;
+    IF done = 1 THEN
+            LEAVE get_emp;
+    END IF;
+    INSERT INTO pasarelas (emplazamiento_id, nombre, ip_virtual, ultima_actualizacion, ip_cpu0, ip_gtw0, mask_cpu0, ip_cpu1, ip_gtw1, mask_cpu1, puerto_sip, periodo_supervision, puerto_servicio_snmp, puerto_snmp, snmpv2, comunidad_snmp, nombre_snmp, localizacion_snmp, contacto_snmp, puerto_servicio_web, tiempo_sesion, puerto_rtsp, servidor_rtsp, servidor_rtspb)
+    SELECT v_nuevos, pas.nombre, pas.ip_virtual, pas.ultima_actualizacion, pas.ip_cpu0, pas.ip_gtw0, pas.mask_cpu0, pas.ip_cpu1, pas.ip_gtw1, pas.mask_cpu1, pas.puerto_sip, pas.periodo_supervision, pas.puerto_servicio_snmp, pas.puerto_snmp, pas.snmpv2, pas.comunidad_snmp, pas.nombre_snmp, pas.localizacion_snmp, pas.contacto_snmp, pas.puerto_servicio_web, pas.tiempo_sesion, pas.puerto_rtsp, pas.servidor_rtsp, pas.servidor_rtspb
+    FROM pasarelas pas 
+    WHERE pas.emplazamiento_id = v_antiguos;
+    END LOOP get_emp;
+    CLOSE emplazamiento_cursor;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `SP_Test` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_Test`()
+BEGIN
+	DECLARE a_cursor CURSOR FOR
+    SELECT *
+    FROM PASARELAS 
+    WHERE emplazamiento_id=3; 
+    
+    
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `alarmas_view`
@@ -686,4 +768,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-04 10:27:14
+-- Dump completed on 2017-09-06 11:10:54
