@@ -1326,6 +1326,8 @@ function ResetResourcePanel(){
 	$('#BlackWhiteRow').attr('style','display:table-row');
 
 	$('#TbNameResource').val('');
+	$('#TbAdGain').val('');
+	$('#TbDaGain').val('');
 	
 	$('#SCodec option:eq(1)').prop('selected', true);
 	$('#SResourceType option:eq(0)').prop('selected', true);
