@@ -19,7 +19,7 @@ var UpdateSynchroStateInSites = function(data) {
 	if (data.length != 0) {
 		$.each(data, function (index, value) {
 			$(".gtwList li").each(function (index) {
-				if(index!=0) {
+				//if(index!=0) {
 					if ($(this).data('texto') == value.idGtw) {
 						if (value.online) {
 							if (value.isNotActiveCfg)
@@ -42,7 +42,7 @@ var UpdateSynchroStateInSites = function(data) {
 								$(this).prop('class', 'NoVivaActivaSite');
 						}
 					}
-				}
+				//}
 			});
 		});
 	}
