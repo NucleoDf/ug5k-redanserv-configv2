@@ -1544,10 +1544,10 @@ var ExportCfgToPdf_v0 = function(idCfg){
 /* */
 var RdTypes = [
 	"Local Simple", "Local P/R", "Local FD Simple", "Local FD P/R",
-  	"Remoto Tx", "Remoto Rx", "Remoto TxRx"
+  	"Remoto TxRx", "Remoto Tx", "Remoto Rx"
 ];
 var PhTypes = [
-   	"BL","BC","AB","LCEN","ATS-R2","ATS-N5","ATS-QSIG"
+   	"BL","BC","AB","ATS-R2","ATS-N5","LCEN","ATS-QSIG"
 ];
 /***/
 function PdfPrintGws(gws) {
@@ -1583,7 +1583,7 @@ function PdfPrintRadioRs(content, rd){
   	rdInfo += (' Tipo: '+ RdTypes[rd.tipo_agente]);
   
 	content.push({text: rdInfo, style: 'level3'});
-	if (rd.tipo_agente <= 4){
+	if (rd.tipo_agente < 4){
   		content.push({text: rd.col.length.toString() + ' Colaterales', style: 'level4'});
     	for (ic = 0; ic<rd.col.length; ic++){
     		var col = rd.col[ic];
