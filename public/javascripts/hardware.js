@@ -2253,12 +2253,6 @@ function ShowRangeAts(dataReceived){
 	});
 }
 
-/****************************************/
-/*	FUNCTION: ShowTelParamsOfResource 	*/
-/*  PARAMS: data: datos de recurso tfno	*/
-/*										*/
-/*  REV 1.0.2 VMG						*/
-/****************************************/
 function ShowTelParamsOfResource(data){
 	// Mantener datos del recurso
 	var name = $('#NameResource').text();
