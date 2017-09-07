@@ -1564,40 +1564,67 @@ function PdfPrintGws(gws) {
 /**/
 function PdfPrintGw(content, gw){
 	content.push({text: 'Pasarela ' + gw.gw + ', en ' + gw.site, style: 'level1'});
-  	content.push({text: 'Configuracion Radio. ' + gw.radios.length + ' Recursos.', style: 'level2'});
-  	for (ir=0; ir<gw.radios.length; ir++){
-  		var rr = gw.radios[ir];
-    	PdfPrintRadioRs(content, rr);
-  	}
-  	content.push({text: 'Configuracion Telefonia. ' + gw.telef.length + ' Recursos.', style: 'level2'});
-  	for (it=0; it<gw.telef.length; it++){
-  		var rt = gw.telef[it];
-    	PdfPrintPhoneRs(content, rt);
-  	}
+  content.push({text: 'Configuracion Radio. ' + gw.radios.length + ' Recursos.', style: 'level2'});
+  if (gw.radios.length > 0) {
+    content.push( { columns: [
+                  {text: 'Recurso', width: 250},
+                  {text: 'Frecuencia', width: 80},
+                  {text: 'Tipo', width: 80},
+                  {text: 'Colaterales', width: 120}
+                  ], style: 'level3_header'});  
+    for (ir=0; ir<gw.radios.length; ir++) {
+      var rr = gw.radios[ir];
+      PdfPrintRadioRs(content, rr);
+    }
+  }
+
+	content.push({text: 'Configuracion Telefonia. ' + gw.telef.length + ' Recursos.', style: 'level2'});
+  if (gw.telef.length > 0) {
+    content.push( { columns: [
+                  {text: 'Recurso', width: 330},
+                  {text: 'Tipo', width: 80},
+                  {text: 'Colateral', width: 120}
+                  ], style: 'level3_header'});  
+    for (it=0; it<gw.telef.length; it++){
+      var rt = gw.telef[it];
+      PdfPrintPhoneRs(content, rt);
+    }
+  }
 }
 /** */
-function PdfPrintRadioRs(content, rd){
-	var rdInfo = ('(' + (rd.columna.toString()+'/'+rd.fila) + ')');
-  	rdInfo += (': ' + rd.nombre);
-  	rdInfo += (', Frecuencia ' + rd.frecuencia + ' Mhz.');
-  	rdInfo += (' Tipo: '+ RdTypes[rd.tipo_agente]);
-  
-	content.push({text: rdInfo, style: 'level3'});
-	if (rd.tipo_agente < 4){
-  		content.push({text: rd.col.length.toString() + ' Colaterales', style: 'level4'});
-    	for (ic = 0; ic<rd.col.length; ic++){
-    		var col = rd.col[ic];
-    	PdfPrintRadioCol(content, col);
-    	}
-  	}
+function PdfPrintRadioRs(content, rd) {
+  var rdInfo1 = ('(' + (rd.columna.toString()+'/'+rd.fila) + ')');
+  rdInfo1 += (': ' + rd.nombre);
+  var rdInfo2 = (rd.frecuencia + ' Mhz.');
+  var rdInfo3 = (RdTypes[rd.tipo_agente]);
+  var colInfo = "";
+  if (rd.tipo_agente < 4) {
+ 		colInfo += (rd.col.length.toString() + ' Colaterales');
+    for (ic = 0; ic<rd.col.length; ic++) {
+    	var col = rd.col[ic];
+      colInfo += ('\r\n.    EMPL ' + Math.round(col.nivel_colateral/2) + ', ' + col.tipo + ': '+ col.uri);  
+    }
+  }  
+  content.push( { 
+  		columns: [
+          {text: rdInfo1, width: 250},
+          {text: rdInfo2, width: 80},
+          {text: rdInfo3, width: 80},
+          {text: colInfo, width: 250}
+				], style: 'level3'});
 }
 /** */
 function PdfPrintPhoneRs(content, ph){
-	var phInfo = ('(' + (ph.columna.toString()+'/'+ph.fila) + ')');
-	phInfo += (': ' + ph.nombre);
-  	phInfo += (' Tipo: '+ PhTypes[ph.tipo_interfaz_tel]);
-  	phInfo += (", Colateral Remoto: " + ph.uri_telefonica)
-	content.push({text: phInfo, style: 'level3'});
+	var phInfo1 = ('(' + (ph.columna.toString()+'/'+ph.fila) + ')');
+  phInfo1 += (': ' + ph.nombre);
+  var phInfo2 = (PhTypes[ph.tipo_interfaz_tel]);
+  var phInfo3 = (ph.uri_telefonica)
+  content.push( { 
+  		columns: [
+          {text: phInfo1, width: 330},
+          {text: phInfo2, width: 80},
+          {text: phInfo3, width: 250}
+				], style: 'level3'});
 }
 
 /** */
@@ -1697,7 +1724,7 @@ var ExportCfgToPdf = function(idCfg){
 			// var logo = getBase64Image(document.getElementById("logo"));
       	var docDefinition = {
         	pageSize: 'A4',
-          	pageOrientation: 'portrait',
+          	pageOrientation: 'landscape',
           	//pageMargins: [10,10,10,10],
           	styles: {
             	header: {
@@ -1728,12 +1755,18 @@ var ExportCfgToPdf = function(idCfg){
 	            	alignment: 'left',
 	              	margin: [40,10,0,0]
 	            },
-	            level3:{
-	            	fontSize: 10,
-	              	bold: true,
-	              	alignment: 'left',
-	              	margin: [50,2,0,0]
-	            },
+            level3_header:{
+            	fontSize: 10,
+              bold: true,
+              alignment: 'left',
+              color: 'blue',
+              margin: [50,2,0,0]
+            },
+            level3:{
+            	fontSize: 9,
+              alignment: 'left',
+              margin: [50,2,0,0]
+            },
             level4:{
             	fontSize: 10,
               bold: true,
