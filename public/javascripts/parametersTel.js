@@ -375,7 +375,12 @@ function OnClickSupervision(cb){
 	else
 		$('#ReleaseRow').hide();
 }
-
+function OnClickPeriodoRespuesta(cb){
+	if (cb.checked)
+		$('#OptionsIntervalRow').show();
+	else
+		$('#OptionsIntervalRow').hide();
+}
 /****************************************/
 /*	FUNCTION: GetTelephonicResources 	*/
 /*  PARAMS: 							*/

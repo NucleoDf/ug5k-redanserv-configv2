@@ -2306,6 +2306,11 @@ function ShowTelParamsOfResource(data){
 		else
 			$('#ReleaseRow').hide();
 		
+		if ($('#CbOptionsSupervision').prop('checked'))
+			$('#OptionsIntervalRow').show();
+		else
+			$('#OptionsIntervalRow').hide();
+		
 		ShowOptions($('#LbTypeTel option:selected').val());
 	}
 }
