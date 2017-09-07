@@ -3622,47 +3622,49 @@ function showDataForTelephoneResource(data) {
 				if (data != null) {
 					//ShowRangeAts(data);
 					//dataAtsRange = data;
-					var kOrigen=0, kDestino=0;
-					data.ranks.forEach(function (rango) {
-						if(rango.tipo==0){//Origen
-							kOrigen++;
-							if(kOrigen==1){
-								$('#OrigenInicio1').val(rango.inicial);
-								$('#OrigenFinal1').val(rango.final);
+					if(data!='NO_DATA') {
+						var kOrigen = 0, kDestino = 0;
+						data.ranks.forEach(function (rango) {
+							if (rango.tipo == 0) {//Origen
+								kOrigen++;
+								if (kOrigen == 1) {
+									$('#OrigenInicio1').val(rango.inicial);
+									$('#OrigenFinal1').val(rango.final);
+								}
+								if (kOrigen == 2) {
+									$('#OrigenInicio2').val(rango.inicial);
+									$('#OrigenFinal2').val(rango.final);
+								}
+								if (kOrigen == 3) {
+									$('#OrigenInicio3').val(rango.inicial);
+									$('#OrigenFinal3').val(rango.final);
+								}
+								if (kOrigen == 4) {
+									$('#OrigenInicio4').val(rango.inicial);
+									$('#OrigenFinal4').val(rango.final);
+								}
 							}
-							if(kOrigen==2){
-								$('#OrigenInicio2').val(rango.inicial);
-								$('#OrigenFinal2').val(rango.final);
+							else {//Destino
+								kDestino++;
+								if (kDestino == 1) {
+									$('#DestinoInicio1').val(rango.inicial);
+									$('#DestinoFinal1').val(rango.final);
+								}
+								if (kDestino == 2) {
+									$('#DestinoInicio2').val(rango.inicial);
+									$('#DestinoFinal2').val(rango.final);
+								}
+								if (kDestino == 3) {
+									$('#DestinoInicio3').val(rango.inicial);
+									$('#DestinoFinal3').val(rango.final);
+								}
+								if (kDestino == 4) {
+									$('#DestinoInicio4').val(rango.inicial);
+									$('#DestinoFinal4').val(rango.final);
+								}
 							}
-							if(kOrigen==3){
-								$('#OrigenInicio3').val(rango.inicial);
-								$('#OrigenFinal3').val(rango.final);
-							}
-							if(kOrigen==4){
-								$('#OrigenInicio4').val(rango.inicial);
-								$('#OrigenFinal4').val(rango.final);
-							}
-						}
-						else {//Destino
-							kDestino++;
-							if(kDestino==1){
-								$('#DestinoInicio1').val(rango.inicial);
-								$('#DestinoFinal1').val(rango.final);
-							}
-							if(kDestino==2){
-								$('#DestinoInicio2').val(rango.inicial);
-								$('#DestinoFinal2').val(rango.final);
-							}
-							if(kDestino==3){
-								$('#DestinoInicio3').val(rango.inicial);
-								$('#DestinoFinal3').val(rango.final);
-							}
-							if(kDestino==4){
-								$('#DestinoInicio4').val(rango.inicial);
-								$('#DestinoFinal4').val(rango.final);
-							}
-						}
-					});
+						});
+					}
 				}//else no data
 			},
 			error: function (data) {
