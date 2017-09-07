@@ -67,7 +67,7 @@ function checkPerfil(userprofile ){
 }
 passport.use(new Strategy(
   function(username, password, cb) {
-    logging.LoggingDate('Passport Strategy function: ' + username + '/' + password);
+    logging.LoggingDateCond('Passport Strategy function: ' + username + '/' + password, config.Ulises.LoginSystemTrace);
     if (ctrlSesiones.localSession) {
         insertHistoric(ACCESS_SYSTEM_FAIL, username, 'Existe una sesion activa.');
         return cb(null, false, {message: 'Existe una sesion activa.'});
@@ -106,7 +106,7 @@ passport.use(new Strategy(
 passport.serializeUser(function(user, cb) {
   ctrlSesiones.user = user;
   cb(null, user.idOPERADORES);
-  //logging.LoggingDate('serializeUser: ' + user.idOPERADORES.toString() + ', ' + user.perfil.toString());
+  logging.LoggingDateCond('serializeUser: ' + user.idOPERADORES.toString() + ', ' + user.perfil.toString(), config.Ulises.LoginSystemTrace);
 });
 passport.deserializeUser(function(id, cb) {
   // require("./lib/users").findById(id, function (err, user) {
@@ -114,7 +114,7 @@ passport.deserializeUser(function(id, cb) {
   //   cb(null, user);
   //   console.log('deserializeUser: ' + id.toString());
   // });
-  //logging.LoggingDate('deserializeUser: ' + id.toString());
+  logging.LoggingDateCond('deserializeUser: ' + id.toString(), config.Ulises.LoginSystemTrace);
   if (ctrlSesiones.user)
       return cb(null,ctrlSesiones.user);
   return cb("No hay usuario logeado...");
@@ -286,20 +286,20 @@ app.get('/',
 
 app.get('/login',
   function(req, res){
-    logging.LoggingDate('app.get</login>: ');
+    logging.LoggingDateCond('app.get</login>: ', config.Ulises.LoginSystemTrace);
     res.render('login', {message: req.flash('error'), region: config.Ulises.Region});
   });
   
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
   function(req, res) {
-    logging.LoggingDate('app.post</login>: ' + req.user.name + ' ' + req.user.perfil);
+    logging.LoggingDateCond('app.post</login>: ' + req.user.name + ' ' + req.user.perfil, config.Ulises.LoginSystemTrace);
     res.redirect('/');
   });
   
 app.get('/logout',
   function(req, res){
-    logging.LoggingDate('app.get</logout>: ' + req.user.name + ' ' + req.user.perfil);
+    logging.LoggingDateCond('app.get</logout>: ' + req.user.name + ' ' + req.user.perfil, config.Ulises.LoginSystemTrace);
     insertHistoric(USER_LOGOUT_SYSTEM, ctrlSesiones.user.name, '');
     ctrlSesiones.localSession = null;
     req.logout();
@@ -402,13 +402,14 @@ setInterval(function(){
 var intervalObject = setInterval(function () {
       if (ctrlSesiones.localSession) {
         if (moment().isAfter(moment(ctrlSesiones.localSession.cookie._expires))) {
-            logging.LoggingDate("La Session ha expirado....");
+            logging.LoggingDateCond("La Session ha expirado....", config.Ulises.LoginSystemTrace);
             insertHistoric(USER_LOGOUT_SYSTEM, ctrlSesiones.user.name, 'La Session ha expirado....');
             ctrlSesiones.localSession = null;
         }
       } 
-      // console.log(moment().toString() + ": " +
-      //   (ctrlSesiones.localSession ? ("Sesion Activa hasta : " + moment(ctrlSesiones.localSession.cookie._expires).toString() ): "No Session"));
+      logging.LoggingDateCond(moment().toString() + ": " +
+         (ctrlSesiones.localSession ? ("Sesion Activa hasta : " + moment(ctrlSesiones.localSession.cookie._expires).toString() ): "No Session"), config.Ulises.LoginSystemTrace);
+    
     }, 5000);
 
 var synch = setInterval(function () {
@@ -431,6 +432,13 @@ var synch = setInterval(function () {
     }*/
 }, config.Ulises.refreshTime);
 /*************************/
+
+fs.watchFile(require.resolve('./configUlises.json'), function() {
+      /** Para cargar dinamicamente los cambios de configuracion */
+      delete require.cache[require.resolve('./configUlises.json')];
+      config = require('./configUlises.json');
+      console.log('Configuracion cambiada...');
+});
 
 app.set('port', process.env.PORT || 5050);
 
