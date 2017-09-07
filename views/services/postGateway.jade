@@ -292,12 +292,12 @@ script.
 			var regex = /^-?[0-9]*(?:\.\d{1,2})?$/; // Números con hasta dos decimales, positivos o negativos
 
 			if ($(element).val()!='' && ($(element).val().match(regex) == null ||
-				(Number($(element).val()) < -24.3 || Number($(element).val()) > 1.10)))
+				(Number($(element).val()) < -24.3 || Number($(element).val()) > 1.1)))
 				Fade(element,label);
 		}
 
 		function ValidateAD(element,label){
-			var regex = /^-?[0-9]*(?:\.\d{1,2})?$/; // Números con hasta dos decimales, positivos o negativos
+			var regex = /^-?[0-9]*(?:\.\d{1})?$/; // Números con hasta un decimal, positivos o negativos
 
 			if ($(element).val()!='' && ($(element).val().match(regex) == null ||
 				(Number($(element).val()) < -13.4 || Number($(element).val()) > 1.2)))
@@ -305,7 +305,7 @@ script.
 		}
 
 		function ValidateTonosRespuesta(element,label){
-			var regex = /^-?[0-9]*(?:\.\d{1,2})?$/; // Números con hasta dos decimales, positivos o negativos
+			var regex = /^-?[0-9]*(?:\.\d{1})?$/; // Números con hasta un decimal, positivos o negativos
 
 			if ($(element).val()!='' && ($(element).val().match(regex) == null ||
 				(Number($(element).val()) < 0 || Number($(element).val()) > 10)))
