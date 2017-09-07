@@ -3326,6 +3326,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	})
 	
 	if(update) {
+		$('#CbGranularity').prop("disabled",true);
 		$('#ButtonCommit').text('Actualizar');
 		//$('#ButtonCommit').attr('onclick', "UpdateResource('" + $('.Slave' +
 		//		col).data('idSLAVE') + "','" + col + "','" + row +
