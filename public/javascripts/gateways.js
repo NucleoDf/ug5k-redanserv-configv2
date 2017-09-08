@@ -2758,7 +2758,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna).data('updated', true)
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
 					+ value.columna + "',true,'1','"+value.idrecurso_radio+"')");
-			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
+			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
 				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1,"+value.idrecurso_radio+")")
