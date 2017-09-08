@@ -254,7 +254,7 @@ script.
 		}
 
 		function ValidateVAD(element,label){
-			var regex = /^-?[0-9]*(?:\.\d{1,2})?$/; // Números con hasta dos decimales, positivos o negativos
+			var regex = /^-?[0-9]+$/; // Números sin decimales, positivos o negativos
 
 			if ($(element).val()!='' && ($(element).val().match(regex) == null ||
 				(Number($(element).val()) < -35 || Number($(element).val()) >-15)))
@@ -270,7 +270,7 @@ script.
 		}
 
 		function ValidateBssWindow(element,label){
-			var regex = /^[0-9]*(?:\.\d{1,2})?$/; // Números positivos con hasta dos decimales
+			var regex = /^[0-9]+$/; // Números positivos sin decimales
 
 			if($(element).val()!=0){
 				if ($(element).val()!='' && ($(element).val().match(regex) == null ||
@@ -305,7 +305,7 @@ script.
 		}
 
 		function ValidateTonosRespuesta(element,label){
-			var regex = /^-?[0-9]+$/; // Números con hasta un decimal, positivos o negativos
+			var regex = /^-?[0-9]+$/; // Números sin decimales, positivos o negativos
 
 			if ($(element).val()!='' && ($(element).val().match(regex) == null ||
 				(Number($(element).val()) < 0 || Number($(element).val()) > 10)))
