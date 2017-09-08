@@ -90,39 +90,39 @@ function ShowUris(data){
 		for (var i = 0; i < data.uris.length; i++) {
 			if (data.uris[i].nivel_colateral == 1) {
 				if (data.uris[i].tipo == 'TXA')
-					$('#UriTxA1').val(data.uris[i].uri);
+					$('#UriTxA1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 				if (data.uris[i].tipo == 'RXA')
-					$('#UriRxA1').val(data.uris[i].uri);
+					$('#UriRxA1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 			}
 			if (data.uris[i].nivel_colateral == 2) {
 				if (data.uris[i].tipo == 'TXB')
-					$('#UriTxB1').val(data.uris[i].uri);
+					$('#UriTxB1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 				if (data.uris[i].tipo == 'RXB')
-					$('#UriRxB1').val(data.uris[i].uri);
+					$('#UriRxB1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 			}
 			if (data.uris[i].nivel_colateral == 3) {
 				if (data.uris[i].tipo == 'TXA')
-					$('#UriTxA2').val(data.uris[i].uri);
+					$('#UriTxA2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 				if (data.uris[i].tipo == 'RXA')
-					$('#UriRxA2').val(data.uris[i].uri);
+					$('#UriRxA2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 			}
 			if (data.uris[i].nivel_colateral == 4) {
 				if (data.uris[i].tipo == 'TXB')
-					$('#UriTxB2').val(data.uris[i].uri);
+					$('#UriTxB2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 				if (data.uris[i].tipo == 'RXB')
-					$('#UriRxB2').val(data.uris[i].uri);
+					$('#UriRxB2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 			}
 			if (data.uris[i].nivel_colateral == 5) {
 				if (data.uris[i].tipo == 'TXA')
-					$('#UriTxA3').val(data.uris[i].uri);
+					$('#UriTxA3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 				if (data.uris[i].tipo == 'RXA')
-					$('#UriRxA3').val(data.uris[i].uri);
+					$('#UriRxA3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 			}
 			if (data.uris[i].nivel_colateral == 6) {
 				if (data.uris[i].tipo == 'TXB')
-					$('#UriTxB3').val(data.uris[i].uri);
+					$('#UriTxB3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 				if (data.uris[i].tipo == 'RXB')
-					$('#UriRxB3').val(data.uris[i].uri);
+					$('#UriRxB3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
 			}
 		}
 	}
