@@ -25,6 +25,164 @@ function Site2Config(mySite, sites) {
 }
 
 /********************************************/
+/*	FUNCTION: showDataForTelephoneResource 	*/
+/*  PARAMS: 								*/
+/*  REV 1.0.2 VMG							*/
+/********************************************/
+function showDataForTelephoneResource(data) {
+	//Nombre
+	$('#TbNameResource').val(data.nombre);
+	//Codec
+	//$('#SCodec option').val(data.codec).prop('selected', true);
+	//Habilitar Registro
+	if(data.clave_registro!=null) {
+		$('#KeyRow').show();
+		$('#TbEnableRegister').prop('checked', true);
+		$('#TbKey').val(data.clave_registro);
+	}
+	else {
+		$('#TbEnableRegister').prop('checked', false);
+		$('#KeyRow').hide();
+	}
+	//Ajuste A/D
+	if(data.ajuste_ad!=null) {
+		$('#LblAD').show();
+		$('#TbAdGain').show();
+		$('#CbAdAgc').prop('checked', false);
+		$('#TbAdGain').val(data.ajuste_ad);
+	}
+	else {
+		$('#LblAD').hide();
+		$('#TbAdGain').hide();
+		$('#CbAdAgc').prop('checked', true);
+	}
+	//Ajuste D/A
+	if(data.ajuste_da!=null) {
+		$('#LblDA').show();
+		$('#TbDaGain').show();
+		$('#CbDaAgc').prop('checked', false);
+		$('#TbDaGain').val(data.ajuste_da);
+	}
+	else {
+		$('#LblDA').hide();
+		$('#TbDaGain').hide();
+		$('#CbDaAgc').prop('checked', true);
+	}
+	//Precisión Audio
+	$('#CbGranularity option[value="' +data.precision_audio +'"]').prop('selected', true);
+	ShowOptions(data.tipo_interfaz_tel.toString());//Opciones de telefono por defecto
+	//Tipo de Interfaz Telefónico
+	$('#LbTypeTel option[value="' +data.tipo_interfaz_tel +'"]').prop('selected', true);
+	//URI remota
+	$('#TbRemoteUri').val(data.uri_telefonica);
+	//Detección VOX
+	if(data.deteccion_vox==1)
+		$('#CbVox').prop('checked', true);
+	else
+		$('#CbVox').prop('checked', false);
+	//Umbral Vox (dB) umbral_vox
+	$('#TbUmbral').val(data.umbral_vox);
+	//Cola Vox (sg.) cola_vox
+	$('#TbInactividad').val(data.cola_vox);
+	//Respuesta automática
+	if(data.respuesta_automatica==1) {
+		$('#CbResp').prop('checked', true);
+		$('#OptionsIntervalRow').show();
+		//Periodo tonos resp. estado (sg.)
+		$('#TbOptionsInterval').val(data.periodo_tonos);
+	}
+	else {
+		$('#CbResp').prop('checked', false);
+		$('#OptionsIntervalRow').hide();
+	}
+	
+	//Lado
+	$('#LbLado option[value="' +data.lado +'"]').prop('selected', true);
+	//Origen llamadas salientes de test
+	$('#TbLocalNumText').val(data.origen_test);
+	//Destino llamadas salientes de test
+	$('#TbRemoteNumText').val(data.destino_test);
+	//Supervisa colateral
+	if(data.supervisa_colateral==1) {
+		$('#CbOptionsSupervision').prop('checked', true);
+		$('#ReleaseRow').show();
+		$('#TbReleaseTime').val(data.tiempo_supervision);
+	}
+	else {
+		$('#CbOptionsSupervision').prop('checked', false);
+		$('#ReleaseRow').hide();
+	}
+	//Duración tono interrupción (sg.)
+	$('#CbInterruptToneTime option[value="' +data.duracion_tono_interrup +'"]').prop('selected', true);
+	
+	//Peticion rangos ATS
+	// Ocultar/Mostrar tab ATS dependiendo del tipo de recurso telefonico
+	if ($('#LbTypeTel option:selected').val() == 3 ||
+		$('#LbTypeTel option:selected').val() == 4) {
+		$('#ListMenuParameters li:nth-child(5)').show();
+		$.ajax({type: 'GET',
+			url: '/resources/' + data.idrecurso_telefono + '/phoneParameters/range',
+			success: function(data){
+				if (data != null) {
+					//ShowRangeAts(data);
+					//dataAtsRange = data;
+					if(data!='NO_DATA') {
+						var kOrigen = 0, kDestino = 0;
+						data.ranks.forEach(function (rango) {
+							if (rango.tipo == 0) {//Origen
+								kOrigen++;
+								if (kOrigen == 1) {
+									$('#OrigenInicio1').val(rango.inicial);
+									$('#OrigenFinal1').val(rango.final);
+								}
+								if (kOrigen == 2) {
+									$('#OrigenInicio2').val(rango.inicial);
+									$('#OrigenFinal2').val(rango.final);
+								}
+								if (kOrigen == 3) {
+									$('#OrigenInicio3').val(rango.inicial);
+									$('#OrigenFinal3').val(rango.final);
+								}
+								if (kOrigen == 4) {
+									$('#OrigenInicio4').val(rango.inicial);
+									$('#OrigenFinal4').val(rango.final);
+								}
+							}
+							else {//Destino
+								kDestino++;
+								if (kDestino == 1) {
+									$('#DestinoInicio1').val(rango.inicial);
+									$('#DestinoFinal1').val(rango.final);
+								}
+								if (kDestino == 2) {
+									$('#DestinoInicio2').val(rango.inicial);
+									$('#DestinoFinal2').val(rango.final);
+								}
+								if (kDestino == 3) {
+									$('#DestinoInicio3').val(rango.inicial);
+									$('#DestinoFinal3').val(rango.final);
+								}
+								if (kDestino == 4) {
+									$('#DestinoInicio4').val(rango.inicial);
+									$('#DestinoFinal4').val(rango.final);
+								}
+							}
+						});
+					}
+				}//else no data
+			},
+			error: function (data) {
+				alertify.error('Error cconsultando los rangos ATS.');
+			}
+		});
+	}
+	
+	else
+		$('#ListMenuParameters li:nth-child(5)').hide();
+	
+}
+
+/********************************************/
 /*	FUNCTION: isResNameDup 					*/
 /*  PARAMS: 								*/
 /*											*/
@@ -3525,158 +3683,7 @@ function showDataForRadioResource(data) {
 		showWhiteBlackList(data.idrecurso_radio, 'LSB');
 	}
 }
-/********************************************/
-/*	FUNCTION: showDataForTelephoneResource 	*/
-/*  PARAMS: 								*/
-/*  REV 1.0.2 VMG							*/
-/********************************************/
-function showDataForTelephoneResource(data) {
-	//Nombre
-	$('#TbNameResource').val(data.nombre);
-	//Codec
-	//$('#SCodec option').val(data.codec).prop('selected', true);
-	//Habilitar Registro
-	if(data.clave_registro!=null) {
-		$('#KeyRow').show();
-		$('#TbEnableRegister').prop('checked', true);
-		$('#TbKey').val(data.clave_registro);
-	}
-	else {
-		$('#TbEnableRegister').prop('checked', false);
-		$('#KeyRow').hide();
-	}
-	//Ajuste A/D
-	if(data.ajuste_ad!=null) {
-		$('#LblAD').show();
-		$('#TbAdGain').show();
-		$('#CbAdAgc').prop('checked', false);
-		$('#TbAdGain').val(data.ajuste_ad);
-	}
-	else {
-		$('#LblAD').hide();
-		$('#TbAdGain').hide();
-		$('#CbAdAgc').prop('checked', true);
-	}
-	//Ajuste D/A
-	if(data.ajuste_da!=null) {
-		$('#LblDA').show();
-		$('#TbDaGain').show();
-		$('#CbDaAgc').prop('checked', false);
-		$('#TbDaGain').val(data.ajuste_da);
-	}
-	else {
-		$('#LblDA').hide();
-		$('#TbDaGain').hide();
-		$('#CbDaAgc').prop('checked', true);
-	}
-	//Precisión Audio
-	$('#CbGranularity option[value="' +data.precision_audio +'"]').prop('selected', true);
-	ShowOptions(data.tipo_interfaz_tel.toString());//Opciones de telefono por defecto
-	//Tipo de Interfaz Telefónico
-	$('#LbTypeTel option[value="' +data.tipo_interfaz_tel +'"]').prop('selected', true);
-	//URI remota
-	$('#TbRemoteUri').val(data.uri_telefonica);
-	//Detección VOX
-	if(data.deteccion_vox==1)
-		$('#CbVox').prop('checked', true);
-	else
-		$('#CbVox').prop('checked', false);
-	//Umbral Vox (dB) umbral_vox
-	$('#TbUmbral').val(data.umbral_vox);
-	//Cola Vox (sg.) cola_vox
-	$('#TbInactividad').val(data.cola_vox);
-	//Respuesta automática
-	if(data.respuesta_automatica==1)
-		$('#CbResp').prop('checked', true);
-	else
-		$('#CbResp').prop('checked', false);
-	//Periodo tonos resp. estado (sg.)
-	$('#TbOptionsInterval').val(data.periodo_tonos);
-	//Lado
-	$('#LbLado option[value="' +data.lado +'"]').prop('selected', true);
-	//Origen llamadas salientes de test
-	$('#TbLocalNumText').val(data.origen_test);
-	//Destino llamadas salientes de test
-	$('#TbRemoteNumText').val(data.destino_test);
-	//Supervisa colateral
-	if(data.supervisa_colateral==1) {
-		$('#CbOptionsSupervision').prop('checked', true);
-		$('#ReleaseRow').show();
-		$('#TbReleaseTime').val(data.tiempo_supervision);
-	}
-	else {
-		$('#CbOptionsSupervision').prop('checked', false);
-		$('#ReleaseRow').hide();
-	}
-	//Duración tono interrupción (sg.)
-	$('#CbInterruptToneTime option[value="' +data.duracion_tono_interrup +'"]').prop('selected', true);
-	
-	//Peticion rangos ATS
-	// Ocultar/Mostrar tab ATS dependiendo del tipo de recurso telefonico
-	if ($('#LbTypeTel option:selected').val() == 3 ||
-		$('#LbTypeTel option:selected').val() == 4) {
-		$('#ListMenuParameters li:nth-child(5)').show();
-		$.ajax({type: 'GET',
-			url: '/resources/' + data.idrecurso_telefono + '/phoneParameters/range',
-			success: function(data){
-				if (data != null) {
-					//ShowRangeAts(data);
-					//dataAtsRange = data;
-					if(data!='NO_DATA') {
-						var kOrigen = 0, kDestino = 0;
-						data.ranks.forEach(function (rango) {
-							if (rango.tipo == 0) {//Origen
-								kOrigen++;
-								if (kOrigen == 1) {
-									$('#OrigenInicio1').val(rango.inicial);
-									$('#OrigenFinal1').val(rango.final);
-								}
-								if (kOrigen == 2) {
-									$('#OrigenInicio2').val(rango.inicial);
-									$('#OrigenFinal2').val(rango.final);
-								}
-								if (kOrigen == 3) {
-									$('#OrigenInicio3').val(rango.inicial);
-									$('#OrigenFinal3').val(rango.final);
-								}
-								if (kOrigen == 4) {
-									$('#OrigenInicio4').val(rango.inicial);
-									$('#OrigenFinal4').val(rango.final);
-								}
-							}
-							else {//Destino
-								kDestino++;
-								if (kDestino == 1) {
-									$('#DestinoInicio1').val(rango.inicial);
-									$('#DestinoFinal1').val(rango.final);
-								}
-								if (kDestino == 2) {
-									$('#DestinoInicio2').val(rango.inicial);
-									$('#DestinoFinal2').val(rango.final);
-								}
-								if (kDestino == 3) {
-									$('#DestinoInicio3').val(rango.inicial);
-									$('#DestinoFinal3').val(rango.final);
-								}
-								if (kDestino == 4) {
-									$('#DestinoInicio4').val(rango.inicial);
-									$('#DestinoFinal4').val(rango.final);
-								}
-							}
-						});
-					}
-				}//else no data
-			},
-			error: function (data) {
-				alertify.error('Error cconsultando los rangos ATS.');
-			}
-		});
-	}
-		
-	else
-		$('#ListMenuParameters li:nth-child(5)').hide();
-	
-}
+
 
 
 function insertBNList(listaUris){

@@ -305,7 +305,7 @@ script.
 		}
 
 		function ValidateTonosRespuesta(element,label){
-			var regex = /^-?[0-9]*(?:\.\d{1})?$/; // Números con hasta un decimal, positivos o negativos
+			var regex = /^-?[0-9]+$/; // Números con hasta un decimal, positivos o negativos
 
 			if ($(element).val()!='' && ($(element).val().match(regex) == null ||
 				(Number($(element).val()) < 0 || Number($(element).val()) > 10)))

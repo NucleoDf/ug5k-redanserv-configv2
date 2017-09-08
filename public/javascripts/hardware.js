@@ -2306,7 +2306,7 @@ function ShowTelParamsOfResource(data){
 		else
 			$('#ReleaseRow').hide();
 		
-		if ($('#CbOptionsSupervision').prop('checked'))
+		if ($('#CbResp').prop('checked'))
 			$('#OptionsIntervalRow').show();
 		else
 			$('#OptionsIntervalRow').hide();
