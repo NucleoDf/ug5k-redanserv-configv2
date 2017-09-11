@@ -313,7 +313,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 		
 		//Tabla calificación audio
 		if($('#CbBssAudioTable option:selected').val() == -1)
-			radioResource.tabla_bss_id				=	null;
+			radioResource.tabla_bss_id				=	0;
 		else
 			radioResource.tabla_bss_id				=	$('#CbBssAudioTable option:selected').val();
 		//Retraso interno GRS
@@ -3685,7 +3685,7 @@ function showDataForRadioResource(data) {
 	$('#TbGrsInternalDelay').val(data.retraso_interno_grs);
 	//Tabla Calificacion de audio
 	SetAudioTableCB(function() {//Primero hay que inicializar los valores de la tabla.
-		if(data.tabla_bss_id==null)
+		if(data.tabla_bss_id==0)
 			$('#CbBssAudioTable option[value="-1"]').prop('selected', true);
 		else
 			$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
