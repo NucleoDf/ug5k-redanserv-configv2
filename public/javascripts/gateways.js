@@ -3902,40 +3902,40 @@ function showWhiteBlackList(idRecurso, listType) {
 					if(listType=='LSN'){//Lista Negra
 						kNegra++;
 						if(kNegra==1)
-							$('#Uri1BL').val(lista.uri);
+							$('#Uri1BL').val(lista.uri.substring(4,lista.uri.length));
 						if(kNegra==2)
-							$('#Uri2BL').val(lista.uri);
+							$('#Uri2BL').val(lista.uri.substring(4,lista.uri.length));
 						if(kNegra==3)
-							$('#Uri3BL').val(lista.uri);
+							$('#Uri3BL').val(lista.uri.substring(4,lista.uri.length));
 						if(kNegra==4)
-							$('#Uri4BL').val(lista.uri);
+							$('#Uri4BL').val(lista.uri.substring(4,lista.uri.length));
 						if(kNegra==5)
-							$('#Uri5BL').val(lista.uri);
+							$('#Uri5BL').val(lista.uri.substring(4,lista.uri.length));
 						if(kNegra==6)
-							$('#Uri6BL').val(lista.uri);
+							$('#Uri6BL').val(lista.uri.substring(4,lista.uri.length));
 						if(kNegra==7)
-							$('#Uri7BL').val(lista.uri);
+							$('#Uri7BL').val(lista.uri.substring(4,lista.uri.length));
 						if(kNegra==8)
-							$('#Uri8BL').val(lista.uri);
+							$('#Uri8BL').val(lista.uri.substring(4,lista.uri.length));
 					}
 					if(listType=='LSB'){//Lista Blanca
 						kBlanca++;
 						if(kBlanca==1)
-							$('#Uri1WL').val(lista.uri);
+							$('#Uri1WL').val(lista.uri.substring(4,lista.uri.length));
 						if(kBlanca==2)
-							$('#Uri2WL').val(lista.uri);
+							$('#Uri2WL').val(lista.uri.substring(4,lista.uri.length));
 						if(kBlanca==3)
-							$('#Uri3WL').val(lista.uri);
+							$('#Uri3WL').val(lista.uri.substring(4,lista.uri.length));
 						if(kBlanca==4)
-							$('#Uri4WL').val(lista.uri);
+							$('#Uri4WL').val(lista.uri.substring(4,lista.uri.length));
 						if(kBlanca==5)
-							$('#Uri5WL').val(lista.uri);
+							$('#Uri5WL').val(lista.uri.substring(4,lista.uri.length));
 						if(kBlanca==6)
-							$('#Uri6WL').val(lista.uri);
+							$('#Uri6WL').val(lista.uri.substring(4,lista.uri.length));
 						if(kBlanca==7)
-							$('#Uri7WL').val(lista.uri);
+							$('#Uri7WL').val(lista.uri.substring(4,lista.uri.length));
 						if(kBlanca==8)
-							$('#Uri8WL').val(lista.uri);
+							$('#Uri8WL').val(lista.uri.substring(4,lista.uri.length));
 					}
 				});
 			}
