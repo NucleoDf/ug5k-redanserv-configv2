@@ -257,7 +257,7 @@ router.route('/:gateway/testconfig')
 		 		res.json({idConf: result.ipv.toString(), fechaHora:''});
 			}
 			else if (result.toLocal == -2){
-				updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, 0, true, false);
+				updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, 0, result.data.idconfiguracion, true, false);
 				// No en configurción activa
 				logging.LoggingDate(JSON.stringify({idConf:result.toLocal.toString(), fechaHora:''},null,'\t'));
 					//myLibGateways.getTestConfig(result.ipv,function(data){
@@ -266,9 +266,9 @@ router.route('/:gateway/testconfig')
 			}
 			if(result.data!=null && result.toLocal == null ) {
 				if (req.query.std=="-4")
-					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, result.data.updatePend, false, true);
+					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, result.data.updatePend, result.data.idconfiguracion, false, true);
 				else
-					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, result.data.updatePend, false, false);
+					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, result.data.updatePend, result.data.idconfiguracion, false, false);
 				res.json({idConf: result.data.idConf, fechaHora: result.data.fechaHora});
 			}
 			/*
@@ -480,11 +480,13 @@ hardwareRouter.route('/:hardware')
 /*  									*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
-function updateSincGtws(aliveGtws,gtw,idGtw,updatePend,isNotActiveCfg,InConflict){
+function updateSincGtws(aliveGtws,gtw,idGtw,updatePend,idConfiguracion,isNotActiveCfg,InConflict){
 	var isGtwFound=false;
 	
 	for(var i=0;i<aliveGtws.length && !isGtwFound;i++) {
 		if(aliveGtws[i].idGtw==idGtw) {
+			if(gtw!=aliveGtws[i].ip0)//Add new IP.
+				aliveGtws[i].ip1=gtw;
 			aliveGtws[i].online=true;
 			aliveGtws[i].time=0;
 			aliveGtws[i].updatePend=updatePend;
@@ -498,6 +500,8 @@ function updateSincGtws(aliveGtws,gtw,idGtw,updatePend,isNotActiveCfg,InConflict
 		var onlineGtw = {};
 		onlineGtw.idGtw=idGtw;
 		onlineGtw.online=true;
+		onlineGtw.idCfg=idConfiguracion;
+		onlineGtw.ip0=gtw;
 		onlineGtw.time=0;
 		onlineGtw.updatePend=updatePend;
 		onlineGtw.isNotActiveCfg=isNotActiveCfg;
