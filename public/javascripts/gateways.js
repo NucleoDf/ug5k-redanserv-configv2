@@ -126,6 +126,22 @@ function showDataForTelephoneResource(data) {
 				if (data != null) {
 					//ShowRangeAts(data);
 					//dataAtsRange = data;
+					$('#OrigenInicio1').val('');
+					$('#OrigenFinal1').val('');
+					$('#OrigenInicio2').val('');
+					$('#OrigenFinal2').val('');
+					$('#OrigenInicio3').val('');
+					$('#OrigenFinal3').val('');
+					$('#OrigenInicio4').val('');
+					$('#OrigenFinal4').val('');
+					$('#DestinoInicio1').val('');
+					$('#DestinoFinal1').val('');
+					$('#DestinoInicio2').val('');
+					$('#DestinoFinal2').val('');
+					$('#DestinoInicio3').val('');
+					$('#DestinoFinal3').val('');
+					$('#DestinoInicio4').val('');
+					$('#DestinoFinal4').val('');
 					if(data!='NO_DATA') {
 						var kOrigen = 0, kDestino = 0;
 						data.ranks.forEach(function (rango) {
