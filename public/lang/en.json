@@ -259,6 +259,7 @@
 	"UserAlreadyLogin"		: ": ",
     "Users"					: "Users",
 	"MenuVersion"			: "Version",
+	"MenuUris"				: "Uris",
 	"IdVersion"				: "Version: ",
 	"Subversion"			: "SubVersion: ",
 	"VersGenDate"			: "Version Date: ",
