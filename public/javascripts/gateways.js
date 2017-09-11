@@ -2739,6 +2739,13 @@ function ResetHardware(f){
 /*  REV 1.0.2 VMG					*/
 /************************************/
 function ShowAssignedSlaves(data){
+	var iconRadio="<img src='/images/iconRadio.gif' style='float: right'/>";
+	var iconRadioIn="<img src='/images/iconRadioIn.gif' style='float: right'/>";
+	var iconRadioOut="<img src='/images/iconRadioOut.gif' style='float: right'/>";
+	var iconRadioInOut="<img src='/images/iconRadioInOut.gif' style='float: right'/>";
+	var iconPhone="<img src='/images/iconPhone.gif' style='float: right'/>";
+	var iconOperator="<img src='/images/iconOperator.gif' style='float: right'/>";
+	
 	var idCgw = $('#DivGateways').data('idCgw');
 	//var assignedSlaves=[];
 	//var freeSlaves=[];
@@ -2774,7 +2781,14 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna).data('updated', true)
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
 					+ value.columna + "',true,'1','"+value.idrecurso_radio+"')");
-			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
+			if(value.tipo_agente==4)
+				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append(iconRadioInOut);
+			else if(value.tipo_agente==5)
+				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append(iconRadioOut);
+			else if(value.tipo_agente==6)
+				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append(iconRadioIn);
+			else
+				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append(iconOperator);
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
 				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1,"+value.idrecurso_radio+")")
@@ -2791,7 +2805,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna).data('updated', true)
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
 					+ value.columna + "',true,'2','"+value.idrecurso_telefono+"')");
-			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
+			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(iconPhone);
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
 				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",2,"+value.idrecurso_telefono+")")
