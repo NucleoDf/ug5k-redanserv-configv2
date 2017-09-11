@@ -412,6 +412,7 @@ CREATE TABLE `recursos_externos` (
   `idrecursos_externos` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la tabla',
   `uri` varchar(45) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Uri introducida por el usuario para ser seleccionada',
   `tipo` varchar(45) COLLATE latin1_spanish_ci NOT NULL COMMENT '1 para Radio y 2 para telefonía',
+  `alias` varchar(45) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Alias de la uri',
   PRIMARY KEY (`idrecursos_externos`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -422,7 +423,7 @@ CREATE TABLE `recursos_externos` (
 
 LOCK TABLES `recursos_externos` WRITE;
 /*!40000 ALTER TABLE `recursos_externos` DISABLE KEYS */;
-INSERT INTO `recursos_externos` VALUES (1,'20',''),(2,'23',''),(3,'24',''),(4,'3','');
+INSERT INTO `recursos_externos` VALUES (1,'20','',''),(2,'23','',''),(3,'24','',''),(4,'3','','');
 /*!40000 ALTER TABLE `recursos_externos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -798,4 +799,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-11 14:14:05
+-- Dump completed on 2017-09-11 16:35:30
