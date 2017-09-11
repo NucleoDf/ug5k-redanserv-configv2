@@ -253,10 +253,57 @@ router.route('/:gateway/testconfig')
 			if (result.toLocal == -1){
 				// No en BD
 				logging.LoggingDate(JSON.stringify({idConf:result.ipv.toString(), fechaHora:''},null,'\t'));
-
 		 		res.json({idConf: result.ipv.toString(), fechaHora:''});
 			}
-			else if (result.toLocal == -2){
+			else  {
+				if(result.data.length==1){//La pasarela está en una sola config
+					if(result.data[0].activa==1){
+						if (req.query.std=="-4")
+							updateSincGtws(aliveGtws, req.params.gateway, result.data[0].idGtw, result.data[0].updatePend, result.data[0].idconfiguracion, false, true);
+						else
+							updateSincGtws(aliveGtws, req.params.gateway, result.data[0].idGtw, result.data[0].updatePend, result.data[0].idconfiguracion, false, false);
+						res.json({idConf: result.data[0].idConf, fechaHora: result.data[0].fechaHora});
+					}
+					else{//No Activa
+						updateSincGtws(aliveGtws, req.params.gateway, result.data[0].idGtw, 0, result.data[0].idconfiguracion, true, false);
+						// No en configurción activa
+						logging.LoggingDate(JSON.stringify({idConf:result.toLocal.toString(), fechaHora:''},null,'\t'));
+						//myLibGateways.getTestConfig(result.ipv,function(data){
+						res.json({idConf: -2, fechaHora:''});
+					}
+				}
+				else {//La pasarela está en varias configuraciones
+					var id2Send='';
+					var date2Send='';
+					var isActiveCfg=false;
+					for(var i=0;i<result.data.length;i++) {
+						if (result.data[i].activa == 1) {
+							id2Send = result.data[i].idConf;
+							date2Send = result.data[i].fechaHora;
+						}
+						if (result.data[i].activa == 1) {
+							isActiveCfg=true;
+							if (req.query.std == "-4")
+								updateSincGtws(aliveGtws, req.params.gateway, result.data[i].idGtw, result.data[i].updatePend, result.data[i].idconfiguracion, false, true);
+							else
+								updateSincGtws(aliveGtws, req.params.gateway, result.data[i].idGtw, result.data[i].updatePend, result.data[i].idconfiguracion, false, false);
+							
+						}
+						else {
+							if (req.query.std == "-4")
+								updateSincGtws(aliveGtws, req.params.gateway, result.data[i].idGtw, result.data[i].updatePend, result.data[i].idconfiguracion, true, true);
+							else
+								updateSincGtws(aliveGtws, req.params.gateway, result.data[i].idGtw, result.data[i].updatePend, result.data[i].idconfiguracion, true, false);
+							
+						}
+					}
+					if(isActiveCfg)
+						res.json({idConf:id2Send, fechaHora: date2Send});
+					else
+						res.json({idConf:-2, fechaHora: date2Send});
+				}
+			}
+			/*if (result.toLocal == -2){
 				updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, 0, result.data.idconfiguracion, true, false);
 				// No en configurción activa
 				logging.LoggingDate(JSON.stringify({idConf:result.toLocal.toString(), fechaHora:''},null,'\t'));
@@ -270,7 +317,7 @@ router.route('/:gateway/testconfig')
 				else
 					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, result.data.updatePend, result.data.idconfiguracion, false, false);
 				res.json({idConf: result.data.idConf, fechaHora: result.data.fechaHora});
-			}
+			}*/
 			/*
 			var ipv = result.ipv;
 			if (ipv != -1 && ipv != -2 && ipv != null){
