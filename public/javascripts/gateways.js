@@ -3896,6 +3896,7 @@ function showWhiteBlackList(idRecurso, listType) {
 		url: '/resources/' + idRecurso + '/radioParameters/wblist/'+listType,
 		success: function (data) {
 			if (data.list != null && data.list.length>0) {
+				resetUrisValues();
 				var kNegra=0, kBlanca=0;
 				data.list.forEach(function (lista) {
 					if(listType=='LSN'){//Lista Negra
@@ -3919,22 +3920,14 @@ function showWhiteBlackList(idRecurso, listType) {
 					}
 					if(listType=='LSB'){//Lista Blanca
 						kBlanca++;
-						/*$('#Uri1BL').val('');
-						$('#Uri2BL').val('');
-						$('#Uri3BL').val('');
-						$('#Uri4BL').val('');
-						$('#Uri5BL').val('');
-						$('#Uri6BL').val('');
-						$('#Uri7BL').val('');
-						$('#Uri8BL').val('');*/
 						if(kBlanca==1)
 							$('#Uri1WL').val(lista.uri);
 						if(kBlanca==2)
-							$('#Uri1WL').val(lista.uri);
+							$('#Uri2WL').val(lista.uri);
 						if(kBlanca==3)
-							$('#Uri1WL').val(lista.uri);
+							$('#Uri3WL').val(lista.uri);
 						if(kBlanca==4)
-							$('#Uri1WL').val(lista.uri);
+							$('#Uri4WL').val(lista.uri);
 						if(kBlanca==5)
 							$('#Uri5WL').val(lista.uri);
 						if(kBlanca==6)
@@ -3946,9 +3939,6 @@ function showWhiteBlackList(idRecurso, listType) {
 					}
 				});
 			}
-			/*else {
-				alertify.error('Error.');
-			}*/
 		},
 		error: function (data) {
 			alertify.error('Error al obtener las listas Blancas y Negras.');
