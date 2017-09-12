@@ -1,14 +1,14 @@
 {
   "Ulises": {
-    "HistoricsDeep": 30,
-    "LoginTimeOut": 100,
+    "HistoricsDeep": 90,
+    "LoginTimeOut": 60,
     "LoginSystemTrace": false,
 	"Region": "Región Centro",
     "BackupServiceDomain": "192.168.0.212:8082",
-    "Version": "2.0",
-    "SubVersion": "1",
-    "Date": "05/05/2017",
-    "NodeJS": "6.9.5",
+    "Version": "1.0",
+    "SubVersion": "2",
+    "Date": "11/00/2017",
+    "NodeJS": "8.*.*",
     "MySQL": "5.7.17",
     "Files": [
       {
