@@ -144,36 +144,40 @@ app.post('/',[
             }).single('upl'),
         function(req,res){
             logging.LoggingDate(req.file); //form files
+            var retorno = {};
            //Inicializar el campo
             fs.readFile(req.file.path, 'utf8', function(err, contents) {
 				myLibConfig.checkExportGtwNamesOrIpDup(req.body.config, req.body.site, JSON.parse(contents),function(result){
 					if (result.data=='OK'){
 						logging.LoggingSuccess('Comprobación de importación correcta');
-						myLibConfig.postConfigurationFromJsonFile(req.body.config, req.body.site, JSON.parse(contents),function(result) {
+						myLibConfig.postConfigurationFromJsonFile(req.body.config, req.body.site, JSON.parse(contents),function(result) {                            
 							if (result.error == null) {
-								//alertify.success('Configuracion no importada. Error en la operación.');
-								logging.LoggingSuccess('Configuracion importada correctamente');
+                                retorno.msg = 'Configuracion importada correctamente';                                
+								logging.loggingError('Configuracion importada correctamente');
 							}
 							else {
+                                retorno.err = req.file.message;
 								logging.loggingError(req.file.message);
 							}
+                            res.json(retorno);
 						});
 					}
-					else if (result.data=='DUPLICATED') {
-						//alertify.error('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
-						//	'Elimine la pasarela o cambie los datos antes de importar.');
-						logging.loggingError('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
-							'Elimine la pasarela o cambie los datos antes de importar');
+                    else {
+    					if (result.data=='DUPLICATED') {
+    						//alertify.error('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
+    						//	'Elimine la pasarela o cambie los datos antes de importar.');
+    						logging.loggingError('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
+    							'Elimine la pasarela o cambie los datos antes de importar');
+                            retorno.err = 'Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
+                                'Elimine la pasarela o cambie los datos antes de importar';
+                        }
+    					else {
+    						//alertify.error('Configuracion no importada. Error en la operación.');
+    						logging.loggingError('Configuracion no importada. Error en la operación.');
+                            retorno.err = 'Configuracion no importada. Error en la operación.';
+    					}
+                    res.json(retorno);                    
                     }
-					else {
-						//alertify.error('Configuracion no importada. Error en la operación.');
-						logging.loggingError('Configuracion no importada. Error en la operación.');
-					}
-                    res.status(200).redirect('/');
-                    // res.end('Fin de la importacion');
-                    // res.render('imported', {
-                    //     error: 'mensaje de error'
-                    //     });                        
 				});
 					    
                 /*/  console.log(contents);
