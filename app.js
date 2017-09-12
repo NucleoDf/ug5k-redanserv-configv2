@@ -133,6 +133,9 @@ app.set('aliveGtws', aliveGtws);
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
+// AGL.. Clear Update folder
+require('del').sync(['./uploads/**', '!./uploads']);
+
 // to updload files
 var multer  =   require('multer');
 app.post('/',[ 
@@ -166,6 +169,11 @@ app.post('/',[
 						//alertify.error('Configuracion no importada. Error en la operación.');
 						logging.loggingError('Configuracion no importada. Error en la operación.');
 					}
+                    res.status(200).redirect('/');
+                    // res.end('Fin de la importacion');
+                    // res.render('imported', {
+                    //     error: 'mensaje de error'
+                    //     });                        
 				});
 					    
                 /*/  console.log(contents);
@@ -232,7 +240,7 @@ app.post('/',[
                 });*/
             });
             //res.json({size:req.file.size});
-			res.status(200).redirect('/');
+			//res.status(200).redirect('/');
         }
 ]);
 
@@ -315,6 +323,27 @@ app.get('/alive',
             alive: "ok"
         });
  });
+
+  /** 20070908 AGL. Para Leer / Escribir la configuracion local del servidor */
+  app.get('/localconfig',
+//    isAuthenticated,
+    function(req, res, next) {
+        res.json(config.Ulises);
+  });
+
+  app.post('/localconfig',
+//    isAuthenticated,
+    function(req, res) {
+        // Chequear coherencia.
+        // Lo salvo en los datos...
+        config.Ulises = req.body;
+        // Lo salvo en el fichero...
+        var Ulises = {Ulises: req.body};
+        fs.writeFile("./configUlises_test.json", JSON.stringify(Ulises, null, 2), (err)=>{
+           if(err) res.json({res: false, txt: 'Error fs.writeFile'});
+           else    res.json({res: true,  txt: 'File saved.'});
+        });
+    });
   
 app.use('/users', isAuthenticated, users);
 app.use('/gateways', gateways);
@@ -409,7 +438,7 @@ var intervalObject = setInterval(function () {
       } 
       logging.LoggingDateCond(moment().toString() + ": " +
          (ctrlSesiones.localSession ? ("Sesion Activa hasta : " + moment(ctrlSesiones.localSession.cookie._expires).toString() ): "No Session"), config.Ulises.LoginSystemTrace);
-    
+      //  console.log(config.Ulises.LoginSystemTrace);
     }, 5000);
 
 var synch = setInterval(function () {
