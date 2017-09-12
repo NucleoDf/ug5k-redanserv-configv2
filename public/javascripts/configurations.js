@@ -1595,7 +1595,7 @@ function PdfPrintGw(content, gw){
 function PdfPrintRadioRs(content, rd) {
   var rdInfo1 = ('(' + (rd.columna.toString()+'/'+rd.fila) + ')');
   rdInfo1 += (': ' + rd.nombre);
-  var rdInfo2 = (rd.frecuencia + ' Mhz.');
+  var rdInfo2 = (rd.frecuencia.toFixed(3) + ' MHz.');
   var rdInfo3 = (RdTypes[rd.tipo_agente]);
   var colInfo = "";
   if (rd.tipo_agente < 4) {
@@ -1644,7 +1644,7 @@ var ExportCfgToExcel = function(idCfg, empl) {
                     ';Pasarela' +
                     ';P-R-T-C' +
                     ';Recurso' +
-                    ';Frecuencia' +
+                    ';Frecuencia (MHz)' +
                     ';Tipo' +
                     ';Colateral' + '\r\n';
       for(igw=0; igw<gws.length; igw++){
@@ -1667,7 +1667,7 @@ var ExportCfgToExcel = function(idCfg, empl) {
                       gw.gw + ';' + 
                       '1' + ';' + 
                       rr.nombre + ';' + 
-                      rr.frecuencia + ';' + 
+                      rr.frecuencia.toFixed(3) + ';' + 
                       RdTypes[rr.tipo_agente] + ';' + 
                       '---' + '\r\n');
           	if (rr.tipo_agente <= 4) {
@@ -1681,7 +1681,7 @@ var ExportCfgToExcel = function(idCfg, empl) {
                           gw.gw + ';' + 
                           '3' + ';' + 
                           rr.nombre + ';' + 
-                          rr.frecuencia + ';' + 
+                          rr.frecuencia.toFixed(3) + ';' + 
                           RdTypes[rr.tipo_agente] + ';' + 
                           clInfo + '\r\n');
               	}
