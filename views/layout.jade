@@ -26,6 +26,7 @@ html
         script(type='text/javascript' src='/pdfmake/pdfmake.min.js')
         script(type='text/javascript' src='/pdfmake/vfs_fonts.js')
         script(type='text/javascript' src='/javascripts/tableBss.js')
+        script(type='text/javascript' src='/javascripts/externalResources.js')
         script(type='text/javascript' src='/javascripts/authentication.js')
         script(type='text/javascript' src='/javascripts/version.js')
         script(type='text/javascript' src='/javascripts/index.js')
@@ -366,8 +367,8 @@ html
                                     li(id="lopcionUsuarios")
                                         a(id="opcionUsuarios" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePrevious(\'#FormOperador\',\'#AddFormUser\',\'#DivOperador\'); GetUsuarios()})", tkey='Users')
                                     // AGL..        
-                                    li(id="lopcionVersion")
-                                        a(id="opcionUris" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePrevious(\'#FormVersion\',\'#AddFormVersion\',\'#DivVersion\'); GetVersion(false)})", tkey='MenuUris')
+                                    li(id="lopcionResources")
+                                        a(id="opcionResources" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePrevious(\'#FormResources\',\'#AddFormResources\',\'#DivResources\'); GetExtResources()})", tkey='MenuResources')
                                     li#cfVolver(style='margin-top:100px')
                                         a( onclick="CheckingAnyChange(\'GeneralContent\', function(){hide()})", tkey='Exit') 
                         td#GeneralDiv
@@ -385,6 +386,9 @@ html
                             // FORM TABLE BSS
                             block table_bss
                             include ./services/postTableBss.jade
+                            // FORM TABLE BSS
+                            block resources
+                            include services/postResources.jade
                             // FORM SITES
                             block sites
                             include ./services/postSites.jade

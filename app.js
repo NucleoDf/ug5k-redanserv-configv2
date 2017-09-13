@@ -16,6 +16,7 @@ var hardware = require('./routes/hardware/hardware');
 var resources = require('./routes/hardware/resources');
 var sites = require('./routes/sites/sites');
 var tableBss = require('./routes/tableBss/tableBss');
+var externalResources = require('./routes/externalResources/externalResources');
 var radioDestinations = require('./routes/destinations/radioDestinations');
 var historics = require('./routes/historics/historics');
 var version = require('./routes/version/version');
@@ -360,6 +361,7 @@ app.use('/destinations', isAuthenticated, radioDestinations);
 app.use('/historics', isAuthenticated, historics);
 app.use('/version', isAuthenticated, version);
 app.use('/tableBss', isAuthenticated, tableBss);
+app.use('/externalResources', isAuthenticated, externalResources);
 
 // app.use('/', routes);
 // app.use('/users', users);
