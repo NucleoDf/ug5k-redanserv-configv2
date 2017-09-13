@@ -274,7 +274,7 @@
 	"Gateways" 				: "Pasarelas",
 	"Hardware" 				: "Hardware",
 	"RadioDestinations"		: "Frecuencias",
-	"RadioDestination"		: "Frecuencia Mhz",
+	"RadioDestination"		: "Frecuencia MHz",
 	"Sites" 				: "Emplazamientos",
 	"Site" 					: "Emplazamiento",
 	"EnableRecording"		: "Habilita grabación",

@@ -117,39 +117,47 @@ var GetTable = function (idTable){
 /*  REV 1.0.2 VMG					*/
 /************************************/
 var PostTable = function(){
-	var listValues=[];
-	for (var i=0;i<6;i++){
-		listValues[i] = $('#CbRssi' + i + ' option:selected').val();
+	
+	if ($('#IdTable').val()==''){
+		alertify.alert('El nombre de la tabla no puede ser vacío. Utilize un nombre correcto.');
+		return;
 	}
-	$.ajax({type: 'POST', 
-		dataType: 'json',
-		contentType:'application/json',
-		url: '/tableBss',
-		data: JSON.stringify({
-								name: $('#IdTable').val(),
-								description: $('#DescTable').val(),
-								UsuarioCreacion: $('#user').val(),
-								UsuarioModificacion: $('#user').val(),
-								TableValues: listValues
-							}),
-		success: function(data){
-			if (data.error == null) {
-				alertify.success('Tabla de calificación ' + $('#IdTable').val() + ' generada.');
-				GenerateHistoricEvent(ID_HW, ADD_CALIFICATION_AUDIO_TABLE, $('#IdTable').val(), $('#loggedUser').text());
-				/** 20170516. AGL. Activar Cambios... */
-				tbbssModified = true;
-				GetTablesBss(function(){
-					GetTable(data.idTable);
-				});
-			}
-			else {
-				alertify.error('Error: '+data.error);
-			}
-		},
-		error: function(data){
-			alertify.error('Error generando la tabla de calificación de audio.');
+	else {
+		var listValues = [];
+		for (var i = 0; i < 6; i++) {
+			listValues[i] = $('#CbRssi' + i + ' option:selected').val();
 		}
-	});
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			contentType: 'application/json',
+			url: '/tableBss',
+			data: JSON.stringify({
+				name: $('#IdTable').val(),
+				description: $('#DescTable').val(),
+				UsuarioCreacion: $('#user').val(),
+				UsuarioModificacion: $('#user').val(),
+				TableValues: listValues
+			}),
+			success: function (data) {
+				if (data.error == null) {
+					alertify.success('Tabla de calificación ' + $('#IdTable').val() + ' generada.');
+					GenerateHistoricEvent(ID_HW, ADD_CALIFICATION_AUDIO_TABLE, $('#IdTable').val(), $('#loggedUser').text());
+					/** 20170516. AGL. Activar Cambios... */
+					tbbssModified = true;
+					GetTablesBss(function () {
+						GetTable(data.idTable);
+					});
+				}
+				else {
+					alertify.error('Error: ' + data.error);
+				}
+			},
+			error: function (data) {
+				alertify.error('Error generando la tabla de calificación de audio.');
+			}
+		});
+	}
 };
 
 /************************************/

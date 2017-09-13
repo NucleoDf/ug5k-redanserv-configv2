@@ -74,7 +74,7 @@ function showDataForTelephoneResource(data) {
 	//Tipo de Interfaz Telefónico
 	$('#LbTypeTel option[value="' +data.tipo_interfaz_tel +'"]').prop('selected', true);
 	//URI remota
-	$('#TbRemoteUri').val(data.uri_telefonica);
+	$('#TbRemoteUri').val(data.uri_telefonica.substr(4, data.uri_telefonica.length));
 	//Detección VOX
 	if(data.deteccion_vox==1)
 		$('#CbVox').prop('checked', true);
@@ -2782,13 +2782,13 @@ function ShowAssignedSlaves(data){
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
 					+ value.columna + "',true,'1','"+value.idrecurso_radio+"')");
 			if(value.tipo_agente==4)
-				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append(iconRadioInOut);
+				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' MHz').append(iconRadioInOut);
 			else if(value.tipo_agente==5)
-				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append(iconRadioOut);
+				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' MHz').append(iconRadioOut);
 			else if(value.tipo_agente==6)
-				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append(iconRadioIn);
+				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' MHz').append(iconRadioIn);
 			else
-				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' Mhz').append(iconOperator);
+				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' MHz').append(iconOperator);
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
 				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1,"+value.idrecurso_radio+")")
@@ -2926,7 +2926,7 @@ function ShowResourcesFromSlave(idSlave,slave, data, isFirstLoad, f){
 				}
 
 				if(r.tipo == 1) {
-					$('.Res' + fila + col + ' a').text(r.resource).append(' - '+r.Frecuencia+' Mhz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
+					$('.Res' + fila + col + ' a').text(r.resource).append(' - '+r.Frecuencia+' MHz').append($("<img src='/images/iconRadio.gif' style='float: right'/>"));
 				}
 				else
 					$('.Res' + fila + col + ' a').text(r.resource).append($("<img src='/images/iconPhone.gif' style='float: right'/>"));
