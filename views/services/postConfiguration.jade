@@ -96,17 +96,28 @@ script.
               contentType: 'application/json',
               success: function(response){
                 console.log(response);
-               if (response.err) {
-                    alertify.error(response.err);
-                }     
-                else if (response.msg) {
-                    alertify.success(response.msg);
+                   if (response.err) {
+                        alertify.error(response.err);
+                    }     
+                    else if (response.msg) {
+                        alertify.success(response.msg);
+                    }
+                CloseImportConfiguration();
+                GetConfigurations();              
                 }
-              }
            });
           return false;
         });
     });
+
+    function validateUploadForm() {
+        if( document.getElementById("fileselectbtn").files.length == 0 ){
+            console.log("no files selected");
+            alertify.error('No hay ningun fichero seleccionado');
+            return false;
+        }
+        return true;
+    }
 
     // Fin de la modificacion....
 
@@ -868,9 +879,9 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                     div(style='border-top: 1px solid black; width:97%;')
                             tr
                                 td
-                                    form#UploadForm(method="post",enctype="multipart/form-data",action="/")
+                                    form#UploadForm(method="post",enctype="multipart/form-data",action="/", onsubmit='return validateUploadForm()')
                                         p
-                                            input#fileselectbtn(type="file",name="upl",accept=".json")
+                                            input#fileselectbtn(type="file",name="upl",accept=".json", required)
                                             input#user(type="hidden",name="user")
                                             input#clave(type="hidden",name="clave")
                                             input#perfil(type="hidden",name="perfil")
@@ -880,7 +891,7 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                         table(style='width: 100%;border-spacing: 10px 10px')
                                             tr
                                                 td
-                                                    input.ButtonNucleo(style='width: 100px' onclick='CloseImportConfiguration();GetConfigurations();' type="submit")
+                                                    input.ButtonNucleo(style='width: 100px' onclick='' type="submit")
                                                 td
                                                     a.ButtonNucleo(style='width: 100px' onclick='CloseImportConfiguration()' tkey='Close')
 
