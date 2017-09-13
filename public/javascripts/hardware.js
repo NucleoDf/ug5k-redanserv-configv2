@@ -2145,7 +2145,7 @@ function ShowRadioParamsOfResource(data){
 		//$('#SquelchDeactRow').attr('style','display:table-column');
 		$('#ClimaxDelayRow').attr('style','display:table-column');
 		//$('#InternalDelayRow').attr('style','display:table-column');
-		//$('#CompensationRow').attr('style','display:table-column');
+		$('#CompensationRow').attr('style','display:table-column');
 		$('#BssTimeRow').attr('style','display:table-column');
 		$('#BssSquelchRow').attr('style','display:table-column');
 		//$('#PttSquelchRow').attr('style','display:table-column');
@@ -2490,7 +2490,7 @@ function SelectBss(){
 		//$('#SquelchDeactRow').attr('style','display:table-column');
 		$('#ClimaxDelayRow').attr('style','display:table-column');
 		//$('#InternalDelayRow').attr('style','display:table-column');
-		//$('#CompensationRow').attr('style','display:table-column');
+		$('#CompensationRow').attr('style','display:table-column');
 		$('#BssTimeRow').attr('style','display:table-column');
 		$('#BssSquelchRow').attr('style','display:table-column');
 		//$('#PttSquelchRow').attr('style','display:table-column');
@@ -2661,7 +2661,7 @@ function OnCbBssEnable(cb){
 		//$('#SquelchDeactRow').attr('style','display:table-row');
 		$('#ClimaxDelayRow').attr('style','display:table-row');
 		//$('#InternalDelayRow').attr('style','display:table-row');
-		//$('#CompensationRow').attr('style','display:table-row');
+		$('#CompensationRow').attr('style','display:table-row');
 		if ($('#TbClimaxDelay option:selected').val() == 2)
 			$('#CompensationRow').attr('style','display:table-row');
 		else
@@ -2683,7 +2683,7 @@ function OnCbBssEnable(cb){
 		$('#ClimaxDelayRow').attr('style','display:table-column');
 		$('#CompensationRow').attr('style','display:table-column');
 		//$('#InternalDelayRow').attr('style','display:table-column');
-		//$('#CompensationRow').attr('style','display:table-column');
+		$('#CompensationRow').attr('style','display:table-column');
 		$('#BssTimeRow').attr('style','display:table-column');
 		$('#BssSquelchRow').attr('style','display:table-column');
 		//$('#PttSquelchRow').attr('style','display:table-column');

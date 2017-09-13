@@ -326,6 +326,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 			radioResource.habilita_grabacion	=	1;
 		else
 			radioResource.habilita_grabacion	=	0;
+		//ToDo
+		radioResource.retardo_fijo_climax	=	$('#CbCompensation').val();
 		
 		//Lista de URIS
 		var listaUris=[];
@@ -3545,6 +3547,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#BtnRemoveResource').attr('onclick', "removeRadioResource('" + data.idrecurso_radio + "')");
 						$('#ButtonCommit').attr('onclick', "InsertNewResource('1','" + data.idrecurso_radio + "','true')");
 						$('#ResId').attr('res-id',data.idrecurso_radio);
+						$('#LblUriSip').text(data.nombre+'@'+$('#ipv').val());
 					}
 					else if (resourceType == '2') {
 						showDataForTelephoneResource(data);
@@ -3559,6 +3562,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						if ($('#LbTypeTel')[0].value == 3 || $('#LbTypeTel')[0].value == 4) {
 							$('#ListMenuParameters li:nth-child(6)').show();
 						}
+						$('#LblUriSip').text(data.nombre+'@'+$('#ipv').val());
 					}
 				}
 				else if (data.error) {

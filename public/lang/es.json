@@ -88,7 +88,7 @@
 	"ErrorGRSInternalDelay"	: "Valor de Retraso interno GRS (ms.) no válido",
 	"Time"					: "Tiempo",
 	"ErrorTime"				: "Tiempo no válido",
-	"ClimaxDelay"			: "Retraso Climax",
+	"ClimaxDelay"			: "Modo Climax",
 	"SquelchDeactTimeout"	: "Tiempo desactivación squelch",
 	"VADThreshold"			: "Umbral VAD (dB)",
 	"BSSMethod"				: "Método BSS preferido",

@@ -300,7 +300,6 @@ div(id="FormParameters")
 								label(tkey='ClimaxDelay')
 							td.New
 								select#TbClimaxDelay(type='select' onchange='OnChangeClimax(this)')
-									option(value='0') NO
 									option(value='1') ASAP
 									option(value='2' tkey='Time')
 						tr#ModoCalculoClimaxRow
@@ -310,11 +309,11 @@ div(id="FormParameters")
 								select#TbModoCalculoClimax(type='select')
 									option(value='0' tkey='ModoRelativo')
 									option(value='1' tkey='ModoAbsoluto')
-						//tr#CompensationRow
-						//	td
-						//		label(tkey='Time')
-						//	td.New
-						//		input.textbox#CbCompensation(type='text' style='width:50px' onblur='ValidateCompensation(this,"Time")' onfocus='this.oldValue=this.value')
+						tr#CompensationRow
+							td
+								label(tkey='Time')
+							td.New
+								input.textbox#CbCompensation(type='text' style='width:50px' onblur='ValidateCompensation(this,"Time")' onfocus='this.oldValue=this.value')
 						tr#PttSquelchRow
 							td
 								label(tkey='PTTSquelchEvents')
