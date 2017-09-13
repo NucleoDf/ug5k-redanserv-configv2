@@ -152,8 +152,8 @@ app.post('/',[
 						logging.LoggingSuccess('Comprobación de importación correcta');
 						myLibConfig.postConfigurationFromJsonFile(req.body.config, req.body.site, JSON.parse(contents),function(result) {                            
 							if (result.error == null) {
-                                retorno.msg = 'Configuracion importada correctamente';                                
-								logging.loggingError('Configuracion importada correctamente');
+                                retorno.msg = 'Configuracion importada correctamente';
+								logging.LoggingSuccess('Configuracion importada correctamente');
 							}
 							else {
                                 retorno.err = req.file.message;
