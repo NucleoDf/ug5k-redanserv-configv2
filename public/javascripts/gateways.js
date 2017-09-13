@@ -3694,6 +3694,7 @@ function showDataForRadioResource(data) {
 		else
 			$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
 	});
+	$('#CbCompensation').val(data.retardo_fijo_climax);
 	//Habilita grabación
 	if(data.habilita_grabacion==1)
 		$('#CbEnableRecording').prop('checked', true);

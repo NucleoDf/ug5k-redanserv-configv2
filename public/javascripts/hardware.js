@@ -2121,7 +2121,7 @@ function ShowRadioParamsOfResource(data){
 			//$('#InternalDelayRow').attr('style','display:table-row');
 			$('#CompensationRow').attr('style','display:table-row');
 			$('#BssTimeRow').attr('style','display:table-row');
-			$('#BssSquelchRow').attr('style','display:table-row');
+			//$('#BssSquelchRow').attr('style','display:table-row');
 			//$('#PttSquelchRow').attr('style','display:table-row');
 			if ($('#TbClimaxDelay option:selected').val() == 2 || $('#TbClimaxDelay option:selected').val() == 1){
 				$('#ModoCalculoClimaxRow').attr('style','display:table-row');
@@ -2462,7 +2462,7 @@ function SelectBss(){
 			//$('#InternalDelayRow').attr('style','display:table-row');
 			$('#CompensationRow').attr('style','display:table-row');
 			$('#BssTimeRow').attr('style','display:table-row');
-			$('#BssSquelchRow').attr('style','display:table-row');
+			//$('#BssSquelchRow').attr('style','display:table-row');
 			//$('#PttSquelchRow').attr('style','display:table-row');
 			if ($('#TbClimaxDelay option:selected').val() == 2 || $('#TbClimaxDelay option:selected').val() == 1){
 				$('#ModoCalculoClimaxRow').attr('style','display:table-row');
@@ -2668,7 +2668,7 @@ function OnCbBssEnable(cb){
 			$('#CompensationRow').attr('style','display:table-column');
 
 		$('#BssTimeRow').attr('style','display:table-row');
-		$('#BssSquelchRow').attr('style','display:table-row');
+		//$('#BssSquelchRow').attr('style','display:table-row');
 		//$('#PttSquelchRow').attr('style','display:table-row');
 		if ($('#TbClimaxDelay option:selected').val() == 2 || $('#TbClimaxDelay option:selected').val() == 1){
 			$('#ModoCalculoClimaxRow').attr('style','display:table-row');
