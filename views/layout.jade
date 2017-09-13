@@ -366,8 +366,8 @@ html
                                     li(id="lopcionUsuarios")
                                         a(id="opcionUsuarios" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePrevious(\'#FormOperador\',\'#AddFormUser\',\'#DivOperador\'); GetUsuarios()})", tkey='Users')
                                     // AGL..        
-                                    li(id="lopcionUris")
-                                        a(id="opcionUris" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePrevious(\'#FormUri\',\'#AddFormUri\',\'#DivUri\'); GetUri()})", tkey='MenuUris')
+                                    li(id="lopcionResources")
+                                        a(id="opcionResources" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePrevious(\'#FormResources\',\'#AddFormResources\',\'#DivResources\'); GetExtResources()})", tkey='MenuResources')
                                     li#cfVolver(style='margin-top:100px')
                                         a( onclick="CheckingAnyChange(\'GeneralContent\', function(){hide()})", tkey='Exit') 
                         td#GeneralDiv
@@ -385,6 +385,9 @@ html
                             // FORM TABLE BSS
                             block table_bss
                             include ./services/postTableBss.jade
+                            // FORM TABLE BSS
+                            block resources
+                            include services/postResources.jade
                             // FORM SITES
                             block sites
                             include ./services/postSites.jade
