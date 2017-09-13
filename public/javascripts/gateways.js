@@ -74,7 +74,7 @@ function showDataForTelephoneResource(data) {
 	//Tipo de Interfaz Telefónico
 	$('#LbTypeTel option[value="' +data.tipo_interfaz_tel +'"]').prop('selected', true);
 	//URI remota
-	$('#TbRemoteUri').val(data.uri_telefonica);
+	$('#TbRemoteUri').val(data.uri_telefonica.substr(4, data.uri_telefonica.length));
 	//Detección VOX
 	if(data.deteccion_vox==1)
 		$('#CbVox').prop('checked', true);
