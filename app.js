@@ -271,11 +271,30 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// AGL. Mensajes para la pantalla login
+function msg4Login(req, msg) {
+    if (msg) {
+        global.msg = msg;
+        req.flash('error', msg);
+    }
+    else {
+        var flash_msg = req.flash('error');
+        // console.log("<" + arguments.callee.caller.name.toString() + ">: " + 'flash: ' + flash_msg);
+        if (flash_msg.length==0) {
+            flash_msg = global.msg;
+            delete global.msg;
+            // console.log("<" + arguments.callee.caller.name.toString() + ">: " + 'global.msg: ' + flash_msg);
+        }
+        return flash_msg;
+    }
+}
+
 //
 var isAuthenticated = function (req, res, next) {
   if (req.isAuthenticated()) {
     return next();    
   }
+  // console.log('redirect to /login from isAuthenticated');
   res.redirect('/login');
 }
 
@@ -300,7 +319,8 @@ app.get('/',
 app.get('/login',
   function(req, res){
     logging.LoggingDateCond('app.get</login>: ', config.Ulises.LoginSystemTrace);
-    res.render('login', {message: req.flash('error'), region: config.Ulises.Region});
+//    res.render('login', {message: req.flash('error'), region: config.Ulises.Region});
+    res.render('login', {message: msg4Login(req), region: config.Ulises.Region});
   });
   
 app.post('/login', 
@@ -321,12 +341,18 @@ app.get('/logout',
 
   /** 20170808 AGL. TICK de Sesion Activa */
 app.get('/alive', 
-  isAuthenticated,
+//  isAuthenticated,
     function(req, res, next) {
-    res.json(
-        {
-            alive: "ok"
-        });
+        if (req.isAuthenticated()) {
+            res.json({alive: "ok"});
+        }
+        else{
+            msg4Login(req, 'La sesion ha expirado. Identifiquese de nuevo');
+
+              // console.log('redirect to /login from /alive');
+
+            res.redirect('/login');
+        }
  });
 
   /** 20070908 AGL. Para Leer / Escribir la configuracion local del servidor */
@@ -472,7 +498,7 @@ fs.watchFile(require.resolve('./configUlises.json'), function() {
       /** Para cargar dinamicamente los cambios de configuracion */
       delete require.cache[require.resolve('./configUlises.json')];
       config = require('./configUlises.json');
-      console.log('Configuracion cambiada...');
+      // console.log('Configuracion cambiada...');
 });
 
 app.set('port', process.env.PORT || 5050);
