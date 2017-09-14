@@ -25,3 +25,11 @@ hs_err_pid*
 ./idea/workspace.xml
 
 *.bat
+/esquemas_bbdd/BackupTemplateDev006.sql
+/esquemas_bbdd/BackupTemplateDev007.sql
+/esquemas_bbdd/BackupTemplateDev008.sql
+/esquemas_bbdd/BackupTemplateDev010.sql
+/esquemas_bbdd/BackupTemplateDev014.sql
+/esquemas_bbdd/BackupTemplateDev034.sql
+/esquemas_bbdd/BackupTemplateDev036.sql
+/uploads
