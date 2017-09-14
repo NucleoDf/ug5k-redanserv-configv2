@@ -303,8 +303,7 @@ app.get('/',
     //require('connect-ensure-login').ensureLoggedIn(),
   isAuthenticated,
     function(req, res, next) {
-    logging.LoggingDate('app.get</>: ');
-        ctrlSesiones.localSession = req.session;
+        logging.LoggingDate('app.get</>: ');
         res.render('index',
             {
                 LoginTimeout: config.Ulises.LoginTimeOut,
@@ -327,6 +326,7 @@ app.post('/login',
   passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
   function(req, res) {
     logging.LoggingDateCond('app.post</login>: ' + req.user.name + ' ' + req.user.perfil, config.Ulises.LoginSystemTrace);
+    ctrlSesiones.localSession = req.session;
     res.redirect('/');
   });
   
