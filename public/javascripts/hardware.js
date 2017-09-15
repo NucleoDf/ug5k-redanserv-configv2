@@ -12,20 +12,67 @@ var originalResourceType = 0;
 /*  REV 1.0.2 VMG						*/
 /****************************************/
 function ShowUris(data){
-	//Limpiar Campos
-	$('#UriTxA1').val('');
-	$('#UriRxA1').val('');
-	$('#UriTxA2').val('');
-	$('#UriRxA2').val('');
-	$('#UriTxA3').val('');
-	$('#UriRxA3').val('');
-	$('#UriTxB1').val('');
-	$('#UriRxB1').val('');
-	$('#UriTxB2').val('');
-	$('#UriRxB2').val('');
-	$('#UriTxB3').val('');
-	$('#UriRxB3').val('');
 	
+	loadUriSites(true);
+	
+	if (data!=null&&data.uris!=null) {
+		for (var i = 0; i < data.uris.length; i++) {
+			if (data.uris[i].nivel_colateral == 1) {
+				if (data.uris[i].tipo == 'TXA')
+					$('#UriTxA1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+				if (data.uris[i].tipo == 'RXA')
+					$('#UriRxA1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+			}
+			if (data.uris[i].nivel_colateral == 2) {
+				if (data.uris[i].tipo == 'TXB')
+					$('#UriTxB1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+				if (data.uris[i].tipo == 'RXB')
+					$('#UriRxB1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+			}
+			if (data.uris[i].nivel_colateral == 3) {
+				if (data.uris[i].tipo == 'TXA')
+					$('#UriTxA2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+				if (data.uris[i].tipo == 'RXA')
+					$('#UriRxA2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+			}
+			if (data.uris[i].nivel_colateral == 4) {
+				if (data.uris[i].tipo == 'TXB')
+					$('#UriTxB2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+				if (data.uris[i].tipo == 'RXB')
+					$('#UriRxB2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+			}
+			if (data.uris[i].nivel_colateral == 5) {
+				if (data.uris[i].tipo == 'TXA')
+					$('#UriTxA3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+				if (data.uris[i].tipo == 'RXA')
+					$('#UriRxA3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+			}
+			if (data.uris[i].nivel_colateral == 6) {
+				if (data.uris[i].tipo == 'TXB')
+					$('#UriTxB3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+				if (data.uris[i].tipo == 'RXB')
+					$('#UriRxB3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
+			}
+		}
+	}
+}
+
+function loadUriSites(isClean) {
+	if(isClean) {
+		//Limpiar Campos
+		$('#UriTxA1').val('');
+		$('#UriRxA1').val('');
+		$('#UriTxA2').val('');
+		$('#UriRxA2').val('');
+		$('#UriTxA3').val('');
+		$('#UriRxA3').val('');
+		$('#UriTxB1').val('');
+		$('#UriRxB1').val('');
+		$('#UriTxB2').val('');
+		$('#UriRxB2').val('');
+		$('#UriTxB3').val('');
+		$('#UriRxB3').val('');
+	}
 	//Inicializar
 	$('#LabelSite1').show();
 	$('#RowSite1').show();
@@ -86,48 +133,7 @@ function ShowUris(data){
 		$('#TxBRow3').show();
 		$('#RxBRow3').show();
 	}
-	if (data!=null&&data.uris!=null) {
-		for (var i = 0; i < data.uris.length; i++) {
-			if (data.uris[i].nivel_colateral == 1) {
-				if (data.uris[i].tipo == 'TXA')
-					$('#UriTxA1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-				if (data.uris[i].tipo == 'RXA')
-					$('#UriRxA1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-			}
-			if (data.uris[i].nivel_colateral == 2) {
-				if (data.uris[i].tipo == 'TXB')
-					$('#UriTxB1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-				if (data.uris[i].tipo == 'RXB')
-					$('#UriRxB1').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-			}
-			if (data.uris[i].nivel_colateral == 3) {
-				if (data.uris[i].tipo == 'TXA')
-					$('#UriTxA2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-				if (data.uris[i].tipo == 'RXA')
-					$('#UriRxA2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-			}
-			if (data.uris[i].nivel_colateral == 4) {
-				if (data.uris[i].tipo == 'TXB')
-					$('#UriTxB2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-				if (data.uris[i].tipo == 'RXB')
-					$('#UriRxB2').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-			}
-			if (data.uris[i].nivel_colateral == 5) {
-				if (data.uris[i].tipo == 'TXA')
-					$('#UriTxA3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-				if (data.uris[i].tipo == 'RXA')
-					$('#UriRxA3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-			}
-			if (data.uris[i].nivel_colateral == 6) {
-				if (data.uris[i].tipo == 'TXB')
-					$('#UriTxB3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-				if (data.uris[i].tipo == 'RXB')
-					$('#UriRxB3').val(data.uris[i].uri.substring(4,data.uris[i].uri.length));
-			}
-		}
-	}
 }
-
 var GetHardware = function() {
 	//$('#Component').text('Hardware');	// Titulo
 	//$("#NewHardware").show();
@@ -2350,6 +2356,7 @@ function ClickAdAgc(element){
 		
 function SelectBss(){
 	if ($('#LbTypeRadio option:selected').val() >= 0 && $('#LbTypeRadio option:selected').val() <=3){
+		loadUriSites(false);
 		$('#InternalDelayRow').attr('style','display:table-column');
 		$('#ListMenuParameters li:nth-child(5)').show();
 		// Ocultar panel de listas B/N
