@@ -327,6 +327,10 @@ var InsertNewResource = function(col, row, isUpdate) {
 		else
 			radioResource.habilita_grabacion	=	0;
 		//ToDo
+		radioResource.tipo_climax				=	$('#TbClimaxDelay option:selected').val();
+		radioResource.metodo_climax				=	$('#TbModoCalculoClimax option:selected').val();
+		
+		radioResource.ventana_bss 			=	$('#TbBssWindow').val();
 		radioResource.retardo_fijo_climax	=	$('#CbCompensation').val();
 		
 		//Lista de URIS
@@ -3673,10 +3677,7 @@ function showDataForRadioResource(data) {
 	else
 		$('#CbBssEnable').prop('checked', false);
 	//Ventana BSS (ms)
-	if(data.ventana_bss==null)
-		$('#TbBssWindow').val('');
-	else
-		$('#TbBssWindow').val(data.ventana_bss);
+	$('#TbBssWindow').val(data.ventana_bss);
 	//BSS Cola Squelch (ms)
 	if(data.cola_bss_sqh==null)
 		$('#TbBssSquelchQueue').val('');
