@@ -1,0 +1,53 @@
+block local_config
+
+div#myModal.modal
+    div.modal-content
+        span.close $times
+        div#editor_holder
+        button#submit Salvar
+script.
+    var json_schema = {
+        "$schema": "http://json-schema.org/draft-04/schema#", 
+        "definitions": {}, 
+        "properties": {
+            "Ulises": {
+                "properties": {
+                    "BackupServiceDomain": {"type": "string"}, 
+                    "Date": {"type": "string"}, 
+                    "Files": {"items": {}, "type": "array" }, 
+                    "HistoricsDeep": {"type": "integer" }, 
+                    "LoginSystemTrace": {"type": "boolean"}, 
+                    "LoginTimeOut": {"type": "integer" }, 
+                    "MySQL": { "type": "string" }, 
+                    "NodeJS": { "type": "string" }, 
+                    "Region": { "type": "string" }, 
+                    "SubVersion": { "type": "string" }, 
+                    "Version": { "type": "string" }, 
+                    "dbdatabase": { "type": "string" }, 
+                    "dbhost": { "type": "string" }, 
+                    "dbpassword": { "type": "string" }, 
+                    "dbuser": { "type": "string" }, 
+                    "log2con": { "type": "boolean" }, 
+                    "log2file": { "type": "boolean" }, 
+                    "logfile_maxfiles": { "type": "integer" }, 
+                    "logfile_path": { "type": "string" }, 
+                    "logfile_sizefile": { "type": "integer" }, 
+                    "maxCycleTime": { "type": "integer" }, 
+                    "morgan": { "type": "boolean" }, 
+                    "refreshTime": { "type": "integer" }
+                }, 
+                "required": [
+                    "LoginTimeOut", "morgan", "logfile_sizefile", "SubVersion", "dbhost", "logfile_path", 
+                    "logfile_maxfiles", "log2file", "BackupServiceDomain", "Region", "maxCycleTime", "log2con", 
+                    "dbuser", "Date", "dbpassword", "refreshTime", "NodeJS", "Files", "HistoricsDeep", 
+                    "dbdatabase", "Version", "MySQL", "LoginSystemTrace"
+                ], 
+                "type": "object"
+            }
+        }, 
+        "required": [
+            "Ulises"
+        ], 
+        "type": "object"
+    };
+
