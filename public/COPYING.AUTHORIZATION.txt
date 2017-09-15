@@ -1,6 +1,39 @@
+----------------------------------------------------------------------------------------------------------
 COPYING AUTHORIZATION
+----------------------------------------------------------------------------------------------------------
 
 Codigo fuente modificado del SW GNU y bajo COPYING.LESSER disponible libremente bajo peticion por escrito a DF NUCLEO a la siguiente direccion: C/Via de los Poblados 7, 28033 MADRID (Spain).
+
+----------------------------------------------------------------------------------------------------------
+LICENCIAS DE CODIGO ABIERTO
+----------------------------------------------------------------------------------------------------------
+
+ULISES G5000 - PASARELA
+OPEN SOURCE CODE SOFTWARE         VERSION  COPYING COPYING COPYING LICENSE                     URL DOWNLOAD
+                                                    LESSER  AFFERO
+S.O. Yellow Dog                   2.4.1      X       X             GPL v2.0,LGPL v.2.1         http://www.fixstars.com/en/technologies/linux/
+oSip Library                      2.3.5              X             LGPL v3                     ftp://ftp.gnu.org/gnu/osip
+xOSip Library                     2.3.5      X                     GPL v2.0                    http://download.savannah.nongnu.org/releases/exosip/
+jRtp Library                      3.7.1      X                     MIT                         http://research.edm.uhasselt.be/jori/page/CS/Jrtplib.html
+Snmp++ Library                    3.3.1      X                     Particular license          http://agentpp.com/download.html
+Agent++ Library                   4.0.2      X                     Apache 2 Open Source        http://agentpp.com/download.html
+mongoose server                   5.6        X                     GPL v2.0                    https://github.com/cesanta/mongoose/releases/tag/5.6
+Rapid-Json                        1.0.2      X                     MIT                         https://www.nuget.org/packages/rapidjson/1.0.2
+Rapid-xml                         1.13       X                     BSL-1.0/MIT                 https://www.nuget.org/packages/rapidxml/1.13.0
+jQuery                            2.1.3      X                     MIT/Boost Software License  https://code.jquery.com/jquery/
+Angular JS                        1.5.3      X                     MIT                         https://code.angularjs.org/1.5.3/
+Bootstrap                         3.3.5      X                     MIT                         https://github.com/twbs/bootstrap#copyright-and-license
+
+ULISES G5000 - SERVIDOR
+OPEN SOURCE CODE SOFTWARE         VERSION  COPYING COPYING COPYING LICENSE                     URL DOWNLOAD
+                                                    LESSER  AFFERO
+MySQL Database Community Edition  5.6.11     X                     GPL v2.0                    https://www.mysql.com/products/community
+Node.JS                           8.0.0      X                     Particular license          https://nodejs.org/dist/v8.0.0/
+Common.Logging                    3.0.0      X                     Apache 2 Open Source        https://www.nuget.org/packages/Common.Logging/3.0.0
+JSON.NET                          8.0.2      X                     MIT                         https://www.newtonsoft.com/json
+NLOG                              4.2.3      X                     BSD-3-Clause                https://www.nuget.org/packages/NLog/4.2.3
+Quartz                            2.3.3      X                     Apache 2 Open Source        https://www.quartz-scheduler.org/downloads/
+
 
 ----------------------------------------------------------------------------------------------------------
 COPYING LICENSES
