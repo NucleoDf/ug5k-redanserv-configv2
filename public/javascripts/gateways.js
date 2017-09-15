@@ -3476,9 +3476,10 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	loadParam(element);
 	
 	if(update) {
-		$('#FormComm').attr('onclick', "loadParam(this);loadUriList('"+resourceId+"')");
+		$('#FormComm').attr('onclick', "loadParam(this);");
 		$('#SResourceType').prop("disabled", true);
 		$('#BtnRemoveResource').show();
+		loadUriList(resourceId);
 	}
 	else {
 		resetUrisValues();
