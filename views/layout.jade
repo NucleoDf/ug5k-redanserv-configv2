@@ -307,6 +307,48 @@ html
                 alertify.alert("Informacion", "Para Restaurar la Base de Datos, consultar 'ULISES G 5000-REDAN. Configuracion Remota. Manual de Usuario.docx' Punto 6.2.");
             }
 
+            function About() {
+                // alertify.alert("Acerca de...");
+                if(!alertify.About){
+                  //define a new dialog
+                  alertify.dialog('About',function factory(){
+                    return{
+                      main:function(message){
+                        this.message = message;
+                      },
+                      setup:function(){
+                          return { 
+                            buttons:[{text: "Aceptar", key:27/*Esc*/}],
+                            focus: { element:0 }
+                          };
+                      },
+                      prepare:function(){
+                        this.setContent(this.message);
+                      },
+                      build: function(){
+                        this.setHeader('REDAN. Aplicacion de Configuracion..');
+                        this.set('resizable', true);
+                      }
+                  }});
+                }
+
+                $.ajax({type: 'GET', 
+                        url: '/version',
+                        success: function(data) {
+                                console.log(data);
+                                //launch it
+                                var url_license = "http://" + '192.168.0.212:5050' + '/COPYING.AUTHORIZATION.txt';
+                                var msg = '<div>' +
+                                          '<h2>REDAN CFGR</h2>' +
+                                          '<p style="text-align:center; color: black;">Version ' + data.version + '.' + data.subversion + ', ' + data.date + '</p>' +
+                                          '<p style="text-align:center">DF Nucleo Copyright ©2017. Todos los Derechos Reservados.</p>' +
+                                          '<p style="text-align: right"><a href="' + url_license + '" target="_blank">Acuerdo de Licencia</a></p>' +
+                                          '</div>';
+                                alertify.About(msg).resizeTo(500, 270);
+                            }
+                });
+            }
+
         table(style='width:100%')
             tr
                 td(style='width:15%')
@@ -353,6 +395,8 @@ html
                                         a(id="opcionMant" onclick="hideMenu(\'#MenuHistoricos\',\'#MenuMantenimiento\'); LoadGatewaysInActiveConfiguration()" tkey='Maintenance')
                                     li#mgBkp
                                         a(id="opcionBackup" onclick="hideMenu(\'#MenuBackup\',\'#MenuCfgBackup\');" tkey='Backup')
+                                    li#about(style='margin-top:199px')
+                                        a(id='opcAbout' onclick='About();') Acerca de..
             #MenuConfiguration
                 table#Principal(style='width:100%')
                     tr(style='vertical-align:top')
