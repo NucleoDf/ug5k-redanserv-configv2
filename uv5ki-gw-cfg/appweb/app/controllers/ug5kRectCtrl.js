@@ -755,7 +755,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         ats.push({ inicial: abonados[0], final: abonados[1] });
                     }
                     else {
-                        alert(/*"Error Formato Rango: "*/transerv.translate('ICTRL_MSG_01') + value);
+                        console.log(/*"Error Formato Rango: "*/transerv.translate('ICTRL_MSG_01') + value);
                     }
                 }
             });

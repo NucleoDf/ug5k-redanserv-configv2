@@ -111,6 +111,7 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
     /** */
     function defResource(slv, can, tp) {
         var idRec = tp == 1 ? "RD-" + slv + "-" + can : "TF-" + slv + "-" + can;
+        var PrecisionAudio = tp == 1 ? 0 : 1;
         return {
             IdRecurso: idRec,
             Radio_o_Telefonia: tp == 1 ? 1 : 2,
@@ -157,7 +158,7 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                     [2,3,7,10,12,15],
                 iSesionPrio: 0,
                 iPttPrio: 0,
-                iPrecisionAudio: 1,
+                iPrecisionAudio: PrecisionAudio,
                 colateral: {
                     name: "111.110",
                     tipoConmutacion: 0,
