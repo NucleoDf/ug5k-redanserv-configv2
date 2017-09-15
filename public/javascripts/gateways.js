@@ -3672,8 +3672,14 @@ function showDataForRadioResource(data) {
 	//Prioridad Sesion SIP
 	$('#LbSipPriority option[value="' + data.prioridad_sesion_sip + '"]').prop('selected', true);
 	//BSS/CLIMAX
-	if(data.climax_bss==1)
+	if(data.climax_bss==1) {
+		
 		$('#CbBssEnable').prop('checked', true);
+		$('#BssTimeRow').show();
+		$('#ClimaxDelayRow').show();
+		$('#ModoCalculoClimaxRow').show();
+		
+	}
 	else
 		$('#CbBssEnable').prop('checked', false);
 	//Ventana BSS (ms)
