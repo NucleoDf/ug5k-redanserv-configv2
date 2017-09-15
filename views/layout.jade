@@ -327,7 +327,7 @@ html
                       },
                       build: function(){
                         this.setHeader('REDAN. Aplicacion de Configuracion..');
-                        this.set('resizable', true).resizeTo(500, 270);
+                        this.set('resizable', true);
                       }
                   }});
                 }
@@ -344,7 +344,7 @@ html
                                           '<p style="text-align:center">DF Nucleo Copyright ©2017. Todos los Derechos Reservados.</p>' +
                                           '<p style="text-align: right"><a href="' + url_license + '" target="_blank">Acuerdo de Licencia</a></p>' +
                                           '</div>';
-                                alertify.About(msg);
+                                alertify.About(msg).resizeTo(500, 270);
                             }
                 });
             }
