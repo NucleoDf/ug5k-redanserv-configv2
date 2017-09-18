@@ -2148,42 +2148,46 @@ function dragSlave(ev, rank, slave){
 /*** en otra pasarela a una pasarela	  **/
 /*******************************************/
 function SlaveAssigned(ev, rank, idSlave) {
-	loadingContent();
-    ev.preventDefault();
-    $('.dropable').removeClass('target');
-
-    var idCgw = $('#DivGateways').data('idCgw');
-    //var idSlave = '';
-	var source={'idSlave': '', 'rank': ''};
-	var target={'idSlave': '', 'rank': ''};
-
-    //idSlave = ev.dataTransfer.getData("itemDragging");
-    /*
-    if (idSlave != ""){
-    	//	Se asigna un slave desde la lista
-    	// Si la posición está ocupada, esta se libera y luego se asigna
-    	if (ev.target.id != "" && $('#'+ev.target.id).data('idSLAVE') != '')
-    		ReleaseSlaveFromGateway(idCgw, $('#'+ev.target.id).data('idSLAVE'), rank);
-    	
-		AssigSlaveToGateway(idSlave, idCgw, rank);
-	} 	
-	else{
-	*/
-		// Se cambia la slave de slot (o intercambio de slave)
-		source.idSlave=JSON.parse(ev.dataTransfer.getData('slaveDragging')).idSLAVES;
-		source.rank=JSON.parse(ev.dataTransfer.getData('slaveDragging')).rank;
-		target.idSlave=idSlave; //$('#'+ev.target.id).data('idSLAVE');
-		target.rank=rank;
-	
-		//VMG Vamos a hacerlo solo una vez, que sea la query la que haga todo el trabajo ;)
-		changeSlaveFromGateway(target.rank,source.idSlave,idCgw);
-		//if (target.idSlave != ""){
-			// El slot destino está ocupado. => Intercambio de slave
+	if(ev.dataTransfer.getData("slavedragging")!='') {
+		loadingContent();
+		ev.preventDefault();
+		$('.dropable').removeClass('target');
 		
-			//PutSlaveFromGateway(source.rank,target.idSlave,idCgw);
+		var idCgw = $('#DivGateways').data('idCgw');
+		//var idSlave = '';
+		var source = {'idSlave': '', 'rank': ''};
+		var target = {'idSlave': '', 'rank': ''};
+		
+		//idSlave = ev.dataTransfer.getData("itemDragging");
+		/*
+		 if (idSlave != ""){
+		 //	Se asigna un slave desde la lista
+		 // Si la posición está ocupada, esta se libera y luego se asigna
+		 if (ev.target.id != "" && $('#'+ev.target.id).data('idSLAVE') != '')
+		 ReleaseSlaveFromGateway(idCgw, $('#'+ev.target.id).data('idSLAVE'), rank);
+		 
+		 AssigSlaveToGateway(idSlave, idCgw, rank);
+		 }
+		 else{
+		 */
+		// Se cambia la slave de slot (o intercambio de slave)
+		source.idSlave = JSON.parse(ev.dataTransfer.getData('slaveDragging')).idSLAVES;
+		source.rank = JSON.parse(ev.dataTransfer.getData('slaveDragging')).rank;
+		target.idSlave = idSlave; //$('#'+ev.target.id).data('idSLAVE');
+		target.rank = rank;
+		
+		//VMG Vamos a hacerlo solo una vez, que sea la query la que haga todo el trabajo ;)
+		changeSlaveFromGateway(target.rank, source.idSlave, idCgw);
+		//if (target.idSlave != ""){
+		// El slot destino está ocupado. => Intercambio de slave
+		
+		//PutSlaveFromGateway(source.rank,target.idSlave,idCgw);
 		//}
 		GetMySlaves();
-	//}
+		//}
+	}
+	else
+		alertify.error('Operación no permitida.');
 }
 
 
@@ -2780,12 +2784,11 @@ function ShowAssignedSlaves(data){
 	
 	for(var i=0;i<4;i++) {
 		var dragStart='';
-		var onDrop='';
+		var	onDrop="SlaveAssigned(event," + i + "," + i + ")";
 		if(isAuthorized) {
 			dragStart = "dragSlave(event," + i + "," + i + ")";
-			onDrop = "SlaveAssigned(event," + i + "," + i + ")"
 		}
-
+		
 		$('.Slave'+i+' a:first-child').text(i)
 			.attr('style','color:black')
 			.attr('id',i)
