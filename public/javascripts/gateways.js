@@ -330,8 +330,15 @@ var InsertNewResource = function(col, row, isUpdate) {
 		radioResource.tipo_climax				=	$('#TbClimaxDelay option:selected').val();
 		radioResource.metodo_climax				=	$('#TbModoCalculoClimax option:selected').val();
 		
-		radioResource.ventana_bss 			=	$('#TbBssWindow').val();
-		radioResource.retardo_fijo_climax	=	$('#CbCompensation').val();
+		if($('#TbBssWindow').val()!='')
+			radioResource.ventana_bss 			=	$('#TbBssWindow').val();
+		else
+			radioResource.ventana_bss		=	500;
+		if($('#CbCompensation').val()!='')
+			radioResource.retardo_fijo_climax	=	$('#CbCompensation').val();
+		else
+			radioResource.retardo_fijo_climax		=	100;
+		
 		
 		//Lista de URIS
 		var listaUris=[];
