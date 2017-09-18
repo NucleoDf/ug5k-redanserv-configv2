@@ -29,7 +29,7 @@ router.route('/updateUsers')
 router.route('/updateTable/:idTable')
 	.get(function(req,res){
 		//logging.LoggingDate('GET /syncGateways/:refreshTime');
-		myLibGateways.updateTable(req.params.idTable, function(idTable,data){
+		myLibGateways.updateTable(req.params.idTable, function(data){
 			res.json(data);
 		});
 	});
