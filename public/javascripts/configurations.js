@@ -844,11 +844,11 @@ var ShowCopyConfiguration = function(on){
 /*  PARAMS: 								*/
 /*  REV 1.0.2 VMG							*/
 /********************************************/
-var ExistGatewayWithoutResources = function(f) {
+var ExistGatewayWithoutResources = function(idCfg,f) {
 	var retorno = false;
 	$.ajax({
 		type: 'GET',
-		url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/gatewaysHasResources',
+		url: '/configurations/' + idCfg + '/gatewaysHasResources',
 		success: function (result) {
 			var strGateways='Las siguientes pasarelas no tienen recursos asignados:' + '<br />';
 			var gtw=[];
@@ -924,11 +924,11 @@ var ExistGatewayWithoutResources = function(f) {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var ExistGatewaysOut = function(f){
+var ExistGatewaysOut = function(idCfg,f){
 	var retorno = false;
 	$.ajax({
 			type: 'GET',
-			url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/gatewaysOut',
+			url: '/configurations/' + idCfg + '/gatewaysOut',
 			success: function(result){
 						var strGateways='Las siguientes pasarelas no tiene comunicación con el servidor:' + '<br />';
 						var gtw=[];
@@ -1106,11 +1106,11 @@ var GetActiveCfgAndActivate = function(){
 					strmsg='¿Desea aplicar los cambios a las gateways de \"'+data.name+'\"?';
 				alertify.confirm('Ulises G 5000 R',strmsg,
 					function(){
-						ExistGatewaysOut(function(existe){
+						ExistGatewaysOut(data.idCFG,function(existe){
 							if (existe.Aplicar){
 								// Comprobar si existe alguna pasarela de la configuración
 								// a activar sin recursos configurados
-								ExistGatewayWithoutResources(function(gateways) {
+								ExistGatewayWithoutResources(data.idCFG, function(gateways) {
 									if (gateways.Aplicar) {
 										//TODO esto quita solo la coma del final...
 										listOfGateways = listOfGateways.substr(0,listOfGateways.length - 1);

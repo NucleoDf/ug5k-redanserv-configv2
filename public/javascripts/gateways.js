@@ -717,6 +717,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 								alertify.success('El recurso se ha añadido correctamente.');
 								GenerateHistoricEvent(ID_HW,ADD_HARDWARE_RESOURCE,$('#TbNameResource').val(),$('#loggedUser').text());
 								GetMySlaves();
+								//if(Vicente)
 								resModified=true;
 							}
 							else
