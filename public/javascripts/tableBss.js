@@ -189,6 +189,22 @@ var PutTable = function(){
 				GetTablesBss(function () {
 					GetTable($('#FormTableBss').data('idtabla_bss'));
 				});
+				//Vamos a llamar a actualizar las pasarelas
+				$.ajax({
+					type: 'GET',
+					url: '/gateways/updateTable/'+$('#FormTableBss').data('idtabla_bss'),
+					success: function (data) {
+						if (data.error == null) {
+							alertify.success('Pasarelas actualizadas.');
+						}
+						else if (data.error) {
+							alertify.error('Error: ' + data.error);
+						}
+					},
+					error: function (data) {
+						alertify.error('Error actualizando pasarelas.');
+					}
+				});
 			}
 			else {
 				alertify.error('Error: '+data.error);

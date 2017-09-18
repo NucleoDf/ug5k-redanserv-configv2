@@ -26,6 +26,13 @@ router.route('/updateUsers')
 			res.json(data);
 		});
 	});
+router.route('/updateTable/:idTable')
+	.get(function(req,res){
+		//logging.LoggingDate('GET /syncGateways/:refreshTime');
+		myLibGateways.updateTable(req.params.idTable, function(idTable,data){
+			res.json(data);
+		});
+	});
 router.route('/syncGateways/:refreshTime')
 	.get(function(req,res){
 		//logging.LoggingDate('GET /syncGateways/:refreshTime');
