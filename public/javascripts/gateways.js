@@ -2044,24 +2044,29 @@ function ResourceAssigned(ev,fila,columna){
 	
 	var slaveTo=$('.Slave'+columna).data('idSLAVE');
 
-	var data = JSON.parse(ev.dataTransfer.getData("resourceDragging"));
-	// Cloning data
-	var dataFrom = JSON.parse(JSON.stringify(data));
-
-	data.SLAVES_idSLAVES=slaveTo;
-	data.rank=fila;
-	data.dataFrom=dataFrom;
-
-	$.ajax({type: 'PUT', 
-			url: '/hardware/positions/'+$('#DivGateways').data('idCgw'),
-			dataType: 'json', 
-			contentType:'application/json',
+	if(ev.dataTransfer.getData("resourceDragging")!='') {
+		var data = JSON.parse(ev.dataTransfer.getData("resourceDragging"));
+		// Cloning data
+		var dataFrom = JSON.parse(JSON.stringify(data));
+		
+		data.SLAVES_idSLAVES = slaveTo;
+		data.rank = fila;
+		data.dataFrom = dataFrom;
+		
+		$.ajax({
+			type: 'PUT',
+			url: '/hardware/positions/' + $('#DivGateways').data('idCgw'),
+			dataType: 'json',
+			contentType: 'application/json',
 			data: JSON.stringify(data),
-			success: function(data){
+			success: function (data) {
 				resModified = true;
-					GetMySlaves();
+				GetMySlaves();
 			}
-	});
+		});
+	}
+	else
+		alertify.error('Operación no permitida.');
 }
 
 /*******************************************/
@@ -2771,7 +2776,16 @@ function ShowAssignedSlaves(data){
 	
 	//Empezamos desde aquí
 	//Inicializar las IA4
+	var isAuthorized = Authorize($('#BodyRedan').data('perfil'),[ccAdminProfMsc,ccConfiProfMsc]);
+	
 	for(var i=0;i<4;i++) {
+		var dragStart='';
+		var onDrop='';
+		if(isAuthorized) {
+			dragStart = "dragSlave(event," + i + "," + i + ")";
+			onDrop = "SlaveAssigned(event," + i + "," + i + ")"
+		}
+
 		$('.Slave'+i+' a:first-child').text(i)
 			.attr('style','color:black')
 			.attr('id',i)
@@ -2784,13 +2798,17 @@ function ShowAssignedSlaves(data){
 		
 		$('.Slave'+i).addClass('dragableItem occuped')
 			.attr('draggable',true)
-			.attr('ondrop',"SlaveAssigned(event," + i + "," + i + ")")
-			.attr('ondragstart',"dragSlave(event," + i + "," + i + ")")
+			.attr('ondrop',onDrop)
+			.attr('ondragstart',dragStart)
 			.data('idSLAVE',i);
 	}
 	
 	if (data.radio != null || data.tfno!=null) {
 		$.each(data.radio, function (index, value) {
+			var dragStartResRadio = '';
+			if(isAuthorized) {
+				dragStartResRadio = "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1," + value.idrecurso_radio + ")";
+			}
 			$('.Res' + value.fila + value.columna).data('idResource', value.idrecurso_radio);
 			$('.Res' + value.fila + value.columna).data('updated', true)
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
@@ -2805,7 +2823,7 @@ function ShowAssignedSlaves(data){
 				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' MHz').append(iconOperator);
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
-				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1,"+value.idrecurso_radio+")")
+				.attr('ondragstart', dragStartResRadio)
 			// No viene de una operacion de D&D sobre otra pasarela
 			/*$('.Res' + fila + col)//.attr('onclick','GotoSlave(' + idSlave + ')')
 			 .data('pos', r.POS_idPOS)
@@ -2815,6 +2833,10 @@ function ShowAssignedSlaves(data){
 			//.attr('onclick',"UpdateResource('" + idSlave + "','" + fila + "')");
 		});
 		$.each(data.tfno, function (index, value) {
+			var dragStartResPhone= '';
+			if(isAuthorized) {
+				dragStartResPhone = "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",2," + value.idrecurso_telefono + ")"
+			}
 			$('.Res' + value.fila + value.columna).data('idResource', value.idrecurso_telefono);
 			$('.Res' + value.fila + value.columna).data('updated', true)
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
@@ -2822,7 +2844,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(iconPhone);
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
-				.attr('ondragstart', "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",2,"+value.idrecurso_telefono+")")
+				.attr('ondragstart', dragStartResPhone)
 			
 		});
 	}
