@@ -19,6 +19,13 @@ var gcfg = require('../../configUlises.json');
 // Nest routers by attaching them as middleware:
 //router.use('/:gatewayId/resources', myGatewaysModule);
 
+router.route('/updateUsers')
+	.get(function(req,res){
+		//logging.LoggingDate('GET /syncGateways/:refreshTime');
+		myLibGateways.updateUsers(function(data){
+			res.json(data);
+		});
+	});
 router.route('/syncGateways/:refreshTime')
 	.get(function(req,res){
 		//logging.LoggingDate('GET /syncGateways/:refreshTime');

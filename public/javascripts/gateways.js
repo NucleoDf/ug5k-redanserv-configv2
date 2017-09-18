@@ -3575,7 +3575,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 				}
 			},
 			error: function (data) {
-				alertify.error('Error cconsultando los recursos.');
+				alertify.error('Error consultando los recursos.');
 			}
 		});
 	}

@@ -95,7 +95,23 @@ var PutUser = function(){
 						alertify.success('Usuario \"' + $('#IdOperador').val() + '\" actualizado.');
 						GetUsuarios();
 						/** 20170509. AGL Gestor 'Aplicar cambios' */
-						usersModified = true;								
+						usersModified = true;
+						//Vamos a llamar a actualizar las pasarelas
+						$.ajax({
+							type: 'GET',
+							url: '/gateways/updateUsers',
+							success: function (data) {
+								if (data.error == null) {
+									alertify.success('Pasarelas actualizadas.');
+								}
+								else if (data.error) {
+									alertify.error('Error: ' + data.error);
+								}
+							},
+							error: function (data) {
+								alertify.error('Error actualizando pasarelas.');
+							}
+						});
 					},
 			error: function(data){
 						alertify.error('El usuario \"' + $('#IdOperador').val() + '\" no existe.');
