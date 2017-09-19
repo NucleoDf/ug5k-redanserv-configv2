@@ -1798,6 +1798,8 @@ function removeRadioResource(idResource) {
 					alertify.success('El recurso se ha eliminado correctamente.');
 					GenerateHistoricEvent(ID_HW,REMOVE_HARDWARE_RESOURCE,$('#TbNameResource').val(),$('#loggedUser').text());
 					GetMySlaves();
+					if(data.activa==1)
+						resModified=true;
 				}
 				else {
 					alertify.error('Error: '+data.error);
