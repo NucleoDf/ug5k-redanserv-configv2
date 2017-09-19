@@ -239,13 +239,16 @@ var GetUsuario = function (ind,valor){
 					$("#IdOperador").val(usuario.name);
 					$("#ClaveUser").val(window.atob(usuario.clave));
 					$('#AddFormUser').data('idOperador',usuario.idOPERADORES);
-
+					// Rellena la tabla de Perfiles...
 					var valor = usuario.perfil;
 					for (var i=0;i<16;i++){
 						if ((i!=2) && (i!=5)){		// el perfil 2 no existe, y el 5 es ingenieria					
 							if (Boolean(valor & 1)) {
-								$('#' + (Math.pow(2,i))).prop('checked',true);
-								$('#' + (Math.pow(2,i))).prop('disabled', false);
+								var check_control = $('#prf_' + (Math.pow(2,i)));
+								// $('#' + (Math.pow(2,i))).prop('checked',true);
+								// $('#' + (Math.pow(2,i))).prop('disabled', false);
+								check_control.prop('checked',true);
+								check_control.prop('disabled', false);
 							}							
 							//else
 								//$('#' + (Math.pow(2,i))).prop('disabled', true);
@@ -301,7 +304,7 @@ var GetUsuario = function (ind,valor){
 		/*Con la 5 pasa lo mismo, era el perfil ingenieria*/
 			if ((i!=2) && (i!=5)) {
 				var valor = Math.pow(2,i);
-				$('#' + valor).prop('disabled', false);
+				$('#prf_' + valor).prop('disabled', false);
 			}
 		}
 
@@ -357,7 +360,8 @@ var GetPerfil = function(){
 		/*La posicion 3 es el reconocimiento de alarmas que ya no se usa pero se mantienen  la posición del resto por compatibilidad con otras aplicaciones*/
 		/*Con la 5 pasa lo mismo, era el perfil ingenieria*/
 		if ((i!=2) && (i!=5)) {
-			if ($('#' + (Math.pow(2,i))).prop('checked'))
+			var id = '#prf_' + (Math.pow(2,i));
+			if ($(id).prop('checked'))
 				valor+=Math.pow(2,i);
 		}
 	}
