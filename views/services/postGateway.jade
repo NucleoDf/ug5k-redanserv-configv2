@@ -284,7 +284,7 @@ script.
 			var regex = /^-?[0-9]*(?:\.\d{1,2})?$/; // Números con hasta dos decimales, positivos o negativos
 
 			if ($(element).val()!='' && ($(element).val().match(regex) == null ||
-				(Number($(element).val()) < 10 || Number($(element).val()) > 200)))
+				(Number($(element).val()) < 10 || Number($(element).val()) > 250)))
 				Fade(element,label);
 		}
 
