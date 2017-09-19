@@ -87,6 +87,7 @@
 	"GRSInternalDelay"		: "Retraso interno GRS (ms.)",
 	"ErrorGRSInternalDelay"	: "Valor de Retraso interno GRS (ms.) no válido",
 	"Time"					: "Tiempo",
+	"Time_ms"				: "Tiempo (ms)",
 	"ErrorTime"				: "Tiempo no válido",
 	"ClimaxDelay"			: "Modo Climax",
 	"SquelchDeactTimeout"	: "Tiempo desactivación squelch",
