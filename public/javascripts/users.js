@@ -27,7 +27,22 @@ var DelUsuario = function(){
 									alertify.success('Usuario \"' + data.data + '\" eliminado.');
 									GetUsuarios();
 									/** 20170509. AGL Gestor 'Aplicar cambios' */
-									usersModified = true;								
+									usersModified = true;
+									$.ajax({
+										type: 'GET',
+										url: '/gateways/updateUsers',
+										success: function (data) {
+											if (data.error == null) {
+												alertify.success('Pasarelas actualizadas.');
+											}
+											else if (data.error) {
+												alertify.error('Error: ' + data.error);
+											}
+										},
+										error: function (data) {
+											alertify.error('Error actualizando pasarelas.');
+										}
+									});
 								}
 							},
 					error: function(data){
@@ -172,7 +187,22 @@ var PostUser = function (){
 						alertify.success('El usuario \"' + $('#IdOperador').val() + '\" ha sido creado.');
 						GetUsuarios();
 						/** 20170509. AGL Gestor 'Aplicar cambios' */
-						usersModified = true;								
+						usersModified = true;
+						$.ajax({
+							type: 'GET',
+							url: '/gateways/updateUsers',
+							success: function (data) {
+								if (data.error == null) {
+									alertify.success('Pasarelas actualizadas.');
+								}
+								else if (data.error) {
+									alertify.error('Error: ' + data.error);
+								}
+							},
+							error: function (data) {
+								alertify.error('Error actualizando pasarelas.');
+							}
+						});
 					}
 					else if (data.error == "ER_DUP_ENTRY")
 						alertify.error('El usuario \"' + $('#IdOperador').val() + '\" ya existe.');
