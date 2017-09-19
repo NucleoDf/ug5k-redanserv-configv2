@@ -2792,12 +2792,12 @@ function ShowAssignedSlaves(data){
 		
 		$('.Slave'+i+' a:first-child').text(i)
 			.attr('style','color:black')
-			.attr('id',i)
+			.attr('id','IA4'+i)
 			.data('idSLAVE',i);
 		
 		$('.Slave'+i+' a:first-child').text('IA4')
 			.attr('style','color:black; font-size: 8px; margin-right: 0')
-			.attr('id',i)
+			.attr('id','IA4'+i)
 			.data('idSLAVE',i);
 		
 		$('.Slave'+i).addClass('dragableItem occuped')
