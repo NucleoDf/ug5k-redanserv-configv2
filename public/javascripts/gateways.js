@@ -717,8 +717,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 								alertify.success('El recurso se ha añadido correctamente.');
 								GenerateHistoricEvent(ID_HW,ADD_HARDWARE_RESOURCE,$('#TbNameResource').val(),$('#loggedUser').text());
 								GetMySlaves();
-								//if(Vicente)
-								resModified=true;
+								if(data.activa)//Solo si es config activa se habilita el botón de Aplicar Cambios
+									resModified=true;
 							}
 							else
 								alertify.error('Error: ' + data.error);
@@ -760,7 +760,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 								//var paramHistoric={0:}
 								GenerateHistoricEvent(ID_HW, MODIFY_HARDWARE_RESOURCE_LOGIC_PARAM, $('#TbNameResource').val(), $('#loggedUser').text());
 								alertify.success('El recurso se ha actualizado correctamente.');
-								resModified=true;
+								if(data.activa)//Solo si es config activa se habilita el botón de Aplicar Cambios
+									resModified=true;
 							}
 							else
 								alertify.error('Error: ' + data.error);
