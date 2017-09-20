@@ -378,5 +378,6 @@
 	"ErrorFrecuencia"		: "Formato de frecuencia no válido",
 	"ModoCalculoClimax"		: "Modo cálculo Climax",
 	"ModoRelativo"          : "Modo Relativo",
-	"ModoAbsoluto" 			: "Modo Absoluto"
+	"ModoAbsoluto" 			: "Modo Absoluto",
+	"LoadIndexMessage" 		: "Indice de carga"
 }
