@@ -357,23 +357,70 @@ app.get('/alive',
 
   /** 20070908 AGL. Para Leer / Escribir la configuracion local del servidor */
   app.get('/localconfig',
-//    isAuthenticated,
+    isAuthenticated,
     function(req, res, next) {
         res.json(config.Ulises);
   });
 
+  /** */
+  var Ajv = require('ajv');
+  var ajv = Ajv({AllErrors: true});
+
+  var validateLocalConfig = ajv.compile(
+    {
+        "properties": {
+            "BackupServiceDomain": {"type": "string"}, 
+            "Date": {"type": "string"}, 
+            "Files": {"items": {}, "type": "array" }, 
+            "HistoricsDeep": {"type": "integer"}, 
+            "LoginSystemTrace": {"type": "boolean"}, 
+            "LoginTimeOut": {"type": "integer"}, 
+            "MySQL": { "type": "string" }, 
+            "NodeJS": { "type": "string" }, 
+            "Region": { "type": "string" }, 
+            "SubVersion": {"type": "string"}, 
+            "Version": { "type": "string" }, 
+            "dbdatabase": { "type": "string" }, 
+            "dbhost": {"type": "string"}, 
+            "dbpassword": {"type": "string"}, 
+            "dbuser": {"type": "string"}, 
+            "log2con": {"type": "boolean"}, 
+            "log2file": {"type": "boolean" }, 
+            "logfile_maxfiles": { "type": "integer" }, 
+            "logfile_path": {"type": "string" }, 
+            "logfile_sizefile": {"type": "integer"}, 
+            "maxCycleTime": { "type": "integer" }, 
+            "morgan": { "type": "boolean" }, 
+            "refreshTime": { "type": "integer" }
+        },
+      "required": [
+            "LoginTimeOut", "morgan", "logfile_sizefile", "SubVersion", "dbhost", 
+            "logfile_path", "logfile_maxfiles", "log2file", "BackupServiceDomain", 
+            "Region", "maxCycleTime", "log2con", "dbuser", "Date", "dbpassword", 
+            "refreshTime", "NodeJS", "Files", "HistoricsDeep", "dbdatabase", 
+            "Version", "MySQL", "LoginSystemTrace"
+        ] 
+    }  );
+
   app.post('/localconfig',
-//    isAuthenticated,
+    isAuthenticated,
     function(req, res) {
+        // console.log(req.body);
+
         // Chequear coherencia.
-        // Lo salvo en los datos...
-        config.Ulises = req.body;
-        // Lo salvo en el fichero...
-        var Ulises = {Ulises: req.body};
-        fs.writeFile("./configUlises_test.json", JSON.stringify(Ulises, null, 2), (err)=>{
-           if(err) res.json({res: false, txt: 'Error fs.writeFile'});
-           else    res.json({res: true,  txt: 'File saved.'});
-        });
+        if (validateLocalConfig(req.body)){
+            // Lo salvo en los datos...
+            config.Ulises = req.body;
+            // Lo salvo en el fichero...
+            var Ulises = {Ulises: req.body};
+            fs.writeFile("./configUlises.json", JSON.stringify(Ulises, null, 2), (err)=>{
+               if(err) res.json({res: false, txt: 'Error fs.writeFile'});
+               else    res.json({res: true,  txt: 'File saved.'});
+            });
+        }
+        else {
+            res.json({res: false, txt: 'JSON no valido...'});
+        }
     });
   
 app.use('/users', isAuthenticated, users);
@@ -498,7 +545,7 @@ fs.watchFile(require.resolve('./configUlises.json'), function() {
       /** Para cargar dinamicamente los cambios de configuracion */
       delete require.cache[require.resolve('./configUlises.json')];
       config = require('./configUlises.json');
-      // console.log('Configuracion cambiada...');
+      console.log('Configuracion cambiada...');
 });
 
 app.set('port', process.env.PORT || 5050);
