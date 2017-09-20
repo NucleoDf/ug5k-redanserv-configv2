@@ -441,6 +441,16 @@ var InsertNewResource = function(col, row, isUpdate) {
 			uri2Insert={};
 		}
 		
+		//Mensaje de relleno de URIS
+		switch($('#LbTypeRadio option:selected').val()){
+			case '0':
+				if($('#UriTxA1').val()==''&&$('#UriRxA1').val()=='')
+					//alertify.alert('Ulises G 5000 R', 'Quiere trasladar la pasarela del emplazamiento');
+				break;
+			case '1':
+				break;
+		}
+		
 		radioResource.listaUris=insertBNList(listaUris);
 		radioResource.restriccion_entrantes = $('#SRestriccion option:selected').val();
 	}
@@ -4006,8 +4016,12 @@ function showWhiteBlackList(idRecurso, listType) {
 
 function calculateLoadIndex(data) {
 	var loadIndex=0;
-	for (var i=0;i<data.radio.length;i++)
-		loadIndex+=2;
+	for (var i=0;i<data.radio.length;i++) {
+		if(data.radio[i].tipo_agente==2||data.radio[i].tipo_agente==3)
+			loadIndex += 8;
+		else
+			loadIndex += 2;
+	}
 	for (var i=0;i<data.tfno.length;i++)
 		loadIndex++;
 	return loadIndex;
