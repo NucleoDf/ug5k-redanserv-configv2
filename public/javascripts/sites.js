@@ -271,7 +271,7 @@ function UpdateSingleSite(){
 					//ShowSite(data.data,$('#IdSite').data('idSite'));//TODO esto no chuta
 				}
 				else if (data.error == 'ER_DUP_ENTRY'){
-					$('#IdSite').val('');
+					$('#IdSite').val($('#IdSite')['0'].oldValue);
 					alertify.error('Ya existe un emplazamiento \"' + data.dupName+ '\" en esta configuración.');
 				}
 				else

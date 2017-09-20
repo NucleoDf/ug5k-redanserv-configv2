@@ -182,7 +182,7 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                 td.New(style='padding-top: 30px;' align="center" width="100%" colspan=8)
                                     a.ButtonNucleo(id='AddSiteButton', onclick='CreateSite()' style="text-align: center; padding: 5px 10px; width:120px" tkey='NewSite')
                             tr
-                                td.New(style='padding-top: 15px' colspan=5)
+                                td.New2(style='padding-top: 15px' colspan=5)
                                     .content.fadeFormNucleo#AssignatedGatewaysDiv(style='height: 280px;width: 672px')
                                         // 20170518. AGL. Eliminada la opcion de otras pasarelas diferentes a la de la configuracion
                                         table(style='width: inherit;table-layout:fixed')
@@ -193,7 +193,7 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                                     label.labelNucleo Ver todas las pasarelas
                                                     input#CBViewFreeGateways(type='checkbox' onclick='ClickViewFreeGateways()')
                                             tr(align='center')
-                                                td.New(rowspan='2' style='vertical-align:top')
+                                                td.New2(rowspan='2' style='vertical-align:top')
                                                     ul.list#assignatedGatewaysList(style='width:310px;height:230px;margin-left:0' ondrop="dropAssignedGateway(event)" ondragover="allowDrop(event)")
                                                 td#CBFreeGatewaysRow
                                                     select#CBFreeGateways(type = 'select' style='width:220px;display:none' onchange='ClickCBFreeGateways()')
@@ -466,7 +466,7 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                                                     td(style='padding-left:15px; padding-bottom: 10px')
                                                                         label(tkey='ServiceTemplate')
                                                                     td.New(style='padding-left:10px; padding-bottom: 10px')
-                                                                        select#ListServices.toReset(style='width:20em' onchange='copyServiceData()' onmousedown='this.oldValue=this.selectedIndex')
+                                                                        select#ListServices.toReset(style='width:20em' onchange='copyServiceData()' onmousedown='this.oldValue=this.selectedIndex' title="Permite copiar datos de servicio de otras pasarelas dadas de alta en el sistema.")
                                                                 //  td.New(style='padding-left:25px;padding-bottom: 10px')
                                                                 //      button.ButtonNucleo#CopyButton(type="button" onclick='CloneService(this)' tkey='CopyService')
                                                                 //  td.New(style='padding-left:25px;padding-bottom: 10px')
@@ -670,9 +670,10 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                                                                 button.ButtonNucleo(type="button" onclick="RemoveServer()" style='width:120px; height: 25px' tkey='RemoveServer')
                                                         form.fadeFormNucleo#HwFormGateway(style='display:none; padding:10px 10px')
                                                             table
+
                                                                 tr
                                                                     td(style='width: 75%')
-                                                                        #HardwareZone(style='position:relative;padding: 5% 5%')
+                                                                        #HardwareZone(style='position:relative')
                                                                             table.gradienttable(style='table-layout: fixed;width:100%')
                                                                                 tr(style='height:20px')
                                                                                     th.dropable.Slave0(style='width:25%' draggable=false ondragover="allowDrop(event)")
@@ -726,7 +727,10 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                                                                     td.dropable.Res32(draggable=false ondrop="ResourceAssigned(event,3,2)" ondragover="allowDrop(event)" onclick="GotoResource(3,2,false)")
                                                                                         a(href='#' style='color:gray' ) void
                                                                                     td.dropable.Res33(draggable=false ondrop="ResourceAssigned(event,3,3)" ondragover="allowDrop(event)" onclick="GotoResource(3,3,false)")
-                                                                                        a(href='#' style='color:gray' ) void                        
+                                                                                        a(href='#' style='color:gray' ) void
+                                                                tr
+                                                                    td(align="center")
+                                                                        label#LbLoadIndex(style='color:black' tkey='LoadIndexMessage')
                                                     table#TableToolsGateway(style="width: 755px; padding: 5px 0; display:none")
                                                         tr(align="center")
                                                             td.New(style='padding-top: 5px' align="center")

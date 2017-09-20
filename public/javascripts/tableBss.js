@@ -35,9 +35,12 @@ var PutTable = function(){
 					GetTable($('#FormTableBss').data('idtabla_bss'));
 				});
 				//Vamos a llamar a actualizar las pasarelas
+				var idTabla=0;
+				if($('#FormTableBss').data('idtabla_bss')!=null)
+					idTabla=$('#FormTableBss').data('idtabla_bss');
 				$.ajax({
 					type: 'GET',
-					url: '/gateways/updateTable/'+$('#FormTableBss').data('idtabla_bss'),
+					url: '/gateways/updateTable/'+idTabla,
 					success: function (data) {
 						if (data.error == null)
 							alertify.success('Pasarelas actualizadas.');
@@ -200,6 +203,8 @@ var PostTable = function(){
 					/** 20170516. AGL. Activar Cambios... */
 					tbbssModified = true;
 					GetTablesBss(function () {
+						$('#UpdateTableButton').text('Actualizar');
+						$('#UpdateTableButton').attr('onclick', 'PutTable()');
 						GetTable(data.idTable);
 					});
 				}

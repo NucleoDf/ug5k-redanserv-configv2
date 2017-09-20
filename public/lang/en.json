@@ -372,5 +372,6 @@
 	"ErrorFrecuencia"		: "Invalid frecuency value",
 	"ModoCalculoClimax"		: "Climax calculation mode",
 	"ModoRelativo"          : "Relativ Mode",
-	"ModoAbsoluto" 			: "Absolut Mode"	
+	"ModoAbsoluto" 			: "Absolut Mode",
+	"LoadIndexMessage" 		: "Load Index: "
 }
