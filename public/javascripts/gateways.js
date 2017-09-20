@@ -3967,7 +3967,7 @@ function showWhiteBlackList(idRecurso, listType) {
 				resetUrisValues();
 				var kNegra=0, kBlanca=0;
 				data.list.forEach(function (lista) {
-					if(listType=='LSN'){//Lista Negra
+					if(lista.tipo=='LSN'){//Lista Negra
 						kNegra++;
 						if(kNegra==1)
 							$('#Uri1BL').val(lista.uri.substring(4,lista.uri.length));
@@ -3986,7 +3986,7 @@ function showWhiteBlackList(idRecurso, listType) {
 						if(kNegra==8)
 							$('#Uri8BL').val(lista.uri.substring(4,lista.uri.length));
 					}
-					if(listType=='LSB'){//Lista Blanca
+					if(lista.tipo=='LSB'){//Lista Blanca
 						kBlanca++;
 						if(kBlanca==1)
 							$('#Uri1WL').val(lista.uri.substring(4,lista.uri.length));
