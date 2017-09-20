@@ -379,5 +379,5 @@
 	"ModoCalculoClimax"		: "Modo cálculo Climax",
 	"ModoRelativo"          : "Modo Relativo",
 	"ModoAbsoluto" 			: "Modo Absoluto",
-	"LoadIndexMessage" 		: "Indice de carga"
+	"LoadIndexMessage" 		: "Indice de carga: "
 }

@@ -2770,6 +2770,17 @@ function ShowAssignedSlaves(data){
 	var iconPhone="<img src='/images/iconPhone.gif' style='float: right'/>";
 	var iconOperator="<img src='/images/iconOperator.gif' style='float: right'/>";
 	
+	var loadIndex=0
+	$('#LbLoadIndex').text('Indice de carga: ');
+	loadIndex=calculateLoadIndex(data);
+	$('#LbLoadIndex').append(loadIndex);
+	
+	if(loadIndex>16) {
+		$('#LbLoadIndex').append(' - Indice máximo sobrepasado.');
+		$('#LbLoadIndex').css('color', 'red');
+	}
+	else
+		$('#LbLoadIndex').css('color', 'black');
 	var idCgw = $('#DivGateways').data('idCgw');
 	//var assignedSlaves=[];
 	//var freeSlaves=[];
@@ -3993,3 +4004,11 @@ function showWhiteBlackList(idRecurso, listType) {
 	});
 }
 
+function calculateLoadIndex(data) {
+	var loadIndex=0;
+	for (var i=0;i<data.radio.length;i++)
+		loadIndex+=2;
+	for (var i=0;i<data.tfno.length;i++)
+		loadIndex++;
+	return loadIndex;
+}

@@ -670,9 +670,10 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                                                                 button.ButtonNucleo(type="button" onclick="RemoveServer()" style='width:120px; height: 25px' tkey='RemoveServer')
                                                         form.fadeFormNucleo#HwFormGateway(style='display:none; padding:10px 10px')
                                                             table
+
                                                                 tr
                                                                     td(style='width: 75%')
-                                                                        #HardwareZone(style='position:relative;padding: 5% 5%')
+                                                                        #HardwareZone(style='position:relative')
                                                                             table.gradienttable(style='table-layout: fixed;width:100%')
                                                                                 tr(style='height:20px')
                                                                                     th.dropable.Slave0(style='width:25%' draggable=false ondragover="allowDrop(event)")
@@ -726,7 +727,10 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                                                                     td.dropable.Res32(draggable=false ondrop="ResourceAssigned(event,3,2)" ondragover="allowDrop(event)" onclick="GotoResource(3,2,false)")
                                                                                         a(href='#' style='color:gray' ) void
                                                                                     td.dropable.Res33(draggable=false ondrop="ResourceAssigned(event,3,3)" ondragover="allowDrop(event)" onclick="GotoResource(3,3,false)")
-                                                                                        a(href='#' style='color:gray' ) void                        
+                                                                                        a(href='#' style='color:gray' ) void
+                                                                tr
+                                                                    td(align="center")
+                                                                        label#LbLoadIndex(style='color:black' tkey='LoadIndexMessage')
                                                     table#TableToolsGateway(style="width: 755px; padding: 5px 0; display:none")
                                                         tr(align="center")
                                                             td.New(style='padding-top: 5px' align="center")
