@@ -48,6 +48,13 @@ router.route('/export/:idGtw')
 		});
 	});
 
+router.route('/checkConfigName/:name/:idCfg')
+	.get(function(req,res){
+		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+		myLibConfigurations.checkConfigName(req.params.name,req.params.idCfg,function(result){
+			res.json(result);
+		});
+	});
 /*router.route('/export/:gateway/:cfg')
 	.put(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
