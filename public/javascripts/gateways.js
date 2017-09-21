@@ -235,6 +235,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 	var telephoneResource={};
 	var resourceType=0;
 	var isUrisCleaned=false;
+	var isNoTableBssSelected=false;
 	//Para no tener que hacer ningún SELECT de la id de la pasarela
 	var idCgw=$('#DivGateways').data('idCgw');
 	
@@ -466,6 +467,14 @@ var InsertNewResource = function(col, row, isUpdate) {
 					$('#UriTxB2').val()==''&&$('#UriRxB2').val()==''&&
 					$('#UriTxB3').val()==''&&$('#UriRxB3').val()=='')
 					isUrisCleaned=true;
+				break;
+			case '4':
+				if($('#CbBssAudioTable option:selected').val() == -1)
+					isNoTableBssSelected=true;
+				break;
+			case '6':
+				if($('#CbBssAudioTable option:selected').val() == -1)
+					isNoTableBssSelected=true;
 				break;
 		}
 		
@@ -716,19 +725,32 @@ var InsertNewResource = function(col, row, isUpdate) {
 	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
 	
-	if(isUrisCleaned) {
-		alertify.confirm('Ulises G 5000 R', 'Los campos URI para el tipo de recurso radio ' +
-			'seleccionado se encuentran vacíos. ¿Desea continuar?',
+	if(isNoTableBssSelected){
+		alertify.confirm('Ulises G 5000 R', 'No se ha seleccionado tabla de calificación de audio para el ' +
+			'tipo de recurso radio seleccionado. ¿Desea continuar?',
 			function () {
-				ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId);
+					ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
 			},
 			function () {
 				alertify.error('Cancelado');
 			}
 		);
 	}
-	else
-		ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId);
+	else {
+		if (isUrisCleaned) {
+			alertify.confirm('Ulises G 5000 R', 'Los campos URI para el tipo de recurso radio ' +
+				'seleccionado se encuentran vacíos. ¿Desea continuar?',
+				function () {
+					ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
+				},
+				function () {
+					alertify.error('Cancelado');
+				}
+			);
+		}
+		else
+			ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
+	}
 }
 
 /************************************/
