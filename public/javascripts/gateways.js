@@ -716,15 +716,34 @@ var InsertNewResource = function(col, row, isUpdate) {
 	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
 	
-	if(isUrisCleaned)
-		alertify.alert('Los campos URI para el tipo de recurso radio seleccionado se encuentran vacíos.');
+	if(isUrisCleaned) {
+		alertify.confirm('Ulises G 5000 R', 'Los campos URI para el tipo de recurso radio ' +
+			'seleccionado se encuentran vacíos. ¿Desea continuar?',
+			function () {
+				ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId);
+			},
+			function () {
+				alertify.error('Cancelado');
+			}
+		);
+	}
+	else
+		ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId);
+}
+
+/************************************/
+/*	FUNCTION: ajaxInsertUpdateRes 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+function ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId){
 	//Nuevo Recurso
-	if(isUpdate=='false') {
+	if (isUpdate == 'false') {
 		$.ajax({
 			type: 'GET',
-			url: '/hardware/checkresname/'+$('#TbNameResource').val()+'/'+$('#DivGateways').data('idCgw')+'/0',
+			url: '/hardware/checkresname/' + $('#TbNameResource').val() + '/' + $('#DivGateways').data('idCgw') + '/0',
 			success: function (data) {
-				if (data == "NAME_DUP"){
+				if (data == "NAME_DUP") {
 					
 					alertify.alert('El nombre del recurso \"' + $('#TbNameResource').val() +
 						'\" ya se encuentra dada de alta en la pasarela. Utilize otro nombre.');
@@ -744,10 +763,10 @@ var InsertNewResource = function(col, row, isUpdate) {
 						success: function (data) {
 							if (data.error == null) {
 								alertify.success('El recurso se ha añadido correctamente.');
-								GenerateHistoricEvent(ID_HW,ADD_HARDWARE_RESOURCE,$('#TbNameResource').val(),$('#loggedUser').text());
+								GenerateHistoricEvent(ID_HW, ADD_HARDWARE_RESOURCE, $('#TbNameResource').val(), $('#loggedUser').text());
 								GetMySlaves();
-								if(data.activa)//Solo si es config activa se habilita el botón de Aplicar Cambios
-									resModified=true;
+								if (data.activa)//Solo si es config activa se habilita el botón de Aplicar Cambios
+									resModified = true;
 							}
 							else
 								alertify.error('Error: ' + data.error);
@@ -765,9 +784,9 @@ var InsertNewResource = function(col, row, isUpdate) {
 	else {
 		$.ajax({
 			type: 'GET',
-			url: '/hardware/checkresname/'+$('#TbNameResource').val()+'/'+$('#DivGateways').data('idCgw')+'/'+resourceId,
+			url: '/hardware/checkresname/' + $('#TbNameResource').val() + '/' + $('#DivGateways').data('idCgw') + '/' + resourceId,
 			success: function (data) {
-				if (data == "NAME_DUP"){
+				if (data == "NAME_DUP") {
 					alertify.alert('El nombre del recurso \"' + $('#TbNameResource').val() +
 						'\" ya se encuentra dada de alta en la pasarela. Utilize otro nombre.');
 					return;
@@ -789,8 +808,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 								//var paramHistoric={0:}
 								GenerateHistoricEvent(ID_HW, MODIFY_HARDWARE_RESOURCE_LOGIC_PARAM, $('#TbNameResource').val(), $('#loggedUser').text());
 								alertify.success('El recurso se ha actualizado correctamente.');
-								if(data.activa)//Solo si es config activa se habilita el botón de Aplicar Cambios
-									resModified=true;
+								if (data.activa)//Solo si es config activa se habilita el botón de Aplicar Cambios
+									resModified = true;
 							}
 							else
 								alertify.error('Error: ' + data.error);
@@ -806,7 +825,6 @@ var InsertNewResource = function(col, row, isUpdate) {
 	}
 	GetMySlaves();
 }
-
 /************************************/
 /*	FUNCTION: ChangeGateWaySite 	*/
 /*  PARAMS: 						*/
