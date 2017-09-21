@@ -779,6 +779,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 function checkResRestrictionsAndInsert(isUriPhoneClear,isUrisCleaned,isNoTableBssSelected,isUpdate,
 							  	resource2Insert,resourceType,resourceId,setTimeOut) {
 var localTimeOut=100;
+//Ponemos un timeout porque si venimos de otro alert, al no ponerlo se solapa con el otro y no se muestra el segundo
+	//Recomiendan mínimo de 300 para asegurarse de que salen los dos mensajes.
 	if(setTimeOut)
 		localTimeOut=700;
 	setTimeout(function () {
