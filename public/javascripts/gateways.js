@@ -3709,6 +3709,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#ListMenuParameters li:nth-child(4)').hide();
 		$('#ListMenuParameters li:nth-child(5)').show();
 		$('#ListMenuParameters li:nth-child(6)').hide();
+		
 		$('#TbVad').val('-27');
 		// Borrar valores residuales en el insertar new
 	}

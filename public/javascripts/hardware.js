@@ -2360,6 +2360,7 @@ function ClickAdAgc(element){
 		
 function SelectBss(){
 	if ($('#LbTypeRadio option:selected').val() >= 0 && $('#LbTypeRadio option:selected').val() <=3){
+		$('#VadRow').attr('style','display:table-column');
 		loadUriSites(false);
 		$('#InternalDelayRow').attr('style','display:table-column');
 		$('#ListMenuParameters li:nth-child(5)').show();
@@ -2414,11 +2415,12 @@ function SelectBss(){
 		GetUris($('#DivParameters').data('idRecurso'));
 	}
 	else{
+		
 		$('#BSSMethodRow').attr('style','display:table-row');	// Hide
 		$('#BssAvailableRow').attr('style','display:table-column');	// Show
 		$('#PttPriorityRow').attr('style','display:table-column');	// Show
 		$('#SipPriorityRow').attr('style','display:table-column');	// Show
-
+		
 		// Ocultar panel comunicaciones
 		$('#ListMenuParameters li:nth-child(5)').hide();
 		// Mostrar panel de listas B/N
