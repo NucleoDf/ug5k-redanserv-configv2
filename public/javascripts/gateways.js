@@ -728,38 +728,65 @@ var InsertNewResource = function(col, row, isUpdate) {
 	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
 	
-	if(resourceType==2) {//Phone
-		if (isUriPhoneClear) {
-			alertify.confirm('Ulises G 5000 R', 'El campo URI remota se encuentra vacío. ¿Desea continuar?',
-				function () {
-					ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
-				},
-				function () {
-					alertify.error('Cancelado');
-				}
-			);
+	//
+	//Calculo del índice de carga para sacar mensaje
+	var localLoadIndex=0;
+	var newIndex2Add=0;
+	var stopLoop=false;
+	for(var rowIndex=0;rowIndex<4&&!stopLoop;rowIndex++){
+		for(var colIndex=0;colIndex<4&&!stopLoop;colIndex++){
+			if($('.Res'+rowIndex+colIndex).data('loadIndex')!=0) {
+				localLoadIndex = $('.Res' + rowIndex + colIndex).data('loadIndex');
+				stopLoop=true;
+			}
 		}
-		else
-			ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
 	}
-	else {//Radio
-		if (isNoTableBssSelected) {
-			alertify.confirm('Ulises G 5000 R', 'No se ha seleccionado tabla de calificación de audio para el ' +
-				'tipo de recurso radio seleccionado. ¿Desea continuar?',
-				function () {
-					ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
-				},
-				function () {
-					alertify.error('Cancelado');
-				}
-			);
-		}
-		else {
-			if (isUrisCleaned) {
-				alertify.confirm('Ulises G 5000 R', 'Los campos URI para el tipo de recurso radio ' +
-					'seleccionado se encuentran vacíos. ¿Desea continuar?',
+	//Carga de los índices nuevos
+	if(resourceType==2)
+		newIndex2Add=1;
+	else {
+		if($('#LbTypeRadio option:selected').val()=='2'||$('#LbTypeRadio option:selected').val()=='3')
+			newIndex2Add=8;
+		else
+			newIndex2Add=2;
+	}
+	
+	localLoadIndex+=newIndex2Add;
+	
+	if(localLoadIndex<=16) {
+		checkResRestrictionsAndInsert(isUriPhoneClear,isUrisCleaned,isNoTableBssSelected,isUpdate,
+			resource2Insert,resourceType,resourceId,false);
+	}
+	else {
+		alertify.confirm('Ulises G 5000 R', 'El índice de carga al añadir este tipo de ' +
+			'recurso es de: '+localLoadIndex+'. ¿Desea continuar?',
+			function () {
+				checkResRestrictionsAndInsert(isUriPhoneClear,isUrisCleaned,isNoTableBssSelected,isUpdate,
+					resource2Insert,resourceType,resourceId,true);
+			},
+			function () {
+				alertify.error('Cancelado');
+			}
+		);
+	}
+}
+
+/************************************/
+/*	FUNCTION: ajaxInsertUpdateRes 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+function checkResRestrictionsAndInsert(isUriPhoneClear,isUrisCleaned,isNoTableBssSelected,isUpdate,
+							  	resource2Insert,resourceType,resourceId,setTimeOut) {
+var localTimeOut=100;
+	if(setTimeOut)
+		localTimeOut=700;
+	setTimeout(function () {
+		if (resourceType == 2) {//Phone
+			if (isUriPhoneClear) {
+				alertify.confirm('Ulises G 5000 R', 'El campo URI remota se encuentra vacío. ¿Desea continuar?',
 					function () {
-						ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
+						ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId);
 					},
 					function () {
 						alertify.error('Cancelado');
@@ -767,9 +794,37 @@ var InsertNewResource = function(col, row, isUpdate) {
 				);
 			}
 			else
-				ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
+				ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId);
 		}
-	}
+		else {//Radio
+			if (isNoTableBssSelected) {
+				alertify.confirm('Ulises G 5000 R', 'No se ha seleccionado tabla de calificación de audio para el ' +
+					'tipo de recurso radio seleccionado. ¿Desea continuar?',
+					function () {
+						ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId);
+					},
+					function () {
+						alertify.error('Cancelado');
+					}
+				);
+			}
+			else {
+				if (isUrisCleaned) {
+					alertify.confirm('Ulises G 5000 R', 'Los campos URI para el tipo de recurso radio ' +
+						'seleccionado se encuentran vacíos. ¿Desea continuar?',
+						function () {
+							ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId);
+						},
+						function () {
+							alertify.error('Cancelado');
+						}
+					);
+				}
+				else
+					ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId);
+			}
+		}
+	}, localTimeOut);
 }
 
 /************************************/
@@ -2779,11 +2834,12 @@ function UpdateAssignedSlaves(data){
 														$('.Res' + i + j + ' a').text('')
 																				.data('pos',null)
 																				.data('idResource',null)
+																				.data('loadIndex',0)
 																				.attr('draggable',false)
 																				.attr('ondragstart',"");
 														//if(loadIndex>=totalRecursos)
 														//	totalRecursos = loadIndex;
-														$('.Res' + i + j).attr('onclick',"GetResourceFromGateway('" + i + "','" + j + "',false" + ")");													}
+														$('.Res' + i + j).attr('onclick',"GetResourceFromGateway('" + i + "','" + j + "',false)");													}
 												}
 											}
 										});
@@ -2821,6 +2877,7 @@ function ResetHardware(f){
 			for (var j = 0; j < 4; j++) {
 				$('.Res'+h+j).data('pos',null)
 							.data('idResource',null)
+							.data('loadIndex',0)
 							.attr('draggable',false)
 							.attr('ondragstart',"")
 							.attr('onclick',"GetResourceFromGateway('" + h + "','" + j + "',false)");
@@ -2913,7 +2970,7 @@ function ShowAssignedSlaves(data){
 				dragStartResRadio = "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1," + value.idrecurso_radio + ")";
 			}
 			$('.Res' + value.fila + value.columna).data('idResource', value.idrecurso_radio);
-			$('.Res' + value.fila + value.columna).data('updated', true)
+			$('.Res' + value.fila + value.columna).data('updated', true).data('loadIndex',loadIndex)
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
 					+ value.columna + "',true,'1','"+value.idrecurso_radio+"')");
 			if(value.tipo_agente==4)
@@ -2941,7 +2998,7 @@ function ShowAssignedSlaves(data){
 				dragStartResPhone = "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",2," + value.idrecurso_telefono + ")"
 			}
 			$('.Res' + value.fila + value.columna).data('idResource', value.idrecurso_telefono);
-			$('.Res' + value.fila + value.columna).data('updated', true)
+			$('.Res' + value.fila + value.columna).data('updated', true).data('loadIndex',loadIndex)
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
 					+ value.columna + "',true,'2','"+value.idrecurso_telefono+"')");
 			$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(iconPhone);
