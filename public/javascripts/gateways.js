@@ -236,6 +236,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 	var resourceType=0;
 	var isUrisCleaned=false;
 	var isNoTableBssSelected=false;
+	var isUriPhoneClear=false;
 	//Para no tener que hacer ningún SELECT de la id de la pasarela
 	var idCgw=$('#DivGateways').data('idCgw');
 	
@@ -720,26 +721,16 @@ var InsertNewResource = function(col, row, isUpdate) {
 			}
 		}
 		telephoneResource.ranks						=	atsRanks;
+		if($('#TbRemoteUri').val()=='')
+			isUriPhoneClear=true;
 	}
 	//Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda
 	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
 	
-	if(isNoTableBssSelected){
-		alertify.confirm('Ulises G 5000 R', 'No se ha seleccionado tabla de calificación de audio para el ' +
-			'tipo de recurso radio seleccionado. ¿Desea continuar?',
-			function () {
-					ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
-			},
-			function () {
-				alertify.error('Cancelado');
-			}
-		);
-	}
-	else {
-		if (isUrisCleaned) {
-			alertify.confirm('Ulises G 5000 R', 'Los campos URI para el tipo de recurso radio ' +
-				'seleccionado se encuentran vacíos. ¿Desea continuar?',
+	if(resourceType==2) {//Phone
+		if (isUriPhoneClear) {
+			alertify.confirm('Ulises G 5000 R', 'El campo URI remota se encuentra vacío. ¿Desea continuar?',
 				function () {
 					ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
 				},
@@ -750,6 +741,34 @@ var InsertNewResource = function(col, row, isUpdate) {
 		}
 		else
 			ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
+	}
+	else {//Radio
+		if (isNoTableBssSelected) {
+			alertify.confirm('Ulises G 5000 R', 'No se ha seleccionado tabla de calificación de audio para el ' +
+				'tipo de recurso radio seleccionado. ¿Desea continuar?',
+				function () {
+					ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
+				},
+				function () {
+					alertify.error('Cancelado');
+				}
+			);
+		}
+		else {
+			if (isUrisCleaned) {
+				alertify.confirm('Ulises G 5000 R', 'Los campos URI para el tipo de recurso radio ' +
+					'seleccionado se encuentran vacíos. ¿Desea continuar?',
+					function () {
+						ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
+					},
+					function () {
+						alertify.error('Cancelado');
+					}
+				);
+			}
+			else
+				ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
+		}
 	}
 }
 
