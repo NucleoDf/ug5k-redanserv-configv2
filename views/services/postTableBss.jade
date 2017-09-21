@@ -10,7 +10,7 @@ div(id="FormTableBss", style="display: none; width: 1250px")
 					div
 						table(style="width:100%")
 							tr(style="height: 50px", align="center")
-								td
+								td.New
 									a.ButtonNucleo(id="NewTable", onclick='GetTable(-1)', style="color:#bf2a36; width: 80px" tkey='NewTable')
 				td(style='vertical-align:top')
 					#AddTableBss.fadeFormNucleo(style='display:none;padding-left:20px')
@@ -180,9 +180,9 @@ div(id="FormTableBss", style="display: none; width: 1250px")
 
 							table(style='width:100%;border-spacing: 20px')
 								tr(style="height: 20px", align="center")
-									td
+									td.New
 										a.ButtonNucleo(id='UpdateTableButton', onclick='PostTable()' tkey='Add') 
-									td
+									td.New
 										a.ButtonNucleo(id='DeleteTableButton' onclick="DelTable()" , style="width:50px" tkey='Remove')
-									td
+									td.New
 										a.ButtonNucleo(id='CancelTableButton', onclick='GetTablesBss()' tkey='Cancel')

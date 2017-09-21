@@ -69,12 +69,12 @@ var PutTable = function(){
 /************************************/
 var GetTablesBss = function(f) {
 	/** 20170511 AGL PERFILES */
-	if (Authorize($('#BodyRedan').data('perfil'),[ccAdminProfMsc,ccConfiProfMsc])==false) {
+//	if (Authorize($('#BodyRedan').data('perfil'),[ccAdminProfMsc,ccConfiProfMsc])==false) {
 	/*if ((($('#BodyRedan').data('perfil') & 16) != 16) && (($('#BodyRedan').data('perfil') & 64) != 64)) {
 		*****************************/
-		alertify.error('No tiene asignados permisos para la gestión de las tablas de calificación de audio.');
-		return;
-	}
+//		alertify.error('No tiene asignados permisos para la gestión de las tablas de calificación de audio.');
+//		return;
+//	}
 
 	$('#AddTableBss').hide();
 	$("#FormTableBss").show();	

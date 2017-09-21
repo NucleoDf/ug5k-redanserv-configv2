@@ -123,7 +123,7 @@ function indexInitUserData(username, userprofile) {
 	if (Authorize(userprofile,[ccAdminProfMsc,ccUsersProfMsc])==false) {
 		$('#lopcionUsuarios').hide();
 	}
-	if (Authorize(userprofile,[ccAdminProfMsc,ccConfiProfMsc])==false) {
+	if (Authorize(userprofile,[ccAdminProfMsc,ccConfiProfMsc,visualProfMsc])==false) {
 		$('#lopcionTabla').hide();
 	}					
 	if (Authorize(userprofile,[ccAdminProfMsc,ccConfiProfMsc,ccLoadcProfMsc])==true) {
