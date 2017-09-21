@@ -3711,6 +3711,9 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#ListMenuParameters li:nth-child(6)').hide();
 		
 		$('#TbVad').val('-27');
+		$('#TbOptionsInterval').val('5');
+		$('#TbUmbral').val('-27');
+		$('#TbInactividad').val('5');
 		// Borrar valores residuales en el insertar new
 	}
 }
