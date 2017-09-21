@@ -242,7 +242,7 @@ var DelTable = function(){
 						GenerateHistoricEvent(ID_HW,REMOVE_CALIFICATION_AUDIO_TABLE,$('#IdTable').val(),$('#loggedUser').text());
 						alertify.success('Tabla \"' +  $('#IdTable').val() + '\" eliminada.');
 						/** 20170516. AGL. Activar Cambios... */
-						tbbssModified = true;
+						//tbbssModified = true;
 						GetTablesBss();
 					}
 				},
