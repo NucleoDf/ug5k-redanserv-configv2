@@ -289,7 +289,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 		if($('#TbVad').val()!='')
 			radioResource.umbral_vad			=	$('#TbVad').val();
 		else
-			radioResource.umbral_vad			=	-20;
+			radioResource.umbral_vad			=	-27;
 		//Indicación salida audio
 		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
 		//Métodos BSS disponibles
@@ -3650,7 +3650,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#ListMenuParameters li:nth-child(4)').hide();
 		$('#ListMenuParameters li:nth-child(5)').show();
 		$('#ListMenuParameters li:nth-child(6)').hide();
-		
+		$('#TbVad').val('-27');
 		// Borrar valores residuales en el insertar new
 	}
 }
