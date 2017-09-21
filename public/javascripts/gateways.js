@@ -234,7 +234,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 	var radioResource={};
 	var telephoneResource={};
 	var resourceType=0;
-	
+	var isUrisCleaned=false;
 	//Para no tener que hacer ningún SELECT de la id de la pasarela
 	var idCgw=$('#DivGateways').data('idCgw');
 	
@@ -445,9 +445,27 @@ var InsertNewResource = function(col, row, isUpdate) {
 		switch($('#LbTypeRadio option:selected').val()){
 			case '0':
 				if($('#UriTxA1').val()==''&&$('#UriRxA1').val()=='')
-					//alertify.alert('Ulises G 5000 R', 'Quiere trasladar la pasarela del emplazamiento');
+					isUrisCleaned=true;
 				break;
 			case '1':
+				if($('#UriTxA1').val()==''&&$('#UriRxA1').val()==''&&
+					$('#UriTxB1').val()==''&&$('#UriRxB1').val()=='')
+					isUrisCleaned=true;
+				break;
+			case '2':
+				if($('#UriTxA1').val()==''&&$('#UriRxA1').val()==''&&
+					$('#UriTxA2').val()==''&&$('#UriRxA2').val()==''&&
+					$('#UriTxA3').val()==''&&$('#UriRxA3').val()=='')
+					isUrisCleaned=true;
+				break;
+			case '3':
+				if($('#UriTxA1').val()==''&&$('#UriRxA1').val()==''&&
+					$('#UriTxA2').val()==''&&$('#UriRxA2').val()==''&&
+					$('#UriTxA3').val()==''&&$('#UriRxA3').val()==''&&
+					$('#UriTxB1').val()==''&&$('#UriRxB1').val()==''&&
+					$('#UriTxB2').val()==''&&$('#UriRxB2').val()==''&&
+					$('#UriTxB3').val()==''&&$('#UriRxB3').val()=='')
+					isUrisCleaned=true;
 				break;
 		}
 		
@@ -698,7 +716,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 	// la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
 	var resource2Insert={radio: radioResource, telephone: telephoneResource};
 	
-	
+	if(isUrisCleaned)
+		alertify.alert('Los campos URI para el tipo de recurso radio seleccionado se encuentran vacíos.');
 	//Nuevo Recurso
 	if(isUpdate=='false') {
 		$.ajax({
