@@ -20,19 +20,19 @@ var GetExtResources = function(f) {
 	$("#FormResources").show();
 	$('#DivResources').animate({width: '535px'});
 	
-	/*$.ajax({type: 'GET',
-	 url: '/tableBss'})
-	 .done(function(data){
-	 $("#listTablesBss").empty();
-	 if (data.tables != null && data.tables.length > 0){
-	 $.each(data.tables, function(index, value){
-	 var item = $("<li><a onclick='GetTable(" + value.idtabla_bss + ")'>" + value.name + "</li>");
-	 item.appendTo($("#listTablesBss"));
-	 });
-	 if (f != null)
-	 f();
-	 }
-	 else if (f != null)
-	 f();
-	 });*/
+	$.ajax({type: 'GET',
+	 	url: '/externalResources'})
+	 	.done(function(data){
+	 		$("#listResources").empty();
+			if (data.tables != null && data.tables.length > 0){
+	 			$.each(data.tables, function(index, value){
+					 var item = $("<li><a onclick='GetTable(" + value.idtabla_bss + ")'>" + value.name + "</li>");
+					 item.appendTo($("#listTablesBss"));
+	 			});
+				if (f != null)
+					f();
+	 		}
+	 		else if (f != null)
+	 			f();
+	 	});
 };

@@ -26,6 +26,7 @@ var config = require('./configUlises.json');
 var myLibHistorics = require('./lib/historics.js');
 var myLibConfig = require('./lib/configurations.js');
 var myLibHardwareGateways = require('./lib/hardware.js');
+var myLibExtResources = require('./lib/externalResources.js');
 var jsonTemplate = require('./lib/jsonTemplate');
 
 var jsgtw = require('./public/javascripts/gateways.js');
