@@ -385,8 +385,8 @@ app.get('/alive',
             "dbhost": {"type": "string"}, 
             "dbpassword": {"type": "string"}, 
             "dbuser": {"type": "string"}, 
-            "log2con": {"type": "boolean"}, 
-            "log2file": {"type": "boolean" }, 
+            "log2con": {"type": "string"}, 
+            "log2file": {"type": "string" }, 
             "logfile_maxfiles": { "type": "integer" }, 
             "logfile_path": {"type": "string" }, 
             "logfile_sizefile": {"type": "integer"}, 
@@ -414,9 +414,12 @@ app.get('/alive',
             config.Ulises = req.body;
             // Lo salvo en el fichero...
             var Ulises = {Ulises: req.body};
-            fs.writeFile("./configUlises.json", JSON.stringify(Ulises, null, 2), (err)=>{
+            fs.writeFile("./configUlises.json", JSON.stringify(Ulises, null, 2), (err) => {
                if(err) res.json({res: false, txt: 'Error fs.writeFile'});
-               else    res.json({res: true,  txt: 'File saved.'});
+               else    {
+                    res.json({res: true,  txt: 'File saved.'});
+                    logging.Configure(Ulises.Ulises);
+                }
             });
         }
         else {
