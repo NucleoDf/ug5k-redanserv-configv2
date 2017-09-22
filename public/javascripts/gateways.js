@@ -3670,7 +3670,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 	//Inicializar la primera pestaña para obligar a la carga de uris
 	var element={rel:"FormHw"};
 	loadParam(element);
-	
+	$('#LblUriSip').text('');
 	if(update) {
 		$('#FormComm').attr('onclick', "loadParam(this);");
 		$('#SResourceType').prop("disabled", true);

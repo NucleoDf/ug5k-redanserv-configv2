@@ -852,7 +852,7 @@ function ShowDataOfResource(data,f){
 		$('#TbNameResource')//.prop('disabled','disabled')
 							.val(data.recursos[0].name);
 		
-		$('#LblUriSip').text(data.recursos[0].name+'@'+$('#ipv').val());
+		//$('#LblUriSip').text(data.recursos[0].name+'@'+$('#ipv').val());
 		
 		
 		$('#UriSipRow').attr('style','display:table-row');
