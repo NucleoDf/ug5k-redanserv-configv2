@@ -25,8 +25,8 @@ var GetExtResources = function(f) {
 	 	.done(function(data){
 	 		$("#listResources").empty();
 			if (data.lista_uris != null && data.lista_uris.length > 0){
-	 			$.each(data.tables, function(index, value){
-					 var item = $("<li><a onclick='GetTable(" + value.idtabla_bss + ")'>" + value.name + "</li>");
+	 			$.each(data.lista_uris, function(index, value){
+					 var item = $("<li><a onclick='GetTable(" + value.idrecursos_externos + ")'>"+value.uri+": "+value.uri+"</li>");
 					 item.appendTo($("#listTablesBss"));
 	 			});
 				if (f != null)
