@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"u",
+				"ug5kdb"
+			],
+			[
 				"pa",
 				"password"
 			],
@@ -510,10 +514,6 @@
 			[
 				"CGW_",
 				"CGW_idCGW"
-			],
-			[
-				"A",
-				"Activa"
 			]
 		]
 	},
@@ -529,10 +529,19 @@
 			}
 		},
 		{
-			"file": "lib/users.js",
+			"file": "lib/tableBss.js",
 			"settings":
 			{
-				"buffer_size": 15905,
+				"buffer_size": 9518,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lib/loggingDate.js",
+			"settings":
+			{
+				"buffer_size": 4701,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -582,12 +591,21 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2"
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/lib",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/public"
 	],
 	"file_history":
 	[
-		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/views/layout.jade",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/lib/ug5kdb.js",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/lib/loggingDate.js",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/lib/tableBss.js",
 		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/views/index.jade",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/public/javascripts/index.js",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/public/javascripts/tableBss.js",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/lib/users.js",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/views/services/postTableBss.jade",
+		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/views/layout.jade",
 		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/views/login.jade",
 		"/C/Users/nucleocc/Desktop/Redan-Setup/ug5k-serv-v2/configUlises.json",
 		"/C/Users/nucleocc/Desktop/Redan-Setup/UG5K-Serv/views/index.jade",
@@ -706,18 +724,11 @@
 		"/H/logfile.txt",
 		"/D/Proyectos/Ulises G 5000 2X/UG5K-Serv/routes/index.js",
 		"/D/Proyectos/Ulises G 5000 2X/UG5K-Serv/public/javascripts/index.js",
-		"/D/Proyectos/Ulises G 5000 2X/UG5K-Serv/bin/www",
-		"/D/Proyectos/Ulises G 5000 2X/UG5K-Serv/views/services/postSites.jade",
-		"/D/Proyectos/Ulises G 5000 2X/UG5K-Serv/public/javascripts/gateways.js",
-		"/D/Proyectos/Ulises G 5000 2X/UG5K-Serv/public/javascripts/services.js",
-		"/D/Proyectos/Ulises G 5000 2X/UG5K-Serv/public/javascripts/backups,js",
-		"/D/Proyectos/Ulises-5000I/Ulises-5000I-TA/Sources/Cd40/bin/Release/u5ki.LastCfg.bin",
-		"/D/Proyectos/Ulises-5000I/BD-Ulises/BD-Desarrollo-Tenerife.sql",
-		"/D/Proyectos/Ulises-5000I/BD-Ulises/BD-Maqueta-Tenerife.sql"
+		"/D/Proyectos/Ulises G 5000 2X/UG5K-Serv/bin/www"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -859,6 +870,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"newtable",
+			"gettables",
 			"console",
 			"localSe",
 			"logger",
@@ -984,9 +997,7 @@
 			"ipv",
 			"all",
 			"CopyParamResources",
-			"async.parallel",
-			"UpdateGateway",
-			"updategate"
+			"async.parallel"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1050,7 +1061,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1066,8 +1077,8 @@
 						"selection":
 						[
 							[
-								14670,
-								14670
+								14638,
+								14638
 							]
 						],
 						"settings":
@@ -1077,27 +1088,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4729.0,
+						"translation.y": 5044.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "lib/users.js",
+					"file": "lib/tableBss.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15905,
+						"buffer_size": 9518,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								9165,
+								9165
 							]
 						],
 						"settings":
@@ -1106,7 +1117,36 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6021.0,
+						"translation.y": 4185.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lib/loggingDate.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4701,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								744,
+								744
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1148,7 +1188,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 205.0
+		"height": 188.0
 	},
 	"output.find_results":
 	{

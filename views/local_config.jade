@@ -22,8 +22,8 @@ script.
                     "dbhost": { "type": "string" }, 
                     "dbpassword": { "type": "string" }, 
                     "dbuser": { "type": "string" }, 
-                    "log2con": { "type": "boolean" }, 
-                    "log2file": { "type": "boolean" }, 
+                    "log2con": { "type": "string" }, 
+                    "log2file": { "type": "string" }, 
                     "logfile_maxfiles": { "type": "integer" }, 
                     "logfile_path": { "type": "string" }, 
                     "logfile_sizefile": { "type": "integer" }, 
@@ -148,8 +148,10 @@ script.
                                         LoginTimeOut: {title: "Duracion de sesion en minutos",type: "integer",enum: [5,10,30,60,120],default: 30},
                                         refreshTime: {title: 'Tiempo de Refresco en ms',type: "integer"},
                                         maxCycleTime: {title: 'Tiempo Ciclo en ms',type: "integer" },
-                                        log2con: {title: 'Tracear a consola',type: "boolean", format: "checkbox", default: false},
-                                        log2file: {title: 'Tracear a fichero', type: "boolean", format: "checkbox", default: false},
+                                        log2con: {title: 'Tracear a consola',type: "string", enum: 
+                                            ['none','silly','info','warn'], default: 'none'},
+                                        log2file: {title: 'Tracear a fichero', type: "string", enum: 
+                                            ['none','silly','info','warn'], default: false},
                                         LoginSystemTrace: {title: 'Tracear el Control de Acceso',type: "boolean",format: "checkbox", default: false }
                                     }
                                 }
