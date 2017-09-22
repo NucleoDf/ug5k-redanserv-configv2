@@ -255,6 +255,7 @@
 	"CfgId"					: "Id. Configuración",
 	"New"					: "Nuevo",
 	"NewTable"				: "Nueva tabla",
+	"NewExtResource"		: "Nuevo Elemento",
     "Options" 				: "Opciones",
     "User" 					: "Usuario",
     "AccessControl" 		: "Control de Acceso",
