@@ -3869,15 +3869,14 @@ function showDataForRadioResource(data) {
 	$('#LbSipPriority option[value="' + data.prioridad_sesion_sip + '"]').prop('selected', true);
 	//BSS/CLIMAX
 	if(data.climax_bss==1) {
-		
 		$('#CbBssEnable').prop('checked', true);
-		$('#BssTimeRow').show();
-		$('#ClimaxDelayRow').show();
-		$('#ModoCalculoClimaxRow').show();
-		
+		$('#BssTimeRow').attr('style','display:table-row');
+		$('#ClimaxDelayRow').attr('style','display:table-row');
+		$('#ModoCalculoClimaxRow').attr('style','display:table-row');
 	}
 	else
 		$('#CbBssEnable').prop('checked', false);
+	
 	//Ventana BSS (ms)
 	$('#TbBssWindow').val(data.ventana_bss);
 	//BSS Cola Squelch (ms)
@@ -3898,6 +3897,11 @@ function showDataForRadioResource(data) {
 		else
 			$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
 	});
+	
+	if(data.tipo_climax==1)
+		$('#CompensationRow').attr('style','display:table-column');
+	else
+		$('#CompensationRow').attr('style','display:table-row');
 	$('#CbCompensation').val(data.retardo_fijo_climax);
 	//Habilita grabación
 	if(data.habilita_grabacion==1)
