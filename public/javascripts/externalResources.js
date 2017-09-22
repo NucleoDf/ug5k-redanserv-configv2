@@ -24,7 +24,7 @@ var GetExtResources = function(f) {
 	 	url: '/externalResources'})
 	 	.done(function(data){
 	 		$("#listResources").empty();
-			if (data.tables != null && data.tables.length > 0){
+			if (data.lista_uris != null && data.lista_uris.length > 0){
 	 			$.each(data.tables, function(index, value){
 					 var item = $("<li><a onclick='GetTable(" + value.idtabla_bss + ")'>" + value.name + "</li>");
 					 item.appendTo($("#listTablesBss"));
@@ -32,7 +32,12 @@ var GetExtResources = function(f) {
 				if (f != null)
 					f();
 	 		}
-	 		else if (f != null)
-	 			f();
+	 		else{
+				var item = $("<li>No hay elementos disponibles</li>");
+				item.appendTo($("#listResources"));
+			}
+	 			
+	 		//else if (f != null)
+	 		//	f();
 	 	});
 };

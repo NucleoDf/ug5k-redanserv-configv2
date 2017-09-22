@@ -13,7 +13,6 @@ var myLibExtResources = require('../../lib/externalResources.js');
 
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/accessControl',controlAccess'))
 	.get(function(req, res) {
-		myLibExtResources.LoggingDate("GET /externalResources");
 		myLibExtResources.getExternalResources(req, res);
 	})
 	.post(function(req,res){
