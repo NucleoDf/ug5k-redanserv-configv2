@@ -295,7 +295,10 @@ var InsertNewResource = function(col, row, isUpdate, realCol, realRow) {
 		//Indicación salida audio
 		radioResource.indicacion_salida_audio	=	$('#LbPttType option:selected').val();
 		//Métodos BSS disponibles
-		radioResource.metodo_bss				=	$('#CbBssMethodAvailable option:selected').val();
+		if($('#LbTypeRadio option:selected').val()=="4"||$('#LbTypeRadio option:selected').val()=="6")
+			radioResource.metodo_bss				=	$('#CbBssMethod option:selected').val();
+		else
+			radioResource.metodo_bss				=	$('#CbBssMethodAvailable option:selected').val();
 		//Eventos PTT/Squelch
 		if($('#CbPttSquelchEvents').prop('checked'))
 			radioResource.evento_ptt_squelch	=	1;
@@ -3859,7 +3862,10 @@ function showDataForRadioResource(data) {
 	//Indicación salida audio 
 	$('#LbPttType option[value="' +data.indicacion_salida_audio +'"]').prop('selected', true);
 	//Método BSS disponible/preferido 
-	$('#CbBssMethod option[value="' +data.metodo_bss +'"]').prop('selected', true);
+	if(data.tipo_agente=="4"||data.tipo_agente=="6")
+		$('#CbBssMethod option[value="' +data.metodo_bss +'"]').prop('selected', true);
+	else
+		$('#CbBssMethodAvailable option[value="' +data.metodo_bss +'"]').prop('selected', true);
 	//Eventos PTT/Squelch
 	if(data.evento_ptt_squelch==1)
 		$('#CbPttSquelchEvents').prop('checked', true);

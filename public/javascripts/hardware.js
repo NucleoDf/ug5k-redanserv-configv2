@@ -2835,12 +2835,16 @@ function OnChangeRestriccion(sel){
 
 // Mostrar u ocultar CB selección tabla calificación audio
 function OnCbBssMethod(obj){
-	// Las tablas de calificación sólo estarán disponibles para los recursos 
+	// Las tablas de calificación sólo estarán disponibles para los recursos
 	// radio remotos con método Bss seleccionado RSSI y si son Rx o RxTx.
-	if (($('#LbTypeRadio option:selected').val()==4 || $('#LbTypeRadio option:selected').val()==6 ))
-		$('#BSSMethodRow .SoloRssi').show();
-	else
+	if($('#CbBssMethod option:selected').val()==1)
 		$('#BSSMethodRow .SoloRssi').hide();
+	else {
+		if (($('#LbTypeRadio option:selected').val() == 4 || $('#LbTypeRadio option:selected').val() == 6 ))
+			$('#BSSMethodRow .SoloRssi').show();
+		else
+			$('#BSSMethodRow .SoloRssi').hide();
+	}
 }
 
 // Mostrar u ocultar CB selección tabla calificación audio
