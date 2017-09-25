@@ -229,7 +229,7 @@ function isResNameDup (resourceName,idCgw,idRes) {
 /*												*/
 /*  REV 1.0.2 VMG								*/
 /************************************************/
-var InsertNewResource = function(col, row, isUpdate) {
+var InsertNewResource = function(col, row, isUpdate, realCol, realRow) {
 	var resourceId=row;
 	var radioResource={};
 	var telephoneResource={};
@@ -741,7 +741,7 @@ var InsertNewResource = function(col, row, isUpdate) {
 			}
 		}
 	}
-	//Carga de los índices nuevos
+	//Carga de los índices nuevos Esta mal porque habría que restar el anterior... xS
 	if(resourceType==2)
 		newIndex2Add=1;
 	else {
@@ -750,7 +750,8 @@ var InsertNewResource = function(col, row, isUpdate) {
 		else
 			newIndex2Add=2;
 	}
-	
+	if(localLoadIndex!=0)
+		localLoadIndex=localLoadIndex-$('.Res'+realRow+realCol).data('localLoadIndex');
 	localLoadIndex+=newIndex2Add;
 	
 	if(localLoadIndex<=16) {
@@ -2975,6 +2976,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna).data('updated', true).data('loadIndex',loadIndex)
 				.attr('onclick',"GetResourceFromGateway('" + value.fila + "','"
 					+ value.columna + "',true,'1','"+value.idrecurso_radio+"')");
+			
 			if(value.tipo_agente==4)
 				$('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' MHz').append(iconRadioInOut);
 			else if(value.tipo_agente==5)
@@ -2986,13 +2988,11 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
 				.attr('ondragstart', dragStartResRadio)
-			// No viene de una operacion de D&D sobre otra pasarela
-			/*$('.Res' + fila + col)//.attr('onclick','GotoSlave(' + idSlave + ')')
-			 .data('pos', r.POS_idPOS)
-			 .attr('draggable', true)
-			 .attr('ondragstart', "dragResource(event," + r.POS_idPOS + "," + fila + "," + idSlave + ")")
-			 .attr('onclick', "GotoResource('" + fila + "','" + col + "',true" + ")");*/
-			//.attr('onclick',"UpdateResource('" + idSlave + "','" + fila + "')");
+			
+			if(value.tipo_agente==2||value.tipo_agente==3)
+				$('.Res' + value.fila + value.columna).data('localLoadIndex', 8);
+			else
+				$('.Res' + value.fila + value.columna).data('localLoadIndex', 2);
 		});
 		$.each(data.tfno, function (index, value) {
 			var dragStartResPhone= '';
@@ -3007,6 +3007,7 @@ function ShowAssignedSlaves(data){
 			$('.Res' + value.fila + value.columna + ' a')
 				.attr('draggable', true)
 				.attr('ondragstart', dragStartResPhone)
+			$('.Res' + value.fila + value.columna).data('localLoadIndex', 1);
 			
 		});
 	}
@@ -3742,7 +3743,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 							$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removeRadioResource('" + data.idrecurso_radio + "')");
-						$('#ButtonCommit').attr('onclick', "InsertNewResource('1','" + data.idrecurso_radio + "','true')");
+						$('#ButtonCommit').attr('onclick', "InsertNewResource('1','" + data.idrecurso_radio + "','true','"+col+"','"+row+"')");
 						$('#ResId').attr('res-id',data.idrecurso_radio);
 						$('#LblUriSip').text(data.nombre+'@'+$('#ipv').val());
 					}
@@ -3755,7 +3756,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#ListMenuParameters li:nth-child(5)').hide();
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removePhoneResource('" + data.idrecurso_telefono + "')");
-						$('#ButtonCommit').attr('onclick', "InsertNewResource('2','" + data.idrecurso_telefono + "','true')");
+						$('#ButtonCommit').attr('onclick', "InsertNewResource('2','" + data.idrecurso_telefono + "','true','"+col+"','"+row+"')");
 						if ($('#LbTypeTel')[0].value == 3 || $('#LbTypeTel')[0].value == 4) {
 							$('#ListMenuParameters li:nth-child(6)').show();
 						}
