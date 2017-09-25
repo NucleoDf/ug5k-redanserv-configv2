@@ -2752,6 +2752,7 @@ function OnChangeGroup(){
 function OnChangeResourceType(sel){
 	if (sel.value == 1){//Radio
 		SelectBss();
+		$('#CbGranularity option[value="0"]').prop('selected',true);
 		$('#GranularityRow').show();
 		$('#DestinationRow').show();
 		$('#BlackWhiteRow').show();
@@ -2766,6 +2767,7 @@ function OnChangeResourceType(sel){
 	}
 	else{//Telefono
 		ShowOptions('0');//Opciones de telefono por defecto
+		$('#CbGranularity option[value="1"]').prop('selected',true);
 		$('#LbTypeTel option[value="0"]').prop('selected', true);
 		$('#GranularityRow').hide();//Precisión de audio desactivado para tfno
 		$('#DestinationRow').hide();

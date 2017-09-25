@@ -754,7 +754,7 @@ var InsertNewResource = function(col, row, isUpdate, realCol, realRow) {
 			newIndex2Add=2;
 	}
 	//Si es vacio (0) hacemos los cálculos normales. Sino nos traemos el índice de carga del anterior
-	if(localLoadIndex!=0)
+	if(isUpdate=="true")
 		localLoadIndex=localLoadIndex-$('.Res'+realRow+realCol).data('localLoadIndex');
 	localLoadIndex+=newIndex2Add;
 	
@@ -3732,6 +3732,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 					$('#SResourceType option[value="' + resourceType + '"]').prop('selected', true);
 					$('#ListMenuParameters li:nth-child(1)').show();
 					if (resourceType == '1') {
+						$('#CbGranularity option[value="0"]').prop('selected',true);
 						showDataForRadioResource(data);
 						$('#ListMenuParameters li:nth-child(2)').show();//Radio
 						$('#ListMenuParameters li:nth-child(3)').hide();//Telefono
@@ -3752,6 +3753,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 						$('#LblUriSip').text(data.nombre+'@'+$('#ipv').val());
 					}
 					else if (resourceType == '2') {
+						$('#CbGranularity option[value="1"]').prop('selected',true);
 						showDataForTelephoneResource(data);
 						$('#DestinationRow').hide();
 						$('#ListMenuParameters li:nth-child(2)').hide();
@@ -3781,6 +3783,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		$('#BtnRemoveResource').hide();
 		$('#KeyRow').hide();
 		$('#CbGranularity').prop("disabled",true);
+		$('#CbGranularity option[value="0"]').prop('selected',true);
 		$('#ButtonCommit').attr('onclick', "InsertNewResource('" + col + "','" + row +
 				"','false')")
 		
