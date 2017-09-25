@@ -750,6 +750,7 @@ var InsertNewResource = function(col, row, isUpdate, realCol, realRow) {
 		else
 			newIndex2Add=2;
 	}
+	//Si es vacio (0) hacemos los cálculos normales. Sino nos traemos el índice de carga del anterior
 	if(localLoadIndex!=0)
 		localLoadIndex=localLoadIndex-$('.Res'+realRow+realCol).data('localLoadIndex');
 	localLoadIndex+=newIndex2Add;
