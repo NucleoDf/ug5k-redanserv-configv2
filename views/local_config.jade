@@ -140,7 +140,11 @@ script.
                                 schema: { 
                                     type: "object", 
                                     title: "Parametros Configurables",
-                                    options: { disable_properties: true, disable_collapse: true, disable_edit_json: true },
+                                    options: { 
+                                        disable_properties: true, 
+                                        disable_collapse: true, 
+                                        disable_edit_json: true
+                                    },
                                     properties: {
                                         Region: {title: "Region / Zona", type: "string"},
                                         BackupServiceDomain: {title: "Localizacion Servicio de Backup", type: "string"},
@@ -151,10 +155,14 @@ script.
                                         log2con: {title: 'Tracear a consola',type: "string", enum: 
                                             ['none','silly','info','warn'], default: 'none'},
                                         log2file: {title: 'Tracear a fichero', type: "string", enum: 
-                                            ['none','silly','info','warn'], default: false},
+                                            ['none','silly','info','warn'], default: 'silly'},
                                         LoginSystemTrace: {title: 'Tracear el Control de Acceso',type: "boolean",format: "checkbox", default: false }
-                                    }
-                                }
+                                    },
+                                    required: ['Region', 'BackupServiceDomain', 'HistoricsDeep',
+                                    'LoginTimeOut', 'refreshTime', 'maxCycleTime', 'log2con',
+                                    'log2file', 'LoginSystemTrace']
+                                },
+                                theme: 'barebones'
                             }
                         );
                     },
@@ -178,7 +186,7 @@ script.
                 }
             });
         }
-        var ret = alertify.cfgLocal("").resizeTo(520, 490);
+        var ret = alertify.cfgLocal("").resizeTo(520, 450);
         console.log(ret);
 
     }
