@@ -113,12 +113,18 @@ function ShowOptions(tipo){
 			$('#TbInactividad').prop('disabled',CbVox.checked ? false : 'disabled');
 			break;*/
 		case '3': 	// R2
+			if($('#CbOptionsSupervision').prop('checked'))
+				$('#ReleaseRow').show();
 		case '4': 	// N5
 			$('.ATS').attr('style','display:table-row');
 			$('#ListMenuParameters li:nth-child(6)').show();
+			if($('#CbOptionsSupervision').prop('checked'))
+				$('#ReleaseRow').show();
 			break;
 		case '5': 	// LCEN
 			$('.LCEN').attr('style','display:table-row');
+			if($('#CbOptionsSupervision').prop('checked'))
+				$('#ReleaseRow').show();
 			break;
 		case '6': 	// QSIG
 			$('.QSIG').attr('style','display:table-row');
