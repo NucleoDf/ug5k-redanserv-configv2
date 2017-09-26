@@ -202,8 +202,9 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 6:         // BSS / CLIMAX ?
                 return (parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3);
 
-            case 7:         // Ventana BSS
             case 8:         // BSS. Cola SQUELCH
+                return false;
+            case 7:         // Ventana BSS
             case 9:         // CLIMAX-DELAY
                 return ((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1);
 
