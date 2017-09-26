@@ -3,8 +3,12 @@
     margin: 10px;
 }
 
-.ajs-content input, select {
+.ajs-content input {
     float: right;
     background: white;
 }
 
+.ajs-content select {
+    float: right;
+    background: white;
+}
