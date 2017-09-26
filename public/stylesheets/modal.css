@@ -1,0 +1,10 @@
+
+.ajs-content .row {
+    margin: 10px;
+}
+
+.ajs-content input, select {
+    float: right;
+    background: white;
+}
+
