@@ -28,12 +28,12 @@ router.route('/')	// The root path is relative the path where it's mounted in ap
 		//});
 	});
 
-router.route('/:idTable')
+router.route('/:idExtResource')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		//myLibTable.getTableBss(req.params.idTable,function(data){
-		//	res.json(data);
-		//});
+		myLibExtResources.getExternalResource(req.params.idExtResource,function(data){
+			res.json(data);
+		});
 	})
 	.delete(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
