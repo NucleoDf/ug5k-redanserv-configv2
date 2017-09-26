@@ -3739,6 +3739,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 					$('#SResourceType option[value="' + resourceType + '"]').prop('selected', true);
 					$('#ListMenuParameters li:nth-child(1)').show();
 					if (resourceType == '1') {
+						$('#EntradaAudioRow').show();
 						$('#CbGranularity option[value="0"]').prop('selected',true);
 						showDataForRadioResource(data);
 						$('#ListMenuParameters li:nth-child(2)').show();//Radio
@@ -3753,6 +3754,10 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 							$('#ListMenuParameters li:nth-child(5)').show();
 						else
 							$('#ListMenuParameters li:nth-child(5)').hide();
+						if(data.tipo_agente==5)
+							$('#EntradaAudioRow').hide();
+						else
+							$('#EntradaAudioRow').show();
 						$('#ListMenuParameters li:nth-child(6)').hide();
 						$('#BtnRemoveResource').attr('onclick', "removeRadioResource('" + data.idrecurso_radio + "')");
 						$('#ButtonCommit').attr('onclick', "InsertNewResource('1','" + data.idrecurso_radio + "','true','"+col+"','"+row+"')");

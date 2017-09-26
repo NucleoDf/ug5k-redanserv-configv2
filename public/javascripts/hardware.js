@@ -2390,7 +2390,7 @@ function SelectBss(){
 															.attr('onclick','');
 				// Mostrar TX-B y RX-B 
 				$('#TxBRow').attr('style','display:table-row');	
-				$('#RxBRow').attr('style','display:table-row');	
+				$('#RxBRow').attr('style','display:table-row');
 				break;
 			case '3':
 				// Mostrar TX-B y RX-B 
@@ -2444,7 +2444,10 @@ function SelectBss(){
 		$('#BSSAvailableRow').hide();
 		if ($('#LbTypeRadio option:selected').val() == 5) {
 			$('#BSSMethodRow').hide();
+			$('#EntradaAudioRow').hide();
 		}
+		else
+			$('#EntradaAudioRow').show()
 		
 		
 		if ($('#LbTypeRadio option:selected').val() == 6){
