@@ -73,6 +73,7 @@ function showDataForTelephoneResource(data) {
 	ShowOptions(data.tipo_interfaz_tel.toString());//Opciones de telefono por defecto
 	//Tipo de Interfaz Telefónico
 	$('#LbTypeTel option[value="' +data.tipo_interfaz_tel +'"]').prop('selected', true);
+	
 	//URI remota
 	$('#TbRemoteUri').val(data.uri_telefonica.substr(4, data.uri_telefonica.length));
 	//Detección VOX
@@ -196,6 +197,12 @@ function showDataForTelephoneResource(data) {
 	else
 		$('#ListMenuParameters li:nth-child(5)').hide();
 	
+	if(data.tipo_interfaz_tel==0||data.tipo_interfaz_tel==1||data.tipo_interfaz_tel==2) {
+		$('#OptionsIntervalRow').hide();
+		$('#ReleaseRow').hide();
+	}
+	
+		
 }
 
 /********************************************/
