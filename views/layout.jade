@@ -7,6 +7,8 @@ html
         link(rel="stylesheet", href="/alertifyjs/css/alertify.min.css")
         link(rel="stylesheet", href="/alertifyjs/css/themes/semantic.css")
 
+        link(rel='stylesheet', href='/stylesheets/modal.css')
+
         script(type='text/javascript' src='/javascripts/jquery-1.11.2.min.js')
         script(type='text/javascript' src='/javascripts/jquery.form.min.js')
         script(type='text/javascript' src='/translator/lang.js')
@@ -20,6 +22,10 @@ html
         script(type='text/javascript' src='/javascripts/radioDestinations.js')
         script(type='text/javascript' src='/javascripts/index.js')
         script(type='text/javascript' src='/alertifyjs/alertify.min.js')
+
+        script(type='text/javascript' src='/javascripts/jsoneditor.js')
+        script(type='text/javascript' src='/javascripts/underscore-min.js')
+        script(type='text/javascript' src='/javascripts/check-type.min.js')
 
         script(type='text/javascript' src='/javascripts/historics.js')
         script(type='text/javascript' src='/javascripts/backups.js')
@@ -455,6 +461,8 @@ html
                                     //-     a(id="opcionEstadi" onclick="showMaintenancePanel('Estadisticas')" tkey='Statistic')
                                     //li
                                     //  a(id="opcionPasarel" onclick="showMaintenancePanel('Pasarelas')" tkey='Gateways')
+                                    li
+                                        a(id="cfgLocal" onclick="ConfigEdit();") Conf. Servidor
                                     // AGL. FORM VERSION.
                                     li(id="lopcionVersion")
                                         a(id="opcionVersion" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePreviousHistorics(\'#FormVersion\',\'#AddFormVersion\',\'#DivVersion\'); GetVersion(false)})", tkey='MenuVersion')
@@ -520,6 +528,9 @@ html
                             block backups
                             include ./backups/backups.jade
 
+        // Config Local
+        block local_config
+        include ./local_config.jade
         .divNucleo(style='margin-top: 10px')
             footer.footerNucleo#_pieExtern DF Nucleo Copyright ©2017. Todos los Derechos Reservados.
             footer.footerNucleo#hVersion
