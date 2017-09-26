@@ -47,68 +47,40 @@ var GetExtResources = function(f) {
 /*  PARAMS: idTable (IN)			*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var GetExtResource = function (idTable){
-	$('#DivTableBss').animate({width:'950px'});
-	$('#AddTableBss').show();
+var GetExtResource = function (idExtResource){
+	$('#DivResources').animate({width:'950px'});
+	$('#AddResources').show();
 	
-	if (idTable != -1){
-		$.ajax({
-			type: 'GET',
-			url: '/tableBss/' + idTable,
-			success: function(data){
-				if (data.tables != null){
-					translateWord('Update',function(result){
-						$('#UpdateTableButton').text(result)
-							.attr('onclick','PutTable()');
-					});
-					$('#FormTableBss').data('idtabla_bss',data.tables[0].idtabla_bss);
-					$('#IdTable').val(data.tables[0].name);
-					$('#DescTable').val(data.tables[0].description);
-					$('#RowCreationUser').hide();
-					$('#RowCreationDate').show();
-					$('#RowModificationUser').hide();
-					$('#RowModificationDate').hide();
-					//$('#LblCreationUser').text(data.tables[0].UsuarioCreacion);
-					$('#LblCreationDate').text(data.tables[0].FechaCreacion);
-					//$('#LblModificationUser').text(data.tables[0].UsuarioModificacion);
-					//$('#LblModificationDate').text(data.tables[0].FechaModificacion);
-					
-					$('#CbRssi0 option[value="' + data.tables[0].valor0 +'"]').prop('selected', true);
-					$('#CbRssi1 option[value="' + data.tables[0].valor1 +'"]').prop('selected', true);
-					$('#CbRssi2 option[value="' + data.tables[0].valor2 +'"]').prop('selected', true);
-					$('#CbRssi3 option[value="' + data.tables[0].valor3 +'"]').prop('selected', true);
-					$('#CbRssi4 option[value="' + data.tables[0].valor4 +'"]').prop('selected', true);
-					$('#CbRssi5 option[value="' + data.tables[0].valor5 +'"]').prop('selected', true);
-					$('#DeleteTableButton').show();
-					$('#RowValuesTable').show();
-				}
+	$.ajax({
+		type: 'GET',
+		url: '/externalResources/' + idExtResource,
+		success: function(data){
+			if (data.lista_uris != null){
+				translateWord('Update',function(result){
+					$('#UpdateTableButton').text(result)
+						.attr('onclick','PutTable()');
+				});
+				$('#FormTableBss').data('idtabla_bss',data.tables[0].idtabla_bss);
+				$('#IdTable').val(data.tables[0].name);
+				$('#DescTable').val(data.tables[0].description);
+				$('#RowCreationUser').hide();
+				$('#RowCreationDate').show();
+				$('#RowModificationUser').hide();
+				$('#RowModificationDate').hide();
+				//$('#LblCreationUser').text(data.tables[0].UsuarioCreacion);
+				$('#LblCreationDate').text(data.tables[0].FechaCreacion);
+				//$('#LblModificationUser').text(data.tables[0].UsuarioModificacion);
+				//$('#LblModificationDate').text(data.tables[0].FechaModificacion);
+				
+				$('#CbRssi0 option[value="' + data.tables[0].valor0 +'"]').prop('selected', true);
+				$('#CbRssi1 option[value="' + data.tables[0].valor1 +'"]').prop('selected', true);
+				$('#CbRssi2 option[value="' + data.tables[0].valor2 +'"]').prop('selected', true);
+				$('#CbRssi3 option[value="' + data.tables[0].valor3 +'"]').prop('selected', true);
+				$('#CbRssi4 option[value="' + data.tables[0].valor4 +'"]').prop('selected', true);
+				$('#CbRssi5 option[value="' + data.tables[0].valor5 +'"]').prop('selected', true);
+				$('#DeleteTableButton').show();
+				$('#RowValuesTable').show();
 			}
-		});
-	}
-	else{
-		$('#CbRssi0 option[value="0"]').prop('selected', true);
-		$('#CbRssi1 option[value="0"]').prop('selected', true);
-		$('#CbRssi2 option[value="0"]').prop('selected', true);
-		$('#CbRssi3 option[value="0"]').prop('selected', true);
-		$('#CbRssi4 option[value="0"]').prop('selected', true);
-		$('#CbRssi5 option[value="0"]').prop('selected', true);
-		translateWord('Add',function(result){
-			$('#UpdateTableButton').text(result)
-				.attr('onclick','PostTable()');
-		});
-		translateWord('Cancel',function(result){
-			$('#CancelTableButton').text(result)
-				.attr('onclick','GetTablesBss()');
-		});
-		
-		$('#DeleteTableButton').hide();
-		$('#FormTableBss').data('idtabla_bss',null);
-		$('#IdTable').val('');
-		$('#DescTable').val('');
-		$('#RowCreationUser').hide();
-		$('#RowCreationDate').hide();
-		$('#RowModificationUser').hide();
-		$('#RowModificationDate').hide();
-		$('#RowValuesTable').show();
-	}
+		}
+	});
 };
