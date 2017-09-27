@@ -168,43 +168,45 @@ var ShowCfg = function(cfg){
 		url: '/configurations/' + cfg.idCFG,
 		success: function(data){
 			if (data.error == null) {
-				if (data != 'NO_DATA') {
-					translateWord('LoadConfig', function (result) {
-						$('#BtnActivate').text(result);
-					});
-					//VMG La configuracion tiene al menos un emplazamiento
-					if(data.result[0].nameSite!=null) {
-						var idCFGCopy = '';
-						//VMG No hay config o emplazamientos que es lo mas normal.
-						if (data != 'Configuration not found.' || data != 'Site not found.') {
-							$('#CancelGtwButton').attr('onclick', 'ShowSite(\'' + data.result[0].nameSite + '\',\'' + data.result[0].idEMPLAZAMIENTO + '\')');
-							/*$('#CancelGtwButton').click(function(nameSite, idSite) {
-							 ShowSite(nameSite, idSite);
-							 });*/
-							$.each(data.result, function (index, value) {
-								var item = $('<li data-texto-emp="' + value.idEMPLAZAMIENTO + '"  >' +
-									'<a draggable="false" ondragstart="dragGatewayToSite(event)" ondrop="dropGatewayToSite(event)" ondragover="getOverDropC(event)" style="display:block; color:#b70028" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowSite(\'' + value.nameSite + '\',\'' + value.idEMPLAZAMIENTO + '\')})"' + '>' + value.nameSite + '</a>' +
-									'<ul class="gtwList" id="site-' + value.idEMPLAZAMIENTO + '" style="display:none"></ul>' +
-									'</li>');
+				if(data.result.length>0) {
+					if (data != 'NO_DATA') {
+						translateWord('LoadConfig', function (result) {
+							$('#BtnActivate').text(result);
+						});
+						//VMG La configuracion tiene al menos un emplazamiento
+						if (data.result[0].nameSite != null) {
+							var idCFGCopy = '';
+							//VMG No hay config o emplazamientos que es lo mas normal.
+							if (data != 'Configuration not found.' || data != 'Site not found.') {
+								$('#CancelGtwButton').attr('onclick', 'ShowSite(\'' + data.result[0].nameSite + '\',\'' + data.result[0].idEMPLAZAMIENTO + '\')');
+								/*$('#CancelGtwButton').click(function(nameSite, idSite) {
+								 ShowSite(nameSite, idSite);
+								 });*/
+								$.each(data.result, function (index, value) {
+									var item = $('<li data-texto-emp="' + value.idEMPLAZAMIENTO + '"  >' +
+										'<a draggable="false" ondragstart="dragGatewayToSite(event)" ondrop="dropGatewayToSite(event)" ondragover="getOverDropC(event)" style="display:block; color:#b70028" onclick="CheckingAnyChange(\'GeneralContent\', function(){ShowSite(\'' + value.nameSite + '\',\'' + value.idEMPLAZAMIENTO + '\')})"' + '>' + value.nameSite + '</a>' +
+										'<ul class="gtwList" id="site-' + value.idEMPLAZAMIENTO + '" style="display:none"></ul>' +
+										'</li>');
+									
+									item.appendTo($(lista));
+									idCFGCopy = value.idCFG;
+								});
+								$(lista).show();
 								
-								item.appendTo($(lista));
-								idCFGCopy = value.idCFG;
-							});
-							$(lista).show();
-							
-							$('#DivConfigurations').data('idCFG', idCFGCopy);
-							//VMG esta parte es la que rellena las pasarelas de la config de abajo
-							GetGatewaysBelongConfiguration(true, idCFGCopy);
-							$('#CBFreeGateways option[value="0"]').prop('selected', true);
-							//VMG esta parte nos dirá si estan activas a o no.
-							//ClickCBFreeGateways();
+								$('#DivConfigurations').data('idCFG', idCFGCopy);
+								//VMG esta parte es la que rellena las pasarelas de la config de abajo
+								GetGatewaysBelongConfiguration(true, idCFGCopy);
+								$('#CBFreeGateways option[value="0"]').prop('selected', true);
+								//VMG esta parte nos dirá si estan activas a o no.
+								//ClickCBFreeGateways();
+							}
+							else
+								GetGatewaysBelongConfiguration(false);
 						}
-						else
-							GetGatewaysBelongConfiguration(false);
 					}
-				}
-				else {
-					alertify.error('La configuración no existe');
+					else {
+						alertify.error('La configuración no existe');
+					}
 				}
 			}
 			else {
@@ -989,7 +991,7 @@ var ExistGatewaysOut = function(idCfg,f){
 /*  REV 1.0.2 VMG					*/
 /************************************/
 var ActiveCfg = function(f) {
-	alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + $('#name').val() + "\".?",
+	alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + $('#name').val() + "\"?",
 	function () {
 		$.ajax({
 			type: 'GET',
