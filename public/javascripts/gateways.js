@@ -3881,8 +3881,10 @@ function showDataForRadioResource(data) {
 		$('#CbBssMethod option[value="' + data.metodo_bss + '"]').prop('selected', true);
 		$('#BSSMethodRow .SoloRssi').show();
 	}
-	else
-		$('#CbBssMethodAvailable option[value="' +data.metodo_bss +'"]').prop('selected', true);
+	else {
+		$('#CbBssMethodAvailable option[value="' + data.metodo_bss + '"]').prop('selected', true);
+		$('#BSSMethodRow .SoloRssi').hide();
+	}
 	//Eventos PTT/Squelch
 	if(data.evento_ptt_squelch==1)
 		$('#CbPttSquelchEvents').prop('checked', true);
