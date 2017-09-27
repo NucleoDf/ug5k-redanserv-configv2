@@ -3877,8 +3877,10 @@ function showDataForRadioResource(data) {
 	//Indicación salida audio 
 	$('#LbPttType option[value="' +data.indicacion_salida_audio +'"]').prop('selected', true);
 	//Método BSS disponible/preferido 
-	if(data.tipo_agente=="4"||data.tipo_agente=="6")
-		$('#CbBssMethod option[value="' +data.metodo_bss +'"]').prop('selected', true);
+	if(data.tipo_agente=="4"||data.tipo_agente=="6") {
+		$('#CbBssMethod option[value="' + data.metodo_bss + '"]').prop('selected', true);
+		$('#BSSMethodRow .SoloRssi').show();
+	}
 	else
 		$('#CbBssMethodAvailable option[value="' +data.metodo_bss +'"]').prop('selected', true);
 	//Eventos PTT/Squelch
