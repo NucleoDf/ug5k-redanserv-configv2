@@ -12,7 +12,7 @@ var isActiveConfig = false;
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var GetConfigurations = function(f) {
+var GetConfigurations = function(refreshActiva,f) {
 	var cfgString = '';
 	translateWord('Configurations',function(result){
 		$('#TitleH3').text(result);	
@@ -31,6 +31,11 @@ var GetConfigurations = function(f) {
 				$('#CBFreeGateways').empty();
 				
 				$.each(data.result, function (index, value) {
+					if(refreshActiva&&value.idCFG==$('#DivConfigurations').data('cfgJson').idCFG){
+						$('#DivConfigurations').data('cfgJson').activa=1;
+						$('#DivConfigurations').data('cfgJson').ts_activa=value.ts_activa;
+					}
+						
 					var item = $('<li>' +
 						'<a data-cfg=' + value.idCFG + ' ondrop="dropSiteToCfg(event)" ondragover="getOverDropC(event)" style="display:block" onclick=\'CheckingAnyChange("GeneralContent", function(){ShowCfg(' + JSON.stringify(value) + ')})\'>' + value.name + '</a>' +
 						'<ul class="gtwList" id="cfg-' + value.name + '" style="display:none"></ul>' +
@@ -47,6 +52,8 @@ var GetConfigurations = function(f) {
 					}));
 				});
 				$('#Add').attr("onclick", "GetConfiguration(-1)");
+				if(refreshActiva)
+					ShowCfg($('#DivConfigurations').data('cfgJson'));
 				if (f != null)
 					f();
 			}
@@ -1020,8 +1027,9 @@ var ActiveCfg = function(f) {
 					}
 				}
 				// Provocar una actualización  en la lista de configuraciones si hubiera un cambio de configuración activa
-				GetConfigurations();
-				ShowCfg($('#DivConfigurations').data('cfgJson'));
+					GetConfigurations(true);
+					//ShowCfg($('#DivConfigurations').data('cfgJson'));
+				
 			}
 		});
 	},
