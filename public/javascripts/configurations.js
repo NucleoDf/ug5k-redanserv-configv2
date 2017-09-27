@@ -1014,8 +1014,9 @@ var ActiveCfg = function(f) {
 					//		GenerateHistoricEventArray(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, [$('#name').val(), value], $('#loggedUser').text());
 					//	});
 					//}
-					configModified = true;
-					isActiveConfig = true;
+					GetActiveCfgAndActivate();
+					//configModified = true;
+					//isActiveConfig = true;
 				}
 				else {
 					GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, $('#name').val(), $('#loggedUser').text());
