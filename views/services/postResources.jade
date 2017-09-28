@@ -11,7 +11,7 @@ div(id="FormResources", style="display: none; width: 1250px")
                         table(style="width:100%")
                             tr(style="height: 50px", align="center")
                                 td
-                                    a.ButtonNucleo(id="NewExtResource", onclick='GetTable(-1)', style="color:#bf2a36; width: 80px" tkey='NewExtResource')
+                                    a.ButtonNucleo(id="NewExtResource", onclick='GetExtResource(-1)', style="color:#bf2a36; width: 80px" tkey='NewExtResource')
                 td(style='vertical-align:top')
                     #AddResources.fadeFormNucleo(style='display:none;padding-left:20px')
                         .content#DatosResources(style='width:inherit')
@@ -39,8 +39,8 @@ div(id="FormResources", style="display: none; width: 1250px")
                             table(style='width:100%;border-spacing: 20px')
                                 tr(style="height: 20px", align="center")
                                     td
-                                        a.ButtonNucleo(id='UpdateTableButton', onclick='PostTable()' tkey='Add')
+                                        a.ButtonNucleo(id='UpdateExtResButton', onclick='PostExtResource()' tkey='Add')
                                     td
-                                        a.ButtonNucleo(id='DeleteTableButton' onclick="DelTable()" , style="width:50px" tkey='Remove')
+                                        a.ButtonNucleo(id='DeleteExtResButton' onclick="ExtResource()" , style="width:50px" tkey='Remove')
                                     td
-                                        a.ButtonNucleo(id='CancelTableButton', onclick='GetTablesBss()' tkey='Cancel')
+                                        a.ButtonNucleo(id='CancelExtResButton', onclick='GetExtResources()' tkey='Cancel')
