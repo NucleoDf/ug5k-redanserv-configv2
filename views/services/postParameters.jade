@@ -376,13 +376,13 @@ div(id="FormParameters")
 										td
 										td.New(rowspan='12')
 											table#facedResources(style='height: 210px;border-style: double;width: 100%;')
-												//tr
-												//	td(align='center')
-												//		select#CBFacedTelCfg(style='width:140px;' onchange='SelectTelSite($("#CBFacedTelCfg option:selected").val())')
 												tr
 													td(align='center')
+														select#CBFacedTelType(style='width:140px;' onchange='SelectTelType($("#CBFacedTelType option:selected").val())')
+												tr#rowSelectTelSite
+													td(align='center')
 														select#CBFacedTelSite(style='width:140px;' onchange='SelectTelGtw($("#name").val(),$("#CBFacedTelSite option:selected").val())')
-												tr
+												tr#rowSelectTelGtw
 													td(align='center')
 														select#CBFacedTelGtw(style='width:140px;' onchange='SelectTelResource($("#name").val(),$("#CBFacedTelSite option:selected").val(),$("#CBFacedTelGtw option:selected").val())')
 												tr

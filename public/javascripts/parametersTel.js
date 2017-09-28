@@ -47,13 +47,62 @@ function ResetTelParameters(){
 /*  REV 1.0.2 VMG								*/
 /************************************************/
 function GetRemoteTfnoResources() {
-	var cfgId = $('#DivConfigurations').data('idCFG');
+	var options='';
+	
+	
+	$('#CBFacedTelType').empty();
+	options = '<option value="" disabled selected>Seleccione tipo de recurso</option>';
+	$('#CBFacedTelType').append(options);
+	options = '<option value="0">Recursos configurados</option>';
+	$('#CBFacedTelType').append(options);
+	options = '<option value="1">Recursos externos</option>';
+	$('#CBFacedTelType').append(options);
 	
 	$('#CBFacedTelSite').empty();
 	$('#CBFacedTelGtw').empty();
 	$('#CBFacedTelResources').empty();
+
+}
+
+/************************************************/
+/*	FUNCTION: SelectPhoneSite 					*/
+/*  PARAMS: resType: id de la configuración		*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function SelectTelType(resType){
+	var cfgId = $('#DivConfigurations').data('idCFG');
 	
-	SelectPhoneSite(cfgId);
+	if(resType==0)
+		SelectPhoneSite(cfgId);
+	else
+		SelectPhoneExtResource();
+}
+
+/************************************************/
+/*	FUNCTION: SelectPhoneExtResource 			*/
+/*  PARAMS: 									*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function SelectPhoneExtResource(){
+	$('#CBFacedTelSite').empty();
+	$('#CBFacedTelGtw').empty();
+	$('#CBFacedTelResources').empty();
+	
+	$('#rowSelectTelSite').hide();
+	$('#rowSelectTelGtw').hide();
+	
+	$.ajax({type: 'GET',
+	url: '/externalResources'})
+	.done(function(data) {
+		if (data.lista_uris != null && data.lista_uris.length > 0) {
+			$.each(data.lista_uris, function (index, value) {
+				var item = '<option value="' + value.uri + '">' + value.alias + '</option>';
+				$('#CBFacedTelResources').append(item);
+			});
+		}
+	});
 }
 
 /************************************************/
@@ -63,6 +112,12 @@ function GetRemoteTfnoResources() {
 /*  REV 1.0.2 VMG								*/
 /************************************************/
 function SelectPhoneSite(cfgId){
+	$('#CBFacedTelSite').empty();
+	$('#CBFacedTelGtw').empty();
+	$('#CBFacedTelResources').empty();
+	$('#rowSelectTelSite').show();
+	$('#rowSelectTelGtw').show();
+	
 	$.ajax({type: 'GET',
 		url: '/resources/remote/' + cfgId + '/null/null/null',
 		success: function(data){
