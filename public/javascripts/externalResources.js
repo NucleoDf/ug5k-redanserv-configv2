@@ -63,23 +63,8 @@ var GetExtResource = function (idExtResource){
 				$('#FormResources').data('idrecursos_externos',data.lista_uris[0].idrecursos_externos);
 				$('#aliasExtResource').val(data.lista_uris[0].alias);
 				$('#uriExtResource').val(data.lista_uris[0].uri);
-				$('#RowCreationUser').hide();
-				$('#RowCreationDate').show();
-				$('#RowModificationUser').hide();
-				$('#RowModificationDate').hide();
-				//$('#LblCreationUser').text(data.tables[0].UsuarioCreacion);
-				$('#LblCreationDate').text(data.tables[0].FechaCreacion);
-				//$('#LblModificationUser').text(data.tables[0].UsuarioModificacion);
-				//$('#LblModificationDate').text(data.tables[0].FechaModificacion);
 				
-				$('#CbRssi0 option[value="' + data.tables[0].valor0 +'"]').prop('selected', true);
-				$('#CbRssi1 option[value="' + data.tables[0].valor1 +'"]').prop('selected', true);
-				$('#CbRssi2 option[value="' + data.tables[0].valor2 +'"]').prop('selected', true);
-				$('#CbRssi3 option[value="' + data.tables[0].valor3 +'"]').prop('selected', true);
-				$('#CbRssi4 option[value="' + data.tables[0].valor4 +'"]').prop('selected', true);
-				$('#CbRssi5 option[value="' + data.tables[0].valor5 +'"]').prop('selected', true);
-				$('#DeleteTableButton').show();
-				$('#RowValuesTable').show();
+				$('#extResType option[value="' + data.lista_uris[0].tipo +'"]').prop('selected', true);
 			}
 		}
 	});
