@@ -18,34 +18,23 @@ div(id="FormResources", style="display: none; width: 1250px")
                             table(style='border-spacing: 10px 10px;width:inherit')
                                 tr(style="height: 20px")
                                     td(style="width: 50%;padding:10px 5px")
-                                        label(tkey='TableId')
+                                        label(tkey='lblAliasExtResource')
                                     td.New
                                         input.textbox(id="aliasExtResource", type="text" onblur='ValidateUser(this,"ErrorTableId")' onfocus='this.oldValue=this.value')
                                 tr(style="height: 20px")
                                     td(style="padding:5px 5px")
-                                        label(tkey='Description')
+                                        label(tkey='lblUriExtResource')
                                     td.New
-                                        input.textbox#uriExtResource(type="text")
-                                tr#RowCreationUser(style="vertical-align:center")
+                                        input.textbox#uriExtResource(type='text' style='width:200px' )
+                                tr#RowExtResType(style="vertical-align:center")
                                     td(style="padding:5px 5px")
-                                        label(tkey='CreationUser')
+                                        label(tkey='lblExtResType')
                                     td.New
-                                        label#LblCreationUser(style='color:black')
-                                tr#RowCreationDate(style="vertical-align:center")
-                                    td(style="padding:5px 5px")
-                                        label(tkey='CreationDate')
-                                    td.New
-                                        label#LblCreationDate(style='color:black')
-                                tr#RowModificationUser(style="vertical-align:center")
-                                    td(style="padding:5px 5px")
-                                        label(tkey='ModificationUser')
-                                    td.New
-                                        label#LblModificationUser(style='color:black')
-                                tr#RowModificationDate(style="vertical-align:center")
-                                    td(style="padding:5px 5px")
-                                        label(tkey='ModificationDate')
-                                    td.New
-                                        label#LblModificationDate(style='color:black')
+                                        select#LbPttType(type='select')
+                                            option(value='0') Radio Tx
+                                            option(value='1') Radio TxRx
+                                            option(value='2') Radio Rx
+                                            option(value='3') Teléfono
 
                             table(style='width:100%;border-spacing: 20px')
                                 tr(style="height: 20px", align="center")
