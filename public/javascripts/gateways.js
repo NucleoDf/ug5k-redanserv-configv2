@@ -1056,7 +1056,17 @@ var CloseCopy = function(){
 	});
 };
 
+/************************************/
+/*	FUNCTION: CopyGateway 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
 var CopyGateway = function(){
+	//Reset Values
+	$('#nameCopyGw').val('');
+	$('#ipCopyCpu0').val('');
+	$('#ipCopyCpu1').val('');
+	
 	$('#AddFormsite').addClass('disabledDiv');
 	$('#SitesList').addClass('disabledDiv');
 	$('#NavMenu').addClass('disabledDiv');
