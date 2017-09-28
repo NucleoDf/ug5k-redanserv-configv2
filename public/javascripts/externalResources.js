@@ -44,7 +44,7 @@ var GetExtResources = function(f) {
 
 /************************************/
 /*	FUNCTION: GetExtResource	 	*/
-/*  PARAMS: idTable (IN)			*/
+/*  PARAMS: idExtResource (IN)		*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
 var GetExtResource = function (idExtResource){
@@ -82,9 +82,10 @@ var GetExtResource = function (idExtResource){
 		$('#DeleteExtResButton').hide();
 	}
 };
+
 /************************************/
 /*	FUNCTION: GetExtResource	 	*/
-/*  PARAMS: idTable (IN)			*/
+/*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
 var PostExtResource = function () {
@@ -118,4 +119,34 @@ var PostExtResource = function () {
 			}
 		});
 	}
+};
+
+/************************************/
+/*	FUNCTION: DeleteExtResource	 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+var DeleteExtResource = function(){
+	alertify.confirm ('Ulises G 5000 R','¿Eliminar el recurso'+$('#aliasExtResource').val()+'?',
+		function(){
+			$.ajax({type: 'DELETE',
+				url: '/externalResources/'+$('#FormResources').data('idrecursos_externos'),
+				success: function(data){
+					if (data.error == null){
+						alertify.success('Recurso \"' +  $('#aliasExtResource').val() + '\" eliminado.');
+						GetExtResources();
+					}
+					else {
+						alertify.error('Error: ' + data.error);
+					}
+				},
+				error: function(data){
+					alertify.error('Error eliminando el recurso.');
+				}
+			});
+		},
+		function(){
+			alertify.error('Cancelado');
+		}
+	);
 };

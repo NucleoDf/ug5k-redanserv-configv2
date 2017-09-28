@@ -37,9 +37,9 @@ router.route('/:idExtResource')
 	})
 	.delete(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		//myLibTable.deleteTableBss(req.params.idTable,function(data){
-		//	res.json(data);
-		//});
+		myLibExtResources.deleteExternalResource(req.params.idExtResource,function(data){
+			res.json(data);
+		});
 	});
 
 module.exports = router;
