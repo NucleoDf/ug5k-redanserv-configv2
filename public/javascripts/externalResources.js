@@ -60,9 +60,9 @@ var GetExtResource = function (idExtResource){
 					$('#UpdateTableButton').text(result)
 						.attr('onclick','PutTable()');
 				});
-				$('#FormTableBss').data('idtabla_bss',data.tables[0].idtabla_bss);
-				$('#IdTable').val(data.tables[0].name);
-				$('#DescTable').val(data.tables[0].description);
+				$('#FormResources').data('idrecursos_externos',data.lista_uris[0].idrecursos_externos);
+				$('#aliasExtResource').val(data.lista_uris[0].alias);
+				$('#uriExtResource').val(data.lista_uris[0].uri);
 				$('#RowCreationUser').hide();
 				$('#RowCreationDate').show();
 				$('#RowModificationUser').hide();
