@@ -74,10 +74,47 @@ var GetExtResource = function (idExtResource){
 		});
 	}
 	else {
-		$('#aliasExtResource').val('');
+		$('#FormResources').data('idrecursos_externos',-1);
+			$('#aliasExtResource').val('');
 		$('#uriExtResource').val('');
 		$('#extResType option[value="0"]').prop('selected', true);
 		$('#UpdateExtResButton').text('Insertar');
 		$('#DeleteExtResButton').hide();
+	}
+};
+/************************************/
+/*	FUNCTION: GetExtResource	 	*/
+/*  PARAMS: idTable (IN)			*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+var PostExtResource = function () {
+	if ($('#aliasExtResource').val() == '' || $('#uriExtResource').val() == '') {
+		alertify.alert('Los datos del recurso no pueden estar vacíos. Rellene todos los campos.');
+		return;
+	}
+	else {
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			contentType: 'application/json',
+			url: '/externalResources',
+			data: JSON.stringify({
+				alias: $('#aliasExtResource').val(),
+				uri: $('#uriExtResource').val(),
+				tipo: $('#extResType option:selected').val()
+			}),
+			success: function (data) {
+				if (data.error == null) {
+					alertify.success('Recurso '+$('#aliasExtResource').val()+' generado.');
+					GetExtResources();
+				}
+				else {
+					alertify.error('Error: ' + data.error);
+				}
+			},
+			error: function (data) {
+				alertify.error('Error generando el recurso.');
+			}
+		});
 	}
 };
