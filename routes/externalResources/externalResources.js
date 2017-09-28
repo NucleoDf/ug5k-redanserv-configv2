@@ -17,9 +17,9 @@ router.route('/')	// The root path is relative the path where it's mounted in ap
 	})
 	.post(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibExtResources.postExternalResources(req.body,function(data){
-		//	res.json(data);
-		//});
+		myLibExtResources.postExternalResource(req.body,function(data){
+			res.json(data);
+		});
 	})
 	.put(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);

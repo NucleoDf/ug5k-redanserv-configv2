@@ -101,7 +101,8 @@ var PostExtResource = function () {
 			data: JSON.stringify({
 				alias: $('#aliasExtResource').val(),
 				uri: $('#uriExtResource').val(),
-				tipo: $('#extResType option:selected').val()
+				tipo: $('#extResType option:selected').val(),
+				id_recurso: $('#FormResources').data('idrecursos_externos')
 			}),
 			success: function (data) {
 				if (data.error == null) {
