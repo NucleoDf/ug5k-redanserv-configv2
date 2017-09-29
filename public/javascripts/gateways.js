@@ -24,6 +24,172 @@ function Site2Config(mySite, sites) {
 	return cfgName;
 }
 
+/****************************************/
+/*	FUNCTION: showDataForRadioResource 	*/
+/*  PARAMS: 							*/
+/*  REV 1.0.2 VMG						*/
+/****************************************/
+function showDataForRadioResource(data) {
+	//Nombre
+	$('#TbNameResource').val(data.nombre);
+	//Codec
+	//$('#SCodec option').val(data.codec).prop('selected', true);
+	//Frecuencia
+	$('#IdDestination').val(data.frecuencia.toFixed(3));
+	//Habilitar Registro
+	if(data.clave_registro!=null) {
+		$('#KeyRow').show();
+		$('#TbEnableRegister').prop('checked', true);
+		$('#TbKey').val(data.clave_registro);
+	}
+	else {
+		$('#TbEnableRegister').prop('checked', false);
+		$('#KeyRow').hide();
+	}
+	//Ajuste A/D
+	if(data.ajuste_ad!=null) {
+		$('#LblAD').show();
+		$('#TbAdGain').show();
+		$('#CbAdAgc').prop('checked', false);
+		$('#TbAdGain').val(data.ajuste_ad);
+	}
+	else {
+		$('#LblAD').hide();
+		$('#TbAdGain').hide();
+		$('#CbAdAgc').prop('checked', true);
+	}
+	//Ajuste D/A
+	if(data.ajuste_da!=null) {
+		$('#LblDA').show();
+		$('#TbDaGain').show();
+		$('#CbDaAgc').prop('checked', false);
+		$('#TbDaGain').val(data.ajuste_da);
+	}
+	else {
+		$('#LblDA').hide();
+		$('#TbDaGain').hide();
+		$('#CbDaAgc').prop('checked', true);
+	}
+	//Precisión Audio
+	$('#CbGranularity option[value="' +data.precision_audio +'"]').prop('selected', true);
+	
+	//PESTAÑA RADIO
+	//Tipo de Agente Radio
+	$('#LbTypeRadio option[value="' + data.tipo_agente +'"]').prop('selected', true);
+	//Ponemos todos los campos en su sitio
+	SelectBss();
+	//Indicación entrada audio
+	$('#LbSquelchType option[value="' +data.indicacion_entrada_audio +'"]').prop('selected', true);
+	//Umbral VAD (dB)
+	$('#TbVad').val(data.umbral_vad);
+	//Indicación salida audio 
+	$('#LbPttType option[value="' +data.indicacion_salida_audio +'"]').prop('selected', true);
+	//Método BSS disponible/preferido 
+	if(data.tipo_agente=="4"||data.tipo_agente=="6") {
+		$('#CbBssMethod option[value="' + data.metodo_bss + '"]').prop('selected', true);
+		$('#BSSMethodRow .SoloRssi').show();
+	}
+	else {
+		$('#CbBssMethodAvailable option[value="' + data.metodo_bss + '"]').prop('selected', true);
+		$('#BSSMethodRow .SoloRssi').hide();
+	}
+	//Eventos PTT/Squelch
+	if(data.evento_ptt_squelch==1)
+		$('#CbPttSquelchEvents').prop('checked', true);
+	else
+		$('#CbPttSquelchEvents').prop('checked', false);
+	//Prioridad PTT
+	$('#LbPttPriority option[value="' + data.prioridad_ptt + '"]').prop('selected', true);
+	//Prioridad Sesion SIP
+	$('#LbSipPriority option[value="' + data.prioridad_sesion_sip + '"]').prop('selected', true);
+	//BSS/CLIMAX
+	if ($('#LbTypeRadio option:selected').val() == 2 || $('#LbTypeRadio option:selected').val() ==3) {
+		if (data.climax_bss == 1) {
+			$('#CbBssEnable').prop('checked', true);
+			$('#BssTimeRow').attr('style', 'display:table-row');
+			$('#ClimaxDelayRow').attr('style', 'display:table-row');
+			$('#ModoCalculoClimaxRow').attr('style', 'display:table-row');
+		}
+		else {
+			if ($('#LbTypeRadio option:selected').val() >= 4 && $('#LbTypeRadio option:selected').val() <= 6) {
+				$('#CompensationRow').attr('style', 'display:table-column');
+				if ($('#LbSquelchType option:selected').val() == 1)
+					$('#VadRow').attr('style', 'display:table-row');
+				else
+					$('#VadRow').attr('style', 'display:table-column');
+			}
+			else
+				$('#CompensationRow').attr('style', 'display:table-row');
+			$('#CbBssEnable').prop('checked', false);
+		}
+		
+	}
+	//Ventana BSS (ms)
+	$('#TbBssWindow').val(data.ventana_bss);
+	//BSS Cola Squelch (ms)
+	if(data.cola_bss_sqh==null)
+		$('#TbBssSquelchQueue').val('');
+	else
+		$('#TbBssSquelchQueue').val(data.cola_bss_sqh);
+	//Retraso Climax
+	$('#TbClimaxDelay option[value="' + data.tipo_climax + '"]').prop('selected', true);
+	//Retraso Climax
+	$('#TbModoCalculoClimax option[value="' + data.metodo_climax + '"]').prop('selected', true);
+	//Retraso interno GRS
+	$('#TbGrsInternalDelay').val(data.retraso_interno_grs);
+	//Tabla Calificacion de audio
+	SetAudioTableCB(function() {//Primero hay que inicializar los valores de la tabla.
+		if(data.tabla_bss_id==0)
+			$('#CbBssAudioTable option[value="-1"]').prop('selected', true);
+		else
+			$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
+	});
+	if (($('#LbTypeRadio option:selected').val() == 2 ||$('#LbTypeRadio option:selected').val() == 3)
+		&& data.tipo_climax == 0)
+		$('#CompensationRow').attr('style', 'display:table-column');
+	
+	if ($('#LbTypeRadio option:selected').val() != 0 && $('#LbTypeRadio option:selected').val() !=1) {
+		if (data.tipo_climax == 1)
+			$('#CompensationRow').attr('style', 'display:table-column');
+		else
+			$('#CompensationRow').attr('style', 'display:table-row');
+	}
+	$('#CbCompensation').val(data.retardo_fijo_climax);
+	//Habilita grabación
+	if(data.habilita_grabacion==1)
+		$('#CbEnableRecording').prop('checked', true);
+	else
+		$('#CbEnableRecording').prop('checked', false);
+	
+	$('#SRestriccion option[value="' + data.restriccion_entrantes+'"]').prop('selected', true);
+	
+	if (($('#LbTypeRadio option:selected').val() >= 0||$('#LbTypeRadio option:selected').val() <= 3 )
+		&& $('#LbSquelchType option:selected').val() ==1) {
+		$('#VadRow').attr('style', 'display:table-row');
+	}
+	if ($('#LbTypeRadio option:selected').val() == 2||$('#LbTypeRadio option:selected').val() == 3){
+		if($('#TbClimaxDelay option:selected').val() ==1)
+		$('#CompensationRow').attr('style', 'display:table-column');
+	}
+	if ($('#LbTypeRadio option:selected').val() == 4||$('#LbTypeRadio option:selected').val() == 5||$('#LbTypeRadio option:selected').val() == 6)
+		$('#CompensationRow').attr('style', 'display:table-column');
+	
+	
+	if(data.restriccion_entrantes == 0) {
+		$('#BlackList').attr('style', 'display:table-column');
+		$('#WhiteList').attr('style', 'display:table-column');
+	}
+	if(data.restriccion_entrantes == 1) {
+		$('#BlackList').attr('style', 'display:table');
+		$('#WhiteList').attr('style', 'display:table-column');
+		showWhiteBlackList(data.idrecurso_radio, 'LSN');
+	}
+	if(data.restriccion_entrantes == 2) {
+		$('#BlackList').attr('style', 'display:table-column');
+		$('#WhiteList').attr('style', 'display:table');
+		showWhiteBlackList(data.idrecurso_radio, 'LSB');
+	}
+}
 /********************************************/
 /*	FUNCTION: showDataForTelephoneResource 	*/
 /*  PARAMS: 								*/
@@ -3825,146 +3991,6 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		// Borrar valores residuales en el insertar new
 	}
 }
-
-/****************************************/
-/*	FUNCTION: showDataForRadioResource 	*/
-/*  PARAMS: 							*/
-/*  REV 1.0.2 VMG						*/
-/****************************************/
-function showDataForRadioResource(data) {
-	//Nombre
-	$('#TbNameResource').val(data.nombre);
-	//Codec
-	//$('#SCodec option').val(data.codec).prop('selected', true);
-	//Frecuencia
-	$('#IdDestination').val(data.frecuencia.toFixed(3));
-	//Habilitar Registro
-	if(data.clave_registro!=null) {
-		$('#KeyRow').show();
-		$('#TbEnableRegister').prop('checked', true);
-		$('#TbKey').val(data.clave_registro);
-	}
-	else {
-		$('#TbEnableRegister').prop('checked', false);
-		$('#KeyRow').hide();
-	}
-	//Ajuste A/D
-	if(data.ajuste_ad!=null) {
-		$('#LblAD').show();
-		$('#TbAdGain').show();
-		$('#CbAdAgc').prop('checked', false);
-		$('#TbAdGain').val(data.ajuste_ad);
-	}
-	else {
-		$('#LblAD').hide();
-		$('#TbAdGain').hide();
-		$('#CbAdAgc').prop('checked', true);
-	}
-	//Ajuste D/A
-	if(data.ajuste_da!=null) {
-		$('#LblDA').show();
-		$('#TbDaGain').show();
-		$('#CbDaAgc').prop('checked', false);
-		$('#TbDaGain').val(data.ajuste_da);
-	}
-	else {
-		$('#LblDA').hide();
-		$('#TbDaGain').hide();
-		$('#CbDaAgc').prop('checked', true);
-	}
-	//Precisión Audio
-	$('#CbGranularity option[value="' +data.precision_audio +'"]').prop('selected', true);
-	
-	//PESTAÑA RADIO
-	//Tipo de Agente Radio
-	$('#LbTypeRadio option[value="' + data.tipo_agente +'"]').prop('selected', true);
-	//Ponemos todos los campos en su sitio
-	SelectBss();
-	//Indicación entrada audio
-	$('#LbSquelchType option[value="' +data.indicacion_entrada_audio +'"]').prop('selected', true);
-	//Umbral VAD (dB)
-	$('#TbVad').val(data.umbral_vad);
-	//Indicación salida audio 
-	$('#LbPttType option[value="' +data.indicacion_salida_audio +'"]').prop('selected', true);
-	//Método BSS disponible/preferido 
-	if(data.tipo_agente=="4"||data.tipo_agente=="6") {
-		$('#CbBssMethod option[value="' + data.metodo_bss + '"]').prop('selected', true);
-		$('#BSSMethodRow .SoloRssi').show();
-	}
-	else {
-		$('#CbBssMethodAvailable option[value="' + data.metodo_bss + '"]').prop('selected', true);
-		$('#BSSMethodRow .SoloRssi').hide();
-	}
-	//Eventos PTT/Squelch
-	if(data.evento_ptt_squelch==1)
-		$('#CbPttSquelchEvents').prop('checked', true);
-	else
-		$('#CbPttSquelchEvents').prop('checked', false);
-	//Prioridad PTT
-	$('#LbPttPriority option[value="' + data.prioridad_ptt + '"]').prop('selected', true);
-	//Prioridad Sesion SIP
-	$('#LbSipPriority option[value="' + data.prioridad_sesion_sip + '"]').prop('selected', true);
-	//BSS/CLIMAX
-	if(data.climax_bss==1) {
-		$('#CbBssEnable').prop('checked', true);
-		$('#BssTimeRow').attr('style','display:table-row');
-		$('#ClimaxDelayRow').attr('style','display:table-row');
-		$('#ModoCalculoClimaxRow').attr('style','display:table-row');
-	}
-	else
-		$('#CbBssEnable').prop('checked', false);
-	
-	//Ventana BSS (ms)
-	$('#TbBssWindow').val(data.ventana_bss);
-	//BSS Cola Squelch (ms)
-	if(data.cola_bss_sqh==null)
-		$('#TbBssSquelchQueue').val('');
-	else
-		$('#TbBssSquelchQueue').val(data.cola_bss_sqh);
-	//Retraso Climax
-	$('#TbClimaxDelay option[value="' + data.tipo_climax + '"]').prop('selected', true);
-	//Retraso Climax
-	$('#TbModoCalculoClimax option[value="' + data.metodo_climax + '"]').prop('selected', true);
-	//Retraso interno GRS
-	$('#TbGrsInternalDelay').val(data.retraso_interno_grs);
-	//Tabla Calificacion de audio
-	SetAudioTableCB(function() {//Primero hay que inicializar los valores de la tabla.
-		if(data.tabla_bss_id==0)
-			$('#CbBssAudioTable option[value="-1"]').prop('selected', true);
-		else
-			$('#CbBssAudioTable option[value="' + data.tabla_bss_id + '"]').prop('selected', true);
-	});
-	
-	if(data.tipo_climax==1)
-		$('#CompensationRow').attr('style','display:table-column');
-	else
-		$('#CompensationRow').attr('style','display:table-row');
-	$('#CbCompensation').val(data.retardo_fijo_climax);
-	//Habilita grabación
-	if(data.habilita_grabacion==1)
-		$('#CbEnableRecording').prop('checked', true);
-	else
-		$('#CbEnableRecording').prop('checked', false);
-	
-	$('#SRestriccion option[value="' + data.restriccion_entrantes+'"]').prop('selected', true);
-	
-	if(data.restriccion_entrantes == 0) {
-		$('#BlackList').attr('style', 'display:table-column');
-		$('#WhiteList').attr('style', 'display:table-column');
-	}
-	if(data.restriccion_entrantes == 1) {
-		$('#BlackList').attr('style', 'display:table');
-		$('#WhiteList').attr('style', 'display:table-column');
-		showWhiteBlackList(data.idrecurso_radio, 'LSN');
-	}
-	if(data.restriccion_entrantes == 2) {
-		$('#BlackList').attr('style', 'display:table-column');
-		$('#WhiteList').attr('style', 'display:table');
-		showWhiteBlackList(data.idrecurso_radio, 'LSB');
-	}
-}
-
-
 
 function insertBNList(listaUris){
 	var uri2Insert={};

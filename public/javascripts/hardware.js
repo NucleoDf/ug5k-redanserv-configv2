@@ -2360,8 +2360,13 @@ function ClickAdAgc(element){
 		
 function SelectBss(){
 	if ($('#LbTypeRadio option:selected').val() >= 0 && $('#LbTypeRadio option:selected').val() <=3){
-		$('#VadRow').attr('style','display:table-column');
+		
+		if($('#LbSquelchType option:selected').val() ==1)
+			$('#VadRow').attr('style','display:table-row');
+		else
+			$('#VadRow').attr('style','display:table-column');
 		loadUriSites(false);
+		$('#SalidaAudioRow').attr('style','display:table-column');
 		$('#InternalDelayRow').attr('style','display:table-column');
 		$('#ListMenuParameters li:nth-child(5)').show();
 		// Ocultar panel de listas B/N
@@ -2427,11 +2432,9 @@ function SelectBss(){
 		$('#ListMenuParameters li:nth-child(4)').show();
 		if ($('#SRestriccion option:selected').val() != 0){
 			$('#WhiteBlackList').attr('style','display:table');
-			//$('#NewsUris').attr('style','display:table');
 		}
 		else{
 			$('#WhiteBlackList').attr('style','display:table-column');
-			//$('#NewsUris').attr('style','display:table-column');	
 		}
 
 		if ($('#LbTypeRadio option:selected').val() != 5)
@@ -2451,7 +2454,6 @@ function SelectBss(){
 		
 		
 		if ($('#LbTypeRadio option:selected').val() == 6){
-			//$('#TbGrsInternalDelay').prop('disabled',true);
 			$('#InternalDelayRow').attr('style','display:table-column');
 			$('#TbGrsInternalDelay').val(0);
 		}
@@ -2472,48 +2474,46 @@ function SelectBss(){
 		$('#BSSEnableRow').attr('style','display:table-row');
 		if ($('#CbBssEnable').prop('checked')){
 			$('#BigSlavesZone').animate({bottom: '580px'});
-			//$('#BSSMethodRow').attr('style','display:table-row');
-			//$('#SquelchDeactRow').attr('style','display:table-row');
 			$('#ClimaxDelayRow').attr('style','display:table-row');
-			//$('#InternalDelayRow').attr('style','display:table-row');
-			$('#CompensationRow').attr('style','display:table-row');
-			$('#BssTimeRow').attr('style','display:table-row');
-			//$('#BssSquelchRow').attr('style','display:table-row');
-			//$('#PttSquelchRow').attr('style','display:table-row');
+			if ($('#TbClimaxDelay option:selected').val() == 1)
+				$('#CompensationRow').attr('style','display:table-column');
+			else
+				$('#CompensationRow').attr('style','display:table-row');
 			if ($('#TbClimaxDelay option:selected').val() == 2 || $('#TbClimaxDelay option:selected').val() == 1){
 				$('#ModoCalculoClimaxRow').attr('style','display:table-row');
 			}
 		}
 		else{
 			$('#BigSlavesZone').animate({bottom: '512px'});
-			//$('#BSSMethodRow').attr('style','display:table-column');
-			//$('#SquelchDeactRow').attr('style','display:table-column');
 			$('#ClimaxDelayRow').attr('style','display:table-column');
-			//$('#InternalDelayRow').attr('style','display:table-column');
 			$('#CompensationRow').attr('style','display:table-column');
 			$('#BssTimeRow').attr('style','display:table-column');
 			$('#BssSquelchRow').attr('style','display:table-column');
-			//$('#PttSquelchRow').attr('style','display:table-column');
 			$('#ModoCalculoClimaxRow').attr('style','display:table-column');
 		}
 	}
 	else{
+		if (($('#LbTypeRadio option:selected').val() == 4||$('#LbTypeRadio option:selected').val() == 6)
+			&& $('#LbSquelchType option:selected').val() ==1) {
+			$('#VadRow').attr('style', 'display:table-row');
+			
+		}
 		if ($('#LbTypeRadio option:selected').val() == 4 || $('#LbTypeRadio option:selected').val() == 6){
 			SetAudioTableCB(function(){ });
 		}
+		if ($('#LbTypeRadio option:selected').val() == 4||$('#LbTypeRadio option:selected').val() == 5){
+			$('#SalidaAudioRow').attr('style', 'display:table-row');
+		}
+		if ($('#LbTypeRadio option:selected').val() == 6) {
+			$('#SalidaAudioRow').attr('style', 'display:table-column');
+			if($('#LbSquelchType option:selected').val() ==1)
+				$('#VadRow').attr('style', 'display:table-row');
+		}
 		$('#BSSEnableRow').attr('style','display:table-column');
-		//$('#BSSMethodRow').attr('style','display:table-column');
-		//$('#SquelchDeactRow').attr('style','display:table-column');
 		$('#ClimaxDelayRow').attr('style','display:table-column');
-		//$('#InternalDelayRow').attr('style','display:table-column');
 		$('#CompensationRow').attr('style','display:table-column');
 		$('#BssTimeRow').attr('style','display:table-column');
 		$('#BssSquelchRow').attr('style','display:table-column');
-		//$('#PttSquelchRow').attr('style','display:table-column');
-		//if ($('#LbTypeRadio option:selected').val() > 3){ // Recurso radio remoto
-			//$('#BSSMethodRow').attr('style','display:table-row');
-			//$('#InternalDelayRow').attr('style','display:table-row');
-		//}
 		$('#ModoCalculoClimaxRow').attr('style','display:table-column');
 	}
 	
