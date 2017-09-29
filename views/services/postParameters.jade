@@ -49,6 +49,7 @@ script.
 			// 	$('#FormATS').hide();
 			// break;
 			case "FormRadio":
+				GetRemoteRadioResources();
 				tabs=document.getElementById('ListMenuParameters').getElementsByTagName("a");
 				$('#FormHw').hide();
 				//$('#FormJitter').hide();
@@ -750,15 +751,14 @@ div(id="FormParameters")
 								tr
 									td
 										label#ResId(style='color:#bf2a36' tkey='RemoteRadioResources')
-										div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')										
-								//
-								//tr
-								//	td
-								//		select#CBFacedCfg(style='width:140px;' onchange='SelectSite($("#CBFacedCfg option:selected").val())')
+										div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
 								tr
 									td
+										select#CBFacedType(style='width:140px;' onchange='SelectERType($("#CBFacedType option:selected").val())')
+								tr#rowSelectFSite
+									td
 										select#CBFacedSite(style='width:140px;' onchange='SelectGtw($("#CBFacedSite option:selected").val())')
-								tr
+								tr#rowSelectFGtw
 									td
 										select#CBFacedGtw(style='width:140px;' onchange='SelectResource($("#CBFacedGtw option:selected").val())')
 								tr

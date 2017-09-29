@@ -141,69 +141,99 @@ function OnSelectSQActivation(sel){
 	else
 		$('#VadRow').attr('style','display:table-row');
 }
+
 /************************************************/
-/*	FUNCTION: GetRemoteRadioResources 			*/
+/*	FUNCTION: GetRemoteTfnoResources 			*/
 /*  PARAMS: 									*/
 /*												*/
 /*  REV 1.0.2 VMG								*/
 /************************************************/
-function GetRemoteRadioResources(){
-	var cfgId = $('#DivConfigurations').data('idCFG');
+function GetRemoteRadioResources() {
+	var options='';
+	
+	$('#CBFacedType').empty();
+	options = '<option value="" disabled selected>Seleccione tipo de recurso</option>';
+	$('#CBFacedType').append(options);
+	options = '<option value="0">Recursos configurados</option>';
+	$('#CBFacedType').append(options);
+	options = '<option value="1">Recursos externos</option>';
+	$('#CBFacedType').append(options);
 	
 	$('#CBFacedSite').empty();
 	$('#CBFacedGtw').empty();
 	$('#CBFacedResources').empty();
-
-	SelectSite(cfgId);
 	
-	/*$.ajax({type: 'GET', 
-		url: '/resources/remote/' + cfgName + '/null/null',
-		success: function(data){
-			$('#CBFacedCfg').empty();
-			$('#CBFacedSite').empty();
-			$('#CBFacedGtw').empty();
-			$('#CBFacedResources').empty();
-
-			if (data.data != null){
-			    var numCfg = 0;
-			    var options = '<option value="" disabled selected>Seleccione configuración</option>';
-
-				$('#CBFacedCfg').append(options);
-				$.each(data.data, function(index, value){
-					var encontrado = false;
-
-					if ($("#CBFacedCfg option[value='" + value.cfName + "']").length == 0){
-						options = '<option value="' + value.cfName + '">' + value.cfName + '</option>';
-						$('#CBFacedCfg').append(options);
-					}
-				})
-				
-			}
-		}
-	});	*/
 }
+
 /************************************************/
-/*	FUNCTION: SelectSite 						*/
+/*	FUNCTION: SelectPhoneSite 					*/
+/*  PARAMS: resType: id de la configuración		*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function SelectERType(resType){
+	var cfgId = $('#DivConfigurations').data('idCFG');
+	
+	if(resType==0)
+		SelectSite(cfgId);
+	else
+		SelectExtResource();
+}
+
+/************************************************/
+/*	FUNCTION: SelectPhoneExtResource 			*/
+/*  PARAMS: 									*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function SelectExtResource(){
+	$('#CBFacedSite').empty();
+	$('#CBFacedGtw').empty();
+	$('#CBFacedResources').empty();
+	
+	$('#rowSelectFSite').hide();
+	$('#rowSelectFGtw').hide();
+	
+	$.ajax({type: 'GET',
+			url: '/externalResources'})
+		.done(function(data) {
+			if (data.lista_uris != null && data.lista_uris.length > 0) {
+				$.each(data.lista_uris, function (index, value) {
+					var item = '<option value="' + value.uri + '">' + value.alias + '</option>';
+					$('#CBFacedResources').append(item);
+				});
+			}
+		});
+}
+
+/************************************************/
+/*	FUNCTION: SelectPhoneSite 					*/
 /*  PARAMS: cfgId: id de la configuración		*/
 /*												*/
 /*  REV 1.0.2 VMG								*/
 /************************************************/
 function SelectSite(cfgId){
-	$.ajax({type: 'GET', 
+	$('#CBFacedSite').empty();
+	$('#CBFacedGtw').empty();
+	$('#CBFacedResources').empty();
+	$('#rowSelectFSite').show();
+	$('#rowSelectFGtw').show();
+	
+	$.ajax({type: 'GET',
 		url: '/resources/remote/' + cfgId + '/null/null/null',
 		success: function(data){
 			$('#CBFacedSite').empty();$('#CBFacedSite').text('');
 			$('#CBFacedGtw').empty();$('#CBFacedGtw').text('');
 			$('#CBFacedResources').empty();$('#CBFacedResources').text('');
-
+			
 			if (data.data != null){
-			    var numCfg = 0;
-			    var options = '<option value="" disabled selected>Seleccione emplazamiento</option>';
-
+				var numCfg = 0;
+				var options = '<option value="" disabled selected>Seleccione emplazamiento</option>';
+				
 				$('#CBFacedSite').append(options);
 				$.each(data.data, function(index, value){
 					var encontrado = false;
-
+					
 					if ($("#CBFacedSite option[value='" + value.eName + "']").length == 0){
 						options = '<option value="' + value.idemplazamiento + '">' + value.eName + '</option>';
 						$('#CBFacedSite').append(options);
@@ -213,6 +243,7 @@ function SelectSite(cfgId){
 		}
 	});
 }
+
 /************************************************/
 /*	FUNCTION: SelectGtw 						*/
 /*  PARAMS: siteId: id del emplazamiento		*/
