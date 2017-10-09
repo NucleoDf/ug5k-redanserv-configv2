@@ -11,9 +11,9 @@ var parseUrlEncoded = bodyParser.urlencoded({ extended: false });
 // app.use();        // to support URL-encoded bodies
 var myLibExtResources = require('../../lib/externalResources.js');
 
-router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/accessControl',controlAccess'))
+router.route('/:extType')	// The root path is relative the path where it's mounted in app.js (app.use('/accessControl',controlAccess'))
 	.get(function(req, res) {
-		myLibExtResources.getExternalResources(req, res);
+		myLibExtResources.getExternalResources(req.params.extType, req, res);
 	})
 	.post(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
@@ -28,7 +28,7 @@ router.route('/')	// The root path is relative the path where it's mounted in ap
 		//});
 	});
 
-router.route('/:idExtResource')
+router.route('/getResource/:idExtResource')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		myLibExtResources.getExternalResource(req.params.idExtResource,function(data){

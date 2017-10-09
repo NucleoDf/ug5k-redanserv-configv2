@@ -94,14 +94,20 @@ function SelectPhoneExtResource(){
 	$('#rowSelectTelGtw').hide();
 	
 	$.ajax({type: 'GET',
-	url: '/externalResources'})
+	url: '/externalResources/4'})
 	.done(function(data) {
-		if (data.lista_uris != null && data.lista_uris.length > 0) {
-			$.each(data.lista_uris, function (index, value) {
-				var item = '<option value="' + value.uri + '">' + value.alias + '</option>';
-				$('#CBFacedTelResources').append(item);
-			});
-		}
+        if( data.lista_recursos == null) {
+            var item = '<option value="0">No existen recursos...</option>';
+            $('#CBFacedTelResources').append(item);
+        }
+        else {
+            if (data.lista_recursos != null && data.lista_recursos.length > 0) {
+                $.each(data.lista_recursos, function (index, value) {
+                    var item = '<option value="' + value.uri + '">' + value.alias + '</option>';
+                    $('#CBFacedTelResources').append(item);
+                });
+            }
+        }
 	});
 }
 

@@ -177,32 +177,38 @@ function SelectERType(resType){
 	if(resType==0)
 		SelectSite(cfgId);
 	else
-		SelectExtResource();
+		SelectExtResource(resType);
 }
 
 /************************************************/
-/*	FUNCTION: SelectPhoneExtResource 			*/
+/*	FUNCTION: SelectRadioExtResource 			*/
 /*  PARAMS: 									*/
 /*												*/
 /*  REV 1.0.2 VMG								*/
 /************************************************/
-function SelectExtResource(){
+function SelectExtResource(resType){
 	$('#CBFacedSite').empty();
 	$('#CBFacedGtw').empty();
 	$('#CBFacedResources').empty();
 	
 	$('#rowSelectFSite').hide();
 	$('#rowSelectFGtw').hide();
-	
+
 	$.ajax({type: 'GET',
-			url: '/externalResources'})
+			url: '/externalResources/'+$("#LbTypeRadio option:selected").val()})
 		.done(function(data) {
-			if (data.lista_uris != null && data.lista_uris.length > 0) {
-				$.each(data.lista_uris, function (index, value) {
-					var item = '<option value="' + value.uri + '">' + value.alias + '</option>';
-					$('#CBFacedResources').append(item);
-				});
+			if( data.lista_recursos == null) {
+                var item = '<option value="0">No existen recursos...</option>';
+                $('#CBFacedResources').append(item);
 			}
+			else {
+                if (data.lista_recursos != null && data.lista_recursos.length > 0) {
+                    $.each(data.lista_recursos, function (index, value) {
+                        var item = '<option value="' + value.uri + '" tipo="' + value.tipo + '">' + value.alias + '</option>';
+                        $('#CBFacedResources').append(item);
+                    });
+                }
+            }
 		});
 }
 

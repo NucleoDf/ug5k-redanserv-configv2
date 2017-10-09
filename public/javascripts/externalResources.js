@@ -3,7 +3,7 @@
  */
 
 /************************************/
-/*	FUNCTION: GetTablesBss	 		*/
+/*	FUNCTION: GetExtResources	 		*/
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
@@ -21,11 +21,11 @@ var GetExtResources = function(f) {
 	$('#DivResources').animate({width: '535px'});
 	
 	$.ajax({type: 'GET',
-	 	url: '/externalResources'})
+	 	url: '/externalResources/-1'})
 	 	.done(function(data){
 	 		$("#listResources").empty();
-			if (data.lista_uris != null && data.lista_uris.length > 0){
-	 			$.each(data.lista_uris, function(index, value){
+			if (data.lista_recursos != null && data.lista_recursos.length > 0){
+	 			$.each(data.lista_recursos, function(index, value){
 					 var item = $("<li><a onclick='GetExtResource(" + value.idrecursos_externos + ")'>"+value.alias+": "+value.uri+"</li>");
 					 item.appendTo($("#listResources"));
 	 			});
@@ -54,18 +54,18 @@ var GetExtResource = function (idExtResource){
 	if(idExtResource!=-1) {
 		$.ajax({
 			type: 'GET',
-			url: '/externalResources/' + idExtResource,
+			url: '/externalResources/getResource/' + idExtResource,
 			success: function (data) {
-				if (data.lista_uris != null) {
+				if (data.lista_recursos != null) {
 					translateWord('Update', function (result) {
 						$('#UpdateTableButton').text(result)
 							.attr('onclick', 'PutTable()');
 					});
-					$('#FormResources').data('idrecursos_externos', data.lista_uris[0].idrecursos_externos);
-					$('#aliasExtResource').val(data.lista_uris[0].alias);
-					$('#uriExtResource').val(data.lista_uris[0].uri);
+					$('#FormResources').data('idrecursos_externos', data.lista_recursos[0].idrecursos_externos);
+					$('#aliasExtResource').val(data.lista_recursos[0].alias);
+					$('#uriExtResource').val(data.lista_recursos[0].uri);
 					
-					$('#extResType option[value="' + data.lista_uris[0].tipo + '"]').prop('selected', true);
+					$('#extResType option[value="' + data.lista_recursos[0].tipo + '"]').prop('selected', true);
 					$('#UpdateExtResButton').text('Modificar');
 					$('#DeleteExtResButton').show();
 					
@@ -84,7 +84,7 @@ var GetExtResource = function (idExtResource){
 };
 
 /************************************/
-/*	FUNCTION: GetExtResource	 	*/
+/*	FUNCTION: PostExtResource	 	*/
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
@@ -98,7 +98,7 @@ var PostExtResource = function () {
 			type: 'POST',
 			dataType: 'json',
 			contentType: 'application/json',
-			url: '/externalResources',
+			url: '/externalResources/-1',
 			data: JSON.stringify({
 				alias: $('#aliasExtResource').val(),
 				uri: $('#uriExtResource').val(),
@@ -130,7 +130,7 @@ var DeleteExtResource = function(){
 	alertify.confirm ('Ulises G 5000 R','¿Eliminar el recurso'+$('#aliasExtResource').val()+'?',
 		function(){
 			$.ajax({type: 'DELETE',
-				url: '/externalResources/'+$('#FormResources').data('idrecursos_externos'),
+				url: '/externalResources/getResource/'+$('#FormResources').data('idrecursos_externos'),
 				success: function(data){
 					if (data.error == null){
 						alertify.success('Recurso \"' +  $('#aliasExtResource').val() + '\" eliminado.');
