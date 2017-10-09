@@ -621,7 +621,7 @@ div(id="FormParameters")
 																		label URI A:
 																	td.New
 																		input.UriTextbox#UriTxA1(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
-																	td.New
+																	td#RowBtnSelectTxA1.New
 																		a.ButtonNucleo#BtnSelectTxA1(onclick='MakeFacedUri("#UriTxA1")') <
 																tr#TxBRow1
 																	td
@@ -763,7 +763,7 @@ div(id="FormParameters")
 										select#CBFacedGtw(style='width:140px;' onchange='SelectResource($("#CBFacedGtw option:selected").val())')
 								tr
 									td
-										select#CBFacedResources(style='width:140px;')
+										select#CBFacedResources(style='width:140px;' onchange='SelectBtnsResources($("#CBFacedResources option:selected"))')
 			#FormATS(style='width:auto; display:none;margin-left:5px')
 				label(style='color:black' tkey='ATSNumberRange')
 				div(style='border-top: 1px solid black; width:97%;margin-top: 20px;padding-bottom: 5px')

@@ -190,26 +190,28 @@ function SelectExtResource(resType){
 	$('#CBFacedSite').empty();
 	$('#CBFacedGtw').empty();
 	$('#CBFacedResources').empty();
-	
+
 	$('#rowSelectFSite').hide();
 	$('#rowSelectFGtw').hide();
 
+
 	$.ajax({type: 'GET',
 			url: '/externalResources/'+$("#LbTypeRadio option:selected").val()})
-		.done(function(data) {
-			if( data.lista_recursos == null) {
-                var item = '<option value="0">No existen recursos...</option>';
-                $('#CBFacedResources').append(item);
+	.done(function(data) {
+		if( data.lista_recursos == null) {
+			var item = '<option value="0">No existen recursos...</option>';
+			$('#CBFacedResources').append(item);
+		}
+		else {
+			if (data.lista_recursos != null && data.lista_recursos.length > 0) {
+				$.each(data.lista_recursos, function (index, value) {
+					var item = '<option value="' + value.uri + '" tipo="' + value.tipo + '">' + value.alias + '</option>';
+					$('#CBFacedResources').append(item);
+				});
 			}
-			else {
-                if (data.lista_recursos != null && data.lista_recursos.length > 0) {
-                    $.each(data.lista_recursos, function (index, value) {
-                        var item = '<option value="' + value.uri + '" tipo="' + value.tipo + '">' + value.alias + '</option>';
-                        $('#CBFacedResources').append(item);
-                    });
-                }
-            }
-		});
+            SelectBtnsResources($("#CBFacedResources option:selected"));
+		}
+	});
 }
 
 /************************************************/
@@ -336,4 +338,97 @@ function MakeFacedUri(target){
 	}
 
 	$(target).val($("#CBFacedResources option:selected").val());
+}
+
+/************************************/
+/*	FUNCTION: SelectBtnsResources	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+function SelectBtnsResources (element) {
+
+	//0 Radio Tx || 1 Radio TxRx || 2 Radio Rx
+    switch(element["0"].attributes[1].nodeValue){
+		case '0':
+            $('#BtnSelectTxA1').addClass('NotAllowedTd');
+            $('#BtnSelectTxA1').removeAttr("onclick");
+            $('#BtnSelectTxB1').addClass('NotAllowedTd');
+            $('#BtnSelectTxB1').removeAttr("onclick");
+            $('#BtnSelectTxA2').addClass('NotAllowedTd');
+            $('#BtnSelectTxA2').removeAttr("onclick");
+            $('#BtnSelectTxB2').addClass('NotAllowedTd');
+            $('#BtnSelectTxB2').removeAttr("onclick");
+            $('#BtnSelectTxA3').addClass('NotAllowedTd');
+            $('#BtnSelectTxA3').removeAttr("onclick");
+            $('#BtnSelectTxB3').addClass('NotAllowedTd');
+            $('#BtnSelectTxB3').removeAttr("onclick");
+
+            $('#BtnSelectRxA1').removeClass('NotAllowedTd');
+            $('#BtnSelectRxA1').attr('onclick', 'MakeFacedUri("#UriRxA1")');
+            $('#BtnSelectRxB1').removeClass('NotAllowedTd');
+            $('#BtnSelectRxB1').attr('onclick', 'MakeFacedUri("#UriRxB1")');
+            $('#BtnSelectRxA2').removeClass('NotAllowedTd');
+            $('#BtnSelectRxA2').attr('onclick', 'MakeFacedUri("#UriRxA2")');
+            $('#BtnSelectRxB2').removeClass('NotAllowedTd');
+            $('#BtnSelectRxB2').attr('onclick', 'MakeFacedUri("#UriRxB2")');
+            $('#BtnSelectRxA3').removeClass('NotAllowedTd');
+            $('#BtnSelectRxA3').attr('onclick', 'MakeFacedUri("#UriRxA3")');
+            $('#BtnSelectRxB3').removeClass('NotAllowedTd');
+            $('#BtnSelectRxB3').attr('onclick', 'MakeFacedUri("#UriRxB3")');
+		break;
+		case '1':
+            $('#BtnSelectTxA1').removeClass('NotAllowedTd');
+            $('#BtnSelectTxA1').attr('onclick', 'MakeFacedUri("#UriTxA1")');
+            $('#BtnSelectTxB1').removeClass('NotAllowedTd');
+            $('#BtnSelectTxB1').attr('onclick', 'MakeFacedUri("#UriTxB1")');
+            $('#BtnSelectTxA2').removeClass('NotAllowedTd');
+            $('#BtnSelectTxA2').attr('onclick', 'MakeFacedUri("#UriTxA2")');
+            $('#BtnSelectTxB2').removeClass('NotAllowedTd');
+            $('#BtnSelectTxB2').attr('onclick', 'MakeFacedUri("#UriTxB2")');
+            $('#BtnSelectTxA3').removeClass('NotAllowedTd');
+            $('#BtnSelectTxA3').attr('onclick', 'MakeFacedUri("#UriTxA3")');
+            $('#BtnSelectTxB3').removeClass('NotAllowedTd');
+            $('#BtnSelectTxB3').attr('onclick', 'MakeFacedUri("#UriTxB3")');
+
+            $('#BtnSelectRxA1').removeClass('NotAllowedTd');
+            $('#BtnSelectRxA1').attr('onclick', 'MakeFacedUri("#UriRxA1")');
+            $('#BtnSelectRxB1').removeClass('NotAllowedTd');
+            $('#BtnSelectRxB1').attr('onclick', 'MakeFacedUri("#UriRxB1")');
+            $('#BtnSelectRxA2').removeClass('NotAllowedTd');
+            $('#BtnSelectRxA2').attr('onclick', 'MakeFacedUri("#UriRxA2")');
+            $('#BtnSelectRxB2').removeClass('NotAllowedTd');
+            $('#BtnSelectRxB2').attr('onclick', 'MakeFacedUri("#UriRxB2")');
+            $('#BtnSelectRxA3').removeClass('NotAllowedTd');
+            $('#BtnSelectRxA3').attr('onclick', 'MakeFacedUri("#UriRxA3")');
+            $('#BtnSelectRxB3').removeClass('NotAllowedTd');
+            $('#BtnSelectRxB3').attr('onclick', 'MakeFacedUri("#UriRxB3")');
+		break;
+        case '2':
+            $('#BtnSelectTxA1').removeClass('NotAllowedTd');
+            $('#BtnSelectTxA1').attr('onclick', 'MakeFacedUri("#UriTxA1")');
+            $('#BtnSelectTxB1').removeClass('NotAllowedTd');
+            $('#BtnSelectTxB1').attr('onclick', 'MakeFacedUri("#UriTxB1")');
+            $('#BtnSelectTxA2').removeClass('NotAllowedTd');
+            $('#BtnSelectTxA2').attr('onclick', 'MakeFacedUri("#UriTxA2")');
+            $('#BtnSelectTxB2').removeClass('NotAllowedTd');
+            $('#BtnSelectTxB2').attr('onclick', 'MakeFacedUri("#UriTxB2")');
+            $('#BtnSelectTxA3').removeClass('NotAllowedTd');
+            $('#BtnSelectTxA3').attr('onclick', 'MakeFacedUri("#UriTxA3")');
+            $('#BtnSelectTxB3').removeClass('NotAllowedTd');
+            $('#BtnSelectTxB3').attr('onclick', 'MakeFacedUri("#UriTxB3")');
+
+            $('#BtnSelectRxA1').addClass('NotAllowedTd');
+            $('#BtnSelectRxA1').removeAttr("onclick");
+            $('#BtnSelectRxB1').addClass('NotAllowedTd');
+            $('#BtnSelectRxB1').removeAttr("onclick");
+            $('#BtnSelectRxA2').addClass('NotAllowedTd');
+            $('#BtnSelectRxA2').removeAttr("onclick");
+            $('#BtnSelectRxB2').addClass('NotAllowedTd');
+            $('#BtnSelectRxB2').removeAttr("onclick");
+            $('#BtnSelectRxA3').addClass('NotAllowedTd');
+            $('#BtnSelectRxA3').removeAttr("onclick");
+            $('#BtnSelectRxB3').addClass('NotAllowedTd');
+            $('#BtnSelectRxB3').removeAttr("onclick");
+            break;
+	};
 }
