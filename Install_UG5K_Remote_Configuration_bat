@@ -49,6 +49,8 @@ xcopy .\views %1\views /SY
 
 md %1\data_model
 xcopy .\data_model %1\data_model /SY
+md %1\esquemas_bbdd
+xcopy .\esquemas_bbdd %1\esquemas_bbdd /SY
 
 md %1\public
 xcopy .\public %1\public /SY
