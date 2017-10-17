@@ -198,10 +198,17 @@ class LocalConfig : public CodeBase
 {
 public:
 	static LocalConfig *p_cfg;
+	/** 20171016. Mutex Global para controlar los accesos a ficheros INI */
+	static pthread_mutex_t global_mutex;
+
 public:
 	LocalConfig(string filename=strFile) {
 		_filename = filename;
+
+		/** 20171016. Mutex Global para controlar los accesos a ficheros INI */
+		GlobalAccessAcquire();
 		ini = LoadIni(_filename.c_str());
+		GlobalAccessRelease();
 	}
 	~LocalConfig() {}
 public:
@@ -216,15 +223,31 @@ public:
 	}
 	void set(string section, string key, string val, bool save=false) {
 		PutIniSetting(ini, section.c_str(), key.c_str(), val.c_str());
-		if (save)
+		if (save) {
+			/** 20171016. Mutex Global para controlar los accesos a ficheros INI */
+			GlobalAccessAcquire();
 			SaveIni(ini, _filename.c_str());
+			GlobalAccessRelease();
+		}
 	}
 	void del(string strsection) {
 		INISection vacia;
 		ini[strsection.c_str()] = vacia;	
 	}
-	void save() {
+	void save() {			
+		/** 20171016. Mutex Global para controlar los accesos a ficheros INI */			
+		GlobalAccessAcquire();
 		SaveIni(ini, _filename.c_str() );
+		GlobalAccessRelease();
+	}
+protected:
+	void GlobalAccessAcquire() 
+	{
+		pthread_mutex_lock(&LocalConfig::global_mutex);
+	}
+	void GlobalAccessRelease()
+	{
+		pthread_mutex_unlock(&LocalConfig::global_mutex);
 	}
 private:
 	INIFile ini;

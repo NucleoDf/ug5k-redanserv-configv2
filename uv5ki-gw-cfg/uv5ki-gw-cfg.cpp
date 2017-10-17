@@ -53,7 +53,9 @@ public:
 			LocalConfig::p_cfg = new LocalConfig();
 			
 			/** 20170418. Timeout de procesos 'colgados' */
-			hangup_timeout = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTimeout, "180");
+			hangup_timeout_min = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTimeout, "180");
+			/** 20171016. Timeout maximo que acota posibles actualizaciones de RELOJ */
+			hangup_timeout_max = hangup_timeout_min + 60;
 #if defined (_WIN32)
 			bool mode = false;	/** false: REDAN, true: ULISES */
 #else
@@ -313,29 +315,33 @@ private:
 	}
 
 #endif
+	/** 20170418. Timeout de procesos 'colgados' */
+	/** 20171016. Timeout maximo que acota posibles actualizaciones de RELOJ */
 	void SupervisaProcesos() {
-		if (HistClient::p_hist->Tick.elapsed(hangup_timeout)==true) {
+
+		if (HistClient::p_hist->Tick.elapsed(hangup_timeout_min)==true && HistClient::p_hist->Tick.lastdiff() < hangup_timeout_max) {
 			Tools::fatalerror("Reset por HISTCLIENT Colgado...");
 			exit(-1);
 		}
-		if (CfgProc::p_cfg_proc->Tick.elapsed(hangup_timeout)==true) {
+		if (CfgProc::p_cfg_proc->Tick.elapsed(hangup_timeout_min)==true && CfgProc::p_cfg_proc->Tick.lastdiff() < hangup_timeout_max) {
 			Tools::fatalerror("Reset por CFGPROC Colgado...");
 			exit(-1);
 		}
-		if (ManProc::p_man->Tick.elapsed(hangup_timeout)==true) {
+		if (ManProc::p_man->Tick.elapsed(hangup_timeout_min)==true && ManProc::p_man->Tick.lastdiff() < hangup_timeout_max) {
 			Tools::fatalerror("Reset por MANPROC Colgado...");
 			exit(-1);
 		}
-		if (FileSupervisor::p_fspv->Tick.elapsed(hangup_timeout)==true) {
+		if (FileSupervisor::p_fspv->Tick.elapsed(hangup_timeout_min) == true && FileSupervisor::p_fspv->Tick.lastdiff() < hangup_timeout_max) {
 			Tools::fatalerror("Reset por FILESUP Colgado...");
 			exit(-1);
 		}
-		if (pwebApp->Tick.elapsed(hangup_timeout)==true) {
+		if (pwebApp->Tick.elapsed(hangup_timeout_min)==true && pwebApp->Tick.lastdiff() < hangup_timeout_max) {
 			Tools::fatalerror("Reset por WEBSRV Colgado...");
 			exit(-1);
 		}
 	}
-	time_t hangup_timeout;
+	time_t hangup_timeout_min;
+	time_t hangup_timeout_max;
 	Uv5kiGwCfgWebApp *pwebApp;
 };
 

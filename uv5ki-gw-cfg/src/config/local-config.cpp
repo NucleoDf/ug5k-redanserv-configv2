@@ -2,6 +2,8 @@
 
 /** */
 LocalConfig *LocalConfig::p_cfg;
+	/** 20171016. Mutex Global para controlar los accesos a ficheros INI */
+pthread_mutex_t LocalConfig::global_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 ///**
 // */

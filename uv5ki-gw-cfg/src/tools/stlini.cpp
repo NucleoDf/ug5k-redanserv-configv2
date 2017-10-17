@@ -115,32 +115,38 @@ void PutIniSetting(INIFile &theINI, const char *section, const char *key, const 
 INIFile LoadIni(const char *filename)
 {
 	INIFile theINI;
-	char  *value, *temp;
-	std::string section;
-	char buffer[MAX_INI_LINE];
-	std::fstream file(filename, std::ios::in);
+
+	/** 20171016. Para favorecer que los errores en la rutina no afectan al MUTEX Global */
+	try {
+		char  *value, *temp;
+		std::string section;
+		char buffer[MAX_INI_LINE];
+		std::fstream file(filename, std::ios::in);
 	
-	while(file.good())
-	{
-		memset(buffer, 0, sizeof(buffer));
-		file.getline(buffer, sizeof(buffer));
-		if((temp = strchr(buffer, '\n')))
-			*temp = '\0';		// cut off at newline
-		if((temp = strchr(buffer, '\r')))
-			*temp = '\0';		// cut off at linefeeds
-		if((buffer[0] == '[') && (temp = strrchr(buffer, ']')))
-		{     // if line is like -->   [section name]
-			*temp = '\0';   // chop off the trailing ']';
-			section = &buffer[1];
-			PutIniSetting(theINI, &buffer[1]);	 // start new section
-		}
-		else if(buffer[0] && (value = strchr(buffer, '=')))
+		while(file.good())
 		{
-			*value++ = '\0'; // assign whatever follows = sign to value, chop at "=" 
-			PutIniSetting(theINI, section.c_str(), buffer, value); 	// and add both sides to INISection
+			memset(buffer, 0, sizeof(buffer));
+			file.getline(buffer, sizeof(buffer));
+			if((temp = strchr(buffer, '\n')))
+				*temp = '\0';		// cut off at newline
+			if((temp = strchr(buffer, '\r')))
+				*temp = '\0';		// cut off at linefeeds
+			if((buffer[0] == '[') && (temp = strrchr(buffer, ']')))
+			{     // if line is like -->   [section name]
+				*temp = '\0';   // chop off the trailing ']';
+				section = &buffer[1];
+				PutIniSetting(theINI, &buffer[1]);	 // start new section
+			}
+			else if(buffer[0] && (value = strchr(buffer, '=')))
+			{
+				*value++ = '\0'; // assign whatever follows = sign to value, chop at "=" 
+				PutIniSetting(theINI, section.c_str(), buffer, value); 	// and add both sides to INISection
+			}
+			else if(buffer[0])
+				PutIniSetting(theINI, section.c_str(), buffer, ""); 	// must be a comment or something
 		}
-		else if(buffer[0])
-			PutIniSetting(theINI, section.c_str(), buffer, ""); 	// must be a comment or something
+	}
+	catch(...) {
 	}
 	return theINI;
 }
@@ -149,29 +155,34 @@ INIFile LoadIni(const char *filename)
 */
 void SaveIni(INIFile &theINI, const char *filename)
 {
-	std::fstream file(filename, std::ios::out);
-	if(!file.good())
-		return;
+	/** 20171016. Para favorecer que los errores en la rutina no afectan al MUTEX Global */
+	try {
+		std::fstream file(filename, std::ios::out);
+		if(!file.good())
+			return;
 	
-	// just iterate the hashes and values and dump them to a file.
-	INIFile::iterator section= theINI.begin();
-	while(section != theINI.end())
-	{
-		if(section->first > "") 
-			file << std::endl << "[" << section->first << "]" << std::endl;
-		INISection::iterator pair = section->second.begin();
-	
-		while(pair != section->second.end())
+		// just iterate the hashes and values and dump them to a file.
+		INIFile::iterator section= theINI.begin();
+		while(section != theINI.end())
 		{
-			if(pair->second > "")
-				file << pair->first << "=" << pair->second << std::endl;
-			else
-				file << pair->first << std::endl;
-			pair++;
+			if(section->first > "") 
+				file << std::endl << "[" << section->first << "]" << std::endl;
+			INISection::iterator pair = section->second.begin();
+	
+			while(pair != section->second.end())
+			{
+				if(pair->second > "")
+					file << pair->first << "=" << pair->second << std::endl;
+				else
+					file << pair->first << std::endl;
+				pair++;
+			}
+			section++;
 		}
-		section++;
+		file.close();
 	}
-	file.close();
+	catch(...) {
+	}
 }
 
 

@@ -35,14 +35,20 @@ public:
 	}
 	bool elapsed(time_t _timeout) {
 		time_t now = time(NULL);
+		
+		_diff = now - _last;
 		if (now > (_last + _timeout)) {
 			_last = now;
 			return true;
 		}
 		return false;
 	}
+	/** */
+	time_t lastdiff() {return _diff;}
+
 private:
 	time_t _last;
+	time_t _diff;
 };
 
 /**
