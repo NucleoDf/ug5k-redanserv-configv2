@@ -24,6 +24,86 @@ function Site2Config(mySite, sites) {
 	return cfgName;
 }
 
+/************************************/
+/*	FUNCTION: ChangeGateWaySite 	*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+var ChangeGateWaySite = function(data){
+    var oldIndex = data[data.oldValue].value;
+    var newIndex = data[data.selectedIndex].value;
+    var idCgw = $('#DivGateways').data('idCgw');
+    var oldEmpl = data[data.oldValue].outerText;
+    var newEmpl = data[data.selectedIndex].outerText;
+    var ipb1 = '';
+    if($('#ipb1')['0'].oldValue == null)
+        ipb1 = $('#ipb1').val();
+    else
+        ipb1 = $('#ipb1')['0'].oldValue;
+
+    var ipb2 = '';
+    if($('#ipb2')['0'].oldValue == null)
+        ipb2 = $('#ipb2').val();
+    else
+        ipb2 = $('#ipb2')['0'].oldValue;
+
+    $.ajax({
+        type: 'GET',
+        //url: '/gateways/' + $('#Component').text() + '/services/' + serviceId,
+        url: '/gateways/checkipaddr4changesite/' + ipb1 + '/' + ipb2 + '/' + newIndex,
+        success: function (data) {
+            if (data == "IP_DUP_1" ) {
+                $('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+                alertify.error('La dirección ip: ' + ipb1 + ' ya se encuentra dada de alta en el emplazamiento de destino.');
+            }
+            else if (data == "IP_DUP_2" ) {
+                $('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+                alertify.error('La dirección ip: ' + ipb2 + ' ya se encuentra dada de alta en el emplazamiento de destino.');
+            }
+            else {
+                alertify.confirm('Ulises G 5000 R', "¿Quiere trasladar la pasarela del emplazamiento \"" + oldEmpl +
+                    "\" al emplazamiento \"" + newEmpl + "\"?",
+                    function(){
+                        $.ajax({type: 'POST',
+                            url: '/gateways/changesite/'+idCgw+'/'+oldIndex+'/'+newIndex,
+                            success: function(data){
+                                if(data.data == 'DUP_ENTRY_NAME') {
+                                    $('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+                                    alertify.error('Ya existe una pasarela con el mismo nombre en el emplazamiento de destino seleccionado.');
+                                }
+                                else if(data.error!=null) {
+                                    $('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+                                    alertify.error('Error en la operacion');
+                                }
+                                else {
+                                    alertify.success('La pasarela ha sido cambiada de emplazamiento.');
+                                    PostGateWay('"'+idCgw+'"',true);
+                                    //ShowCfg($('#DivConfigurations').data('idCFG'));
+                                }
+                            },
+                            error: function(data){
+                                $('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+                                alertify.error('Error en la operacion');
+                            }
+                        });
+                        //alertify.success('Ok');
+                    },
+
+                    function(){
+                        $('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+                        //ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
+                        alertify.error('Cancelado');
+                    }
+                );
+            }
+        },
+        error: function (data) {
+            $('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
+            alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+        }
+    });
+};
+
 /****************************************/
 /*	FUNCTION: showDataForRadioResource 	*/
 /*  PARAMS: 							*/
@@ -1101,85 +1181,6 @@ function ajaxInsertUpdateRes(isUpdate,resource2Insert,resourceType,resourceId){
 	}
 	GetMySlaves();
 }
-/************************************/
-/*	FUNCTION: ChangeGateWaySite 	*/
-/*  PARAMS: 						*/
-/*  REV 1.0.2 VMG					*/
-/************************************/
-var ChangeGateWaySite = function(data){
-	var oldIndex = data[data.oldValue].value;
-	var newIndex = data[data.selectedIndex].value;
-	var idCgw = $('#DivGateways').data('idCgw');
- 	var oldEmpl = data[data.oldValue].outerText;
-	var newEmpl = data[data.selectedIndex].outerText;
-	var ipb1 = '';
-	if($('#ipb1')['0'].oldValue == null)
-		ipb1 = $('#ipb1').val();
-	else
-		ipb1 = $('#ipb1')['0'].oldValue;
-	
-	var ipb2 = '';
-	if($('#ipb2')['0'].oldValue == null)
-		ipb2 = $('#ipb2').val();
-	else
-		ipb2 = $('#ipb2')['0'].oldValue;
-	
-	$.ajax({
-		type: 'GET',
-		//url: '/gateways/' + $('#Component').text() + '/services/' + serviceId,
-		url: '/gateways/checkipaddr4changesite/' + ipb1 + '/' + ipb2 + '/' + newIndex,
-		success: function (data) {
-			if (data == "IP_DUP_1" ) {
-				$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
-				alertify.error('La dirección ip: ' + ipb1 + ' ya se encuentra dada de alta en el emplazamiento de destino.');
-			}
-			else if (data == "IP_DUP_2" ) {
-				$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
-				alertify.error('La dirección ip: ' + ipb2 + ' ya se encuentra dada de alta en el emplazamiento de destino.');
-			}
-			else {
-				alertify.confirm('Ulises G 5000 R', "¿Quiere trasladar la pasarela del emplazamiento \"" + oldEmpl +
-					"\" al emplazamiento \"" + newEmpl + "\"?",
-					function(){
-						$.ajax({type: 'POST',
-							url: '/gateways/changesite/'+idCgw+'/'+oldIndex+'/'+newIndex,
-							success: function(data){
-								if(data.data == 'DUP_ENTRY_NAME') {
-									$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
-									alertify.error('Ya existe una pasarela con el mismo nombre en el emplazamiento de destino seleccionado.');
-								}
-								else if(data.error!=null) {
-									$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
-									alertify.error('Error en la operacion');
-								}
-								else {
-									alertify.success('La pasarela ha sido cambiada de emplazamiento.');
-									PostGateWay('"'+idCgw+'"',true);
-									//ShowCfg($('#DivConfigurations').data('idCFG'));
-								}
-							},
-							error: function(data){
-								$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
-								alertify.error('Error en la operacion');
-							}
-						});
-						//alertify.success('Ok');
-					},
-					
-					function(){
-						$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
-						//ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
-						alertify.error('Cancelado');
-					}
-				);
-			}
-		},
-		error: function (data) {
-			$('#ListSites option[value="' + oldIndex +'"]').prop('selected', true);
-			alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
-		}
-	});
-};
 
 /************************************/
 /*	FUNCTION: DelGateway 			*/
