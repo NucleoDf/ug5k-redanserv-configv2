@@ -54,7 +54,7 @@ public:
 	WorkingConfig *p_working_config;
 
 public:
-	void AvisaCambioConfiguracion(string host);
+	//void AvisaCambioConfiguracion(string host);
 	void AvisaSubirConfiguracion();
 	void AvisaPideConfiguracion(string cfg="");
 	void AvisaChequearConfiguracion();
@@ -78,7 +78,7 @@ public:
 protected:
 	void StdSincrSet(eStdLocalConfig nstd/*, jgw_config &local*/);
 	string StdSincrGet();
-	void GeneraAvisosCpu(string host, string cmd);
+	//void GeneraAvisosCpu(string host, string cmd);
 	void ResourcesConfigClear();
 
 protected:

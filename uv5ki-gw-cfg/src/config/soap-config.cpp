@@ -52,7 +52,7 @@ soap_config::soap_config(remoteGetXdataFunc remoteFunc, string iphw, string hwNa
 	{
 		if (host->IdHost == CfgPasarela.Nombre) {
 			this->IpVirt = host->IpRed1;
-			this->IpCol = host->IpRed2;
+			this->IpCol = host->IpRed2;		// sistema::ipColateral();	// host->IpRed2;
 			break;
 		}
 	}	

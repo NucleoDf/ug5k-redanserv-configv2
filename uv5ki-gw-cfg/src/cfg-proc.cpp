@@ -41,17 +41,17 @@ bool CfgProc::IdConfig(int &std, string &id, string &tim)
 }
 
 /** */
-void CfgProc::AvisaCambioConfiguracion(string ip) 
-{
-	CCSLock _lock(m_lock);
-
-	stAviso aviso;
-	aviso.ip = ip;
-	aviso.main = CPU2CPU_MSG;
-	aviso.cmd = CPU2CPU_MSG_CAMBIO_CONFIG;
-
-	avisos.set(aviso);
-}
+//void CfgProc::AvisaCambioConfiguracion(string ip) 
+//{
+//	CCSLock _lock(m_lock);
+//
+//	stAviso aviso;
+//	aviso.ip = ip;
+//	aviso.main = CPU2CPU_MSG;
+//	aviso.cmd = CPU2CPU_MSG_CAMBIO_CONFIG;
+//
+//	avisos.set(aviso);
+//}
 
 /** */
 void CfgProc::AvisaSubirConfiguracion() 
@@ -144,16 +144,16 @@ string CfgProc::StdSincrGet()
 }
 
 /** */
-void CfgProc::GeneraAvisosCpu(string host, string cmd) 
-{
-	/** Generar el comando y Espera Respuesta... */
-	string request = "PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " HTTP/1.1\r\nHost: " + host + "\r\nContent-Type: application/json\r\n\r\n";
-	ParseResponse response = HttpClient(host).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemLocalHttpTimeout, "5000"));
-	if (response.Status() != "200")
-	{
-		throw Exception("REQUEST ERROR: PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " Host: " + host +  ". " + response.Status());
-	}
-}
+//void CfgProc::GeneraAvisosCpu(string host, string cmd) 
+//{
+//	/** Generar el comando y Espera Respuesta... */
+//	string request = "PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " HTTP/1.1\r\nHost: " + host + "\r\nContent-Type: application/json\r\n\r\n";
+//	ParseResponse response = HttpClient(host).SendHttpCmd(request, LocalConfig().getint(strRuntime, strRuntimeItemLocalHttpTimeout, "5000"));
+//	if (response.Status() != "200")
+//	{
+//		throw Exception("REQUEST ERROR: PUT /" + string(CPU2CPU_MSG) + "/" + cmd + " Host: " + host +  ". " + response.Status());
+//	}
+//}
 
 /** */
 void CfgProc::ResourcesConfigClear()
@@ -233,9 +233,9 @@ void JsonClientProc::Run()
 					} else if (aviso.main == MAIN_PIDE_CONFIG) {
 						PLOG_INFO("Solicitando Configuracion a: %s", aviso.ip.c_str());
 						PedirConfiguracion(aviso.cmd);
-					} else if (aviso.main == CPU2CPU_MSG) {
-						PLOG_INFO("Avisando de cambio de Configuracion a: %s", aviso.ip.c_str());
-						GeneraAvisosCpu(aviso.ip, aviso.cmd);
+					//} else if (aviso.main == CPU2CPU_MSG) {
+					//	PLOG_INFO("Avisando de cambio de Configuracion a: %s", aviso.ip.c_str());
+					//	GeneraAvisosCpu(aviso.ip, aviso.cmd);
 					} else if (aviso.main == MAIN_SUBIR_CONFIG) {
 						PLOG_INFO("Subiendo Configuracion a: %s", aviso.ip.c_str());
 						SubirConfiguracion();
@@ -454,9 +454,9 @@ void SoapClientProc::Run()
 						PLOG_INFO("Solicitando Configuracion a: %s...", aviso.ip.c_str());
 						PedirConfiguracion(aviso.cmd);
 						PLOG_INFO("Configuracion Recibida...");
-					} else if (aviso.main == CPU2CPU_MSG) {
-						PLOG_INFO("Avisando de cambio de Configuracion a: %s", aviso.ip.c_str());
-						GeneraAvisosCpu(aviso.ip, aviso.cmd);
+					//} else if (aviso.main == CPU2CPU_MSG) {
+					//	PLOG_INFO("Avisando de cambio de Configuracion a: %s", aviso.ip.c_str());
+					//	GeneraAvisosCpu(aviso.ip, aviso.cmd);
 					} else if (aviso.main == MAIN_SUBIR_CONFIG) {
 						PLOG_INFO("Subiendo Configuracion a: %s", aviso.ip.c_str());
 						SubirConfiguracion();
@@ -573,6 +573,8 @@ void SoapClientProc::ChequearConfiguracion()
 			//slcConflico = -4;
 			break;
 		}
+		/** 20171031. Para la dualidad en ULISES */
+		p_working_config->refreshCpuPair();
 	}
 	catch(...)
 	{	// Evento CFG-A

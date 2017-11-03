@@ -49,6 +49,17 @@ void WorkingConfig::dispose()
 }
 
 /** */
+/** 20171102. Callback para las respuestas del modulo de Grabacion */
+void WorkingConfig::_recResponse(bool res, int len, void *data)
+{
+	if (data != NULL) {
+		((char *)data)[len] = 0;
+		PLOG_INFO("_recResponse: %s", string(((char *)data)).c_str());
+	}
+	else {
+		PLOG_ERROR("_recResponse....");
+	}
+}
 EventosHistoricos *WorkingConfig::set(CommConfig &redanCfg, bool actualiza_ini) 
 {
 	config = redanCfg;
@@ -66,7 +77,7 @@ EventosHistoricos *WorkingConfig::set(CommConfig &redanCfg, bool actualiza_ini)
 		LocalConfig recconfig(onfs(LocalConfig::p_cfg->get(strModulos, strItemModuloGrabador)/*.snmpModule()*/));
 		
 		HistClient::p_hist->Signal(snmpconfig.getint("SERVICIO","UDP_PORT_IN_AGSNMP","65000"));
-		HistClient::p_hist->Signal(recconfig.getint("SERVICIO","PORT_IN_SERVICIO","65001"));
+		HistClient::p_hist->Signal(recconfig.getint("SERVICIO","PORT_IN_SERVICIO","65001"), _recResponse);
 	}
 
 	return his;

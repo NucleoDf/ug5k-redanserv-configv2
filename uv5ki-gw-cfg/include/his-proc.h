@@ -119,7 +119,7 @@ public:
 	void GetEstado(CIPAddress from, callback respuesta);
 	void SetSincrState(string snmpStatus);
 
-	void Signal(int toPort = 65000);
+	void Signal(int toPort = 65000, callback rsp=NULL);
 	void SetEstadoCpu(string local, string remoto);
 
 	void SetEventosHistoricos(string user, EventosHistoricos *eventos);

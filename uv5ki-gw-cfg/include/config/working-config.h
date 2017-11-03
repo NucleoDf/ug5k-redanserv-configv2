@@ -102,6 +102,21 @@ public:
 		port = config.ulises.MulticastPort;
 	}
 
+	/** 20171031. Obtener dinamicamente la ip del colaterl */
+	void refreshCpuPair() {
+		string ipCol = sistema::ipColateral();
+		if (sistema::ParImpar()==0)
+		{
+			config.general.cpus[1].ipb = ipCol;
+			config.general.cpus[1].ipg = ipCol;
+		}
+		else
+		{
+			config.general.cpus[0].ipb = ipCol;
+			config.general.cpus[0].ipg = ipCol;
+		}
+	}
+
 public:
 	bool IdConfig(string &idConfig, string &fechaHora);
 
@@ -111,6 +126,7 @@ protected:
 	void init();
 	void dispose();
 	static void *DelayedSignal(void *arg);
+	static void _recResponse(bool res, int len, void *data);
 
 private:
 	WorkingConfigMode cfg_mode;

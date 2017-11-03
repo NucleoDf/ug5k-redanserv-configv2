@@ -31,14 +31,18 @@ void HistClient::Run()
 
 	while (IsRunning())
 	{
-		this->sleep(10);
+		/** 20171102. Amplio de 10 a 100 para poder asegurar que se eliminan posibles respuestas a comandos 'anteriores' */
+		this->sleep(100);
 		if (Get(aviso))
 		{
 			CIPAddress from;
 			try
 			{
-				// sck.Recv(buffer, BUFSIZ-1, MSG_DONTWAIT);
 				PLOG_DEBUG("TO-SNMP-SERVICE (%s:%d): %s", aviso.dst.GetHostName().c_str(), aviso.dst.GetPort(), aviso.datos.c_str());
+				/** 20171102. Limpio el buffer de lectura para eliminar posibles respuestas a comandos 'anteriores' */
+#ifndef _WIN32
+				sck.Recv(buffer, BUFSIZ-1, MSG_DONTWAIT);
+#endif
 				if (sck.SendTo(aviso.datos.c_str(), aviso.datos.size(), aviso.dst) == (int )aviso.datos.size())
 				{
 					if (aviso.respuesta != (callback )NULL)
@@ -53,7 +57,7 @@ void HistClient::Run()
 						{
 							aviso.respuesta(false, 0, NULL);
 						}
-					}
+					}				
 				}
 				else
 				{
@@ -179,7 +183,7 @@ void HistClient::GetEstado(CIPAddress from, callback respuesta)
 }
 
 /** */
-void HistClient::Signal(int toPort)
+void HistClient::Signal(int toPort, callback rsp)
 {
 	/** Lock */
 	CCSLock lock(_acceso);
@@ -187,7 +191,7 @@ void HistClient::Signal(int toPort)
 	stHistAviso aviso;
 	
 	aviso.datos = string("C,H02");
-	aviso.respuesta = NULL;
+	aviso.respuesta = rsp;
 	aviso.dst = CIPAddress("127.0.0.1", toPort);
 	avisos.set(aviso);
 }

@@ -57,6 +57,7 @@ using namespace std;
 #define strRuntimeItemThreadActiveTimeout		((const char *)"THREAD_ACTIVE_TIMEOUT")
 #define strRuntimeItemHttpCharTimeout			((const char *)"HTTP_CHAR_TIMEOUT")
 #define strRuntimeItemTcpConnTimeout			((const char *)"TCP_CONN_TIMEOUT")
+#define strRuntimeItemColateralIpInfoPath		((const char *)"COLATERAL_IP_INFO_PATH")
 
 
 #define strFilesSupervidor				((const char *)"FILESUPERVISOR")

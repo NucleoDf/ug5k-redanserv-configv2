@@ -118,8 +118,14 @@ bool sistema::GetIpAddress(/*char *szIf, */string &ip)
 			close(iSocket);
 			return true;
         }
+		else {
+			PLOG_ERROR("sistema::GetIpAddress. Error en IOCTL: %s", strerror(errno));
+		}
 		close(iSocket);
     }
+	else {
+		PLOG_ERROR("sistema::GetIpAddress. Error en Apertura de socket: %d", iSocket);
+	}
     return false;    
 #endif
 }
@@ -366,5 +372,20 @@ void sistema::fileattr(string path, int modo, string &date, string &size)
 		size = "0";
 		date = "???";
 	}
+}
+
+/** */
+string sistema::ipColateral() 
+{
+	string filepath = onfs(LocalConfig::p_cfg->get(strRuntime, strRuntimeItemColateralIpInfoPath, "/mnt/ramfs/cpupair"));
+	ifstream ff(filepath.c_str());
+
+	if (ff.good())
+	{
+		string ip;
+		ff >> ip;
+		return ip;
+	}
+	return "";
 }
 

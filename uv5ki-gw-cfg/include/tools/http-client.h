@@ -15,8 +15,8 @@ using namespace std;
 class HttpClient : public CodeBase
 {
 public:
-	HttpClient(string host="localhost") {
-		server = host;
+	HttpClient(string host="localhost", int port = 80) {
+		server = host + ":" + Tools::itoa(port);
 		char_timeout = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemHttpCharTimeout, "100");
 		conn_timeout = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemTcpConnTimeout, "60");
 	}

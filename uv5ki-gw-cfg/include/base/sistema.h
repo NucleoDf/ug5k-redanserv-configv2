@@ -84,6 +84,9 @@ public:
 
 	/** */
 	static void fileattr(string path, int modo, string &date, string &size);
+
+	/** 20171031. Obtener el colateral */
+	static string ipColateral();
 	
 };
 

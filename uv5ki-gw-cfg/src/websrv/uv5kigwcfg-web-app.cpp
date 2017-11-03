@@ -526,7 +526,7 @@ void *Uv5kiGwCfgWebApp::ConfigSync(void* arg)
 		{
 			if (ipColateral != "") 
 			{
-				ParseResponse resp = HttpClient(ipColateral).SendHttpCmd("PUT", 
+				ParseResponse resp = HttpClient(ipColateral, Tools::atoi(_web_config.web_port)).SendHttpCmd("PUT", 
 					string(CPU2CPU_MSG)+ "/" + string(CPU2CPU_MSG_CAMBIO_CONFIG), 
 					LocalConfig().getint(strRuntime, strRuntimeItemLocalHttpTimeout, "5000"),
 					P_WORKING_CONFIG->JConfig());
