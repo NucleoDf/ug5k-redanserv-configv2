@@ -442,6 +442,7 @@ void Uv5kiGwCfgWebApp::stCb_internos(struct mg_connection *conn, string user, we
 		string data_in = string(conn->content, conn->content_len );
 		if (levels[2]==CPU2CPU_MSG_CAMBIO_CONFIG)				// Han cambiado la Configuracion...
 		{
+			PLOG_INFO("Recibido Aviso Cambio de Configuracion Local");
 			string data_in = string(conn->content, conn->content_len );
 			CommConfig cfg(data_in);
 			P_WORKING_CONFIG->set(cfg, true);						// No Genero historicos.

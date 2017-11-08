@@ -48,6 +48,13 @@ ParseResponse HttpClient::SendHttpCmd(string cmd, int ms_timeout)
 /** */
 ParseResponse HttpClient::SendHttpCmd(string metodo, string cmd, int ms_timeout, string jdata)
 {
-	string request = metodo + "/" + cmd + " HTTP/1.1\r\nHost: " + server + "\r\nContent-Type: application/json\r\n" + jdata + "\r\n";
+	string line1 = metodo + " /" + cmd + " HTTP/1.1\r\n";
+	string line2 = "Host: " + server + "\r\n";
+	string line3 = "Content-Type: application/json\r\n";
+	string line4 = "Content-Length: " + Tools::itoa(jdata.length()) + "\r\n";
+
+	string request = line1 + line2 + line3 + line4 + "\r\n" + jdata + "\r\n";
+	// string request = metodo + "/" + cmd + " HTTP/1.1\r\nHost: " + server + "\r\nContent-Type: application/json\r\n\r\n" + jdata + "\r\n";
+
 	return SendHttpCmd(request, ms_timeout);
 }

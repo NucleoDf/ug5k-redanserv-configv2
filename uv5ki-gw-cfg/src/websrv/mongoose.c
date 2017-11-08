@@ -1302,7 +1302,7 @@ typedef pid_t process_id_t;
 #include "../../include/websrv/mongoose.h"
 
 /** 20171102. AGL. Multiplico el tamaño por 8 para poder actualizar desde POST las cpu de pasarelas... */
-#define MAX_REQUEST_SIZE (16384*1)
+#define MAX_REQUEST_SIZE (16384*4)
 #define IOBUF_SIZE 8192
 #define MAX_PATH_SIZE 8192
 #define DEFAULT_CGI_PATTERN "**.cgi$|**.pl$|**.php$"

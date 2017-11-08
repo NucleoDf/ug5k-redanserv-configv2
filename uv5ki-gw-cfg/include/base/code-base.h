@@ -150,7 +150,8 @@ public:
 #elif defined(_PPC82xx_)
 		return filename;
 #else
-		return "./fs-lnx" + filename;
+		// return "./fs-lnx" + filename;
+		return "./fs-win" + filename;
 #endif
 	}
 	static string onram(string filename) {

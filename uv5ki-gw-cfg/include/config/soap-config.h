@@ -608,6 +608,12 @@ public:
 		//xdata_ResourceInfo = Tools::read_txt_file(onfs("/home/GetParametrosRecursoById_idRecurso=RD-SIM_tipo=0.xml"));
 
 		read_key(xdata_ResourceInfo, "Tablas", info);
+
+		/** 20171107. Para los recursos sin destino, como el caso de los TX-HF, se pone el destino igual al recurso... */
+		if (info.IdDestino=="IdDestino") {
+			info.IdDestino = IdRecurso;
+		}
+		/***************/
 	}
 	void TablaBss(vector<int> &v) {
 		v.clear();

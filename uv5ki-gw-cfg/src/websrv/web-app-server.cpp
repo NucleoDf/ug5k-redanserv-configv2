@@ -126,7 +126,7 @@ int WebAppServer::WebHandler(struct mg_connection *conn, enum mg_event ev)
 			if (config()->enable_login==true)
 			{
 				if (Check4SecureUri(conn->uri) == true && 
-					(strcmp(conn->request_method, "POST") == 0 || strcmp(conn->request_method, "PUT") == 0) ) 		
+					(strcmp(conn->request_method, "POST") == 0 /*|| strcmp(conn->request_method, "PUT") == 0*/) ) 		
 				{		
 					return check_login_form_submission(conn);		
 				}	  	
@@ -435,7 +435,8 @@ bool WebAppServer::Check4SecureUri(string uri)
 {
 	for (vector<string>::iterator it=config()->sec_uris.begin(); it != config()->sec_uris.end(); it++)
 	{
-		if (*it == uri)
+		if (uri.find(*it) == 0)
+//		if (*it == uri)
 			return true;
 	}
 	return false;
