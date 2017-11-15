@@ -229,6 +229,12 @@ var GetUsuario = function (ind,valor){
 	$("#FormOperador").show();
 	$('#AddFormUser').show();
 
+    var lIndex = $('#loggedUser').text().indexOf('(');
+
+	if(valor.name==$('#loggedUser').text().substring(0, lIndex-1))
+    	$('#DeleteUserButton').hide();
+    else
+        $('#DeleteUserButton').show();
 	if (ind >= 0){
 		$(':checkbox.rol').prop('checked',false);
 		$.ajax({type: 'GET', 

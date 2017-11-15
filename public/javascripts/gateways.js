@@ -2570,7 +2570,7 @@ function Add2Select(idSelect, Item2Insert, limit, idTipo) {
 				value: Item2Insert, 
 				text: Item2Insert
 			}));
-			alertify.success('Elmento ' + idTipo + ' ' + Item2Insert + " añadido...");
+			alertify.success('Elemento ' + idTipo + ' ' + Item2Insert + " añadido...");
 		}
 	}	 
 }

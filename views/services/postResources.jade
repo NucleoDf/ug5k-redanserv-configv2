@@ -25,7 +25,7 @@ div(id="FormResources", style="display: none; width: 1250px")
                                     td(style="padding:5px 5px")
                                         label(tkey='lblUriExtResource')
                                     td.New
-                                        input.textbox#uriExtResource(type='text' style='width:200px' )
+                                        input.textbox#uriExtResource(type='text' style='width:200px' onblur='ValidateUriNoSIP(this,"ErrorURI")')
                                 tr#RowExtResType(style="vertical-align:center")
                                     td(style="padding:5px 5px")
                                         label(tkey='lblExtResType')
