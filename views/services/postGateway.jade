@@ -323,6 +323,11 @@ script.
 			}
 		}
 
+		function ValidateReleaseTimeNumber(element,label){
+			if($(element).val()=='' || ($(element).val()<1 && $(element).val()>10))
+					Fade(element,label)
+		}
+
 		function ValidateNumber(element,label){
 			var regx_numberval = /^[0-9]+$/;
 

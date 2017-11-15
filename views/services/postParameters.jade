@@ -456,7 +456,7 @@ div(id="FormParameters")
 										td
 											label(tkey='ReleaseTime' )
 										td.New
-											input.textbox#TbReleaseTime(type='text' style='width:50px' onblur='ValidateNumber(this,"ErrorValue")' onfocus='this.oldValue=this.value')
+											input.textbox#TbReleaseTime(type='text' style='width:50px' onblur='ValidateReleaseTimeNumber(this,"ErrorValue")' onfocus='this.oldValue=this.value')
 									tr#InterruptToneRow(class='ATS')
 										td
 											label(tkey='InterruptToneTime' )
