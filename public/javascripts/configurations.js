@@ -1043,6 +1043,7 @@ var ActiveCfg = function(f) {
 		function(){ alertify.error('Cancelado');}
 	);
 }
+
 /*var ActiveCfg = function() {
 	alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + $('#name').val() + "\".?",
 	function () {

@@ -37,7 +37,7 @@ var UpdateSynchroStateInSites = function(data) {
 							$(this).prop('class', 'apply');
 						else {
 							if (value.isNotActiveCfg)
-								$(this).prop('class', '');
+								$(this).prop('class', 'NoVivaNoActia');
 							else
 								$(this).prop('class', 'NoVivaActivaSite');
 						}

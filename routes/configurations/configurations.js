@@ -231,6 +231,13 @@ router.route('/:configuration/activate')
   		logging.LoggingDate("GET configurations/:configuration/activate");
 		if (req.params.configuration != null)
 			myLibConfigurations.activateConfiguration(req.params.configuration,function(result){
+                var aliveGtws=req.app.get('aliveGtws');
+                for(var i=0;i<aliveGtws.length;i++) {
+                    if (aliveGtws[i].idCfg == parseInt(req.params.configuration))
+                        aliveGtws[i].isNotActiveCfg=false;
+                    else
+                        aliveGtws[i].isNotActiveCfg=true;
+                }
 				res.json(result);
 			});
 		});
