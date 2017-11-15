@@ -324,8 +324,10 @@ script.
 		}
 
 		function ValidateReleaseTimeNumber(element,label){
-			if($(element).val()=='' || ($(element).val()<1 && $(element).val()>10))
-					Fade(element,label)
+			if($(element).val()=='')
+				Fase(element,label)
+			if(parseInt($(element).val())<1 || parseInt($(element).val())>10)
+				Fade(element,label)
 		}
 
 		function ValidateNumber(element,label){
