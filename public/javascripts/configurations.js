@@ -131,6 +131,7 @@ var GetConfiguration = function(cfg){
 /*  REV 1.0.2 VMG					*/
 /************************************/
 var ShowCfg = function(cfg){
+    $('#AssignatedGatewaysDiv').hide();
 	translateWord('Configurations',function(result){
 		$('#TitleH3').text(result + ': ' + cfg.name);	
 	});
