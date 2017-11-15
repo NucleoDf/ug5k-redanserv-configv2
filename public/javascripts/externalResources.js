@@ -12,7 +12,7 @@ var GetExtResources = function(f) {
 	if (Authorize($('#BodyRedan').data('perfil'),[ccAdminProfMsc,ccConfiProfMsc])==false) {
 		/*if ((($('#BodyRedan').data('perfil') & 16) != 16) && (($('#BodyRedan').data('perfil') & 64) != 64)) {
 		 *****************************/
-		alertify.error('No tiene asignados permisos para la gestión de las tablas de calificación de audio.');
+		alertify.error('No tiene asignados permisos para la gestión de recursos externos.');
 		return;
 	}
 	
