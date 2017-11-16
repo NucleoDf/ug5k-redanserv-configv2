@@ -8,11 +8,11 @@ var originalResourceType = 0;
 function OnCbBssMethod(obj){
     // Las tablas de calificación sólo estarán disponibles para los recursos
     // radio remotos con método Bss seleccionado RSSI y si son Rx o RxTx.
-    if (($('#CbBssMethod option:selected').val()==1))
+    /*if (($('#CbBssMethod option:selected').val()==1))
         $('#BSSMethodRow .SoloRssi').hide();
     else
         $('#BSSMethodRow .SoloRssi').show();
-
+*/
 }
 
 /****************************************/
