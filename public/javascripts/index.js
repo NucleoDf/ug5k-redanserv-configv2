@@ -130,6 +130,9 @@ function indexInitUserData(username, userprofile) {
 		$('.New').removeClass('NotAllowedTd');
 		$('.New *:first-child').removeClass('NotAllowedBtn');
 	}
+    if (Authorize(userprofile,[ccHistoProfMsc])==true) {
+        $('#cfCfgLocal').hide();
+    }
 	/** 20170512 AGL. OCULTAR BOTONES COPIA / IMPORT / EXPORT */
 	//$('#BtnCopyCfg').hide();		// Copia Configuracion
 	$('#BtnCopySite').hide();		// Copia Emplazamiento.
