@@ -111,10 +111,11 @@ void WorkingConfig::load_from(string file)
 		{
 			PLOG_EXCEP(x, "Error cargando fichero de configuracion: %s", file.c_str());
 			// Poner configuracion por defecto.
-			CommConfig cfg;
-			PLOG_DEBUG("Generada CFG Por Defecto,");
-			set(cfg, false);
-			PLOG_DEBUG("Activada CFG Por Defecto");
+			set_to_default();
+			//CommConfig cfg;
+			//PLOG_DEBUG("Generada CFG Por Defecto,");
+			//set(cfg, false);
+			//PLOG_DEBUG("Activada CFG Por Defecto");
 		}
 
 		return;
@@ -133,6 +134,16 @@ void WorkingConfig::save_to(string file)
 		return;
 	}
 	throw Exception("Modo de Configuracion no implementado escribiendo fichero...");
+}
+
+/** */
+void WorkingConfig::set_to_default()
+{
+	// Poner configuracion por defecto.
+	CommConfig cfg;
+	PLOG_DEBUG("Generada CFG Por Defecto,");
+	set(cfg, false);
+	PLOG_DEBUG("Activada CFG Por Defecto");
 }
 
 /** */

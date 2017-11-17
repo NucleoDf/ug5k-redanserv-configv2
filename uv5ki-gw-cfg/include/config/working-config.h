@@ -43,6 +43,7 @@ public:
 	void set();
 	void load_from(string file);
 	void save_to(string file);
+	void set_to_default();
 
 public:
 	void TimeStamp();

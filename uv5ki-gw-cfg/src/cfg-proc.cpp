@@ -212,8 +212,11 @@ void JsonClientProc::Run()
 
 	// Comprobar que _ip_propia es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
 	// y hay que obtener la configuracion del Servidor...
+	// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
 	if (p_working_config->ippropia() != _ip_propia) {
+		p_working_config->set_to_default();
 		p_working_config->ResetTimeStamp();				// Pone Fecha 01/01/1970, para que sea actualizado.
+		p_working_config->save_to(LAST_CFG);
 		PLOG_INFO("Detectado Cambio de IP-LOCAL. Nueva IP: %s", _ip_propia.c_str());
 	}
 
@@ -429,9 +432,12 @@ void SoapClientProc::Run()
 
 	// Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
 	// y hay que obtener la configuracion del Servidor...
+	// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
 	if (p_working_config->config.general.name != hwName) {
+		p_working_config->set_to_default();
 		p_working_config->config.general.name = hwName;
 		p_working_config->ResetTimeStamp();
+		p_working_config->save_to(LAST_CFG);
 		PLOG_INFO("Detectado Cambio de ID. Nuevo ID: %s", hwName.c_str());
 	}
 
@@ -643,7 +649,7 @@ void SoapClientProc::McastActivateOrDeactivate(bool activate)
 				p_mcast_socket = NULL;
 			}
 			CIPAddress mcast_group(ipmcast);
-                        CIPAddress mcast_itf(_ip_propia);
+            CIPAddress mcast_itf(_ip_propia);
 			p_mcast_socket = new CUDPSocket();
 			p_mcast_socket->SetReusable();
 			p_mcast_socket->Bind(port);

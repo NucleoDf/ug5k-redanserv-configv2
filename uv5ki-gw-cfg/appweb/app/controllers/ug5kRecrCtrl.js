@@ -695,8 +695,8 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                             /*"RSSI y NUCLEO"*/transerv.translate('RCTRL_P02_BSSC'),
                             /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1'),
 					    ] : [
-                            /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1'),
-                            /*"RSSI"*/transerv.translate('RCTRL_P02_BSSR')
+                            /*"RSSI"*/transerv.translate('RCTRL_P02_BSSR'),
+                            /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1')
 					    ],
 					    Show: vm.p2_rad_show,
 					    Val: vm.dval

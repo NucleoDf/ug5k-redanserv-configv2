@@ -44,7 +44,7 @@
                         <ol data-ng-switch-when="2" data-ng-disabled="item.Enable==false">
                             <li data-ng-repeat="item1 in item.Value track by $index" style="list-style-type: none">
                                 <span class="error" ng-show="item.Val(item.Value[$index])==false" translate>RADIO_ERROR</span>
-                                <input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()" />
+                                <input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()" data-ng-disabled="item.Enable==false"/>
                             </li>
                         </ol>
                         <span data-ng-switch-when="3">
@@ -55,7 +55,7 @@
                             </div>
                         </span>
                         <ol data-ng-switch-when="4" data-ng-disabled="item.Enable==false">
-                            <li data-ng-repeat="item1 in item.Value track by $index" style="list-style-type: none">
+                            <li data-ng-repeat="item1 in item.Value track by $index" style="list-style-type: none" data-ng-disabled="item.Enable==false">
                                 <span class="error" ng-show="item.Val(item.Value[$index])==false" translate>RADIO_ERROR</span>
 <!-- 
                                 <span class="sip" >Sip:</span>
@@ -63,7 +63,7 @@
  -->
 								<label class="control-label col-sm-1">Sip:</label>
 								<div class="col-sm-11">
-									<input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()" />
+									<input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()" data-ng-disabled="item.Enable==false"/>
 								</div>
 							</li>
                         </ol>
