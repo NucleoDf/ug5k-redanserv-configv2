@@ -1153,7 +1153,7 @@ var GetActiveCfgAndActivate = function(isAutomaticActive){
 									url: '/configurations/' + data.idCFG + '/loadChangestoGtws',
 									success: function (result) {
 										if (result) {
-											GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, data.name, $('#loggedUser').text());
+											//GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, data.name, $('#loggedUser').text());
 											alertify.success('Configuración activada y pasarelas actualizadas.');
 										}
 									}
