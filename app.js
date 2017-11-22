@@ -59,7 +59,8 @@ function insertHistoric(code, user, reason) {
             Usuario: user,
             Param: reason
         }
-        , function(h){            
+        , function(h){
+        console.log("insertHistoric: " + h);            
     });
 }
 function checkPerfil(userprofile ){
@@ -292,7 +293,7 @@ function msg4Login(req, msg) {
 
 //
 var isAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated()) {
+  if (ctrlSesiones.localSession != null && req.isAuthenticated()) {
     return next();    
   }
   // console.log('redirect to /login from isAuthenticated');
@@ -328,6 +329,7 @@ app.post('/login',
   function(req, res) {
     logging.LoggingDateCond('app.post</login>: ' + req.user.name + ' ' + req.user.perfil, config.Ulises.LoginSystemTrace);
     ctrlSesiones.localSession = req.session;
+    ctrlSesiones.localSession.lastTick = moment();
     res.redirect('/');
   });
   
@@ -344,6 +346,11 @@ app.get('/logout',
 app.get('/alive', 
 //  isAuthenticated,
     function(req, res, next) {
+        
+        if (ctrlSesiones.localSession) {
+            ctrlSesiones.localSession.lastTick = moment();
+        }
+
         if (req.isAuthenticated()) {
             res.json({alive: "ok"});
         }
@@ -513,7 +520,12 @@ setInterval(function(){
 /** 20170525. AGL. Para el control de Sesiones. */
 var intervalObject = setInterval(function () {
       if (ctrlSesiones.localSession) {
-        if (moment().isAfter(moment(ctrlSesiones.localSession.cookie._expires))) {
+        if (moment().diff(ctrlSesiones.localSession.lastTick, "seconds") > 60 ) {
+            logging.LoggingDateCond("La Session ha expirado...El cliente no genera los ticks", config.Ulises.LoginSystemTrace);
+            insertHistoric(USER_LOGOUT_SYSTEM, ctrlSesiones.user.name, 'La Session ha expirado...El cliente no genera los ticks.');
+            ctrlSesiones.localSession = null;
+        }
+        else if (moment().isAfter(moment(ctrlSesiones.localSession.cookie._expires))) {
             logging.LoggingDateCond("La Session ha expirado....", config.Ulises.LoginSystemTrace);
             insertHistoric(USER_LOGOUT_SYSTEM, ctrlSesiones.user.name, 'La Session ha expirado....');
             ctrlSesiones.localSession = null;
