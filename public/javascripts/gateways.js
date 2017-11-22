@@ -29,7 +29,7 @@ function Site2Config(mySite, sites) {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-function PostGateWay (idSite, isUpdate) {
+function PostGateWay (idSite, isUpdate, isChangeSite) {
     var newGateway={};
     var proxys=[];
     var registrars=[];
@@ -171,163 +171,200 @@ function PostGateWay (idSite, isUpdate) {
         alertify.error('La Ip Virtual y la de la CPU1 tienen que ser distintas.');
         return;
     }
+    if(!isChangeSite) {
+        var idUpdatedCgw = 'noData';
+        if(isUpdate)
+            idUpdatedCgw = $('#DivGateways').data('idCgw');
 
-    if(typeof($('#DivConfigurations').data('idCFG'))!='undefined') {
-        var regx_ipval = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
+        if (typeof($('#DivConfigurations').data('idCFG')) != 'undefined') {
+            var regx_ipval = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 
-        var matchIp = newGateway.ipv.match(regx_ipval);
-        if (newGateway.ipv != '' && matchIp == null) {
-            alertify.error('La Ip Virtual no es válida.');
-            return;
-        }
-        matchIp = newGateway.ipb1.match(regx_ipval);
-        if (newGateway.ipb1 != '' && matchIp == null) {
-            alertify.error('La Ip de la CPU0 no es válida.');
-            return;
-        }
-        matchIp = newGateway.ipb2.match(regx_ipval);
-        if (newGateway.ipb2 != '' && matchIp == null) {
-            alertify.error('La Ip de la CPU1 no es válida.');
-            return;
-        }
-        //IPV
-        $.ajax({
-            type: 'GET',
-            url: '/gateways/checkipaddr/' + newGateway.ipv + '/' + $('#DivConfigurations').data('idCFG'),
-            success: function (data) {
-                if (data == "IP_DUP") {
-                    alertify.error('La dirección ip: ' + newGateway.ipv + ' ya se encuentra dada de alta en esta configuración.');
-                    return;
-                }
-                else {
-                    //IPB1
-                    $.ajax({
-                        type: 'GET',
-                        url: '/gateways/checkipaddr/' + newGateway.ipb1 + '/' + $('#DivConfigurations').data('idCFG'),
-                        success: function (data) {
-                            if (data == "IP_DUP") {
-                                alertify.error('La dirección ip: ' + newGateway.ipb1 + ' ya se encuentra dada de alta en esta configuración.');
-                                return;
-                            }
-                            else {
-                                //IPB2
-                                $.ajax({
-                                    type: 'GET',
-                                    url: '/gateways/checkipaddr/' + newGateway.ipb2 + '/' + $('#DivConfigurations').data('idCFG'),
-                                    success: function (data) {
-                                        if (data == "IP_DUP") {
-                                            alertify.error('La dirección ip: ' + newGateway.ipb2 + ' ya se encuentra dada de alta en esta configuración.');
-                                            return;
-                                        }
-                                        else {
-                                            //Nombre
-                                            $.ajax({
-                                                type: 'GET',
-                                                url: '/gateways/checkgtwname/' + newGateway.nombre + '/' + $('#DivConfigurations').data('idCFG'),
-                                                success: function (data) {
-                                                    if (data == "NAME_DUP") {
-                                                        alertify.error('El identificador de pasarela: ' + newGateway.nombre + ' ya se encuentra dado de alta en esta configuración.');
-                                                        return;
-                                                    }
-                                                    else {
-                                                        //Nueva Pasarela
-                                                        if(isUpdate == false) {
-                                                            $.ajax({
-                                                                type: 'POST',
-                                                                dataType: 'json',
-                                                                contentType: 'application/json',
-                                                                url: '/gateways/createNewGateway/:newGateway/:idSite',
-                                                                data: JSON.stringify({
-                                                                        "newGateway": newGateway,
-                                                                        "idSite": idSite
-                                                                    }
-                                                                ),
-                                                                success: function (data) {
-                                                                    if (data.error == null) {
-                                                                        alertify.success('La pasarela \"' + data.name + '\" ha sido creada.');
-                                                                        GenerateHistoricEvent(ID_HW,ADD_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
-                                                                        ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
-                                                                        cgwModified = true;
-                                                                        //GetGateways(null,function(){
-                                                                        //	ShowHardwareGateway(data.insertId, data.name);
-                                                                        //});//TODO esto no muestra nada de lo que tiene que mostrar
-                                                                    }
-                                                                    else if (data.error) {
-                                                                        alertify.error('Error: ' + data.error);
-                                                                    }
-                                                                },
-                                                                error: function (data) {
-                                                                    alertify.error('Error creando la pasarela.');
-                                                                }
-                                                            });
-                                                        }
-                                                        //Modifica Pasarela
-                                                        else {
-                                                            var idGtw = $('#DivGateways').data('idCgw');
-                                                            $.ajax({
-                                                                type: 'POST',
-                                                                dataType: 'json',
-                                                                contentType: 'application/json',
-                                                                url: '/gateways/updateGateway/:newGateway/:idGtw',
-                                                                data: JSON.stringify({
-                                                                        "newGateway": newGateway,
-                                                                        "idGtw": idGtw
-                                                                    }
-                                                                ),
-                                                                success: function (data) {
-                                                                    if (data.error == null) {
-                                                                        alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
-                                                                        GenerateHistoricEvent(ID_HW,MODIFY_GATEWAY_COMMON_PARAM,$('#nameGw').val(),$('#loggedUser').text());
-                                                                        ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
-                                                                        cgwModified = true;
-                                                                        //GetGateways(null,function(){
-                                                                        //	ShowHardwareGateway(data.insertId, data.name);
-                                                                        //});//TODO esto no muestra nada de lo que tiene que mostrar
-                                                                        //AddGatewayToList(idGtw);
-                                                                    }
-                                                                    else if (data.error) {
-                                                                        alertify.error('Error: ' + data.error);
-                                                                    }
-                                                                },
-                                                                error: function (data) {
-                                                                    alertify.error('Error modificando la pasarela.');
-                                                                }
-                                                            });
-                                                        }
-                                                    }
-                                                },
-                                                error: function (data) {
-                                                    alertify.error('Error al comprobar los identificadores existentes en el sistema.');
-                                                    return;
-                                                }
-                                            });
-										}
-                                    },
-                                    error: function (data) {
-                                        alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
-                                        return;
-                                    }
-                                });
-							}
-                        },
-                        error: function (data) {
-                            alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
-                            return;
-                        }
-                    });
-				}
-            },
-            error: function (data) {
-                alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+            var matchIp = newGateway.ipv.match(regx_ipval);
+            if (newGateway.ipv != '' && matchIp == null) {
+                alertify.error('La Ip Virtual no es válida.');
                 return;
             }
-        });
+            matchIp = newGateway.ipb1.match(regx_ipval);
+            if (newGateway.ipb1 != '' && matchIp == null) {
+                alertify.error('La Ip de la CPU0 no es válida.');
+                return;
+            }
+            matchIp = newGateway.ipb2.match(regx_ipval);
+            if (newGateway.ipb2 != '' && matchIp == null) {
+                alertify.error('La Ip de la CPU1 no es válida.');
+                return;
+            }
+            //IPV
+            $.ajax({
+                type: 'GET',
+                url: '/gateways/checkipaddr/' + newGateway.ipv + '/' + $('#DivConfigurations').data('idCFG') + '/' + idUpdatedCgw,
+                success: function (data) {
+                    if (data == "IP_DUP") {
+                        alertify.error('La dirección ip: ' + newGateway.ipv + ' ya se encuentra dada de alta en esta configuración.');
+                        return;
+                    }
+                    else {
+                        //IPB1
+                        $.ajax({
+                            type: 'GET',
+                            url: '/gateways/checkipaddr/' + newGateway.ipb1 + '/' + $('#DivConfigurations').data('idCFG') + '/' + idUpdatedCgw,
+                            success: function (data) {
+                                if (data == "IP_DUP") {
+                                    alertify.error('La dirección ip: ' + newGateway.ipb1 + ' ya se encuentra dada de alta en esta configuración.');
+                                    return;
+                                }
+                                else {
+                                    //IPB2
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/gateways/checkipaddr/' + newGateway.ipb2 + '/' + $('#DivConfigurations').data('idCFG') + '/' + idUpdatedCgw,
+                                        success: function (data) {
+                                            if (data == "IP_DUP") {
+                                                alertify.error('La dirección ip: ' + newGateway.ipb2 + ' ya se encuentra dada de alta en esta configuración.');
+                                                return;
+                                            }
+                                            else {
+                                                //Nombre
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    url: '/gateways/checkgtwname/' + newGateway.nombre + '/' + $('#DivConfigurations').data('idCFG'),
+                                                    success: function (data) {
+                                                        if (data == "NAME_DUP") {
+                                                            alertify.error('El identificador de pasarela: ' + newGateway.nombre + ' ya se encuentra dado de alta en esta configuración.');
+                                                            return;
+                                                        }
+                                                        else {
+                                                            //Nueva Pasarela
+                                                            if (isUpdate == false) {
+                                                                $.ajax({
+                                                                    type: 'POST',
+                                                                    dataType: 'json',
+                                                                    contentType: 'application/json',
+                                                                    url: '/gateways/createNewGateway/:newGateway/:idSite',
+                                                                    data: JSON.stringify({
+                                                                            "newGateway": newGateway,
+                                                                            "idSite": idSite
+                                                                        }
+                                                                    ),
+                                                                    success: function (data) {
+                                                                        if (data.error == null) {
+                                                                            alertify.success('La pasarela \"' + data.name + '\" ha sido creada.');
+                                                                            GenerateHistoricEvent(ID_HW, ADD_GATEWAY, $('#nameGw').val(), $('#loggedUser').text());
+                                                                            ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+                                                                            cgwModified = true;
+                                                                            //GetGateways(null,function(){
+                                                                            //	ShowHardwareGateway(data.insertId, data.name);
+                                                                            //});//TODO esto no muestra nada de lo que tiene que mostrar
+                                                                        }
+                                                                        else if (data.error) {
+                                                                            alertify.error('Error: ' + data.error);
+                                                                        }
+                                                                    },
+                                                                    error: function (data) {
+                                                                        alertify.error('Error creando la pasarela.');
+                                                                    }
+                                                                });
+                                                            }
+                                                            //Modifica Pasarela
+                                                            else {
+                                                                var idGtw = $('#DivGateways').data('idCgw');
+                                                                $.ajax({
+                                                                    type: 'POST',
+                                                                    dataType: 'json',
+                                                                    contentType: 'application/json',
+                                                                    url: '/gateways/updateGateway/:newGateway/:idGtw',
+                                                                    data: JSON.stringify({
+                                                                            "newGateway": newGateway,
+                                                                            "idGtw": idGtw
+                                                                        }
+                                                                    ),
+                                                                    success: function (data) {
+                                                                        if (data.error == null) {
+                                                                            alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
+                                                                            GenerateHistoricEvent(ID_HW, MODIFY_GATEWAY_COMMON_PARAM, $('#nameGw').val(), $('#loggedUser').text());
+                                                                            ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+                                                                            cgwModified = true;
+                                                                            //GetGateways(null,function(){
+                                                                            //	ShowHardwareGateway(data.insertId, data.name);
+                                                                            //});//TODO esto no muestra nada de lo que tiene que mostrar
+                                                                            //AddGatewayToList(idGtw);
+                                                                        }
+                                                                        else if (data.error) {
+                                                                            alertify.error('Error: ' + data.error);
+                                                                        }
+                                                                    },
+                                                                    error: function (data) {
+                                                                        alertify.error('Error modificando la pasarela.');
+                                                                    }
+                                                                });
+                                                            }
+                                                        }
+                                                    },
+                                                    error: function (data) {
+                                                        alertify.error('Error al comprobar los identificadores existentes en el sistema.');
+                                                        return;
+                                                    }
+                                                });
+                                            }
+                                        },
+                                        error: function (data) {
+                                            alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+                                            return;
+                                        }
+                                    });
+                                }
+                            },
+                            error: function (data) {
+                                alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+                                return;
+                            }
+                        });
+                    }
+                },
+                error: function (data) {
+                    alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+                    return;
+                }
+            });
 
 
+        }
+        else {
+            alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+            return;
+        }
     }
     else {
-        alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
-        return;
+        var idGtw = $('#DivGateways').data('idCgw');
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/gateways/updateGateway/:newGateway/:idGtw',
+            data: JSON.stringify({
+                    "newGateway": newGateway,
+                    "idGtw": idGtw
+                }
+            ),
+            success: function (data) {
+                if (data.error == null) {
+                    alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
+                    GenerateHistoricEvent(ID_HW, MODIFY_GATEWAY_COMMON_PARAM, $('#nameGw').val(), $('#loggedUser').text());
+                    ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+                    cgwModified = true;
+                    //GetGateways(null,function(){
+                    //	ShowHardwareGateway(data.insertId, data.name);
+                    //});//TODO esto no muestra nada de lo que tiene que mostrar
+                    //AddGatewayToList(idGtw);
+                }
+                else if (data.error) {
+                    alertify.error('Error: ' + data.error);
+                }
+            },
+            error: function (data) {
+                alertify.error('Error modificando la pasarela.');
+            }
+        });
     }
 }
 
@@ -384,7 +421,7 @@ var ChangeGateWaySite = function(data){
                                 }
                                 else {
                                     alertify.success('La pasarela ha sido cambiada de emplazamiento.');
-                                    PostGateWay('"'+idCgw+'"',true);
+                                    PostGateWay('"'+idCgw+'"',true, true);
                                     //ShowCfg($('#DivConfigurations').data('idCFG'));
                                 }
                             },
@@ -2306,7 +2343,7 @@ var GetGateway = function (gtw,lastUpdate,f){
 				var idSite=$('#IdSite') .data('idSite');
 				translateWord('Update',function(result){
 					$('#UpdateGtwButton').text(result)
-										.attr('onclick','PostGateWay('+idSite+',true)');
+										.attr('onclick','PostGateWay('+idSite+',true,false)');
 				});
 
 				/*if (gtw.general.dualidad)
@@ -3766,7 +3803,7 @@ function NewGateway (){
 	var idSite=$('#IdSite') .data('idSite');
 	translateWord('CreateGateway',function(result){
 		$('#UpdateGtwButton').text(result)//TsODO Create Gateway
-			.attr('onclick','PostGateWay('+idSite+',false)');
+			.attr('onclick','PostGateWay('+idSite+',false,false)');
 	});
 	//$('#IdSite').data('gatewayName',name)
 	//$('#IdSite').data('gatewayId',id)
