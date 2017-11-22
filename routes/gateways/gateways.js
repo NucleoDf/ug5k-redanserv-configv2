@@ -75,10 +75,10 @@ router.route('/checkipaddr/:ip/:idCfg/:idUpdatedCgw')
 		});
 	});
 
-router.route('/checkgtwname/:name/:idCfg')
+router.route('/checkgtwname/:name/:idCfg/:idUpdatedCgw')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibGateways.getGatewaysNamesInConfig(req.params.name,req.params.idCfg, function(gtw){
+		myLibGateways.getGatewaysNamesInConfig(req.params.name,req.params.idCfg,req.params.idUpdatedCgw, function(gtw){
 			res.json(gtw.error);
 		});
 	});

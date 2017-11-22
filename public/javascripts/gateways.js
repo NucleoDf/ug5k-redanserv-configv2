@@ -227,7 +227,7 @@ function PostGateWay (idSite, isUpdate, isChangeSite) {
                                                 //Nombre
                                                 $.ajax({
                                                     type: 'GET',
-                                                    url: '/gateways/checkgtwname/' + newGateway.nombre + '/' + $('#DivConfigurations').data('idCFG'),
+                                                    url: '/gateways/checkgtwname/' + newGateway.nombre + '/' + $('#DivConfigurations').data('idCFG') + '/' + idUpdatedCgw,
                                                     success: function (data) {
                                                         if (data == "NAME_DUP") {
                                                             alertify.error('El identificador de pasarela: ' + newGateway.nombre + ' ya se encuentra dado de alta en esta configuración.');
