@@ -60,7 +60,7 @@ function insertHistoric(code, user, reason) {
             Param: reason
         }
         , function(h){
-        console.log("insertHistoric: " + h);            
+        //console.log("insertHistoric: " + h);
     });
 }
 function checkPerfil(userprofile ){

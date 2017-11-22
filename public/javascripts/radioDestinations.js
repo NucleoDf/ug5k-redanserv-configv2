@@ -72,7 +72,7 @@ var AddRadioDestination = function(f){
 		});
 	}
 	else{
-		alertify.alert('Ulises G 5000 R',"Identificador de frecuancia no válido.");
+		alertify.alert('Ulises G 5000 R',"Identificador de frecuencia no válido.");
 		alertify.error("Identificador de frecuencia no válido.");
 	}
 };

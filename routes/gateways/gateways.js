@@ -356,7 +356,7 @@ router.route('/syncGateways')
 
 router.route('/createNewGateway/:newGateway/:idSite')
 	.post(function(req,res){
-		logging.LoggingDate('POST /createNewGateway//:newGateway/:idSite');
+		logging.LoggingDate('POST /createNewGateway/:newGateway/:idSite');
 		var newGateway = req.body.newGateway;
 		var idSite = req.body.idSite;
 		myLibGateways.createGateWayonSite(newGateway,idSite,function(result){
