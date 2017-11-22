@@ -225,30 +225,13 @@ script.
 		}
 
 		function ValidateIp(element,label){
-			if(typeof($('#DivGateways').data('idCgw'))!='undefined') {
+			if($(element).val() == '')
+			if(typeof($('#DivConfigurations').data('idCFG'))!='undefined') {
 				var regx_ipval = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
 
 				var matchIp = $(element).val().match(regx_ipval);
 				if ($(element).val() != '' && matchIp == null) {
 					Fade(element, label)
-				}
-				else {
-					if ($(element).val() != element.oldValue && (element.id == 'ipb1' || element.id == 'ipb2')) {
-						$.ajax({
-							type: 'GET',
-							//url: '/gateways/' + $('#Component').text() + '/services/' + serviceId,
-							url: '/gateways/checkipaddr/' + $(element).val() + '/' + $('#DivConfigurations').data('idCFG'),
-							success: function (data) {
-								if (data == "IP_DUP" && (element.name == 'ipb1' || element.name == 'ipb2')) {
-									alertify.error('La dirección ip: ' + $(element).val() + ' ya se encuentra dada de alta en esta configuración.');
-									$(element).val(element.oldValue);
-								}
-							},
-							error: function (data) {
-								alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
-							}
-						});
-					}
 				}
 			}
 		}

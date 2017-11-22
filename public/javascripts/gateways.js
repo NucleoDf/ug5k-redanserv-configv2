@@ -25,6 +25,313 @@ function Site2Config(mySite, sites) {
 }
 
 /************************************/
+/*	FUNCTION: PostGateWay 			*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+function PostGateWay (idSite, isUpdate) {
+    var newGateway={};
+    var proxys=[];
+    var registrars=[];
+    var traps=[];
+    var listServers=[];
+
+    ///////////////////////////
+    //PESTAÑA GENERAL
+    if ($('#nameGw').val() == ''){
+        translateWord('ErrorGatewayHaveNoName',function(result){
+            alertify.error(result);
+        });
+        return;
+    }
+    if ($('#ipv').val() == ''){
+        translateWord('ErrorGatewayHaveNoIP',function(result){
+            alertify.error(result);
+        });
+        return;
+    }
+    //CPU 0
+    if ($('#ipb1').val() == ''){
+        translateWord('ErrorIPCPU',function(result){
+            alertify.error(result + " 0");
+        });
+        return;
+    }
+    if ($('#ipg1').val() == ''){
+        translateWord('ErrorIPGateway',function(result){
+            alertify.error(result + " 0");
+        });
+        return;
+    }
+    if ($('#msb1').val() == ''){
+        translateWord('ErrorCPUMask',function(result){
+            alertify.error(result + " 0");
+        });
+        return;
+    }
+    if ($('#dual').prop('checked')){
+        //CPU 1
+        if ($('#ipb2').val() == ''){
+            translateWord('ErrorIPCPU',function(result){
+                alertify.error(result + " 1");
+            });
+            return;
+        }
+        if ($('#ipg2').val() == ''){
+            translateWord('ErrorIPGateway',function(result){
+                alertify.error(result + " 1");
+            });
+            return;
+        }
+        if ($('#msb2').val() == ''){
+            translateWord('ErrorCPUMask',function(result){
+                alertify.error(result + " 1");
+            });
+            return;
+        }
+        if($('#ipb1').val() == $('#ipb2').val() && $('#ipb1').val()!=''){
+            translateWord('ErrorEqualCPUIp',function(result){
+                alertify.error(result);
+            });
+            return;
+        }
+    }
+    ///////////////////////////
+    //PESTAÑA SERVICIOS
+    //SIP
+    // Proxy list
+    $('#ProxysList option').each(function() {
+        var selected = $("#ProxysList option:selected").val() == $(this).val();
+        proxys.push({'ip':$(this).val(),'selected':selected});
+    });
+    // Registrars list
+    $('#RegistrarsList option').each(function() {
+        var selected = $("#RegistrarsList option:selected").val() == $(this).val();
+        registrars.push({'ip':$(this).val(),'selected':selected});
+    });
+    //SINCRONIZACION
+    //Ntp
+    $('#NtpServersList option').each(function() {
+        var selected = $("#NtpServersList option:selected").val() == $(this).val();
+        listServers.push({'ip':$(this).val(),'selected':selected});
+    });
+    //SNMP
+    //Aquí ponemos el text porque parseamos las ips luego en modo 1,2.2.2.2/345 y el
+    //	value una vez las guarda así (en la creación) y en el update guarda solo la ip :S
+    // Traps list
+    $('#TrapsList option').each(function() {
+        traps.push($(this).text());
+    });
+    //WEB
+    //GRABACION
+
+    //Insertamos los datos
+    //GENERAL
+    newGateway.nombre=$('#nameGw').val();
+    newGateway.ipv=$('#ipv').val();
+    newGateway.ipb1=$('#ipb1').val();
+    newGateway.ipg1=$('#ipg1').val();
+    newGateway.msb1=$('#msb1').val();
+    newGateway.ipb2=$('#ipb2').val();
+    newGateway.ipg2=$('#ipg2').val();
+    newGateway.msb2=$('#msb2').val();
+    //SIP
+    newGateway.PuertoLocalSIP=$('#PuertoLocalSIP').val();//Fixed
+    newGateway.proxys=proxys;
+    newGateway.registrars=registrars;
+
+    newGateway.periodo_supervision=$('#TbUpdatePeriod').val();
+    //SINCRONIZACION
+    newGateway.listServers=listServers;
+    //SNMP
+    newGateway.puerto_servicio_snmp=$('#sport').val();
+    newGateway.puerto_snmp=$('#snmpp').val();
+    if($('#agv2').prop('checked')){
+        newGateway.snmpv2=1;
+        newGateway.comunidad_snmp=$('#agcomm').val();
+    }
+    else {
+        newGateway.snmpv2 = 0;
+        newGateway.comunidad_snmp=$('#agcomm').val();
+    }
+    newGateway.traps=traps;
+    //WEB
+    newGateway.puerto_servicio_web=$('#wport').val();
+    newGateway.tiempo_sesion=$('#stime').val();
+    //GRABACION
+    newGateway.puerto_rtsp=$('#rtsp_port').val();
+    newGateway.servidor_rtsp=$('#rtsp_ip').val();
+    newGateway.servidor_rtspb=$('#rtspb_ip').val();
+
+    if (newGateway.ipv == newGateway.ipb1) {
+        alertify.error('La Ip Virtual y la de la CPU0 tienen que ser distintas.');
+        return;
+    }
+    if (newGateway.ipv == newGateway.ipb2) {
+        alertify.error('La Ip Virtual y la de la CPU1 tienen que ser distintas.');
+        return;
+    }
+
+    if(typeof($('#DivConfigurations').data('idCFG'))!='undefined') {
+        var regx_ipval = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
+
+        var matchIp = newGateway.ipv.match(regx_ipval);
+        if (newGateway.ipv != '' && matchIp == null) {
+            alertify.error('La Ip Virtual no es válida.');
+            return;
+        }
+        matchIp = newGateway.ipb1.match(regx_ipval);
+        if (newGateway.ipb1 != '' && matchIp == null) {
+            alertify.error('La Ip de la CPU0 no es válida.');
+            return;
+        }
+        matchIp = newGateway.ipb2.match(regx_ipval);
+        if (newGateway.ipb2 != '' && matchIp == null) {
+            alertify.error('La Ip de la CPU1 no es válida.');
+            return;
+        }
+        //IPV
+        $.ajax({
+            type: 'GET',
+            url: '/gateways/checkipaddr/' + newGateway.ipv + '/' + $('#DivConfigurations').data('idCFG'),
+            success: function (data) {
+                if (data == "IP_DUP") {
+                    alertify.error('La dirección ip: ' + newGateway.ipv + ' ya se encuentra dada de alta en esta configuración.');
+                    return;
+                }
+                else {
+                    //IPB1
+                    $.ajax({
+                        type: 'GET',
+                        url: '/gateways/checkipaddr/' + newGateway.ipb1 + '/' + $('#DivConfigurations').data('idCFG'),
+                        success: function (data) {
+                            if (data == "IP_DUP") {
+                                alertify.error('La dirección ip: ' + newGateway.ipb1 + ' ya se encuentra dada de alta en esta configuración.');
+                                return;
+                            }
+                            else {
+                                //IPB2
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/gateways/checkipaddr/' + newGateway.ipb2 + '/' + $('#DivConfigurations').data('idCFG'),
+                                    success: function (data) {
+                                        if (data == "IP_DUP") {
+                                            alertify.error('La dirección ip: ' + newGateway.ipb2 + ' ya se encuentra dada de alta en esta configuración.');
+                                            return;
+                                        }
+                                        else {
+                                            //Nombre
+                                            $.ajax({
+                                                type: 'GET',
+                                                url: '/gateways/checkgtwname/' + newGateway.nombre + '/' + $('#DivConfigurations').data('idCFG'),
+                                                success: function (data) {
+                                                    if (data == "NAME_DUP") {
+                                                        alertify.error('El identificador de pasarela: ' + newGateway.nombre + ' ya se encuentra dado de alta en esta configuración.');
+                                                        return;
+                                                    }
+                                                    else {
+                                                        //Nueva Pasarela
+                                                        if(isUpdate == false) {
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                dataType: 'json',
+                                                                contentType: 'application/json',
+                                                                url: '/gateways/createNewGateway/:newGateway/:idSite',
+                                                                data: JSON.stringify({
+                                                                        "newGateway": newGateway,
+                                                                        "idSite": idSite
+                                                                    }
+                                                                ),
+                                                                success: function (data) {
+                                                                    if (data.error == null) {
+                                                                        alertify.success('La pasarela \"' + data.name + '\" ha sido creada.');
+                                                                        GenerateHistoricEvent(ID_HW,ADD_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
+                                                                        ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+                                                                        cgwModified = true;
+                                                                        //GetGateways(null,function(){
+                                                                        //	ShowHardwareGateway(data.insertId, data.name);
+                                                                        //});//TODO esto no muestra nada de lo que tiene que mostrar
+                                                                    }
+                                                                    else if (data.error) {
+                                                                        alertify.error('Error: ' + data.error);
+                                                                    }
+                                                                },
+                                                                error: function (data) {
+                                                                    alertify.error('Error creando la pasarela.');
+                                                                }
+                                                            });
+                                                        }
+                                                        //Modifica Pasarela
+                                                        else {
+                                                            var idGtw = $('#DivGateways').data('idCgw');
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                dataType: 'json',
+                                                                contentType: 'application/json',
+                                                                url: '/gateways/updateGateway/:newGateway/:idGtw',
+                                                                data: JSON.stringify({
+                                                                        "newGateway": newGateway,
+                                                                        "idGtw": idGtw
+                                                                    }
+                                                                ),
+                                                                success: function (data) {
+                                                                    if (data.error == null) {
+                                                                        alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
+                                                                        GenerateHistoricEvent(ID_HW,MODIFY_GATEWAY_COMMON_PARAM,$('#nameGw').val(),$('#loggedUser').text());
+                                                                        ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
+                                                                        cgwModified = true;
+                                                                        //GetGateways(null,function(){
+                                                                        //	ShowHardwareGateway(data.insertId, data.name);
+                                                                        //});//TODO esto no muestra nada de lo que tiene que mostrar
+                                                                        //AddGatewayToList(idGtw);
+                                                                    }
+                                                                    else if (data.error) {
+                                                                        alertify.error('Error: ' + data.error);
+                                                                    }
+                                                                },
+                                                                error: function (data) {
+                                                                    alertify.error('Error modificando la pasarela.');
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                },
+                                                error: function (data) {
+                                                    alertify.error('Error al comprobar los identificadores existentes en el sistema.');
+                                                    return;
+                                                }
+                                            });
+										}
+                                    },
+                                    error: function (data) {
+                                        alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+                                        return;
+                                    }
+                                });
+							}
+                        },
+                        error: function (data) {
+                            alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+                            return;
+                        }
+                    });
+				}
+            },
+            error: function (data) {
+                alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+                return;
+            }
+        });
+
+
+    }
+    else {
+        alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
+        return;
+    }
+}
+
+/************************************/
 /*	FUNCTION: ChangeGateWaySite 	*/
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
@@ -3628,211 +3935,6 @@ function copyServiceData () {
 			}
 		}
 	});
-}
-
-/************************************/
-/*	FUNCTION: PostGateWay 			*/
-/*  PARAMS: 						*/
-/*  REV 1.0.2 VMG					*/
-/************************************/
-function PostGateWay (idSite, isUpdate) {
-	var newGateway={};
-	var proxys=[];
-	var registrars=[];
-	var traps=[];
-	var listServers=[];
-	
-	///////////////////////////
-	//PESTAÑA GENERAL
-	if ($('#nameGw').val() == ''){
-		translateWord('ErrorGatewayHaveNoName',function(result){
-			alertify.error(result);
-		});
-		return;
-	}
-	if ($('#ipv').val() == ''){
-		translateWord('ErrorGatewayHaveNoIP',function(result){
-			alertify.error(result);
-		});
-		return;
-	}
-	//CPU 0
-	if ($('#ipb1').val() == ''){
-		translateWord('ErrorIPCPU',function(result){
-			alertify.error(result + " 0");
-		});
-		return;
-	}
-	if ($('#ipg1').val() == ''){
-		translateWord('ErrorIPGateway',function(result){
-			alertify.error(result + " 0");
-		});
-		return;
-	}
-	if ($('#msb1').val() == ''){
-		translateWord('ErrorCPUMask',function(result){
-			alertify.error(result + " 0");
-		});
-		return;
-	}
-	if ($('#dual').prop('checked')){
-		//CPU 1
-		if ($('#ipb2').val() == ''){
-			translateWord('ErrorIPCPU',function(result){
-				alertify.error(result + " 1");
-			});
-			return;
-		}
-		if ($('#ipg2').val() == ''){
-			translateWord('ErrorIPGateway',function(result){
-				alertify.error(result + " 1");
-			});
-			return;
-		}
-		if ($('#msb2').val() == ''){
-			translateWord('ErrorCPUMask',function(result){
-				alertify.error(result + " 1");
-			});
-			return;
-		}
-		if($('#ipb1').val() == $('#ipb2').val() && $('#ipb1').val()!=''){
-			translateWord('ErrorEqualCPUIp',function(result){
-				alertify.error(result);
-			});
-			return;
-		}
-	}
-	///////////////////////////
-	//PESTAÑA SERVICIOS
-	//SIP
-	// Proxy list
-	$('#ProxysList option').each(function() {
-		var selected = $("#ProxysList option:selected").val() == $(this).val();
-		proxys.push({'ip':$(this).val(),'selected':selected});
-	});
-	// Registrars list
-	$('#RegistrarsList option').each(function() {
-		var selected = $("#RegistrarsList option:selected").val() == $(this).val();
-		registrars.push({'ip':$(this).val(),'selected':selected});
-	});
-	//SINCRONIZACION
-	//Ntp
-	$('#NtpServersList option').each(function() {
-		var selected = $("#NtpServersList option:selected").val() == $(this).val();
-		listServers.push({'ip':$(this).val(),'selected':selected});
-	});
-	//SNMP
-	//Aquí ponemos el text porque parseamos las ips luego en modo 1,2.2.2.2/345 y el
-	//	value una vez las guarda así (en la creación) y en el update guarda solo la ip :S
-	// Traps list
-	$('#TrapsList option').each(function() {
-		traps.push($(this).text());
-	});
-	//WEB
-	//GRABACION
-	
-	//Insertamos los datos
-	//GENERAL
-	newGateway.nombre=$('#nameGw').val();
-	newGateway.ipv=$('#ipv').val();
-	newGateway.ipb1=$('#ipb1').val();
-	newGateway.ipg1=$('#ipg1').val();
-	newGateway.msb1=$('#msb1').val();
-	newGateway.ipb2=$('#ipb2').val();
-	newGateway.ipg2=$('#ipg2').val();
-	newGateway.msb2=$('#msb2').val();
-	//SIP
-	newGateway.PuertoLocalSIP=$('#PuertoLocalSIP').val();//Fixed
-	newGateway.proxys=proxys;
-	newGateway.registrars=registrars;
-	
-	newGateway.periodo_supervision=$('#TbUpdatePeriod').val();
-	//SINCRONIZACION
-	newGateway.listServers=listServers;
-	//SNMP
-	newGateway.puerto_servicio_snmp=$('#sport').val();
-	newGateway.puerto_snmp=$('#snmpp').val();
-	if($('#agv2').prop('checked')){
-		newGateway.snmpv2=1;
-		newGateway.comunidad_snmp=$('#agcomm').val();
-	}
-	else {
-		newGateway.snmpv2 = 0;
-		newGateway.comunidad_snmp=$('#agcomm').val();
-	}
-	newGateway.traps=traps;
-	//WEB
-	newGateway.puerto_servicio_web=$('#wport').val();
-	newGateway.tiempo_sesion=$('#stime').val();
-	//GRABACION
-	newGateway.puerto_rtsp=$('#rtsp_port').val();
-	newGateway.servidor_rtsp=$('#rtsp_ip').val();
-	newGateway.servidor_rtspb=$('#rtspb_ip').val();
-	
-	//Nueva Pasarela
-	if(isUpdate == false) {
-		$.ajax({
-			type: 'POST',
-			dataType: 'json',
-			contentType: 'application/json',
-			url: '/gateways/createNewGateway/:newGateway/:idSite',
-			data: JSON.stringify({
-					"newGateway": newGateway,
-					"idSite": idSite
-				}
-			),
-			success: function (data) {
-				if (data.error == null) {
-					alertify.success('La pasarela \"' + data.name + '\" ha sido creada.');
-					GenerateHistoricEvent(ID_HW,ADD_GATEWAY,$('#nameGw').val(),$('#loggedUser').text());
-					ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
-					cgwModified = true;
-					//GetGateways(null,function(){
-					//	ShowHardwareGateway(data.insertId, data.name);
-					//});//TODO esto no muestra nada de lo que tiene que mostrar
-				}
-				else if (data.error) {
-					alertify.error('Error: ' + data.error);
-				}
-			},
-			error: function (data) {
-				alertify.error('Error creando la pasarela.');
-			}
-		});
-	}
-	//Modifica Pasarela
-	else {
-		var idGtw = $('#DivGateways').data('idCgw');
-		$.ajax({
-			type: 'POST',
-			dataType: 'json',
-			contentType: 'application/json',
-			url: '/gateways/updateGateway/:newGateway/:idGtw',
-			data: JSON.stringify({
-					"newGateway": newGateway,
-					"idGtw": idGtw
-				}
-			),
-			success: function (data) {
-				if (data.error == null) {
-					alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
-					GenerateHistoricEvent(ID_HW,MODIFY_GATEWAY_COMMON_PARAM,$('#nameGw').val(),$('#loggedUser').text());
-					ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
-					cgwModified = true;
-					//GetGateways(null,function(){
-					//	ShowHardwareGateway(data.insertId, data.name);
-					//});//TODO esto no muestra nada de lo que tiene que mostrar
-					//AddGatewayToList(idGtw);
-				}
-				else if (data.error) {
-					alertify.error('Error: ' + data.error);
-				}
-			},
-			error: function (data) {
-				alertify.error('Error modificando la pasarela.');
-			}
-		});
-	}
 }
 
 /****************************************/
