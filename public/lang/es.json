@@ -298,7 +298,7 @@
 	"Backup"				: "Backup base de datos",
 	"BackupService"			: "Servicio de Backup",
 	"SetupBackup"			: "Parámetros",
-	"LogsManagement"		: "Historico de Backup",
+	"LogsManagement"		: "Histórico de Backup",
 	"HandBackup"			: "Backup manual",
 	"HandRestore"			: "Restaurar",
 	"BackupTimestamp"		: "Inicio backup",
