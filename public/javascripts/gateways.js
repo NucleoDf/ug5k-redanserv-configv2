@@ -1081,6 +1081,13 @@ var InsertNewResource = function(col, row, isUpdate, realCol, realRow) {
 		
 		radioResource.listaUris=insertBNList(listaUris);
 		radioResource.restriccion_entrantes = $('#SRestriccion option:selected').val();
+
+		if($('#SRestriccion option:selected').val()==2){
+            if($('#Uri1WL').val()==''&&$('#Uri2WL').val()==''&&$('#Uri3WL').val()==''&&$('#Uri4WL').val()==''&&
+                $('#Uri5WL').val()==''&&$('#Uri6WL').val()==''&&$('#Uri7WL').val()==''&&$('#Uri8WL').val()==''){
+                    alertify.alert('Ulises G 5000 R', "<b>Información:</b> No se han añadido URIS en la lista blanca por tanto el recurso no será accesible.");
+            }
+        }
 	}
 	////////////////////
 	//TELEFONO
