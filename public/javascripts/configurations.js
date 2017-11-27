@@ -1855,7 +1855,7 @@ var ExportCfgToPdf = function(idCfg){
           },
           header: {
             margin: [10,10,10,10],
-            text: "Ulises G 5000. Informe de Configuracion: " + cfgName, style: 'header'
+            text: "Ulises G 5000. Informe de Configuracion de Recursos: " + cfgName, style: 'header'
           },
           footer:	function(currentPage, pageCount) { 
             return {
