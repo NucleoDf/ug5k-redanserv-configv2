@@ -145,10 +145,14 @@ var ShowCfg = function(cfg){
 	$('#AddFormsite').fadeOut(500,function(){
 		$("#AddFormConfiguration").show();
 		$('#tableTools').show();
-		if (cfg.activa==1)
-			$('#BtnActivate').hide();
-		else
-			$('#BtnActivate').show();
+		if (cfg.activa==1) {
+            $('#activeDateTimeRow').show();
+            $('#BtnActivate').hide();
+        }
+		else {
+            $('#activeDateTimeRow').hide();
+            $('#BtnActivate').show();
+        }
 			
 		translateWord('LoadConfig',function(result){
 			$('#BtnActivate').text(result);
