@@ -303,6 +303,7 @@
 	"HandRestore"			: "Restaurar",
 	"BackupTimestamp"		: "Inicio backup diario",
 	"Path"					: "Path",
+	"HlpColoursGtws"		: "Leyenda colores",
 	"Hour"					: "Hora",
 	"Minute"				: "Minutos",
 	"Depth"					: "Conservación de backup",

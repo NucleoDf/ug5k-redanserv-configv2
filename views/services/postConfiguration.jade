@@ -198,11 +198,15 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                                 td#CBFreeGatewaysRow
                                                     select#CBFreeGateways(type = 'select' style='width:220px;display:none' onchange='ClickCBFreeGateways()')
                                                         option(value=0 tkey='AliveGateways')
+
                                             //- tr(align='center')
                                             //-     td.New#freeGatewaysListRow
                                             //-         ul.list#freeGatewaysList(style='width:310px;height:207px;margin-left:0;display:none' ondrop="dropFreeGateway(event)" ondragover="allowDrop(event)")
 
                             tr
+                                //td(style='width:100%')
+                                //    label#HlpColoursGtws.labelNucleo(tkey='HlpColoursGtws')
+
                                 td.New(style='padding-top: 15px' colspan=5)
                                     .content.fadeFormNucleo#CopyCfgDiv(style='height: 125px;display:none')
                                         form(id='CopyCfgForm', action='/configurations/configurations/', method='POST', style='padding: 10px 0')
