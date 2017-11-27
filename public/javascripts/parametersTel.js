@@ -220,7 +220,7 @@ function AddPhoneParameters(){
 			umbral_vox:			$('#TbUmbral').val()=='' ? -15 : $('#TbUmbral').val(),
 			tm_inactividad:		$('#TbInactividad').val()=='' ? 0 : $('#TbInactividad').val(),
 			superv_options:		$('#CbOptionsSupervision').prop('checked') ? '1' : '0',
-			tm_superv_options:	$('#TbReleaseTime').val(),
+			tm_superv_options:	$('#TbReleaseTime option:selected').val(),
 			colateral_scv:		$('#LbDestinationType option:selected').val(),
 			iT_Int_Warning: 	$('#CbInterruptToneTime option:selected').val()
 		};

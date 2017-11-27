@@ -697,7 +697,7 @@ function showDataForTelephoneResource(data) {
 	if(data.supervisa_colateral==1) {
 		$('#CbOptionsSupervision').prop('checked', true);
 		$('#ReleaseRow').show();
-		$('#TbReleaseTime').val(data.tiempo_supervision);
+        $('#TbReleaseTime option[value="' +data.tiempo_supervision +'"]').prop('selected', true);
 	}
 	else {
 		$('#CbOptionsSupervision').prop('checked', false);
@@ -1153,17 +1153,14 @@ var InsertNewResource = function(col, row, isUpdate, realCol, realRow) {
 		if($('#CbOptionsSupervision').prop('checked')) {
 			telephoneResource.supervisa_colateral 		= 	1;
 			//Tiempo supervisión (sg.)
-			if($('#TbReleaseTime').val() == '')
-				telephoneResource.tiempo_supervision	=	5;//Valor por defecto
-			else
-				telephoneResource.tiempo_supervision	=	$('#TbReleaseTime').val();
+            telephoneResource.tiempo_supervision	=	$('#TbReleaseTime option:selected').val();
 		}
 		else {
 			telephoneResource.supervisa_colateral		=	0;
 			telephoneResource.tiempo_supervision		=	5;
 		}
 		//Duración tono interrupción (sg.)
-		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val()
+		telephoneResource.duracion_tono_interrup		=	$('#CbInterruptToneTime option:selected').val();
 		
 		var rank={};
 		var atsRanks=[];

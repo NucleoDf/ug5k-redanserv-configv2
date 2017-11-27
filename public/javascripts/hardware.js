@@ -2318,7 +2318,7 @@ function ShowTelParamsOfResource(data){
 		$('#TbOptionsInterval').val(data.parametros.telefonia.it_release);
 		$('#TbRemoteUri').val(data.parametros.telefonia.uri_remota != null ? data.parametros.telefonia.uri_remota.substring(4) : '');
 		$('#CbOptionsSupervision').prop('checked',data.parametros.telefonia.superv_options == 1);
-		$('#TbReleaseTime').val(data.parametros.telefonia.tm_superv_options);
+        $('#TbReleaseTime option[value="' +data.parametros.telefonia.tm_superv_options +'"]').prop('selected', true);
 		$('#CbInterruptToneTime option[value="' + data.parametros.telefonia.iT_Int_Warning + '"]').prop('selected',true);
 
 		if ($('#CbOptionsSupervision').prop('checked'))
