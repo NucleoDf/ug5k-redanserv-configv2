@@ -359,7 +359,7 @@
 	"ErrorTableId"			: "Tabla id not valid. Special characters like ?,-,@,... Are not allowed.",
 	"ErrorSiteId"			: "Site id not valid. Special characters like ?,-,@,... Are not allowed.",
 	"ErrorGatewayId"		: "Gateway id not valid. Special characters like ?,-,@,... Are not allowed.",
-	"ErrorResourceId"		: "Resource id not valid. Special characters like ?,-,@,... Are not allowed.",
+	"ErrorResourceId"		: "Resource id not valid. Please insert a valid URI.",
 	"ErrorURI"				: "URI id not valid",	
 	"ErrorOperador"			: "Operator Id not valid",
 	"ErrorIPPort"			: "IP and Port format not valid",
