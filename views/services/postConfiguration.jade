@@ -131,8 +131,10 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                     div
                         table(style="width:100%")
                             tr(style="height: 50px", align="center")
+                                td(style="width:20%; cursor: pointer")
+                                    a(id="ColourHelp", onclick='AboutColours()', style="color:#bf2a36; width: 50px; font-size:10px" tkey='ColourHelp')
                                 td.New
-                                    a.ButtonNucleo(id="Add", onclick='GetConfiguration(-1)', style="color:#bf2a36; width: 80px" tkey='AddCfg') 
+                                    a.ButtonNucleo(id="Add", onclick='GetConfiguration(-1)', style="color:#bf2a36; width: 80px" tkey='AddCfg')
                 // CONFIGURACIÓN
                 td(style='vertical-align:top')
                     #AddFormConfiguration.content(name="Add-Configuration", style="display: none; width:730px")

@@ -28,6 +28,7 @@
 	"RemoveSite"			: "Eliminar colateral",
 	"AddSite"				: "Añadir colateral",
 	"AddCfg"				: "Añadir configuración",
+	"ColourHelp"			: "Ayuda colores",
 	"UpdateCol"			: "Actualizar colateral",
 	"ChangeSite"			: "Cambiar empl.",
 	"FreeResources"			: "Recursos libres",

@@ -28,6 +28,7 @@
 	"NewSite"				: "Add site",
 	"AddSite"				: "Add collateral",
 	"AddCfg"				: "Add configuration",
+	"ColourHelp"			: "Colour help",
 	"UpdateSite"			: "Update collateral",
 	"ChangeSite"			: "Change site",
 	"FreeResources"			: "Free resources",
