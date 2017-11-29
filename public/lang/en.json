@@ -253,6 +253,7 @@
 	"New"					: "New",
 	"NewTable"				: "New table",
 	"NewExtResource"		: "New Element",
+	"FilterExtResource"		: "Filter elements",
 	"lblAliasExtResource"	: "Resource alias",
 	"lblUriExtResource"		: "Resource uri",
 	"lblExtResType"			: "Resource type",

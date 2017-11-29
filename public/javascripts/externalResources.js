@@ -7,7 +7,7 @@
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var GetExtResources = function(f) {
+var GetExtResources = function (filter, f) {
 	/** 20170511 AGL PERFILES */
 	if (Authorize($('#BodyRedan').data('perfil'),[ccAdminProfMsc,ccConfiProfMsc])==false) {
 		/*if ((($('#BodyRedan').data('perfil') & 16) != 16) && (($('#BodyRedan').data('perfil') & 64) != 64)) {
@@ -15,13 +15,18 @@ var GetExtResources = function(f) {
 		alertify.error('No tiene asignados permisos para la gestión de recursos externos.');
 		return;
 	}
-	
+	var filterOption=-1;
+    if (typeof filter != 'undefined')
+        filterOption=parseInt($('#extResFilter option:selected').val());
+	else
+        $('#extResFilter option[value="-1"]').prop('selected', true);
+
 	$('#AddResources').hide();
 	$("#FormResources").show();
-	$('#DivResources').animate({width: '535px'});
+	$('#DivResources').animate({width: '950px'});
 	
 	$.ajax({type: 'GET',
-	 	url: '/externalResources/-1'})
+	 	url: '/externalResources/'+filterOption})
 	 	.done(function(data){
 	 		$("#listResources").empty();
 			if (data.lista_recursos != null && data.lista_recursos.length > 0){
@@ -29,8 +34,8 @@ var GetExtResources = function(f) {
 					 var item = $("<li><a onclick='GetExtResource(" + value.idrecursos_externos + ")'>"+value.alias+": "+value.uri+"</li>");
 					 item.appendTo($("#listResources"));
 	 			});
-				if (f != null)
-					f();
+				//if (f != null)
+				//	f(-1);
 	 		}
 	 		else{
 				var item = $("<li>No hay elementos disponibles</li>");
