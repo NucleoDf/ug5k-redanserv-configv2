@@ -95,6 +95,8 @@ script.
 				GetRemoteRadioResources();
 				tabs=document.getElementById('ListMenuParameters').getElementsByTagName("a");
 				$('#FormHw').hide();
+				$('#rowSelectFResourceType').hide();
+				$('#rowFilterFResource').hide();
 				$('#FormRadio').hide();
 				$('#FormTel').hide();
 				//$('#FormJitter').hide();
@@ -771,7 +773,23 @@ div(id="FormParameters")
 								tr#rowSelectFGtw
 									td
 										select#CBFacedGtw(style='width:140px;' onchange='SelectResource($("#CBFacedGtw option:selected").val())')
-								tr
+								tr#rowSelectFResourceType
+									td
+										select#CBFacedResourcesType(style='width:140px;' onchange='SelectResourcesType($("#CBFacedResourcesType option:selected").val())')
+											option(value='-2') Filtrar recursos...
+											option(value='4') Buscar por alias
+											option(value='5') Buscar por uri
+											option(disabled='disabled') ------------
+											option(value='0') Radio Tx
+											option(value='1') Radio TxRx
+											option(value='2') Radio Rx
+											option(value='3') Teléfono
+											option(value='-1') Todos
+
+								tr#rowFilterFResource
+									td
+										input.textbox#FilterFResource(type='text' style='width:140px' placeholder="Carácteres a buscar...")
+								tr#rowSelectFResource
 									td
 										select#CBFacedResources(style='width:140px;' onchange='SelectBtnsResources($("#CBFacedResources option:selected"))')
 			#FormATS(style='width:auto; display:none;margin-left:5px')

@@ -191,27 +191,51 @@ function SelectExtResource(resType){
 	$('#CBFacedGtw').empty();
 	$('#CBFacedResources').empty();
 
+    $('#rowSelectFResourceType').show();
+    $('#CBFacedResourcesType option[value="-2"]').prop('selected', true);
 	$('#rowSelectFSite').hide();
 	$('#rowSelectFGtw').hide();
 
+}
 
-	$.ajax({type: 'GET',
-			url: '/externalResources/'+$("#LbTypeRadio option:selected").val()})
-	.done(function(data) {
-		if( data.lista_recursos == null) {
-			var item = '<option value="0">No existen recursos...</option>';
-			$('#CBFacedResources').append(item);
-		}
-		else {
-			if (data.lista_recursos != null && data.lista_recursos.length > 0) {
-				$.each(data.lista_recursos, function (index, value) {
-					var item = '<option value="' + value.uri + '" tipo="' + value.tipo + '">' + value.alias + '</option>';
-					$('#CBFacedResources').append(item);
-				});
-			}
-            SelectBtnsResources($("#CBFacedResources option:selected"));
-		}
-	});
+/************************************************/
+/*	FUNCTION: SelectResourcesType 				*/
+/*  PARAMS: 									*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function SelectResourcesType (resType){
+
+    $('#FilterFResource').val('');
+    $('#CBFacedResources').empty();
+
+	if(resType=='4'||resType=='5') {
+        $('#rowFilterFResource').show();
+        $('#CBFacedResources').empty();
+    }
+	else {
+        $('#rowFilterFResource').hide();
+
+        $.ajax({
+            type: 'GET',
+            url: '/externalResources/' + resType
+        })
+            .done(function (data) {
+                if (data.lista_recursos == null) {
+                    var item = '<option value="0">No existen recursos...</option>';
+                    $('#CBFacedResources').append(item);
+                }
+                else {
+                    if (data.lista_recursos != null && data.lista_recursos.length > 0) {
+                        $.each(data.lista_recursos, function (index, value) {
+                            var item = '<option value="' + value.uri + '" tipo="' + value.tipo + '">' + value.alias + '</option>';
+                            $('#CBFacedResources').append(item);
+                        });
+                    }
+                    SelectBtnsResources($("#CBFacedResources option:selected"));
+                }
+            });
+    }
 }
 
 /************************************************/
@@ -226,6 +250,9 @@ function SelectSite(cfgId){
 	$('#CBFacedResources').empty();
 	$('#rowSelectFSite').show();
 	$('#rowSelectFGtw').show();
+    $('#rowSelectFResourceType').hide();
+    $('#rowFilterFResource').hide();
+
 	
 	$.ajax({type: 'GET',
 		url: '/resources/remote/' + cfgId + '/null/null/null',
