@@ -97,6 +97,7 @@ script.
 				$('#FormHw').hide();
 				$('#rowSelectFResourceType').hide();
 				$('#rowFilterFResource').hide();
+				$('#rowFilterFResourceBt').hide();
 				$('#FormRadio').hide();
 				$('#FormTel').hide();
 				//$('#FormJitter').hide();
@@ -761,20 +762,20 @@ div(id="FormParameters")
 						td(style='vertical-align:top')
 							table#facedResources(style='padding: 5px 0; height:210px')
 								tr
-									td
+									td(align='center')
 										label#ResId(style='color:#bf2a36' tkey='RemoteRadioResources')
 										div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
 								tr
-									td
+									td(align='center')
 										select#CBFacedType(style='width:140px;' onchange='SelectERType($("#CBFacedType option:selected").val())')
 								tr#rowSelectFSite
-									td
+									td(align='center')
 										select#CBFacedSite(style='width:140px;' onchange='SelectGtw($("#CBFacedSite option:selected").val())')
 								tr#rowSelectFGtw
-									td
+									td(align='center')
 										select#CBFacedGtw(style='width:140px;' onchange='SelectResource($("#CBFacedGtw option:selected").val())')
 								tr#rowSelectFResourceType
-									td
+									td(align='center')
 										select#CBFacedResourcesType(style='width:140px;' onchange='SelectResourcesType($("#CBFacedResourcesType option:selected").val())')
 											option(value='-2') Filtrar recursos...
 											option(value='4') Buscar por alias
@@ -787,10 +788,13 @@ div(id="FormParameters")
 											option(value='-1') Todos
 
 								tr#rowFilterFResource
-									td
+									td(align='center')
 										input.textbox#FilterFResource(type='text' style='width:140px' placeholder="Carácteres a buscar...")
+								tr#rowFilterFResourceBt
+									td(align='center')
+										a.ButtonNucleo#BtnFindFilterRes(onclick='MakeFacedUri("#UriTxA1")') Buscar recursos
 								tr#rowSelectFResource
-									td
+									td(align='center')
 										select#CBFacedResources(style='width:140px;' onchange='SelectBtnsResources($("#CBFacedResources option:selected"))')
 			#FormATS(style='width:auto; display:none;margin-left:5px')
 				label(style='color:black' tkey='ATSNumberRange')

@@ -211,10 +211,13 @@ function SelectResourcesType (resType){
 
 	if(resType=='4'||resType=='5') {
         $('#rowFilterFResource').show();
+        $('#rowFilterFResourceBt').show();
         $('#CBFacedResources').empty();
+        $('#BtnFindFilterRes').css('min-width','');
     }
 	else {
         $('#rowFilterFResource').hide();
+        $('#rowFilterFResourceBt').hide();
 
         $.ajax({
             type: 'GET',
@@ -252,6 +255,7 @@ function SelectSite(cfgId){
 	$('#rowSelectFGtw').show();
     $('#rowSelectFResourceType').hide();
     $('#rowFilterFResource').hide();
+    $('#rowFilterFResourceBt').hide();
 
 	
 	$.ajax({type: 'GET',
