@@ -27,7 +27,12 @@ router.route('/:extType')	// The root path is relative the path where it's mount
 		//	res.json(data);
 		//});
 	});
-
+router.route('/filterResources/:filterType/:chars2Find')
+    .get(function(req, res) {
+        myLibExtResources.filterExternalResources(req.params.filterType, req.params.chars2Find, function (data) {
+            res.json(data);
+        });
+    })
 router.route('/getResource/:idExtResource')
 	.get(function(req,res){
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);

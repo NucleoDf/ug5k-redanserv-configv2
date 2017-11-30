@@ -778,8 +778,9 @@ div(id="FormParameters")
 									td(align='center')
 										select#CBFacedResourcesType(style='width:140px;' onchange='SelectResourcesType($("#CBFacedResourcesType option:selected").val())')
 											option(value='-2') Filtrar recursos...
-											option(value='4') Buscar por alias
-											option(value='5') Buscar por uri
+											option(disabled='disabled') ------------
+											option(value='4') Buscar por Alias
+											option(value='5') Buscar por URI
 											option(disabled='disabled') ------------
 											option(value='0') Radio Tx
 											option(value='1') Radio TxRx
@@ -792,7 +793,7 @@ div(id="FormParameters")
 										input.textbox#FilterFResource(type='text' style='width:140px' placeholder="Carácteres a buscar...")
 								tr#rowFilterFResourceBt
 									td(align='center')
-										a.ButtonNucleo#BtnFindFilterRes(onclick='MakeFacedUri("#UriTxA1")') Buscar recursos
+										a.ButtonNucleo#BtnFindFilterRes(onclick='FilterResourcesBy()') Buscar recursos
 								tr#rowSelectFResource
 									td(align='center')
 										select#CBFacedResources(style='width:140px;' onchange='SelectBtnsResources($("#CBFacedResources option:selected"))')
