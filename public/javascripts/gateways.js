@@ -4010,6 +4010,8 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId){
 		loadUriList(resourceId);
 	}
 	else {
+        $('#TbLocalNumText').val('');
+        $('#TbRemoteNumText').val('');
 		resetUrisValues();
 		$('#SRestriccion option[value="0"]').prop('selected', true);
 		$('#LbTypeRadio option[value="0"]').prop('selected', true);
