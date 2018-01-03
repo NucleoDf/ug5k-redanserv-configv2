@@ -421,7 +421,7 @@ app.get('/alive',
             config.Ulises = req.body;
             // Lo salvo en el fichero...
             var Ulises = {Ulises: req.body};
-            fs.writeFile("./configUlises.json", JSON.stringify(Ulises, null, 2), (err) => {
+            fs.writeFile("./configUlises.json", JSON.stringify(Ulises, null, 2), function(err) {
                if(err) res.json({res: false, txt: 'Error fs.writeFile'});
                else    {
                     res.json({res: true,  txt: 'File saved.'});

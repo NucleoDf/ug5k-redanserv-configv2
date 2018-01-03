@@ -33,6 +33,7 @@ html
         script(type='text/javascript' src='/pdfmake/vfs_fonts.js')
         script(type='text/javascript' src='/javascripts/tableBss.js')
         script(type='text/javascript' src='/javascripts/externalResources.js')
+        script(type='text/javascript' src='/javascripts/hrr.js')
         script(type='text/javascript' src='/javascripts/authentication.js')
         script(type='text/javascript' src='/javascripts/version.js')
         script(type='text/javascript' src='/javascripts/index.js')
@@ -499,7 +500,7 @@ html
                                     li(id="lopcionResources")
                                         a(id="opcionResources" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePrevious(\'#FormResources\',\'#AddFormResources\',\'#DivResources\'); GetExtResources()})", tkey='MenuResources')
                                     li(id="lopcionHRR")
-                                        a(id="opcionHRR" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePrevious(\'#FormResources\',\'#AddFormResources\',\'#DivResources\'); GetExtResources()})", tkey='MenuHRR')
+                                        a(id="opcionHRR" onclick="CheckingAnyChange(\'GeneralContent\', function(){hidePrevious(\'#FormResources\',\'#AddFormResources\',\'#DivResources\'); GetHRR()})", tkey='MenuHRR')
                                     li#cfVolver(style='margin-top:100px')
                                         a( onclick="CheckingAnyChange(\'GeneralContent\', function(){hide()})", tkey='Exit') 
                         td#GeneralDiv
@@ -520,6 +521,9 @@ html
                             // FORM RESOURCES
                             block resources
                             include services/postResources.jade
+                            // FORM HRR
+                            block hrr
+                            include services/postHRR.jade
                             // FORM SITES
                             block sites
                             include ./services/postSites.jade
