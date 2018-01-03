@@ -267,6 +267,7 @@
     "Users"					: "Users",
 	"MenuVersion"			: "Version",
 	"MenuResources"			: "External Resources",
+	"MenuHRR"				: "H.R.R.",
 	"IdVersion"				: "Version: ",
 	"Subversion"			: "SubVersion: ",
 	"VersGenDate"			: "Version Date: ",
