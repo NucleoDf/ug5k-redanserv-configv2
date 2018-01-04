@@ -24,10 +24,10 @@ var GetHRR = function (filter, f) {
 	//$('#AddResources').hide();
 	$("#FormHRR").show();
 	$('#DivHRR').animate({width: '950px'});
-	
-	$.ajax({type: 'GET',
-	 	url: '/externalResources/'+filterOption})
-	 	.done(function(data){
+
+    $.ajax({type: 'GET',
+        url: '/hrr/getHrr',
+        success: function(data){
 	 		$("#listResources").empty();
 			if (data.lista_recursos != null && data.lista_recursos.length > 0){
 	 			$.each(data.lista_recursos, function(index, value){
@@ -44,7 +44,11 @@ var GetHRR = function (filter, f) {
 	 			
 	 		//else if (f != null)
 	 		//	f();
-	 	});
+        },
+        error: function(data){
+            alertify.error('Se ha producido un error al intentar recuperar las configuraciones.');
+        }
+    });
 };
 
 /************************************/

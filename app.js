@@ -18,6 +18,7 @@ var sites = require('./routes/sites/sites');
 var tableBss = require('./routes/tableBss/tableBss');
 var externalResources = require('./routes/externalResources/externalResources');
 var radioDestinations = require('./routes/destinations/radioDestinations');
+var hrr = require('./routes/hrr/hrr');
 var historics = require('./routes/historics/historics');
 var version = require('./routes/version/version');
 var logging = require('./lib/loggingDate.js');
@@ -446,6 +447,7 @@ app.use('/historics', isAuthenticated, historics);
 app.use('/version', isAuthenticated, version);
 app.use('/tableBss', isAuthenticated, tableBss);
 app.use('/externalResources', isAuthenticated, externalResources);
+app.use('/hrr', isAuthenticated, hrr);
 
 // app.use('/', routes);
 // app.use('/users', users);
