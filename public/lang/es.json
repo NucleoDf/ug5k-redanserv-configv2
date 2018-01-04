@@ -278,6 +278,7 @@
 	"NodeJSVersion"			: "Node JS: ",
 	"MySQLVersion"			: "MySQL: ",
     "Configurations"		: "Configuraciones",
+	"HRR"					: "Herramienta de Reconfiguración Rápida",
 	"Archivos"				: "Archivos: ",
 	"Gateways" 				: "Pasarelas",
 	"Hardware" 				: "Hardware",

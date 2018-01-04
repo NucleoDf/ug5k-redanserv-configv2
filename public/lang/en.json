@@ -275,6 +275,7 @@
 	"MySQLVersion"			: "MySQL: ",
 	"Archivos"				: "Files: ",
     "Configurations" 		: "Configurations",
+    "HRR" 					: "Quick Reconfiguration Tool",
 	"Gateways" 				: "Gateways",
 	"Hardware" 				: "Hardware",
 	"RadioDestinations"		: "Frequencies",
