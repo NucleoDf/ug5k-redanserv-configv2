@@ -28,18 +28,18 @@ var GetHRR = function (filter, f) {
     $.ajax({type: 'GET',
         url: '/hrr/getHrr',
         success: function(data){
-	 		$("#listResources").empty();
-			if (data.lista_recursos != null && data.lista_recursos.length > 0){
-	 			$.each(data.lista_recursos, function(index, value){
-					 var item = $("<li><a onclick='GetExtResource(" + value.idrecursos_externos + ")'>"+value.alias+": "+value.uri+"</li>");
-					 item.appendTo($("#listResources"));
+	 		$("#listConfigurationsHrr").empty();
+			if (data.result != null && data.result.length > 0){
+	 			$.each(data.result, function(index, value){
+					 var item = $("<li><a onclick='GetHRRConfig(" + value.idCFG + ")'>"+value.name+"</li>");
+					 item.appendTo($("#listConfigurationsHrr"));
 	 			});
 				//if (f != null)
 				//	f(-1);
 	 		}
 	 		else{
 				var item = $("<li>No hay elementos disponibles</li>");
-				item.appendTo($("#listResources"));
+				item.appendTo($("#listConfigurationsHrr"));
 			}
 	 			
 	 		//else if (f != null)
