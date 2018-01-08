@@ -56,14 +56,14 @@ var GetHRR = function (filter, f) {
 /*  PARAMS: idExtResource (IN)		*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var GetExtResource = function (idExtResource){
+var GetHRRConfig = function (idCfg){
 	$('#DivResources').animate({width:'950px'});
 	$('#AddResources').show();
 	
 	if(idExtResource!=-1) {
 		$.ajax({
 			type: 'GET',
-			url: '/externalResources/getResource/' + idExtResource,
+			url: '/hrr/getHrrCfg/' + idCfg,
 			success: function (data) {
 				if (data.lista_recursos != null) {
 					translateWord('Update', function (result) {
