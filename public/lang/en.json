@@ -29,6 +29,7 @@
 	"AddSite"				: "Add collateral",
 	"AddCfg"				: "Add configuration",
 	"ColourHelp"			: "Colour help",
+	"HRRHelp"				: "Select a Configuration",
 	"UpdateSite"			: "Update collateral",
 	"ChangeSite"			: "Change site",
 	"FreeResources"			: "Free resources",
