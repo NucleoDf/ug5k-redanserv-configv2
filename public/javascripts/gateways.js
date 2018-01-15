@@ -25,6 +25,44 @@ function Site2Config(mySite, sites) {
 }
 
 /************************************/
+/*	FUNCTION: Copy 					*/
+/*  PARAMS: 						*/
+/*  REV 1.0.2 VMG					*/
+/************************************/
+var Copy = function(){
+    if ($('#nameCopyGw').val().length > 0){
+        var regx_idval = /^[a-zA-Z0-9\-_.]{1,32}$/;
+        var match = $('#nameCopyGw').val().match(regx_idval);
+        if (match!=null) {
+            if ($('#ipCopyCpu0').val().length > 0) {
+                if ($('#ipCopyCpu1').val().length > 0) {
+                    if ($('#IpvCopyGateway').val().length > 0) {
+                        if ($('#ipCopyCpu0').val() != $('#ipCopyCpu1').val()) {
+                            CopyMethodGateway($('#DivGateways').data('idCgw'), $('#nameCopyGw').val(),
+                                $('#ipCopyCpu0').val(), $('#ipCopyCpu1').val(), $('#IpvCopyGateway').val());
+                        }
+                        else
+                            alertify.error('Los valores para la CPU0 y la CPU1 deben ser diferentes.');
+                    }
+                    else
+                        alertify.error('El valor de la Ip virtual no puede ser vacío.');
+                }
+                else
+                    alertify.error('El valor de la Ip para la CPU1 no puede ser vacío.');
+            }
+            else
+                alertify.error('El valor de la Ip para la CPU0 no puede ser vacío.');
+        }
+        else
+            alertify.error('Identificador de la configuración no válido. No se pueden usar caracteres especiales como ?,-,@,...');
+    }
+    else
+        alertify.error('El identificador de la pasarela no puede ser vacío.');
+
+    CloseCopy();
+};
+
+/************************************/
 /*	FUNCTION: PostGateWay 			*/
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
@@ -1632,37 +1670,7 @@ var CopyGateway2 = function(){
 	});*/
 };
 
-/************************************/
-/*	FUNCTION: Copy 					*/
-/*  PARAMS: 						*/
-/*  REV 1.0.2 VMG					*/
-/************************************/
-var Copy = function(){
-	if ($('#nameCopyGw').val().length > 0){
-		if ($('#ipCopyCpu0').val().length > 0){
-			if ($('#ipCopyCpu1').val().length > 0) {
-				if ($('#IpvCopyGateway').val().length > 0) {
-					if ($('#ipCopyCpu0').val() != $('#ipCopyCpu1').val()) {
-						CopyMethodGateway($('#DivGateways').data('idCgw'), $('#nameCopyGw').val(),
-							$('#ipCopyCpu0').val(), $('#ipCopyCpu1').val(), $('#IpvCopyGateway').val());
-					}
-					else
-						alertify.error('Los valores para la CPU0 y la CPU1 deben ser diferentes.');
-				}
-				else
-					alertify.error('El valor de la Ip virtual no puede ser vacío.');
-			}
-			else
-				alertify.error('El valor de la Ip para la CPU1 no puede ser vacío.');
-		}
-		else
-			alertify.error('El valor de la Ip para la CPU0 no puede ser vacío.');
-	}
-	else
-		alertify.error('El identificador de la pasarela no puede ser vacío.');
-	
-	CloseCopy();
-};
+
 
 /************************************/
 /*	FUNCTION: CopyMethodGateway 	*/
