@@ -2370,11 +2370,12 @@ function ClickAdAgc(element){
 		
 function SelectBss(){
 	if ($('#LbTypeRadio option:selected').val() >= 0 && $('#LbTypeRadio option:selected').val() <=3){
-		
-		if($('#LbSquelchType option:selected').val() ==1)
-			$('#VadRow').attr('style','display:table-row');
-		else
-			$('#VadRow').attr('style','display:table-column');
+
+        if($('#LbSquelchType option:selected').val() ==1 )
+            $('#VadRow').attr('style','display:table-row');
+        else
+            $('#VadRow').attr('style','display:table-column');
+
 		loadUriSites(false);
 		$('#SalidaAudioRow').attr('style','display:table-column');
 		$('#InternalDelayRow').attr('style','display:table-column');
@@ -2430,7 +2431,12 @@ function SelectBss(){
 		GetUris($('#DivParameters').data('idRecurso'));
 	}
 	else{
-		
+
+        if($('#LbSquelchType option:selected').val() ==1 && $('#LbTypeRadio option:selected').val() ==6)
+            $('#VadRow').attr('style','display:table-row');
+        else
+            $('#VadRow').attr('style','display:table-column');
+
 		$('#BSSMethodRow').attr('style','display:table-row');	// Hide
 		$('#BssAvailableRow').attr('style','display:table-column');	// Show
 		$('#PttPriorityRow').attr('style','display:table-column');	// Show
