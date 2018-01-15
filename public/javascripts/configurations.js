@@ -1025,8 +1025,8 @@ var ActiveCfg = function(f) {
 					//	});
 					//}
 					GetActiveCfgAndActivate(true);
-					//configModified = true;
-					//isActiveConfig = true;
+					configModified = true;
+					isActiveConfig = true;
 				}
 				else {
 					GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, $('#name').val(), $('#loggedUser').text());
