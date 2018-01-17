@@ -41,7 +41,21 @@
       },
       {
         "Path": "/lib/",
+        "Name": "externalResources.js",
+        "fileSizeInBytes": 79087,
+        "md5": "f5d63730e14f92eabebdcd0c0beaba35",
+        "date": "5/10/2017"
+      },
+      {
+        "Path": "/lib/",
         "Name": "gateways.js",
+        "fileSizeInBytes": 158922,
+        "md5": "6f3b71ae05a78b00779a1f09da66dd9e",
+        "date": "22/11/2017"
+      },
+      {
+        "Path": "/lib/",
+        "Name": "get_cfg_report.js",
         "fileSizeInBytes": 158922,
         "md5": "6f3b71ae05a78b00779a1f09da66dd9e",
         "date": "22/11/2017"
@@ -56,6 +70,13 @@
       {
         "Path": "/lib/",
         "Name": "historics.js",
+        "fileSizeInBytes": 52561,
+        "md5": "0faffedc66ab3d79e67d18c1f78a3094",
+        "date": "16/11/2017"
+      },
+      {
+        "Path": "/lib/",
+        "Name": "jsonTemplate.js",
         "fileSizeInBytes": 52561,
         "md5": "0faffedc66ab3d79e67d18c1f78a3094",
         "date": "16/11/2017"
@@ -98,6 +119,13 @@
       {
         "Path": "/lib/",
         "Name": "tableBss.js",
+        "fileSizeInBytes": 9484,
+        "md5": "34701367fefeb3c61cd5d26efe14f77d",
+        "date": "5/10/2017"
+      },
+      {
+        "Path": "/lib/",
+        "Name": "ug5kdb.js",
         "fileSizeInBytes": 9484,
         "md5": "34701367fefeb3c61cd5d26efe14f77d",
         "date": "5/10/2017"
