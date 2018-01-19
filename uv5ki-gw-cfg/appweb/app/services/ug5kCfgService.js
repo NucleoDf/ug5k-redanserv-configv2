@@ -225,6 +225,8 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
 					{ inicial: "", final: "" },
 					{ inicial: "", final: "" }
                 ]
+                , idRed: ""
+                , idTroncal: ""
             },
             LlamadaAutomatica: 0,
             restriccion: 0,

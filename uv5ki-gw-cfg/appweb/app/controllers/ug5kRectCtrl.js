@@ -287,6 +287,26 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     }
 
     /** */
+    function NormalizeTmSuperv(toDisplay, valor) {
+        var retorno = 0;
+        if (toDisplay === true) {
+            retorno = valor < 10 ? 0 :
+                valor < 15 ? 1 :
+                valor < 20 ? 2 :
+                valor < 25 ? 3 :
+                valor < 30 ? 4 : 5;
+        }
+        else {
+            retorno = valor == 0 ? 5 :
+                valor == 1 ? 10 :
+                valor == 2 ? 15 :
+                valor == 3 ? 20 :
+                valor == 4 ? 25 : 30;
+        }
+        return retorno;
+    }
+
+    /** */
     function get_telef() {
         vm.ltelef = CfgService.ltelef();
     }
@@ -312,7 +332,6 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
         if (vm.tdata == undefined)
             return;
-
         switch (vm.pagina) {
             case 0:
                 vm.vdata = [
@@ -517,12 +536,12 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     				},
 					{
 					    Name: /*'Tiempo Supervision (s):'*/transerv.translate('TCTRL_P02_TSUP'),
-					    Value: vm.tdata.telefonia.tm_superv_options,
+					    Value: NormalizeTmSuperv(true,vm.tdata.telefonia.tm_superv_options).toString(),
 					    Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
-					    Input: 0,
-					    Inputs: [],
+					    Input: 1/*0*/,
+					    Inputs: ["5","10","15","20","25","30"]/*[]*/,
 					    Show: vm.p2_tel_show,
-					    Val: vm.tsup_val
+					    Val: vm.dval/*vm.tsup_val*/
 					},
     				{
     				    Name: /*'Deteccion Vox ?:'*/transerv.translate('TCTRL_P02_VOX'),
@@ -699,7 +718,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 vm.tdata.telefonia.no_test_remoto = vm.vdata[5].Value;
                 vm.tdata.telefonia.no_test_local = vm.vdata[6].Value;
                 vm.tdata.telefonia.superv_options = parseInt(vm.vdata[7].Value);// Supervisa Colateral ???
-                vm.tdata.telefonia.tm_superv_options = vm.vdata[8].Value;       // Tiempo Supervision Colateral
+                vm.tdata.telefonia.tm_superv_options = parseInt(NormalizeTmSuperv(false,vm.vdata[8].Value));       // Tiempo Supervision Colateral
                 vm.tdata.telefonia.detect_vox = parseInt(vm.vdata[9].Value);    // VOX en BL ???
                 vm.tdata.telefonia.umbral_vox = vm.vdata[10].Value;             // Umbral VOX en BL
                 vm.tdata.telefonia.tm_inactividad = vm.vdata[11].Value;         // Cola VOX
@@ -814,7 +833,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 if (vm.vdata[3].Show(3) && !vm.ptre_val(vm.vdata[3].Value)) return false;
                 if (vm.vdata[5].Show(5) && !vm.validate_ats_number(vm.vdata[5].Value)) return false;
                 if (vm.vdata[6].Show(6) && !vm.validate_ats_number(vm.vdata[6].Value)) return false;
-                if (vm.vdata[8].Show(8) && !vm.tsup_val(vm.vdata[8].Value)) return false;
+                // if (vm.vdata[8].Show(8) && !vm.tsup_val(vm.vdata[8].Value)) return false;
                 if (vm.vdata[10].Show(10) && !vm.vox_val(vm.vdata[10].Value)) return false;
                 if (vm.vdata[11].Show(11) && !vm.cvox_val(vm.vdata[11].Value)) return false;
                 break;
