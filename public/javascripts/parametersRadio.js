@@ -252,7 +252,7 @@ function FilterResourcesBy (){
 	var filterType = parseInt($("#CBFacedResourcesType option:selected").val());
 	var chars2Find =  $('#FilterFResource').val();
 
-
+    $('#CBFacedResources').empty();
 	$.ajax({
 		type: 'GET',
 		url: '/externalResources/filterResources/' + filterType + '/' + chars2Find
