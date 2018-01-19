@@ -1009,40 +1009,51 @@ var ExistGatewaysOut = function(idCfg,f){
 /************************************/
 var ActiveCfg = function(f) {
 	alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + $('#name').val() + "\"?",
-	function () {
-		$.ajax({
-			type: 'GET',
-			url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/activate',
-			success: function (data) {
-				if (data.result) {
-					GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, $('#name').val(), $('#loggedUser').text());
-					alertify.success('Configuración \"' + $('#name').val() + '\" activada.');
-					// Generar histórico con cada pasarela que no se pudo configurar
-					// por estar desconectada del servidor
-					//if (existe.gateways != null) {
-					//	$.each(existe.gateways, function (index, value) {
-					//		GenerateHistoricEventArray(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, [$('#name').val(), value], $('#loggedUser').text());
-					//	});
-					//}
-					GetActiveCfgAndActivate(true);
-					configModified = true;
-					isActiveConfig = true;
-				}
-				else {
-					GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, $('#name').val(), $('#loggedUser').text());
-					if (data.count == 0)
-						alertify.error('No ha sido posible activar la configuración \"' + $('#name').val() + '\" al estar vacía.');
-					else {
-						alertify.error('No ha sido posible activar la configuración \"' + $('#name').val() + '\".');
-						alertify.error('¿Tiene la configuración \"' + $('#name').val() + '\" alguna pasarela asignada?.');
-					}
-				}
-				// Provocar una actualización  en la lista de configuraciones si hubiera un cambio de configuración activa
-					GetConfigurations(true);
-					//ShowCfg($('#DivConfigurations').data('cfgJson'));
-				
-			}
-		});
+	function ()
+	{
+        ExistGatewaysOut($('#DivConfigurations').data('idCFG'), function (existe) {
+            if (existe.Aplicar)
+            {
+                ExistGatewayWithoutResources($('#DivConfigurations').data('idCFG'), function (gateways) {
+                    if (gateways.Aplicar)
+                    {
+                        $.ajax({
+                            type: 'GET',
+                            url: '/configurations/' + $('#DivConfigurations').data('idCFG') + '/activate',
+                            success: function (data) {
+                                if (data.result) {
+                                    GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, $('#name').val(), $('#loggedUser').text());
+                                    alertify.success('Configuración \"' + $('#name').val() + '\" activada.');
+                                    // Generar histórico con cada pasarela que no se pudo configurar
+                                    // por estar desconectada del servidor
+                                    //if (existe.gateways != null) {
+                                    //	$.each(existe.gateways, function (index, value) {
+                                    //		GenerateHistoricEventArray(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, [$('#name').val(), value], $('#loggedUser').text());
+                                    //	});
+                                    //}
+                                    GetActiveCfgAndActivate(true);
+                                    configModified = true;
+                                    isActiveConfig = true;
+                                }
+                                else {
+                                    GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION_FAIL, $('#name').val(), $('#loggedUser').text());
+                                    if (data.count == 0)
+                                        alertify.error('No ha sido posible activar la configuración \"' + $('#name').val() + '\" al estar vacía.');
+                                    else {
+                                        alertify.error('No ha sido posible activar la configuración \"' + $('#name').val() + '\".');
+                                        alertify.error('¿Tiene la configuración \"' + $('#name').val() + '\" alguna pasarela asignada?.');
+                                    }
+                                }
+                                // Provocar una actualización  en la lista de configuraciones si hubiera un cambio de configuración activa
+                                GetConfigurations(true);
+                                //ShowCfg($('#DivConfigurations').data('cfgJson'));
+
+                            }
+                        });
+                    }
+                });
+            }
+        });
 	},
 		function(){ alertify.error('Cancelado');}
 	);
