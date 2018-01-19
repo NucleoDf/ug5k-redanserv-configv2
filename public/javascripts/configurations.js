@@ -1877,7 +1877,7 @@ var ExportCfgToPdf = function(idCfg){
             	margin: [10,10,10,10],
             	columns: [
                 { text: (new Date()).toLocaleString(), style: 'footer', alignment: 'left'},
-                { text: "DF-Nucleo. 2017. All rights reserved.", style: 'footer', alignment: 'center'},
+                { text: "DF-Nucleo. 2018. All rights reserved.", style: 'footer', alignment: 'center'},
                 { text: 'Pg ' + currentPage.toString() + ' de ' + pageCount, style: 'footer', alignment: 'right' }              
               ]
             };
