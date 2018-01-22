@@ -535,14 +535,18 @@ var UpdateSynchroStateInConfig = function(data){
 							$(this).find('div:first').prop('class', 'dragableItem VivaNoActiva');
 						else if(value.isSinch)
 							$(this).find('div:first').prop('class', 'dragableItem apply');
-						else if(value.updatePend)
-							$(this).find('div:first').prop('class', 'dragableItem VivaNoSincro');
+						else if(value.updatePend) {
+                            $(this).find('div:first').prop('class', 'dragableItem VivaNoSincro');
+                            configBackup = false;
+                        }
 						else if(value.InConflict&&!value.updatePend) {
                             $(this).find('div:first').prop('class', 'dragableItem InConflict');
                             configBackup = true; //Se activa el botón para actualizar
                         }
-						else
-							$(this).find('div:first').prop('class', 'dragableItem VivaSincro');
+						else {
+                            $(this).find('div:first').prop('class', 'dragableItem VivaSincro');
+                            configBackup = false;
+                        }
 					}
 					else if(value.isSinch)
 						$(this).find('div:first').prop('class', 'dragableItem apply');
