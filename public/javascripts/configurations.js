@@ -536,8 +536,10 @@ var UpdateSynchroStateInConfig = function(data){
 							$(this).find('div:first').prop('class', 'dragableItem apply');
 						else if(value.updatePend)
 							$(this).find('div:first').prop('class', 'dragableItem VivaNoSincro');
-						else if(value.InConflict&&!value.updatePend)
-							$(this).find('div:first').prop('class', 'dragableItem InConflict');
+						else if(value.InConflict&&!value.updatePend) {
+                            $(this).find('div:first').prop('class', 'dragableItem InConflict');
+                            configModified = true; //Se activa el botón para actualizar
+                        }
 						else
 							$(this).find('div:first').prop('class', 'dragableItem VivaSincro');
 					}
@@ -1877,7 +1879,7 @@ var ExportCfgToPdf = function(idCfg){
             	margin: [10,10,10,10],
             	columns: [
                 { text: (new Date()).toLocaleString(), style: 'footer', alignment: 'left'},
-                { text: "DF-Nucleo. 2018. All rights reserved.", style: 'footer', alignment: 'center'},
+                { text: "DF-Nucleo. 2017. All rights reserved.", style: 'footer', alignment: 'center'},
                 { text: 'Pg ' + currentPage.toString() + ' de ' + pageCount, style: 'footer', alignment: 'right' }              
               ]
             };

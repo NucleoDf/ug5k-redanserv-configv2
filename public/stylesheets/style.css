@@ -545,12 +545,23 @@ color: #FFF;
 
 /*
   Rojo claro
+  Cambiado a amarillo
  */
-.InConflict{
+/*.InConflict{
     font: bold 12px verdana, sans-serif;
     display: block;
     background-color:#f92a2a !important;
     color:  #ffffff !important;
+    width: auto;
+    border: 1px solid #C1022C;
+    border-radius: 0 5px 0 0;
+}
+*/
+.InConflict{
+    font: bold 12px verdana, sans-serif;
+    display: block;
+    background-color: #ffff99 !important;
+    color: #ff8c1a !important;
     width: auto;
     border: 1px solid #C1022C;
     border-radius: 0 5px 0 0;
