@@ -7,6 +7,7 @@
 var blockDrag = false;
 var configModified = false;
 var isActiveConfig = false;
+var configBackup = false;
 /************************************/
 /*	FUNCTION: getConfigurations 	*/
 /*  PARAMS: 						*/
@@ -538,7 +539,7 @@ var UpdateSynchroStateInConfig = function(data){
 							$(this).find('div:first').prop('class', 'dragableItem VivaNoSincro');
 						else if(value.InConflict&&!value.updatePend) {
                             $(this).find('div:first').prop('class', 'dragableItem InConflict');
-                            configModified = true; //Se activa el botón para actualizar
+                            configBackup = true; //Se activa el botón para actualizar
                         }
 						else
 							$(this).find('div:first').prop('class', 'dragableItem VivaSincro');
@@ -1196,34 +1197,52 @@ var GetActiveCfgAndActivate = function(isAutomaticActive){
 										if (gateways.Aplicar) {
 											//TODO esto quita solo la coma del final...
 											listOfGateways = listOfGateways.substr(0, listOfGateways.length - 1);
-											$.ajax({
-												type: 'GET',
-												url: '/configurations/' + data.idCFG + '/loadChangestoGtws',
-												success: function (result) {
-													if (result) {
-														GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, data.name, $('#loggedUser').text());
-														var strmsg = '';
-														if (isActiveConfig)
-															strmsg = 'Configuración \"' + data.name + '\" activada.';
-														else
-															strmsg = 'Cambios aplicados en \"' + data.name + '\".';
-														alertify.success(strmsg);
-														isActiveConfig = false;
-														// Reset list of gateways to activate
-														//AddGatewayToList(null);
-														// 20170509. AGL Gestor 'Aplicar cambios' en usuarios
-														usersModified = false;
-														// 20170516. AGL. Activar Cambios...
-														tbbssModified = false;
-														// 20170516. AGL. Activar Cambios...
-														configModified = false;
-														// 20170516. AGL. Activar Cambios...
-														cgwModified = false;
-														// 20170516. AGL. Activar Cambios...
-														resModified = false;
-													}
-												}
-											});
+                                            $.ajax({
+                                                type: 'PUT',
+                                                url: '/configurations/' + $('#DivConfigurations').data('idCFG'),
+                                                dataType: 'json',
+                                                contentType: 'application/json',
+                                                data: JSON.stringify({
+                                                    "idCFG": $('#DivConfigurations').data('idCFG'),
+                                                    "name": $('#name').val(),
+                                                    "description": $('#desc').val(),
+                                                    "activa": $('#activa').prop('checked')
+                                                }),
+                                                success: function (data) {
+                                                    if (data.error == null) {
+                                                        $.ajax({
+                                                            type: 'GET',
+                                                            url: '/configurations/' + data.idCFG + '/loadChangestoGtws',
+                                                            success: function (result) {
+                                                                if (result) {
+                                                                    GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, data.name, $('#loggedUser').text());
+                                                                    var strmsg = '';
+                                                                    if (isActiveConfig)
+                                                                        strmsg = 'Configuración \"' + data.name + '\" activada.';
+                                                                    else
+                                                                        strmsg = 'Cambios aplicados en \"' + data.name + '\".';
+                                                                    alertify.success(strmsg);
+                                                                    isActiveConfig = false;
+                                                                    // Reset list of gateways to activate
+                                                                    //AddGatewayToList(null);
+                                                                    // 20170509. AGL Gestor 'Aplicar cambios' en usuarios
+                                                                    usersModified = false;
+                                                                    // 20170516. AGL. Activar Cambios...
+                                                                    tbbssModified = false;
+                                                                    // 20170516. AGL. Activar Cambios...
+                                                                    configModified = false;
+                                                                    // 20170516. AGL. Activar Cambios...
+                                                                    cgwModified = false;
+                                                                    // 20170516. AGL. Activar Cambios...
+                                                                    resModified = false;
+                                                                    //
+                                                                    configBackup = false;
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                            });
 										}
 									});
 								}
@@ -1246,6 +1265,8 @@ var GetActiveCfgAndActivate = function(isAutomaticActive){
 				cgwModified = false;
 				// 20170516. AGL. Activar Cambios...
 				resModified = false;
+				//
+                configBackup = false;
 			}
 		}
 	});
