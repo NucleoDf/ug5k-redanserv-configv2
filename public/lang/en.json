@@ -248,6 +248,7 @@
 	"Activate"				: "Apply changes",
 	"LoadConfig"            : "Load configuration",
 	"ActivationTS"			: "Activation timestamp",
+	"LastUpdatedTS"			: "Last updated",
 	"Active"				: "Active",
 	"Activo"				: "Active",
 	"CfgId"					: "Configuration id.",

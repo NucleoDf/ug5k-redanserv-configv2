@@ -160,6 +160,11 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                     label.labelNucleo(tkey='ActivationTS')
                                 td.New(colspan='2')
                                     input.textbox(id="ts_activa" type='text'  name='ts_activa' style='width: 178px' readonly)
+                            tr#lastDateTimeRow
+                                td.New(colspan="2")
+                                    label.labelNucleo(tkey='LastUpdatedTS')
+                                td.New(colspan='2')
+                                    input.textbox(id="ts_updated" type='text'  name='ts_activa' style='width: 178px' readonly)
                             tr
                                 td.New.ActivateCfg(style='padding: 15px 0 15px 0; width: 100%' align="center" colspan=4)
                                     a.ButtonNucleo#BtnActivate(onclick="ActiveCfg()" , style="text-align: center; padding: 5px 10px" tkey='Activate')                                   

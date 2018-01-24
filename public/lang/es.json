@@ -252,6 +252,7 @@
 	"Activate"				: "Aplicar cambios",
 	"LoadConfig"            : "Activar configuración",
 	"ActivationTS"			: "Fecha/Hora Activación",
+	"LastUpdatedTS"			: "Última actualización",
 	"Active"				: "Activa",
 	"Activo"				: "Activo",
 	"CfgId"					: "Id. Configuración",

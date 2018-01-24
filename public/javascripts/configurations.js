@@ -35,6 +35,8 @@ var GetConfigurations = function(refreshActiva,f) {
 					if(refreshActiva&&value.idCFG==$('#DivConfigurations').data('cfgJson').idCFG){
 						$('#DivConfigurations').data('cfgJson').activa=1;
 						$('#DivConfigurations').data('cfgJson').ts_activa=value.ts_activa;
+						$('#DivConfigurations').data('cfgJson').ts_updated=value.ultima_actualizacion;
+
 					}
 						
 					var item = $('<li>' +
@@ -88,6 +90,7 @@ var GetConfiguration = function(cfg){
 
 					$('#desc').val(cfg.result.description);
 					$('#ts_activa').val(cfg.result.ts_activa != null ?  (cfg.result.ts_activa + ' UTC') : '');
+					$('#ts_updated').val(cfg.result.ultima_actualizacion != null ?  (cfg.result.ultima_actualizacion + ' UTC') : '');
 					$('#idCFG').val(cfg.result.idCFG),
 
 					translateWord('LoadConfig',function(result){
@@ -123,6 +126,8 @@ var GetConfiguration = function(cfg){
 		$('#activa').prop('checked',false);
 		$('#desc').val('');
 		$('#ts_activa').val('');
+		$('#ts_updated').val('');
+
 	}
 };
 
@@ -164,6 +169,7 @@ var ShowCfg = function(cfg){
 	$('#activa').prop('checked',cfg.activa);
 	$('#desc').val(cfg.description);
 	$('#ts_activa').val(cfg.ts_activa != null ?  (cfg.ts_activa + ' UTC') : '');
+	$('#ts_updated').val(cfg.ultima_actualizacion != null ?  (cfg.ultima_actualizacion + ' UTC') : '');
 	$('#idCFG').val(cfg.idCFG);
 
 	translateWord('GatewaysInCfg',function(result){
@@ -205,7 +211,7 @@ var ShowCfg = function(cfg){
 									idCFGCopy = value.idCFG;
 								});
 								$(lista).show();
-								
+                                $('#ts_updated').val(data.result[0].ultima_actualizacion);
 								$('#DivConfigurations').data('idCFG', idCFGCopy);
 								//VMG esta parte es la que rellena las pasarelas de la config de abajo
 								GetGatewaysBelongConfiguration(true, idCFGCopy);
