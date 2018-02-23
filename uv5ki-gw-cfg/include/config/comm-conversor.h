@@ -66,8 +66,10 @@ protected:
 	void ActualizaWebIni();
 
 	void TablasUlises(CommUv5Config *p_tbs);
-	void TablaUlises(vector<CommUlises_st_numeracionats> &plan, struct st_numeracionats *p_plan);
+	void TablaUlises(vector<CommUlises_st_numeracionats> &plan, 
+		vector<CommUlises_st_direccionamientoip> &planip, struct st_numeracionats *p_plan);
 	void TablaUlises(vector<CommUlises_st_direccionamientoip> &plan, struct st_direccionamientoip *p_plan);
+	void TablaUlises(vector<CommUlises_st_direccionamientoip> &plan, struct st_direccionamientoproxy *p_plan);
 	void TablaUlises(vector<CommUlises_st_listatroncales> &plan, struct st_listatroncales *p_plan);
 	void TablaUlises(vector<CommUlises_st_listaredes> &plan, struct st_listaredes *p_plan);
 	void TablaUlises(vector<CommUlises_st_asignacionusuario_tv> &plan, struct st_asignacionusuario_tv *p_plan);

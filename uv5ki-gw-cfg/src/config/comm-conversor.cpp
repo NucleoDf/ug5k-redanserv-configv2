@@ -956,8 +956,9 @@ void CommConversor::ActualizaWebIni()
 /** */
 void CommConversor::TablasUlises(CommUv5Config *p_tbs)
 {
-	TablaUlises(p_tbs->plannumeracionats, mcfg->plannumeracionats);
+	TablaUlises(p_tbs->plannumeracionats, p_tbs->plandireccionamientoip, mcfg->plannumeracionats);
 	TablaUlises(p_tbs->plandireccionamientoip, mcfg->plandireccionamientoip);
+	TablaUlises(p_tbs->plandireccionamientoip, mcfg->plan_direccionamientoproxy);
 	TablaUlises(p_tbs->plantroncales, mcfg->plantroncales);
 	TablaUlises(p_tbs->planredes, mcfg->planredes);
 	TablaUlises(p_tbs->planasignacionusuarios, mcfg->planasignacionusuarios);
@@ -966,7 +967,9 @@ void CommConversor::TablasUlises(CommUv5Config *p_tbs)
 }
 
 /** */
-void CommConversor::TablaUlises(vector<CommUlises_st_numeracionats> &plan, struct st_numeracionats *p_plan)
+void CommConversor::TablaUlises(vector<CommUlises_st_numeracionats> &plan,
+						vector<CommUlises_st_direccionamientoip> &planip, 
+						struct st_numeracionats *p_plan)
 {
 	/** Plan numeracion ATS */
 	size_t ats;
@@ -976,6 +979,7 @@ void CommConversor::TablaUlises(vector<CommUlises_st_numeracionats> &plan, struc
 			PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de numeracion ATS");
 			break;
 		}
+		plan[ats].NameSet(planip);
 		plan[ats].copyto(&p_plan[ats]);
 	}
 	if (ats < (N_MAX_TV+N_MAX_TIFX))
@@ -993,11 +997,49 @@ void CommConversor::TablaUlises(vector<CommUlises_st_direccionamientoip> &plan, 
 			PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de DIRECCIONAMIENTO IP");
 			break;
 		}
+
 		plan[ip].copyto(&p_plan[ip]);
 	}
 	if (ip < (N_MAX_TV+N_MAX_TIFX))
 		p_plan[ip].idhost[0]=NO_NAME;
 }
+
+/** */
+void CommConversor::TablaUlises(vector<CommUlises_st_direccionamientoip> &plan, struct st_direccionamientoproxy *p_plan)
+{
+	/** Plan direccionamiento IP-PROXY */
+	size_t ip,icen=0;
+	vector<string> centrales;
+	for (ip=0; ip<plan.size(); ip++)
+	{
+		if (plan[ip].centralip == true)
+		{
+			if (plan[ip].interno==true) 
+			{
+			/** 20180214. Chequeo la central propia y relleno los proxies. */
+				strncpy(mcfg->szDirSipProxy[0], plan[ip].ipred1.c_str(), MAX_LONG_DIRIP);
+				strncpy(mcfg->szDirSipProxy[1], plan[ip].ipred2.c_str(), MAX_LONG_DIRIP);
+				strncpy(mcfg->szDirSipProxy[2], plan[ip].ipred3.c_str(), MAX_LONG_DIRIP);
+			}
+
+			if (icen >= (N_MAX_CENTRALES)) {
+				PLOG_ERROR("CommConversor::TablasUlises: Demasiados elementos en el Plan de DIRECCIONAMIENTO PROXY");
+				break;
+			}
+			/** Chequear que no haya centrales repetidas.*/
+			if (std::find(centrales.begin(), centrales.end(), plan[ip].idhost) == centrales.end())
+			{
+				plan[ip].copyto(&p_plan[icen]);
+				centrales.push_back(plan[ip].idhost);
+				icen++;
+			}
+		}
+	}
+
+	if (icen < (N_MAX_CENTRALES))
+		p_plan[icen].idhost[0]=NO_NAME;
+}
+
 
 /** */
 void CommConversor::TablaUlises(vector<CommUlises_st_listatroncales> &plan, struct st_listatroncales *p_plan)

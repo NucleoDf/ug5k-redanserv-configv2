@@ -251,15 +251,27 @@ public:
 		read_key(xnode, "Interno", Interno);
 		read_key(xnode, "Min", Min);
 		read_key(xnode, "Max", Max);
+	/** 20180214 Nuevos campos asociados a los PROXIES y SERVIDORES de Presencia */
+		read_key(xnode, "IpRed3", IpRed3);
+		read_key(xnode, "EsCentralIP", EsCentralIP);
+		read_key(xnode, "SrvPresenciaIpRed1", SrvPresenciaIpRed1);
+		read_key(xnode, "SrvPresenciaIpRed2", SrvPresenciaIpRed3);
+		read_key(xnode, "SrvPresenciaIpRed3", SrvPresenciaIpRed3);
 	}
 public:
 	string IdHost;
-	string IpRed1;
-	string IpRed2;
+	string IpRed1;			// Proxy Principal de la Dependencia
+	string IpRed2;			// Proxy Alternativo 1
 	THOST_ TipoHost;
 	bool Interno;
 	int Min;
 	int Max;
+	/** 20180214 Nuevos campos asociados a los PROXIES y SERVIDORES de Presencia */
+	string IpRed3;			// Proxy Alternativo 2
+	bool EsCentralIP;
+	string SrvPresenciaIpRed1;
+	string SrvPresenciaIpRed2;
+	string SrvPresenciaIpRed3;
 };
 
 /** */

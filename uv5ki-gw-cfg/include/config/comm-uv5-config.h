@@ -84,6 +84,17 @@ public:
 		strncpy(pr->final, final.c_str(), LONG_AB_ATS);
 		abonado.copyto(&pr->abonado);
 	}
+	bool isEqual(int min, int max)
+	{
+		/** */
+		if (inicial=="" || final=="")
+			return false;
+		
+		string Min = Tools::itoa(min);
+		string Max = Tools::itoa(max);
+
+		return inicial==Min && final==Max;
+	}
 public:
 	string inicial;
 	string final;
@@ -124,6 +135,101 @@ public:
 public:
     int tiporuta; 
     vector<string> listatroncales;
+};
+
+/** */
+class CommUlises_st_direccionamientoip  : public jData
+{
+public:
+	CommUlises_st_direccionamientoip() {
+	}
+	CommUlises_st_direccionamientoip(soap_DireccionamientoIP sDir) {
+		idhost = sDir.IdHost;
+		ipred1 = sDir.IpRed1;
+		ipred2 = sDir.IpRed2;
+		tipohost = (int )sDir.TipoHost;
+
+	/** 20180214. Nuevos Parametros de SOAP*/
+		ipred3 = sDir.IpRed3;
+		interno = sDir.Interno;
+		min = sDir.Min;
+		max = sDir.Max;
+		centralip = sDir.EsCentralIP;
+		presenciaIp1 = sDir.SrvPresenciaIpRed1;
+		presenciaIp2 = sDir.SrvPresenciaIpRed2;
+		presenciaIp3 = sDir.SrvPresenciaIpRed3;
+	}
+	~CommUlises_st_direccionamientoip() {
+	}
+
+public:
+	virtual void jwrite(Writer<StringBuffer> &writer) {
+		write_key(writer, "idhost", idhost);
+		write_key(writer, "tipohost", tipohost);
+		write_key(writer, "ipred1", ipred1);
+		write_key(writer, "ipred2", ipred2);
+
+	/** 20180214. Nuevos Parametros de SOAP*/
+		write_key(writer, "ipred3", ipred3);
+		write_key(writer, "interno", interno);
+		write_key(writer, "min", min);
+		write_key(writer, "max", max);
+		write_key(writer, "centralip", centralip);
+		write_key(writer, "presenciaIp1", presenciaIp1);
+		write_key(writer, "presenciaIp2", presenciaIp2);
+		write_key(writer, "presenciaIp3", presenciaIp3);
+	}
+	virtual void jread(Value &base) {
+		read_key(base, "idhost", idhost);
+		read_key(base, "tipohost", tipohost);
+		read_key(base, "ipred1", ipred1);
+		read_key(base, "ipred2", ipred2);
+
+	/** 20180214. Nuevos Parametros de SOAP*/
+		read_key(base, "ipred3", ipred3);
+		read_key(base, "interno", interno);
+		read_key(base, "min", min);
+		read_key(base, "max", max);
+		read_key(base, "centralip", centralip);
+		read_key(base, "presenciaIp1", presenciaIp1);
+		read_key(base, "presenciaIp2", presenciaIp2);
+		read_key(base, "presenciaIp3", presenciaIp3);
+	}
+public:
+	void copyto(st_direccionamientoip *dip) {
+		strncpy(dip->idhost, idhost.c_str(), CFG_MAX_LONG_NOMBRE);
+		strncpy(dip->ipred1, ipred1.c_str(), MAX_LONG_DIRIP);
+		strncpy(dip->ipred2, ipred2.c_str(), MAX_LONG_DIRIP);
+		dip->tipohost = (unsigned char)tipohost;
+	}
+
+	/** 20180214. Nuevos Parametros de SOAP*/
+	void copyto(st_direccionamientoproxy *prxy) {
+		strncpy(prxy->idhost, idhost.c_str(), CFG_MAX_LONG_NOMBRE);
+		strncpy(prxy->IpRed1, ipred1.c_str(), MAX_LONG_DIRIP);
+		strncpy(prxy->IpRed2, ipred2.c_str(), MAX_LONG_DIRIP);
+	/** 20180214. Nuevos Parametros de SOAP*/
+		strncpy(prxy->IpRed3, ipred3.c_str(), MAX_LONG_DIRIP);
+		strncpy(prxy->SrvPresenciaIpRed1, presenciaIp1.c_str(), MAX_LONG_DIRIP);
+		strncpy(prxy->SrvPresenciaIpRed2, presenciaIp2.c_str(), MAX_LONG_DIRIP);
+		strncpy(prxy->SrvPresenciaIpRed3, presenciaIp3.c_str(), MAX_LONG_DIRIP);
+	}
+
+public:
+    string idhost;
+	int tipohost;
+    string ipred1;
+    string ipred2;
+
+	/** 20180214. Nuevos Parametros de SOAP*/
+	string ipred3;
+	bool interno;
+	int min;
+	int max;
+	bool centralip;
+	string presenciaIp1;
+	string presenciaIp2;
+	string presenciaIp3;
 };
 
 /** */
@@ -179,6 +285,8 @@ public:
 		}
 		if (r<N_MAX_RUTAS)
 			pa->listarutas[r].tiporuta=NO_TIPO_RUTA;
+		/** */
+		strncpy(pa->nombre, nombre.c_str(), CFG_MAX_LONG_NOMBRE);
 	}
 public:
 	int centralpropia;
@@ -187,55 +295,32 @@ public:
 	vector<CommUlises_st_rango> rangosoperador;
 	vector<CommUlises_st_rango> rangosprivilegiados;
 	vector<CommUlises_st_planrutas> listarutas;
-};
-
-/** */
-class CommUlises_st_direccionamientoip  : public jData
-{
-public:
-	CommUlises_st_direccionamientoip() {
+	string nombre;
+	/** Para llamar antes del copy y despues de relleno el elemento del plan */
+	void NameSet(vector<CommUlises_st_direccionamientoip> &planip) 
+	{
+		for (size_t iplan=0; iplan<planip.size(); iplan++) {
+			CommUlises_st_direccionamientoip plan = planip[iplan];
+			if (plan.tipohost == THOST_EXTTELEFONIA && plan.min != 0 && plan.max != 0) {
+				/** busco en los rangos de operador */
+				for (size_t iro=0; iro<rangosoperador.size(); iro++) {
+					if (rangosoperador[iro].isEqual(plan.min, plan.max)==true) {
+						nombre = plan.idhost;
+						return;
+					}
+				}
+				/** busco en los rangos de operadores privilegiados */
+				for (size_t irp=0; irp<rangosprivilegiados.size(); irp++) {
+					if (rangosprivilegiados[irp].isEqual(plan.min, plan.max)==true) {
+						nombre = plan.idhost;
+						return;
+					}
+				}
+			}
+		}
+		/** no encontrado se pone en blanco */
+		nombre = "";
 	}
-	CommUlises_st_direccionamientoip(soap_DireccionamientoIP sDir) {
-		idhost = sDir.IdHost;
-		ipred1 = sDir.IpRed1;
-		ipred2 = sDir.IpRed2;
-		tipohost = (int )sDir.TipoHost;
-
-		// TODO: ¿que se hace con estos parametros del SOAP?
-		//bool Interno;
-		//int Min;
-		//int Max;
-	}
-	~CommUlises_st_direccionamientoip() {
-	}
-
-public:
-	virtual void jwrite(Writer<StringBuffer> &writer) {
-		write_key(writer, "idhost", idhost);
-		write_key(writer, "ipred1", ipred1);
-		write_key(writer, "ipred2", ipred2);
-		write_key(writer, "tipohost", tipohost);
-	}
-	virtual void jread(Value &base) {
-		read_key(base, "idhost", idhost);
-		read_key(base, "ipred1", ipred1);
-		read_key(base, "ipred2", ipred2);
-		read_key(base, "tipohost", tipohost);
-	}
-public:
-	void copyto(st_direccionamientoip *dip) {
-		strncpy(dip->idhost, idhost.c_str(), CFG_MAX_LONG_NOMBRE);
-		strncpy(dip->ipred1, ipred1.c_str(), MAX_LONG_DIRIP);
-		strncpy(dip->ipred2, ipred2.c_str(), MAX_LONG_DIRIP);
-		dip->tipohost = (unsigned char)tipohost;
-	}
-
-public:
-    string idhost;
-    string ipred1;
-    string ipred2;
-	int tipohost;
-
 };
 
 /** */

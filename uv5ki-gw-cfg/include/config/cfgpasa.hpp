@@ -113,6 +113,11 @@
 
 #define CFG_REC_TOTAL_TIPOS         7
 
+//tipo de proxy. el tipo viene en la informacion de tipo de recurso. para que no se solapen tipos, deben valer por encima de los tipos de recursos que hay configurados
+
+#define TIPO_PROXY_PRINCIPAL		CFG_IFREC_TOTAL_TIPOS
+#define TIPO_PROXY_ALTERNATIVO		CFG_IFREC_TOTAL_TIPOS+1
+
 
 /*
  * Tipos de interfaz de recurso.
@@ -215,15 +220,15 @@
  * (coincide con los defines de para rellenar el sdp en una llamada radio)
  */
 
-#define CFG_METBSS_NO           0
-#define CFG_METBSS_RSSI         1
-#define CFG_METBSS_RSSI_UV5K    2
+#define CFG_METBSS_NO             0
+#define CFG_METBSS_RSSI       	  1
+#define CFG_METBSS_RSSI_NUCLEO    2
 
 /*
  * BSS preferido para un canal remoto
  */
 #define CFG_PREF_BSS_RSSI    0
-#define CFG_PREF_BSS_UV5K    1
+#define CFG_PREF_BSS_NUCLEO    1
 
 /*
  * Tipos de NTZ.
@@ -402,6 +407,16 @@ enum eType
 //--------------------- Finalizacion de tablas ---------------------------------/
 
 
+struct st_direccionamientoproxy {			//ENC-2018
+    char idhost[CFG_MAX_LONG_NOMBRE];/*NO_NAME fin de tabla*/
+    char IpRed1[MAX_LONG_DIRIP];
+    char IpRed2[MAX_LONG_DIRIP];
+    char IpRed3[MAX_LONG_DIRIP];
+    char SrvPresenciaIpRed1[MAX_LONG_DIRIP];
+    char SrvPresenciaIpRed2[MAX_LONG_DIRIP];
+    char SrvPresenciaIpRed3[MAX_LONG_DIRIP];
+};
+
 
 struct st_direccionamientoip {
     char idhost[CFG_MAX_LONG_NOMBRE];/*NO_NAME fin de tabla*/
@@ -503,6 +518,7 @@ struct st_rango {
 
 
 struct st_numeracionats {
+    char nombre[CFG_MAX_LONG_NOMBRE];					//ENC-2018
     unsigned char centralpropia; /*Mi Central,CENTRAL_NO_DEF para indicar fin tabla */;
     unsigned char throwswitching;
     char no_test [LONG_AB_ATS];
@@ -1146,7 +1162,7 @@ struct cfgConfigPasarela
     struct st_asignacionusuario_tv planasignacionusuarios [N_MAX_TV];
     struct st_asignacionrecursos_gw planasignacionrecursos[N_MAX_REC_SISTEMA];
     struct st_direccionamiento_sip plandireccionamientosip [N_MAX_TV];
-
+    struct st_direccionamientoproxy plan_direccionamientoproxy[N_MAX_CENTRALES];		//ENC-2018
     /*
      * todo meter estas funciones en cfgConfigPasarela
      *
