@@ -769,6 +769,10 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	/** */
 	memcpy(mtlf->szIdRed, p_rec->telefonia.idRed.c_str(), CFG_MAX_LONG_NOMBRE_RED);
 
+	// 20180320. Nuevos Parametros...
+	mtlf->iTmLlamEntrante = p_rec->telefonia.iTmLlamEntrante == -1 ? 30 : p_rec->telefonia.iTmLlamEntrante;
+	mtlf->iTmDetFinLlamada= p_rec->telefonia.iTmDetFinLlamada == -1 ? 6 : p_rec->telefonia.iTmDetFinLlamada;
+
 	
 	/* 20170119. */
 	switch ( mgen->iTipoIf)
@@ -958,7 +962,7 @@ void CommConversor::TablasUlises(CommUv5Config *p_tbs)
 {
 	TablaUlises(p_tbs->plannumeracionats, p_tbs->plandireccionamientoip, mcfg->plannumeracionats);
 	TablaUlises(p_tbs->plandireccionamientoip, mcfg->plandireccionamientoip);
-	TablaUlises(p_tbs->plandireccionamientoip, mcfg->plan_direccionamientoproxy);
+	TablaUlises(p_tbs->plandireccionamientoip, mcfg->plandireccionamientoproxy);
 	TablaUlises(p_tbs->plantroncales, mcfg->plantroncales);
 	TablaUlises(p_tbs->planredes, mcfg->planredes);
 	TablaUlises(p_tbs->planasignacionusuarios, mcfg->planasignacionusuarios);

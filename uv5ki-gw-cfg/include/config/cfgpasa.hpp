@@ -18,7 +18,7 @@
 #ifndef INCLUIDO_CFGPASA_PUNTOHACHE
 #define INCLUIDO_CFGPASA_PUNTOHACHE
 
-// #include <pthread.h>
+//#include <pthread.h>
 
 //------------------------------------------------------------
 //  Definiciones
@@ -78,6 +78,9 @@
 
 #define CFG_MAX_LONG_NOMBRE_RED       32
 #define CFG_MAX_LONG_NOMBRE_TRONCAL    32
+
+#define	MAX_TM_LLAMADA_ENTRANTE		60			//maximo tiempo de llamada entrante para lineas de 2 hilos
+#define MAX_TM_DET_FINLLAMADA		8			//maximo tiempo para detectar que ha finalizado la llamada entrante rtb (ringon-ringoff), es decir, reposo desde el ultimo ringoff
 /*
  * Tipos de sincronizacion.
  */
@@ -113,11 +116,6 @@
 
 #define CFG_REC_TOTAL_TIPOS         7
 
-//tipo de proxy. el tipo viene en la informacion de tipo de recurso. para que no se solapen tipos, deben valer por encima de los tipos de recursos que hay configurados
-
-#define TIPO_PROXY_PRINCIPAL		CFG_IFREC_TOTAL_TIPOS
-#define TIPO_PROXY_ALTERNATIVO		CFG_IFREC_TOTAL_TIPOS+1
-
 
 /*
  * Tipos de interfaz de recurso.
@@ -144,6 +142,11 @@
 #define CFG_IFREC_TIPO_TUN_REMOTO  16
 
 #define CFG_IFREC_TOTAL_TIPOS      17
+//tipo de proxy. el tipo viene en la informacion de tipo de recurso. para que no se solapen tipos, deben valer por encima de los tipos de recursos que hay configurados
+
+#define TIPO_PROXY_PRINCIPAL		CFG_IFREC_TOTAL_TIPOS
+#define TIPO_PROXY_ALTERNATIVO		CFG_IFREC_TOTAL_TIPOS+1
+
 
 /*
  * Tipos de Radio REDAN
@@ -392,7 +395,7 @@ enum eType
 #define TI_I_O		10
 #define TI_DATOS	11
 
-
+#define MAX_PREFIJOS	99
 
 //--------------------- Finalizacion de tablas ---------------------------------/
 #define NO_NAME                 0
@@ -407,7 +410,7 @@ enum eType
 //--------------------- Finalizacion de tablas ---------------------------------/
 
 
-struct st_direccionamientoproxy {			//ENC-2018
+struct st_direccionamientoproxy {
     char idhost[CFG_MAX_LONG_NOMBRE];/*NO_NAME fin de tabla*/
     char IpRed1[MAX_LONG_DIRIP];
     char IpRed2[MAX_LONG_DIRIP];
@@ -415,6 +418,8 @@ struct st_direccionamientoproxy {			//ENC-2018
     char SrvPresenciaIpRed1[MAX_LONG_DIRIP];
     char SrvPresenciaIpRed2[MAX_LONG_DIRIP];
     char SrvPresenciaIpRed3[MAX_LONG_DIRIP];
+    bool operator ==( const st_direccionamientoproxy& );
+    bool operator !=( const st_direccionamientoproxy& );
 };
 
 
@@ -518,7 +523,7 @@ struct st_rango {
 
 
 struct st_numeracionats {
-    char nombre[CFG_MAX_LONG_NOMBRE];					//ENC-2018
+    char nombre[CFG_MAX_LONG_NOMBRE];
     unsigned char centralpropia; /*Mi Central,CENTRAL_NO_DEF para indicar fin tabla */;
     unsigned char throwswitching;
     char no_test [LONG_AB_ATS];
@@ -1008,6 +1013,8 @@ struct cfgConfigIfTlf
     int iDetectVox;
     int iUmbralVox;
     int iTmInactividad;
+    int iTmLlamEntrante;			//tmout de llamada entrante en lineas tlf (BL,BC,RTB)
+    int iTmDetFinLlamada;			//tmout para detectar fin llamada desde el ultimo ringoff
     char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
     void PorDefecto();
     bool operator ==( const cfgConfigIfTlf& );
@@ -1072,6 +1079,7 @@ struct cfgConfigRecurso
     bool operator ==( const cfgConfigRecurso& );
     bool operator !=( const cfgConfigRecurso& );
     bool CambiaColateral(cfgConfigRecurso *pcfgOtra );
+    void ReajustaAudio( int offsetAtenuacion );
 };        
 
 /*
@@ -1162,7 +1170,9 @@ struct cfgConfigPasarela
     struct st_asignacionusuario_tv planasignacionusuarios [N_MAX_TV];
     struct st_asignacionrecursos_gw planasignacionrecursos[N_MAX_REC_SISTEMA];
     struct st_direccionamiento_sip plandireccionamientosip [N_MAX_TV];
-    struct st_direccionamientoproxy plan_direccionamientoproxy[N_MAX_CENTRALES];		//ENC-2018
+//#ifdef CFG_ENC
+    struct st_direccionamientoproxy plandireccionamientoproxy[N_MAX_CENTRALES];
+//#endif
     /*
      * todo meter estas funciones en cfgConfigPasarela
      *
@@ -1181,6 +1191,7 @@ struct cfgConfigPasarela
     void TomaModoSincro( int );
     void PorDefecto( int );
     void ExtraeCfgSistema( struct st_config_sistema *ptcfgsistema);
+    void TomaOffsetAtenuacion( int offset);
 
     cfgConfigPasarela();
     void  operator= ( cfgConfigPasarela );

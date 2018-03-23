@@ -29,6 +29,7 @@ CfgProc::CfgProc(void) {
 
 /** */
 CfgProc::~CfgProc(void) {
+	p_working_config->dispose();
 }
 
 /** */

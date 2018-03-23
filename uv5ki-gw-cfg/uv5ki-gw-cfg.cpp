@@ -147,6 +147,8 @@ public:
 			delete LocalConfig::p_cfg;
 
 			PLOG_INFO("UG5k-APPSERVER Finalizado.");
+			CThread::sleep(1000);
+
 			plogDispose();
 		}
 		catch(Exception x)
@@ -192,6 +194,7 @@ private:
 				break;
 			case SIGSEGV:           // Error acceso a memoria.
 				traceSIGSEGV();
+				CfgProc::p_cfg_proc->p_working_config->dispose();
 				CThread::sleep(2000);
 				exit(-1);
 				break;        
@@ -209,6 +212,7 @@ private:
 				break;
 			case SIGSEGV:           // Error acceso a memoria.
 				traceSIGSEGV();
+				CfgProc::p_cfg_proc->p_working_config->dispose();
 				CThread::sleep(2000);
 				exit(-1);
 				break;            

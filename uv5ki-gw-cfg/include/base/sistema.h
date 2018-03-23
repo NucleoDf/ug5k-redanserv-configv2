@@ -22,6 +22,13 @@
 
  #include <signal.h>
 
+ /** 20180322. Se han añadido estos includes para el semaforo global */
+ #include <sys/ipc.h>
+ #include <sys/sem.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <errno.h>
+
 #if defined(_PPC82xx_)
  #include <linux/config.h>
  #include <asm/ioctl.h>
@@ -97,5 +104,35 @@ public:
 #define _TIMER_EXPIRED( val )		((val) && _TIMER_DELTA(val)<=0)
 #define _TIMER_CLR( val ) 			(val) = 0
 #define _TIMER_IS_RUNNING( val )	(val)
+
+/** 20180322. Semaforo Global */
+#ifndef _WIN32
+	#if defined(__GNU_LIBRARY__) && !defined(_SEM_SEMUN_UNDEFINED)
+	// La union ya está definida en sys/sem.h
+	#else
+	// Tenemos que definir la union
+	union semun
+	{
+		int val;
+		struct semid_ds *buf;
+		unsigned short int *array;
+		struct seminfo *__buf;
+	};
+	#endif
+#endif
+class global_semaphore : CodeBase
+{
+public:
+	global_semaphore(int id, int count);
+	~global_semaphore();
+public:
+	bool acquire();
+	bool release();
+protected:
+	int value();
+	int Id;
+	int procid;
+	int initial_count;
+};
  
 #endif

@@ -389,3 +389,146 @@ string sistema::ipColateral()
 	return "";
 }
 
+/** 20180322. Semaforo Global */
+global_semaphore::global_semaphore(int id, int count)
+{
+#ifdef _WIN32
+	Id = id;
+#else
+	key_t Clave;
+	if ((Clave = ftok ("/bin/ls", id)) < 0)
+	{
+		PLOG_ERROR("global_semaphore ftok error %i", errno);
+		Id = -1;
+	}
+	else 
+	{
+		if ((Id = semget (Clave, 1, 0600 | IPC_CREAT | IPC_EXCL)) < 0)
+		{
+			PLOG_ERROR("global_semaphore semget error %i", errno);
+			//si da error suponemos que es porque esta creado
+			if ((Id = semget (Clave, 1, 0600 | IPC_CREAT)) < 0)
+			{
+				PLOG_ERROR("global_semaphore semget error %i", errno);
+				Id = -1;
+			}
+			else
+			{
+				PLOG_DEBUG("global_semaphore sem ya creado id %i\n", Id);
+			}
+		}
+		else
+		{	
+			//el semaforo no estaba creado. Lo inicializamos
+			union semun arg;
+			PLOG_DEBUG("global_semaphore sem creado id %i. Inisem\n", Id);
+			arg.val = count;
+			if  ((semctl (Id, 0, SETVAL, arg)) < 0)
+			{
+				PLOG_ERROR("global_semaphore semclt to %i error %i", arg.val, errno);
+				Id = -1;
+			}
+		}
+	}
+#endif
+	procid = -1;
+	initial_count = count;
+}
+
+global_semaphore::~global_semaphore()
+{
+#ifdef _WIN32
+	Id = -1;
+#else
+	
+	if (Id != -1 && procid != -1) 
+	{
+		release();
+	}
+
+#endif
+}
+
+int global_semaphore::value()
+{
+#ifdef _WIN32
+	return 1;
+#else
+	if (Id != -1) 
+	{
+		int i;
+		if ((i=semctl (Id, 0, GETVAL, 0)) <0)
+		{
+			PLOG_ERROR("global_semaphore semctl (GETVAL) error %i", errno);
+			return -1;
+		}
+		return i;
+	}
+	PLOG_ERROR("global_semaphore (value). Semaforo no creado");
+	return -1;
+#endif
+}
+
+bool global_semaphore::acquire()
+{
+#ifdef _WIN32
+	return true;
+#else
+	PLOG_DEBUG("global_semaphore sem id %i. acquiring...", Id);
+	if (Id != -1) 
+	{
+		struct sembuf Operacion;
+		Operacion.sem_num = 0;
+		Operacion.sem_op = -1;
+		Operacion.sem_flg = 0;
+		if ((semop (Id, &Operacion, 1)) < 0)
+		{
+			PLOG_ERROR("global_semaphore semop (acquire) error %i", errno);
+			return false;
+		}
+		procid = 1;
+		PLOG_DEBUG("global_semaphore sem id %i. acquired...", Id);
+		return true;
+	}
+	PLOG_ERROR("global_semaphore semop (acquire). Semaforo no creado");
+	return false;
+#endif
+}
+
+bool global_semaphore::release()
+{
+#ifdef _WIN32
+	return true;
+#else
+	PLOG_DEBUG("global_semaphore sem id %i. releasing...", Id);
+	if (Id != -1)
+	{
+		int val = value();
+		if (val != -1 && val < initial_count)
+		{
+			struct sembuf Operacion;
+			Operacion.sem_num = 0;
+			Operacion.sem_op = 1;
+			Operacion.sem_flg = 0;
+			if ((semop (Id, &Operacion, 1)) < 0)
+			{
+				PLOG_ERROR("global_semaphore semop (release) error %i", errno);
+				return false;
+			}
+			procid = -1;
+			PLOG_DEBUG("global_semaphore sem id %i. released...", Id);
+			return true;
+		}
+		else 
+		{
+			PLOG_ERROR("global_semaphore semop (release). Valor no esperado %i", val);
+			return false;
+		}
+	}
+	else 
+	{
+		PLOG_ERROR("global_semaphore semop (release). Semaforo no creado");
+		return false;
+	}
+#endif
+}

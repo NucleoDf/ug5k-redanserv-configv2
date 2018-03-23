@@ -54,7 +54,9 @@ protected:
 		val = sval == "false" ? false : true;
 	}
 	void read_key(xml_node<> * xnode, const char *indice, int &val) {
-		val = atoi(RAPID_XML_NODE_VALUE(xnode, indice));
+		string sval = RAPID_XML_NODE_VALUE(xnode, indice);
+		val = sval == indice ? -1 : atoi(sval.c_str());
+		// val = atoi(RAPID_XML_NODE_VALUE(xnode, indice));
 	}
 	void read_key(xml_node<> * xnode, const char *indice, TI_ &val) {
 		string str_val = RAPID_XML_NODE_VALUE(xnode, indice);
@@ -449,6 +451,9 @@ class soap_ResourceInfo : public xml_data
 public:
 	soap_ResourceInfo()	{
 		radio.UmbralTonoSQ = -30;
+		/** 20180320. Nuevos Parámetros en interfaces analogicas */
+		telef.iTmLlamEntrante = 30;
+		telef.iTmDetFinLlamada= 6;
 	}
 	~soap_ResourceInfo(){}
 public:
@@ -521,6 +526,9 @@ public:
 		read_key(xnode, "GrabacionEd137", radio.GrabacionEd137);
 		read_key(xnode, "ValuesTablaBss", radio.ValuesTablaBss);
 		// radio.TablaBss="1, 2, 3,  4 ,5,   6,7,8,9,10,11,mmm,11,";
+		/** 20180320. Nuevos Parámetros en interfaces analogicas */
+		read_key(xnode, "iTmLlamEntrante", telef.iTmLlamEntrante);
+		read_key(xnode, "iTmDetFinLlamada", telef.iTmDetFinLlamada);
 	}
 
 public:
@@ -551,6 +559,9 @@ public:
 		string IdRed;					// TODO: Pendiente.
 		/** R2/N5 */
 		string IdTroncal;				// TODO: Pendiente.
+		/** 20180320. Nuevos Parámetros en interfaces analogicas */
+		int iTmLlamEntrante;
+		int iTmDetFinLlamada;
 	} telef;
 	struct {
 		bool EM;						// TODO: No se asigna.

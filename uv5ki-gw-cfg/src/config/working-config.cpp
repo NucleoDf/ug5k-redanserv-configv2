@@ -17,35 +17,48 @@ WorkingConfig::~WorkingConfig()
 /** */
 void WorkingConfig::init()
 {
+	p_mem_config_sem = new global_semaphore(33,1);
+	if (p_mem_config_sem->acquire()) {
 #ifdef _WIN32
-	p_mem_config =(ug5k_mem_config *)(new char[sizeof(ug5k_mem_config)+4]);	// new ug5k_mem_config();
+		p_mem_config =(ug5k_mem_config *)(new char[sizeof(ug5k_mem_config)+4]);	// new ug5k_mem_config();
 #else
-    /** Shared memory segment at 1234 */
-	key_mem = 75218977; 
-    /** Create the segment and set permissions.*/
-	if ((shmid = shmget(key_mem, sizeof(ug5k_mem_config), IPC_CREAT | 0666)) < 0) 
-	{
-		perror("shmget");	
-		return;
-	}
-   /** Now we attach the segment to our data space. */
-	if ((p_mem_config = (ug5k_mem_config *)shmat(shmid, NULL, 0)) == (ug5k_mem_config *) -1) 
-	{
-		perror("shmat");
-		return;
-	}
+		/** Shared memory segment at 1234 */
+		key_mem = 75218977; 
+		/** Create the segment and set permissions.*/
+		if ((shmid = shmget(key_mem, sizeof(ug5k_mem_config), IPC_CREAT | 0666)) < 0) 
+		{
+			PLOG_ERROR("shmget error %i", errno);
+		}
+		   /** Now we attach the segment to our data space. */
+		else if ((p_mem_config = (ug5k_mem_config *)shmat(shmid, NULL, 0)) == (ug5k_mem_config *) -1) 
+		{
+			PLOG_ERROR("shmat error %i", errno);
+		}
+		else 
+		{
+			/** Marco la configuracion como vacia */
+			strncpy(((ug5k_mem_config *)p_mem_config)->acIdSistema, "ESTA-VACIA", CFG_MAX_LONG_ID);
+		}
 #endif
+		p_mem_config_sem->release();
+	}
 }
 
 /** */
 void WorkingConfig::dispose()
 {
+	PLOG_DEBUG("WorkingConfig (global semaphore) disposing...");
+	if (p_mem_config_sem->acquire()) {
 #ifdef _WIN32
 	delete p_mem_config;
 #else
 	if(shmdt(p_mem_config) != 0)
 		fprintf(stderr, "Could not close memory segment.\n");
 #endif
+	delete p_mem_config_sem;
+	p_mem_config_sem = NULL;
+	PLOG_DEBUG("WorkingConfig (global semaphore) disposed.");
+	}
 }
 
 /** */
@@ -62,10 +75,14 @@ void WorkingConfig::_recResponse(bool res, int len, void *data)
 }
 EventosHistoricos *WorkingConfig::set(CommConfig &redanCfg, bool actualiza_ini) 
 {
+	EventosHistoricos *his = NULL;
 	config = redanCfg;
 
-	/** Actualizar la memoria y los ficheros INI */
-	EventosHistoricos *his = redanConv.convierte(config, p_mem_config, actualiza_ini);
+	if (p_mem_config_sem->acquire()) {
+		/** Actualizar la memoria y los ficheros INI */
+		his = redanConv.convierte(config, p_mem_config, actualiza_ini);
+		p_mem_config_sem->release();
+	}
 
 	/** Mandar el SIGNAL USR2 */
 	WorkingThread(WorkingConfig::DelayedSignal, this).Do();

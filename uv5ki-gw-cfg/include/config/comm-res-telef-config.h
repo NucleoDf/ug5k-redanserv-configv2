@@ -61,6 +61,9 @@ public:
 
 		idRed = "";
 		idTroncal = "";
+		/** 20180320. Nuevos Parámetros en interfaces analogicas */
+		iTmLlamEntrante = 30;
+		iTmDetFinLlamada = 6;
 	}
 	~CommResTelef() {
 		clear_array(ats_rangos_dst);
@@ -98,6 +101,9 @@ public:
 		write_key(writer, "ats_rangos_privilegiados", ats_rangos_privilegiados);
 		write_key(writer, "ats_rangos_directos_ope", ats_rangos_directos_ope);
 		write_key(writer, "ats_rangos_directos_pri", ats_rangos_directos_pri);
+		/** 20180320. Nuevos Parámetros en interfaces analogicas */
+		write_key(writer, "iTmLlamEntrante", iTmLlamEntrante);
+		write_key(writer, "iTmDetFinLlamada", iTmDetFinLlamada);
 	}
 	virtual void jread(Value &base)
 	{
@@ -130,6 +136,9 @@ public:
 		read_key(base, "ats_rangos_privilegiados", ats_rangos_privilegiados);
 		read_key(base, "ats_rangos_directos_ope", ats_rangos_directos_ope);
 		read_key(base, "ats_rangos_directos_pri", ats_rangos_directos_pri);
+		/** 20180320. Nuevos Parámetros en interfaces analogicas */
+		read_key(base, "iTmLlamEntrante", iTmLlamEntrante);
+		read_key(base, "iTmDetFinLlamada", iTmDetFinLlamada);
 	}
 
 public:
@@ -151,6 +160,9 @@ public:
 	int tm_superv_options;
 	int colateral_scv;
 	int iT_Int_Warning;
+	/** 20180320. Nuevos Parámetros en interfaces analogicas */
+	int iTmLlamEntrante;
+	int iTmDetFinLlamada;
 #if __POR_REFERENCIA__
 	vector<CommResTelefAtsRange> ats_rangos_dst;
 	vector<CommResTelefAtsRange> ats_rangos_org;

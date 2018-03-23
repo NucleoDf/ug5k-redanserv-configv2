@@ -120,17 +120,18 @@ public:
 
 public:
 	bool IdConfig(string &idConfig, string &fechaHora);
+	void dispose();
 
 	/** */
 
 protected:
 	void init();
-	void dispose();
 	static void *DelayedSignal(void *arg);
 	static void _recResponse(bool res, int len, void *data);
 
 private:
 	WorkingConfigMode cfg_mode;
+	global_semaphore *p_mem_config_sem;
 	ug5k_mem_config *p_mem_config;
 	CommConversor redanConv;
 #ifdef _WIN32

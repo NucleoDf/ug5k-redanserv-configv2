@@ -107,7 +107,9 @@ public:
 		p_working_config = new WorkingConfig(cfgRedan);
 		_modo_redan = "0";
 	}
-	~JsonClientProc(void){};
+	~JsonClientProc(void)
+	{
+	};
 
 protected:
 	void Run();

@@ -265,6 +265,10 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->telefonia.tm_superv_options = 0;					 // Dejar a 0.
 			this->telefonia.colateral_scv = 0;						 // Dejar a 0.
 			this->telefonia.iT_Int_Warning = 5;						 // Dejar a 5.
+			/** 20180320. Nuevos Parámetros en interfaces analogicas */
+			this->telefonia.iTmLlamEntrante = sres.info.telef.iTmLlamEntrante;
+			this->telefonia.iTmDetFinLlamada = sres.info.telef.iTmDetFinLlamada;
+
 			this->telefonia.ats_rangos_dst.clear();					 // Dejar Vacio.
 			this->telefonia.ats_rangos_org.clear();					 // Dejar Vacio.
 
