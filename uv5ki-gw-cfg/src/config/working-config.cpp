@@ -47,8 +47,9 @@ void WorkingConfig::init()
 /** */
 void WorkingConfig::dispose()
 {
-	PLOG_DEBUG("WorkingConfig (global semaphore) disposing...");
-	if (p_mem_config_sem->acquire()) {
+	/** 20180411. Si se cae la apliacion con el semaforo cogido, no se podría limpiar la misma */
+	//PLOG_DEBUG("WorkingConfig (global semaphore) disposing...");
+	//if (p_mem_config_sem->acquire()) {
 #ifdef _WIN32
 	delete p_mem_config;
 #else
@@ -58,7 +59,7 @@ void WorkingConfig::dispose()
 	delete p_mem_config_sem;
 	p_mem_config_sem = NULL;
 	PLOG_DEBUG("WorkingConfig (global semaphore) disposed.");
-	}
+	//}
 }
 
 /** */
