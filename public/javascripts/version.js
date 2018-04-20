@@ -1,6 +1,6 @@
 
 var GetVersion = function(isFirstLoad) {
-	$('#DivVersion').animate({width: '435px'});
+	$('#DivVersion').animate({width: '760px'});
 	if(!isFirstLoad) {
 		$("#AddFormVersion").show();
 		$("#FormVersion").show();
@@ -25,7 +25,7 @@ var GetVersion = function(isFirstLoad) {
 							 "<b>" + value.Name + "</b>" +
 							 ", "  + value.date +
 							 ", "  + value.fileSizeInBytes + ' bytes' +
-//							 ", "  + value.md5.toUpperCase() +
+							 ", "  + value.md5.toUpperCase() +
 							 "</p>"
 							);
 				item.appendTo($("#listVersions"));

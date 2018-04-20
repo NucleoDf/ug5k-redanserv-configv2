@@ -12,13 +12,6 @@
     "MySQL": "5.7.17",
     "Files": [
       {
-        "Name": "configUlises.json",
-        "Path": "/",
-        "fileSizeInBytes": 3448,
-        "md5": "ba4db45cef7d0537b7f5ff4402e352fa",
-        "date": "3/1/2018"
-      },
-      {
         "Name": "app.js",
         "Path": "/",
         "fileSizeInBytes": 24110,
