@@ -676,12 +676,25 @@ void SoapClientProc::McastTest()
 	if (p_mcast_socket == NULL)
 		return;
 
-	vector<byte> buff;
-	if (p_mcast_socket->Recv_bin(buff, 10)>0)
-	{
-		PLOG_INFO("Mensaje MCAST: ");
-		if (buff[0]==0x31) {
-			AvisaPideConfiguracion();
+	if (p_mcast_socket->IsReadable(200)) {
+		char buff[256];
+		int  leidos = p_mcast_socket->Recv(buff, 256);
+		if ( leidos > 0) {
+			PLOG_INFO("Mensaje MCAST: ");
+			if (buff[0]=='1') {
+				PLOG_INFO("Recibido Mensaje Nueva Configuracion disponible...");
+				AvisaPideConfiguracion();
+			}
+			else if (buff[0]==0x32) {
+				/** Cambio P/R | 0x32 | ... Nombre GW (32 c) ... | P | R | */
+				string name = string((char *)(buff+1));
+				PLOG_INFO("Recibido Mensaje Cambio P/R para: %s", name.c_str());
+				if (name == hwName && sistema::MainOrStandby()==true) {
+					sistema::ExecuteCommand("/mnt/ramfs/vrrpIni.sh");
+					PLOG_INFO("Ejecutado cambio P/R en: %s", hwName.c_str());
+				}
+			}
 		}
 	}
+
 }

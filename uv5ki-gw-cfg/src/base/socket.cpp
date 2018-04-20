@@ -554,40 +554,6 @@ int CSocket::Recv(void *buf, int sz, int _flags)
 	return num;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//
-int CSocket::Recv_text(string &text, int timeout/*=0*/, int char_timeout/*=10*/)
-{
-	text = "";
-	if (this->IsReadable(timeout))
-	{
-		char leido;
-		do 
-		{
-			if (this->Recv(&leido, 1) != 1)
-				break;			
-			text.push_back(leido);
-		} while (this->IsReadable(char_timeout));
-	}
-	return text.length();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//
-int CSocket::Recv_bin(vector<byte> &buff, int timeout/*=0*/, int char_timeout/*=10*/)
-{
-	buff.clear();
-	if (this->IsReadable(timeout))
-	{
-		byte leido;
-		do 
-		{
-			this->Recv(&leido, 1);
-			buff.push_back(leido);
-		} while (this->IsReadable(char_timeout));
-	}
-	return buff.size();
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -907,6 +873,40 @@ void CTCPSocket::Read(void *buf, int sz)
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//
+int CTCPSocket::Recv_text(string &text, int timeout/*=0*/, int char_timeout/*=10*/)
+{
+	text = "";
+	if (this->IsReadable(timeout))
+	{
+		char leido;
+		do 
+		{
+			if (this->Recv(&leido, 1) != 1)
+				break;			
+			text.push_back(leido);
+		} while (this->IsReadable(char_timeout));
+	}
+	return text.length();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+int CTCPSocket::Recv_bin(vector<byte> &buff, int timeout/*=0*/, int char_timeout/*=10*/)
+{
+	buff.clear();
+	if (this->IsReadable(timeout))
+	{
+		byte leido;
+		do 
+		{
+			this->Recv(&leido, 1);
+			buff.push_back(leido);
+		} while (this->IsReadable(char_timeout));
+	}
+	return buff.size();
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 //
