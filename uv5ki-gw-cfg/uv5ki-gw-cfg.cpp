@@ -69,12 +69,14 @@ public:
 				acBuildString, 
 				WORKING_DIR);
 #else
-			PLOG_INFO("%s (%s) CfgServer(pid: %d): (%s) Iniciado en \"%s\". ", 
+			PLOG_INFO("%s (%s) CfgServer(pid: %d): (%s) Iniciado en \"%s\". PIPE-ID: %s", 
 				Tools::read_txt_file(ON_WORKING_DIR("VERSION.TXT")).c_str(),  
 				mode==false ? string("REDAN-" + redan_mode).c_str() : "ULISES",
 				(int )getpid(),
 				acBuildString, 
-				WORKING_DIR);
+				WORKING_DIR,
+				pipe_name
+				);
 #endif
 
 			pwebApp = new Uv5kiGwCfgWebApp();
@@ -112,24 +114,31 @@ public:
 			// Si se ejecuta desde CARPER, nos pasan como primer parametro el descriptor de pipe para refrescar al perro (a CARPER).
 			int iDescPerro=pipe_name==NULL ? -1 :  atoi(pipe_name);
 			unsigned char ucPerro=0;			// Envio al Perro...		
-
+			unsigned int MainLoopLogInfoCount = 0;
 	#if !defined __APPLE__
 			mtrace();
 	#endif
 			/* Capturar las Se�ales */
 			setAllSignalCatch();
+			PLOG_INFO("Entrando en Bucle de Supervision. Pipe ID: %d.", iDescPerro);
 			while(salida==0) 
 			{
 				CThread::sleep(100);
 
 				if (iDescPerro != -1)
+				{
 					write( iDescPerro, &ucPerro, 1 );
+					if ( (MainLoopLogInfoCount % 50) == 0) {
+						PLOG_INFO("Escribiendo en Pipe ID: %d.", iDescPerro);
+					}
+					MainLoopLogInfoCount++;
+				}
 
 				SupervisaProcesos();
 			}
 	#endif
-
 			/** Finalizacion Comun */
+			PLOG_INFO("UG5k-APPSERVER Deteniendo threads hijos...");
 
 			/** Parada de Threads */
 			pwebApp->Dispose();
