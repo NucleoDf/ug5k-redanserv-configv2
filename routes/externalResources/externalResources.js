@@ -27,9 +27,20 @@ router.route('/:extType')	// The root path is relative the path where it's mount
 		//	res.json(data);
 		//});
 	});
+router.route('/radio/:extType')	// The root path is relative the path where it's mounted in app.js (app.use('/accessControl',controlAccess'))
+    .get(function(req, res) {
+        myLibExtResources.getRadioExternalResources(req.params.extType, req, res);
+    })
+
 router.route('/filterResources/:filterType/:chars2Find')
     .get(function(req, res) {
         myLibExtResources.filterExternalResources(req.params.filterType, req.params.chars2Find, function (data) {
+            res.json(data);
+        });
+    })
+router.route('/filterPhoneResources/:filterType/:chars2Find')
+    .get(function(req, res) {
+        myLibExtResources.filterExternalPhoneResources(req.params.filterType, req.params.chars2Find, function (data) {
             res.json(data);
         });
     })

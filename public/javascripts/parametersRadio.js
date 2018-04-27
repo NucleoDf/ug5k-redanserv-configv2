@@ -221,7 +221,7 @@ function SelectResourcesType (resType){
 
         $.ajax({
             type: 'GET',
-            url: '/externalResources/' + resType
+            url: '/externalResources/radio/' + resType
         })
             .done(function (data) {
                 if (data.lista_recursos == null) {
@@ -242,7 +242,7 @@ function SelectResourcesType (resType){
 }
 
 /************************************************/
-/*	FUNCTION: SelectResourcesType 				*/
+/*	FUNCTION: FilterResourcesBy 				*/
 /*  PARAMS: 									*/
 /*												*/
 /*  REV 1.0.2 VMG								*/

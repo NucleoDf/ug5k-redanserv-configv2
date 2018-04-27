@@ -62,6 +62,9 @@ script.
 				GetRemoteTfnoResources();
 				tabs=document.getElementById('ListMenuParameters').getElementsByTagName("a");
 				$('#FormHw').hide();
+				$('#rowSelectTResourceType').hide();
+				$('#rowFilterPhResource').hide();
+				$('#rowFilterPhResourceBt').hide();
 				$('#FormRadio').hide();
 				//$('#FormJitter').hide();
 				$('#FormLists').hide();
@@ -96,6 +99,9 @@ script.
 				tabs=document.getElementById('ListMenuParameters').getElementsByTagName("a");
 				$('#FormHw').hide();
 				$('#rowSelectFResourceType').hide();
+				$('#rowSelectTResourceType').hide();
+				$('#rowFilterPhResource').hide();
+				$('#rowFilterPhResourceBt').hide();
 				$('#rowFilterFResource').hide();
 				$('#rowFilterFResourceBt').hide();
 				$('#FormRadio').hide();
@@ -383,6 +389,21 @@ div(id="FormParameters")
 												tr
 													td(align='center')
 														select#CBFacedTelType(style='width:140px;' onchange='SelectTelType($("#CBFacedTelType option:selected").val())')
+												tr#rowSelectTResourceType
+													td(align='center')
+														select#CBFaced2ResourcesType(style='width:140px;' onchange='SelectPhResourcesType($("#CBFaced2ResourcesType option:selected").val())')
+															option(value='-2') Filtrar recursos...
+															option(disabled='disabled') ------------
+															option(value='4') Buscar por Alias
+															option(value='5') Buscar por URI
+															option(disabled='disabled') ------------
+															option(value='-1') Todos (Teléfono)
+												tr#rowFilterPhResource
+													td(align='center')
+														input.textbox#FilterPhResource(type='text' style='width:140px' placeholder="Carácteres a buscar...")
+												tr#rowFilterPhResourceBt
+													td(align='center')
+														a.ButtonNucleo#BtnFindPhFilterRes(onclick='FilterPhResourcesBy()') Buscar recursos
 												tr#rowSelectTelSite
 													td(align='center')
 														select#CBFacedTelSite(style='width:140px;' onchange='SelectTelGtw($("#name").val(),$("#CBFacedTelSite option:selected").val())')
@@ -778,12 +799,10 @@ div(id="FormParameters")
 											option(value='4') Buscar por Alias
 											option(value='5') Buscar por URI
 											option(disabled='disabled') ------------
+											option(value='-1') Todos (Radio)
 											option(value='0') Radio Tx
-											option(value='1') Radio TxRx
+											option(value='1') Radio Tx Rx
 											option(value='2') Radio Rx
-											option(value='3') Teléfono
-											option(value='-1') Todos
-
 								tr#rowFilterFResource
 									td(align='center')
 										input.textbox#FilterFResource(type='text' style='width:140px' placeholder="Carácteres a buscar...")

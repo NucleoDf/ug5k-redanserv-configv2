@@ -89,12 +89,14 @@ function SelectPhoneExtResource(){
 	$('#CBFacedTelSite').empty();
 	$('#CBFacedTelGtw').empty();
 	$('#CBFacedTelResources').empty();
-	
+
+    $('#rowSelectTResourceType').show();
 	$('#rowSelectTelSite').hide();
 	$('#rowSelectTelGtw').hide();
-	
-	$.ajax({type: 'GET',
-	url: '/externalResources/4'})
+    $('#CBFaced2ResourcesType option[value="-2"]').prop('selected', true);
+
+	/*$.ajax({type: 'GET',
+	url: '/externalResources/3'})
 	.done(function(data) {
         if( data.lista_recursos == null) {
             var item = '<option value="0">No existen recursos...</option>';
@@ -108,9 +110,78 @@ function SelectPhoneExtResource(){
                 });
             }
         }
-	});
+	});*/
 }
 
+/************************************************/
+/*	FUNCTION: SelectPhResourcesType 			*/
+/*  PARAMS: 									*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function SelectPhResourcesType(option){
+    $('#CBFacedTelResources').empty();
+    $('#FilterPhResource').val('');
+
+	if(option==-1) { //Caso de buscar todos
+        $('#rowFilterPhResource').hide();
+        $('#rowFilterPhResourceBt').hide();
+        $.ajax({
+            type: 'GET',
+            url: '/externalResources/3'
+        })
+		.done(function (data) {
+			if (data.lista_recursos == null) {
+				var item = '<option value="0">No existen recursos...</option>';
+				$('#CBFacedTelResources').append(item);
+			}
+			else {
+				if (data.lista_recursos != null && data.lista_recursos.length > 0) {
+					$.each(data.lista_recursos, function (index, value) {
+						var item = '<option value="' + value.uri + '">' + value.alias + '</option>';
+						$('#CBFacedTelResources').append(item);
+					});
+				}
+			}
+		});
+    }
+    if(option==4||option==5){
+        $('#rowFilterPhResource').show();
+        $('#rowFilterPhResourceBt').show();
+	}
+}
+
+/************************************************/
+/*	FUNCTION: FilterResourcesBy 				*/
+/*  PARAMS: 									*/
+/*												*/
+/*  REV 1.0.2 VMG								*/
+/************************************************/
+function FilterPhResourcesBy(){
+
+    var filterType = parseInt($("#CBFaced2ResourcesType option:selected").val());
+    var chars2Find =  $('#FilterPhResource').val();
+
+    $('#CBFacedTelResources').empty();
+    $.ajax({
+        type: 'GET',
+        url: '/externalResources/filterPhoneResources/' + filterType + '/' + chars2Find
+    })
+        .done(function (data) {
+            if (data.lista_recursos == null) {
+                var item = '<option value="0">No existen recursos...</option>';
+                $('#CBFacedTelResources').append(item);
+            }
+            else {
+                if (data.lista_recursos != null && data.lista_recursos.length > 0) {
+                    $.each(data.lista_recursos, function (index, value) {
+                        var item = '<option value="' + value.uri + '" tipo="' + value.tipo + '" title="' + value.uri + '">' + value.alias + '</option>';
+                        $('#CBFacedTelResources').append(item);
+                    });
+                }
+            }
+        });
+}
 /************************************************/
 /*	FUNCTION: SelectPhoneSite 					*/
 /*  PARAMS: cfgId: id de la configuración		*/
@@ -123,7 +194,10 @@ function SelectPhoneSite(cfgId){
 	$('#CBFacedTelResources').empty();
 	$('#rowSelectTelSite').show();
 	$('#rowSelectTelGtw').show();
-	
+    $('#rowSelectTResourceType').hide();
+    $('#rowFilterPhResource').hide();
+    $('#rowFilterPhResourceBt').hide();
+
 	$.ajax({type: 'GET',
 		url: '/resources/remote/' + cfgId + '/null/null/null',
 		success: function(data){

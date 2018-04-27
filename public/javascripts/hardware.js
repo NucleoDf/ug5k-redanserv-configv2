@@ -2779,7 +2779,7 @@ function OnChangeResourceType(sel){
 		$('#ListMenuParameters li:nth-child(2)').show();//Radio
 		$('#ListMenuParameters li:nth-child(3)').hide();//Telefonico
 		$('#ListMenuParameters li:nth-child(4)').hide();
-		$('#ListMenuParameters li:nth-child(5)').hide();
+		$('#ListMenuParameters li:nth-child(5)').show();//Comunicaciones
 		$('#ListMenuParameters li:nth-child(6)').hide();
 		//$('#DestinationRow').attr('style','display:table-row');
 		//$('#BlackWhiteRow').attr('style','display:table-row');
