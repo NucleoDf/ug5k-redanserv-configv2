@@ -7,7 +7,11 @@
 #include "../../include/config/local-config.h"
 
 #define SIGU5K01        40
-
+#if defined(_PPC82xx_)
+	#define ESD_DEV "/dev/esdiscretas"
+	#define ESDI_LEE_LADO_LR	_IOR('E',16, unsigned int)
+	#define ESDI_DIME_JIFFIES   _IOR('E', 7, unsigned int)  
+#endif
 /*******************************************************/
 class MonthNameConv
 {
@@ -270,7 +274,7 @@ bool sistema::MainOrStandby()
 time_t sistema::_TIMER_CLK()
 {
 	time_t tval;
-	time(&tval);
+	::time(&tval);
 	return tval;
 }
 
@@ -303,9 +307,6 @@ string sistema::RecordServiceVersion()
 int sistema::ParImpar()
 {
 #if defined(_PPC82xx_)
-	#define ESD_DEV "/dev/esdiscretas"
-	#define ESDI_LEE_LADO_LR	_IOR('E',16, unsigned int)
-
 	int iFdEsd = -1;
    	if ( (iFdEsd=open(ESD_DEV, O_RDWR)) < 0 )
 	{
@@ -387,6 +388,44 @@ string sistema::ipColateral()
 		return ip;
 	}
 	return "";
+}
+
+/** 20180503. Obtener los tick del sistema */
+int sistema::TickCount()
+{
+#if defined(_PPC82xx_)
+
+	int iFdEsd = -1;
+   	if ( (iFdEsd=open(ESD_DEV, O_RDWR)) < 0 )
+	{
+		PLOG_ERROR("sistema::TickCount. Error en Apertura de Driver ED !!!");
+   		return -1;
+	}
+	int ticks = ioctl( iFdEsd, ESDI_DIME_JIFFIES, 0 );
+	close(iFdEsd);
+
+	return ticks;
+#else
+	return (int )::time(NULL);
+#endif
+}
+/** */
+time_t sistema::time()
+{
+#if defined(_PPC82xx_)
+	return (time_t)((TickCount() * 10) / 1000);
+#else
+	return ::time(NULL);
+#endif
+}
+
+time_t sistema::time_max()
+{
+#if defined(_PPC82xx_)
+	return (time_t)((INT_MAX * 10) / 1000);
+#else
+	return LONG_MAX;
+#endif
 }
 
 /** 20180322. Semaforo Global */

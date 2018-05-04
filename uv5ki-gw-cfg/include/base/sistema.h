@@ -94,6 +94,11 @@ public:
 
 	/** 20171031. Obtener el colateral */
 	static string ipColateral();
+
+	/** 20180503. Obtener los Tick del sistema */
+	static int TickCount();
+	static time_t time();
+	static time_t time_max();
 	
 };
 

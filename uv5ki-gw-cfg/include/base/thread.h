@@ -21,6 +21,7 @@
 #include <assert.h>
 
 #include "code-base.h"
+#include "sistema.h"
 
 #ifndef THREAD_PRIORITY_NORMAL
 	#define THREAD_PRIORITY_NORMAL 1
@@ -31,12 +32,14 @@ class TimeMeasure
 {
 public:
 	TimeMeasure() {
-		_last = time(NULL);
+		_last = sistema::time();
 	}
 	bool elapsed(time_t _timeout) {
-		time_t now = time(NULL);
+		time_t now = sistema::time();
 		
-		_diff = now - _last;
+		_diff = now >= _last ? now - _last : 
+			sistema::time_max() - (_last - now);
+
 		if (now > (_last + _timeout)) {
 			_last = now;
 			return true;

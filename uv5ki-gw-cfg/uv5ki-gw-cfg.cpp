@@ -108,6 +108,8 @@ public:
 				//Tools::fatalerror("Test FATALERROR");
 
 				SupervisaProcesos();
+
+				Testing();
 			}
 	#else
 				/** Lazo de LINUX */
@@ -353,6 +355,13 @@ private:
 			exit(-1);
 		}
 	}
+#ifdef _WIN32
+	void Testing() 
+	{
+		short unsigned int cnt = 0xfff0;
+		short unsigned int cnt_over = cnt + 20;
+	}
+#endif
 	time_t hangup_timeout_min;
 	time_t hangup_timeout_max;
 	Uv5kiGwCfgWebApp *pwebApp;
