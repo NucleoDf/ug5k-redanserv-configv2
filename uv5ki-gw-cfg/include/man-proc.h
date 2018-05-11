@@ -222,6 +222,7 @@ public:
 		else
 			setEstadoCpu(cpu1cpu2==0 ? epriCpu0 : epriCpu1, cpu1cpu2==0 ? estado.cpu0 : estado.cpu1, len, data);
 	}
+	bool IsCollateralInStandby();
 protected:
 	void actualizaPrincipal();
 	void SetEstadoPRCpu(ePRIdentity quien, /*ePRIdentity que, */int nestado);

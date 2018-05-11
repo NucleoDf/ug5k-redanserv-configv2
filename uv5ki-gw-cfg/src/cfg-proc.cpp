@@ -690,8 +690,13 @@ void SoapClientProc::McastTest()
 				string name = string((char *)(buff+1));
 				PLOG_INFO("Recibido Mensaje Cambio P/R para: %s", name.c_str());
 				if (name == hwName && sistema::MainOrStandby()==true) {
-					sistema::ExecuteCommand("/mnt/ramfs/vrrpIni.sh");
-					PLOG_INFO("Ejecutado cambio P/R en: %s", hwName.c_str());
+					if (ManProc::p_man->IsCollateralInStandby()) {
+						sistema::ExecuteCommand("/mnt/ramfs/vrrpIni.sh");
+						PLOG_INFO("Cambio P/R Ejecutado en: %s", hwName.c_str());
+					}
+					else {
+						PLOG_INFO("Cambio P/R No Ejecutado en: %s. El Colateral no está en STANDBY", hwName.c_str());
+					}
 				}
 			}
 		}

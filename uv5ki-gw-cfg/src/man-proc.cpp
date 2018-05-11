@@ -361,6 +361,25 @@ void ManProc::NotificaEstadosCpu()
 
 #endif
 
+bool ManProc::IsCollateralInStandby() 
+{
+	if (P_WORKING_CONFIG->DualCpu() == true) {
+		string ipCol = sistema::ipColateral();
+		if (ipCol == estado.cpu0.ip) {
+			GetEstadoCpu(0);
+			this->sleep(200);
+			return estado.cpu0.st_cpu == 2 ? true : false;
+		}
+		else if (ipCol == estado.cpu1.ip) {
+			GetEstadoCpu(1);
+			this->sleep(200);
+			return estado.cpu1.st_cpu == 2 ? true : false;
+		}
+	}
+	return false;
+}
+
+
 ///////////////////////////////////////////////////////////////////
 //
 void jDataBite::setMsg(string msgIn) 
