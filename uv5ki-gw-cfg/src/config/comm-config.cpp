@@ -214,8 +214,11 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			/***************************/
 
 			/** 20170316. Parámetros específicos para FD */
-			this->radio.tGRSid=sres.info.radio.GrsDelay;								// GRS Delay
-			this->radio.metodoBss=sres.info.radio.MetodoBSS;							// Metodo QIDX
+			this->radio.tGRSid = sres.info.radio.GrsDelay;								// GRS Delay
+			/** 201806020. En Ulises vienen los codigos cambiados */
+			// this->radio.metodoBss = sres.info.radio.MetodoBSS;							// Metodo QIDX
+			this->radio.metodoBss = sres.info.radio.MetodoBSS==0 ? 1 : 0;
+
 			sres.TablaBss(this->radio.tabla_indices_calidad);						//  
 			this->radio.iEnableGI=sres.info.radio.GrabacionEd137==false ? 0 : 1;		// 
 			this->radio.evtPTT=sres.info.radio.EnableEventPttSq  ? 1 : 0;
