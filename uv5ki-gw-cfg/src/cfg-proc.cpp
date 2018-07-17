@@ -582,6 +582,10 @@ void SoapClientProc::ChequearConfiguracion()
 		}
 		/** 20171031. Para la dualidad en ULISES */
 		p_working_config->refreshCpuPair();
+
+#ifdef _WIN32
+		//HttpClient("192.168.0.53:8080").TestChunkResponse();
+#endif
 	}
 	catch(...)
 	{	// Evento CFG-A

@@ -254,7 +254,9 @@ public:
     void Write(const void *buf, int sz);  // escribe exactamente sz bytes (lo mismo que Send)
     void Read(void *buf, int sz);         // lee exactamente sz bytes: si hay menos, espera; si se cierra la conexi�n lanza el error WSAECONNRESET)
 	// AGL.
-	int Recv_text(string &text, int timeout=0, int char_timeout=10);
+	int ReadLine(string &line, int timeout=0);
+	int Recv_text(string &text, int len, int timeout=0);
+	int Recv_http(string &text, int timeout=5000);
 	int Recv_bin(vector<byte> &buffer, int timeout=0, int char_timeout=10);
 protected:
     virtual void Init();

@@ -29,6 +29,9 @@ public:
 public:
 	static void ParseHost(string host, string &ip, int &port);
 
+	/** Testing */
+	void TestChunkResponse();
+
 private:
 	string server;
 	int char_timeout;

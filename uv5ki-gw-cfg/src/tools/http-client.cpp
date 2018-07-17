@@ -31,11 +31,15 @@ ParseResponse HttpClient::SendHttpCmd(string cmd, int ms_timeout)
 		if (sck.Send(cmd.c_str(), cmd.length()) != (int) cmd.length())
 			throw Exception("Error al Enviar request: " + cmd);
 
-		string respuesta;
-		sck.Recv_text(respuesta, ms_timeout, char_timeout);
+		//string respuesta;
+		////sck.Recv_text(respuesta, ms_timeout, char_timeout);
+		//sck.Recv_http(respuesta);
+		//sck.Close();
+		//return ParseResponse(respuesta.c_str());
 
+		ParseResponse respuesta(sck, ms_timeout);
 		sck.Close();
-		return ParseResponse(respuesta.c_str());
+		return respuesta;
 
 	} 
 	catch (socket_error e) 
@@ -57,4 +61,11 @@ ParseResponse HttpClient::SendHttpCmd(string metodo, string cmd, int ms_timeout,
 	// string request = metodo + "/" + cmd + " HTTP/1.1\r\nHost: " + server + "\r\nContent-Type: application/json\r\n\r\n" + jdata + "\r\n";
 
 	return SendHttpCmd(request, ms_timeout);
+}
+
+/** Testing */
+void HttpClient::TestChunkResponse()
+{
+	string request = "GET /ntpstatus  HTTP/1.1\r\nHost: 192.168.0.53:8080\r\nContent-Type: application/json\r\n\r\n";
+	ParseResponse response = SendHttpCmd(request, 5000);
 }

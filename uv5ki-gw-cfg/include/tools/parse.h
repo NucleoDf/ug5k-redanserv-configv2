@@ -16,6 +16,9 @@
 #define FAIL_MESSAGE "Fail"
 #define FAIL_SPLIT "Error in split function : "
 
+#include "../base/socket.h"
+#include "../tools/tools.h"
+
 using namespace std;
 
 class Parse {
@@ -54,6 +57,7 @@ class ParseResponse
 public:
 	ParseResponse();
 	ParseResponse(string response);
+	ParseResponse(CTCPSocket &sck, int timeout=0);
 
 public:
 	string Status(){return _status;};	 
@@ -62,13 +66,16 @@ public:
 	string StatusText(){return _status_text;}
 
 	bool Error(){return _error;}
-	bool Parse(string response);
 
 private:
+	bool Parse(string response);
 	vector<string> Split(string entrada, string sep);
 	bool ParseStatus(string line);
 	bool ParseHeader(string line);
 	string ParseCkunked(vector<string> &data, vector<string>::iterator &it);
+	bool Parse(CTCPSocket &sck, int timeout);
+	bool ParseCkunked(CTCPSocket &sck, int timeout);
+	void SetError(){_error=true;}
 
 private:
 	string _status,_httpv, _status_text, _body;

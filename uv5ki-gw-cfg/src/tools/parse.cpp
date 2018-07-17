@@ -212,6 +212,13 @@ ParseResponse::ParseResponse(string response)
 }
 
 /** */
+ParseResponse::ParseResponse(CTCPSocket &sck,int timeout)
+{
+	_error = !Parse(sck, timeout);
+}
+
+
+/** */
 string ParseResponse::Header(string _header) const
 {
   map<string,string>::const_iterator it;
@@ -329,5 +336,81 @@ string ParseResponse::ParseCkunked(vector<string> &data, vector<string>::iterato
 		it++;
 
 	}
+	return retorno;
+}
+
+/** */
+bool ParseResponse::Parse(CTCPSocket &sck,int timeout)
+{		
+	string line;
+	int len=0;
+
+	/** Procesar la Primera Linea */
+	if (sck.ReadLine(line, timeout)<=0)
+		return false;
+	if (ParseStatus(line)==false)
+		return false;	
+
+	/** Procesar los HEADERS */
+	do {
+		len = sck.ReadLine(line, timeout);
+
+		if (len < 0 )
+			return false;
+		
+		ParseHeader(line);
+
+	} while (len > 0);
+
+	/** Leer el Body */
+	if (Header("Transfer-Encoding")=="chunked")
+	{
+		return ParseCkunked(sck, timeout);
+	}
+	else 
+	{
+		string strLen = Header("Content-Length");
+		len = Tools::atoi(strLen);
+		if (len <= 0)
+			return false;
+
+		len = sck.Recv_text(_body, len, timeout);		
+		if (len < 0) 		
+			return false;
+	}
+	return true;
+}
+
+/** */
+bool ParseResponse::ParseCkunked(CTCPSocket &sck, int timeout)
+{
+	string data;
+	string line;
+	int lenline=0;
+	bool retorno = true;
+	do
+	{
+		/** La primera Linea del chunk es la longitud en hexadecimal */
+		lenline = sck.ReadLine(line, timeout);
+		if (lenline > 0)
+		{
+			long chunklen = strtol(line.c_str(), NULL, 16);
+			if (chunklen > 0) 
+			{
+				/** La siguiente linea es el chunk */
+				lenline = sck.ReadLine(line, timeout);
+				if (lenline > 0)
+				{
+					_body += line;
+				}
+				else if (lenline < 0)
+					retorno = false;
+			}
+		}
+		else if (lenline < 0)
+			retorno = false;
+		
+	} while(lenline > 0);
+
 	return retorno;
 }

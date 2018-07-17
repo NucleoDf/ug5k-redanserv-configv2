@@ -873,9 +873,34 @@ void CTCPSocket::Read(void *buf, int sz)
 	}
 }
 
+int CTCPSocket::ReadLine(string &line, int timeout)
+{
+	line = "";
+	if (this->IsReadable(timeout))
+	{
+		char leido;
+		do 
+		{
+			int err = this->Recv(&leido, 1);
+
+			if (err != 1)
+				return err < 0 ? err : -1;
+
+			if (leido == '\n')
+				break;
+
+			if (leido == '\r')
+				continue;
+
+			line.push_back(leido);
+		} while (this->IsReadable(timeout));
+	}
+	return line.length();
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 //
-int CTCPSocket::Recv_text(string &text, int timeout/*=0*/, int char_timeout/*=10*/)
+int CTCPSocket::Recv_text(string &text, int len, int timeout/*=0*/)
 {
 	text = "";
 	if (this->IsReadable(timeout))
@@ -883,13 +908,36 @@ int CTCPSocket::Recv_text(string &text, int timeout/*=0*/, int char_timeout/*=10
 		char leido;
 		do 
 		{
-			if (this->Recv(&leido, 1) != 1)
-				break;			
+			int err = this->Recv(&leido, 1);
+			if (err != 1)
+				return err < 0 ? err : -1;
+
 			text.push_back(leido);
-		} while (this->IsReadable(char_timeout));
+
+		} while (--len > 0 && this->IsReadable(timeout));
 	}
 	return text.length();
 }
+
+int CTCPSocket::Recv_http(string &text, int timeout)
+{
+	text = "";
+	if (this->IsReadable(timeout))
+	{
+		char localbuf[10000];
+		int leidos = sizeof(localbuf);
+
+		do 
+		{
+			leidos = this->Recv(localbuf, sizeof(localbuf));		
+			for (int leido=0; leido<leidos; leido++)
+				text.push_back(localbuf[leido]);
+		} while(leidos==sizeof(localbuf) && this->IsReadable(50));
+	}
+
+	return text.length();
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //
