@@ -454,7 +454,7 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
         , dualidad: function () {
             return cfg.general.dualidad == 0 ? false : true;
         }
-        , indice_carga: function () {
+        , indice_carga: function (modo) {   // 0: Redan, 1: Ulises
             var ic = 0;
             var nr = 0;
             if (cfg != null) {
@@ -479,7 +479,26 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                         }
                     }
                     else if (rec.Radio_o_Telefonia == 2) {
-                        ic += 1;
+                        switch (rec.telefonia.tipo) {
+                            case 0: // BL
+                            case 1: // BC
+                                ic += 1;
+                                break;
+
+                            case 2: // AB en ulises 4 en REDAN 1.
+                                ic += (modo == 0 ? 1 : 4);
+                                break;
+
+                            case 3: // R2
+                            case 4: // N5
+                            case 5: // LCEN
+                                ic += 2;
+                                break;
+
+                            default:
+                                ic += 1;
+                                break;
+                        }
                     }
                 });
             }

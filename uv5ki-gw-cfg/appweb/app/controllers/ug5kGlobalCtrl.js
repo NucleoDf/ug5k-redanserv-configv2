@@ -168,8 +168,9 @@ function ug5kGlobalCtrl($scope, $rootScope, $interval, $translate, dataservice, 
 	}
 
     /** */
-	vm.gw_ic = function () {
-	    return "IC: " + CfgService.indice_carga().toString();
+    vm.gw_ic = function () {
+        var modo = MantService.modo() == "ul" ? 1 : 0;
+	    return "IC: " + CfgService.indice_carga(modo).toString();
 	}
 
     /** */
