@@ -1,4 +1,8 @@
 /** */
+var Simulate = location.port == 8888;
+var Desarrollando = false;
+var session_supervision = !Simulate;
+
 var ug5kApp = angular.module('Ug5kweb', ['ngRoute', 'ui.bootstrap', 'smart-table', 'pascalprecht.translate']);
 
 /** */
@@ -81,9 +85,6 @@ var carga_upload_config_timer = 0;              // Temporizador Aleatorio en Seg
 var carga_upload_config_timer_max = 60;         // Máximo del Temporizador.
 var carga_upload_config_timer_min = 20;         // Minimo del Temporizador.
 
-var Simulate = false;
-var Desarrollando = false;
-var session_supervision = true;
 
 /** */
 var sesion_sup = 10;
