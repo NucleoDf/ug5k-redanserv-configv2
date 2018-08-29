@@ -1,0 +1,3 @@
+D:\Datos\Empresa\Visual Studio 2010\Projects\GitRepos\AtGithub\ug5k-redanserv-configv2\obj\Debug\RedanCfgV2.njsprojAssemblyReference.cache
+D:\Datos\Empresa\Visual Studio 2010\Projects\GitRepos\AtGithub\ug5k-redanserv-configv2\obj\Debug\RedanCfgV2.njsproj.CoreCompileInputs.cache
+D:\Datos\Empresa\Visual Studio 2010\Projects\GitRepos\AtGithub\ug5k-redanserv-configv2\bin\Microsoft.NodejsTools.WebRole.dll
