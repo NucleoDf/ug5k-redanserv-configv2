@@ -424,7 +424,7 @@ time_t sistema::time_max()
 #if defined(_PPC82xx_)
 	return (time_t)((INT_MAX * 10) / 1000);
 #else
-	return LONG_MAX;
+	return INT_MAX;
 #endif
 }
 

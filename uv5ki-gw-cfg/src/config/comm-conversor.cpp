@@ -393,7 +393,9 @@ void CommConversor::RecursoGeneral(CommResConfig *p_rec, struct cfgConfigGeneral
 	mgen->iRecPuertoRemoto = mcfg->iRecPuertoRemoto;
 	mgen->iRecPuertoBase = 65004;
 
-	// memcpy(mgen->szDestino, p_rec->szDestino.c_str(), CFG_MAX_LONG_NOMBRE_RECURSO);
+	/** 20180913. Se utiliza en ULISES para los Display NAME de los recursos PP */
+	memcpy(mgen->szDestino, p_rec->szDestino.c_str(), CFG_MAX_LONG_NOMBRE_RECURSO);
+
 	mgen->iFlgUsarDiffServ = p_rec->iFlgUsarDiffServ;
 
 	/** Lista de enlaces externos ??? */

@@ -20,6 +20,7 @@
 #else
 	#include <unistd.h>
 	#include <signal.h>
+	#include <limits.h>
 	#define Sleep(m)	usleep(1000*m)
 
 	#if defined _PPC82xx_
