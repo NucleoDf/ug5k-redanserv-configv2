@@ -53,9 +53,9 @@ protected:
 		string sval = string(RAPID_XML_NODE_VALUE(xnode, indice));
 		val = sval == "false" ? false : true;
 	}
-	void read_key(xml_node<> * xnode, const char *indice, int &val) {
+	void read_key(xml_node<> * xnode, const char *indice, int &val, int vdef=-1) {
 		string sval = RAPID_XML_NODE_VALUE(xnode, indice);
-		val = sval == indice ? -1 : atoi(sval.c_str());
+		val = sval == indice ? vdef : atoi(sval.c_str());
 		// val = atoi(RAPID_XML_NODE_VALUE(xnode, indice));
 	}
 	void read_key(xml_node<> * xnode, const char *indice, TI_ &val) {
@@ -454,6 +454,12 @@ public:
 		/** 20180320. Nuevos Parámetros en interfaces analogicas */
 		telef.iTmLlamEntrante = 30;
 		telef.iTmDetFinLlamada= 6;
+		/** 20181016. U2510. SP#01-15*/
+		telef.superv_options = 0;
+		telef.tm_superv_options = 10;
+		telef.TReleaseBL = 3;
+		telef.iDetCallerId = 1;
+		telef.iTmCallerId = 30;
 	}
 	~soap_ResourceInfo(){}
 public:
@@ -529,6 +535,13 @@ public:
 		/** 20180320. Nuevos Parámetros en interfaces analogicas */
 		read_key(xnode, "iTmLlamEntrante", telef.iTmLlamEntrante);
 		read_key(xnode, "iTmDetFinLlamada", telef.iTmDetFinLlamada);
+
+		/** 20181016. U2510. SP#01-15*/
+		read_key(xnode, "superv_options", telef.superv_options, 0);
+		read_key(xnode, "tm_superv_options", telef.tm_superv_options, 10);
+		read_key(xnode, "TReleaseBL", telef.TReleaseBL, 3);
+		read_key(xnode, "iDetCallerId", telef.iDetCallerId, 1);
+		read_key(xnode, "iTmCallerId", telef.iTmCallerId, 30);
 	}
 
 public:
@@ -562,6 +575,13 @@ public:
 		/** 20180320. Nuevos Parámetros en interfaces analogicas */
 		int iTmLlamEntrante;
 		int iTmDetFinLlamada;
+		/** 20181016. U2510. SP#01-15*/
+		int superv_options;
+		int tm_superv_options;
+		int TReleaseBL;
+		int iDetCallerId;
+		int iTmCallerId;
+
 	} telef;
 	struct {
 		bool EM;						// TODO: No se asigna.
@@ -695,6 +715,10 @@ public:
 		/** */
 		read_key(xnode, "IpGrabador1", Grabador1);
 		read_key(xnode, "IpGrabador2", Grabador2);
+
+		/** 20181016. U2510. SP#01-15*/
+		read_key(xnode, "SupervisionLanGW", SupervisionLanGW, 0);
+		read_key(xnode, "TmMaxSupervLanGW", TmMaxSupervLanGW, 1);
 	}
 
 public:
@@ -711,6 +735,10 @@ public:
 	/** */
 	string Grabador1;
 	string Grabador2;
+	
+	/** 20181016. U2510. SP#01-15*/
+	int SupervisionLanGW;
+	int TmMaxSupervLanGW;
 };
 
 /** */

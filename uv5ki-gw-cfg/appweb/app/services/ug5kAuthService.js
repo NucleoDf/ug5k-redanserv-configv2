@@ -16,6 +16,9 @@ function authservice(MantService, $q, $location, $rootScope) {
         , Confirma: Confirma
         , global_enable: function (perfiles) {
 
+            if (Desarrollando === true)
+                return true;
+
             if (ProfilePermission(true, perfiles) == false)
                 return false;
 

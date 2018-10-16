@@ -34,10 +34,6 @@
 #define PRECISION_ESTRICTA 0
 #define PRECISION_NORMAL   1
 
-//Identificacion de configuracion vacia
-
-#define ID_CFG_VACIA	"ESTA-VACIA"
-
 /*
  * Dimensionamiento
  */
@@ -85,14 +81,6 @@
 
 #define	MAX_TM_LLAMADA_ENTRANTE		60			//maximo tiempo de llamada entrante para lineas de 2 hilos
 #define MAX_TM_DET_FINLLAMADA		8			//maximo tiempo para detectar que ha finalizado la llamada entrante rtb (ringon-ringoff), es decir, reposo desde el ultimo ringoff
-
-#define	MIN_PERIODO_SPV_RING		50
-#define	MAX_PERIODO_SPV_RING		400
-#define	DEF_PERIODO_SPV_RING		200
-#define	MIN_FILTRO_SPV_RING			1
-#define	MAX_FILTRO_SPV_RING			6
-#define	DEF_FILTRO_SPV_RING			2
-
 /*
  * Tipos de sincronizacion.
  */
@@ -337,7 +325,6 @@ enum eType
 #define RESTRICCION_LISTA_NEGRA    1
 
 
-#define TM_MAX_SUPERV_OPTIONS		20
 
 /*
  * Otros numeros.
@@ -940,6 +927,7 @@ struct cfgConfigIfLcen
 struct cfgConfigIfR2N5
 {
     int iLado;
+
     struct Tiempos
     {
         int iP1Min;
@@ -1027,16 +1015,6 @@ struct cfgConfigIfTlf
     int iTmInactividad;
     int iTmLlamEntrante;			//tmout de llamada entrante en lineas tlf (BL,BC,RTB)
     int iTmDetFinLlamada;			//tmout para detectar fin llamada desde el ultimo ringoff
-
-    int TReleaseBL;
-    int iDetDtmf;
-    int iDetInversionPol;
-    int iDetCallerId;
-    int iTmCallerId;
-
-    int iPeriodoSpvRing;
-    int iFiltroSpvRing;
-
     char szIdRed[CFG_MAX_LONG_NOMBRE_RED+1];
     void PorDefecto();
     bool operator ==( const cfgConfigIfTlf& );
@@ -1101,7 +1079,6 @@ struct cfgConfigRecurso
     bool operator ==( const cfgConfigRecurso& );
     bool operator !=( const cfgConfigRecurso& );
     bool CambiaColateral(cfgConfigRecurso *pcfgOtra );
-    bool CambioCritico(  const cfgConfigRecurso &sLaOtra );
     void ReajustaAudio( int offsetAtenuacion );
 };        
 
@@ -1173,9 +1150,6 @@ struct cfgConfigPasarela
     int iRecPuertoRemoto;
 //    int iSnmpPuertoRemotoTraps;
 //    char szTraps[CFG_MAX_LONG_URL+1];
-
-    int iSupervLanGW;
-	int itmmaxSupervLanGW;
 
     int iNumRecursos;
 

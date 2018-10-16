@@ -186,9 +186,9 @@ protected:
 		val = is_null(base, indice) ? false :
 			   is_bool(base, indice) ? base[indice].GetBool() : false; 			   
 	}
-	void read_key(Value &base, const char *indice, int &val) {
+	void read_key(Value &base, const char *indice, int &val, int def=-1) {
 		error = "";
-		val = is_null(base, indice) ? -1 :
+		val = is_null(base, indice) ? def :
 			   is_int(base, indice) ? base[indice].GetInt() : 			   
 			   is_string(base, indice) ? atoi(base[indice].GetString()) : -2;
 	}

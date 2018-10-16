@@ -70,6 +70,9 @@ CommGenConfig::CommGenConfig(soap_config &sc)
 		}
 	}
 
+	/** 20181016. U2510. SP#01-15*/
+	this->SupervisionLanGW = sc.CfgPasarela.SupervisionLanGW;
+	this->TmMaxSupervLanGW = sc.CfgPasarela.TmMaxSupervLanGW;
 }
 
 /** */
@@ -264,8 +267,14 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->telefonia.detect_vox = 0;							 // Dejar a 0. En ULISES no hay deteccion de cuelgue.
 			this->telefonia.umbral_vox = -26;						 // 
 			this->telefonia.tm_inactividad = 0;						 // 20170628. Se cambia de 12 a 0 para que en ULISES no se supervise inactividad.
-			this->telefonia.superv_options = 0;						 // Dejar a 0.
-			this->telefonia.tm_superv_options = 0;					 // Dejar a 0.
+		
+		    /** 20181016. U2510. SP#01-15*/
+			this->telefonia.superv_options = sres.info.telef.superv_options;
+			this->telefonia.tm_superv_options = sres.info.telef.tm_superv_options;
+			this->telefonia.TReleaseBL = sres.info.telef.TReleaseBL;
+			this->telefonia.iDetCallerId = sres.info.telef.iDetCallerId;
+			this->telefonia.iTmCallerId = sres.info.telef.iTmCallerId;
+			
 			this->telefonia.colateral_scv = 0;						 // Dejar a 0.
 			this->telefonia.iT_Int_Warning = 5;						 // Dejar a 5.
 			/** 20180320. Nuevos Parámetros en interfaces analogicas */

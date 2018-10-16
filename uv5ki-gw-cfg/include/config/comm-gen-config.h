@@ -103,6 +103,10 @@ public:
 		}
 		//cpus.push_back(CommGenCpu());
 		//cpus.push_back(CommGenCpu());
+	
+		/** 20181016. U2510. SP#01-15*/
+		SupervisionLanGW=0;
+		TmMaxSupervLanGW=1;
 	}
 	CommGenConfig(soap_config &sc);
 	~CommGenConfig() {
@@ -142,6 +146,10 @@ public:
 		write_key(writer, "puertoconsola", puertoconsola);
 		write_key(writer, "nivelIncidencias", nivelIncidencias);
 		write_key(writer, "cpus", cpus);
+
+		/** 20181016. U2510. SP#01-15*/
+		write_key(writer, "SupervisionLanGW", SupervisionLanGW);
+		write_key(writer, "TmMaxSupervLanGW", TmMaxSupervLanGW);
 	}
 	virtual void jread(Value &base)
 	{
@@ -159,6 +167,10 @@ public:
 		read_key(base,"puertoconsola", puertoconsola);
 		read_key(base,"nivelIncidencias", nivelIncidencias);
 		read_key(base, "cpus", cpus);
+
+		/** 20181016. U2510. SP#01-15*/
+		read_key(base,"SupervisionLanGW", SupervisionLanGW, 0);
+		read_key(base, "TmMaxSupervLanGW", TmMaxSupervLanGW, 1);
 	}
 
 public:
@@ -175,6 +187,10 @@ public:
 #else
 	vector<CommGenCpu *> cpus;
 #endif
+	/** 20181016. U2510. SP#01-15*/
+	int SupervisionLanGW;
+	int TmMaxSupervLanGW;
+
 	//string acGrupoMulticast;
 	//int uiPuertoMulticast;
 };

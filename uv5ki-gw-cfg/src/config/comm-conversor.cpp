@@ -259,6 +259,10 @@ void CommConversor::ParametrosGlobales()
 	// MODO en Pasarela
 	mcfg->iCfgModoSistema = p_cfg_in->tipo==1 ? 0 : 1;						// 0: Ulises, 1: Redan.
 
+	/** 20181016. U2510. SP#01-15*/
+	mcfg->iSupervLanGW = p_cfg_in->general.SupervisionLanGW;
+	mcfg->itmmaxSupervLanGW = p_cfg_in->general.TmMaxSupervLanGW;
+
 }
 
 /** */
@@ -792,6 +796,12 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	mgen->iRestriccion=0;
 	// mgen->iEnableRegistro = 0;
 	/*************/
+
+	/** 20181016. U2510. SP#01-15*/
+	mtlf->TReleaseBL = p_rec->telefonia.TReleaseBL;
+	mtlf->iDetCallerId = p_rec->telefonia.iDetCallerId;
+	mtlf->iTmCallerId = p_rec->telefonia.iTmCallerId;
+
 }
 
 /** */

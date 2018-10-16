@@ -64,6 +64,10 @@ public:
 		/** 20180320. Nuevos Parámetros en interfaces analogicas */
 		iTmLlamEntrante = 30;
 		iTmDetFinLlamada = 6;
+		/** 20181016. U2510. SP#01-15*/
+		TReleaseBL = 3;
+		iDetCallerId = 1;
+		iTmCallerId = 30;
 	}
 	~CommResTelef() {
 		clear_array(ats_rangos_dst);
@@ -104,6 +108,10 @@ public:
 		/** 20180320. Nuevos Parámetros en interfaces analogicas */
 		write_key(writer, "iTmLlamEntrante", iTmLlamEntrante);
 		write_key(writer, "iTmDetFinLlamada", iTmDetFinLlamada);
+		/** 20181016. U2510. SP#01-15*/
+		write_key(writer, "TReleaseBL", TReleaseBL);
+		write_key(writer, "iDetCallerId", iDetCallerId);
+		write_key(writer, "iTmCallerId", iTmCallerId);
 	}
 	virtual void jread(Value &base)
 	{
@@ -137,8 +145,12 @@ public:
 		read_key(base, "ats_rangos_directos_ope", ats_rangos_directos_ope);
 		read_key(base, "ats_rangos_directos_pri", ats_rangos_directos_pri);
 		/** 20180320. Nuevos Parámetros en interfaces analogicas */
-		read_key(base, "iTmLlamEntrante", iTmLlamEntrante);
-		read_key(base, "iTmDetFinLlamada", iTmDetFinLlamada);
+		read_key(base, "iTmLlamEntrante", iTmLlamEntrante, 30);
+		read_key(base, "iTmDetFinLlamada", iTmDetFinLlamada, 6);
+		/** 20181016. U2510. SP#01-15*/
+		read_key(base, "TReleaseBL", TReleaseBL, 3);
+		read_key(base, "iDetCallerId", iDetCallerId, 1);
+		read_key(base, "iTmCallerId", iTmCallerId, 30);
 	}
 
 public:
@@ -163,6 +175,12 @@ public:
 	/** 20180320. Nuevos Parámetros en interfaces analogicas */
 	int iTmLlamEntrante;
 	int iTmDetFinLlamada;
+
+	/** 20181016. U2510. SP#01-15*/
+	int TReleaseBL;
+	int iDetCallerId;
+	int iTmCallerId;
+
 #if __POR_REFERENCIA__
 	vector<CommResTelefAtsRange> ats_rangos_dst;
 	vector<CommResTelefAtsRange> ats_rangos_org;

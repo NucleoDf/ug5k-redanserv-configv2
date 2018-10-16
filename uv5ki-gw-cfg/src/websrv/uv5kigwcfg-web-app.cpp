@@ -75,7 +75,7 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.sec_uris.push_back("/styles/bootstrap/bootstrap.min.css");
 	_web_config.sec_uris.push_back("/styles/uv5ki-styles.css");
 	_web_config.sec_uris.push_back("/scripts/jquery/jquery-2.1.3.min.js");
-	_web_config.sec_uris.push_back("/images/nucleo-df-new.jpg");
+	_web_config.sec_uris.push_back("/images/corporativo.png");
 	_web_config.sec_uris.push_back("/images/noaccess.jpg");
 	_web_config.sec_uris.push_back(_web_config.login_uri);
 	_web_config.sec_uris.push_back(_web_config.bad_user_uri);
