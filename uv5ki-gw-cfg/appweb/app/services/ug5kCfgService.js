@@ -227,6 +227,15 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                 ]
                 , idRed: ""
                 , idTroncal: ""
+				, iTmLlamEntrante: 30
+				, iTmDetFinLlamada: 6
+				, TReleaseBL: 3
+				, iDetCallerId: 1
+				, iTmCallerId: 30
+				, iDetInversionPol: 1
+				, iPeriodoSpvRing: 200
+				, iFiltroSpvRing: 2
+				, iDetDtmf: 0
             },
             LlamadaAutomatica: 0,
             restriccion: 0,
