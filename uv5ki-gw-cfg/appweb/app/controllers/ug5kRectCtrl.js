@@ -635,17 +635,17 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     },
                     {
                         // 2 - 17
-                        Name: transerv.translate('Tiempo con tonos antes de pasar a reposo (sg)'), // todo traducir
+                        Name: transerv.translate('Tiempo con tonos antes de pasar a reposo (sg)'), 
                         Value: vm.tdata.telefonia.TReleaseBL,
                         Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 0,
                         Inputs: [],
                         Show: function () { return vm.vdata[0].Value === "0"; },
-                        Val: function () { return vm.vdata[16].Value > 0 && vm.vdata[16].Value <= 10; }
+                        Val: function () { return vm.vdata[17].Value > 0 && vm.vdata[17].Value <= 10; }
                     },
                     {
                         // 2 - 18
-                        Name: transerv.translate('Detección de Caller-Id en llamadas entrantes ?'), // todo traducir
+                        Name: transerv.translate('Detección de Caller-Id en llamadas entrantes ?'), 
                         Value: vm.tdata.telefonia.iDetCallerId.toString(),
                         Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 1,
@@ -655,13 +655,53 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     },
                     {
                         // 2 - 19
-                        Name: transerv.translate('Tiempo de deteccion de CallerId (unidades de 100 ms)'),    // todo traducir
+                        Name: transerv.translate('Tiempo de deteccion de CallerId (unidades de 100 ms)'), 
                         Value: vm.tdata.telefonia.iTmCallerId,
                         Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 0,
                         Inputs: [],
                         Show: function () { return vm.vdata[0].Value === "2" && vm.vdata[18].Value === "1"; },
                         Val: function () { return vm.vdata[19].Value > 0 && vm.vdata[19].Value <= 50; }
+                    },
+                    {
+                        // 2 - 20
+                        Name: transerv.translate('Detección de Inversion de Polaridad ?'),
+                        Value: vm.tdata.telefonia.iDetInversionPol.toString(),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
+                        Input: 1,
+                        Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
+                        Show: function () { return vm.vdata[0].Value === "2"; },
+                        Val: function () { return true; }
+                    },
+                    {
+                        // 2 - 21
+                        Name: transerv.translate('Periodo de Supervision de señal de ring (ms).'), 
+                        Value: vm.tdata.telefonia.iPeriodoSpvRing,
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
+                        Input: 0,
+                        Inputs: [],
+                        Show: function () { return vm.vdata[0].Value === "2" || vm.vdata[0].Value === "0"; },
+                        Val: function () { return vm.vdata[21].Value >= 50 && vm.vdata[21].Value <= 400; }
+                    },
+                    {
+                        // 2 - 22
+                        Name: transerv.translate('Filtro de Supervision de señal de ring.'),
+                        Value: vm.tdata.telefonia.iFiltroSpvRing,
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
+                        Input: 0,
+                        Inputs: [],
+                        Show: function () { return vm.vdata[0].Value === "2" || vm.vdata[0].Value === "0"; },
+                        Val: function () { return vm.vdata[22].Value > 0 && vm.vdata[22].Value <= 6; }
+                    },
+                    {
+                        // 2 - 23
+                        Name: transerv.translate('Detección DTMF ?'), // todo traducir
+                        Value: vm.tdata.telefonia.iDetDtmf.toString(),
+                        Enable: false,  // authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
+                        Input: 1,
+                        Inputs: [/*"No"*/transerv.translate('TCTRL_P00_NO'), /*"Si"*/transerv.translate('TCTRL_P00_SI')],
+                        Show: function () { return vm.vdata[0].Value === "1"; },
+                        Val: function () { return true; }
                     }
                 ];
                 break;
@@ -797,6 +837,10 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 vm.tdata.telefonia.TReleaseBL = vm.vdata[17].Value;
                 vm.tdata.telefonia.iDetCallerId = parseInt(vm.vdata[18].Value);
                 vm.tdata.telefonia.iTmCallerId = vm.vdata[19].Value;
+                vm.tdata.telefonia.iDetInversionPol = parseInt(vm.vdata[20].Value);
+                vm.tdata.telefonia.iPeriodoSpvRing = vm.vdata[21].Value;
+                vm.tdata.telefonia.iFiltroSpvRing = vm.vdata[22].Value;
+                vm.tdata.telefonia.iDetDtmf = parseInt(vm.vdata[23].Value);
 
                 break;
             case 3:

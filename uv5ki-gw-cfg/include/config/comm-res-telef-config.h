@@ -69,6 +69,9 @@ public:
 		iDetCallerId = 1;
 		iTmCallerId = 30;
 		iDetInversionPol = 1;
+		iPeriodoSpvRing = 200;
+		iFiltroSpvRing = 2;
+		iDetDtmf = 0;
 	}
 	~CommResTelef() {
 		clear_array(ats_rangos_dst);
@@ -114,6 +117,9 @@ public:
 		write_key(writer, "iDetCallerId", iDetCallerId);
 		write_key(writer, "iTmCallerId", iTmCallerId);
 		write_key(writer, "iDetInversionPol", iDetInversionPol);
+		write_key(writer, "iPeriodoSpvRing", iPeriodoSpvRing);
+		write_key(writer, "iFiltroSpvRing", iFiltroSpvRing);
+		write_key(writer, "iDetDtmf", iDetDtmf);
 	}
 	virtual void jread(Value &base)
 	{
@@ -154,6 +160,9 @@ public:
 		read_key(base, "iDetCallerId", iDetCallerId, 1);
 		read_key(base, "iTmCallerId", iTmCallerId, 30);
 		read_key(base, "iDetInversionPol", iDetInversionPol, 1);
+		read_key(base, "iPeriodoSpvRing", iPeriodoSpvRing, 200);
+		read_key(base, "iFiltroSpvRing", iFiltroSpvRing, 2);
+		read_key(base, "iDetDtmf", iDetDtmf, 0);
 	}
 
 public:
@@ -184,6 +193,9 @@ public:
 	int iDetCallerId;
 	int iTmCallerId;
 	int iDetInversionPol;
+	int iPeriodoSpvRing;
+	int iFiltroSpvRing;
+	int iDetDtmf;
 
 #if __POR_REFERENCIA__
 	vector<CommResTelefAtsRange> ats_rangos_dst;

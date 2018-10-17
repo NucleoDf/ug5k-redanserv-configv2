@@ -48,16 +48,32 @@
                         </ol>
                         <span data-ng-switch-when="3">
                             <span class="error" ng-show="item.Val(item.Value)==false" translate>TELEF_ERROR</span>
-                            <label class="control-label col-sm-1">Sip:</label>
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <label class="control-label">Sip:</label>
+                                </div>
+                                <div class="col-sm-10" style="float:right;">
+                                    <input type="text" class="form-control input-sm" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
+                                </div>
+                            </div>
+                            <!--<label class="control-label col-sm-1">Sip:</label>
                             <div class="col-sm-11">
                                 <input type="text" class="form-control input-sm" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
-                            </div>
+                            </div>-->
                         </span>
                         <ol data-ng-switch-when="4" data-ng-disabled="item.Enable==false">
                             <li data-ng-repeat="item1 in item.Value track by $index" style="list-style-type: none">
                                 <span class="error" ng-show="item.Val(item.Value[$index])==false" translate>TELEF_ERROR</span>
-                                <span class="sip" >Sip:</span>
-                                <input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()"></input>
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                        <label class="control-label">Sip:</label>
+                                    </div>
+                                    <div class="col-sm-10" style="float:right;">
+                                        <input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()"></input>
+                                    </div>
+                                </div>
+                                <!--<span class="sip">Sip:</span>
+                                <input type="text" class="form-control input-sm" data-ng-model="item.Value[$index]" data-ng-blur="vm.autosave()"></input>-->
                             </li>
                         </ol>
                     </td>

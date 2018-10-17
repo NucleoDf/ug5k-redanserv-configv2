@@ -381,6 +381,13 @@
   "Id. Troncal": "Id. Troncal",
   "Tiempo maximo de llamada entrante en linea (sg)": "Tiempo maximo de llamada entrante en linea (sg)",
   "Tiempo de deteccion de fin de llamada desde Ring Off  (sg)": "Tiempo de deteccion de fin de llamada desde Ring Off  (sg)",
+  "Tiempo con tonos antes de pasar a reposo (sg)": "Tiempo con tonos antes de pasar a reposo (sg)",
+  "Detección de Caller-Id en llamadas entrantes ?": "Detección de Caller-Id en llamadas entrantes ?",
+  "Tiempo de deteccion de CallerId (unidades de 100 ms)": "Tiempo de deteccion de CallerId (unidades de 100 ms)",
+  "Detección de Inversion de Polaridad ?": "Detección de Inversion de Polaridad ?",
+  "Periodo de Supervision de señal de ring (ms).": "Periodo de Supervision de señal de ring (ms).",
+  "Filtro de Supervision de señal de ring.": "Filtro de Supervision de señal de ring.",
+  "Detección DTMF ?": "Detección DTMF ?",
 
   "FINAL": "final"
 }

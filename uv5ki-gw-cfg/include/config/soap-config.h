@@ -461,6 +461,9 @@ public:
 		telef.iDetCallerId = 1;
 		telef.iTmCallerId = 30;
 		telef.iDetInversionPol = 1;
+		telef.iPeriodoSpvRing = 200;
+		telef.iFiltroSpvRing = 2;
+		telef.iDetDtmf = 0;
 	}
 	~soap_ResourceInfo(){}
 public:
@@ -534,8 +537,8 @@ public:
 		read_key(xnode, "ValuesTablaBss", radio.ValuesTablaBss);
 		// radio.TablaBss="1, 2, 3,  4 ,5,   6,7,8,9,10,11,mmm,11,";
 		/** 20180320. Nuevos Parámetros en interfaces analogicas */
-		read_key(xnode, "iTmLlamEntrante", telef.iTmLlamEntrante);
-		read_key(xnode, "iTmDetFinLlamada", telef.iTmDetFinLlamada);
+		read_key(xnode, "iTmLlamEntrante", telef.iTmLlamEntrante, 30);
+		read_key(xnode, "iTmDetFinLlamada", telef.iTmDetFinLlamada, 6);
 
 		/** 20181016. U2510. SP#01-15*/
 		read_key(xnode, "superv_options", telef.superv_options, 0);
@@ -544,6 +547,9 @@ public:
 		read_key(xnode, "iDetCallerId", telef.iDetCallerId, 1);
 		read_key(xnode, "iTmCallerId", telef.iTmCallerId, 30);
 		read_key(xnode, "iDetInversionPol", telef.iDetInversionPol, 1);
+		read_key(xnode, "iPeriodoSpvRing", telef.iPeriodoSpvRing, 200);
+		read_key(xnode, "iFiltroSpvRing", telef.iFiltroSpvRing, 2);
+		read_key(xnode, "iDetDtmf", telef.iDetDtmf, 0);
 	}
 
 public:
@@ -584,6 +590,9 @@ public:
 		int iDetCallerId;
 		int iTmCallerId;
 		int iDetInversionPol;
+		int iPeriodoSpvRing;
+		int iFiltroSpvRing;
+		int iDetDtmf;
 
 	} telef;
 	struct {

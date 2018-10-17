@@ -275,6 +275,9 @@ CommResConfig::CommResConfig(soap_config &sc, int irec)
 			this->telefonia.iDetCallerId = sres.info.telef.iDetCallerId;
 			this->telefonia.iTmCallerId = sres.info.telef.iTmCallerId;
 			this->telefonia.iDetInversionPol = sres.info.telef.iDetInversionPol;
+			this->telefonia.iPeriodoSpvRing = sres.info.telef.iPeriodoSpvRing;
+			this->telefonia.iFiltroSpvRing = sres.info.telef.iFiltroSpvRing;
+			this->telefonia.iDetDtmf = sres.info.telef.iDetDtmf;
 			
 			this->telefonia.colateral_scv = 0;						 // Dejar a 0.
 			this->telefonia.iT_Int_Warning = 5;						 // Dejar a 5.
