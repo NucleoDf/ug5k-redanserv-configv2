@@ -68,6 +68,7 @@ public:
 		TReleaseBL = 3;
 		iDetCallerId = 1;
 		iTmCallerId = 30;
+		iDetInversionPol = 1;
 	}
 	~CommResTelef() {
 		clear_array(ats_rangos_dst);
@@ -112,6 +113,7 @@ public:
 		write_key(writer, "TReleaseBL", TReleaseBL);
 		write_key(writer, "iDetCallerId", iDetCallerId);
 		write_key(writer, "iTmCallerId", iTmCallerId);
+		write_key(writer, "iDetInversionPol", iDetInversionPol);
 	}
 	virtual void jread(Value &base)
 	{
@@ -151,6 +153,7 @@ public:
 		read_key(base, "TReleaseBL", TReleaseBL, 3);
 		read_key(base, "iDetCallerId", iDetCallerId, 1);
 		read_key(base, "iTmCallerId", iTmCallerId, 30);
+		read_key(base, "iDetInversionPol", iDetInversionPol, 1);
 	}
 
 public:
@@ -180,6 +183,7 @@ public:
 	int TReleaseBL;
 	int iDetCallerId;
 	int iTmCallerId;
+	int iDetInversionPol;
 
 #if __POR_REFERENCIA__
 	vector<CommResTelefAtsRange> ats_rangos_dst;

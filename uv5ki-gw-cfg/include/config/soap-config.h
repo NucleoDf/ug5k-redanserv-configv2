@@ -460,6 +460,7 @@ public:
 		telef.TReleaseBL = 3;
 		telef.iDetCallerId = 1;
 		telef.iTmCallerId = 30;
+		telef.iDetInversionPol = 1;
 	}
 	~soap_ResourceInfo(){}
 public:
@@ -542,6 +543,7 @@ public:
 		read_key(xnode, "TReleaseBL", telef.TReleaseBL, 3);
 		read_key(xnode, "iDetCallerId", telef.iDetCallerId, 1);
 		read_key(xnode, "iTmCallerId", telef.iTmCallerId, 30);
+		read_key(xnode, "iDetInversionPol", telef.iDetInversionPol, 1);
 	}
 
 public:
@@ -581,6 +583,7 @@ public:
 		int TReleaseBL;
 		int iDetCallerId;
 		int iTmCallerId;
+		int iDetInversionPol;
 
 	} telef;
 	struct {

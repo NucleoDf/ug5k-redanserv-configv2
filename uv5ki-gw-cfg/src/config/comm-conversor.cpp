@@ -801,6 +801,7 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	mtlf->TReleaseBL = p_rec->telefonia.TReleaseBL;
 	mtlf->iDetCallerId = p_rec->telefonia.iDetCallerId;
 	mtlf->iTmCallerId = p_rec->telefonia.iTmCallerId;
+	mtlf->iDetInversionPol = p_rec->telefonia.iDetInversionPol;
 
 }
 
