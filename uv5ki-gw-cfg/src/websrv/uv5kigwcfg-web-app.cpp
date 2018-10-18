@@ -52,6 +52,7 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 
 	_handlers_list["/test"]=stCb_;					// GET, POST.			PARA PRUEBAS...
 	_handlers_list["/dev"]=stCb_dev;				// GET, POST			PARA DESARROLLO...
+	_handlers_list["/force_logout"] = stCb_logout;
 }
 
 /** */
@@ -86,6 +87,7 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.sec_uris.push_back("/mant/ver");
 	_web_config.sec_uris.push_back("/mant/lver");
 	_web_config.sec_uris.push_back("/ntpstatus");
+	_web_config.sec_uris.push_back("/force_logout");
 
 	_web_config.access_control = stAccessControl;	
 
@@ -193,7 +195,7 @@ void Uv5kiGwCfgWebApp::stCb_ntpstatus(struct mg_connection *conn, string user, w
 void Uv5kiGwCfgWebApp::stCb_logout(struct mg_connection *conn, string user, web_response *resp)
 {
 	resp->actividad=false;
-	if (string(conn->request_method)=="POST") 
+	if (string(conn->request_method)=="POST" || string(conn->request_method) == "GET")
 	{
 		PLOG_INFO("Uv5kiGwCfgWebApp: LOGOUT Usuario: %s", user.c_str());
 		_web_config.session_control.reset();

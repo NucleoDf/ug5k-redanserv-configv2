@@ -95,7 +95,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     /* */
     vm.set_pagina = function (pagina) {
         if (!authservice.global_validate(validate_page())) {
-            alert(transerv.translate('ICTRL_MSG_01'));   // "Existen Errores de Formato o Rango. No puede cambiar de vista...");
+            /*alert*/alertify.error("01 " + transerv.translate('ICTRL_MSG_01'));   // "Existen Errores de Formato o Rango. No puede cambiar de vista...");
         }
         else if (authservice.check_session() == true) {
             v2jdata();
@@ -200,7 +200,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 return false;
 
             case 5:         // Metodo BSS. En todos menos en los TX-Remotos (vm.vdata[0].Value == 5)
-                return parseInt(vm.vdata[0].Value) != 5;;
+                return parseInt(vm.vdata[0].Value) != 5;
 
             case 6:         // BSS / CLIMAX ?
                 return (parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3);
@@ -439,7 +439,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
         if (vm.rdata != undefined) {
             vm.lcol = vm.rdata.radio.colateral.emplazamientos.length;
             if (vm.lcol != 3)
-                alert(transerv.translate('RCTRL_MSG_01')/*"El recurso " */ + vm.rdata.IdRecurso + transerv.translate('RCTRL_MSG_02')/*" viene con "*/ +
+                /*alert*/alertify.error(transerv.translate('RCTRL_MSG_01')/*"El recurso " */ + vm.rdata.IdRecurso + transerv.translate('RCTRL_MSG_02')/*" viene con "*/ +
                     vm.lcol + transerv.translate('RCTRL_MSG_03')/*" emplazamientos!.\nDebería venir con 3..."*/);
             j2vdata();
             /* Campos nuevos */
@@ -1170,7 +1170,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     /* Cambio de Vista... */
     $scope.$on("$locationChangeStart", function (event) {
         if (!authservice.global_validate(validate_page())) {
-            alert(transerv.translate('ICTRL_MSG_01'));  // "Existen Errores de Formato o Rango. No puede cambiar de vista...");
+            /*alert*/alertify.error("02 " + transerv.translate('ICTRL_MSG_01'));  // "Existen Errores de Formato o Rango. No puede cambiar de vista...");
             event.preventDefault();
         }
         else
@@ -1181,12 +1181,20 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     $scope.$on('savecfg', function (data) {
         //console.log("savecfg");
         if (!authservice.global_validate(validate_page())) {
-            alert(transerv.translate('ICTRL_MSG_01'));  // "Existen Errores de Formato o Rango. No puede salvar lo cambios...");
+            /*alert*/alertify.error("03 " + transerv.translate('ICTRL_MSG_01'));  // "Existen Errores de Formato o Rango. No puede salvar lo cambios...");
         }
         else {
-            if (CfgService.test_ip_virtual() == true ||
-                confirm(transerv.translate('GCTRL_IPV_WARNING')) == true) {
+            //if (CfgService.test_ip_virtual() == true ||
+            //    confirm(transerv.translate('GCTRL_IPV_WARNING')) == true) {
+            //    CfgService.aplicar_cambios();
+            //}
+            if (CfgService.test_ip_virtual() == true) {
                 CfgService.aplicar_cambios();
+            }
+            else {
+                AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
+                    CfgService.aplicar_cambios();
+                });
             }
         }
     });

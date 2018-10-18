@@ -21,13 +21,13 @@ function ug5kUlisesCtrl($scope, $route, dataservice, authservice, CfgService, tr
             vm.pagina = n;
             vm.opcion = 0;
         }
-    }
+    };
 
     /** */
     vm.Opcion = function (n) {
         if (authservice.check_session() == true)
             vm.opcion = n;
-    }
+    };
 
     /** */
     CfgService.init().then(function () {
@@ -70,43 +70,59 @@ function ug5kUlisesCtrl($scope, $route, dataservice, authservice, CfgService, tr
     vm.id_tipo_rec = function (tp) {
         return MantService.textoTipoItf(tp);
         //return "?" + tp.toString();
-    }
+    };
+
     /** */
     vm.show_rutas_central = function (cen) {
         return cen.centralpropia == 0;
-    }
+    };
+
     vm.id_central = function (cen) {
         var retorno = cen.centralpropia == 1 ? "P, " : "O, ";
         retorno += (cen.no_test == "" ? "------" : cen.no_test);
         retorno += (cen.throwswitching == 0 ? "" : ", TS");
         return retorno;
-    }
+    };
+
     /** */
     vm.id_tipo_ruta = function (ruta) {
         return ruta == undefined ? "???" : ruta.tiporuta == 0 ? "Directa" : "Alternativa";
-    }
+    };
+
     vm.id_red_byprefix = function (prefix) {
         var result = $.grep(vm.ats_red, function (e) { return e.prefijo == prefix; });
         return result.lenght == 0 ? "?" + prefix.toString() : result[0].idred;
-    }
+    };
+
     vm.show_rec_red = function (red) {
         return red.listarecursos.length != 0;
-    }
+    };
+
     vm.show_rec_troncal = function (troncal) {
         return troncal.listarecursos.length != 0;
-    }
+    };
+
     vm.show_rangos_central = function (central) {
         return central.rangosoperador.length != 0;
-    }
+    };
+
     vm.show_rangosp_central = function (central) {
         return central.rangosprivilegiados.length != 0;
-    }
+    };
 
     /** Se ha pulsado el boton -aplicar- */
     $scope.$on('savecfg', function (data) {
-        if (CfgService.test_ip_virtual() == true ||
-            confirm(transerv.translate('GCTRL_IPV_WARNING')) == true) {
+        //if (CfgService.test_ip_virtual() == true ||
+        //    confirm(transerv.translate('GCTRL_IPV_WARNING')) == true) {
+        //    CfgService.aplicar_cambios();
+        //}
+        if (CfgService.test_ip_virtual() == true) {
             CfgService.aplicar_cambios();
+        }
+        else {
+            AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
+                CfgService.aplicar_cambios();
+            });
         }
     });
 
@@ -119,5 +135,4 @@ function ug5kUlisesCtrl($scope, $route, dataservice, authservice, CfgService, tr
         console.log("std_change");
         $route.reload();
     });
-
 }

@@ -390,23 +390,40 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
         }
         , rec_uri_nor: RecUriNorm
         , aplicar_cambios: function () {
-            if (confirm(/*"¿Desea salvar los cambios efectuados?"*/transerv.translate('CFGS_MSG_00'))) {
+            //if (confirm(/*"¿Desea salvar los cambios efectuados?"*/transerv.translate('CFGS_MSG_00'))) {
+            //    $("body").css("cursor", "progress");
+            //    dataservice.set_config(cfg).then(
+            //        function (respuesta) {
+            //            cfg = null;
+            //            Init();
+            //            $("body").css("cursor", "default");
+            //            if (confirm(/*"¿Desea Subir los cambios?"*/transerv.translate('CFGS_MSG_01'))) {
+            //                dataservice.upload_config();
+            //            }
+            //        },
+            //        function (error) {
+            //            $("body").css("cursor", "default");
+            //            console.log("POST-ERROR: ", error);
+            //        }
+            //    );
+            //}
+            AltfyConfirm(authservice, transerv.translate('CFGS_MSG_00'), function () {                
                 $("body").css("cursor", "progress");
                 dataservice.set_config(cfg).then(
                     function (respuesta) {
                         cfg = null;
                         Init();
                         $("body").css("cursor", "default");
-                        if (confirm(/*"¿Desea Subir los cambios?"*/transerv.translate('CFGS_MSG_01'))) {
+                        AltfyConfirm(authservice, transerv.translate('CFGS_MSG_01'), function () {
                             dataservice.upload_config();
-                        }
+                        });
                     },
                     function (error) {
                         $("body").css("cursor", "default");
                         console.log("POST-ERROR: ", error);
                     }
                 );
-            }
+            });
         }
         , test_json: function (data) {
             return true;

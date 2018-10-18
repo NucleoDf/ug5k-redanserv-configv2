@@ -459,7 +459,7 @@ public:
 		telef.tm_superv_options = 10;
 		telef.TReleaseBL = 3;
 		telef.iDetCallerId = 1;
-		telef.iTmCallerId = 30;
+		telef.iTmCallerId = 3000;
 		telef.iDetInversionPol = 1;
 		telef.iPeriodoSpvRing = 200;
 		telef.iFiltroSpvRing = 2;
@@ -541,11 +541,11 @@ public:
 		read_key(xnode, "iTmDetFinLlamada", telef.iTmDetFinLlamada, 6);
 
 		/** 20181016. U2510. SP#01-15*/
-		read_key(xnode, "superv_options", telef.superv_options, 0);
-		read_key(xnode, "tm_superv_options", telef.tm_superv_options, 10);
+		read_key(xnode, "isuperv_options", telef.superv_options, 0);
+		read_key(xnode, "itm_superv_options", telef.tm_superv_options, 10);
 		read_key(xnode, "TReleaseBL", telef.TReleaseBL, 3);
 		read_key(xnode, "iDetCallerId", telef.iDetCallerId, 1);
-		read_key(xnode, "iTmCallerId", telef.iTmCallerId, 30);
+		read_key(xnode, "iTmCallerId", telef.iTmCallerId, 3000);
 		read_key(xnode, "iDetInversionPol", telef.iDetInversionPol, 1);
 		read_key(xnode, "iPeriodoSpvRing", telef.iPeriodoSpvRing, 200);
 		read_key(xnode, "iFiltroSpvRing", telef.iFiltroSpvRing, 2);

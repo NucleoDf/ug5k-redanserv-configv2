@@ -328,7 +328,7 @@ int WebAppServer::check_login_form_submission_old(struct mg_connection *conn)
 	else
 	{
 		if (config()->enable_login==true)
-			mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->closed_session_uri.c_str());
+			mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s?flg=1\r\n\r\n\r\n", config()->closed_session_uri.c_str());
 	}
 	return MG_FALSE;
 }
@@ -365,6 +365,10 @@ int WebAppServer::check_login_form_submission(struct mg_connection *conn)
 				return MG_TRUE;		
 			}
 		}
+		if (config()->enable_login == true)
+			mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s?flg=%d\r\n\r\n\r\n", 
+				config()->closed_session_uri.c_str(),
+				string(name)=="root" && acceso==true ? 1 : 0);
 	}
 	else
 	{
@@ -385,8 +389,6 @@ int WebAppServer::check_login_form_submission(struct mg_connection *conn)
 				mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->bad_user_uri.c_str());
 		}
 	}
-	if (config()->enable_login==true)
-		mg_printf(conn, "HTTP/1.1 302 Found\r\nLocation: %s\r\n\r\n\r\n", config()->closed_session_uri.c_str());
 	return MG_FALSE;
 }
 

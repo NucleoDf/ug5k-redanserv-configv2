@@ -20,7 +20,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
     /* */
     vm.set_pagina = function (pagina) {
         if (!authservice.global_validate(validate_page())) {
-            alert(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
+            /*alert*/alertify.error(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
         }
         else if (authservice.check_session() === true) {
             post_data();
@@ -372,7 +372,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
     /** Cambio de Vista... */
     $scope.$on("$locationChangeStart", function (event) {
         if (!authservice.global_validate(validate_page())) {
-            alert(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
+            /*alert*/alertify.error(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
             event.preventDefault();
         }
         else
@@ -383,30 +383,27 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
     $scope.$on('savecfg', function (data) {
         console.log("savecfg");
         if (!authservice.global_validate(validate_page())) {
-            alert(/*"Existen Errores de Formato o Rango. No puede salvar lo cambios..."*/transerv.translate('ICTRL_MSG_01'));
+            /*alert*/alertify.error(/*"Existen Errores de Formato o Rango. No puede salvar lo cambios..."*/transerv.translate('ICTRL_MSG_01'));
         }
         else {
             //if (vm.last_ip_virtual != vm.j_data.ipv) {
-            if (CfgService.test_ip_virtual() == false) {
-                if (confirm(transerv.translate('GCTRL_IPV_WARNING'))) {
-                    CfgService.aplicar_cambios();
-                }
-            }
-            else {
+            //if (CfgService.test_ip_virtual() == false) {
+            //    if (confirm(transerv.translate('GCTRL_IPV_WARNING'))) {
+            //        CfgService.aplicar_cambios();
+            //    }
+            //}
+            //else {
+            //    CfgService.aplicar_cambios();
+            //}
+            if (CfgService.test_ip_virtual() == true) {
                 CfgService.aplicar_cambios();
             }
+            else {
+                AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
+                    CfgService.aplicar_cambios();
+                });
+            }
         }
-        //else if (confirm("¿Realmente desea activar los cambios efectuados?")) {
-        //    if (vm.last_ip_virtual != vm.j_data.ipv) {
-        //        if (confirm("Ha cambiado la IP Virtual. Si continúa se Reiniciará la Unidad...")) {
-        //            CfgService.save();
-        //            vm.last_ip_virtual = vm.j_data.ipv;
-        //        }
-        //    }
-        //    else {
-        //        CfgService.save();
-        //    }
-        //}
     });
 
     /** */

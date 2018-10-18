@@ -2,6 +2,7 @@
 var Simulate = location.port == 8888;
 var Desarrollando = false;
 var session_supervision = !Simulate;
+var altfy = true;
 
 var ug5kApp = angular.module('Ug5kweb', ['ngRoute', 'ui.bootstrap', 'smart-table', 'pascalprecht.translate']);
 
@@ -123,3 +124,9 @@ var regx_urival_nosip = /^([^:]+)@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-
 var regx_fid = /^(1|2|3)[0-9]{2}\.[0-9]{2}(0|5)$/;
 var regx_urirtspval = /^rtsp:(.+)@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:[\d]{1,5})?$/;
 var regx_idval = /^[a-zA-Z0-9\-_\.]{1,32}$/;
+
+function AltfyConfirm(authservice, msg, sifunc, nofunc) {
+    if (authservice.check_session() == false)
+        return;
+    alertify.confirm(msg, sifunc, nofunc).set({ 'modal': false, 'closable': false });
+}

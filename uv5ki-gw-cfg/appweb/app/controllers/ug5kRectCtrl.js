@@ -152,7 +152,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     /* */
     vm.set_pagina = function (pagina) {
         if (!authservice.global_validate(validate_page())) {
-            alert(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
+            /*alert*/alertify.error(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
         }
         else if (authservice.check_session() == true) {
             v2jdata();
@@ -655,13 +655,13 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     },
                     {
                         // 2 - 19
-                        Name: transerv.translate('Tiempo de deteccion de CallerId (unidades de 100 ms)'), 
+                        Name: transerv.translate('Tiempo de deteccion de CallerId (ms)'), 
                         Value: vm.tdata.telefonia.iTmCallerId,
                         Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 0,
                         Inputs: [],
                         Show: function () { return vm.vdata[0].Value === "2" && vm.vdata[18].Value === "1"; },
-                        Val: function () { return vm.vdata[19].Value > 0 && vm.vdata[19].Value <= 50; }
+                        Val: function () { return vm.vdata[19].Value >= 1000 && vm.vdata[19].Value <= 5000; }
                     },
                     {
                         // 2 - 20
@@ -984,7 +984,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     /* Cambio de Vista... */
     $scope.$on("$locationChangeStart", function (event) {
         if (!authservice.global_validate(validate_page())) {
-            alert(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
+            /*alert*/alertify.error(/*"Existen Errores de Formato o Rango. No puede cambiar de vista..."*/transerv.translate('ICTRL_MSG_01'));
             event.preventDefault();
         }
         else
@@ -995,12 +995,20 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     $scope.$on('savecfg', function (data) {
         console.log("savecfg");
         if (!authservice.global_validate(validate_page())) {
-            alert(/*"Existen Errores de Formato o Rango. No puede salvar lo cambios..."*/transerv.translate('ICTRL_MSG_01'));
+            /*alert*/alertify.error(/*"Existen Errores de Formato o Rango. No puede salvar lo cambios..."*/transerv.translate('ICTRL_MSG_01'));
         }
         else {
-            if (CfgService.test_ip_virtual() == true ||
-                confirm(transerv.translate('GCTRL_IPV_WARNING')) == true) {
+            //if (CfgService.test_ip_virtual() == true ||
+            //    confirm(transerv.translate('GCTRL_IPV_WARNING')) == true) {
+            //    CfgService.aplicar_cambios();
+            //}
+            if (CfgService.test_ip_virtual() == true) {
                 CfgService.aplicar_cambios();
+            }
+            else {
+                AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
+                    CfgService.aplicar_cambios();
+                });
             }
         }
     });

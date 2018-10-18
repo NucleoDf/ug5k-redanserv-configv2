@@ -6,24 +6,23 @@ angular
 dataservice.$inject = ['$http'];
 
 /** */
-function dataservice($http)
-{
+function dataservice($http) {
     return {
-		logout: function () {
-			return remotePost(rest_url_logout);
-		}
-		, get_tses: function() {
-			return remoteGet(rest_url_tses);
-		}
-		, get_config: function() {
-			return remoteGet(rest_url_config);
-		}
-		, set_config: function(cfg) {
-			return remotePost(rest_url_config, cfg);
-		}
-		, upload_config: function() {
-		    return remotePut(rest_url_config);
-		}
+        logout: function () {
+            return remotePost(rest_url_logout);
+        }
+        , get_tses: function () {
+            return remoteGet(rest_url_tses);
+        }
+        , get_config: function () {
+            return remoteGet(rest_url_config);
+        }
+        , set_config: function (cfg) {
+            return remotePost(rest_url_config, cfg);
+        }
+        , upload_config: function () {
+            return remotePut(rest_url_config);
+        }
         , set_import: function (filename, cfg) {
             return remotePost(rest_url_impexp + "/" + filename, cfg);
         }
@@ -64,7 +63,7 @@ function dataservice($http)
             return remotePost(rest_url_dev_hist, msg);
         }
 
-		/** para ir eliminado */
+        /** para ir eliminado */
         //, get_data: getData
         //, set_data: setData
         //, put_data: putData
@@ -81,42 +80,42 @@ function dataservice($http)
         , get: function (url) {
             return $http.get(url, { header: { 'Content-Type': 'application/json; charset=UTF-8' } });
         }
-//        get: function (url) {
-//            return $http.get(url)
-//                .then(function (response) { return response; });
-////                .catch(DataFailed);
-//        }
+        //        get: function (url) {
+        //            return $http.get(url)
+        //                .then(function (response) { return response; });
+        ////                .catch(DataFailed);
+        //        }
     };
 
-	//
-	function remoteGet(url) {
-		return $http.get(normalizeUrl(url), {header : {'Content-Type' : 'application/json; charset=UTF-8'}});
-	}
+    //
+    function remoteGet(url) {
+        return $http.get(normalizeUrl(url), { header: { 'Content-Type': 'application/json; charset=UTF-8' } });
+    }
 
-	//
-	function remotePost(url, data) {
-		return $http.post(normalizeUrl(url), data);
-	}
+    //
+    function remotePost(url, data) {
+        return $http.post(normalizeUrl(url), data);
+    }
 
-	//
-	function remotePut(url, data) {
-		return $http.put(normalizeUrl(url), data);
-	}
+    //
+    function remotePut(url, data) {
+        return $http.put(normalizeUrl(url), data);
+    }
 
-	//
-	function remoteDel(url) {
-		return $http.delete(normalizeUrl(url));
-	}
+    //
+    function remoteDel(url) {
+        return $http.delete(normalizeUrl(url));
+    }
 
-	//
-	function normalizeUrl(url) {
-		if (Simulate == false)
-			return url;
-		return "./simulate" + url + ".json";
-	}	
-	
-	/** Obsoletas. Para ir eliminando... */
-	/** obsoleta */
+    //
+    function normalizeUrl(url) {
+        if (Simulate == false)
+            return url;
+        return "./simulate" + url + ".json";
+    }
+
+    /** Obsoletas. Para ir eliminando... */
+    /** obsoleta */
     //function DataFailed(error)
     //{
     //    return {error: error.data};
@@ -150,16 +149,16 @@ function dataservice($http)
     //function putData(url, data)
     //{
     //    return $http.put(url, data, { header: { 'Content-Type': 'application/json; charset=UTF-8' } })
-	//			.then(function (res) { return res.data; })
-	//			.catch(DataFailed);
+    //			.then(function (res) { return res.data; })
+    //			.catch(DataFailed);
     //}
 
     /** obsoleta */
     //function delData(url, data)
     //{
     //        return $http.delete(url)
-	//			.then(function (res) { return "OK"; })
-	//			.catch(DataFailed);
+    //			.then(function (res) { return "OK"; })
+    //			.catch(DataFailed);
     //}
 
     /** obsoleta */
@@ -212,8 +211,7 @@ function dataservice($http)
     //}
 
     /** obsoleta */
-    function sendFile(url, file, ids, version)
-    {
+    function sendFile(url, file, ids, version) {
         var fd = new FormData();
         fd.append('file', file);
 

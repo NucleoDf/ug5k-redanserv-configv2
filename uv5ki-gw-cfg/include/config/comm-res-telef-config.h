@@ -67,7 +67,7 @@ public:
 		/** 20181016. U2510. SP#01-15*/
 		TReleaseBL = 3;
 		iDetCallerId = 1;
-		iTmCallerId = 30;
+		iTmCallerId = 3000;
 		iDetInversionPol = 1;
 		iPeriodoSpvRing = 200;
 		iFiltroSpvRing = 2;
@@ -158,7 +158,7 @@ public:
 		/** 20181016. U2510. SP#01-15*/
 		read_key(base, "TReleaseBL", TReleaseBL, 3);
 		read_key(base, "iDetCallerId", iDetCallerId, 1);
-		read_key(base, "iTmCallerId", iTmCallerId, 30);
+		read_key(base, "iTmCallerId", iTmCallerId, 3000);
 		read_key(base, "iDetInversionPol", iDetInversionPol, 1);
 		read_key(base, "iPeriodoSpvRing", iPeriodoSpvRing, 200);
 		read_key(base, "iFiltroSpvRing", iFiltroSpvRing, 2);

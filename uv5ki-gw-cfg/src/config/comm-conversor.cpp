@@ -779,7 +779,10 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	mtlf->iTmLlamEntrante = p_rec->telefonia.iTmLlamEntrante == -1 ? 30 : p_rec->telefonia.iTmLlamEntrante;
 	mtlf->iTmDetFinLlamada= p_rec->telefonia.iTmDetFinLlamada == -1 ? 6 : p_rec->telefonia.iTmDetFinLlamada;
 
-	
+	/** 20181016. U2510. SP#01-15*/
+	mtlf->iDetCallerId = 0;
+	mtlf->iDetInversionPol = 0;
+
 	/* 20170119. */
 	switch ( mgen->iTipoIf)
 	{
@@ -787,8 +790,12 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 		mtlf->iModoEyM = 0;
 		break;
 	case CFG_IFREC_TIPO_BC:
+		mtlf->iDetectVox = 0;
+		break;
 	case CFG_IFREC_TIPO_AB:
 		mtlf->iDetectVox = 0;
+		mtlf->iDetCallerId = p_rec->telefonia.iDetCallerId;
+		mtlf->iDetInversionPol = p_rec->telefonia.iDetInversionPol;
 		break;
 	default:
 		break;
@@ -799,9 +806,7 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 
 	/** 20181016. U2510. SP#01-15*/
 	mtlf->TReleaseBL = p_rec->telefonia.TReleaseBL;
-	mtlf->iDetCallerId = p_rec->telefonia.iDetCallerId;
 	mtlf->iTmCallerId = p_rec->telefonia.iTmCallerId;
-	mtlf->iDetInversionPol = p_rec->telefonia.iDetInversionPol;
 	mtlf->iPeriodoSpvRing = p_rec->telefonia.iPeriodoSpvRing;
 	mtlf->iFiltroSpvRing = p_rec->telefonia.iFiltroSpvRing;
 	mtlf->iDetDtmf = p_rec->telefonia.iDetDtmf;
