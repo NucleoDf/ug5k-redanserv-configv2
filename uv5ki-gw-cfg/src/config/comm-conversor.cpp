@@ -328,13 +328,13 @@ void CommConversor::Recurso(CommResConfig *p_rec, struct cfgConfigRecurso *mrec,
 		break;
 	
 	case CFG_IFREC_TIPO_LCEN:
-		RecursoColateralTPP(p_rec, &mrec->sGeneral.sColateral);
+		RecursoColateralTPP(p_rec, &mrec->sGeneral.sColateral, true);
 		RecursoLcen(p_rec, &mrec->uIf.sLcen, &mrec->sGeneral);
 		break;
 
 	case CFG_IFREC_TIPO_R2:
 	case CFG_IFREC_TIPO_N5:
-		RecursoColateralTPP(p_rec, &mrec->sGeneral.sColateral);
+		RecursoColateralTPP(p_rec, &mrec->sGeneral.sColateral, true);
 		RecursoTelefoniaR2N5(p_rec, &mrec->uIf.sR2N5, &mrec->sGeneral);
 		break;
 
@@ -411,13 +411,20 @@ void CommConversor::RecursoGeneral(CommResConfig *p_rec, struct cfgConfigGeneral
 }
 
 /** */
-void CommConversor::RecursoColateralTPP(CommResConfig *p_rec, struct cfgColateralPP   *mcol)
+void CommConversor::RecursoColateralTPP(CommResConfig *p_rec, struct cfgColateralPP   *mcol, bool spvoptions)
 {
 	SetInt(&mcol->iRespuestaAutomatica,p_rec->telefonia.r_automatica, INCI_MPSW, "RESPUESTA AUTOMATICA TPP");
 	SetString(mcol->szUriRemota, p_rec->telefonia.uri_remota, INCI_MPSW, "URI-REMOTA TPP",MAX_LONG_DIR_URI);
 
-	SetInt(&mcol->isuperv_options, p_rec->telefonia.superv_options, INCI_MPSW, "HABILITA OPTIONS");
-	SetInt(&mcol->itm_superv_options, p_rec->telefonia.tm_superv_options, INCI_MPSW, "TIEMPO OPTIONS");
+	if (spvoptions == true) {
+		SetInt(&mcol->isuperv_options, p_rec->telefonia.superv_options, INCI_MPSW, "HABILITA OPTIONS");
+		SetInt(&mcol->itm_superv_options, p_rec->telefonia.tm_superv_options, INCI_MPSW, "TIEMPO OPTIONS");
+	}
+	else {
+		p_rec->telefonia.superv_options = 0;
+		p_rec->telefonia.tm_superv_options = 10;
+	}
+
 	SetInt(&mcol->iColateralSCV, p_rec->telefonia.colateral_scv, INCI_MPSW, "TIPO COLATERAL");	
 }
 
@@ -776,27 +783,46 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	memcpy(mtlf->szIdRed, p_rec->telefonia.idRed.c_str(), CFG_MAX_LONG_NOMBRE_RED);
 
 	// 20180320. Nuevos Parametros...
-	mtlf->iTmLlamEntrante = p_rec->telefonia.iTmLlamEntrante == -1 ? 30 : p_rec->telefonia.iTmLlamEntrante;
-	mtlf->iTmDetFinLlamada= p_rec->telefonia.iTmDetFinLlamada == -1 ? 6 : p_rec->telefonia.iTmDetFinLlamada;
+	// mtlf->iTmLlamEntrante = p_rec->telefonia.iTmLlamEntrante == -1 ? 30 : p_rec->telefonia.iTmLlamEntrante;
+	// mtlf->iTmDetFinLlamada= p_rec->telefonia.iTmDetFinLlamada == -1 ? 6 : p_rec->telefonia.iTmDetFinLlamada;
 
 	/** 20181016. U2510. SP#01-15*/
+	mtlf->TReleaseBL = 3;
 	mtlf->iDetCallerId = 0;
+	mtlf->iTmCallerId = 3000;
 	mtlf->iDetInversionPol = 0;
+	mtlf->iTmLlamEntrante = 30;
+	mtlf->iTmDetFinLlamada = 6;
+	mtlf->iPeriodoSpvRing = 200;
+	mtlf->iFiltroSpvRing = 2;
+	mtlf->iDetDtmf = 0;
 
 	/* 20170119. */
 	switch ( mgen->iTipoIf)
 	{
 	case CFG_IFREC_TIPO_BL:
 		mtlf->iModoEyM = 0;
+		mtlf->TReleaseBL = p_rec->telefonia.TReleaseBL;
+		mtlf->iTmLlamEntrante = p_rec->telefonia.iTmLlamEntrante;
+		mtlf->iPeriodoSpvRing = p_rec->telefonia.iPeriodoSpvRing;
+		mtlf->iFiltroSpvRing = p_rec->telefonia.iFiltroSpvRing;
 		break;
 	case CFG_IFREC_TIPO_BC:
 		mtlf->iDetectVox = 0;
+		mtlf->iTmLlamEntrante = p_rec->telefonia.iTmLlamEntrante;
+		mtlf->iDetDtmf = p_rec->telefonia.iDetDtmf;
 		break;
 	case CFG_IFREC_TIPO_AB:
 		mtlf->iDetectVox = 0;
 		mtlf->iDetCallerId = p_rec->telefonia.iDetCallerId;
+		mtlf->iTmCallerId = p_rec->telefonia.iTmCallerId;
 		mtlf->iDetInversionPol = p_rec->telefonia.iDetInversionPol;
+		mtlf->iTmLlamEntrante = p_rec->telefonia.iTmLlamEntrante;
+		mtlf->iTmDetFinLlamada = p_rec->telefonia.iTmDetFinLlamada;
+		mtlf->iPeriodoSpvRing = p_rec->telefonia.iPeriodoSpvRing;
+		mtlf->iFiltroSpvRing = p_rec->telefonia.iFiltroSpvRing;
 		break;
+
 	default:
 		break;
 	}
@@ -804,12 +830,6 @@ void CommConversor::RecursoTelefoniaAnalogica(CommResConfig *p_rec, struct cfgCo
 	// mgen->iEnableRegistro = 0;
 	/*************/
 
-	/** 20181016. U2510. SP#01-15*/
-	mtlf->TReleaseBL = p_rec->telefonia.TReleaseBL;
-	mtlf->iTmCallerId = p_rec->telefonia.iTmCallerId;
-	mtlf->iPeriodoSpvRing = p_rec->telefonia.iPeriodoSpvRing;
-	mtlf->iFiltroSpvRing = p_rec->telefonia.iFiltroSpvRing;
-	mtlf->iDetDtmf = p_rec->telefonia.iDetDtmf;
 }
 
 /** */

@@ -47,7 +47,7 @@ protected:
 	void Recurso(CommResConfig *p_rec, struct cfgConfigRecurso *mrec, bool add=false);
 
 	void RecursoGeneral(CommResConfig *p_rec, struct cfgConfigGeneralRecurso *mgen);
-	void RecursoColateralTPP(CommResConfig *p_rec, struct cfgColateralPP   *mcol);
+	void RecursoColateralTPP(CommResConfig *p_rec, struct cfgColateralPP   *mcol, bool spvoptions=true);
 	void RecursoAudio(CommResConfig *p_rec, struct cfgConfigRecAudio   *maud);
 	void RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRecurso *mgen, struct cfgConfigIfRadio   *mrad);
 	void ColateralesRadio(CommResRadioColateral *p_col, struct cfgColateralRadio *mcol);
