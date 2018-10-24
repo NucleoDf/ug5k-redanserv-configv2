@@ -58,6 +58,7 @@ using namespace std;
 #define strRuntimeItemHttpCharTimeout			((const char *)"HTTP_CHAR_TIMEOUT")
 #define strRuntimeItemTcpConnTimeout			((const char *)"TCP_CONN_TIMEOUT")
 #define strRuntimeItemColateralIpInfoPath		((const char *)"COLATERAL_IP_INFO_PATH")
+#define strRuntimeItemSoapServicePath			((const char *)"SOAP-SERVICE-PATH")
 
 
 #define strFilesSupervidor				((const char *)"FILESUPERVISOR")
