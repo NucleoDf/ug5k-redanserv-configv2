@@ -39,6 +39,12 @@ var flash = require('connect-flash');
 var moment = require('moment');
 var ctrlSesiones = {user: null, localSession: null};
 var aliveGtws = [];
+
+/** 20180829. Variables de Entorno en Base de Datos */
+process.env.DB_HOST = process.env.DB_HOST || config.Ulises.dbhost;
+process.env.DB_BASE = process.env.DB_BASE || config.Ulises.dbdatabase;
+process.env.DB_USER = process.env.DB_USER || config.Ulises.dbuser;
+process.env.DB_PASS = process.env.DB_PASS || config.Ulises.dbpassword;
 //{ip:'',online:'',time:''}
 
 /***/
