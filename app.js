@@ -503,7 +503,7 @@ app.use(function(err, req, res, next) {
 setImmediate(function(){
     logging.LoggingDate('Running once a day. Historics deep: ' + config.Ulises.HistoricsDeep + ' days.');
     myLibHistorics.deepHistorics(config.Ulises.HistoricsDeep,function(result){
-        logging.LoggingDate('Historics record removed: ' + result.affectedRows);
+        logging.LoggingDate('Historics record removed: ' + result.affectedRows + ', ' + result.error);
     });
     myLibConfig.resetGatewaysSynchroState(function(result){
         logging.LoggingDate('Reset Gateways Synchro State: ' + result.result);
