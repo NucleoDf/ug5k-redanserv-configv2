@@ -546,12 +546,12 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                     {
                         // 2 - 08
                         Name: /*'Tiempo Supervision (s):'*/transerv.translate('TCTRL_P02_TSUP'),
-                        Value: NormalizeTmSuperv(true, vm.tdata.telefonia.tm_superv_options).toString(),
+                        Value: /*NormalizeTmSuperv(true, vm.tdata.telefonia.tm_superv_options).toString()*/vm.tdata.telefonia.tm_superv_options,
                         Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
-                        Input: 1/*0*/,
-                        Inputs: ["5", "10", "15", "20", "25", "30"]/*[]*/,
+                        Input: 0,
+                        Inputs: [/*"5", "10", "15", "20", "25", "30"*/]/*[]*/,
                         Show: function () { return (vm.vdata[0].Value === "3" || vm.vdata[0].Value === "4" || vm.vdata[0].Value === "5") && vm.vdata[7].Value==="1"; },
-                        Val: function () { return true; }
+                        Val: function () { return vm.vdata[8].Value > 0 && vm.vdata[8].Value <= 20; }
                     },
                     {
                         // 2 - 09
@@ -824,7 +824,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 vm.tdata.telefonia.no_test_remoto = vm.vdata[5].Value;
                 vm.tdata.telefonia.no_test_local = vm.vdata[6].Value;
                 vm.tdata.telefonia.superv_options = parseInt(vm.vdata[7].Value);// Supervisa Colateral ???
-                vm.tdata.telefonia.tm_superv_options = parseInt(NormalizeTmSuperv(false, vm.vdata[8].Value));       // Tiempo Supervision Colateral
+                vm.tdata.telefonia.tm_superv_options = parseInt(/*NormalizeTmSuperv(false, */vm.vdata[8].Value/*)*/);       // Tiempo Supervision Colateral
                 vm.tdata.telefonia.detect_vox = parseInt(vm.vdata[9].Value);    // VOX en BL ???
                 vm.tdata.telefonia.umbral_vox = vm.vdata[10].Value;             // Umbral VOX en BL
                 vm.tdata.telefonia.tm_inactividad = vm.vdata[11].Value;         // Cola VOX

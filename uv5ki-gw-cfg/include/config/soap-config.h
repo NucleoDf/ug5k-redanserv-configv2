@@ -729,8 +729,8 @@ public:
 		read_key(xnode, "IpGrabador2", Grabador2);
 
 		/** 20181016. U2510. SP#01-15*/
-		read_key(xnode, "SupervisionLanGW", SupervisionLanGW, 0);
-		read_key(xnode, "TmMaxSupervLanGW", TmMaxSupervLanGW, 1);
+		read_key(xnode, "iSupervLanGW", SupervisionLanGW, 0);
+		read_key(xnode, "itmmaxSupervLanGW", TmMaxSupervLanGW, 1);
 	}
 
 public:
