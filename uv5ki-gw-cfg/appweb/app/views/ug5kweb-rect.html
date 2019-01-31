@@ -31,7 +31,7 @@
         <div class="_tablarec ug5k">
             <table class="table table-striped ug5ktb">
                 <tr data-ng-repeat="item in vm.vdata" data-ng-show="item.Show({{$index}})">
-                    <td class="_cab"><label class="control-label">{{item.Name}}</label></td>
+                    <td class="_cab" style="width:40%;"><label class="control-label">{{item.Name}}</label></td>
                     <td data-ng-switch on="item.Input">
                         <span data-ng-switch-when="0">
                             <span class="error" ng-show="item.Val(item.Value)==false" translate>TELEF_ERROR</span>
@@ -53,7 +53,8 @@
                                     <label class="control-label">Sip:</label>
                                 </div>
                                 <div class="col-sm-10" style="float:right;">
-                                    <input type="text" class="form-control input-sm" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
+                                    <input type="text" class="form-control input-sm" style="font-size:90%"
+                                           data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
                                 </div>
                             </div>
                             <!--<label class="control-label col-sm-1">Sip:</label>

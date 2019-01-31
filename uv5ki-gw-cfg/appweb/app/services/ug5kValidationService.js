@@ -32,12 +32,23 @@ function ValidateService($q) {
                 return false;
             return true;
         }
+        //, uri_val: function (value) {
+        //    if (local_max_length_val(value, max_id_length + 16) === false)
+        //        return false;
+        //    if (value != "" && value.match(jamp_no_sip == 1 ? regx_urival_nosip: regx_urival) == null)
+        //        return false;
+        //    return true;
+        //}
         , uri_val: function (value) {
-            if (local_max_length_val(value, max_id_length + 16) === false)
-                return false;
-            if (value != "" && value.match(jamp_no_sip == 1 ? regx_urival_nosip: regx_urival) == null)
-                return false;
-            return true;
+            if (value != "") {
+                var fields = value.match(jamp_no_sip == 1 ? regx_urival_nosip : regx_urival);
+                if (fields) {
+                    if (local_max_length_val(fields[1], max_id_length) === false)
+                        return false;
+                    return true;
+                }
+            }
+            return false;
         }
         ,uri_rtsp_val: function (value) {
             if (value != "" && value.match(regx_urirtspval) == null)

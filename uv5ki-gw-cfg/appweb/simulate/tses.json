@@ -2,9 +2,9 @@
 	"std": "-3",
 	"idc": "PRUEBA",
 	"tim": "11/11/1962, 10:00",
-	"ver": "UG5K-U BETA-01",
-	"modo": "ul",
-	"modo_redan": "0",
+	"ver": "SIMUL-01",
+	"modo": "rd",
+	"modo_redan": "1",
 	"ntpsync": 1,
 	"localdate": "----",
 	"timr": "++++"
