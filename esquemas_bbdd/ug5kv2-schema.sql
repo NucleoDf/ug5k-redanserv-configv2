@@ -247,7 +247,7 @@ DROP TABLE IF EXISTS `lista_uris`;
 CREATE TABLE `lista_uris` (
   `idlista_uris` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Clave Primaria. Representa una lista de uris que se introducen como diversos parámetros para pasarelas, servicios, etc. Solo para recursos radio.',
   `recurso_radio_id` int(11) NOT NULL COMMENT 'Clave externa a recurso.',
-  `uri` varchar(45) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Valor de la dirección ip. Puede ser usuario@ip:puerto',
+  `uri` varchar(64) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Valor de la dirección ip. Puede ser usuario@ip:puerto',
   `tipo` varchar(3) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Tipo de URI: TXA: TRANSMISION A, TXB: TRANSMISION B, RXA: RECEPCION A, RXB: RECEPCION B, LSB: LISTA BLANCA, LSN: LISTA NEGRA, TEL: TELEFONIA.',
   `nivel_colateral` int(1) NOT NULL DEFAULT '0' COMMENT 'Es el nivel de relación que va a existir entre las uris. Va desde 1 a 6. \n1: Emplazamiento1 TXA - RXA\n2: Emplazamiento1 TXB - RXB\n3: Emplazamiento2 TXA - RXA\n4: Emplazamiento2 TXB - RXB\n5: Emplazamiento3 TXA - RXA\n6: Emplazamiento3 TXB - RXB',
   PRIMARY KEY (`idlista_uris`),
@@ -426,7 +426,7 @@ DROP TABLE IF EXISTS `recursos_externos`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `recursos_externos` (
   `idrecursos_externos` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la tabla',
-  `uri` varchar(45) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Uri introducida por el usuario para ser seleccionada',
+  `uri` varchar(64) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Uri introducida por el usuario para ser seleccionada',
   `tipo` int(2) NOT NULL DEFAULT '0' COMMENT 'Radio Tx (0) Radio TxRx (1) Radio Rx (2) y Telefono (3)',
   `alias` varchar(45) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Alias de la uri',
   PRIMARY KEY (`idrecursos_externos`)
@@ -529,7 +529,7 @@ CREATE TABLE `recursos_telefono` (
   `supervisa_colateral` tinyint(1) DEFAULT NULL COMMENT 'Indica si supervisa colateral. (1) Supervisa, (0) No Supervisa.',
   `tiempo_supervision` int(2) NOT NULL DEFAULT '5' COMMENT 'Tiempo de supervisión en segundos. Rango min: 5, max: 30',
   `duracion_tono_interrup` int(2) NOT NULL DEFAULT '0' COMMENT 'Duración en segundos del tono de interrupción. Rango min: 5, max: 15.',
-  `uri_telefonica` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Uri para el recurso telefónico.',
+  `uri_telefonica` varchar(64) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Uri para el recurso telefónico.',
   PRIMARY KEY (`idrecurso_telefono`),
   KEY `fk_pasarela_tfno_idx` (`pasarela_id`),
   CONSTRAINT `fk_pasarela_tfno` FOREIGN KEY (`pasarela_id`) REFERENCES `pasarelas` (`idpasarela`) ON DELETE CASCADE ON UPDATE NO ACTION
