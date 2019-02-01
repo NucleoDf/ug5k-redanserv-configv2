@@ -3024,17 +3024,24 @@ function AddTrap() {
 	}
 	**************************/
 }
-
+/** 20190201. AGL. Solucion Incidencia 3405: Eliminar Trap sin seleccionar ninguno */
 function RemoveTrap(){
 
-	alertify.confirm('Ulises G 5000 R', "¿Eliminar trap \"" +  $("#TrapsList option:selected").val()  + "\"?", 
-		function(){ 
-			$("#TrapsList option:selected").remove();
-			$('#TrapIP').val('');
-			$('#TrapPort').val('');
-		},
-		 function(){ alertify.error('Cancelado');}
-    );
+    var SelectedTrap = $("#TrapsList option:selected").val();
+    if (SelectedTrap != undefined) {
+
+        alertify.confirm('Ulises G 5000 R', "¿Eliminar trap \"" + $("#TrapsList option:selected").val() + "\"?",
+            function () {
+                $("#TrapsList option:selected").remove();
+                $('#TrapIP').val('');
+                $('#TrapPort').val('');
+            },
+            function () { alertify.error('Cancelado'); }
+        );
+    }
+    else {
+        alertify.error("Seleccione un item para eliminar.");
+    }
 }
 
 /** 20170516. AGL. No dejar insertar No duplicados */
