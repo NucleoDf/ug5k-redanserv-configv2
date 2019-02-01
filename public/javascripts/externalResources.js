@@ -2,6 +2,12 @@
  * Created by vjmolina on 13/9/17.
  */
 
+/* AGL */
+function itemListStr(alias, uri) {
+    var stralias = alias.length > 20 ? alias.substr(0, 19) + "..." : alias;
+    var struri = uri.length > 32 ? "..." + uri.substr(uri.length - 32, uri.length - 1) : uri;
+    return stralias + " : " + struri;
+}
 /************************************/
 /*	FUNCTION: GetExtResources	 		*/
 /*  PARAMS: 						*/
@@ -31,7 +37,8 @@ var GetExtResources = function (filter, f) {
 	 		$("#listResources").empty();
 			if (data.lista_recursos != null && data.lista_recursos.length > 0){
 	 			$.each(data.lista_recursos, function(index, value){
-					 var item = $("<li><a onclick='GetExtResource(" + value.idrecursos_externos + ")'>"+value.alias+": "+value.uri+"</li>");
+                        //var item = $("<li><a onclick='GetExtResource(" + value.idrecursos_externos + ")'>" + value.alias + ": " + value.uri + "</li>");
+                        var item = $("<li><a onclick='GetExtResource(" + value.idrecursos_externos + ")'>" + itemListStr(value.alias, value.uri) + "</li>");
 					 item.appendTo($("#listResources"));
 	 			});
 				//if (f != null)
