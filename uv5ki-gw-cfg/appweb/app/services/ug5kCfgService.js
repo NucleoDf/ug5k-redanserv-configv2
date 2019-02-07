@@ -94,16 +94,30 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
         }
     }
 
-    /** Compone la URI de un Recurso */
+    /**
+     * Compone la URI de un Recurso en funcion de la ipv de de la Pasarela
+     * @param {any} rec
+     * 20190207. Los Recursos LCEN(5), BL (0), BC(1) y AB(2) Son de Formato Libre
+     */
     function RecUriGet(rec) {
-		if (cfg != null)
-			return "sip:" + rec.IdRecurso + "@" + cfg.general.ipv;
+        if (cfg != null && rec != undefined) {
+
+            if (rec.Radio_o_Telefonia == 2 &&
+                (rec.telefonia.tipo == 0 || rec.telefonia.tipo == 1 || rec.telefonia.tipo == 2 || rec.telefonia.tipo == 5)) {
+                return rec.Uri_Local;
+            }
+            return "sip:" + rec.IdRecurso + "@" + cfg.general.ipv;
+        }
 		return "";
     }
 
-    /** Normaliza las URI de todos los recursos */
+    /**
+     * Normaliza las URI de todos los recursos
+     *
+     * */
     function RecUriNorm() {
         for (i = 0; i < cfg.recursos.length; i++) {
+            var rec = cfg.recursos[i];
             cfg.recursos[i].Uri_Local = RecUriGet(cfg.recursos[i]);
         }
     }

@@ -22,12 +22,12 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
 
     /** */
     vm.validate_trap = function (value) {
-        return value == "" ? true : value.match(regx_trpval) != null ? true : false;
+        return value == "" ? true : value.match(regx_trpval) != null ? "" : transerv.translate("Error Formato TRAP");
     };
 
     /** */
     vm.validate_sup_sip = function (value) {
-        return (value >= 90 && value <= 1800);
+        return (value >= 90 && value <= 1800) ? "" : transerv.translate("El valor debe estar entre: ") + "90 - 1800";
     };
 
     /** */
@@ -362,29 +362,29 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
         var validate = true;
         switch (vm.index) {
             case 0:
-                if (vm.validate_sup_sip(vm.data[3].Value) == false) validate = false;
+                if (vm.validate_sup_sip(vm.data[3].Value) != "") validate = false;
                 /** PROXY */
                 $.each(vm.data[4].Value, function (index, value) {
-                    if (!ValidateService.ip_val(value)) validate = false;
+                    if (ValidateService.ip_val(value) != "") validate = false;
                 });
                 /** REGISTRAR */
                 $.each(vm.data[5].Value, function (index, value) {
-                    if (!ValidateService.ip_val(value)) validate = false;
+                    if (ValidateService.ip_val(value) != "") validate = false;
                 });
                 break;
             case 1:
                 /** NTP SERVER */
                 $.each(vm.data[1].Value, function (index, value) {
-                    if (!ValidateService.ip_val(value)) validate = false;
+                    if (ValidateService.ip_val(value) != "") validate = false;
                 });
                 break;
             case 2:
                 $.each(vm.data[2].Value, function (index, value) {
-                    if (!vm.validate_trap(value)) validate = false;
+                    if (vm.validate_trap(value) != "") validate = false;
                 });
                 break;
             case 4:
-                if (!ValidateService.ip_val(vm.data[2].Value)) validate = false;
+                if (ValidateService.ip_val(vm.data[2].Value) != "") validate = false;
                 break;
         }
 

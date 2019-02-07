@@ -17,7 +17,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     vm.pagina = 0;
     vm.vdata = [];
     vm.autosave = v2jdata;
-    vm.dval = function () { return true; }
+    vm.dval = function () { return ""; }
     vm.hide = function () { return false; }
     vm.lcol = 0;
 
@@ -28,46 +28,47 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
     /* Validador de IdRecurso. Actualiza a la ver la URI Local */
     vm.id_val = function (value) {
-        if (ValidateService.max_long_val(value) === true) {
+        var error = ValidateService.max_long_val(value);
+        if ( error != "") {
             vm.rdata.IdRecurso = value;
             vm.vdata[4].Value = quitar_sip(CfgService.rec_uri_get(vm.rdata));   // jamp_no_sip == 1 ? CfgService.quitar_sip(CfgService.rec_uri_get(vm.rdata)) : CfgService.rec_uri_get(vm.rdata);
-            return true;
+            return "";
         }
-        return false;
+        return error;
     };
 
     /* Validador cbm en A/D */
     vm.cbmad_val = function (value) {
-        return value >= rr_ad_rng.min && value <= rr_ad_rng.max ? true : false;
+        return value >= rr_ad_rng.min && value <= rr_ad_rng.max ? "" : transerv.translate("El valor debe estar entre: ") + rr_ad_rng.toString();
     };
 
     /* Validador cmd en D/A */
     vm.cbmda_val = function (value) {
-        return value >= rr_da_rng.min && value <= rr_da_rng.max ? true : false;
+        return value >= rr_da_rng.min && value <= rr_da_rng.max ? "" : transerv.translate("El valor debe estar entre: ") + rr_da_rng.toString();
     };
 
     /* Validador nivel VAD */
     vm.vad_val = function (value) {
-        return value >= rr_vad_rng.min && value <= rr_vad_rng.max ? true : false;
+        return value >= rr_vad_rng.min && value <= rr_vad_rng.max ? "" : transerv.translate("El valor debe estar entre: ") + rr_vad_rng.toString();
     };
 
     /* Validador ventana BSS */
     vm.bssv_val = function (value) {
-        return value >= rr_bssw_rng.min && value <= rr_bssw_rng.max ? true : false;
+        return value >= rr_bssw_rng.min && value <= rr_bssw_rng.max ? "" : transerv.translate("El valor debe estar entre: ") + rr_bssw_rng.toString();
     };
 
     /* Validador tiempo fijo CLIMAX */
     vm.climaxt_val = function (value) {
-        return value >= rr_clxt_rng.min && value <= rr_clxt_rng.max ? true : false;
+        return value >= rr_clxt_rng.min && value <= rr_clxt_rng.max ? "" : transerv.translate("El valor debe estar entre: ") + rr_clxt_rng.toString();
     };
 
     /* */
     vm.fid_val = function (value) {
         if (MantService.modo() == "ul")
-            return true;
+            return "";
         if (value != "" && value.match(regx_fid) == null)
-            return false;
-        return true;
+            return transerv.translate("Formato de Frecuencia incorrecto");
+        return "";
     };
 
     /* */
@@ -983,7 +984,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                             /*"Lista Negra"*/transerv.translate('RCTRL_P04_RESB'),
                             /*"Lista Blanca"]*/transerv.translate('RCTRL_P04_RESW')],
                         Show: vm.lbn_show,
-                        Val: function () { return true; }
+                        Val: function () { return ""; }
                     },
                     {
                         Name: /*'Lista Blanca:'*/transerv.translate('RCTRL_P04_RESW'),
@@ -1101,7 +1102,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 case 12:
                     break;
                 default:
-                    if (value.Show(index) && !ValidateService.uri_val(value.Value)) validate = false;
+                    if (value.Show(index) && ValidateService.uri_val(value.Value)!="") validate = false;
             }
         });
         return validate;
@@ -1112,12 +1113,12 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
         var validate = true;
         if (vm.vdata[0].Value == 1) {       // lista negra
             angular.forEach(vm.vdata[2].Value, function (value, index) {
-                if (!ValidateService.uri_val(value)) validate = false;
+                if (ValidateService.uri_val(value)!="") validate = false;
             });
         }
         else if (vm.vdata[0].Value == 2) { // lista blanca.
             angular.forEach(vm.vdata[1].Value, function (value, index) {
-                if (!ValidateService.uri_val(value)) validate = false;
+                if (ValidateService.uri_val(value)!="") validate = false;
             });
         }
         return validate;
@@ -1132,15 +1133,15 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
         switch (vm.pagina) {
             case 0:
-                return ValidateService.uri_val(vm.vdata[4].Value) && vm.fid_val(vm.vdata[2].Value);
+                return ValidateService.uri_val(vm.vdata[4].Value)=="" && vm.fid_val(vm.vdata[2].Value)=="";
             case 1:
-                if (vm.vdata[2].Show(2) && !vm.cbmad_val(vm.vdata[2].Value)) return false;
-                if (vm.vdata[4].Show(4) && !vm.cbmda_val(vm.vdata[4].Value)) return false;
+                if (vm.vdata[2].Show(2) && vm.cbmad_val(vm.vdata[2].Value)!="") return false;
+                if (vm.vdata[4].Show(4) && vm.cbmda_val(vm.vdata[4].Value)!="") return false;
                 break;
             case 2:
-                if (vm.vdata[2].Show(2) && !vm.vad_val(vm.vdata[2].Value)) return false;
-                if (vm.vdata[7].Show(7) && !vm.bssv_val(vm.vdata[7].Value)) return false;
-                if (vm.vdata[10].Show(10) && !vm.climaxt_val(vm.vdata[10].Value)) return false;
+                if (vm.vdata[2].Show(2) && vm.vad_val(vm.vdata[2].Value)!="") return false;
+                if (vm.vdata[7].Show(7) && vm.bssv_val(vm.vdata[7].Value) != "") return false;
+                if (vm.vdata[10].Show(10) && vm.climaxt_val(vm.vdata[10].Value) != "") return false;
                 break;
             case 3:
                 return validate_empl();

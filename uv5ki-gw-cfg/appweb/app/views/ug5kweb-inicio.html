@@ -22,7 +22,8 @@
                     <td><label class="control-label input-sm">{{item.Name}}</label></td>
                     <td data-ng-switch on="item.Input">
                         <span data-ng-switch-when="0">
-                            <span class="error" ng-show="item.Val(item.Value)==false" translate>INICIO_ERROR_FORMATO</span>
+<!--                            <span class="error" ng-show="item.Val(item.Value)==false" translate>INICIO_ERROR_FORMATO</span>-->
+                            <div class="bg-danger text-danger" ng-show="item.Val(item.Value)!=''">{{item.Val(item.Value)}}</div>
                             <input type="text" class="form-control input-sm" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()" />
                         </span>
                         <select data-ng-switch-when="1" class="form-control input-sm" data-ng-model="item.Value" data-ng-disabled="item.Enable==false" data-ng-blur="vm.autosave()">

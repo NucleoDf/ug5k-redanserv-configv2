@@ -144,7 +144,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
                         Input: 0,
                         Inputs: [],
                         Show: function () { return vm.v_data[5].Value === "1" },
-                        Val: function (val) { return val >= 1 && val <= 5 }
+                        Val: function (val) { return val >= 1 && val <= 5 ? "" : "Error 1"; }
                     }
                 ];
                 break;
@@ -354,10 +354,15 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 
         switch (vm.pagina) {
             case 0:
-                return ValidateService.ip_val(vm.v_data[3].Value) && ValidateService.url_val(vm.v_data[4].Value) && vm.v_data[3].Value != "";
+                var resultado1 = ValidateService.ip_val(vm.v_data[3].Value) == "";
+                var resultado2 = ValidateService.url_val(vm.v_data[4].Value) == "";
+                var resultado3 = vm.v_data[3].Value != "";
+                return resultado1 && resultado2 && resultado3;
             case 1:
             case 2:
-                return ValidateService.ip_val(vm.v_data[5].Value) && ValidateService.ip_val(vm.v_data[6].Value) && ValidateService.ip_val(vm.v_data[7].Value);
+                return ValidateService.ip_val(vm.v_data[5].Value)=="" &&
+                    ValidateService.ip_val(vm.v_data[6].Value)=="" &&
+                    ValidateService.ip_val(vm.v_data[7].Value)=="" ;
         }
         return false;
     }

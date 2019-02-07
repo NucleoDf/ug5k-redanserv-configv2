@@ -64,20 +64,44 @@ var VIS_PROFILE   = 0x0001;
 var PUERTA_ATRAS = (PCFG_PROFILE | ADMIN_PROFILE | CRTL_PROFILE | VIS_PROFILE); // 0x1043;
 
 /** Rangos Recursos Radio */
-var rr_ad_rng = { min: -13.5, max: 1.20 };
-var rr_da_rng = { min: -24.3, max: 1.10 };
-var rr_vad_rng = { min: -35, max: -15 };
-var rr_bssw_rng = { min: 10, max: 5000 };
-var rr_clxt_rng = { min: 0, max: 250 };
+var rr_ad_rng = {
+    min: -13.5, max: 1.20, toString: function () { return " min: -13.5, max: 1.2 "; }
+};
+var rr_da_rng = {
+    min: -24.3, max: 1.10, toString: function () { return " min: -24.3, max: 1.1 "; }
+};
+var rr_vad_rng = {
+    min: -35, max: -15, toString: function () { return " min: -35, max: -15 "; }
+};
+var rr_bssw_rng = {
+    min: 10, max: 5000, toString: function () { return " min: 10, max: 5000 "; }
+};
+var rr_clxt_rng = {
+    min: 0, max: 250, toString: function () { return " min: 0, max: 250 "; }
+};
 
 /** Rangos Recursos Telefonia */
-var pr_ad_rng = { min: -13.5, max: 1.20 };
-var pr_da_rng = { min: -24.3, max: 1.10 };
-var pr_vad_rng = { min: -35, max: -15 };
-var pr_vxq_rng = { min: 0, max: 30 };
-var pr_ptre_rng = { min: 1, max: 10 };
-var pr_tsup_rng = { min: 90, max: 180 };
-var pr_iwp_rng = { min: 5, max: 15 };
+var pr_ad_rng = {
+    min: -13.5, max: 1.20, toString: function () { return " min: -13.5, max: 1.20 "; }
+};
+var pr_da_rng = {
+    min: -24.3, max: 1.10, toString: function () { return " min: -24.3, max: 1.10 "; }
+};
+var pr_vad_rng = {
+    min: -35, max: -15, toString: function () { return " min: -35, max: -15 "; }
+};
+var pr_vxq_rng = {
+    min: 0, max: 30, toString: function () { return " min: 0, max: 30 "; }
+};
+var pr_ptre_rng = {
+    min: 1, max: 10, toString: function () { return " min: 1, max: 10 "; }
+};
+var pr_tsup_rng = {
+    min: 90, max: 180, toString: function () { return " min: 90, max: 180 "; }
+};
+var pr_iwp_rng = {
+    min: 5, max: 15, toString: function () { return " min: 5, max: 15 "; }
+};
 
 
 /** */
@@ -118,11 +142,11 @@ var regx_trpval = /^[1-2]+,(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){
 var regx_atsrango = /^[0-9]{6}-[0-9]{6}$/;
 var regx_atsnumber = /^[0-9]{6}$/;
 var regx_urlval = /^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/;
-var regx_ipportval = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:[\d]{1,5})?$/;
+var regx_ipportval = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:([\d]{1,5}))?$/;
 var regx_urival = /^sip:([^:]+)@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:[\d]{1,5})?$/;
-var regx_urival_nosip = /^([^:]+)@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:[\d]{1,5})?$/;
+var regx_urival_nosip = /^([^:]+)@((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(:([\d]{1,5}))?$/;
 var regx_fid = /^(1|2|3)[0-9]{2}\.[0-9]{2}(0|5)$/;
-var regx_urirtspval = /^rtsp:(.+)@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:[\d]{1,5})?$/;
+var regx_urirtspval =/^rtsp:(.+)@((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))(:([\d]{1,5}))?$/;
 var regx_idval = /^[a-zA-Z0-9\-_\.]{1,32}$/;
 
 function AltfyConfirm(authservice, msg, sifunc, nofunc) {
