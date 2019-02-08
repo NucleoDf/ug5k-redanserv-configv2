@@ -388,8 +388,11 @@
   "Longitud de Identificador Excedida": "Longitud de Identificador Excedida",
   "Caracteres No permitidos en Identificador": "Caracteres No permitidos en Identificador",
   "El valor debe estar entre: ": "El valor debe estar entre: ",
+  "Los valores deben estar entre: ": "Los valores deben estar entre: ",
   "Formato de Frecuencia incorrecto": "Formato de Frecuencia incorrecto",
   "Error Formato TRAP": "Error Formato TRAP",
+  "FID No Valido. Valores admitidos: ": "FID No Valido. Valores admitidos: ",
+  "La IP de la URI debe ser: ": "La IP de la URI debe ser: ",
 
   "FINAL": "final"
 }

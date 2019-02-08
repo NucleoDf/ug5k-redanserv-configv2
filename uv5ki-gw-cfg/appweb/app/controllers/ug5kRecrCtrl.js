@@ -17,8 +17,8 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     vm.pagina = 0;
     vm.vdata = [];
     vm.autosave = v2jdata;
-    vm.dval = function () { return ""; }
-    vm.hide = function () { return false; }
+    vm.dval = function () { return ""; };
+    vm.hide = function () { return false; };
     vm.lcol = 0;
 
     /* */
@@ -66,9 +66,10 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     vm.fid_val = function (value) {
         if (MantService.modo() == "ul")
             return "";
-        if (value != "" && value.match(regx_fid) == null)
-            return transerv.translate("Formato de Frecuencia incorrecto");
-        return "";
+        return ValidateService.fid_val(value);
+        //if (value != "" && value.match(regx_fid) == null)
+        //    return transerv.translate("Formato de Frecuencia incorrecto");
+        //return "";
     };
 
     /* */

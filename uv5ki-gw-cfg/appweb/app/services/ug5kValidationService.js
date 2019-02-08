@@ -29,6 +29,13 @@ function ValidateService($q, transerv) {
     }
 
     /** */
+    function local_fid_val(fid) {
+        if (fid.match(regx_hf) != null || fid.match(regx_aereal_vhf) != null || fid.match(regx_aereal_uhf) != null)
+            return true;
+        return false;
+    }
+
+    /** */
     return {
         def_val: function () {
             return "";
@@ -94,6 +101,11 @@ function ValidateService($q, transerv) {
                 return transerv.translate("Longitud de Identificador Excedida");
             if (value != "" && value.match(regx_idval) == null)
                 return transerv.translate("Caracteres No permitidos en Identificador");
+            return "";
+        }
+        , fid_val: function (fid) {
+            if (local_fid_val(fid) == false)
+                return transerv.translate("FID No Valido. Valores admitidos: " + "HF (003.000, 029.995) VHF (118.000, 137.995) UHF (300.000, 339.995)");
             return "";
         }
     };

@@ -75,7 +75,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     /* */
     vm.validate_ats_range = function (range) {
         var match = range.match(regx_atsrango);
-        return (range == "" || match) ? "" : transerv.translate("El valor debe estar entre: ") + "200000-399999";
+        return (range == "" || match) ? "" : transerv.translate("Los valores deben estar entre: ") + "200000-399999";
     };
 
     /* */
@@ -87,6 +87,19 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     /* */
     vm.validate_iwp = function (valor) {
         return (valor >= pr_iwp_rng.min && valor <= pr_iwp_rng.max) ? "" : transerv.translate("El valor debe estar entre: ") + pr_iwp_rng.toString();
+    };
+
+    vm.validate_local_uri = function (valor) {
+        /** valida el formato */
+        var msg = ValidateService.uri_val(valor);
+        if (msg != "")
+            return msg;
+        /** valida que la IP del campo coincide con la ip virtual de la pasarela */
+        var groups = valor.match(regx_urival_nosip);
+        if (groups[2] == undefined || CfgService.cfg_get().general.ipv != groups[2]) {
+            return transerv.translate("La IP de la URI debe ser: ") + CfgService.cfg_get().general.ipv;
+        }
+        return "";
     };
 
     /* */
@@ -399,7 +412,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p0_tel_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.validate_local_uri
                     },
                     {
                         Name: /*'Enable Registro ?:'*/transerv.translate('TCTRL_P00_REG'),
