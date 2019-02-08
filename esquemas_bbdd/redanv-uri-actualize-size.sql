@@ -1,5 +1,7 @@
 USE `ug5kv2`;
---
+
+ALTER TABLE `ug5kv2`.`recursos_telefono`   
+  ADD COLUMN `ats_user` VARCHAR(64) NOT NULL  COMMENT 'Usuario ATS al que se le podria asignar un recurtso PP' AFTER `uri_telefonica`;
 -- 
 --
 ALTER TABLE `ug5kv2`.`lista_uris`   

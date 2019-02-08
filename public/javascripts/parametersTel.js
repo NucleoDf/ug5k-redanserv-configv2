@@ -240,7 +240,13 @@ function ShowOptions(tipo){
 			$('#CbVox').prop('disabled',true);
 			$('#TbUmbral').prop('disabled',false);
 			$('#TbInactividad').prop('disabled',false);
-			break;
+            break;
+        case '1':   // BC
+            $('.BC').attr('style', 'display:table-row');
+            break;
+        case '2': // AB
+            $('.AB').attr('style', 'display:table-row');
+            break;
 		/*case '1':// BC
 			$('.BL').attr('style','display:table-row');
 			$('#CbVox').prop('disabled',false);
@@ -250,6 +256,11 @@ function ShowOptions(tipo){
 		case '3': 	// R2
 			if($('#CbOptionsSupervision').prop('checked'))
 				$('#ReleaseRow').show();
+            $('.ATS').attr('style', 'display:table-row');
+            $('#ListMenuParameters li:nth-child(6)').show();
+            if ($('#CbOptionsSupervision').prop('checked'))
+                $('#ReleaseRow').show();
+            break;
 		case '4': 	// N5
 			$('.ATS').attr('style','display:table-row');
 			$('#ListMenuParameters li:nth-child(6)').show();
