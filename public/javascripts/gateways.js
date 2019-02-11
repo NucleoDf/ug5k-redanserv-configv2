@@ -4427,7 +4427,7 @@ function showWhiteBlackList(idRecurso, listType) {
 function calculateLoadIndex(data) {
     var loadIndex = 0;
     /** 20190201. Se actualiza a la nueva tabla. */
-    /** Radio. los Receptores y Transceptores remotos tienen indice 4 debido al analizador de calidad. */
+    /** Radio. Los Receptores y Transceptores remotos tienen indice 4 debido al analizador de calidad. */
     for (var i = 0; i < data.radio.length; i++) {
         if (data.radio[i].tipo_agente == 2 || data.radio[i].tipo_agente == 3)
             loadIndex += 8;
@@ -4436,8 +4436,8 @@ function calculateLoadIndex(data) {
         else
             loadIndex += 2;
     }
-    /** Telefonia. Las líenas con protocolo en linea (R2, N5, LCEN) tienen indice 2 debido al proceso de DSP necesario */
-    for (var i = 0; i < data.tfno.length; i++) {
+    /** Telefonia. Las líneas con protocolo en linea (R2, N5, LCEN) tienen indice 2 debido al proceso de DSP necesario. */
+    for (i = 0; i < data.tfno.length; i++) {
         var iftel = data.tfno[i];
         if (iftel.tipo_interfaz_tel == 5 || iftel.tipo_interfaz_tel == 4 || iftel.tipo_interfaz_tel == 3) {
             loadIndex += 2;
@@ -4446,7 +4446,6 @@ function calculateLoadIndex(data) {
             loadIndex++;
         }
     }
-
     console.log("calculateLoadIndex = " + loadIndex);
     return loadIndex;
 }

@@ -305,6 +305,8 @@ gatewaysRouter.route('/:gateway/all')
 		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
 		
 		//TODO pasar la ip
+
+        console.log("To getAll (" + myLibGateways + " " + req.params.configuration + " " + req.params.gateway);
 		myLibGateways.getAll(req.params.configuration,req.params.gateway,function(result,idGtw) {
 			var aliveGtws=req.app.get('aliveGtws');
 			var isGtwFound=false;
