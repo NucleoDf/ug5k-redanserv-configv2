@@ -958,8 +958,12 @@ var InsertNewResource = function (col, row, isUpdate, realCol, realRow) {
         //Tabla calificación audio
         if ($('#CbBssAudioTable option:selected').val() == -1)
             radioResource.tabla_bss_id = 0;
-        else
-            radioResource.tabla_bss_id = $('#CbBssAudioTable option:selected').val();
+        else {
+            /** 20190212 Solo rellena la tabla si el tipo de agente es de Recepcion Remoto */
+            var tabla_bss_id = radioResource.tipo_agente == 4 || radioResource.tipo_agente == 6 ? $('#CbBssAudioTable option:selected').val() : 0;
+            radioResource.tabla_bss_id = tabla_bss_id;
+        }
+
         //Retraso interno GRS
         if ($('#TbGrsInternalDelay').val() == '')
             radioResource.retraso_interno_grs = 0;//Valor Defecto
@@ -1369,8 +1373,12 @@ var InsertNewResource = function (col, row, isUpdate, realCol, realRow) {
         telephoneResource.ranks = atsRanks;
         if ($('#TbRemoteUri').val() == '')
             isUriPhoneClear = true;
-    /** 20190208. Nuevo Parametro ATS USER del Recurso TbTelATSUser */
-        telephoneResource.ats_user = $('#TbTelATSUser').val();
+        /** 20190208. Nuevo Parametro ATS USER del Recurso TbTelATSUser solo en interfaces BL, BC, AB y LCEN */
+        var ats_user = telephoneResource.tipo_interfaz_tel == 0 ||
+            telephoneResource.tipo_interfaz_tel == 1 ||
+            telephoneResource.tipo_interfaz_tel == 2 ||
+            telephoneResource.tipo_interfaz_tel == 5 ? $('#TbTelATSUser').val() : "";
+        telephoneResource.ats_user = ats_user;
         console.log("ATSUser => " + telephoneResource.ats_user);
     }
     //Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda
