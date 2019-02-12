@@ -3,15 +3,28 @@ block configuration
 
 script.
     var refreshTime=1000;
-    function SynchronizedGateways(){
-        $.ajax({
-            type: 'GET',
-            url: '/gateways/syncGateways/'+refreshTime,
-            success: function (data) {
-                UpdateSynchroStateInConfig(data);
-                UpdateSynchroStateInSites(data);
-            }
-        });
+    /** Para no forrar al servidor... */
+    var answered1 = true;
+    var answered2 = true;
+    function SynchronizedGateways() {
+        
+        if (answered1==true) {
+            answered1 = false;
+            $.ajax({
+                type: 'GET',
+                url: '/gateways/syncGateways/'+refreshTime,
+                success: function (data) {
+                    UpdateSynchroStateInConfig(data);
+                    UpdateSynchroStateInSites(data);
+                    answered1 = true;
+                },
+                error: function(){
+                    answered1 = true;
+                },
+                timeout: 10000
+            });
+        }
+
         /*$.ajax({type: 'GET',
                 url: '/configurations/' + 'null' + '/gateways', 
                 success: function(data){
@@ -43,19 +56,28 @@ script.
                 }
             })
         }*/
+
         /** AGL. Polling de Sesion Activa */
-        $.ajax({
-            type: 'GET',
-            url: '/alive',
-            success: function (data) {
-                if (!data.alive)
-                    $(location).attr('href', '/login');
-            }
-        });
+        if (answered2==true) {
+            answered2 = false;
+            $.ajax({
+                type: 'GET',
+                url: '/alive',
+                success: function (data) {
+                    answered2 = true;
+                    if (!data.alive)
+                        $(location).attr('href', '/login');
+                },
+                error: function(){
+                    answered2 = true;
+                    $(location).attr('href', '/login');                
+                },
+                timeout: 10000
+            });
+        }
+
         setTimeout(function(){SynchronizedGateways()},refreshTime);
     }
-
-    setTimeout(SynchronizedGateways(),refreshTime);
 
     function EnableAplicarCambios(){//Quitamos el translate para no pedir continuamente el fichero de lang
         //translateWord('Activate',function(result){
@@ -85,6 +107,9 @@ script.
 
     // AGL. Para intentar hacer el UPLOAD con AJAX
     $(document).ready(function(){
+    
+        setTimeout(SynchronizedGateways(),refreshTime);
+
         console.log('Buscando UploadForm....' + $('#UploadForm')[0]);
         $('#UploadForm').submit(function(e){
             e.preventDefault();
