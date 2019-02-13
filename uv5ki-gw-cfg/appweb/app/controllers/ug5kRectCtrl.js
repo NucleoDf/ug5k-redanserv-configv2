@@ -42,13 +42,27 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
         return error;
     };
 
+    /**
+     * 
+     * @param {any} uri
+     */
+    vm.uri_val = function (uri) {
+        if (uri == "")
+            return "";
+        return ValidateService.uri_val(uri);
+    };
+
     /* Validador cbm en A/D */
     vm.cbmad_val = function (value) {
+        if (value.toString() == "")
+            return transerv.translate("El valor debe estar entre: ") + pr_ad_rng.toString();
         return value >= pr_ad_rng.min && value <= pr_ad_rng.max ? "" : transerv.translate("El valor debe estar entre: ") + pr_ad_rng.toString();
     };
 
     /* Validador cmd en D/A */
     vm.cbmda_val = function (value) {
+        if (value.toString() == "")
+            return transerv.translate("El valor debe estar entre: ") + pr_da_rng.toString();
         return value >= pr_da_rng.min && value <= pr_da_rng.max ? "" : transerv.translate("El valor debe estar entre: ") + pr_da_rng.toString();
     };
 
@@ -228,7 +242,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 return true;
             case 2:             // A/D Gain
             case 4:             // D/A Gain
-                return vm.telgain_show();
+                return vm.telgain_show(ind);
         }
         return false;
     };
@@ -329,7 +343,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                             valor == 4 ? 25 : 30;
         }
         return retorno;
-    };
+    }
 
     /* */
     function get_telef() {
@@ -471,7 +485,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         },
                         Input: 0,
                         Inputs: [],
-                        Show: vm.p1_tel_show,
+                        Show: vm.telgain_show,
                         Val: vm.cbmad_val
                     },
                     {
@@ -531,7 +545,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p2_tel_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         // 2 - 02
@@ -824,7 +838,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 4 : 2,
                         Inputs: [],
                         Show: vm.lbn_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: '',
@@ -835,7 +849,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 4 : 2,
                         Inputs: [],
                         Show: vm.lbn_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'Rango Abonados Origen.'*/transerv.translate('TCTRL_P03_OAB'),
@@ -880,7 +894,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Inputs: [],
                         Show: vm.show_rangos_ats,
                         Val: vm.validate_ats_range
-                    },
+                    }
                 ];
                 break;
 
@@ -896,7 +910,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Inputs: [],
                         Show: function () { return true; },
                         Val: vm.dval
-                    },
+                    }
                 ];
                 break;
 
@@ -1013,12 +1027,12 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
         var validate = true;
         if (vm.vdata[0].Value == 1) {       // lista negra
             angular.forEach(vm.vdata[2].Value, function (value, index) {
-                if (ValidateService.uri_val(value) != "") validate = false;
+                if (vm.uri_val(value) != "") validate = false;
             });
         }
         else if (vm.vdata[0].Value == 2) { // lista blanca.
             angular.forEach(vm.vdata[1].Value, function (value, index) {
-                if (ValidateService.uri_val(value) != "") validate = false;
+                if (vm.uri_val(value) != "") validate = false;
             });
         }
         return validate;
@@ -1056,7 +1070,7 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 if (vm.vdata[4].Show(4) && vm.cbmda_val(vm.vdata[4].Value)!="") return false;
                 break;
             case 2:
-                if (vm.vdata[1].Show(1) && ValidateService.uri_val(vm.vdata[1].Value) != "") return false;
+                if (vm.vdata[1].Show(1) && vm.uri_val(vm.vdata[1].Value) != "") return false;
                 if (vm.vdata[3].Show(3) && vm.ptre_val(vm.vdata[3].Value) != "") return false;
                 if (vm.vdata[5].Show(5) && vm.validate_ats_number(vm.vdata[5].Value) != "") return false;
                 if (vm.vdata[6].Show(6) && vm.validate_ats_number(vm.vdata[6].Value) != "") return false;

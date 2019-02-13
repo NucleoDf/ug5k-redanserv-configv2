@@ -37,13 +37,27 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
         return error;
     };
 
+    /**
+     * 
+     * @param {any} uri
+     */
+    vm.uri_val = function (uri) {
+        if (uri == "")
+            return "";
+        return ValidateService.uri_val(uri);
+    };
+
     /* Validador cbm en A/D */
     vm.cbmad_val = function (value) {
+        if (value.toString() == "")
+            return transerv.translate("El valor debe estar entre: ") + rr_ad_rng.toString();
         return value >= rr_ad_rng.min && value <= rr_ad_rng.max ? "" : transerv.translate("El valor debe estar entre: ") + rr_ad_rng.toString();
     };
 
     /* Validador cmd en D/A */
     vm.cbmda_val = function (value) {
+        if (value.toString() == "")
+            return transerv.translate("El valor debe estar entre: ") + rr_da_rng.toString();
         return value >= rr_da_rng.min && value <= rr_da_rng.max ? "" : transerv.translate("El valor debe estar entre: ") + rr_da_rng.toString();
     };
 
@@ -118,7 +132,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             case 7:
             case 8: // Parametros BSS. Solo Radio Locales en FD y BSS Activo.
             case 9:
-                return ((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1)
+                return ((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1);
             case 10: // Tiempo de Compensacion CLIMAX. Solo Radio Locales en FD, BSS Activo y Metodo Tiempo FIJO.
                 return (((parseInt(vm.vdata[0].Value) == 2 || parseInt(vm.vdata[0].Value) == 3) && parseInt(vm.vdata[6].Value) == 1) && parseInt(vm.vdata[9].Value) == 2);
             case 11: // Solo Radio Remoto.
@@ -390,7 +404,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 Inputs: [/*"Hardware"*/transerv.translate('RCTRL_P02_HARD'), /*"VAD"*/transerv.translate('RCTRL_P02_VAD'), /*"Forzado"*/transerv.translate('RCTRL_P02_FOR')],
                 Show: vm.p2_rad_show,
                 Val: vm.dval
-            }
+            };
         }
     };
 
@@ -595,7 +609,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 0,
                         Inputs: [],
-                        Show: vm.p1_rad_show,
+                        Show: vm.radgain_show,
                         Val: vm.cbmad_val
                     },
                     {
@@ -613,7 +627,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]),
                         Input: 0,
                         Inputs: [],
-                        Show: vm.p1_rad_show,
+                        Show: vm.radgain_show,
                         Val: vm.cbmda_val
                     },
                     {
@@ -700,7 +714,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                             /*"Ninguno"*/transerv.translate('RCTRL_P02_BSSN'),
                             /*"RSSI"*/transerv.translate('RCTRL_P02_BSSR'),
                             /*"RSSI y NUCLEO"*/transerv.translate('RCTRL_P02_BSSC'),
-                            /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1'),
+                            /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1')
                         ] : [
                             /*"RSSI"*/transerv.translate('RCTRL_P02_BSSR'),
                             /*"NUCLEO"*/transerv.translate('RCTRL_P02_BSSC1')
@@ -852,7 +866,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'-- URI-TX-B:'*/transerv.translate('RCTRL_P03_TXB'),
@@ -861,7 +875,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'-- URI-RX-A:'*/transerv.translate('RCTRL_P03_RXA'),
@@ -870,7 +884,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'-- URI-RX-B:'*/transerv.translate('RCTRL_P03_RXB'),
@@ -879,7 +893,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'Emplazamiento-2:'*/transerv.translate('RCTRL_P03_SITE2'),
@@ -897,7 +911,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'-- URI-TX-B:'*/transerv.translate('RCTRL_P03_TXB'),
@@ -906,7 +920,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'-- URI-RX-A:'*/transerv.translate('RCTRL_P03_RXA'),
@@ -915,7 +929,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'-- URI-RX-B:'*/transerv.translate('RCTRL_P03_RXB'),
@@ -924,7 +938,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
 
                     {
@@ -943,7 +957,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'-- URI-TX-B:'*/transerv.translate('RCTRL_P03_TXB'),
@@ -952,7 +966,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'-- URI-RX-A:'*/transerv.translate('RCTRL_P03_RXA'),
@@ -961,7 +975,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'-- URI-RX-B:'*/transerv.translate('RCTRL_P03_RXB'),
@@ -970,7 +984,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
                         Show: vm.p3_rad_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     }
                 ];
                 break;
@@ -994,7 +1008,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 4 : 2,
                         Inputs: [],
                         Show: vm.lbn_show,
-                        Val: ValidateService.uri_val
+                        Val: vm.uri_val
                     },
                     {
                         Name: /*'Lista Negra:'*/transerv.translate('RCTRL_P04_RESB'),
@@ -1003,8 +1017,8 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Input: jamp_no_sip == 1 ? 4 : 2,
                         Inputs: [],
                         Show: vm.lbn_show,
-                        Val: ValidateService.uri_val
-                    },
+                        Val: vm.uri_val
+                    }
                 ];
                 break;
             default:
@@ -1103,7 +1117,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                 case 12:
                     break;
                 default:
-                    if (value.Show(index) && ValidateService.uri_val(value.Value)!="") validate = false;
+                    if (value.Show(index) && vm.uri_val(value.Value)!="") validate = false;
             }
         });
         return validate;
@@ -1114,12 +1128,12 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
         var validate = true;
         if (vm.vdata[0].Value == 1) {       // lista negra
             angular.forEach(vm.vdata[2].Value, function (value, index) {
-                if (ValidateService.uri_val(value)!="") validate = false;
+                if (vm.uri_val(value)!="") validate = false;
             });
         }
         else if (vm.vdata[0].Value == 2) { // lista blanca.
             angular.forEach(vm.vdata[1].Value, function (value, index) {
-                if (ValidateService.uri_val(value)!="") validate = false;
+                if (vm.uri_val(value)!="") validate = false;
             });
         }
         return validate;
@@ -1134,7 +1148,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
 
         switch (vm.pagina) {
             case 0:
-                return ValidateService.uri_val(vm.vdata[4].Value)=="" && vm.fid_val(vm.vdata[2].Value)=="";
+                return vm.uri_val(vm.vdata[4].Value)=="" && vm.fid_val(vm.vdata[2].Value)=="";
             case 1:
                 if (vm.vdata[2].Show(2) && vm.cbmad_val(vm.vdata[2].Value)!="") return false;
                 if (vm.vdata[4].Show(4) && vm.cbmda_val(vm.vdata[4].Value)!="") return false;

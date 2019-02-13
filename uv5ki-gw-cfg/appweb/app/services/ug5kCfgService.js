@@ -174,7 +174,7 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                 iPttPrio: 0,
                 iPrecisionAudio: PrecisionAudio,
                 colateral: {
-                    name: "111.110",
+                    name: "118.000",
                     tipoConmutacion: 0,
                     emplazamientos: [{
                         uriTxA: "",
@@ -256,7 +256,7 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
             blanca: ["", "", "", "", "", "", "", ""],
             negra: ["", "", "", "", "", "", "", ""],
             iFlgUsarDiffServ: 0,
-            szDestino: "110.000"
+            szDestino: "118.000"
         };
     }
 

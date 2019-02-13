@@ -390,5 +390,24 @@
   "Filtro de Supervision de señal de ring.": "Filtro de Supervision de señal de ring.",
   "Detección DTMF ?": "Detección DTMF ?",
 
+  "Longitud Excedida": "Longitud Excedida",
+  "Formato IP Incorrecto": "Formato IP Incorrecto",
+  "Formato Endpoint Incorrecto": "Formato Endpoint Incorrecto",
+  "Formato de Puerto Incorrecto": "Formato de Puerto Incorrecto",
+  "Longitud Usuario Excedida": "Longitud Usuario Excedida",
+  "Caracteres No permitidos en Usuario": "Caracteres No permitidos en Usuario",
+  "Formato Uri Incorrecto": "Formato Uri Incorrecto",
+  "El Campo no puede estar vacio": "El Campo no puede estar vacio",
+  "Formato RTSP Incorrecto": "Formato RTSP Incorrecto",
+  "Longitud de Identificador Excedida": "Longitud de Identificador Excedida",
+  "Caracteres No permitidos en Identificador": "Caracteres No permitidos en Identificador",
+  "El valor debe estar entre: ": "El valor debe estar entre: ",
+  "Los valores deben estar entre: ": "Los valores deben estar entre: ",
+  "Formato de Frecuencia incorrecto": "Formato de Frecuencia incorrecto",
+  "Error Formato TRAP": "Error Formato TRAP",
+  "FID No Valido. Valores admitidos: ": "FID No Valido. Valores admitidos: ",
+  "La IP de la URI debe ser: ": "La IP de la URI debe ser: ",
+
+
   "FINAL": "final"
 }
