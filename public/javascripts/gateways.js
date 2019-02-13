@@ -16,7 +16,7 @@ var link_enlaces_libres = [];
 /** 20170518 AGL Devuelve la CFG propia de la lista de emplazamientos */
 function Site2Config(mySite, sites) {
     var cfgName = "";
-    $.each(sites, function (index, value) {
+    $.each(sites, function(index, value) {
         if (mySite == sites[index].idEMPLAZAMIENTO) {
             cfgName = sites[index].nameCfg;
         }
@@ -29,7 +29,7 @@ function Site2Config(mySite, sites) {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var Copy = function () {
+var Copy = function() {
     if ($('#nameCopyGw').val().length > 0) {
         var regx_idval = /^[a-zA-Z0-9\-_.]{1,32}$/;
         var match = $('#nameCopyGw').val().match(regx_idval);
@@ -77,32 +77,32 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
     ///////////////////////////
     //PESTAÑA GENERAL
     if ($('#nameGw').val() == '') {
-        translateWord('ErrorGatewayHaveNoName', function (result) {
+        translateWord('ErrorGatewayHaveNoName', function(result) {
             alertify.error(result);
         });
         return;
     }
     if ($('#ipv').val() == '') {
-        translateWord('ErrorGatewayHaveNoIP', function (result) {
+        translateWord('ErrorGatewayHaveNoIP', function(result) {
             alertify.error(result);
         });
         return;
     }
     //CPU 0
     if ($('#ipb1').val() == '') {
-        translateWord('ErrorIPCPU', function (result) {
+        translateWord('ErrorIPCPU', function(result) {
             alertify.error(result + " 0");
         });
         return;
     }
     if ($('#ipg1').val() == '') {
-        translateWord('ErrorIPGateway', function (result) {
+        translateWord('ErrorIPGateway', function(result) {
             alertify.error(result + " 0");
         });
         return;
     }
     if ($('#msb1').val() == '') {
-        translateWord('ErrorCPUMask', function (result) {
+        translateWord('ErrorCPUMask', function(result) {
             alertify.error(result + " 0");
         });
         return;
@@ -110,25 +110,25 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
     if ($('#dual').prop('checked')) {
         //CPU 1
         if ($('#ipb2').val() == '') {
-            translateWord('ErrorIPCPU', function (result) {
+            translateWord('ErrorIPCPU', function(result) {
                 alertify.error(result + " 1");
             });
             return;
         }
         if ($('#ipg2').val() == '') {
-            translateWord('ErrorIPGateway', function (result) {
+            translateWord('ErrorIPGateway', function(result) {
                 alertify.error(result + " 1");
             });
             return;
         }
         if ($('#msb2').val() == '') {
-            translateWord('ErrorCPUMask', function (result) {
+            translateWord('ErrorCPUMask', function(result) {
                 alertify.error(result + " 1");
             });
             return;
         }
         if ($('#ipb1').val() == $('#ipb2').val() && $('#ipb1').val() != '') {
-            translateWord('ErrorEqualCPUIp', function (result) {
+            translateWord('ErrorEqualCPUIp', function(result) {
                 alertify.error(result);
             });
             return;
@@ -138,18 +138,18 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
     //PESTAÑA SERVICIOS
     //SIP
     // Proxy list
-    $('#ProxysList option').each(function () {
+    $('#ProxysList option').each(function() {
         var selected = $("#ProxysList option:selected").val() == $(this).val();
         proxys.push({ 'ip': $(this).val(), 'selected': selected });
     });
     // Registrars list
-    $('#RegistrarsList option').each(function () {
+    $('#RegistrarsList option').each(function() {
         var selected = $("#RegistrarsList option:selected").val() == $(this).val();
         registrars.push({ 'ip': $(this).val(), 'selected': selected });
     });
     //SINCRONIZACION
     //Ntp
-    $('#NtpServersList option').each(function () {
+    $('#NtpServersList option').each(function() {
         var selected = $("#NtpServersList option:selected").val() == $(this).val();
         listServers.push({ 'ip': $(this).val(), 'selected': selected });
     });
@@ -157,7 +157,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
     //Aquí ponemos el text porque parseamos las ips luego en modo 1,2.2.2.2/345 y el
     //	value una vez las guarda así (en la creación) y en el update guarda solo la ip :S
     // Traps list
-    $('#TrapsList option').each(function () {
+    $('#TrapsList option').each(function() {
         traps.push($(this).text());
     });
     //WEB
@@ -236,7 +236,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
             $.ajax({
                 type: 'GET',
                 url: '/gateways/checkipaddr/' + newGateway.ipv + '/' + $('#DivConfigurations').data('idCFG') + '/' + idUpdatedCgw,
-                success: function (data) {
+                success: function(data) {
                     if (data == "IP_DUP") {
                         alertify.error('La dirección ip: ' + newGateway.ipv + ' ya se encuentra dada de alta en esta configuración.');
                         return;
@@ -246,7 +246,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                         $.ajax({
                             type: 'GET',
                             url: '/gateways/checkipaddr/' + newGateway.ipb1 + '/' + $('#DivConfigurations').data('idCFG') + '/' + idUpdatedCgw,
-                            success: function (data) {
+                            success: function(data) {
                                 if (data == "IP_DUP") {
                                     alertify.error('La dirección ip: ' + newGateway.ipb1 + ' ya se encuentra dada de alta en esta configuración.');
                                     return;
@@ -256,7 +256,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                                     $.ajax({
                                         type: 'GET',
                                         url: '/gateways/checkipaddr/' + newGateway.ipb2 + '/' + $('#DivConfigurations').data('idCFG') + '/' + idUpdatedCgw,
-                                        success: function (data) {
+                                        success: function(data) {
                                             if (data == "IP_DUP") {
                                                 alertify.error('La dirección ip: ' + newGateway.ipb2 + ' ya se encuentra dada de alta en esta configuración.');
                                                 return;
@@ -266,7 +266,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                                                 $.ajax({
                                                     type: 'GET',
                                                     url: '/gateways/checkgtwname/' + newGateway.nombre + '/' + $('#DivConfigurations').data('idCFG') + '/' + idUpdatedCgw,
-                                                    success: function (data) {
+                                                    success: function(data) {
                                                         if (data == "NAME_DUP") {
                                                             alertify.error('El identificador de pasarela: ' + newGateway.nombre + ' ya se encuentra dado de alta en esta configuración.');
                                                             return;
@@ -284,7 +284,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                                                                         "idSite": idSite
                                                                     }
                                                                     ),
-                                                                    success: function (data) {
+                                                                    success: function(data) {
                                                                         if (data.error == null) {
                                                                             alertify.success('La pasarela \"' + data.name + '\" ha sido creada.');
                                                                             GenerateHistoricEvent(ID_HW, ADD_GATEWAY, $('#nameGw').val(), $('#loggedUser').text());
@@ -300,7 +300,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                                                                             alertify.error('Error: ' + data.error);
                                                                         }
                                                                     },
-                                                                    error: function (data) {
+                                                                    error: function(data) {
                                                                         alertify.error('Error creando la pasarela.');
                                                                     }
                                                                 });
@@ -318,7 +318,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                                                                         "idGtw": idGtw
                                                                     }
                                                                     ),
-                                                                    success: function (data) {
+                                                                    success: function(data) {
                                                                         if (data.error == null) {
                                                                             alertify.success('La pasarela \"' + data.name + '\" ha sido modificada!.');
                                                                             GenerateHistoricEvent(ID_HW, MODIFY_GATEWAY_COMMON_PARAM, $('#nameGw').val(), $('#loggedUser').text());
@@ -335,35 +335,35 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                                                                             alertify.error('Error: ' + data.error);
                                                                         }
                                                                     },
-                                                                    error: function (data) {
+                                                                    error: function(data) {
                                                                         alertify.error('Error modificando la pasarela.');
                                                                     }
                                                                 });
                                                             }
                                                         }
                                                     },
-                                                    error: function (data) {
+                                                    error: function(data) {
                                                         alertify.error('Error al comprobar los identificadores existentes en el sistema.');
                                                         return;
                                                     }
                                                 });
                                             }
                                         },
-                                        error: function (data) {
+                                        error: function(data) {
                                             alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
                                             return;
                                         }
                                     });
                                 }
                             },
-                            error: function (data) {
+                            error: function(data) {
                                 alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
                                 return;
                             }
                         });
                     }
                 },
-                error: function (data) {
+                error: function(data) {
                     alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
                     return;
                 }
@@ -388,7 +388,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                 "idGtw": idGtw
             }
             ),
-            success: function (data) {
+            success: function(data) {
                 if (data.error == null) {
                     alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
                     GenerateHistoricEvent(ID_HW, MODIFY_GATEWAY_COMMON_PARAM, $('#nameGw').val(), $('#loggedUser').text());
@@ -405,7 +405,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                     alertify.error('Error: ' + data.error);
                 }
             },
-            error: function (data) {
+            error: function(data) {
                 alertify.error('Error modificando la pasarela.');
             }
         });
@@ -417,7 +417,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var ChangeGateWaySite = function (data) {
+var ChangeGateWaySite = function(data) {
     var oldIndex = data[data.oldValue].value;
     var newIndex = data[data.selectedIndex].value;
     var idCgw = $('#DivGateways').data('idCgw');
@@ -439,7 +439,7 @@ var ChangeGateWaySite = function (data) {
         type: 'GET',
         //url: '/gateways/' + $('#Component').text() + '/services/' + serviceId,
         url: '/gateways/checkipaddr4changesite/' + ipb1 + '/' + ipb2 + '/' + newIndex,
-        success: function (data) {
+        success: function(data) {
             if (data == "IP_DUP_1") {
                 $('#ListSites option[value="' + oldIndex + '"]').prop('selected', true);
                 alertify.error('La dirección ip: ' + ipb1 + ' ya se encuentra dada de alta en el emplazamiento de destino.');
@@ -451,11 +451,11 @@ var ChangeGateWaySite = function (data) {
             else {
                 alertify.confirm('Ulises G 5000 R', "¿Quiere trasladar la pasarela del emplazamiento \"" + oldEmpl +
                     "\" al emplazamiento \"" + newEmpl + "\"?",
-                    function () {
+                    function() {
                         $.ajax({
                             type: 'POST',
                             url: '/gateways/changesite/' + idCgw + '/' + oldIndex + '/' + newIndex,
-                            success: function (data) {
+                            success: function(data) {
                                 if (data.data == 'DUP_ENTRY_NAME') {
                                     $('#ListSites option[value="' + oldIndex + '"]').prop('selected', true);
                                     alertify.error('Ya existe una pasarela con el mismo nombre en el emplazamiento de destino seleccionado.');
@@ -470,7 +470,7 @@ var ChangeGateWaySite = function (data) {
                                     //ShowCfg($('#DivConfigurations').data('idCFG'));
                                 }
                             },
-                            error: function (data) {
+                            error: function(data) {
                                 $('#ListSites option[value="' + oldIndex + '"]').prop('selected', true);
                                 alertify.error('Error en la operacion');
                             }
@@ -478,7 +478,7 @@ var ChangeGateWaySite = function (data) {
                         //alertify.success('Ok');
                     },
 
-                    function () {
+                    function() {
                         $('#ListSites option[value="' + oldIndex + '"]').prop('selected', true);
                         //ShowSite($('#IdSite').val(),$('#IdSite').data('idSite'));
                         alertify.error('Cancelado');
@@ -486,7 +486,7 @@ var ChangeGateWaySite = function (data) {
                 );
             }
         },
-        error: function (data) {
+        error: function(data) {
             $('#ListSites option[value="' + oldIndex + '"]').prop('selected', true);
             alertify.error('Error al comprobar las direcciones ip existentes en el sistema.');
         }
@@ -607,7 +607,7 @@ function showDataForRadioResource(data) {
     //Retraso interno GRS
     $('#TbGrsInternalDelay').val(data.retraso_interno_grs);
     //Tabla Calificacion de audio
-    SetAudioTableCB(function () {//Primero hay que inicializar los valores de la tabla.
+    SetAudioTableCB(function() {//Primero hay que inicializar los valores de la tabla.
         if (data.tabla_bss_id == 0)
             $('#CbBssAudioTable option[value="-1"]').prop('selected', true);
         else
@@ -759,7 +759,7 @@ function showDataForTelephoneResource(data) {
         $.ajax({
             type: 'GET',
             url: '/resources/' + data.idrecurso_telefono + '/phoneParameters/range',
-            success: function (data) {
+            success: function(data) {
                 if (data != null) {
                     //ShowRangeAts(data);
                     //dataAtsRange = data;
@@ -781,7 +781,7 @@ function showDataForTelephoneResource(data) {
                     $('#DestinoFinal4').val('');
                     if (data != 'NO_DATA') {
                         var kOrigen = 0, kDestino = 0;
-                        data.ranks.forEach(function (rango) {
+                        data.ranks.forEach(function(rango) {
                             if (rango.tipo == 0) {//Origen
                                 kOrigen++;
                                 if (kOrigen == 1) {
@@ -824,7 +824,7 @@ function showDataForTelephoneResource(data) {
                     }
                 }//else no data
             },
-            error: function (data) {
+            error: function(data) {
                 alertify.error('Error cconsultando los rangos ATS.');
             }
         });
@@ -853,7 +853,7 @@ function isResNameDup(resourceName, idCgw, idRes) {
     $.ajax({
         type: 'GET',
         url: '/hardware/checkresname/' + resourceName + '/' + idCgw + '/' + idRes,
-        success: function (data) {
+        success: function(data) {
             if (data == "NAME_DUP")
                 return true;
             else
@@ -874,7 +874,7 @@ function isResNameDup(resourceName, idCgw, idRes) {
 /*												*/
 /*  REV 1.0.2 VMG								*/
 /************************************************/
-var InsertNewResource = function (col, row, isUpdate, realCol, realRow) {
+var InsertNewResource = function(col, row, isUpdate, realCol, realRow) {
     var resourceId = row;
     var radioResource = {};
     var telephoneResource = {};
@@ -890,7 +890,7 @@ var InsertNewResource = function (col, row, isUpdate, realCol, realRow) {
     if ($('#SResourceType option:selected').val() == 1) {
         //Campos para identificar el recurso
         resourceType = 1;
-        radioResource.pasarela_id = idCgw
+        radioResource.pasarela_id = idCgw;
         radioResource.fila = row;
         radioResource.columna = col;
         //Nombre
@@ -1425,16 +1425,16 @@ var InsertNewResource = function (col, row, isUpdate, realCol, realRow) {
     else {
         alertify.confirm('Ulises G 5000 R', 'El índice de carga al añadir este tipo de ' +
             'recurso es de: ' + localLoadIndex + '. ¿Desea continuar?',
-            function () {
+            function() {
                 checkResRestrictionsAndInsert(isUriPhoneClear, isUrisCleaned, isNoTableBssSelected, isUpdate,
                     resource2Insert, resourceType, resourceId, true);
             },
-            function () {
+            function() {
                 alertify.error('Cancelado');
             }
         );
     }
-}
+};
 
 /************************************/
 /*	FUNCTION: ajaxInsertUpdateRes 	*/
@@ -1448,14 +1448,14 @@ function checkResRestrictionsAndInsert(isUriPhoneClear, isUrisCleaned, isNoTable
     //Recomiendan mínimo de 300 para asegurarse de que salen los dos mensajes.
     if (setTimeOut)
         localTimeOut = 700;
-    setTimeout(function () {
+    setTimeout(function() {
         if (resourceType == 2) {//Phone
             if (isUriPhoneClear) {
                 alertify.confirm('Ulises G 5000 R', 'El campo URI remota se encuentra vacío. ¿Desea continuar?',
-                    function () {
+                    function() {
                         ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
                     },
-                    function () {
+                    function() {
                         alertify.error('Cancelado');
                     }
                 );
@@ -1467,10 +1467,10 @@ function checkResRestrictionsAndInsert(isUriPhoneClear, isUrisCleaned, isNoTable
             if (isNoTableBssSelected) {
                 alertify.confirm('Ulises G 5000 R', 'No se ha seleccionado tabla de calificación de audio para el ' +
                     'tipo de recurso radio seleccionado. ¿Desea continuar?',
-                    function () {
+                    function() {
                         ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
                     },
-                    function () {
+                    function() {
                         alertify.error('Cancelado');
                     }
                 );
@@ -1479,10 +1479,10 @@ function checkResRestrictionsAndInsert(isUriPhoneClear, isUrisCleaned, isNoTable
                 if (isUrisCleaned) {
                     alertify.confirm('Ulises G 5000 R', 'Los campos URI para el tipo de recurso radio ' +
                         'seleccionado se encuentran vacíos. ¿Desea continuar?',
-                        function () {
+                        function() {
                             ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId);
                         },
-                        function () {
+                        function() {
                             alertify.error('Cancelado');
                         }
                     );
@@ -1505,7 +1505,7 @@ function ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId
         $.ajax({
             type: 'GET',
             url: '/hardware/checkresname/' + $('#TbNameResource').val() + '/' + $('#DivGateways').data('idCgw') + '/0',
-            success: function (data) {
+            success: function(data) {
                 if (data == "NAME_DUP") {
 
                     alertify.alert('El nombre del recurso \"' + $('#TbNameResource').val() +
@@ -1523,7 +1523,7 @@ function ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId
                             "resourceType": resourceType
                         }
                         ),
-                        success: function (data) {
+                        success: function(data) {
                             if (data.error == null) {
                                 alertify.success('El recurso se ha añadido correctamente.');
                                 GenerateHistoricEvent(ID_HW, ADD_HARDWARE_RESOURCE, $('#TbNameResource').val(), $('#loggedUser').text());
@@ -1534,7 +1534,7 @@ function ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId
                             else
                                 alertify.error('Error: ' + data.error);
                         },
-                        error: function (data) {
+                        error: function(data) {
                             alertify.error('Error insertando el nuevo recurso.');
                         }
                     });
@@ -1548,7 +1548,7 @@ function ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId
         $.ajax({
             type: 'GET',
             url: '/hardware/checkresname/' + $('#TbNameResource').val() + '/' + $('#DivGateways').data('idCgw') + '/' + resourceId,
-            success: function (data) {
+            success: function(data) {
                 if (data == "NAME_DUP") {
                     alertify.alert('El nombre del recurso \"' + $('#TbNameResource').val() +
                         '\" ya se encuentra dada de alta en la pasarela. Utilize otro nombre.');
@@ -1566,7 +1566,7 @@ function ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId
                             "resourceId": resourceId
                         }
                         ),
-                        success: function (data) {
+                        success: function(data) {
                             if (data.error == null) {
                                 //var paramHistoric={0:}
                                 GenerateHistoricEvent(ID_HW, MODIFY_HARDWARE_RESOURCE_LOGIC_PARAM, $('#TbNameResource').val(), $('#loggedUser').text());
@@ -1577,7 +1577,7 @@ function ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId
                             else
                                 alertify.error('Error: ' + data.error);
                         },
-                        error: function (data) {
+                        error: function(data) {
                             alertify.error('Error actualizando el recurso.');
                         }
                     });
@@ -1594,14 +1594,14 @@ function ajaxInsertUpdateRes(isUpdate, resource2Insert, resourceType, resourceId
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var DelGateway = function () {
+var DelGateway = function() {
 
     alertify.confirm('Ulises G 5000 R', "¿Eliminar la gateway \"" + $('#LblIdGateway').text() + "\"?",
-        function () {
+        function() {
             $.ajax({
                 type: 'DELETE',
                 url: '/gateways/' + $('#DivGateways').data('idCgw'),
-                success: function (data) {
+                success: function(data) {
                     if (data.error != null)
                         alertify.error('Error: ' + data.error);
                     else {
@@ -1610,18 +1610,18 @@ var DelGateway = function () {
                         ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
                     }
                 },
-                error: function (data) {
+                error: function(data) {
                     alertify.error('Error eliminando la pasarela.');
                 }
             });
         },
-        function () {
+        function() {
             alertify.error('Cancelado');
         });
 };
 
-var CloseCopy = function () {
-    $('#CopyGatewayZone').animate({ width: '0px', height: '0px' }, 500, function () {
+var CloseCopy = function() {
+    $('#CopyGatewayZone').animate({ width: '0px', height: '0px' }, 500, function() {
         $('#CopyGatewayZone').hide();
 
         $('#AddFormsite').removeClass('disabledDiv');
@@ -1636,7 +1636,7 @@ var CloseCopy = function () {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var CopyGateway = function () {
+var CopyGateway = function() {
     //Reset Values
     $('#nameCopyGw').val('');
     $('#ipCopyCpu0').val('');
@@ -1649,7 +1649,7 @@ var CopyGateway = function () {
 
     $('#CopyGatewayZone').attr('style', 'position:absolute;width:0px;height:0px;top:180px;left:260px');
     $('#CopyGatewayZone').show();
-    $('#CopyGatewayZone').animate({ width: '30%', height: '290px' }, 500, function () {
+    $('#CopyGatewayZone').animate({ width: '30%', height: '290px' }, 500, function() {
         $('#IpvCopyGateway').val($('#ipv').val());
         $('#LblNameCopyGateway').text($('#nameGw').val());
 
@@ -1657,20 +1657,20 @@ var CopyGateway = function () {
     });
 };
 
-var CopyGateway2 = function () {
+var CopyGateway2 = function() {
     alertify.success('Test!');
     //Prueba del Json completo
     $.ajax({
         type: 'GET',
         url: '/gateways/1.1.1.2/testconfig',
-        success: function (data) {
+        success: function(data) {
             if (data.error != null)
                 alertify.error('Error: ' + data.error);
             else {
                 alertify.success('Success');
             }
         },
-        error: function (data) {
+        error: function(data) {
             alertify.error('Error en el test.');
         }
     });
@@ -1699,7 +1699,7 @@ var CopyGateway2 = function () {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var CopyMethodGateway = function (idSourceGateway, nameTargetGateway, ip0TargetGateway,
+var CopyMethodGateway = function(idSourceGateway, nameTargetGateway, ip0TargetGateway,
     ip1TargetGateway, ipvTargetGateway) {
 
     $.ajax({
@@ -1707,7 +1707,7 @@ var CopyMethodGateway = function (idSourceGateway, nameTargetGateway, ip0TargetG
         dataType: 'json',
         url: '/gateways/' + idSourceGateway + '/' + nameTargetGateway + '/' + ip0TargetGateway +
             '/' + ip1TargetGateway + '/' + ipvTargetGateway,
-        success: function (data) {
+        success: function(data) {
             if (data.error == 'ER_DUP_ENTRY')
                 alertify.error('El nombre \"' + nameTargetGateway + '\" ya existe en esta configuración.');
             else if (data.error == 'ER_DUP_IP0_ENTRY')
@@ -1726,7 +1726,7 @@ var CopyMethodGateway = function (idSourceGateway, nameTargetGateway, ip0TargetG
 };
 
 
-var PostGateway2 = function (f) {
+var PostGateway2 = function(f) {
     var cpus = [];
     var sip = {};
     var proxys = [];
@@ -1756,7 +1756,7 @@ var PostGateway2 = function (f) {
     };
 
     // SINCR. SERVICE
-    $('#NtpServersList option').each(function () {
+    $('#NtpServersList option').each(function() {
         var selected = $("#NtpServersList option:selected").val() == $(this).val();
         listServers.push({ 'ip': $(this).val(), 'selected': selected });
     });
@@ -1765,34 +1765,34 @@ var PostGateway2 = function (f) {
         "servidores": listServers
     };
     // Proxy list
-    $('#ProxysList option').each(function () {
+    $('#ProxysList option').each(function() {
         var selected = $("#ProxysList option:selected").val() == $(this).val();
         proxys.push({ 'ip': $(this).val(), 'selected': selected });
     });
     // Registrars list
-    $('#RegistrarsList option').each(function () {
+    $('#RegistrarsList option').each(function() {
         var selected = $("#RegistrarsList option:selected").val() == $(this).val();
         registrars.push({ 'ip': $(this).val(), 'selected': selected });
     });
     // Traps list
-    $('#TrapsList option').each(function () {
+    $('#TrapsList option').each(function() {
         traps.push($(this).val());
     });
 
-    translateWord('ErrorServiceToGateway', function (result) {
+    translateWord('ErrorServiceToGateway', function(result) {
         mensaje = result;
     });
-    translateWord('ErrorGatewayHaveNoName', function (result) {
+    translateWord('ErrorGatewayHaveNoName', function(result) {
         mensajeNoName = result;
     });
-    translateWord('ErrorGatewayHaveNoIP', function (result) {
+    translateWord('ErrorGatewayHaveNoIP', function(result) {
         mensajeNoIp = result;
     });
-    translateWord('ErrorGeneratingService', function (result) {
+    translateWord('ErrorGeneratingService', function(result) {
         mensajeServiceError = result;
     });
 
-    translateWord('Update', function (result) {
+    translateWord('Update', function(result) {
         if ($('#UpdateGtwButton').text() === result) {
 
             if ($("#ListServices option:selected").val() == "") {
@@ -1819,19 +1819,19 @@ var PostGateway2 = function (f) {
 
             //CPU 0
             if ($('#ipb1').val() == '') {
-                translateWord('ErrorIPCPU', function (result) {
+                translateWord('ErrorIPCPU', function(result) {
                     alertify.error(result + " 0");
                 });
                 return;
             }
             if ($('#ipg1').val() == '') {
-                translateWord('ErrorIPGateway', function (result) {
+                translateWord('ErrorIPGateway', function(result) {
                     alertify.error(result + " 0");
                 });
                 return;
             }
             if ($('#msb1').val() == '') {
-                translateWord('ErrorCPUMask', function (result) {
+                translateWord('ErrorCPUMask', function(result) {
                     alertify.error(result + " 0");
                 });
                 return;
@@ -1839,19 +1839,19 @@ var PostGateway2 = function (f) {
             if ($('#dual').prop('checked')) {
                 //CPU 1						
                 if ($('#ipb2').val() == '') {
-                    translateWord('ErrorIPCPU', function (result) {
+                    translateWord('ErrorIPCPU', function(result) {
                         alertify.error(result + " 1");
                     });
                     return;
                 }
                 if ($('#ipg2').val() == '') {
-                    translateWord('ErrorIPGateway', function (result) {
+                    translateWord('ErrorIPGateway', function(result) {
                         alertify.error(result + " 1");
                     });
                     return;
                 }
                 if ($('#msb2').val() == '') {
-                    translateWord('ErrorCPUMask', function (result) {
+                    translateWord('ErrorCPUMask', function(result) {
                         alertify.error(result + " 1");
                     });
                     return;
@@ -1960,7 +1960,7 @@ var PostGateway2 = function (f) {
                     }
                 }
                 ),
-                success: function (data) {
+                success: function(data) {
                     if (data.error == 'ER_DUP_ENTRY') {
                         alertify.error('Gateway \"' + $('#nameGw').val() + '\" o dirección IP ya existe');
                     }
@@ -1972,12 +1972,12 @@ var PostGateway2 = function (f) {
                         GenerateHistoricEvent(ID_HW, MODIFY_GATEWAY_COMMON_PARAM, data.name, $('#loggedUser').text());
                         alertify.success('Gateway \"' + data.name + '\" actualizada.');
                         ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
-                        GetGateways(null, function () {
+                        GetGateways(null, function() {
                             ShowHardwareGateway(data.idCGW, data.name);
                         });
                     }
                 },
-                error: function (data) {
+                error: function(data) {
                     alertify.error('Gateway \"' + data.name + '\" ya existe.');
                 }
             });
@@ -2009,19 +2009,19 @@ var PostGateway2 = function (f) {
             //Comprobar que se han introducido los datos de las CPU
             //CPU 0
             if ($('#ipb1').val() == '') {
-                translateWord('ErrorIPCPU', function (result) {
+                translateWord('ErrorIPCPU', function(result) {
                     alertify.error(result + " 0");
                 });
                 return;
             }
             if ($('#ipg1').val() == '') {
-                translateWord('ErrorIPGateway', function (result) {
+                translateWord('ErrorIPGateway', function(result) {
                     alertify.error(result + " 0");
                 });
                 return;
             }
             if ($('#msb1').val() == '') {
-                translateWord('ErrorCPUMask', function (result) {
+                translateWord('ErrorCPUMask', function(result) {
                     alertify.error(result + " 0");
                 });
                 return;
@@ -2029,19 +2029,19 @@ var PostGateway2 = function (f) {
             //CPU 1
             if ($('#dual').prop('checked')) {
                 if ($('#ipb2').val() == '') {
-                    translateWord('ErrorIPCPU', function (result) {
+                    translateWord('ErrorIPCPU', function(result) {
                         alertify.error(result + " 1");
                     });
                     return;
                 }
                 if ($('#ipg2').val() == '') {
-                    translateWord('ErrorIPGateway', function (result) {
+                    translateWord('ErrorIPGateway', function(result) {
                         alertify.error(result + " 1");
                     });
                     return;
                 }
                 if ($('#msb2').val() == '') {
-                    translateWord('ErrorCPUMask', function (result) {
+                    translateWord('ErrorCPUMask', function(result) {
                         alertify.error(result + " 1");
                     });
                     return;
@@ -2050,7 +2050,7 @@ var PostGateway2 = function (f) {
             var claveServicio = $('#name').val() + '-' + $('#nameGw').val();
             //La última parte es crear el servicio.
             var newService;
-            EditNewService(claveServicio, function (newService) {
+            EditNewService(claveServicio, function(newService) {
                 if (!newService || newService == null) {
                     alertify.error(mensajeServiceError);
                     return;
@@ -2154,7 +2154,7 @@ var PostGateway2 = function (f) {
                                 "sincr": sincr
                             }
                         }),
-                        success: function (data) {
+                        success: function(data) {
                             if (data.error === null) {
                                 $('#DivGateways').data('idCgw', data.data.idCGW);
                                 // Si existe f, se añade la gateway a la lista para actualizar su configuración con 'Aplicar cambios'
@@ -2164,7 +2164,7 @@ var PostGateway2 = function (f) {
                                 GenerateHistoricEvent(ID_HW, ADD_GATEWAY, data.data.name, $('#loggedUser').text());
                                 alertify.success('Gateway \"' + data.data.name + '\" añadida.');
                                 ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
-                                GetGateways(null, function () {
+                                GetGateways(null, function() {
                                     ShowHardwareGateway(data.data.idCGW, data.data.name);
                                 });
                             }
@@ -2172,7 +2172,7 @@ var PostGateway2 = function (f) {
                                 alertify.error('Gateway \"' + $('#nameGw').val() + '\" o dirección IP ya existe');
                             }
                         },
-                        error: function (data) {
+                        error: function(data) {
                             alertify.error('Gateway \"' + $('#nameGw').val() + '\" no existe');
                         }
                     });
@@ -2186,8 +2186,8 @@ var PostGateway2 = function (f) {
 };
 
 
-var GetGateways = function (cfg, f) {
-    translateWord('Gateways', function (result) {
+var GetGateways = function(cfg, f) {
+    translateWord('Gateways', function(result) {
         $('#GatewaysH3').text(result);
     });
 
@@ -2208,10 +2208,10 @@ var GetGateways = function (cfg, f) {
         $.ajax({
             type: 'GET',
             url: '/gateways',
-            success: function (data) {
+            success: function(data) {
                 $("#listGateways").empty();
                 link_enlaces = [];
-                $.each(data.general, function (index, value) {
+                $.each(data.general, function(index, value) {
                     link_enlaces[value.idCGW] = { idCFG: null, valor: value };
                     var item = $('<li value=' + value.idCGW + '><a onclick="GetGateway(\'' + value.idCGW + '\',\'' + value.LastUpdate + '\')" draggable=false ondrop="ResourceChangeOfGateway(event,\'' + value.idCGW + '\',\'' + value.name + '\')" ondragover="allowDrop(event)">' + value.name + '</li>');
                     if (value.Activa != null && value.Activa != 0) {
@@ -2236,7 +2236,7 @@ var GetGateways = function (cfg, f) {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var GetGateway = function (gtw, lastUpdate, f) {
+var GetGateway = function(gtw, lastUpdate, f) {
     //	if ($('#AddFormGateway').is(':visible')){
     //			$('#DivGateways').animate({width: '145px'});
     //		}
@@ -2259,7 +2259,7 @@ var GetGateway = function (gtw, lastUpdate, f) {
         $.ajax({
             type: 'GET',
             url: urlString,
-            success: function (gtw) {
+            success: function(gtw) {
                 // Recoger el idCGW de la pasarela
                 $('#DivGateways').data('idCgw', gtw.result[0].idCGW);
 
@@ -2352,7 +2352,7 @@ var GetGateway = function (gtw, lastUpdate, f) {
                 $.ajax({
                     type: 'GET',
                     url: '/sites/' + $('#DivConfigurations').data('idCFG'),
-                    success: function (data) {
+                    success: function(data) {
                         // Load Site list
                         loadSiteList(data.data, gtw.result[0].EMPLAZAMIENTO_idEMPLAZAMIENTO);
                     }
@@ -2399,7 +2399,7 @@ var GetGateway = function (gtw, lastUpdate, f) {
 				}
 				*/
                 var idSite = $('#IdSite').data('idSite');
-                translateWord('Update', function (result) {
+                translateWord('Update', function(result) {
                     $('#UpdateGtwButton').text(result)
                         .attr('onclick', 'PostGateWay(' + idSite + ',true,false)');
                 });
@@ -2431,7 +2431,7 @@ var GetGateway = function (gtw, lastUpdate, f) {
         //$('#FormGateway').show();
         $('#AddFormGateway').show();
         $('#NewGateway').show();
-        translateWord('Gateways', function (result) {
+        translateWord('Gateways', function(result) {
             $('#GatewaysH3').text(result);	// Titulo
         });
         //$('#ServicesFormGateway').hide();
@@ -2441,7 +2441,7 @@ var GetGateway = function (gtw, lastUpdate, f) {
         ReinitFormGateways();
         $('#tab2').hide();
         $('#UpdateGtwButton').show();
-        translateWord('Add', function (result) {
+        translateWord('Add', function(result) {
             $('#UpdateGtwButton').text(result)
                 .attr('onclick', 'PostGateway(function(){AddGatewayToList($(\'#DivGateways\').data(\'idCgw\'))})');
         });
@@ -2493,15 +2493,15 @@ var GetGateway = function (gtw, lastUpdate, f) {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var GetIps4Gateway = function (idCgw) {
+var GetIps4Gateway = function(idCgw) {
     var listOfIps = [];
     if (idCgw != null) {
         var urlString = '/gateways/iplist/' + idCgw;
         $.ajax({
             type: 'GET',
             url: urlString,
-            success: function (data) {
-                $.each(data, function (i, data) {
+            success: function(data) {
+                $.each(data, function(i, data) {
                     if (data.tipo == 'PRX') {
                         $('#ProxysList').append($('<option>', {
                             value: data.ip,
@@ -2534,12 +2534,12 @@ var GetIps4Gateway = function (idCgw) {
                     }
                 });
             },
-            error: function (data) {
+            error: function(data) {
                 alertify.error('Se ha producido recuperando los datos de las ips.');
             }
         });
     }
-}
+};
 
 /*******************************************************************************/
 /****** Function: AddGatewayToList											****/
@@ -2626,11 +2626,11 @@ function UpdateGateway() {
             type: 'PUT',
             //url: '/gateways/' + $('#Component').text() + '/services/' + serviceId,
             url: '/gateways/' + $('#DivGateways').data('idCgw') + '/services/' + serviceId,
-            success: function (data) {
+            success: function(data) {
                 //GetServices(false);
                 PostGateway(f);
             },
-            error: function (data) {
+            error: function(data) {
                 alertify.error('Error asignando servicio a gateway.');
             }
         });
@@ -2639,17 +2639,17 @@ function UpdateGateway() {
         PostGateway(f);
 }
 
-var GoBackGateway = function () {
+var GoBackGateway = function() {
     $('#DivConfigurations').attr('class', 'fadeNucleo divNucleo');
     $('#FormGateway').hide();
     $("#AddFormGateway").hide();
 };
 
-var GetServices = function (resetContent) {
+var GetServices = function(resetContent) {
 
     GetAllServices();
     //if ($('#UpdateGtwButton').text() === 'Add'){
-    translateWord('Add', function (result) {
+    translateWord('Add', function(result) {
         if (resetContent == true &&
             $('#UpdateGtwButton').text() === result) {
             SelectFirstItem('ServicesFormGateway');
@@ -2662,7 +2662,7 @@ var GetServices = function (resetContent) {
             $.ajax({
                 type: 'GET',
                 url: urlString,
-                success: function (gtw) {
+                success: function(gtw) {
                     if (gtw.servicios != null) {
                         CurrentService = gtw.servicios;
 
@@ -2683,7 +2683,7 @@ var GetServices = function (resetContent) {
                     else
                         $('#ServicesFormGateway')[0].reset();
                 },
-                error: function () {
+                error: function() {
                     $('#ServicesFormGateway')[0].reset();
                 }
             });
@@ -2723,18 +2723,18 @@ function dropAssignedGateway(ev) {
             !isIpvIn(link_enlaces_libres[data].valor.ipv, link_enlaces)) {
             ev.target.appendChild(document.getElementById(data));
             alertify.confirm('Ulises G 5000 R', "¿Desea mover la pasarela a esta configuración?",
-                function () {
+                function() {
                     $('.dropable').removeClass('target');
                     postGatewayToConfig($('#idCFG').val(), data);
                 },
-                function () {
+                function() {
                     alertify.error('Cancelado');
                     ev.target.removeChild(document.getElementById(data));
                 }
             );
         }
         else {
-            translateWord('ErrorGatewayAlreadyAssigned', function (result) {
+            translateWord('ErrorGatewayAlreadyAssigned', function(result) {
                 alertify.error(result);
             });
         }
@@ -2798,7 +2798,7 @@ function ResourceAssigned(ev, fila, columna) {
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(data),
-            success: function (data) {
+            success: function(data) {
                 resModified = true;
                 GetMySlaves();
             }
@@ -2820,7 +2820,7 @@ function ResourceChangeOfGateway(ev, idCgw, nameCgw) {
         alertify.success('Recurso asignado a gateway \"' + nameCgw + '\"');
 
         dataOfResource = JSON.parse(ev.dataTransfer.getData("resourceDragging"));
-        GetGateway(idCgw, 'null', function () {
+        GetGateway(idCgw, 'null', function() {
             $('#TabHw').click();
         });
 
@@ -2848,7 +2848,7 @@ function ClickToChangeResourceOfGateway(fila, columna) {
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(dataTo),
-            success: function (data) {
+            success: function(data) {
                 if ($('.Res' + fila + columna).data('pos') != null) {
                     var pos = $('.Res' + fila + columna).data('pos');
                     dataOfResource.idPOS = pos;
@@ -2859,7 +2859,7 @@ function ClickToChangeResourceOfGateway(fila, columna) {
                         dataType: 'json',
                         contentType: 'application/json',
                         data: JSON.stringify(dataOfResource),
-                        success: function (data) {
+                        success: function(data) {
                             dataOfResource = null;
                             GetAllSlaves();
                         }
@@ -2965,7 +2965,7 @@ function Add2Select(idSelect, Item2Insert, limit, idTipo) {
     }
     if (Item2Insert != '') {
         /** Comprobar que no esta repetido... */
-        $(idSelect + " > option").each(function () {
+        $(idSelect + " > option").each(function() {
             if (this.text == Item2Insert) {
                 alertify.error('El elemento ' + idTipo + ' ' + Item2Insert + ", ya está en la lista");
                 Item2Insert = null;
@@ -3003,14 +3003,14 @@ function AddProxy() {
 function RemoveProxy() {
 
     alertify.confirm('Ulises G 5000 R', "¿Eliminar el proxy \"" + $("#ProxysList option:selected").val() + "\"?",
-        function () {
+        function() {
             $("#ProxysList option:selected").remove();
             $('#ProxysList option:eq(1)');
             modify('#ProxyEdit', '#ProxysList');
 
             //alertify.success('Ok'); 
         },
-        function () { alertify.error('Cancelado'); }
+        function() { alertify.error('Cancelado'); }
     );
 
 }
@@ -3035,12 +3035,12 @@ function AddRegistrar() {
 function RemoveRegistrar() {
 
     alertify.confirm('Ulises G 5000 R', "¿Eliminar el registrar \"" + $("#RegistrarsList option:selected").val() + "\"?",
-        function () {
+        function() {
             $("#RegistrarsList option:selected").remove();
             $('#RegistrarsList option:eq(1)');
             modify('#RegistrarEdit', '#RegistrarsList');
         },
-        function () { alertify.error('Cancelado'); }
+        function() { alertify.error('Cancelado'); }
     );
 
 }
@@ -3082,12 +3082,12 @@ function RemoveTrap() {
     if (SelectedTrap != undefined) {
 
         alertify.confirm('Ulises G 5000 R', "¿Eliminar trap \"" + $("#TrapsList option:selected").val() + "\"?",
-            function () {
+            function() {
                 $("#TrapsList option:selected").remove();
                 $('#TrapIP').val('');
                 $('#TrapPort').val('');
             },
-            function () { alertify.error('Cancelado'); }
+            function() { alertify.error('Cancelado'); }
         );
     }
     else {
@@ -3118,13 +3118,13 @@ function AddServer() {
 function RemoveServer() {
 
     alertify.confirm('Ulises G 5000 R', "¿Eliminar el servidor NTP \"" + $("#NtpServersList option:selected").val() + "\"?",
-        function () {
+        function() {
             $("#NtpServersList option:selected").remove();
             $('#ServerEdit').val('');
             $('#NtpServersList option:eq(1)');
             //alertify.success('Ok'); 
         },
-        function () { alertify.error('Cancelado'); }
+        function() { alertify.error('Cancelado'); }
     );
 
 }
@@ -3350,7 +3350,7 @@ function GetAllSlaves() {
     $.ajax({
         type: 'GET',
         url: '/hardware',
-        success: function (data) {
+        success: function(data) {
             ResetHardware();
             ShowAssignedSlaves(data);
         }
@@ -3403,7 +3403,7 @@ function UpdateAssignedSlaves(data) {
     $('#DivGateways').data('noSlaves', true);
 
     if (data.hardware != null) {
-        $.each(data.hardware, function (index, value) {
+        $.each(data.hardware, function(index, value) {
             if (idCgw != null && value.CGW_idCGW == idCgw) {
                 $('#DivGateways').data('noSlaves', false);
                 //if ($('.Slave'+value.rank).data('idSLAVE') != value.idSLAVES)
@@ -3431,10 +3431,10 @@ function UpdateAssignedSlaves(data) {
                 $.ajax({
                     type: 'GET',
                     url: '/hardware/' + value.idSLAVES,
-                    success: function (data) {
+                    success: function(data) {
                         //ShowResourcesFromSlave(value.idSLAVES,value.rank, data, function(){if ( i>=data.hardware.length && f != null) f()});
                         //Este es el que lee constantemente
-                        ShowResourcesFromSlave(value.idSLAVES, value.rank, data, false, function () {
+                        ShowResourcesFromSlave(value.idSLAVES, value.rank, data, false, function() {
                             for (var i = 0; i < 4; i++) {
                                 for (var j = 0; j < 4; j++) {
                                     if ($('.Res' + i + j).data('updated') == false) {
@@ -3523,7 +3523,7 @@ function ShowAssignedSlaves(data) {
     var iconPhone = "<img src='/images/iconPhone.gif' style='float: right'/>";
     var iconOperator = "<img src='/images/iconOperator.gif' style='float: right'/>";
 
-    var loadIndex = 0
+    var loadIndex = 0;
     $('#LbLoadIndex').text('Indice de carga: ');
     loadIndex = calculateLoadIndex(data);
     $('#LbLoadIndex').append(loadIndex);
@@ -3572,7 +3572,7 @@ function ShowAssignedSlaves(data) {
     }
 
     if (data.radio != null || data.tfno != null) {
-        $.each(data.radio, function (index, value) {
+        $.each(data.radio, function(index, value) {
             var dragStartResRadio = '';
             if (isAuthorized) {
                 dragStartResRadio = "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",1," + value.idrecurso_radio + ")";
@@ -3592,17 +3592,17 @@ function ShowAssignedSlaves(data) {
                 $('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(' - ' + value.frecuencia.toFixed(3) + ' MHz').append(iconOperator);
             $('.Res' + value.fila + value.columna + ' a')
                 .attr('draggable', true)
-                .attr('ondragstart', dragStartResRadio)
+                .attr('ondragstart', dragStartResRadio);
 
             if (value.tipo_agente == 2 || value.tipo_agente == 3)
                 $('.Res' + value.fila + value.columna).data('localLoadIndex', 8);
             else
                 $('.Res' + value.fila + value.columna).data('localLoadIndex', 2);
         });
-        $.each(data.tfno, function (index, value) {
+        $.each(data.tfno, function(index, value) {
             var dragStartResPhone = '';
             if (isAuthorized) {
-                dragStartResPhone = "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",2," + value.idrecurso_telefono + ")"
+                dragStartResPhone = "dragResource(event," + value.columna + "," + value.fila + "," + value.columna + ",2," + value.idrecurso_telefono + ")";
             }
             $('.Res' + value.fila + value.columna).data('idResource', value.idrecurso_telefono);
             $('.Res' + value.fila + value.columna).data('updated', true).data('loadIndex', loadIndex)
@@ -3611,7 +3611,7 @@ function ShowAssignedSlaves(data) {
             $('.Res' + value.fila + value.columna + ' a').text(value.nombre).append(iconPhone);
             $('.Res' + value.fila + value.columna + ' a')
                 .attr('draggable', true)
-                .attr('ondragstart', dragStartResPhone)
+                .attr('ondragstart', dragStartResPhone);
             $('.Res' + value.fila + value.columna).data('localLoadIndex', 1);
 
         });
@@ -3693,7 +3693,7 @@ function ShowResourcesFromSlave(idSlave, slave, data, isFirstLoad, f) {
     //Esto no termina de funcionar bien, ya que aún permite la edición aunque salga el mensaje
     //var loadIndex = 0;
     if (data.hardware != null && data.hardware.length > 0) {
-        $.each(data.hardware, function (rowIndex, r) {
+        $.each(data.hardware, function(rowIndex, r) {
 			/*if(data.hardware[0].tipo === 0)
 				loadIndex++;
 			else
@@ -3768,7 +3768,7 @@ function OnChangeVersionSnmp() {
 function ClickFilteringGroup(item) {
     $('.listHardware li').attr('style', 'display:none');
     $('#LFiltering li:gt(0)').find('input').prop('disabled', false);
-    $.each($('#LFiltering input:checked'), function (index, value) {
+    $.each($('#LFiltering input:checked'), function(index, value) {
         if (value.id === 'CBAll') {
             $('.listHardware li').attr('style', 'display:list-item');
             $('#LFiltering li:gt(0)').find('input').prop('disabled', 'disabled');
@@ -3779,7 +3779,7 @@ function ClickFilteringGroup(item) {
                     return false;
                 }
         */
-        $.each($(".listHardware li"), function (index, group) {
+        $.each($(".listHardware li"), function(index, group) {
             if ($(group).data('group') == value.id)
                 $(group).attr('style', 'display:list-item');
         });
@@ -3787,7 +3787,7 @@ function ClickFilteringGroup(item) {
 }
 
 function isIpvIn(ipv, lista) {
-    var array = $.map(lista, function (value, index) {
+    var array = $.map(lista, function(value, index) {
         return [value];
     });
 
@@ -3804,27 +3804,27 @@ function isIpvIn(ipv, lista) {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var ExportConfiguration = function () {
+var ExportConfiguration = function() {
     var idGateway = $('#IdSite').data('gatewayId');
 
     $.ajax({
         type: 'GET',
         url: '/configurations/export/' + idGateway,
 
-        success: function (data) {
+        success: function(data) {
             var myLink = document.createElement('a');
             myLink.download = data.general.emplazamiento + '_' + data.general.name + '_' + data.fechaHora + '.json';
             myLink.href = "data:application/json," + JSON.stringify(data, null, '\t');
             myLink.click();
         },
-        error: function (data) {
+        error: function(data) {
 
         }
     });
 };
 
-var CloseImportConfiguration = function () {
-    $('#ImportZone').animate({ width: '0px', height: '0px' }, 500, function () {
+var CloseImportConfiguration = function() {
+    $('#ImportZone').animate({ width: '0px', height: '0px' }, 500, function() {
         $('#ColumnImportZone').attr('style', 'display:none');
         $('#ImportZone').hide();
 
@@ -3835,7 +3835,7 @@ var CloseImportConfiguration = function () {
     });
 };
 
-var ImportConfiguration = function () {
+var ImportConfiguration = function() {
 
     $('#fileselectbtn').val('');
 
@@ -3852,7 +3852,7 @@ var ImportConfiguration = function () {
 
     $('#ColumnImportZone').attr('style', 'display:inline');
     $('#ImportZone').attr('style', 'position:absolute;width:0px;height:0px;top:180px;left:460px;display:inline-table');
-    $('#ImportZone').animate({ width: '35%', height: '195px' }, 500, function () {
+    $('#ImportZone').animate({ width: '35%', height: '195px' }, 500, function() {
         $('#ImportZone').addClass('divNucleo');
     });
 
@@ -3864,26 +3864,26 @@ var ImportConfiguration = function () {
 /*  REV 1.0.2 VMG					*/
 /************************************/
 function NewGateway() {
-    translateWord('Configurations', function (result) {
+    translateWord('Configurations', function(result) {
         var titulo = result + ': ' + $('#name').val();
-        translateWord('Sites', function (result) {
+        translateWord('Sites', function(result) {
             var titulo2 = titulo + ".\t" + result + ': ' + $('#IdSite').val() + '.';
-            translateWord('Gateways', function (result) {
-                $('#TitleH3').text(titulo2 + '\t' + result + ': ' + name + '.')
-            })
-        })
-    })
+            translateWord('Gateways', function(result) {
+                $('#TitleH3').text(titulo2 + '\t' + result + ': ' + name + '.');
+            });
+        });
+    });
     var idSite = $('#IdSite').data('idSite');
-    translateWord('CreateGateway', function (result) {
+    translateWord('CreateGateway', function(result) {
         $('#UpdateGtwButton').text(result)//TsODO Create Gateway
             .attr('onclick', 'PostGateWay(' + idSite + ',false,false)');
     });
     //$('#IdSite').data('gatewayName',name)
     //$('#IdSite').data('gatewayId',id)
 
-    $('#DivSites').animate({ width: '1150px' }, function () {
-        $('#TrCreateGateway').hide()
-        $('#TrToolsSite').hide()
+    $('#DivSites').animate({ width: '1150px' }, function() {
+        $('#TrCreateGateway').hide();
+        $('#TrToolsSite').hide();
         $('#TrSite').hide();
         //if (id == null){
         $('#LblIdGateway').text('');
@@ -3921,7 +3921,7 @@ function NewGateway() {
         $('#TbUpdatePeriod').val('90');
         RenderSipService(null, true);//Para mostrar el primer item.
         //$('#LblIdGateway').text(name);
-        $('#hwGateway').fadeIn(500, function () {
+        $('#hwGateway').fadeIn(500, function() {
             // translateWord('Sites',function(result1){
             // 	translateWord('Gateways',function(result2){
             // 		$('#TitleSite').text(result1 + ": " + $('#IdSite').val() + '. ' + result2 + ': ' + name)
@@ -3929,7 +3929,7 @@ function NewGateway() {
             // })
         });
         //})
-    })
+    });
     //ResetAllFields();
     $('#nameGw').val('');
     $('#ipv').val('');
@@ -3965,16 +3965,16 @@ function getServices4Copy() {
     $.ajax({
         type: 'GET',
         url: '/gateways/availableservices',
-        success: function (data) {
+        success: function(data) {
             if (data.error != null) {
                 options = '<option value="" disabled selected>Error seleccionando los servicios.</option>';
                 alertify.error('Error ' + data.error + '. Al recuperar los servicios.');
             }
             else {
-                translateWord('SelectService', function (result) {
+                translateWord('SelectService', function(result) {
                     options = '<option value="" disabled selected>' + result + '</option>';
 
-                    $.each(data.result, function (index, value) {
+                    $.each(data.result, function(index, value) {
                         if (value.nombre != null)
                             options += '<option value="' + value.idpasarela + '">' + value.nombre + '</option>';
                     });
@@ -3997,7 +3997,7 @@ function copyServiceData() {
     $.ajax({
         type: 'GET',
         url: '/gateways/getServiceData/' + idSourceCgw,
-        success: function (data) {
+        success: function(data) {
             if (data.error != null) {
                 alertify.error('Error ' + data.error + '. Al recuperar los datos del servicio.');
             }
@@ -4057,7 +4057,7 @@ function loadUriList(idRecurso) {
     $.ajax({
         type: 'GET',
         url: '/resources/' + idRecurso + '/loadUriList',
-        success: function (data) {
+        success: function(data) {
             if (data != null)
                 ShowUris(data);
         }
@@ -4090,11 +4090,11 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId) {
         $('#SResourceType').prop("disabled", false);
         $('#BtnRemoveResource').hide();
     }
-    $('#AddFormsite').addClass('disabledDiv')
-    $('#SitesList').addClass('disabledDiv')
-    $('#NavMenu').addClass('disabledDiv')
-    $('#listConfigurations').addClass('disabledDiv')
-    $('#Add').addClass('disabledDiv')
+    $('#AddFormsite').addClass('disabledDiv');
+    $('#SitesList').addClass('disabledDiv');
+    $('#NavMenu').addClass('disabledDiv');
+    $('#listConfigurations').addClass('disabledDiv');
+    $('#Add').addClass('disabledDiv');
 
     ResetResourcePanel();
 
@@ -4111,10 +4111,10 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId) {
         left: '90px',
         width: '90%',
         height: '510px'
-    }, 500, function () {
+    }, 500, function() {
         $('#BigSlavesZone').addClass('divNucleo');
         $('#FormParameters').show();
-    })
+    });
 
     if (update) {
         $('#CbGranularity').prop("disabled", true);
@@ -4125,7 +4125,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId) {
         $.ajax({
             type: 'GET',
             url: '/gateways/getResource/' + resourceType + '/' + resourceId,
-            success: function (data) {
+            success: function(data) {
                 if (data.error == null) {
                     //1 RADIO y 2 TFNO
                     $('#SResourceType option[value="' + resourceType + '"]').prop('selected', true);
@@ -4177,7 +4177,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId) {
                     alertify.error('Error: ' + data.error);
                 }
             },
-            error: function (data) {
+            error: function(data) {
                 alertify.error('Error consultando los recursos.');
             }
         });
@@ -4189,7 +4189,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId) {
         $('#CbGranularity').prop("disabled", true);
         $('#CbGranularity option[value="0"]').prop('selected', true);
         $('#ButtonCommit').attr('onclick', "InsertNewResource('" + col + "','" + row +
-            "','false')")
+            "','false')");
 
         //Por defecto metemos Radio
         SelectBss();//Inicializar. Recarga el tipo de radio para ponerlo en el primero.
@@ -4341,7 +4341,7 @@ function insertBNList(listaUris) {
         listaUris.push(uri2Insert);
         uri2Insert = {};
     }
-    return listaUris
+    return listaUris;
 }
 
 function resetUrisValues() {
@@ -4386,11 +4386,11 @@ function showWhiteBlackList(idRecurso, listType) {
     $.ajax({
         type: 'GET',
         url: '/resources/' + idRecurso + '/radioParameters/wblist/' + listType,
-        success: function (data) {
+        success: function(data) {
             if (data.list != null && data.list.length > 0) {
                 resetUrisValues();
                 var kNegra = 0, kBlanca = 0;
-                data.list.forEach(function (lista) {
+                data.list.forEach(function(lista) {
                     if (lista.tipo == 'LSN') {//Lista Negra
                         kNegra++;
                         if (kNegra == 1)
@@ -4432,7 +4432,7 @@ function showWhiteBlackList(idRecurso, listType) {
                 });
             }
         },
-        error: function (data) {
+        error: function(data) {
             alertify.error('Error al obtener las listas Blancas y Negras.');
         }
     });

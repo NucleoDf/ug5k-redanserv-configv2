@@ -954,7 +954,7 @@ var ExistGatewayWithoutResources = function(idCfg, f) {
             }
         }
     });
-}
+};
 /*	$.ajax({
 		type: 'GET',
 		url: '/configurations/gatewaysHasResources/',
@@ -1090,7 +1090,7 @@ var ActiveCfg = function(f) {
         },
         function() { alertify.error('Cancelado'); }
     );
-}
+};
 
 /*var ActiveCfg = function() {
 	alertify.confirm('Ulises G 5000 R', "¿Desea activar la configuración \"" + $('#name').val() + "\".?",
@@ -1303,7 +1303,7 @@ var GetActiveCfgAndActivate = function(isAutomaticActive) {
             }
         }
     });
-}
+};
 
 var GotoGateway = function(id, name, idSite, nameSite) {
     hidePrevious('#FormSites', '#AddFormsite', '#DivSites');
@@ -1361,7 +1361,7 @@ var resSubtipoString = function(tipo, subtipo) {
         return subtipo < 9 ? subtipostel[subtipo] : "????";
     }
     return "????";
-}
+};
 var resColateralString = function(tipo, subtipo, reg) {
     if (tipo == 1) {
         switch (subtipo) {
@@ -1369,7 +1369,7 @@ var resColateralString = function(tipo, subtipo, reg) {
             case 2:	// FD Simple
                 return ";" +
                     (reg.uriTxA != null ? reg.uriTxA : '') + ";" +
-                    (reg.uriRxA != null ? reg.uriRxA : '') + ";;"
+                    (reg.uriRxA != null ? reg.uriRxA : '') + ";;";
             case 1:
             case 3:
                 return ";" +
@@ -1389,7 +1389,7 @@ var resColateralString = function(tipo, subtipo, reg) {
         return reg.uri_remota + ";;;;";
     }
     return "????;????;????;????;????";
-}
+};
 
 /** 20170904. Obsoleta-eliminar */
 var ExportCfgToExcel_v0 = function(idCfg, empl) {
@@ -1431,7 +1431,7 @@ var ExportCfgToExcel_v0 = function(idCfg, empl) {
         myLink.href = "data:application/csv," + escape(csvData);
         myLink.click();
     });
-}
+};
 
 /** 20170904. Obsoleta-eliminar */
 var ExportCfgToPdf_v0 = function(idCfg) {
@@ -1624,10 +1624,10 @@ var ExportCfgToPdf_v0 = function(idCfg) {
                                 [
                                     {
                                         image: 'data:image/jpeg;base64,' + base64,
-                                        alignment: 'left',
+                                        alignment: 'left'
                                     },
                                     { text: $('#_hfecha').text() + ' ' + $('#_hsolohora').text(), style: 'subheader', alignment: 'right' }
-                                ],
+                                ]
                             ]
                         }
                     },
@@ -1641,7 +1641,7 @@ var ExportCfgToPdf_v0 = function(idCfg) {
                             // dontBreakRows: true,
                             body: data
                         }
-                    },
+                    }
                 ],
                 styles: {
                     header: {
@@ -1691,7 +1691,7 @@ var PhTypes = [
 /***/
 function PdfPrintGws(gws) {
     var content = [];
-    content.push({ text: gws.length.toString() + ' Pasarelas en la configuracion', style: 'level0' })
+    content.push({ text: gws.length.toString() + ' Pasarelas en la configuracion', style: 'level0' });
     for (igw = 0; igw < gws.length; igw++) {
         var gw = gws[igw];
         PdfPrintGw(content, gw);
@@ -1762,7 +1762,7 @@ function PdfPrintPhoneRs(content, ph) {
     var phInfo1 = ('(' + (ph.columna.toString() + '/' + ph.fila) + ')');
     phInfo1 += (': ' + ph.nombre);
     var phInfo2 = (PhTypes[ph.tipo_interfaz_tel]);
-    var phInfo3 = (ph.uri_telefonica)
+    var phInfo3 = (ph.uri_telefonica);
     content.push({
         columns: [
             { text: phInfo1, width: 330 },
@@ -1860,7 +1860,7 @@ var ExportCfgToExcel = function(idCfg, empl) {
         //    document.body.appendChild(hiddenElement);
         //    hiddenElement.click();		
     });
-}
+};
 
 var ExportCfgToPdf = function(idCfg) {
     // Llamar al SP para generar la tabla con los datos necesarios
@@ -1951,4 +1951,4 @@ var ExportCfgToPdf = function(idCfg) {
         //pdfMake.createPdf(docDefinition).open();
 
     });
-}
+};

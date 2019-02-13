@@ -1,7 +1,7 @@
 
-var authentication = function(){
+var authentication = function() {
 
-	$.get('/ajax', function(res) {
-		$('none').text(res);
-	});
-}
+    $.get('/ajax', function(res) {
+        $('none').text(res);
+    });
+};
