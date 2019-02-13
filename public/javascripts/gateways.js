@@ -289,7 +289,9 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                                                                             alertify.success('La pasarela \"' + data.name + '\" ha sido creada.');
                                                                             GenerateHistoricEvent(ID_HW, ADD_GATEWAY, $('#nameGw').val(), $('#loggedUser').text());
                                                                             ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
-                                                                            cgwModified = true;
+                                                                            /** 20190213 Solo se activará el boton si se modifica la configuracion activa */
+                                                                            cgwModified = data.aplicarcambios && data.aplicarcambios != 0/* true*/;
+                                                                            console.log(data);
                                                                             //GetGateways(null,function(){
                                                                             //	ShowHardwareGateway(data.insertId, data.name);
                                                                             //});//TODO esto no muestra nada de lo que tiene que mostrar
@@ -318,10 +320,12 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                                                                     ),
                                                                     success: function (data) {
                                                                         if (data.error == null) {
-                                                                            alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
+                                                                            alertify.success('La pasarela \"' + data.name + '\" ha sido modificada!.');
                                                                             GenerateHistoricEvent(ID_HW, MODIFY_GATEWAY_COMMON_PARAM, $('#nameGw').val(), $('#loggedUser').text());
                                                                             ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
-                                                                            cgwModified = true;
+                                                                            /** 20190213 Solo se activará el boton si se modifica la configuracion activa */
+                                                                            cgwModified = data.aplicarcambios && data.aplicarcambios != 0/* true*/;
+                                                                            console.log(data);
                                                                             //GetGateways(null,function(){
                                                                             //	ShowHardwareGateway(data.insertId, data.name);
                                                                             //});//TODO esto no muestra nada de lo que tiene que mostrar
@@ -389,7 +393,9 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
                     alertify.success('La pasarela \"' + data.name + '\" ha sido modificada.');
                     GenerateHistoricEvent(ID_HW, MODIFY_GATEWAY_COMMON_PARAM, $('#nameGw').val(), $('#loggedUser').text());
                     ShowSite($('#IdSite').val(), $('#IdSite').data('idSite'));
-                    cgwModified = true;
+                    /** 20190213 Solo se activará el boton si se modifica la configuracion activa */
+                    cgwModified = data.aplicarcambios && data.aplicarcambios != 0/* true*/;
+                    console.log(data);
                     //GetGateways(null,function(){
                     //	ShowHardwareGateway(data.insertId, data.name);
                     //});//TODO esto no muestra nada de lo que tiene que mostrar

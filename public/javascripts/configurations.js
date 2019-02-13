@@ -354,7 +354,8 @@ var PutConfiguration = function() {
                     success: function(data) {
                         if (data.error == null) {
                             alertify.success('Configuración \"' + data.data.name + '\" actualizada.');
-                            configModified = true;
+                            /** 20190213 Solo se activará el boton si se modifica la configuracion activa */
+                            configModified = data.aplicarcambios && data.aplicarcambios != 0/* true*/;
                             GetConfigurations(function() {
                                 ShowCfg(data.data);
                             });

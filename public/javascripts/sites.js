@@ -267,7 +267,9 @@ function UpdateSingleSite(){
 					//AddGatewaysFromActiveToListOfGateways($('#IdSite').data('idSite'))//TODO he comentado esto porque no creo que haga falta.
 					alertify.success('Emplazamiento \"' + data.data + '\" modificado.');
 					ShowCfg($('#DivConfigurations').data('cfgJson'));
-					configModified = true;
+                    /** 20190213 Solo se activará el boton si se modifica la configuracion activa */
+                    configModified = data.aplicarcambios && data.aplicarcambios != 0/* true*/;
+
 					//ShowSite(data.data,$('#IdSite').data('idSite'));//TODO esto no chuta
 				}
 				else if (data.error == 'ER_DUP_ENTRY'){

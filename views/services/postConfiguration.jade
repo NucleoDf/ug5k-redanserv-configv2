@@ -103,11 +103,11 @@ script.
             setTimeout(function(){EnableAplicarCambios()},1000);
         //});
     }
-    setTimeout(EnableAplicarCambios(),1000);
 
     // AGL. Para intentar hacer el UPLOAD con AJAX
     $(document).ready(function(){
     
+        setTimeout(EnableAplicarCambios(),1000);
         setTimeout(SynchronizedGateways(),refreshTime);
 
         console.log('Buscando UploadForm....' + $('#UploadForm')[0]);
