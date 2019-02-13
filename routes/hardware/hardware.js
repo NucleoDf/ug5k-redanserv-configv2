@@ -11,102 +11,102 @@ var myLibHardware = require('../../lib/hardware.js');
 //var myLibServicesGateways = require('../../lib/services.js');
 
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/hardware', hardware);)
-	.get(function(req, res) {
-  		logging.LoggingDate("GET hardware");
-  		myLibHardware.getHardware(function(hardware){
-	  		res.json(hardware);
-  		});
-	});
+    .get(function(req, res) {
+        logging.LoggingDate("GET hardware");
+        myLibHardware.getHardware(function(hardware) {
+            res.json(hardware);
+        });
+    });
 
 router.route('/site/:siteId')
-	.get(function(req, res) {
-  		logging.LoggingDate("GET hardware");
-  		myLibHardware.getHardwareBelongsGroup(req.params.siteId, function(hardware){
-	  		res.json(hardware);
-  		});
-	});
+    .get(function(req, res) {
+        logging.LoggingDate("GET hardware");
+        myLibHardware.getHardwareBelongsGroup(req.params.siteId, function(hardware) {
+            res.json(hardware);
+        });
+    });
 
 router.route('/checkresname/:name/:idCgw/:idRes')
-	.get(function(req,res){
-		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibHardware.getResNamesInConfig(req.params.name,req.params.idCgw,req.params.idRes,
-			function(hardware){
-			res.json(hardware.error);
-		});
-	});
+    .get(function(req, res) {
+        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        myLibHardware.getResNamesInConfig(req.params.name, req.params.idCgw, req.params.idRes,
+            function(hardware) {
+                res.json(hardware.error);
+            });
+    });
 
 /**********************************/
 /*  Routes relating to positions  */
 /**********************************/
 router.route('/positions/:idCgw')
-	.put(function(req,res){
-		var position = req.body;
-		logging.LoggingDate('PUT hardware/positions/:idCgw');
-		var newPosition = new Object();
-		newPosition.colOrig=position.dataFrom.SLAVES_idSLAVES;
-		newPosition.rowOrig=position.dataFrom.rank;
-		newPosition.colDest=position.SLAVES_idSLAVES;
-		newPosition.rowDest=position.rank;
-		newPosition.type=position.type;
-		newPosition.resId=position.resId;
-		newPosition.idCgw=req.params.idCgw;
-		
-		myLibHardware.updatePosition(newPosition,function(result){
-			res.json(result);
-		});
-	});
+    .put(function(req, res) {
+        var position = req.body;
+        logging.LoggingDate('PUT hardware/positions/:idCgw');
+        var newPosition = new Object();
+        newPosition.colOrig = position.dataFrom.SLAVES_idSLAVES;
+        newPosition.rowOrig = position.dataFrom.rank;
+        newPosition.colDest = position.SLAVES_idSLAVES;
+        newPosition.rowDest = position.rank;
+        newPosition.type = position.type;
+        newPosition.resId = position.resId;
+        newPosition.idCgw = req.params.idCgw;
+
+        myLibHardware.updatePosition(newPosition, function(result) {
+            res.json(result);
+        });
+    });
 
 router.route('/:hw')
-	.get(function(req, res) {
-  		logging.LoggingDate("GET hardware/:hw");
-		var hw = req.params.hw;
-		myLibHardware.getSlave(hw,function(hardware){
-			res.json(hardware);
-		});
-	})
-	.delete(function(req, res){
-		var hw = req.params.hw;
-		logging.LoggingDate("DELETE hardware/:hw");
-		myLibHardware.delSlave(hw,function(hardware){
-			res.json(hardware);
-		});
-	})
-	.post(function(req,res){
-		var hw=req.body;
-		logging.LoggingDate("POST hardware/:hw");
-		myLibHardware.postSlave(hw,function(hardware){
-			res.json(hardware);
-		});
-	})
-	.put(function(req, res){
-		var hw = req.body;
-		logging.LoggingDate("PUT hardware/:hw");
-		myLibHardware.putSlave(hw, function(hw){
-			res.status(201).json(hw);
-		});
-	});
+    .get(function(req, res) {
+        logging.LoggingDate("GET hardware/:hw");
+        var hw = req.params.hw;
+        myLibHardware.getSlave(hw, function(hardware) {
+            res.json(hardware);
+        });
+    })
+    .delete(function(req, res) {
+        var hw = req.params.hw;
+        logging.LoggingDate("DELETE hardware/:hw");
+        myLibHardware.delSlave(hw, function(hardware) {
+            res.json(hardware);
+        });
+    })
+    .post(function(req, res) {
+        var hw = req.body;
+        logging.LoggingDate("POST hardware/:hw");
+        myLibHardware.postSlave(hw, function(hardware) {
+            res.json(hardware);
+        });
+    })
+    .put(function(req, res) {
+        var hw = req.body;
+        logging.LoggingDate("PUT hardware/:hw");
+        myLibHardware.putSlave(hw, function(hw) {
+            res.status(201).json(hw);
+        });
+    });
 
 router.route('/:hw/copy')
-	.post(function(req,res){
-		logging.LoggingDate('Copying slave ' + req.params.hw + ' like ' + req.body.name);
-		if (req.params.hw != null && req.body.name != null){
-			myLibHardware.copySlave(req.params.hw, req.body, function(result){
-				res.json(result);
-			});
-		}
-		});
+    .post(function(req, res) {
+        logging.LoggingDate('Copying slave ' + req.params.hw + ' like ' + req.body.name);
+        if (req.params.hw != null && req.body.name != null) {
+            myLibHardware.copySlave(req.params.hw, req.body, function(result) {
+                res.json(result);
+            });
+        }
+    });
 
 /**********************************/
 /*  Routes relating to resources  */
 /**********************************/
 router.route('/:slave/resources/:resource')
-	.post(function(req,res){
-		var slave = req.params.slave;
-		var resource = req.body;
-		logging.LoggingDate('POST hardware/' + slave + '/resources/:' + resource.IdRecurso);
-		myLibHardware.setResource(slave,resource,function(result){
-			res.json(result);
-		});
-	});
+    .post(function(req, res) {
+        var slave = req.params.slave;
+        var resource = req.body;
+        logging.LoggingDate('POST hardware/' + slave + '/resources/:' + resource.IdRecurso);
+        myLibHardware.setResource(slave, resource, function(result) {
+            res.json(result);
+        });
+    });
 
 module.exports = router;

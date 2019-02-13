@@ -12,50 +12,50 @@ var parseUrlEncoded = bodyParser.urlencoded({ extended: false });
 var myLibExtResources = require('../../lib/externalResources.js');
 
 router.route('/:extType')	// The root path is relative the path where it's mounted in app.js (app.use('/accessControl',controlAccess'))
-	.get(function(req, res) {
-		myLibExtResources.getExternalResources(req.params.extType, req, res);
-	})
-	.post(function(req,res){
-		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibExtResources.postExternalResource(req.body,function(data){
-			res.json(data);
-		});
-	})
-	.put(function(req,res){
-		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		//myLibTable.putTableBss(req.body,function(data){
-		//	res.json(data);
-		//});
-	});
+    .get(function(req, res) {
+        myLibExtResources.getExternalResources(req.params.extType, req, res);
+    })
+    .post(function(req, res) {
+        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        myLibExtResources.postExternalResource(req.body, function(data) {
+            res.json(data);
+        });
+    })
+    .put(function(req, res) {
+        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        //myLibTable.putTableBss(req.body,function(data){
+        //	res.json(data);
+        //});
+    });
 router.route('/radio/:extType')	// The root path is relative the path where it's mounted in app.js (app.use('/accessControl',controlAccess'))
     .get(function(req, res) {
         myLibExtResources.getRadioExternalResources(req.params.extType, req, res);
-    })
+    });
 
 router.route('/filterResources/:filterType/:chars2Find')
     .get(function(req, res) {
-        myLibExtResources.filterExternalResources(req.params.filterType, req.params.chars2Find, function (data) {
+        myLibExtResources.filterExternalResources(req.params.filterType, req.params.chars2Find, function(data) {
             res.json(data);
         });
-    })
+    });
 router.route('/filterPhoneResources/:filterType/:chars2Find')
     .get(function(req, res) {
-        myLibExtResources.filterExternalPhoneResources(req.params.filterType, req.params.chars2Find, function (data) {
+        myLibExtResources.filterExternalPhoneResources(req.params.filterType, req.params.chars2Find, function(data) {
+            res.json(data);
+        });
+    });
+router.route('/getResource/:idExtResource')
+    .get(function(req, res) {
+        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        myLibExtResources.getExternalResource(req.params.idExtResource, function(data) {
             res.json(data);
         });
     })
-router.route('/getResource/:idExtResource')
-	.get(function(req,res){
-		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibExtResources.getExternalResource(req.params.idExtResource,function(data){
-			res.json(data);
-		});
-	})
-	.delete(function(req,res){
-		logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
-		myLibExtResources.deleteExternalResource(req.params.idExtResource,function(data){
-			res.json(data);
-		});
-	});
+    .delete(function(req, res) {
+        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        myLibExtResources.deleteExternalResource(req.params.idExtResource, function(data) {
+            res.json(data);
+        });
+    });
 
 module.exports = router;
