@@ -366,12 +366,10 @@ script.
 		}
 
 		function ValidateUriNoSIP(element,label){
-			var regx_urival = /^([a-zA-Z0-9\-_.]+)@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:[\d]{1,5})?$/;
+			var regx_urival = /^([a-zA-Z0-9\-_.]{1,32})@(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(:[\d]{1,5})?$/;
 
-			var matchVal = $(element).val().match(regx_urival);            
-			var valid = matchVal != null ? matchVal[1].length <= 32 : false;
-
-			if ($(element).val()!='' && valid == false){
+			var matchVal = $(element).val().match(regx_urival);
+			if ($(element).val()!='' && matchVal == null){
 				Fade(element,label)
 			}
 		}
