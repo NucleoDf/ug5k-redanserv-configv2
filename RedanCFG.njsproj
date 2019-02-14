@@ -51,6 +51,7 @@
     <Content Include="nss\README.txt" />
     <Content Include="public\COPYING.AUTHORIZATION.txt" />
     <Content Include="routes\index.js" />
+    <Content Include="TODO\todolist.txt" />
     <Content Include="views\error.jade" />
     <Content Include="views\imported.jade" />
     <Content Include="views\index.jade" />
@@ -294,6 +295,7 @@
     <Folder Include="esquemas_bbdd" />
     <Folder Include="lib" />
     <Folder Include="logs" />
+    <Folder Include="TODO\" />
     <Folder Include="nss" />
     <Folder Include="nss\win32" />
     <Folder Include="nss\win64" />
