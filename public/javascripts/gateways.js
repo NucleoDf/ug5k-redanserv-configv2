@@ -4205,6 +4205,7 @@ function GetResourceFromGateway(row, col, update, resourceType, resourceId) {
         $('#TbUmbral').val('-27');
         $('#TbInactividad').val('5');
         // Borrar valores residuales en el insertar new
+        CleanResourceControls();
     }
 }
 
@@ -4463,3 +4464,9 @@ function calculateLoadIndex(data) {
     console.log("calculateLoadIndex = " + loadIndex);
     return loadIndex;
 }
+
+/** 20190214. Rutina para limpiar los controles de recursos que se consideren... despues de salvarlos en BDT */
+function CleanResourceControls() {
+    $('#TbTelATSUser').val('');
+}
+
