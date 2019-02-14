@@ -365,7 +365,7 @@
 	"ErrorSiteId"			: "Site id not valid. Special characters like ?,-,@,... Are not allowed.",
 	"ErrorGatewayId"		: "Gateway id not valid. Special characters like ?,-,@,... Are not allowed.",
 	"ErrorResourceId"		: "Resource id not valid. Please insert a valid URI.",
-	"ErrorURI"				: "URI id not valid",	
+	"ErrorURI"				: "URI not valid",	
 	"ErrorOperador"			: "Operator Id not valid",
 	"ErrorIPPort"			: "IP and Port format not valid",
 	"ErrorIP"				: "IP format not valid",

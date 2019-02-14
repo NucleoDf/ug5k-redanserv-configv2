@@ -370,7 +370,7 @@
 	"ErrorSiteId"			: "Identificador de emplazamiento no válido. No se pueden usar caracteres especiales como ?,-,@,...",
 	"ErrorGatewayId"		: "Identificador de pasarela no válido. No se pueden usar caracteres especiales como ?,-,@,...",
 	"ErrorResourceId"		: "Identificador de recurso no válido. Introduzca una URI válida.",
-	"ErrorURI"				: "Identificador de URI no válido. No se pueden usar caracteres especiales como ?,-,@,...",
+	"ErrorURI"				: "URI no válida. No se pueden usar caracteres especiales como ?,-,@, ni identificadores de usuario de longitud mayor de 32 caracteres.",
 	"ErrorOperador"			: "Identificador de Operador no válido. No se pueden usar caracteres especiales como ?,-,@,...",
 	"ErrorIPPort"			: "Formato de IP y puerto no válido",
 	"ErrorIP"				: "Formato de IP no válido",
