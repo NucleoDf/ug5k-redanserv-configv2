@@ -421,7 +421,10 @@ function ug5kRectCtrl($scope, $routeParams, $route, authservice, CfgService, Val
                         Name: /*'URI:'*/transerv.translate('TCTRL_P00_URI'),
                         Value: jamp_no_sip == 1 ? CfgService.quitar_sip(vm.tdata.Uri_Local) : vm.tdata.Uri_Local,
                         Enable: function () {
-                            return vm.tdata.telefonia.tipo == 0 || vm.tdata.telefonia.tipo == 1 || vm.tdata.telefonia.tipo == 2 || vm.tdata.telefonia.tipo == 5;
+                            var global_enable = authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE]);
+                            return global_enable ?
+                                vm.tdata.telefonia.tipo == 0 || vm.tdata.telefonia.tipo == 1 || vm.tdata.telefonia.tipo == 2 || vm.tdata.telefonia.tipo == 5 :
+                                global_enable;
                         },
                         Input: jamp_no_sip == 1 ? 3 : 0,
                         Inputs: [],
