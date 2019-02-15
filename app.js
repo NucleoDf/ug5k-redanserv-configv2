@@ -31,6 +31,7 @@ var myLibExtResources = require('./lib/externalResources.js');
 var jsonTemplate = require('./lib/jsonTemplate');
 
 var jsgtw = require('./public/javascripts/gateways.js');
+var bdtgw = require('./lib/gateways.js');
 
 /** 20170525. AGL. Para el control de Sesiones. */
 var passport = require('passport');
@@ -362,7 +363,9 @@ app.get('/alive',
         }
 
         if (req.isAuthenticated()) {
-            res.json({ alive: "ok" });
+            bdtgw.getGatewaysPendings(function (npas) {
+                res.json({ alive: "ok", gwpendientes: npas });
+            });
         }
         else {
             msg4Login(req, 'La sesion ha expirado. Identifiquese de nuevo');

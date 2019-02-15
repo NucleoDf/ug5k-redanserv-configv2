@@ -652,7 +652,7 @@ var ClickCBFreeGateways = function() {
                             clase = 'dragableItem VivaSincro';		// Verde claro
                         }
                         else {	// No activa
-                            clase = 'dragableItem VivaNoActiva';		// Verde Oscuro
+                            clase = 'dragableItem VivaNoActiva';	// Verde Oscuro
                         }
 
                         var _cfgJson = { idCFG: value.idCFG, name: value.nameCfg, description: value.description, activa: value.activa, ts_activa: value.ts_activa };
@@ -1989,3 +1989,79 @@ var ExportCfgToPdf = function(idCfg) {
 
     });
 };
+
+/**** */
+var refreshTime = 1000;
+/** Para no forrar al servidor... */
+var answered1 = true;
+var answered2 = true;
+function SynchronizedGateways() {
+
+    if (answered1 == true) {
+        answered1 = false;
+        $.ajax({
+            type: 'GET',
+            url: '/gateways/syncGateways/' + refreshTime,
+            success: function (data) {
+                UpdateSynchroStateInConfig(data);
+                UpdateSynchroStateInSites(data);
+                answered1 = true;
+            },
+            error: function () {
+                answered1 = true;
+            },
+            timeout: 10000
+        });
+    }
+
+    /** AGL. Polling de Sesion Activa */
+    if (answered2 == true) {
+        answered2 = false;
+        $.ajax({
+            type: 'GET',
+            url: '/alive',
+            success: function (data) {
+                answered2 = true;
+                if (!data.alive) {
+                    $(location).attr('href', '/login');
+                }
+                else {
+                    cgwModified = data.gwpendientes ? data.gwpendientes : 0;
+                }
+            },
+            error: function () {
+                answered2 = true;
+                $(location).attr('href', '/login');
+            },
+            timeout: 10000
+        });
+    }
+    setTimeout(function () { SynchronizedGateways() }, refreshTime);
+}
+
+function EnableAplicarCambios() {
+    //Quitamos el translate para no pedir continuamente el fichero de lang
+    //translateWord('Activate',function(result){
+
+    if ($('#listaOpciones li:nth-last-child(2) a ').text() == 'Apply changes' ||
+        $('#listaOpciones li:nth-last-child(2) a ').text() == 'Aplicar cambios') {
+
+        /** 20170509. AGL Gestor 'Aplicar cambios' */
+        if (listOfGateways.length == 0 && usersModified == false && tbbssModified == false
+            && configModified == false && cgwModified == false && resModified == false && configBackup == false) {
+            /* if (listOfGateways.length == 0 )
+               ****************************************************/
+            $('#listaOpciones li:nth-last-child(2)').addClass('menuListDisabled');
+        }
+        else {
+            /* 20170511. AGL. PERFILES */
+            if (Authorize($('#BodyRedan').data('perfil'), [ccAdminProfMsc, ccLoadcProfMsc]) == true)
+                /* if(EnableAplicarCambiosPerfil($('#BodyRedan').data('perfil')))
+                ******************************************/
+                $('#listaOpciones li:nth-last-child(2)').removeClass('menuListDisabled');
+            else
+                $('#listaOpciones li:nth-last-child(2)').addClass('menuListDisabled');
+        }
+    }
+    setTimeout(function () { EnableAplicarCambios(); }, 1000);
+}
