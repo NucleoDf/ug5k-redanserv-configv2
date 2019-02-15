@@ -183,8 +183,10 @@ router.route('/:gateway')
     .get(function(req, res) {
         logging.LoggingDate("GET gateways/:gateway");
         var gtw = req.params.gateway;
-        if (req.params.gateway == 'null')
+        if (req.params.gateway == 'null') {
+            console.long("router.gateways render-1...");
             res.render('./services/postGateway');
+        }
         else
             myLibGateways.getGateway(req, res, null, gtw, function(gtw) {
                 res.json({ general: gtw });

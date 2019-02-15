@@ -36,7 +36,7 @@ router.get('/',
     //require('connect-ensure-login').ensureLoggedIn(),
     isAuthenticated,
     function(req, res, next) {
-        console.log('app.get</>: ');
+        console.log('app.get</>: router.index-1');
         localSession = req.session;
         console.log(localSession);
         res.render('index',
@@ -52,7 +52,7 @@ router.get('/',
 
 router.get('/login',
     function(req, res) {
-        console.log('app.get</login>: ');
+        console.log('app.get</login>: router.index-2');
         console.log(req.session);
         res.render('login', { message: req.flash('error') });
     });

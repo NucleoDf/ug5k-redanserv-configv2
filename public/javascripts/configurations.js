@@ -1065,7 +1065,9 @@ var ActiveCfg = function(f) {
                                         //	});
                                         //}
                                         GetActiveCfgAndActivate(true);
-                                        configModified = true;
+                                        /** 20190215. Cuando se activa una cfg no hace falta */
+                                        //configModified = true;
+                                        ///////////////////////////////////////////////////////
                                         isActiveConfig = true;
                                     }
                                     else {
@@ -1177,7 +1179,8 @@ var ActiveCfg = function(f) {
 /*  PARAMS: 							*/
 /*  REV 1.0.2 VMG						*/
 /****************************************/
-var GetActiveCfgAndActivate = function(isAutomaticActive) {
+var GetActiveCfgAndActivate = function (isAutomaticActive) {
+    console.log('GetActiveCfgAndActivate entering: ' + isAutomaticActive);
     /** 20170516 AGL Este filtro ya no parece tener sentido. Comprobar... */
     $.ajax({
         type: 'GET',
@@ -1190,6 +1193,7 @@ var GetActiveCfgAndActivate = function(isAutomaticActive) {
                     strmsg = '¿Desea activar la configuración \"' + data.name + '\" en las gateways?';
                 else
                     strmsg = '¿Desea aplicar los cambios a las gateways de \"' + data.name + '\"?';
+                console.log('GetActiveCfgAndActivate => /configurations/pendingActive success. ' + data.toString());
                 if (isAutomaticActive) {
                     $.ajax({
                         type: 'GET',
@@ -1227,55 +1231,88 @@ var GetActiveCfgAndActivate = function(isAutomaticActive) {
                                         if (gateways.Aplicar) {
                                             //TODO esto quita solo la coma del final...
                                             listOfGateways = listOfGateways.substr(0, listOfGateways.length - 1);
+/** 20190215. El PUT ponia todas las pasarelas de la configuracion activa como pendientes. */
+                                            //$.ajax({
+                                            //    type: 'PUT',
+                                            //    url: '/configurations/' + $('#DivConfigurations').data('idCFG'),
+                                            //    dataType: 'json',
+                                            //    contentType: 'application/json',
+                                            //    data: JSON.stringify({
+                                            //        "idCFG": $('#DivConfigurations').data('idCFG'),
+                                            //        "name": $('#name').val(),
+                                            //        "description": $('#desc').val(),
+                                            //        "activa": $('#activa').prop('checked')
+                                            //    }),
+                                            //    success: function(data) {
+                                            //        console.log('GetActiveCfgAndActivate => PUT /configurations/<> success. ' + data.toString());
+                                            //        if (data.error == null) {
+                                            //            /** 20190212. Se estaba considerando que los datos estaban en el objeto 'data' y no en el 'data.data' */
+                                            //            console.log(data.data);
+                                            //            $.ajax({
+                                            //                type: 'GET',
+                                            //                url: '/configurations/' + data.data.idCFG + '/loadChangestoGtws',
+                                            //                success: function(result) {
+                                            //                    if (result) {
+                                            //                        console.log(data.data);
+                                            //                        GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, data.data.name, $('#loggedUser').text());
+                                            //                        var strmsg = '';
+                                            //                        if (isActiveConfig)
+                                            //                            strmsg = 'Configuración \"' + data.data.name + '\" activada.';
+                                            //                        else
+                                            //                            strmsg = 'Cambios aplicados en \"' + data.data.name + '\".';
+                                            //                        alertify.success(strmsg);
+                                            //                        isActiveConfig = false;
+                                            //                        // Reset list of gateways to activate
+                                            //                        //AddGatewayToList(null);
+                                            //                        // 20170509. AGL Gestor 'Aplicar cambios' en usuarios
+                                            //                        usersModified = false;
+                                            //                        // 20170516. AGL. Activar Cambios...
+                                            //                        tbbssModified = false;
+                                            //                        // 20170516. AGL. Activar Cambios...
+                                            //                        configModified = false;
+                                            //                        // 20170516. AGL. Activar Cambios...
+                                            //                        cgwModified = false;
+                                            //                        // 20170516. AGL. Activar Cambios...
+                                            //                        resModified = false;
+                                            //                        //
+                                            //                        configBackup = false;
+                                            //                    }
+                                            //                }
+                                            //            });
+                                            //        }
+                                            //    }
+                                            //});
                                             $.ajax({
-                                                type: 'PUT',
-                                                url: '/configurations/' + $('#DivConfigurations').data('idCFG'),
-                                                dataType: 'json',
-                                                contentType: 'application/json',
-                                                data: JSON.stringify({
-                                                    "idCFG": $('#DivConfigurations').data('idCFG'),
-                                                    "name": $('#name').val(),
-                                                    "description": $('#desc').val(),
-                                                    "activa": $('#activa').prop('checked')
-                                                }),
-                                                success: function(data) {
-                                                    if (data.error == null) {
-                                                        /** 20190212. Se estaba considerando que los datos estaban en el objeto 'data' y no en el 'data.data' */
-                                                        console.log(data.data);
-                                                        $.ajax({
-                                                            type: 'GET',
-                                                            url: '/configurations/' + data.data.idCFG + '/loadChangestoGtws',
-                                                            success: function(result) {
-                                                                if (result) {
-                                                                    console.log(data.data);
-                                                                    GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, data.data.name, $('#loggedUser').text());
-                                                                    var strmsg = '';
-                                                                    if (isActiveConfig)
-                                                                        strmsg = 'Configuración \"' + data.data.name + '\" activada.';
-                                                                    else
-                                                                        strmsg = 'Cambios aplicados en \"' + data.data.name + '\".';
-                                                                    alertify.success(strmsg);
-                                                                    isActiveConfig = false;
-                                                                    // Reset list of gateways to activate
-                                                                    //AddGatewayToList(null);
-                                                                    // 20170509. AGL Gestor 'Aplicar cambios' en usuarios
-                                                                    usersModified = false;
-                                                                    // 20170516. AGL. Activar Cambios...
-                                                                    tbbssModified = false;
-                                                                    // 20170516. AGL. Activar Cambios...
-                                                                    configModified = false;
-                                                                    // 20170516. AGL. Activar Cambios...
-                                                                    cgwModified = false;
-                                                                    // 20170516. AGL. Activar Cambios...
-                                                                    resModified = false;
-                                                                    //
-                                                                    configBackup = false;
-                                                                }
-                                                            }
-                                                        });
+                                                type: 'GET',
+                                                url: '/configurations/' + data.idCFG + '/loadChangestoGtws',
+                                                success: function (result) {
+                                                    if (result) {
+                                                        GenerateHistoricEvent(ID_HW, LOAD_REMOTE_CONFIGURATION, data.name, $('#loggedUser').text());
+                                                        var strmsg = '';
+                                                        if (isActiveConfig)
+                                                            strmsg = 'Configuración \"' + data.name + '\" activada.';
+                                                        else
+                                                            strmsg = 'Cambios aplicados en \"' + data.name + '\".';
+                                                        alertify.success(strmsg);
+                                                        isActiveConfig = false;
+                                                        // Reset list of gateways to activate
+                                                        //AddGatewayToList(null);
+                                                        // 20170509. AGL Gestor 'Aplicar cambios' en usuarios
+                                                        usersModified = false;
+                                                        // 20170516. AGL. Activar Cambios...
+                                                        tbbssModified = false;
+                                                        // 20170516. AGL. Activar Cambios...
+                                                        configModified = false;
+                                                        // 20170516. AGL. Activar Cambios...
+                                                        cgwModified = false;
+                                                        // 20170516. AGL. Activar Cambios...
+                                                        resModified = false;
+                                                        //
+                                                        configBackup = false;
                                                     }
                                                 }
                                             });
+//------------------------------------------------------------------------
                                         }
                                     });
                                 }

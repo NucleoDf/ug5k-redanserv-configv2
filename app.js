@@ -485,22 +485,28 @@ app.use(function (req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
+        var msg = 'Development error handler: ' + req.originalUrl.toString() + ', Error: ' + err.status.toString() + ' => ' + err.message;
         res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+        //res.render('error', {
+        //    message: err.message,
+        //    error: err
+        //});
+        res.json({ error: msg });
+        logging.loggingError(msg);
     });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
+    var msg = 'Production error handler: ' + req.originalUrl.toString() + ', Error: ' + err.status.toString() + ' => ' + err.message;
     res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+    res.json({ error: msg });
+    //res.render('error', {
+    //    message: err.message,
+    //    error: {}
+    //});
+    logging.loggingError(msg);
 });
 
 /*function synchGateways() {
