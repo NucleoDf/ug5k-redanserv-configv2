@@ -383,14 +383,14 @@
 	"ModoCalculoClimax"		: "Climax calculation mode",
 	"ModoRelativo"          : "Relativ Mode",
 	"ModoAbsoluto" 			: "Absolut Mode",
-	"LoadIndexMessage" 		: "Load Index: ",
-	
+	"LoadIndexMessage" 		: "Load Index: ",	
 	"Supervisa Puerta de enlace?": "Supervisa Puerta de enlace?",
-	"1 Segundo": "1 Segundo",
-	"2 Segundos": "2 Segundos",
-	"3 Segundos": "3 Segundos",
-	"4 Segundos": "4 Segundos",
-	"5 Segundos": "5 Segundos",
+	"5 Segundos":  "5 Segundos",
+	"10 Segundos": "10 Segundos",
+	"15 Segundos": "15 Segundos",
+	"20 Segundos": "20 Segundos",
+	"25 Segundos": "25 Segundos",
+	"30 Segundos": "30 Segundos",
 
 	"Fin": "Fin"
 }

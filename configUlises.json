@@ -1,7 +1,7 @@
 {
   "Ulises": {
     "HistoricsDeep": 90,
-    "LoginTimeOut": 60,
+    "LoginTimeOut": 120,
     "LoginSystemTrace": false,
     "Region": "Región Centro",
     "BackupServiceDomain": "192.168.0.212:8082",
@@ -14,37 +14,37 @@
       {
         "Name": "app.js",
         "Path": "/",
-        "fileSizeInBytes": 24550,
-        "md5": "c5cd925f4cfd22b6328c5750e3079594",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 25656,
+        "md5": "8c6f9838681d95628ea00947246bc5ff",
+        "date": "15/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "authentication.js",
-        "fileSizeInBytes": 179,
-        "md5": "98a6c9420cdd3bd703dcbfe51950ca45",
-        "date": "24/5/2017"
+        "fileSizeInBytes": 193,
+        "md5": "5c8f2ad4a4d7f8525435461cc6848370",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "configurations.js",
-        "fileSizeInBytes": 108183,
-        "md5": "5f56c110ffb6afbaa1247eb87dade226",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 116877,
+        "md5": "a55a81983bf70dfef5c857e521ccb5d3",
+        "date": "19/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "externalResources.js",
-        "fileSizeInBytes": 8194,
-        "md5": "0117fe7ed01b2c9652ec8e1c01b21a8e",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 8179,
+        "md5": "87a4285de9b42da662693f70e24be02c",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "gateways.js",
-        "fileSizeInBytes": 224489,
-        "md5": "7e98b2b88adbb9b1bf87255099026af2",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 231626,
+        "md5": "f39f28cc26427938c33544ad8b1006f5",
+        "date": "19/2/2019"
       },
       {
         "Path": "/lib/",
@@ -56,86 +56,86 @@
       {
         "Path": "/lib/",
         "Name": "hardware.js",
-        "fileSizeInBytes": 72541,
-        "md5": "74f6c763d2c857b1de024b80eb1ee5c7",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 73839,
+        "md5": "1f509aac7ad21c2a4625807bf03097e3",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "historics.js",
-        "fileSizeInBytes": 62453,
-        "md5": "29bb927ec354ef3eb78da7780ed45a28",
-        "date": "31/1/2019"
+        "fileSizeInBytes": 62349,
+        "md5": "fab83284396317dc06dfac4b2444aa1c",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "jsonTemplate.js",
-        "fileSizeInBytes": 9606,
-        "md5": "e0fbf2b7f2dbce706132f73c71f4b7f3",
-        "date": "6/9/2017"
+        "fileSizeInBytes": 16247,
+        "md5": "3614834400afec60b3ffa81b7f55f690",
+        "date": "19/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "loggingDate.js",
-        "fileSizeInBytes": 5789,
-        "md5": "8eae856186214f0cc6592eb10665ed98",
-        "date": "25/9/2017"
+        "fileSizeInBytes": 6612,
+        "md5": "437506dffe6750be11af1fb0380cabec",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "radioDestinations.js",
-        "fileSizeInBytes": 17850,
-        "md5": "4d81e811f86ce65360ce0d2e944d4c37",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 17817,
+        "md5": "18ba544071dccd2f7afdf8326ccd8fbc",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "resources.js",
-        "fileSizeInBytes": 79411,
-        "md5": "0eff756da36cfeee01b43b347e17268f",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 79270,
+        "md5": "2c9b2a15498e97ae127813947e5ece1a",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "services.js",
-        "fileSizeInBytes": 48748,
-        "md5": "9c74a0ae7e14646b34fa172f2ec9c76d",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 48609,
+        "md5": "769cc1f582439766874c39371c74a494",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "sites.js",
-        "fileSizeInBytes": 41285,
-        "md5": "d6ee4350e75f9e53cc19a6743da58a8b",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 43595,
+        "md5": "422abb7138127399a23c0fe0af4fa8a4",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "tableBss.js",
-        "fileSizeInBytes": 11466,
-        "md5": "045978d9fc45a67198b56e77131f524d",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 11442,
+        "md5": "2415255a25a39843767f1ab1ddbb854d",
+        "date": "13/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "ug5kdb.js",
-        "fileSizeInBytes": 4288,
-        "md5": "f19661e4b4f24aa6a77eac3641dc01cc",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 4283,
+        "md5": "9acc5f7718f950fe587178822290b863",
+        "date": "15/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "users.js",
-        "fileSizeInBytes": 19801,
-        "md5": "dc5bbfcb9f83935a6cd3e5d996dee457",
-        "date": "26/10/2018"
+        "fileSizeInBytes": 20085,
+        "md5": "f92df2c193b0a456005defd96f55c0a4",
+        "date": "15/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "version.js",
-        "fileSizeInBytes": 1916,
-        "md5": "be34a592277787add7c31deff58614fc",
-        "date": "24/5/2017"
+        "fileSizeInBytes": 3047,
+        "md5": "14b2b617986377e368591ae234456f59",
+        "date": "15/2/2019"
       }
     ],
     "dbhost": "192.168.0.212",
