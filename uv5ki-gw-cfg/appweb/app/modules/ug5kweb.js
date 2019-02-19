@@ -94,7 +94,7 @@ var pr_vxq_rng = {
     min: 0, max: 30, toString: function () { return " min: 0, max: 30 "; }
 };
 var pr_ptre_rng = {
-    min: 1, max: 10, toString: function () { return " min: 1, max: 10 "; }
+    min: 0, max: 10, toString: function () { return " min: 0, max: 10 "; }
 };
 var pr_tsup_rng = {
     min: 90, max: 180, toString: function () { return " min: 90, max: 180 "; }
