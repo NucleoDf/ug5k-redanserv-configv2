@@ -227,6 +227,7 @@ function SelectPhoneSite(cfgId) {
 function ShowOptions(tipo) {
     $('.BL').attr('style', 'display:none');
     $('.BC').attr('style', 'display:none');
+    $('.AB').attr('style', 'display:none');
     $('.ATS').attr('style', 'display:none');
     $('.LCEN').attr('style', 'display:none');
     $('.EyM').attr('style', 'display:none');

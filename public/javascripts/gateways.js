@@ -845,6 +845,10 @@ function showDataForTelephoneResource(data) {
     data.ats_user = data.ats_user == undefined ? "399999" : data.ats_user;
     $('#TbTelATSUser').val(data.ats_user);
     console.log(data.ats_user + " => ATSUser");
+    /** 20190219. Nuevo Parametro DET POLARIDAD del Recurso DetInversionPol */
+    data.DetInversionPol = data.DetInversionPol == undefined ? 0 : data.DetInversionPol;
+    $('#DetInversionPol').val(data.DetInversionPol);
+    console.log(data.DetInversionPol.toString() + " => DetInversionPol");
 }
 
 /********************************************/
@@ -1389,7 +1393,10 @@ var InsertNewResource = function(col, row, isUpdate, realCol, realRow) {
             telephoneResource.tipo_interfaz_tel == 2 ||
             telephoneResource.tipo_interfaz_tel == 5 ? $('#TbTelATSUser').val() : "";
         telephoneResource.ats_user = ats_user;
-        console.log("ATSUser => " + telephoneResource.ats_user);
+        /** 20190219. Nuevo Parametro DET POL del Recurso DetInversionPol solo en interfaces AB */
+        var DetInversionPol = telephoneResource.tipo_interfaz_tel == 2 ? parseInt($('#DetInversionPol').val()) : 0;
+        telephoneResource.DetInversionPol = DetInversionPol;
+        console.log("DetInversionPol => " + telephoneResource.DetInversionPol);
     }
     //Usamos la misma estructura tanto para nuevo como para editar ya que aunque no usemos toda
     // la info, así solo hay que usar lo que se neceiste en cada operación de BBDD del servidor.
@@ -4481,5 +4488,8 @@ function calculateLoadIndex(data) {
 /** 20190214. Rutina para limpiar los controles de recursos que se consideren... despues de salvarlos en BDT */
 function CleanResourceControls() {
     $('#TbTelATSUser').val('');
+    $('#DetInversionPol').val(0);
+
+    console.log('public/gateways.js/CleanResourceControls');
 }
 

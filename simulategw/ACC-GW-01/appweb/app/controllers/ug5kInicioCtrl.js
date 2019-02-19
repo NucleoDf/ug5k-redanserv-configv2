@@ -144,7 +144,7 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
                         Input: 0,
                         Inputs: [],
                         Show: function () { return vm.v_data[5].Value === "1" },
-                        Val: function (val) { return val >= 1 && val <= 5 ? "" : "Error 1"; }
+                        Val: function (val) { return val >= 5 && val <= 30 ? "" : "El valor debe estar entre 5 y 30"; }
                     }
                 ];
                 break;

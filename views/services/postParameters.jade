@@ -382,9 +382,16 @@ div(id="FormParameters")
 											div(style='border-top: 1px solid #bf2a36; width:auto; padding: 0 0 5px 0')
 									tr(class='LCEN BL BC AB')
 										td
-											label AGVN User Name
+											label(tkey='AGVN User Name')
 										td.New
 											input.textbox#TbTelATSUser(type='text' placeholder="ATS Number" style="font-size:100%; height:16px; width:50px;" onblur='ValidateAtsNumber(this,"ErrorATSNumber")' onfocus='this.oldValue=this.value')
+									tr(class='AB')
+										td
+											label(tkey='Detecta Inversion Polaridad')
+										td.New
+											select#DetInversionPol
+												option(value=0 tkey='No')
+												option(value=1 tkey='Si')
 									tr
 										td
 											label(tkey='RemoteURI')
@@ -422,7 +429,7 @@ div(id="FormParameters")
 										td.New(style='padding-top: 8px;vertical-align:top')
 											input.UriTextbox#TbRemoteUri(type='text' placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 										td.New(align='right' style='vertical-align: top;')
-											a.ButtonNucleo(onclick='MakeFacedTelUri("#TbRemoteUri")') <
+											a.ButtonNucleo(onclick='MakeFacedTelUri("#TbRemoteUri")') 
 									//
 										tr
 											td

@@ -22,4 +22,10 @@ ALTER TABLE `ug5kv2`.`recursos_telefono`
 --
 ALTER TABLE `ug5kv2`.`pasarelas`   
   ADD COLUMN `sppe` TINYINT(1) DEFAULT 0  NOT NULL  COMMENT 'Supervision de puerta de enlace. 0: No supervisa. 1..5: tiempo en segundos de la supervision' AFTER `pendiente_actualizar`;
+--
+--
+--
+ALTER TABLE `ug5kv2`.`recursos_telefono`   
+  ADD COLUMN `det_inversion_pol` TINYINT(1) DEFAULT 0  NOT NULL  COMMENT 'Flag Deteccion de Inversion de polaridad (solo en AB)' AFTER `ats_user`;
+    
   
