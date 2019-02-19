@@ -68,6 +68,9 @@ var Copy = function() {
 /*  REV 1.0.2 VMG					*/
 /************************************/
 function PostGateWay(idSite, isUpdate, isChangeSite) {
+
+    console.log('SPPE <= ' + $('#sppe').val());
+
     var newGateway = {};
     var proxys = [];
     var registrars = [];
@@ -173,6 +176,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
     newGateway.ipb2 = $('#ipb2').val();
     newGateway.ipg2 = $('#ipg2').val();
     newGateway.msb2 = $('#msb2').val();
+    newGateway.sppe = parseInt($('#sppe').val());
     //SIP
     newGateway.PuertoLocalSIP = $('#PuertoLocalSIP').val();//Fixed
     newGateway.proxys = proxys;
@@ -1727,6 +1731,7 @@ var CopyMethodGateway = function(idSourceGateway, nameTargetGateway, ip0TargetGa
 
 
 var PostGateway2 = function(f) {
+    
     var cpus = [];
     var sip = {};
     var proxys = [];
@@ -2005,6 +2010,7 @@ var PostGateway2 = function(f) {
 				});
 				return;
 			}*/
+            // TODO AGL
 
             //Comprobar que se han introducido los datos de las CPU
             //CPU 0
@@ -2140,7 +2146,7 @@ var PostGateway2 = function(f) {
                                 "name": $('#nameGw').val(),
                                 'emplazamiento': $('#IdSite').val(),	//$('#CBEmplazamiento option:selected').text(),
                                 "ipv": $('#ipv').val(),
-                                "ips": $('#ips').val(),
+                                "ips": $('#ips').val(),                                
                                 "dualidad": $('#dual').prop('checked'),
                                 "cpus": cpus
                             },
@@ -2282,6 +2288,8 @@ var GetGateway = function(gtw, lastUpdate, f) {
                 $("#nameGw").val(gtw.result[0].name);
                 $('#ipv').val(gtw.result[0].ipv);
                 $('#ips').val(gtw.result[0].ips);
+                $('#sppe').val(gtw.result[0].sppe ? gtw.result[0].sppe : 0);
+                console.log('SPPE => ' + $('#sppe').val());
                 $('#dual').prop('checked', true);
                 $('#dual').prop('disabled', true);
 
@@ -2450,6 +2458,7 @@ var GetGateway = function(gtw, lastUpdate, f) {
         $('#ips').val('');
         $('#lips').hide();
         $('#ips').hide();
+        $('#sppe').val(''); 
         $('#dual').prop('checked', true);
         // CPU-0
         $('#lan11').hide();
@@ -2479,6 +2488,8 @@ var GetGateway = function(gtw, lastUpdate, f) {
         $('#ipg2').val('');
         $('#ipb2').val('');
         $('#msb2').val('');
+
+        $('#sppe').val(0);
 
         $('#ExportGateway').show();
         var title = $('#TitleH3').text().split(" ");
@@ -3953,6 +3964,8 @@ function NewGateway() {
     $('#labelSites').hide();
     $('#ListSites').hide();
     $('#CopyGtwButton').hide();
+    $('#sppe').val(0);
+
 }
 
 /************************************/

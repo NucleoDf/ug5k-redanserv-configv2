@@ -1976,7 +1976,7 @@ var ExportCfgToPdf = function(idCfg) {
                     margin: [10, 10, 10, 10],
                     columns: [
                         { text: (new Date()).toLocaleString(), style: 'footer', alignment: 'left' },
-                        { text: "DF-Nucleo. 2017. All rights reserved.", style: 'footer', alignment: 'center' },
+                        { text: "Nucleo. 2017-2019. All rights reserved.", style: 'footer', alignment: 'center' },
                         { text: 'Pg ' + currentPage.toString() + ' de ' + pageCount, style: 'footer', alignment: 'right' }
                     ]
                 };

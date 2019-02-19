@@ -390,5 +390,14 @@
 	"ModoCalculoClimax"		: "Modo cálculo Climax",
 	"ModoRelativo"          : "Modo Relativo",
 	"ModoAbsoluto" 			: "Modo Absoluto",
-	"LoadIndexMessage" 		: "Indice de carga: "
+	"LoadIndexMessage" 		: "Indice de carga: ",
+	"Supervisa Puerta de enlace?": "Supervisa Puerta de enlace?",
+	"1 Segundo": "1 Segundo",
+	"2 Segundos": "2 Segundos",
+	"3 Segundos": "3 Segundos",
+	"4 Segundos": "4 Segundos",
+	"5 Segundos": "5 Segundos",
+
+	"Fin": "Fin"
+
 }

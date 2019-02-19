@@ -6,17 +6,19 @@ var langJS = null;
 var dictionary = [];
 
 var translate = function (jsdata) {
-    console.log("translate....");
     $("[tkey]").each(function (index) {
-        var strTr = jsdata[$(this).attr('tkey')];
+        // var vindex = $(this).attr('tkey');
+        var strTr = jsdata[$(this).attr('tkey')];        
+        // $(this).html(strTr ? strTr : vindex);
         $(this).html(strTr);
+        // console.log("translate: " + vindex.toString());
     });
 };
 
 var translateWord = function (key, translate) {
     var strTr = '';
     var lang = navigator.languages[0].substr(0, 2);
-    console.log("translateWord....");
+    // console.log("translateWord: " + key.toStrin());
     if (langs.indexOf(lang) >= 0) {
         /** 20170529 AGL. Para que no se pida continuamente el fichero de traduccion */
         if (dictionary.length == 0) {
@@ -34,7 +36,7 @@ var translateWord = function (key, translate) {
 
 var translateForm = function () {
     //langCode = navigator.language.substr (0, 2);
-    console.log("translateForm...");
+    // console.log("translateForm...");
     langCode = navigator.languages[0].substr(0, 2);
 
     /** 20170529. AGL. Para que no se pida continuamente el fichero de traduccion */

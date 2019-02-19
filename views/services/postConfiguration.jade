@@ -237,10 +237,21 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                                                         label(tkey='VirtualIP')
                                                                     td.New
                                                                         input.textbox(id="ipv", type="text", name="ipv" onblur='ValidateIp(this,"ErrorIP")' onfocus='this.oldValue=this.value')
+                                                                    //- td(style="width: 120px; padding:5px 5px")
+                                                                    //-     label(id="lips" tkey='ServerIPPort')
+                                                                    //- td.New
+                                                                    //-     input.textbox(id="ips", type="text", name="ips" onblur='ValidateIpPort(this,"ErrorIPPort")' onfocus='this.oldValue=this.value')
                                                                     td(style="width: 120px; padding:5px 5px")
-                                                                        label(id="lips" tkey='ServerIPPort')
+                                                                        label(tkey="Supervisa Puerta de enlace?")
                                                                     td.New
-                                                                        input.textbox(id="ips", type="text", name="ips" onblur='ValidateIpPort(this,"ErrorIPPort")' onfocus='this.oldValue=this.value')
+                                                                        //- input.textbox(id="sps", type="text", name="sps" onblur='ValidateIpPort(this,"ErrorIPPort")' onfocus='this.oldValue=this.value')
+                                                                        select#sppe
+                                                                            option(value=0, tkey="No")
+                                                                            option(value=1, tkey="1 Segundo")
+                                                                            option(value=2, tkey="2 Segundos")
+                                                                            option(value=3, tkey="3 Segundos")                                                                            
+                                                                            option(value=4, tkey="4 Segundos")                                                                            
+                                                                            option(value=5, tkey="5 Segundos")                                                                            
                                                                 tr
                                                                     td(style="width: 120px; padding:5px 10px")
                                                                         label(tkey='DualCPU')

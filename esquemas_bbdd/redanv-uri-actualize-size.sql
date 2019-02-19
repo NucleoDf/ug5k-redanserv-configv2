@@ -17,3 +17,9 @@ ALTER TABLE `ug5kv2`.`recursos_externos`
 --
 ALTER TABLE `ug5kv2`.`recursos_telefono`   
   CHANGE `uri_telefonica` `uri_telefonica` VARCHAR(64) CHARSET latin1 COLLATE latin1_spanish_ci NULL  COMMENT 'Uri para el recurso telefónico.';
+--
+--
+--
+ALTER TABLE `ug5kv2`.`pasarelas`   
+  ADD COLUMN `sppe` TINYINT(1) DEFAULT 0  NOT NULL  COMMENT 'Supervision de puerta de enlace. 0: No supervisa. 1..5: tiempo en segundos de la supervision' AFTER `pendiente_actualizar`;
+  
