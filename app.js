@@ -78,7 +78,7 @@ function checkPerfil(userprofile) {
 }
 passport.use(new Strategy(
     function (username, password, cb) {
-        logging.Trace('Passport Strategy function: ' + username + '/' + password);
+        logging.Trace(config.Ulises.LoginSystemTrace, 'Passport Strategy function: ' + username + '/' + password);
         if (ctrlSesiones.localSession) {
             insertHistoric(ACCESS_SYSTEM_FAIL, username, 'Existe una sesion activa.');
             return cb(null, false, { message: 'Existe una sesion activa.' });
@@ -117,7 +117,7 @@ passport.use(new Strategy(
 passport.serializeUser(function (user, cb) {
     ctrlSesiones.user = user;
     cb(null, user.idOPERADORES);
-    logging.Trace('serializeUser: ' + user.idOPERADORES.toString() + ', ' + user.perfil.toString());
+    logging.Trace(config.Ulises.LoginSystemTrace, 'serializeUser: ' + user.idOPERADORES.toString() + ', ' + user.perfil.toString());
 });
 passport.deserializeUser(function (id, cb) {
     // require("./lib/users").findById(id, function (err, user) {
@@ -125,7 +125,7 @@ passport.deserializeUser(function (id, cb) {
     //   cb(null, user);
     //   console.log('deserializeUser: ' + id.toString());
     // });
-    logging.Trace('deserializeUser: ' + id.toString());
+    logging.Trace(config.Ulises.LoginSystemTrace,'deserializeUser: ' + id.toString());
     if (ctrlSesiones.user)
         return cb(null, ctrlSesiones.user);
     return cb("No hay usuario logeado...");
@@ -483,9 +483,8 @@ var intervalObject = setInterval(function () {
             ctrlSesiones.localSession = null;
         }
     }
-    logging.Trace(moment().toString() + ": " +
+    logging.Trace(config.Ulises.LoginSystemTrace, moment().toString() + ": " +
         (ctrlSesiones.localSession ? ("Sesion Activa hasta : " + moment(ctrlSesiones.localSession.cookie._expires).toString()) : "No Session"));
-    //  console.log(config.Ulises.LoginSystemTrace);
 }, 5000);
 
 var synch = setInterval(function () {

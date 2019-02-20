@@ -35,7 +35,6 @@ router.route('/updateTable/:idTable')
     });
 router.route('/syncGateways/:refreshTime')
     .get(function(req, res) {
-        logging.Trace(req.method, req.originalUrl);
         var aliveGtws = req.app.get('aliveGtws');
         //updateAliveGtws(aliveGtws, req.params.refreshTime);
         res.json(aliveGtws);

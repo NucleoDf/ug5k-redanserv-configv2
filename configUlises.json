@@ -140,6 +140,7 @@
     "logfile_maxfiles": 4,
     "logfile_sizefile": 1000000,
     "log2con": "info",
+    "dblogEnable": false,
     "morgan": false,
     "maxCycleTime": 30000,
     "refreshTime": 1000
