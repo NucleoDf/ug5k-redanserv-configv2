@@ -300,7 +300,7 @@ gatewaysRouter.route('/:gateway/recursos')
     .get(function(req, res) {
         logging.Info(req.method, req.originalUrl);
         res.redirect('/gateways/' + req.params.gateway + '/resources');
-        //logging.LoggingDate('Not implemented yet.')
+        //logging.Trace('Not implemented yet.')
         //res.status(501).json('Not implemented yet.');
     });
 
