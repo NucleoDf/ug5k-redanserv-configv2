@@ -1,5 +1,5 @@
 var express = require('express');
-var logging = require('../../lib/loggingDate.js');
+var logging = require('../../lib/nu-log.js');
 
 var router = express.Router();
 
@@ -11,25 +11,23 @@ var parseUrlEncoded = bodyParser.urlencoded({ extended: false });
 
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/sites', sites);)
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.getSites(req, res, function(result) {
-            logging.LoggingDate(JSON.stringify(result, null, '\t'));
             res.json(result);
         });
     });
 
 router.route('/:configuration')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.getSites4Config(req, res, req.params.configuration, function(result) {
-            logging.LoggingDate(JSON.stringify(result, null, '\t'));
             res.json(result);
         });
     });
 
 router.route('/groups')
     .post(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.postGroup(req.body, function(dataGroup) {
             res.json(dataGroup);
         });
@@ -37,7 +35,7 @@ router.route('/groups')
 
 router.route('/:site/:cfg')
     .put(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.putSite(req.params.site, req.params.cfg, req.body.name, function(data) {
             res.json(data);
         });
@@ -45,37 +43,35 @@ router.route('/:site/:cfg')
 
 router.route('/:site')
     .post(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.postSite(req.body, function(data) {
             res.json(data);
         });
     })
     .delete(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.deleteSite(req.params.site, function(data) {
             res.json(data);
         });
     })
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.getSite(req.params.site, function(result) {
-            logging.LoggingDate(JSON.stringify(result, null, '\t'));
             res.json(result);
         });
     });
 
 router.route('/:site/gateways')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.getGatewaysOfSite(req.params.site, function(result) {
-            logging.LoggingDate(JSON.stringify(result, null, '\t'));
             res.json(result);
         });
     });
 
 router.route('/:site/groups')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.getGroups(req.params.site, function(groups) {
             res.json(groups);
         });
@@ -83,7 +79,7 @@ router.route('/:site/groups')
 
 router.route('/:sourceIdSite/:targetNameSite')
     .copy(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var sourceIdSite = req.params.sourceIdSite;
         var targetNameSite = req.params.targetNameSite;
         var sourceIdCfg = req.body.idCFG;
@@ -94,7 +90,7 @@ router.route('/:sourceIdSite/:targetNameSite')
 
 router.route('/:site/cfg/:cfg')
     .put(function(req, res) {
-        logging.LoggingDate('PUT /:' + req.params.site + '/cfg/:' + req.params.cfg);
+        logging.Info(req.method, req.originalUrl);
         myLibSites.updateCfg(req.params.site, req.params.cfg, function(result) {
             res.json(result);
         });

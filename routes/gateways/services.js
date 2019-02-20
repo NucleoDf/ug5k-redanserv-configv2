@@ -1,5 +1,5 @@
 var express = require('express');
-var logging = require('../../lib/loggingDate.js');
+var logging = require('../../lib/nu-log.js');
 
 var router = express.Router();
 
@@ -10,8 +10,7 @@ var myLibServices = require('../../lib/services.js');
 
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/', services);)
     .get(function(req, res) {
-        logging.LoggingDate("GET services");
-
+        logging.Info(req.method, req.originalUrl);
         myLibServices.getAllServices(function(services) {
             res.json(services);
         });
@@ -19,7 +18,7 @@ router.route('/')	// The root path is relative the path where it's mounted in ap
 
 router.route('/:service/gateways')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibServices.getGatewaysOfService(req.params.service, function(data) {
             res.json(data);
         });
@@ -27,7 +26,7 @@ router.route('/:service/gateways')
 
 router.route('/:service')
     .get(function(req, res) {
-        logging.LoggingDate("GET services/:service");
+        logging.Info(req.method, req.originalUrl);
         var service = req.params.service;
         myLibServices.getService(service, function(data) {
             res.json({
@@ -37,22 +36,22 @@ router.route('/:service')
         });
     })
     .post(function(req, res) {
-        logging.LoggingDate("POST services/:service");
+        logging.Info(req.method, req.originalUrl);
         var service = req.body;
         myLibServices.postService(service, function(data) {
             res.json(data);
         });
     })
     .copy(function(req, res) {
+        logging.Info(req.method, req.originalUrl);
         var targetService = req.body;
-        logging.LoggingDate("COPY services/" + targetService.name);
         myLibServices.postService(targetService, function(data) {
             res.status(201).json(data);
         });
     })
     .delete(function(req, res) {
+        logging.Info(req.method, req.originalUrl);
         var serviceId = req.params.service;
-        logging.LoggingDate("DELETE services/" + serviceId);
         myLibServices.deleteService(serviceId, function(data) {
             res.json(data);
         });

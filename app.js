@@ -21,7 +21,8 @@ var radioDestinations = require('./routes/destinations/radioDestinations');
 var hrr = require('./routes/hrr/hrr');
 var historics = require('./routes/historics/historics');
 var version = require('./routes/version/version');
-var logging = require('./lib/loggingDate.js');
+// var logging = require('./lib/loggingDate.js');
+var logging = require('./lib/nu-log.js');
 var config = require('./configUlises.json');
 //var controlAccess=require('./routes/services/accessControl');
 var myLibHistorics = require('./lib/historics.js');
@@ -68,7 +69,6 @@ function insertHistoric(code, user, reason) {
             Param: reason
         }
         , function (h) {
-            //console.log("insertHistoric: " + h);
         });
 }
 function checkPerfil(userprofile) {
@@ -78,7 +78,7 @@ function checkPerfil(userprofile) {
 }
 passport.use(new Strategy(
     function (username, password, cb) {
-        logging.LoggingDateCond('Passport Strategy function: ' + username + '/' + password, config.Ulises.LoginSystemTrace);
+        logging.Trace('Passport Strategy function: ' + username + '/' + password);
         if (ctrlSesiones.localSession) {
             insertHistoric(ACCESS_SYSTEM_FAIL, username, 'Existe una sesion activa.');
             return cb(null, false, { message: 'Existe una sesion activa.' });
@@ -117,7 +117,7 @@ passport.use(new Strategy(
 passport.serializeUser(function (user, cb) {
     ctrlSesiones.user = user;
     cb(null, user.idOPERADORES);
-    logging.LoggingDateCond('serializeUser: ' + user.idOPERADORES.toString() + ', ' + user.perfil.toString(), config.Ulises.LoginSystemTrace);
+    logging.Trace('serializeUser: ' + user.idOPERADORES.toString() + ', ' + user.perfil.toString());
 });
 passport.deserializeUser(function (id, cb) {
     // require("./lib/users").findById(id, function (err, user) {
@@ -125,7 +125,7 @@ passport.deserializeUser(function (id, cb) {
     //   cb(null, user);
     //   console.log('deserializeUser: ' + id.toString());
     // });
-    logging.LoggingDateCond('deserializeUser: ' + id.toString(), config.Ulises.LoginSystemTrace);
+    logging.Trace('deserializeUser: ' + id.toString());
     if (ctrlSesiones.user)
         return cb(null, ctrlSesiones.user);
     return cb("No hay usuario logeado...");
@@ -154,21 +154,21 @@ app.post('/', [
         dest: './uploads/'
     }).single('upl'),
     function (req, res) {
-        logging.LoggingDate(req.file); //form files
+        logging.Trace(req.method, req.originalUrl, req.file); //form files
         var retorno = {};
         //Inicializar el campo
         fs.readFile(req.file.path, 'utf8', function (err, contents) {
             myLibConfig.checkExportGtwNamesOrIpDup(req.body.config, req.body.site, JSON.parse(contents), function (result) {
                 if (result.data == 'OK') {
-                    logging.LoggingSuccess('Comprobación de importación correcta');
+                    logging.Trace('Comprobación de importación correcta');
                     myLibConfig.postConfigurationFromJsonFile(req.body.config, req.body.site, JSON.parse(contents), function (result) {
                         if (result.error == null) {
                             retorno.msg = 'Configuracion importada correctamente';
-                            logging.LoggingSuccess('Configuracion importada correctamente');
+                            logging.Trace('Configuracion importada correctamente');
                         }
                         else {
                             retorno.err = req.file.message;
-                            logging.loggingError(req.file.message);
+                            logging.Error(req.file.message);
                         }
                         res.json(retorno);
                     });
@@ -177,85 +177,20 @@ app.post('/', [
                     if (result.data == 'DUPLICATED') {
                         //alertify.error('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
                         //	'Elimine la pasarela o cambie los datos antes de importar.');
-                        logging.loggingError('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
+                        logging.Error('Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
                             'Elimine la pasarela o cambie los datos antes de importar');
                         retorno.err = 'Configuracion no importada. La pasarela (nombre o ips) ya existe en la configuración. ' +
                             'Elimine la pasarela o cambie los datos antes de importar';
                     }
                     else {
                         //alertify.error('Configuracion no importada. Error en la operación.');
-                        logging.loggingError('Configuracion no importada. Error en la operación.');
+                        logging.Error('Configuracion no importada. Error en la operación.');
                         retorno.err = 'Configuracion no importada. Error en la operación.';
                     }
                     res.json(retorno);
                 }
             });
-
-            /*/  console.log(contents);
-            myLibConfig.postConfigurationFromJsonFile(req.body.config, req.body.site, JSON.parse(contents),function(result){
-                if (result.error == null){
-                    myLibHardwareGateways.setResources(result.slaves,JSON.parse(contents).recursos,function(result){
-                        logging.LoggingSuccess('Configuracion importada correctamente');
-                        res.render('imported', {
-                            dataToRestore:{
-                                user: req.body.user,
-                                clave: req.body.clave,
-                                perfil: req.body.perfil,
-                                LoginTimeout: config.Ulises.LoginTimeOut,
-                                Region: config.Ulises.Region,
-                                BackupServiceDomain: config.Ulises.BackupServiceDomain,
-                                config: req.body.config,
-                                site: req.body.site,
-                                cfgData: req.body.cfgData
-                            },
-                            error: '',
-                            message: 'Configuracion importada correctamente',
-                            file: req.file.originalname
-                        });
-                    });
-                }
-                else if (result.error == -1){
-                    logging.loggingError('Configuracion no importada. La pasarela ya existe. Elimine la pasarela antes de importar');
-                    res.render('imported', {
-                        dataToRestore:{
-                            user: req.body.user,
-                            clave: req.body.clave,
-                            perfil: req.body.perfil,
-                            LoginTimeout: config.Ulises.LoginTimeOut,
-                            Region: config.Ulises.Region,
-                            BackupServiceDomain: config.Ulises.BackupServiceDomain,
-                            config: req.body.config,
-                            site: req.body.site,
-                            cfgData: req.body.cfgData
-                        },
-                        error: req.file.message,
-                        message: 'Configuracion no importada. La pasarela ya existe. Elimine la pasarela antes de importar',
-                        file: req.file.originalname
-                    });                        
-                }
-                else{
-                    logging.loggingError(req.file.message);
-                    res.render('imported', {
-                        dataToRestore:{
-                            user: req.body.user,
-                            clave: req.body.clave,
-                            perfil: req.body.perfil,
-                            LoginTimeout: config.Ulises.LoginTimeOut,
-                            Region: config.Ulises.Region,
-                            BackupServiceDomain: config.Ulises.BackupServiceDomain,
-                            config: req.body.config,
-                            site: req.body.site,
-                            cfgData: req.body.cfgData
-                        },
-                        error: req.file.message,
-                        message: 'Configuracion no importada',
-                        file: req.file.originalname
-                    });                        
-                }
-            });*/
         });
-        //res.json({size:req.file.size});
-        //res.status(200).redirect('/');
     }
 ]);
 
@@ -315,7 +250,7 @@ app.get('/',
     //require('connect-ensure-login').ensureLoggedIn(),
     isAuthenticated,
     function (req, res, next) {
-        logging.LoggingDate('app.get</> IN');
+        logging.Info(req.method, req.originalUrl);
         res.render('index',
             {
                 LoginTimeout: config.Ulises.LoginTimeOut,
@@ -325,20 +260,19 @@ app.get('/',
                 user: (req.user ? req.user : { name: 'noname', perfil: 64 }),
                 session: ctrlSesiones.localSession
             });
-        logging.LoggingDate('app.get</> OUT');
+        logging.Info(req.method, req.originalUrl, 'OUT');
     });
 
 app.get('/login',
     function (req, res) {
-        logging.LoggingDateCond('app.get</login>: ', config.Ulises.LoginSystemTrace);
-        //    res.render('login', {message: req.flash('error'), region: config.Ulises.Region});
+        logging.Info(req.method, req.originalUrl);
         res.render('login', { message: msg4Login(req), region: config.Ulises.Region });
     });
 
 app.post('/login',
     passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
     function (req, res) {
-        logging.LoggingDateCond('app.post</login>: ' + req.user.name + ' ' + req.user.perfil, config.Ulises.LoginSystemTrace);
+        logging.Info(req.method, req.originalUrl, req.user.name, req.user.perfil);
         ctrlSesiones.localSession = req.session;
         ctrlSesiones.localSession.lastTick = moment();
         res.redirect('/');
@@ -346,7 +280,7 @@ app.post('/login',
 
 app.get('/logout',
     function (req, res) {
-        logging.LoggingDateCond('app.get</logout>: ' + req.user.name + ' ' + req.user.perfil, config.Ulises.LoginSystemTrace);
+        logging.Info(req.method, req.originalUrl, req.user.name, req.user.perfil);
         insertHistoric(USER_LOGOUT_SYSTEM, ctrlSesiones.user.name, '');
         ctrlSesiones.localSession = null;
         req.logout();
@@ -488,28 +422,28 @@ app.use(function (req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
-        var msg = 'Development error handler: ' + req.originalUrl.toString() + ', Error: ' + err.status.toString() + ' => ' + err.message;
+        var msg = 'Development error handler: ' + req.method + ' ' + req.originalUrl.toString() + ', Error: => ' + err.message;
         res.status(err.status || 500);
         //res.render('error', {
         //    message: err.message,
         //    error: err
         //});
         res.json({ error: msg });
-        logging.loggingError(msg);
+        logging.Error(msg);
     });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-    var msg = 'Production error handler: ' + req.originalUrl.toString() + ', Error: ' + err.status.toString() + ' => ' + err.message;
+    var msg = 'Production error handler: ' + req.method + ' ' + req.originalUrl.toString() + ', Error: ' + err.message;
     res.status(err.status || 500);
     res.json({ error: msg });
     //res.render('error', {
     //    message: err.message,
     //    error: {}
     //});
-    logging.loggingError(msg);
+    logging.Error(msg);
 });
 
 /*function synchGateways() {
@@ -519,21 +453,19 @@ app.use(function (err, req, res, next) {
 
 // Prepare historics deep
 setImmediate(function () {
-    logging.LoggingDate('Running once a day. Historics deep: ' + config.Ulises.HistoricsDeep + ' days.');
+    logging.Trace('Running once a day. Historics deep: ' + config.Ulises.HistoricsDeep + ' days.');
     myLibHistorics.deepHistorics(config.Ulises.HistoricsDeep, function (result) {
-        logging.LoggingDate('Historics record removed: ' + result.affectedRows + ', ' + result.error);
+        logging.Trace('Historics record removed: ' + result.affectedRows + ', ' + result.error);
     });
     myLibConfig.resetGatewaysSynchroState(function (result) {
-        logging.LoggingDate('Reset Gateways Synchro State: ' + result.result);
+        logging.Trace('Reset Gateways Synchro State: ' + result.result);
     });
 });
 
 setInterval(function () {
-    logging.LoggingDate('Running once a day. Historics deep: ' + config.Ulises.HistoricsDeep + ' days.');
-    //logging.LoggingDate('[' + new Date().toString() + ']' + 'Running once a day. Historics deep: ' + config.Ulises.HistoricsDeep + ' days.');
+    logging.Trace('Running once a day. Historics deep: ' + config.Ulises.HistoricsDeep + ' days.');
     myLibHistorics.deepHistorics(config.Ulises.HistoricsDeep, function (result) {
-        logging.LoggingDate('Historics record removed: ' + result.affectedRows);
-        //logging.LoggingDate('[' + new Date().toString() + ']' + 'Historics record removed: ' + result.affectedRows);
+        logging.Trace('Historics record removed: ' + result.affectedRows);
     });
 }, 86400000);
 
@@ -541,18 +473,18 @@ setInterval(function () {
 var intervalObject = setInterval(function () {
     if (ctrlSesiones.localSession) {
         if (moment().diff(ctrlSesiones.localSession.lastTick, "seconds") > 60) {
-            logging.LoggingDateCond("La Session ha expirado...El cliente no genera los ticks", config.Ulises.LoginSystemTrace);
+            logging.Trace("La Session ha expirado...El cliente no genera los ticks");
             insertHistoric(USER_LOGOUT_SYSTEM, ctrlSesiones.user.name, 'La Session ha expirado...El cliente no genera los ticks.');
             ctrlSesiones.localSession = null;
         }
         else if (moment().isAfter(moment(ctrlSesiones.localSession.cookie._expires))) {
-            logging.LoggingDateCond("La Session ha expirado....", config.Ulises.LoginSystemTrace);
+            logging.Trace("La Session ha expirado....");
             insertHistoric(USER_LOGOUT_SYSTEM, ctrlSesiones.user.name, 'La Session ha expirado....');
             ctrlSesiones.localSession = null;
         }
     }
-    logging.LoggingDateCond(moment().toString() + ": " +
-        (ctrlSesiones.localSession ? ("Sesion Activa hasta : " + moment(ctrlSesiones.localSession.cookie._expires).toString()) : "No Session"), config.Ulises.LoginSystemTrace);
+    logging.Trace(moment().toString() + ": " +
+        (ctrlSesiones.localSession ? ("Sesion Activa hasta : " + moment(ctrlSesiones.localSession.cookie._expires).toString()) : "No Session"));
     //  console.log(config.Ulises.LoginSystemTrace);
 }, 5000);
 
@@ -569,11 +501,6 @@ var synch = setInterval(function () {
         else
             aliveGtws[i].isSinch = false;
     }
-	/*logging.LoggingDate('Tick. Pasarelas='+aliveGtws.length);
-	if(aliveGtws.length>0){
-	    logging.LoggingDate(aliveGtws[0].time);
-	    logging.LoggingDate(aliveGtws[0].online);
-    }*/
 }, config.Ulises.refreshTime);
 /*************************/
 
@@ -591,13 +518,12 @@ app.locals.isAuthenticated = false;
 app.locals.AuthenticatedUser = 'none';
 
 app.listen(app.get('port'), function () {
-    logging.LoggingDate('Listening UG5k-Serv on port ' + app.get('port'));
-    logging.LoggingDate('Express started in ' + app.get('env'));
+    logging.Info('Listening UG5k-Serv on port ',  app.get('port'));
+    logging.Info('Express started in ',  app.get('env'));
 });
 
 module.exports = app;
 
 process.on('uncaughtException', function (err) {
-    console.log('Caught exception: ' + err);
-    logging.loggingError('Caught exception: ' + err);
+    logging.Error('Caught exception: ', err);
 }); 

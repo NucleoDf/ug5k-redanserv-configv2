@@ -6,7 +6,7 @@ var parseUrlEncoded = bodyParser.urlencoded({ extended: false });
 
 var myLibHrr = require('../../lib/hrr.js');
 
-var logging = require('../../lib/loggingDate.js');
+var logging = require('../../lib/nu-log.js');
 
 function generatesRandomName(name) {
     var myDate = new Date();
@@ -27,7 +27,7 @@ function generatesRandomName(name) {
 
 router.route('/getHrr')	// The root path is relative the path where it's mounted in app.js (app.use('/configurations',configurations'))
     .get(function(req, res) {
-        logging.LoggingDate("GET configurations");
+        logging.Info(req.method, req.originalUrl);
         myLibHrr.getConfigurations(req, res);
     });
 

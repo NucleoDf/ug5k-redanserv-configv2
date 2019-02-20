@@ -1,5 +1,5 @@
 var express = require('express');
-var logging = require('../../lib/loggingDate.js');
+var logging = require('../../lib/nu-log.js');
 
 var router = express.Router();
 
@@ -10,7 +10,7 @@ var myLibUsers = require('../../lib/users.js');
 
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/accessControl',controlAccess'))
     .get(function(req, res) {
-        logging.LoggingDate("GET users.");
+        logging.Info(req.method, req.originalUrl);
         if (req.query.name != null && req.query.clave != null) {
             var usr = {};
             usr.name = req.query.name;
@@ -24,7 +24,7 @@ router.route('/')	// The root path is relative the path where it's mounted in ap
 
 router.route('/:usuario')
     .post(function(req, res) {
-        logging.LoggingDate("POST Users/:Usuario");
+        logging.Info(req.method, req.originalUrl);
         var newUser = req.body.user;
         var gtws = req.body.gateways;
         myLibUsers.postUser(req, res, newUser, gtws, function(result) {
@@ -32,7 +32,7 @@ router.route('/:usuario')
         });
     })
     .get(function(req, res) {
-        logging.LoggingDate("GET Users/:Usuario");
+        logging.Info(req.method, req.originalUrl);
         var usr = req.query;
         if (req.params.usuario == 'null')
             res.render('./services/postUsuario');
@@ -40,14 +40,14 @@ router.route('/:usuario')
             myLibUsers.testUser(req, res, usr);
     })
     .delete(function(req, res) {
+        logging.Info(req.method, req.originalUrl);
         var usr = req.params.usuario;
-        logging.LoggingDate("DELETE Users/:Usuario");
         myLibUsers.delUser(req, res, usr);
     })
     .put(function(req, res) {
+        logging.Info(req.method, req.originalUrl);
         var usr = req.body.user;
         var gtws = req.body.gateways;
-        logging.LoggingDate("PUT Users/:Usuario");
         myLibUsers.putUser(req, res, usr, gtws, function(result) {
             res.json(result);
         });

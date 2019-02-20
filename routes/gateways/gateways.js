@@ -1,5 +1,5 @@
 var express = require('express');
-var logging = require('../../lib/loggingDate.js');
+var logging = require('../../lib/nu-log.js');
 
 var router = express.Router();
 
@@ -21,55 +21,55 @@ var gcfg = require('../../configUlises.json');
 
 router.route('/updateUsers')
     .get(function(req, res) {
-        //logging.LoggingDate('GET /syncGateways/:refreshTime');
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.updateUsers(function(data) {
             res.json(data);
         });
     });
 router.route('/updateTable/:idTable')
     .get(function(req, res) {
-        //logging.LoggingDate('GET /syncGateways/:refreshTime');
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.updateTable(req.params.idTable, function(data) {
             res.json(data);
         });
     });
 router.route('/syncGateways/:refreshTime')
     .get(function(req, res) {
-        //logging.LoggingDate('GET /syncGateways/:refreshTime');
+        logging.Trace(req.method, req.originalUrl);
         var aliveGtws = req.app.get('aliveGtws');
         //updateAliveGtws(aliveGtws, req.params.refreshTime);
         res.json(aliveGtws);
     });
 router.route('/availableservices')
     .get(function(req, res) {
-        //logging.LoggingDate('GET /syncGateways/:refreshTime');
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getSiteName4ServiceCopy(function(result) {
             res.json(result);
         });
     });
 router.route('/getServiceData/:idSourceCgw')
     .get(function(req, res) {
-        //logging.LoggingDate('GET /syncGateways/:refreshTime');
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getServiceDataFromGtw(req.params.idSourceCgw, function(result) {
             res.json(result);
         });
     });
 router.route('/getServiceDataListaIps/:idSourceCgw')
     .get(function(req, res) {
-        //logging.LoggingDate('GET /syncGateways/:refreshTime');
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getServiceDataListaIpsFromGtw(req.params.idSourceCgw, function(result) {
             res.json(result);
         });
     });
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/gateways', gateways);)
     .get(function(req, res) {
-        logging.LoggingDate("GET gateways");
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getGateways(req, res);
     });
 
 router.route('/checkipaddr/:ip/:idCfg/:idUpdatedCgw')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getGatewaysIpInConfig(req.params.ip, req.params.idCfg, req.params.idUpdatedCgw, function(gtw) {
             res.json(gtw.error);
         });
@@ -77,7 +77,7 @@ router.route('/checkipaddr/:ip/:idCfg/:idUpdatedCgw')
 
 router.route('/checkgtwname/:name/:idCfg/:idUpdatedCgw')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getGatewaysNamesInConfig(req.params.name, req.params.idCfg, req.params.idUpdatedCgw, function(gtw) {
             res.json(gtw.error);
         });
@@ -85,7 +85,7 @@ router.route('/checkgtwname/:name/:idCfg/:idUpdatedCgw')
 
 router.route('/checkipaddr4changesite/:ipb1/:ipb2/:idEmp')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getGatewaysIp4ChangeSite(req.params.ipb1, req.params.ipb2, req.params.idEmp,
             function(gtw) {
                 res.json(gtw.error);
@@ -95,7 +95,7 @@ router.route('/checkipaddr4changesite/:ipb1/:ipb2/:idEmp')
 
 router.route('/activeCfg')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getGatewaysBelongsActive(function(gtw) {
             res.json(gtw.data);
         });
@@ -103,7 +103,7 @@ router.route('/activeCfg')
 
 router.route('/alive')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getGatewaysAlive(function(gtw) {
             res.json(gtw.data);
         });
@@ -111,7 +111,7 @@ router.route('/alive')
 
 router.route('/activeCfg/:gtw')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.gatewaysBelongsActive(req.params.gtw, function(gtw) {
             res.json(gtw.data);
         });
@@ -119,7 +119,7 @@ router.route('/activeCfg/:gtw')
 
 router.route('/changesite/:gateway/:idOldSite/:idNewSite')
     .post(function(req, res) {
-        logging.LoggingDate('POST /changesite/:' + req.params.gateway + '/:' + req.params.idSite);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.changeGateWaySite(req.params.gateway, req.params.idOldSite, req.params.idNewSite, function(result) {
             res.json(result);
         });
@@ -127,7 +127,7 @@ router.route('/changesite/:gateway/:idOldSite/:idNewSite')
 
 router.route('/operator/:idOperator')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getGatewaysToOperator(req.params.idOperator, function(gtw) {
             res.json(gtw.data);
         });
@@ -135,7 +135,7 @@ router.route('/operator/:idOperator')
 
 router.route('/iplist/:idGtw')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getIpList4Gateway(req.params.idGtw, function(result) {
             res.json(result);
         });
@@ -143,7 +143,7 @@ router.route('/iplist/:idGtw')
 
 router.route('/:sourceIdGateway/:targetNameGateway/:ip0TargetGateway/:ip1TargetGateway/:ipvTargetGateway')
     .copy(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var sourceIdGateway = req.params.sourceIdGateway;
         var targetNameGateway = req.params.targetNameGateway;
         var ip0TargetGateway = req.params.ip0TargetGateway;
@@ -167,7 +167,7 @@ router.route('/:sourceIdGateway/:targetNameGateway/:ip0TargetGateway/:ip1TargetG
 
 router.route('/:gateway')
     .post(function(req, res) {
-        logging.LoggingDate("POST gateways/:gateway");
+        logging.Info(req.method, req.originalUrl);
         var newGateway = req.body.general;
         var service = req.body.servicios;
         //myLibGateways.gatewayExists(req.body.idConf,newGateway,function(result){
@@ -181,7 +181,7 @@ router.route('/:gateway')
         });
     })
     .get(function(req, res) {
-        logging.LoggingDate("GET gateways/:gateway");
+        logging.Info(req.method, req.originalUrl);
         var gtw = req.params.gateway;
         if (req.params.gateway == 'null') {
             console.long("router.gateways render-1...");
@@ -193,42 +193,20 @@ router.route('/:gateway')
             });
     })
     .delete(function(req, res) {
+        logging.Info(req.method, req.originalUrl);
         var gtw = req.params.gateway;
-        logging.LoggingDate("DELETE Gateways/:gateway");
         myLibGateways.delGateway(req, res, gtw);
     })
     .put(function(req, res) {
+        logging.Info(req.method, req.originalUrl);
         var gtw = req.body.general;
         var service = req.body.servicios;
-        logging.LoggingDate("PUT Gateways/:gateway");
-        //myLibGateways.gatewayExists(req.body.idConf,gtw,function(result){
-        /*if (result.error == 'ER_DUP_ENTRY'){
-            var i=0;
-            while (i<result.data.length){
-                if (result.data[i].idCGW != gtw.idCGW){
-                    break;
-                }
-                else
-                    i++;
-            }
-
-            if (i==result.data.length){
-                myLibGateways.putGateway(req, res, gtw,service, function(gtw){
-                    res.status(201).json(gtw);
-                });
-            }
-            else
-                res.json({error:result.error});
-        }*/
-        //else{
         myLibGateways.putGateway(req, res, gtw, service, function(gtw) {
             res.status(201).json(gtw);
-            //	});
-            //}
         });
     })
     .copy(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.CloneGateway(req.params.gateway, req.body, function(result) {
             res.json(result);
         });
@@ -239,7 +217,7 @@ router.route('/:gateway')
 /********************************/
 router.route('/:gateway/services')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getGateway(req, res, null, req.params.gateway, function(gtw) {
             myLibServicesGateways.getServices(req.params.gateway, null, function(data) {
                 res.json({
@@ -251,7 +229,7 @@ router.route('/:gateway/services')
     });
 router.route('/:gateway/services/:service')
     .put(function(req, res) {
-        logging.LoggingDate('PUT /:' + req.params.gateway + '/services/:' + req.params.service);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.setService(req.params.gateway, req.params.service, function(result) {
             res.json(result);
         });
@@ -265,12 +243,12 @@ router.route('/:gateway/services/:service')
 router.route('/:gateway/testconfig')
     .get(function(req, res) {
         var aliveGtws = req.app.get('aliveGtws');
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         //myLibGateways.getIpv(req.params.gateway,function(result){
         myLibGateways.getIpv2(req.params.gateway, function(result) {
             if (result.toLocal == -1) {
                 // No en BD
-                logging.LoggingDate(JSON.stringify({ idConf: result.ipv.toString(), fechaHora: '' }, null, '\t'));
+                logging.Error(JSON.stringify({ idConf: result.ipv.toString(), fechaHora: '' }, null, '\t'));
                 res.json({ idConf: result.ipv.toString(), fechaHora: '' });
             }
             else {
@@ -285,7 +263,7 @@ router.route('/:gateway/testconfig')
                     else {//No Activa
                         updateSincGtws(aliveGtws, req.params.gateway, result.data[0].idGtw, 0, result.data[0].idconfiguracion, true, false);
                         // No en configurción activa
-                        logging.LoggingDate(JSON.stringify({ idConf: result.toLocal.toString(), fechaHora: '' }, null, '\t'));
+                        logging.Error(JSON.stringify({ idConf: result.toLocal.toString(), fechaHora: '' }, null, '\t'));
                         //myLibGateways.getTestConfig(result.ipv,function(data){
                         res.json({ idConf: -2, fechaHora: '' });
                     }
@@ -321,46 +299,19 @@ router.route('/:gateway/testconfig')
                         res.json({ idConf: -2, fechaHora: date2Send });
                 }
             }
-			/*if (result.toLocal == -2){
-				updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, 0, result.data.idconfiguracion, true, false);
-				// No en configurción activa
-				logging.LoggingDate(JSON.stringify({idConf:result.toLocal.toString(), fechaHora:''},null,'\t'));
-					//myLibGateways.getTestConfig(result.ipv,function(data){
-				res.json({idConf: result.toLocal.toString(), fechaHora:''});
-			 		//});
-			}
-			if(result.data!=null && result.toLocal == null ) {
-				if (req.query.std=="-4")
-					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, result.data.updatePend, result.data.idconfiguracion, false, true);
-				else
-					updateSincGtws(aliveGtws, req.params.gateway, result.data.idGtw, result.data.updatePend, result.data.idconfiguracion, false, false);
-				res.json({idConf: result.data.idConf, fechaHora: result.data.fechaHora});
-			}*/
-			/*
-			var ipv = result.ipv;
-			if (ipv != -1 && ipv != -2 && ipv != null){
-				myLibGateways.getTestConfig(ipv,function(data){
-		 			res.json(data);
-		 		});
-			}
-		 	else{
-				logging.LoggingDate(JSON.stringify({idConf:ipv.toString(), fechaHora:''},null,'\t'));
-
-		 		res.json({idConf: ipv.toString(), fechaHora:''});
-		 	}*/
         });
     });
 
 router.route('/syncGateways')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var aliveGtws = req.app.get('aliveGtws');
         res.json(aliveGtws);
     });
 
 router.route('/createNewGateway/:newGateway/:idSite')
     .post(function(req, res) {
-        logging.LoggingDate('POST /createNewGateway/:newGateway/:idSite');
+        logging.Info(req.method, req.originalUrl);
         var newGateway = req.body.newGateway;
         var idSite = req.body.idSite;
         myLibGateways.createGateWayonSite(newGateway, idSite, function(result) {
@@ -369,7 +320,7 @@ router.route('/createNewGateway/:newGateway/:idSite')
     });
 router.route('/updateGateway/:newGateway/:idGtw')
     .post(function(req, res) {
-        logging.LoggingDate('POST /createNewGateway/:newGateway/:idGtw');
+        logging.Info(req.method, req.originalUrl);
         var newGateway = req.body.newGateway;
         var idGtw = req.body.idGtw;
         myLibGateways.updateGateWayonSite(newGateway, idGtw, function(result) {
@@ -380,7 +331,7 @@ router.route('/updateGateway/:newGateway/:idGtw')
 //Esta es nueva para recoger todos los datos del recurso
 router.route('/getResource/:resourceType/:resourceId')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         if (req.params.resourceType == '1') {//RADIO
             myLibGateways.getRadioRes4Gateway(req.params.resourceId, function(result) {
                 res.json(result);
@@ -396,7 +347,7 @@ router.route('/getResource/:resourceType/:resourceId')
 //Otra nueva para mandar el nuevo recurso a insertar
 router.route('/insertNewResource/:resource2Insert/:resourceType')
     .post(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         if (req.body.resourceType == '1') {//RADIO
             myLibGateways.insertRadioRes4Gateway(req.body.resource2Insert.radio,
                 function(result) {
@@ -414,7 +365,7 @@ router.route('/insertNewResource/:resource2Insert/:resourceType')
 //Otra nueva para editar el recurso a insertar
 router.route('/updateResource/:resource2Insert/:resourceType/:resourceId')
     .put(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         if (req.body.resourceType == '1') {//RADIO
             myLibGateways.updateRadioRes4Gateway(req.body.resource2Insert.radio, req.body.resourceId,
                 function(result) {
@@ -433,14 +384,14 @@ router.route('/updateResource/:resource2Insert/:resourceType/:resourceId')
 ///TEST: GET gateways/getAll/10
 router.route('/getAll/:idGtw')
     .get(function(req, res) {
-        logging.LoggingDate(req);
+        logging.Info(req.method, req.originalUrl);
         var idGtw = req.params.idGtw;
         myLibGateways.getAll(null, idGtw, function(result) {
             res.json(result);
         });
     }).
     post(function(req, res) {
-        logging.LoggingDate(req);
+        logging.Info(req.method, req.originalUrl);
     });
 
 /********************************/
@@ -448,7 +399,7 @@ router.route('/getAll/:idGtw')
 /********************************/
 router.route('/:gateway/resources')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getHardware(req.params.gateway, function(result) {
             var recursos = [];
             if (result.hardware != null && result.hardware.length > 0) {
@@ -473,8 +424,6 @@ router.route('/:gateway/resources')
             else
                 res.json(recursos);
         });
-        //logging.LoggingDate('Not implemented yet.');
-        //res.status(501).json('Not implemented yet.');
     });
 
 
@@ -483,7 +432,7 @@ router.route('/:gateway/resources')
 /********************************/
 router.route('/:gateway/site/:site')
     .put(function(req, res) {
-        logging.LoggingDate('PUT /:' + req.params.gateway + '/site/:' + req.params.site);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.updateSite(req.params.gateway, req.params.site, function(result) {
             res.json(result);
         });
@@ -501,7 +450,7 @@ hardwareResumeRouter.route('/')
     /// GET gateways/:ipv/hardwareResume
     ///
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getHardwareResume(req.params.gateway, function(result) {
             res.json(result);
         });
@@ -512,7 +461,7 @@ hardwareRouter.route('/')
     /// GET gateways/:ipv/hardware
     /// 
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibGateways.getHardware(req.params.gateway, function(result) {
             res.json(result);
         });
@@ -520,21 +469,21 @@ hardwareRouter.route('/')
 
 hardwareRouter.route('/:hardware')
     .post(function(req, res) {
-        logging.LoggingDate('POST gateways/' + req.params.gateway + '/hardware/' + req.params.hardware);
+        logging.Info(req.method, req.originalUrl);
         var hw = req.body;
         myLibHardware.AssignHardwareToGateway(hw, function(result) {
             res.json(result);
         });
     })
     .delete(function(req, res) {
-        logging.LoggingDate('DELETE gateways/' + req.params.gateway + '/hardware/' + req.params.hardware);
+        logging.Info(req.method, req.originalUrl);
         var hw = req.body;
         myLibHardware.RemoveHardwareFromGateway(hw, function(result) {
             res.json(result);
         });
     })
     .put(function(req, res) {
-        logging.LoggingDate('PUT gateways/' + req.params.gateway + '/hardware/' + req.params.hardware);
+        logging.Info(req.method, req.originalUrl);
         var hw = req.body;
         myLibHardware.UpdateHardwareToGateway(hw, function(result) {
             res.json(result);

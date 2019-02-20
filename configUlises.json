@@ -14,9 +14,9 @@
       {
         "Name": "app.js",
         "Path": "/",
-        "fileSizeInBytes": 25656,
-        "md5": "8c6f9838681d95628ea00947246bc5ff",
-        "date": "15/2/2019"
+        "fileSizeInBytes": 21030,
+        "md5": "85a7b602df20a76cf6d48d8ff2c2d4fe",
+        "date": "20/2/2019"
       },
       {
         "Path": "/lib/",
@@ -28,8 +28,8 @@
       {
         "Path": "/lib/",
         "Name": "configurations.js",
-        "fileSizeInBytes": 116877,
-        "md5": "a55a81983bf70dfef5c857e521ccb5d3",
+        "fileSizeInBytes": 118726,
+        "md5": "b38014825fdd0b4911e7243dcdab10f7",
         "date": "19/2/2019"
       },
       {
@@ -42,8 +42,8 @@
       {
         "Path": "/lib/",
         "Name": "gateways.js",
-        "fileSizeInBytes": 231626,
-        "md5": "f39f28cc26427938c33544ad8b1006f5",
+        "fileSizeInBytes": 233216,
+        "md5": "02124ee2f68d9f1e4ed3a17061afb46d",
         "date": "19/2/2019"
       },
       {
@@ -56,9 +56,9 @@
       {
         "Path": "/lib/",
         "Name": "hardware.js",
-        "fileSizeInBytes": 73839,
-        "md5": "1f509aac7ad21c2a4625807bf03097e3",
-        "date": "13/2/2019"
+        "fileSizeInBytes": 74140,
+        "md5": "434d95b49985a99bed39453a5f107850",
+        "date": "19/2/2019"
       },
       {
         "Path": "/lib/",
@@ -70,16 +70,16 @@
       {
         "Path": "/lib/",
         "Name": "jsonTemplate.js",
-        "fileSizeInBytes": 16247,
-        "md5": "3614834400afec60b3ffa81b7f55f690",
+        "fileSizeInBytes": 16887,
+        "md5": "08e74d137eaec53f25b87a3bf50381ea",
         "date": "19/2/2019"
       },
       {
         "Path": "/lib/",
         "Name": "loggingDate.js",
-        "fileSizeInBytes": 6612,
-        "md5": "437506dffe6750be11af1fb0380cabec",
-        "date": "13/2/2019"
+        "fileSizeInBytes": 6519,
+        "md5": "daa8adec867652bece7fb050f0c86478",
+        "date": "20/2/2019"
       },
       {
         "Path": "/lib/",
@@ -146,7 +146,7 @@
     "logfile_path": "./logs/ug5kserv.log",
     "logfile_maxfiles": 4,
     "logfile_sizefile": 1000000,
-    "log2con": "silly",
+    "log2con": "info",
     "morgan": false,
     "maxCycleTime": 30000,
     "refreshTime": 1000

@@ -1,5 +1,5 @@
 var express = require('express');
-var logging = require('../../lib/loggingDate.js');
+var logging = require('../../lib/nu-log.js');
 
 var router = express.Router();
 
@@ -10,13 +10,13 @@ var myLibHistorics = require('../../lib/historics.js');
 
 router.route('/')	// The root path is relative the path where it's mounted in app.js (app.use('/historics', historics);)
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibHistorics.getHistorics(function(h) {
             res.json(h);
         });
     })
     .post(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var Incidencia = req.body;
         myLibHistorics.postHistorics(Incidencia, function(h) {
             res.json(h);
@@ -25,13 +25,13 @@ router.route('/')	// The root path is relative the path where it's mounted in ap
 
 router.route('/events/')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibHistorics.getHistoricsEvents(function(h) {
             res.json(h);
         });
     })
     .post(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var Incidencia = req.body;
         myLibHistorics.postHistorics(Incidencia, function(h) {
             res.json(h);
@@ -40,13 +40,13 @@ router.route('/events/')
 
 router.route('/alarms/')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibHistorics.getHistoricsAlarms(function(h) {
             res.json(h);
         });
     })
     .post(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var Incidencia = req.body;
         myLibHistorics.postHistorics(Incidencia, function(h) {
             res.json(h);
@@ -56,7 +56,7 @@ router.route('/alarms/')
 
 router.route('/range/:start/:howMany')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var start = req.params.start;
         var howMany = req.params.howMany;
         myLibHistorics.getHistoricsRange(start, howMany, function(h) {
@@ -66,7 +66,7 @@ router.route('/range/:start/:howMany')
 
 router.route('/range/events/:start/:howMany')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var start = req.params.start;
         var howMany = req.params.howMany;
         myLibHistorics.getHistoricsRangeEvents(start, howMany, function(h) {
@@ -76,7 +76,7 @@ router.route('/range/events/:start/:howMany')
 
 router.route('/range/alarms/:start/:howMany')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var start = req.params.start;
         var howMany = req.params.howMany;
         myLibHistorics.getHistoricsRangeAlarms(start, howMany, function(h) {
@@ -86,7 +86,7 @@ router.route('/range/alarms/:start/:howMany')
 
 router.route('/date/:dateIni')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var startTime = req.params.dateIni;
         var endTime = req.params.dateFin;
         myLibHistorics.getHistoricsByDatetime(startTime, null, function(h) {
@@ -96,7 +96,7 @@ router.route('/date/:dateIni')
 
 router.route('/date/:dateIni/:dateFin/:start/:howMany')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var startTime = req.params.dateIni;
         var endTime = req.params.dateFin;
         var start = req.params.start;
@@ -108,7 +108,7 @@ router.route('/date/:dateIni/:dateFin/:start/:howMany')
 
 router.route('/group/:group/:dateIni/:dateFin/:start/:howMany')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var data = {
             code: req.params.group,
             startDate: req.params.dateIni,
@@ -123,7 +123,7 @@ router.route('/group/:group/:dateIni/:dateFin/:start/:howMany')
 
 router.route('/groups')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibHistorics.getGroups(function(h) {
             res.json(h);
         });
@@ -131,7 +131,7 @@ router.route('/groups')
 
 router.route('/component/:item/:dateIni/:dateFin/:start/:howMany')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var data = {
             code: req.params.item,
             startDate: req.params.dateIni,
@@ -145,7 +145,7 @@ router.route('/component/:item/:dateIni/:dateFin/:start/:howMany')
     });
 router.route('/components')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibHistorics.getComponents(function(h) {
             res.json(h);
         });
@@ -153,7 +153,7 @@ router.route('/components')
 
 router.route('/code/:code/:dateIni/:dateFin/:start/:howMany')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var data = {
             code: req.params.code,
             startDate: req.params.dateIni,
@@ -167,7 +167,7 @@ router.route('/code/:code/:dateIni/:dateFin/:start/:howMany')
     });
 router.route('/codes')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         myLibHistorics.getCodes(function(h) {
             res.json(h);
         });
@@ -175,7 +175,7 @@ router.route('/codes')
 
 router.route('/deep/:days')
     .delete(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var days = req.params.days;
         myLibHistorics.deepHistorics(days, function(result) {
             res.json(result);
@@ -184,7 +184,7 @@ router.route('/deep/:days')
 
 router.route('/tasaEventosFallos/date/:dateIni/:dateFin')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var data = {
             startTime: req.params.dateIni,
             endTime: req.params.dateFin
@@ -195,7 +195,7 @@ router.route('/tasaEventosFallos/date/:dateIni/:dateFin')
     });
 router.route('/tasaEventosFallos/hw/:idHw/:dateIni/:dateFin')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var data = {
             code: req.params.idHw,
             startDate: req.params.dateIni,
@@ -207,7 +207,7 @@ router.route('/tasaEventosFallos/hw/:idHw/:dateIni/:dateFin')
     });
 router.route('/tasaEventosFallos/event/:idEvent/:dateIni/:dateFin')
     .get(function(req, res) {
-        logging.LoggingDate(req.method + ': ' + req.baseUrl + req.url);
+        logging.Info(req.method, req.originalUrl);
         var data = {
             code: req.params.idEvent,
             startDate: req.params.dateIni,
