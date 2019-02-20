@@ -76,13 +76,6 @@
       },
       {
         "Path": "/lib/",
-        "Name": "loggingDate.js",
-        "fileSizeInBytes": 6519,
-        "md5": "daa8adec867652bece7fb050f0c86478",
-        "date": "20/2/2019"
-      },
-      {
-        "Path": "/lib/",
         "Name": "radioDestinations.js",
         "fileSizeInBytes": 17817,
         "md5": "18ba544071dccd2f7afdf8326ccd8fbc",

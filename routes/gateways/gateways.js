@@ -184,7 +184,6 @@ router.route('/:gateway')
         logging.Info(req.method, req.originalUrl);
         var gtw = req.params.gateway;
         if (req.params.gateway == 'null') {
-            console.long("router.gateways render-1...");
             res.render('./services/postGateway');
         }
         else
