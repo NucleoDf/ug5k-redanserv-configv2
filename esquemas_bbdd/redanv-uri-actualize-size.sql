@@ -27,5 +27,9 @@ ALTER TABLE `ug5kv2`.`pasarelas`
 --
 ALTER TABLE `ug5kv2`.`recursos_telefono`   
   ADD COLUMN `det_inversion_pol` TINYINT(1) DEFAULT 0  NOT NULL  COMMENT 'Flag Deteccion de Inversion de polaridad (solo en AB)' AFTER `ats_user`;
-    
-  
+
+--
+--
+--    
+ALTER TABLE `ug5kv2`.`pasarelas`   
+  ADD COLUMN `dvrrp` INT(6) DEFAULT 2000  NOT NULL  COMMENT 'Timeout de arranque VRRP (2000 .. 20000)' AFTER `sppe`;

@@ -258,6 +258,21 @@ div(id="FormConfiguration", style="display: none; width: 350px")
                                                                         label(tkey='DualCPU')
                                                                     td.New
                                                                         input(id="dual" type='checkbox'  name='dual' onclick='ClickDualCPU(this)' onfocus='this.oldValue=this.checked')
+                                                                    td(style="width: 120px; padding:5px 5px")
+                                                                        label(tkey="Retardo Arranque VRRP")
+                                                                    td.New
+                                                                        //- input.textbox(id="sps", type="text", name="sps" onblur='ValidateIpPort(this,"ErrorIPPort")' onfocus='this.oldValue=this.value')
+                                                                        select#dvrrp
+                                                                            option(value= 2000, tkey=" 2 Segundos")
+                                                                            option(value= 4000, tkey=" 4 Segundos")
+                                                                            option(value= 6000, tkey=" 6 Segundos")
+                                                                            option(value= 8000, tkey=" 8 Segundos")                                                                            
+                                                                            option(value=10000, tkey="10 Segundos")                                                                            
+                                                                            option(value=12000, tkey="12 Segundos")                                                                            
+                                                                            option(value=14000, tkey="14 Segundos")                                                                            
+                                                                            option(value=14000, tkey="16 Segundos")                                                                            
+                                                                            option(value=14000, tkey="18 Segundos")                                                                            
+                                                                            option(value=20000, tkey="20 Segundos")                                                                            
                                                                 tr
                                                                     td(colspan='4' style='height: 100% ; padding: 10px 50px')
                                                                         div#tabs(style='height: 90%' align="center" )

@@ -154,17 +154,17 @@ app.post('/', [
         dest: './uploads/'
     }).single('upl'),
     function (req, res) {
-        logging.Trace(req.method, req.originalUrl, req.file); //form files
+        logging.Info(req.method, req.originalUrl, req.file); //form files
         var retorno = {};
         //Inicializar el campo
         fs.readFile(req.file.path, 'utf8', function (err, contents) {
             myLibConfig.checkExportGtwNamesOrIpDup(req.body.config, req.body.site, JSON.parse(contents), function (result) {
                 if (result.data == 'OK') {
-                    logging.Trace('Comprobación de importación correcta');
+                    logging.Info('Comprobación de importación correcta');
                     myLibConfig.postConfigurationFromJsonFile(req.body.config, req.body.site, JSON.parse(contents), function (result) {
-                        if (result.error == null) {
+                        if (!result.error) {
                             retorno.msg = 'Configuracion importada correctamente';
-                            logging.Trace('Configuracion importada correctamente');
+                            logging.Info('Configuracion importada correctamente');
                         }
                         else {
                             retorno.err = req.file.message;

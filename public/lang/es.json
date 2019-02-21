@@ -404,6 +404,16 @@
 	"Si": "Si",
 	"No": "No",
 
+	"Retardo Arranque VRRP": "Retardo Arranque VRRP",
+	" 2 Segundos": " 2 Segundos",
+	" 4 Segundos": " 4 Segundos",
+	" 6 Segundos": " 6 Segundos",
+	" 8 Segundos": " 8 Segundos",
+	"12 Segundos": "12 Segundos",
+	"14 Segundos": "14 Segundos",
+	"16 Segundos": "16 Segundos",
+	"18 Segundos": "18 Segundos",
+
 	"Fin": "Fin"
 
 }

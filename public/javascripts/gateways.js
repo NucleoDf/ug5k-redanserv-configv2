@@ -69,7 +69,8 @@ var Copy = function() {
 /************************************/
 function PostGateWay(idSite, isUpdate, isChangeSite) {
 
-    console.log('SPPE <= ' + $('#sppe').val());
+    console.log('SPPE <= ', $('#sppe').val());
+    console.log('DVRRP <= ', $('#dvrrp').val());
 
     var newGateway = {};
     var proxys = [];
@@ -177,6 +178,7 @@ function PostGateWay(idSite, isUpdate, isChangeSite) {
     newGateway.ipg2 = $('#ipg2').val();
     newGateway.msb2 = $('#msb2').val();
     newGateway.sppe = parseInt($('#sppe').val());
+    newGateway.dvrrp = parseInt($('#dvrrp').val());
     //SIP
     newGateway.PuertoLocalSIP = $('#PuertoLocalSIP').val();//Fixed
     newGateway.proxys = proxys;
@@ -2295,8 +2297,12 @@ var GetGateway = function(gtw, lastUpdate, f) {
                 $("#nameGw").val(gtw.result[0].name);
                 $('#ipv').val(gtw.result[0].ipv);
                 $('#ips').val(gtw.result[0].ips);
+                
                 $('#sppe').val(gtw.result[0].sppe ? gtw.result[0].sppe : 0);
-                console.log('SPPE => ' + $('#sppe').val());
+                console.log('SPPE => ', $('#sppe').val());
+                $('#dvrrp').val(gtw.result[0].dvrrp ? gtw.result[0].dvrrp : 2000);
+                console.log('DVRRP => ', $('#dvrrp').val());
+
                 $('#dual').prop('checked', true);
                 $('#dual').prop('disabled', true);
 
@@ -2465,7 +2471,6 @@ var GetGateway = function(gtw, lastUpdate, f) {
         $('#ips').val('');
         $('#lips').hide();
         $('#ips').hide();
-        $('#sppe').val(''); 
         $('#dual').prop('checked', true);
         // CPU-0
         $('#lan11').hide();
@@ -2497,6 +2502,7 @@ var GetGateway = function(gtw, lastUpdate, f) {
         $('#msb2').val('');
 
         $('#sppe').val(0);
+        $('#vrrp').val(2000);
 
         $('#ExportGateway').show();
         var title = $('#TitleH3').text().split(" ");
@@ -3972,6 +3978,7 @@ function NewGateway() {
     $('#ListSites').hide();
     $('#CopyGtwButton').hide();
     $('#sppe').val(0);
+    $('#dvrrp').val(2000);
 
 }
 
