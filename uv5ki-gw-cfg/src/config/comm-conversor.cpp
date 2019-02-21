@@ -263,6 +263,8 @@ void CommConversor::ParametrosGlobales()
 	mcfg->iSupervLanGW = p_cfg_in->general.SupervisionLanGW;
 	mcfg->itmmaxSupervLanGW = p_cfg_in->general.TmMaxSupervLanGW;
 
+	/** 20190221. REDAN107*/
+	mcfg->idelayIniciaVrrp = p_cfg_in->general.dvrrp;
 }
 
 /** */

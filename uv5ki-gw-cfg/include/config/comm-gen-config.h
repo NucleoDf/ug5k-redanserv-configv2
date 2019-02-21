@@ -107,6 +107,8 @@ public:
 		/** 20181016. U2510. SP#01-15*/
 		SupervisionLanGW=0;
 		TmMaxSupervLanGW=1;
+		/** 20190221. REDAN107 */
+		dvrrp = 2000;
 	}
 	CommGenConfig(soap_config &sc);
 	~CommGenConfig() {
@@ -150,6 +152,8 @@ public:
 		/** 20181016. U2510. SP#01-15*/
 		write_key(writer, "SupervisionLanGW", SupervisionLanGW);
 		write_key(writer, "TmMaxSupervLanGW", TmMaxSupervLanGW);
+		/** 20190221. REDAN107 */
+		write_key(writer, "dvrrp", dvrrp);
 	}
 	virtual void jread(Value &base)
 	{
@@ -171,6 +175,8 @@ public:
 		/** 20181016. U2510. SP#01-15*/
 		read_key(base,"SupervisionLanGW", SupervisionLanGW, 0);
 		read_key(base, "TmMaxSupervLanGW", TmMaxSupervLanGW, 1);
+		/** 20190221. REDAN107 */
+		read_key(base, "dvrrp", dvrrp, 2000);
 	}
 
 public:
@@ -190,6 +196,8 @@ public:
 	/** 20181016. U2510. SP#01-15*/
 	int SupervisionLanGW;
 	int TmMaxSupervLanGW;
+	/** 20190221. REDAN107 */
+	int dvrrp;
 
 	//string acGrupoMulticast;
 	//int uiPuertoMulticast;

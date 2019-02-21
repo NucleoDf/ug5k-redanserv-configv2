@@ -73,6 +73,8 @@ CommGenConfig::CommGenConfig(soap_config &sc)
 	/** 20181016. U2510. SP#01-15*/
 	this->SupervisionLanGW = sc.CfgPasarela.SupervisionLanGW;
 	this->TmMaxSupervLanGW = sc.CfgPasarela.TmMaxSupervLanGW;
+	/** 20190221. REDAN107*/
+	this->dvrrp = sc.CfgPasarela.dvrrp;
 }
 
 /** */

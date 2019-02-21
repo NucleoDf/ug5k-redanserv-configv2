@@ -731,6 +731,8 @@ public:
 		/** 20181016. U2510. SP#01-15*/
 		read_key(xnode, "iSupervLanGW", SupervisionLanGW, 0);
 		read_key(xnode, "itmmaxSupervLanGW", TmMaxSupervLanGW, 1);
+		/** 20190221. REDAN107 */
+		dvrrp = 2000;
 	}
 
 public:
@@ -751,6 +753,8 @@ public:
 	/** 20181016. U2510. SP#01-15*/
 	int SupervisionLanGW;
 	int TmMaxSupervLanGW;
+	/** 20190221. REDAN107 */
+	int dvrrp;
 };
 
 /** */

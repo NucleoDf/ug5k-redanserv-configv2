@@ -1177,8 +1177,6 @@ struct cfgConfigPasarela
     int iSupervLanGW;
 	int itmmaxSupervLanGW;
 
-	int idelayIniciaVrrp;
-
     int iNumRecursos;
 
     char acTipoSlot[MAX_SLOTS_PASARELA];

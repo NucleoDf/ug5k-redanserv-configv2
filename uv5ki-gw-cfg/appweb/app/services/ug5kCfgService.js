@@ -511,10 +511,12 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
                             case 3:
                                 ic += 8;
                                 break;
-                            case 4: // Radio Remota.
-                            case 5:
+                            case 4: // Radio Remota Receptores
                             case 6:
-                                ic += (rec.radio.iPrecisionAudio == 0 ? 2 : 1);
+                                ic += 4;
+                                break;
+                            case 5: // Radio Remota Transmisor.
+                                ic += 2;                    // (rec.radio.iPrecisionAudio == 0 ? 2 : 1);
                                 break;
                         }
                     }
