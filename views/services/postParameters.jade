@@ -427,7 +427,7 @@ div(id="FormParameters")
 														select#CBFacedTelResources(style='width:140px;')
 									tr
 										td.New(style='padding-top: 8px;vertical-align:top')
-											input.UriTextbox#TbRemoteUri(type='text' placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+											input.UriTextbox#TbRemoteUri(type='text' placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 										td.New(align='right' style='vertical-align: top;')
 											a.ButtonNucleo(onclick='MakeFacedTelUri("#TbRemoteUri")') 
 									//
@@ -587,28 +587,28 @@ div(id="FormParameters")
 							th(colspan=4 tkey='BlackList')
 						tr#AddUriRow1(align='center' style='height:40px')
 							td.New
-								input.UriTextbox#Uri1BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+								input.UriTextbox#Uri1BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value' style='width:85%')
 						tr#AddUriRow2(align='center' style='height:40px')
 							td.New
-								input.UriTextbox#Uri2BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+								input.UriTextbox#Uri2BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value' style='width:85%')
 						tr#AddUriRow3(align='center' style='height:40px')
 							td.New
-								input.UriTextbox#Uri3BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+								input.UriTextbox#Uri3BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value' style='width:85%')
 						tr#AddUriRow4(align='center' style='height:40px')
 							td.New
-								input.UriTextbox#Uri4BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+								input.UriTextbox#Uri4BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value' style='width:85%')
 						tr#AddUriRow5(align='center' style='height:40px')
 							td.New
-								input.UriTextbox#Uri5BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+								input.UriTextbox#Uri5BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value' style='width:85%')
 						tr#AddUriRow6(align='center' style='height:40px')
 							td.New
-								input.UriTextbox#Uri6BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+								input.UriTextbox#Uri6BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value' style='width:85%')
 						tr#AddUriRow7(align='center' style='height:40px')
 							td.New
-								input.UriTextbox#Uri7BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+								input.UriTextbox#Uri7BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value' style='width:85%')
 						tr#AddUriRow8(align='center' style='height:40px')
 							td.New
-								input.UriTextbox#Uri8BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+								input.UriTextbox#Uri8BL(type="text" placeholder="NombreRecurso@IP:Puerto" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value' style='width:85%')
 
 					table#WhiteList.range(style='display:table-column')
 						tr
@@ -662,14 +662,14 @@ div(id="FormParameters")
 																	td
 																		label URI A:
 																	td.New
-																		input.UriTextbox#UriTxA1(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriTxA1(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td#RowBtnSelectTxA1.New
 																		a.ButtonNucleo#BtnSelectTxA1(onclick='MakeFacedUri("#UriTxA1")') <
 																tr#TxBRow1
 																	td
 																		label URI B:
 																	td.New
-																		input.UriTextbox#UriTxB1(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriTxB1(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectTxB1(onclick='MakeFacedUri("#UriTxB1")') <
 												tr(align="center")
@@ -681,14 +681,14 @@ div(id="FormParameters")
 																	td
 																		label URI A:
 																	td.New
-																		input.UriTextbox#UriRxA1(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriRxA1(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectRxA1(onclick='MakeFacedUri("#UriRxA1")') <
 																tr#RxBRow1
 																	td
 																		label URI B:
 																	td.New
-																		input.UriTextbox#UriRxB1(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriRxB1(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectRxB1(onclick='MakeFacedUri("#UriRxB1")') <
 									tr#LabelSite2
@@ -705,14 +705,14 @@ div(id="FormParameters")
 																	td
 																		label URI A:
 																	td.New
-																		input.UriTextbox#UriTxA2(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriTxA2(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectTxA2(onclick='MakeFacedUri("#UriTxA2")') <
 																tr#TxBRow2
 																	td
 																		label URI B:
 																	td.New
-																		input.UriTextbox#UriTxB2(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriTxB2(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectTxB2(onclick='MakeFacedUri("#UriTxB2")') <
 												tr(align="center")
@@ -724,14 +724,14 @@ div(id="FormParameters")
 																	td
 																		label URI A:
 																	td.New
-																		input.UriTextbox#UriRxA2(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriRxA2(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectRxA2(onclick='MakeFacedUri("#UriRxA2")') <
 																tr#RxBRow2
 																	td
 																		label URI B:
 																	td.New
-																		input.UriTextbox#UriRxB2(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriRxB2(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectRxB2(onclick='MakeFacedUri("#UriRxB2")') <
 									tr#LabelSite3
@@ -748,14 +748,14 @@ div(id="FormParameters")
 																	td
 																		label URI A:
 																	td.New
-																		input.UriTextbox#UriTxA3(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriTxA3(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectTxA3(onclick='MakeFacedUri("#UriTxA3")') <
 																tr#TxBRow3
 																	td
 																		label URI B:
 																	td.New
-																		input.UriTextbox#UriTxB3(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriTxB3(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectTxB3(onclick='MakeFacedUri("#UriTxB3")') <
 												tr(align="center")
@@ -767,14 +767,14 @@ div(id="FormParameters")
 																	td
 																		label URI A:
 																	td.New
-																		input.UriTextbox#UriRxA3(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriRxA3(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectRxA3(onclick='MakeFacedUri("#UriRxA3")') <
 																tr#RxBRow3
 																	td
 																		label URI B:
 																	td.New
-																		input.UriTextbox#UriRxB3(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:100%; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
+																		input.UriTextbox#UriRxB3(type="text" placeholder="NombreRecurso@IP:Puerto" style="font-size:95%; font-family: Courier, Monaco, monospace; height:16px;" onblur='ValidateUriNoSIP(this,"ErrorURI")' onfocus='this.oldValue=this.value')
 																	td.New
 																		a.ButtonNucleo#BtnSelectRxB3(onclick='MakeFacedUri("#UriRxB3")') <
 									//tr

@@ -26,20 +26,20 @@ div(id="FormResources", style="display: none; width: 1250px")
                         .content#DatosResources(style='width:inherit')
                             table(style='border-spacing: 10px 10px;width:100%')
                                 tr(style="height: 20px")
-                                    td(style="width: 30%;padding:10px 5px")
+                                    td(style="width: 25%; padding:10px 5px")
                                         label(tkey='lblAliasExtResource')
                                     td.New
-                                        input.textbox(id="aliasExtResource", style='width:100%;' type="text" onblur='ValidateUser(this,"ErrorTableId")' onfocus='this.oldValue=this.value')
+                                        input.textbox(id="aliasExtResource", style='width:100%; font-size:70%;' type="text" onblur='ValidateUser(this,"ErrorTableId")' onfocus='this.oldValue=this.value')
                                 tr(style="height: 20px")
                                     td(style="padding:5px 5px")
                                         label(tkey='lblUriExtResource')
                                     td.New
-                                        input.textbox#uriExtResource(type='text', style='width:100%;' onblur='ValidateUriNoSIP(this,"ErrorURI")')
+                                        input.textbox#uriExtResource(type='text', style='width:100%; font-size:70%;' onblur='ValidateUriNoSIP(this,"ErrorURI")')
                                 tr#RowExtResType(style="vertical-align:center")
                                     td(style="padding:5px 5px")
                                         label(tkey='lblExtResType')
                                     td.New
-                                        select#extResType(type='select')
+                                        select#extResType(type='select' style='font-size:70%;')
                                             option(value='0') Radio Tx
                                             option(value='1') Radio TxRx
                                             option(value='2') Radio Rx

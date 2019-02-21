@@ -145,6 +145,26 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
                         Inputs: [],
                         Show: function () { return vm.v_data[5].Value === "1" },
                         Val: function (val) { return val >= 5 && val <= 30 ? "" : "El valor debe estar entre 5 y 30"; }
+                    },
+                    {
+                        Name: transerv.translate('Retardo Arranque VRRP'),
+                        Value: (vm.j_data.dvrrp ? vm.j_data.dvrrp : 2000).toString(),
+                        Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE, ALM1_PROFILE]),
+                        Input: 5,
+                        Inputs: [
+                            { val: 2000, show: transerv.translate('2 Segundos') },
+                            { val: 4000, show: transerv.translate('4 Segundos') },
+                            { val: 6000, show: transerv.translate('6 Segundos') },
+                            { val: 8000, show: transerv.translate('8 Segundos') },
+                            { val: 10000, show: transerv.translate('10 Segundos') },
+                            { val: 12000, show: transerv.translate('12 Segundos') },
+                            { val: 14000, show: transerv.translate('14 Segundos') },
+                            { val: 16000, show: transerv.translate('16 Segundos') },
+                            { val: 18000, show: transerv.translate('18 Segundos') },
+                            { val: 20000, show: transerv.translate('20 Segundos') }
+                        ],
+                        Show: function () { return true; },
+                        Val: function (val) { return true; }
                     }
                 ];
                 break;
@@ -322,6 +342,8 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
 
                 vm.j_data.SupervisionLanGW = parseInt(vm.v_data[5].Value);
                 vm.j_data.TmMaxSupervLanGW = vm.v_data[6].Value;
+
+                vm.j_data.dvrrp = parseInt(vm.v_data[7].Value);
                 break;
 
             case 1: //CPU0

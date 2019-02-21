@@ -40,7 +40,7 @@ var GetExtResources = function(filter, f) {
             if (data.lista_recursos != null && data.lista_recursos.length > 0) {
                 $.each(data.lista_recursos, function(index, value) {
                     //var item = $("<li><a onclick='GetExtResource(" + value.idrecursos_externos + ")'>" + value.alias + ": " + value.uri + "</li>");
-                    var item = $("<li><a onclick='GetExtResource(" + value.idrecursos_externos + ")'>" + itemListStr(value.alias, value.uri) + "</li>");
+                    var item = $("<li><a onclick='GetExtResource(" + value.idrecursos_externos + ")' style='font-size:80%;'>" + itemListStr(value.alias, value.uri) + "</li>");
                     item.appendTo($("#listResources"));
                 });
                 //if (f != null)
@@ -108,6 +108,7 @@ var PostExtResource = function() {
         return;
     }
     else {
+        var id_recurso = $('#FormResources').data('idrecursos_externos');        
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -121,7 +122,8 @@ var PostExtResource = function() {
             }),
             success: function(data) {
                 if (data.error == null) {
-                    alertify.success('Recurso ' + $('#aliasExtResource').val() + ' generado.');
+                    var strAction = id_recurso==-1 ? ' generado ' : ' modificado ';
+                    alertify.success('Recurso ' + $('#aliasExtResource').val() + strAction);
                     GetExtResources();
                 }
                 else {

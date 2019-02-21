@@ -4,12 +4,12 @@
 		"selected_items":
 		[
 			[
-				"le",
-				"length"
+				"lo",
+				"log"
 			],
 			[
-				"lo",
-				"logging"
+				"le",
+				"length"
 			],
 			[
 				"log",
@@ -40,10 +40,28 @@
 	"buffers":
 	[
 		{
-			"file": "lib/tableBss.js",
+			"file": "lib/configurations.js",
 			"settings":
 			{
-				"buffer_size": 10699,
+				"buffer_size": 109943,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/services/postResources.jade",
+			"settings":
+			{
+				"buffer_size": 3701,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascripts/externalResources.js",
+			"settings":
+			{
+				"buffer_size": 6560,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -87,33 +105,42 @@
 	"expanded_folders":
 	[
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib"
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/lang"
 	],
 	"file_history":
 	[
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/ug5kdb.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/layout.jade",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/externalResources.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/externalResources.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/services/postConfiguration.jade",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/lang/es.json",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/gateways.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/gateways.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/app.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/configurations.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/jsonTemplate.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/tableBss.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/esquemas_bbdd/redanv-uri-actualize-size.sql",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/ug5kdb.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/nu-log.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/historics.js",
 		"/C/Users/f7521897/AppData/Roaming/Sublime Text 3/Packages/User/Babel.sublime-settings",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/configUlises.json",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/gateways/gateways.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/tests/logs-test.js",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/configurations.js",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/gateways.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/hrr.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/sites.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/users.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/hardware.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/loggingDate-obs.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/configurations/configurations.js",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/tableBss.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/version.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/services.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/resources.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/radioDestinations.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/get_cfg_report.js",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/externalResources.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/gateways/resources.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/index.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/version/version.js",
@@ -127,15 +154,10 @@
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/gateways/services.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/destinations/radioDestinations.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/externalResources/externalResources.js",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/gateways.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/loggingDate.js",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/esquemas_bbdd/redanv-uri-actualize-size.sql",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/services/postParameters.jade",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/lang/es.json",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/lang/en.json",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/parametersTel.js",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/services/postConfiguration.jade",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/jsonTemplate.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/translator/lang.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/error.jade",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/authentication.js",
@@ -172,13 +194,14 @@
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 104.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -186,6 +209,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ListResources",
+			"Recursos Extern",
+			"PostExtResource",
+			"generado",
+			"post",
+			"sppe",
+			"dvrrp",
+			"sppe",
+			"copy",
+			"vrrp",
+			"updateGateWayonSite",
+			"sppe",
 			"syncga",
 			"LoginSystemTrace",
 			"console.",
@@ -336,24 +371,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "lib/tableBss.js",
+					"file": "lib/configurations.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10699,
+						"buffer_size": 109943,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7707,
-								7707
+								84848,
+								84848
 							]
 						],
 						"settings":
@@ -361,7 +396,7 @@
 							"SL.13.region_keys":
 							[
 							],
-							"SL.205.region_keys":
+							"SL.28.region_keys":
 							[
 							],
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
@@ -369,7 +404,70 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3456.0,
+						"translation.y": 27210.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "views/services/postResources.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3701,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3324,
+								3339
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascripts/externalResources.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6560,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4234,
+								4234
+							]
+						],
+						"settings":
+						{
+							"SL.27.region_keys":
+							[
+							],
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1354.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

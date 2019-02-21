@@ -98,7 +98,8 @@ var GetHRRConfig = function(idCfg) {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var PostExtResource = function() {
+// var PostExtResource = function() {
+var PostHRR = function() {
     if ($('#aliasExtResource').val() == '' || $('#uriExtResource').val() == '') {
         alertify.alert('Los datos del recurso no pueden estar vacíos. Rellene todos los campos.');
         return;
@@ -136,7 +137,8 @@ var PostExtResource = function() {
 /*  PARAMS: 						*/
 /*  REV 1.0.2 VMG					*/
 /************************************/
-var DeleteExtResource = function() {
+// var DeleteExtResource = function() {
+var DeleteHRR = function() {
     alertify.confirm('Ulises G 5000 R', '¿Eliminar el recurso' + $('#aliasExtResource').val() + '?',
         function() {
             $.ajax({
