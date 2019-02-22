@@ -52,7 +52,7 @@
 			"file": "views/services/postResources.jade",
 			"settings":
 			{
-				"buffer_size": 3701,
+				"buffer_size": 3755,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -61,7 +61,7 @@
 			"file": "public/javascripts/externalResources.js",
 			"settings":
 			{
-				"buffer_size": 6560,
+				"buffer_size": 6451,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -105,15 +105,16 @@
 	"expanded_folders":
 	[
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/lang"
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/services"
 	],
 	"file_history":
 	[
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/services/postParameters.jade",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/externalResources.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/hrr.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/layout.jade",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/externalResources.js",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/externalResources.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/services/postConfiguration.jade",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/lang/es.json",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/gateways.js",
@@ -155,7 +156,6 @@
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/destinations/radioDestinations.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/routes/externalResources/externalResources.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/lib/loggingDate.js",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/services/postParameters.jade",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/lang/en.json",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/parametersTel.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/translator/lang.js",
@@ -209,6 +209,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"GetHRR",
 			"ListResources",
 			"Recursos Extern",
 			"PostExtResource",
@@ -416,15 +417,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3701,
+						"buffer_size": 3755,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3324,
-								3339
+								660,
+								660
 							]
 						],
 						"settings":
@@ -446,20 +447,20 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6560,
+						"buffer_size": 6451,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4234,
-								4234
+								1804,
+								1804
 							]
 						],
 						"settings":
 						{
-							"SL.27.region_keys":
+							"SL.22.region_keys":
 							[
 							],
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
@@ -467,7 +468,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1354.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
