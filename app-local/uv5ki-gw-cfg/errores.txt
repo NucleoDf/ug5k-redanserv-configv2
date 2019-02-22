@@ -1,0 +1,688 @@
+[33;01m--  Compiling src/config/working-config.cpp[0m
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:108:0: warning: "PTW32_LEVEL" redefined [enabled by default]
+src/config/../../include/config/./../pthreads/include/pthread.h:95:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:541:3: error: #error Please upgrade your GNU compiler to one that supports __declspec.
+src/config/../../include/config/./../pthreads/include/pthread.h:665:0: warning: "PTHREAD_CANCELED" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:205:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:675:0: warning: "PTHREAD_ONCE_INIT" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:209:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:693:0: warning: "PTHREAD_MUTEX_INITIALIZER" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:100:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:700:0: warning: "PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:103:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:701:0: warning: "PTHREAD_ERRORCHECK_MUTEX_INITIALIZER_NP" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:105:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:703:0: warning: "PTHREAD_COND_INITIALIZER" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:178:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:705:0: warning: "PTHREAD_RWLOCK_INITIALIZER" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:124:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:782:0: warning: "pthread_cleanup_push" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:559:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:788:0: warning: "pthread_cleanup_pop" redefined [enabled by default]
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:565:0: note: this is the location of the previous definition
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:320:8: error: redefinition of ‘struct timespec’
+In file included from /usr/include/sched.h:34:0,
+                 from /usr/include/pthread.h:25,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/time.h:120:8: error: previous definition of ‘struct timespec’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:585:24: error: conflicting declaration ‘typedef struct ptw32_handle_t pthread_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:36:27: error: ‘pthread_t’ has a previous declaration as ‘typedef long unsigned int pthread_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:586:34: error: conflicting declaration ‘typedef struct pthread_attr_t_* pthread_attr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:43:3: error: ‘pthread_attr_t’ has a previous declaration as ‘typedef union pthread_attr_t pthread_attr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:587:32: error: conflicting declaration ‘typedef struct pthread_once_t_ pthread_once_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:113:13: error: ‘pthread_once_t’ has a previous declaration as ‘typedef int pthread_once_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:588:33: error: conflicting declaration ‘typedef struct pthread_key_t_* pthread_key_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:109:22: error: ‘pthread_key_t’ has a previous declaration as ‘typedef unsigned int pthread_key_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:589:35: error: conflicting declaration ‘typedef struct pthread_mutex_t_* pthread_mutex_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:73:3: error: ‘pthread_mutex_t’ has a previous declaration as ‘typedef union pthread_mutex_t pthread_mutex_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:590:39: error: conflicting declaration ‘typedef struct pthread_mutexattr_t_* pthread_mutexattr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:79:3: error: ‘pthread_mutexattr_t’ has a previous declaration as ‘typedef union pthread_mutexattr_t pthread_mutexattr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:591:34: error: conflicting declaration ‘typedef struct pthread_cond_t_* pthread_cond_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:99:3: error: ‘pthread_cond_t’ has a previous declaration as ‘typedef union pthread_cond_t pthread_cond_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:592:38: error: conflicting declaration ‘typedef struct pthread_condattr_t_* pthread_condattr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:105:3: error: ‘pthread_condattr_t’ has a previous declaration as ‘typedef union pthread_condattr_t pthread_condattr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:594:36: error: conflicting declaration ‘typedef struct pthread_rwlock_t_* pthread_rwlock_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:139:3: error: ‘pthread_rwlock_t’ has a previous declaration as ‘typedef union pthread_rwlock_t pthread_rwlock_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:595:40: error: conflicting declaration ‘typedef struct pthread_rwlockattr_t_* pthread_rwlockattr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:145:3: error: ‘pthread_rwlockattr_t’ has a previous declaration as ‘typedef union pthread_rwlockattr_t pthread_rwlockattr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:596:38: error: conflicting declaration ‘typedef struct pthread_spinlock_t_* pthread_spinlock_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:151:22: error: ‘pthread_spinlock_t’ has a previous declaration as ‘typedef volatile int pthread_spinlock_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:597:37: error: conflicting declaration ‘typedef struct pthread_barrier_t_* pthread_barrier_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:160:3: error: ‘pthread_barrier_t’ has a previous declaration as ‘typedef union pthread_barrier_t pthread_barrier_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:598:41: error: conflicting declaration ‘typedef struct pthread_barrierattr_t_* pthread_barrierattr_t’
+In file included from /usr/include/pthread.h:28:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:166:3: error: ‘pthread_barrierattr_t’ has a previous declaration as ‘typedef union pthread_barrierattr_t pthread_barrierattr_t’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:612:35: error: conflicting declaration ‘PTHREAD_CREATE_JOINABLE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:36:3: error: ‘PTHREAD_CREATE_JOINABLE’ has a previous declaration as ‘<anonymous enum> PTHREAD_CREATE_JOINABLE’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:613:35: error: conflicting declaration ‘PTHREAD_CREATE_DETACHED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:38:3: error: ‘PTHREAD_CREATE_DETACHED’ has a previous declaration as ‘<anonymous enum> PTHREAD_CREATE_DETACHED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:618:35: error: conflicting declaration ‘PTHREAD_INHERIT_SCHED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:149:3: error: ‘PTHREAD_INHERIT_SCHED’ has a previous declaration as ‘<anonymous enum> PTHREAD_INHERIT_SCHED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:619:35: error: conflicting declaration ‘PTHREAD_EXPLICIT_SCHED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:151:3: error: ‘PTHREAD_EXPLICIT_SCHED’ has a previous declaration as ‘<anonymous enum> PTHREAD_EXPLICIT_SCHED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:624:35: error: conflicting declaration ‘PTHREAD_SCOPE_PROCESS’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:161:3: error: ‘PTHREAD_SCOPE_PROCESS’ has a previous declaration as ‘<anonymous enum> PTHREAD_SCOPE_PROCESS’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:625:35: error: conflicting declaration ‘PTHREAD_SCOPE_SYSTEM’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:159:3: error: ‘PTHREAD_SCOPE_SYSTEM’ has a previous declaration as ‘<anonymous enum> PTHREAD_SCOPE_SYSTEM’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:630:35: error: conflicting declaration ‘PTHREAD_CANCEL_ENABLE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:193:3: error: ‘PTHREAD_CANCEL_ENABLE’ has a previous declaration as ‘<anonymous enum> PTHREAD_CANCEL_ENABLE’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:631:35: error: conflicting declaration ‘PTHREAD_CANCEL_DISABLE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:195:3: error: ‘PTHREAD_CANCEL_DISABLE’ has a previous declaration as ‘<anonymous enum> PTHREAD_CANCEL_DISABLE’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:636:35: error: conflicting declaration ‘PTHREAD_CANCEL_ASYNCHRONOUS’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:202:3: error: ‘PTHREAD_CANCEL_ASYNCHRONOUS’ has a previous declaration as ‘<anonymous enum> PTHREAD_CANCEL_ASYNCHRONOUS’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:637:35: error: conflicting declaration ‘PTHREAD_CANCEL_DEFERRED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:200:3: error: ‘PTHREAD_CANCEL_DEFERRED’ has a previous declaration as ‘<anonymous enum> PTHREAD_CANCEL_DEFERRED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:643:35: error: conflicting declaration ‘PTHREAD_PROCESS_PRIVATE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:169:3: error: ‘PTHREAD_PROCESS_PRIVATE’ has a previous declaration as ‘<anonymous enum> PTHREAD_PROCESS_PRIVATE’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:644:35: error: conflicting declaration ‘PTHREAD_PROCESS_SHARED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:171:3: error: ‘PTHREAD_PROCESS_SHARED’ has a previous declaration as ‘<anonymous enum> PTHREAD_PROCESS_SHARED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:649:35: error: conflicting declaration ‘PTHREAD_MUTEX_STALLED’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:68:3: error: ‘PTHREAD_MUTEX_STALLED’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_STALLED’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:650:35: error: conflicting declaration ‘PTHREAD_MUTEX_ROBUST’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:70:3: error: ‘PTHREAD_MUTEX_ROBUST’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_ROBUST’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:655:3: error: expected identifier before ‘-’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:655:3: error: expected ‘}’ before ‘-’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:655:3: error: expected unqualified-id before ‘-’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:716:3: error: conflicting declaration ‘PTHREAD_MUTEX_FAST_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:59:5: error: ‘PTHREAD_MUTEX_FAST_NP’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_FAST_NP’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:717:3: error: conflicting declaration ‘PTHREAD_MUTEX_RECURSIVE_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:47:3: error: ‘PTHREAD_MUTEX_RECURSIVE_NP’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_RECURSIVE_NP’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:718:3: error: conflicting declaration ‘PTHREAD_MUTEX_ERRORCHECK_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:48:3: error: ‘PTHREAD_MUTEX_ERRORCHECK_NP’ has a previous declaration as ‘<anonymous enum> PTHREAD_MUTEX_ERRORCHECK_NP’
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:719:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_TIMED_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:46:3: error: ‘<anonymous enum> PTHREAD_MUTEX_TIMED_NP’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:720:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_ADAPTIVE_NP’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:49:3: error: ‘<anonymous enum> PTHREAD_MUTEX_ADAPTIVE_NP’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:722:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_NORMAL’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:52:3: error: ‘<anonymous enum> PTHREAD_MUTEX_NORMAL’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:723:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_RECURSIVE’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:53:3: error: ‘<anonymous enum> PTHREAD_MUTEX_RECURSIVE’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:724:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_ERRORCHECK’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:54:3: error: ‘<anonymous enum> PTHREAD_MUTEX_ERRORCHECK’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:725:3: error: redefinition of ‘<anonymous enum> PTHREAD_MUTEX_DEFAULT’
+In file included from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr-default.h:41:0,
+                 from /usr/include/c++/4.7/i486-linux-gnu/bits/gthr.h:150,
+                 from /usr/include/c++/4.7/ext/atomicity.h:34,
+                 from /usr/include/c++/4.7/bits/basic_string.h:41,
+                 from /usr/include/c++/4.7/string:54,
+                 from src/config/../../include/config/working-config.h:4,
+                 from src/config/working-config.cpp:1:
+/usr/include/pthread.h:55:3: error: ‘<anonymous enum> PTHREAD_MUTEX_DEFAULT’ previously defined here
+In file included from src/config/../../include/config/./cfgpasa.hpp:21:0,
+                 from src/config/../../include/config/working-config.h:20,
+                 from src/config/working-config.cpp:1:
+src/config/../../include/config/./../pthreads/include/pthread.h:736:29: error: expected ‘)’ before ‘ptw32_cleanup_callback_t’
+src/config/../../include/config/./../pthreads/include/pthread.h:744:3: error: ‘ptw32_cleanup_callback_t’ does not name a type
+src/config/../../include/config/./../pthreads/include/pthread.h:891:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:893:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:895:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:898:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:901:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:904:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:907:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:910:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:913:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:916:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:919:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:922:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:925:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:928:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:931:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:934:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:940:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:945:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:947:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:950:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:952:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:955:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:957:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:959:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:962:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:965:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:967:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:971:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:973:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:981:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:984:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:986:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:989:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:995:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:997:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:999:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1003:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1006:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1007:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1009:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1012:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1019:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1021:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1023:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1027:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1033:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1036:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1038:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1040:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1043:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1045:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1047:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1052:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1054:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1056:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1058:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1060:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1065:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1069:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1071:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1076:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1078:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1080:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1083:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1089:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1092:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1094:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1097:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1101:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1103:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1108:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1112:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1116:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1118:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1123:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1126:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1128:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1130:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1132:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1134:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1137:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1139:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1142:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1144:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1146:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1148:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1151:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1160:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1169:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1171:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1177:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1178:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1179:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1185:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1186:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1187:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1188:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1193:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1207:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1216:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1220:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1238:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1239:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1285:1: error: expected constructor, destructor, or type conversion before ‘(’ token
+src/config/../../include/config/./../pthreads/include/pthread.h:1353:1: error: expected declaration before ‘}’ token
+make: *** [obj/working-config.o] Error 1
