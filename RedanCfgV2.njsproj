@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{14276df3-80e9-4cce-8816-8d9c7083438d}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectView>ProjectFiles</ProjectView>
+    <StartupFile>app.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <LastActiveSolutionConfig>Release|Any CPU</LastActiveSolutionConfig>
+    <StartWebBrowser>True</StartWebBrowser>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+    <Environment>DB_HOST=192.168.0.212
+DB_PASS=cd40</Environment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="configUlises.json" />
+    <Content Include="COPYING.AUTHORIZATION.txt" />
+    <Content Include="COPYING.LESSER.txt" />
+    <Content Include="COPYING.txt" />
+    <Content Include="Instalacion UG5K-Serv.txt" />
+    <Content Include="Preparar Instalacion UG5K-Serv.txt" />
+    <Content Include="configUlises-dev.json" />
+    <Content Include="package.json" />
+    <Content Include="app.js" />
+    <Content Include="lib\authentication.js" />
+    <Content Include="lib\configurations.js" />
+    <Content Include="lib\externalResources.js" />
+    <Content Include="lib\gateways.js" />
+    <Content Include="lib\get_cfg_report.js" />
+    <Content Include="lib\hardware.js" />
+    <Content Include="lib\historics.js" />
+    <Content Include="lib\hrr.js" />
+    <Content Include="lib\jsonTemplate.js" />
+    <Content Include="lib\loggingDate.js" />
+    <Content Include="lib\radioDestinations.js" />
+    <Content Include="lib\resources.js" />
+    <Content Include="lib\services.js" />
+    <Content Include="lib\sites.js" />
+    <Content Include="lib\tableBss.js" />
+    <Content Include="lib\ug5kdb.js" />
+    <Content Include="lib\users.js" />
+    <Content Include="lib\version.js" />
+    <Content Include="nss\ChangeLog.txt" />
+    <Content Include="nss\README.txt" />
+    <Content Include="public\COPYING.AUTHORIZATION.txt" />
+    <Content Include="routes\index.js" />
+    <Content Include="views\error.jade" />
+    <Content Include="views\imported.jade" />
+    <Content Include="views\index.jade" />
+    <Content Include="views\layout.jade" />
+    <Content Include="views\local_config.jade" />
+    <Content Include="views\login.jade" />
+    <Content Include="public\alertifyjs\alertify.js" />
+    <Content Include="public\alertifyjs\alertify.min.js" />
+    <Content Include="public\bootstrap-2.3.2\bower.json" />
+    <Content Include="public\bootstrap-2.3.2\composer.json" />
+    <Content Include="public\bootstrap-2.3.2\package.json" />
+    <Content Include="public\bootstrap-2.3.2\CHANGELOG.md" />
+    <Content Include="public\bootstrap-2.3.2\CONTRIBUTING.md" />
+    <Content Include="public\bootstrap-2.3.2\README.md" />
+    <Content Include="public\images\grafica_corporativa_positivo.png" />
+    <Content Include="public\images\nucleo-df-new.jpg" />
+    <Content Include="public\images\iconOperator.gif" />
+    <Content Include="public\images\iconPhone.gif" />
+    <Content Include="public\images\iconRadio.gif" />
+    <Content Include="public\images\iconRadioIn.gif" />
+    <Content Include="public\images\iconRadioInOut.gif" />
+    <Content Include="public\images\iconRadioOut.gif" />
+    <Content Include="public\images\favicon.ico" />
+    <Content Include="public\javascripts\authentication.js" />
+    <Content Include="public\javascripts\backups.js" />
+    <Content Include="public\javascripts\check-type.min.js" />
+    <Content Include="public\javascripts\configurations.js" />
+    <Content Include="public\javascripts\externalResources.js" />
+    <Content Include="public\javascripts\gateways.js" />
+    <Content Include="public\javascripts\hardware.js" />
+    <Content Include="public\javascripts\historics.js" />
+    <Content Include="public\javascripts\hrr.js" />
+    <Content Include="public\javascripts\index.js" />
+    <Content Include="public\javascripts\jquery-1.11.2.min.js" />
+    <Content Include="public\javascripts\jquery-ui.min.js" />
+    <Content Include="public\javascripts\jquery.form.min.js" />
+    <Content Include="public\javascripts\jsoneditor.js" />
+    <Content Include="public\javascripts\parametersRadio.js" />
+    <Content Include="public\javascripts\parametersTel.js" />
+    <Content Include="public\javascripts\radioDestinations.js" />
+    <Content Include="public\javascripts\resources.js" />
+    <Content Include="public\javascripts\services.js" />
+    <Content Include="public\javascripts\sites.js" />
+    <Content Include="public\javascripts\tableBss.js" />
+    <Content Include="public\javascripts\underscore-min.js" />
+    <Content Include="public\javascripts\users.js" />
+    <Content Include="public\javascripts\version.js" />
+    <Content Include="public\jspdf\jspdf.debug.js" />
+    <Content Include="public\jspdf\jspdf.js" />
+    <Content Include="public\jspdf\jspdf.plugin.autotable.js" />
+    <Content Include="public\jspdf\jspdf.plugin.table.js" />
+    <Content Include="public\jspdf\main.js" />
+    <Content Include="public\jspdf\split_text_to_size.js" />
+    <Content Include="public\lang\en.json" />
+    <Content Include="public\lang\es.json" />
+    <Content Include="public\pdfmake\pdfmake.min.js" />
+    <Content Include="public\pdfmake\vfs_fonts.js" />
+    <Content Include="public\stylesheets\drag.css" />
+    <Content Include="public\stylesheets\jquery-ui.min.css" />
+    <Content Include="public\stylesheets\modal.css" />
+    <Content Include="public\stylesheets\style.css" />
+    <Content Include="public\stylesheets\table.css" />
+    <Content Include="public\stylesheets\tabs.css" />
+    <Content Include="public\translator\lang.js" />
+    <Content Include="public\alertifyjs\css\alertify.css" />
+    <Content Include="public\alertifyjs\css\alertify.min.css" />
+    <Content Include="public\alertifyjs\css\alertify.rtl.css" />
+    <Content Include="public\alertifyjs\css\alertify.rtl.min.css" />
+    <Content Include="public\alertifyjs\css\themes\bootstrap.css" />
+    <Content Include="public\alertifyjs\css\themes\bootstrap.min.css" />
+    <Content Include="public\alertifyjs\css\themes\bootstrap.rtl.css" />
+    <Content Include="public\alertifyjs\css\themes\bootstrap.rtl.min.css" />
+    <Content Include="public\alertifyjs\css\themes\default.css" />
+    <Content Include="public\alertifyjs\css\themes\default.min.css" />
+    <Content Include="public\alertifyjs\css\themes\default.rtl.css" />
+    <Content Include="public\alertifyjs\css\themes\default.rtl.min.css" />
+    <Content Include="public\alertifyjs\css\themes\semantic.css" />
+    <Content Include="public\alertifyjs\css\themes\semantic.min.css" />
+    <Content Include="public\alertifyjs\css\themes\semantic.rtl.css" />
+    <Content Include="public\alertifyjs\css\themes\semantic.rtl.min.css" />
+    <Content Include="public\bootstrap-2.3.2\docs\base-css.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\components.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\customize.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\extend.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\getting-started.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\index.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\javascript.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\scaffolding.html" />
+    <Content Include="public\bootstrap-2.3.2\img\glyphicons-halflings-white.png" />
+    <Content Include="public\bootstrap-2.3.2\img\glyphicons-halflings.png" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-affix.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-alert.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-button.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-carousel.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-collapse.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-dropdown.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-modal.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-popover.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-scrollspy.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-tab.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-tooltip.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-transition.js" />
+    <Content Include="public\bootstrap-2.3.2\js\bootstrap-typeahead.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\build\package.json" />
+    <Content Include="public\bootstrap-2.3.2\docs\build\index.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\examples\carousel.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\examples\fluid.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\examples\hero.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\examples\justified-nav.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\examples\marketing-narrow.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\examples\signin.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\examples\starter-template.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\examples\sticky-footer-navbar.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\examples\sticky-footer.html" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\css\bootstrap-responsive.css" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\css\bootstrap.css" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\css\docs.css" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\ico\apple-touch-icon-114-precomposed.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\ico\apple-touch-icon-144-precomposed.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\ico\apple-touch-icon-57-precomposed.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\ico\apple-touch-icon-72-precomposed.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\ico\favicon.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\ico\favicon.ico" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\bootstrap-docs-readme.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\bs-docs-bootstrap-features.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\bs-docs-masthead-pattern.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\bs-docs-responsive-illustrations.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\bs-docs-twitter-github.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\glyphicons-halflings-white.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\glyphicons-halflings.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\grid-baseline-20px.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\less-logo-large.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\responsive-illustrations.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\bootstrap-mdo-sfmoma-01.jpg" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\bootstrap-mdo-sfmoma-02.jpg" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\bootstrap-mdo-sfmoma-03.jpg" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\README.md" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\application.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-affix.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-alert.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-button.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-carousel.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-collapse.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-dropdown.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-modal.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-popover.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-scrollspy.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-tab.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-tooltip.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-transition.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap-typeahead.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\bootstrap.min.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\html5shiv.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\jquery.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\example-sites\8020select.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\example-sites\adoptahydrant.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\example-sites\breakingnews.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\example-sites\fleetio.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\example-sites\gathercontent.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\example-sites\jshint.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\example-sites\kippt.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\example-sites\soundready.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\bootstrap-example-carousel.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\bootstrap-example-fluid.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\bootstrap-example-justified-nav.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\bootstrap-example-marketing-narrow.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\bootstrap-example-marketing.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\bootstrap-example-signin.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\bootstrap-example-starter.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\bootstrap-example-sticky-footer.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\browser-icon-chrome.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\browser-icon-firefox.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\browser-icon-safari.png" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\slide-01.jpg" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\slide-02.jpg" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\img\examples\slide-03.jpg" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\google-code-prettify\prettify.css" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\google-code-prettify\prettify.js" />
+    <Content Include="public\bootstrap-2.3.2\docs\assets\js\holder\holder.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\index.html" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\phantom.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\server.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-affix.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-alert.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-button.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-carousel.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-collapse.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-dropdown.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-modal.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-phantom.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-popover.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-scrollspy.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-tab.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-tooltip.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-transition.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\unit\bootstrap-typeahead.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\vendor\qunit.css" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\vendor\jquery.js" />
+    <Content Include="public\bootstrap-2.3.2\js\tests\vendor\qunit.js" />
+    <Content Include="public\bootstrap-2.3.2\less\tests\buttons.html" />
+    <Content Include="public\bootstrap-2.3.2\less\tests\css-tests.html" />
+    <Content Include="public\bootstrap-2.3.2\less\tests\forms-responsive.html" />
+    <Content Include="public\bootstrap-2.3.2\less\tests\forms.html" />
+    <Content Include="public\bootstrap-2.3.2\less\tests\navbar-fixed-top.html" />
+    <Content Include="public\bootstrap-2.3.2\less\tests\navbar-static-top.html" />
+    <Content Include="public\bootstrap-2.3.2\less\tests\navbar.html" />
+    <Content Include="public\bootstrap-2.3.2\less\tests\css-tests.css" />
+    <Content Include="routes\configurations\configurations.js" />
+    <Content Include="routes\destinations\radioDestinations.js" />
+    <Content Include="routes\externalResources\externalResources.js" />
+    <Content Include="routes\gateways\gateways.js" />
+    <Content Include="routes\gateways\resources.js" />
+    <Content Include="routes\gateways\services.js" />
+    <Content Include="routes\hardware\hardware.js" />
+    <Content Include="routes\hardware\resources.js" />
+    <Content Include="routes\historics\historics.js" />
+    <Content Include="routes\hrr\hrr.js" />
+    <Content Include="routes\sites\sites.js" />
+    <Content Include="routes\tableBss\tableBss.js" />
+    <Content Include="routes\users\users.js" />
+    <Content Include="routes\version\version.js" />
+    <Content Include="views\backups\backups.jade" />
+    <Content Include="views\historics\historics.jade" />
+    <Content Include="views\services\postConfiguration.jade" />
+    <Content Include="views\services\postGateway.jade" />
+    <Content Include="views\services\postHRR.jade" />
+    <Content Include="views\services\postParameters.jade" />
+    <Content Include="views\services\postRadioDestination.jade" />
+    <Content Include="views\services\postResources.jade" />
+    <Content Include="views\services\postSites.jade" />
+    <Content Include="views\services\postTableBss.jade" />
+    <Content Include="views\services\postUsuario.jade" />
+    <Content Include="views\services\resource.jade" />
+    <Content Include="views\version\version.jade" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin" />
+    <Folder Include="data_model" />
+    <Folder Include="esquemas_bbdd" />
+    <Folder Include="lib" />
+    <Folder Include="nss" />
+    <Folder Include="nss\win32" />
+    <Folder Include="nss\win64" />
+    <Folder Include="public" />
+    <Folder Include="public\alertifyjs" />
+    <Folder Include="public\alertifyjs\css" />
+    <Folder Include="public\alertifyjs\css\themes" />
+    <Folder Include="public\bootstrap-2.3.2" />
+    <Folder Include="public\bootstrap-2.3.2\docs" />
+    <Folder Include="public\bootstrap-2.3.2\docs\assets" />
+    <Folder Include="public\bootstrap-2.3.2\docs\assets\css" />
+    <Folder Include="public\bootstrap-2.3.2\docs\assets\ico" />
+    <Folder Include="public\bootstrap-2.3.2\docs\assets\img" />
+    <Folder Include="public\bootstrap-2.3.2\docs\assets\img\examples" />
+    <Folder Include="public\bootstrap-2.3.2\docs\assets\img\example-sites" />
+    <Folder Include="public\bootstrap-2.3.2\docs\assets\js" />
+    <Folder Include="public\bootstrap-2.3.2\docs\assets\js\google-code-prettify" />
+    <Folder Include="public\bootstrap-2.3.2\docs\assets\js\holder" />
+    <Folder Include="public\bootstrap-2.3.2\docs\build" />
+    <Folder Include="public\bootstrap-2.3.2\docs\examples" />
+    <Folder Include="public\bootstrap-2.3.2\docs\templates" />
+    <Folder Include="public\bootstrap-2.3.2\docs\templates\pages" />
+    <Folder Include="public\bootstrap-2.3.2\img" />
+    <Folder Include="public\bootstrap-2.3.2\js" />
+    <Folder Include="public\bootstrap-2.3.2\js\tests" />
+    <Folder Include="public\bootstrap-2.3.2\js\tests\unit" />
+    <Folder Include="public\bootstrap-2.3.2\js\tests\vendor" />
+    <Folder Include="public\bootstrap-2.3.2\less" />
+    <Folder Include="public\bootstrap-2.3.2\less\tests" />
+    <Folder Include="public\images" />
+    <Folder Include="public\javascripts" />
+    <Folder Include="public\jspdf" />
+    <Folder Include="public\lang" />
+    <Folder Include="public\pdfmake" />
+    <Folder Include="public\stylesheets" />
+    <Folder Include="public\translator" />
+    <Folder Include="RedanCfgV2" />
+    <Folder Include="routes" />
+    <Folder Include="routes\configurations" />
+    <Folder Include="routes\destinations" />
+    <Folder Include="routes\externalResources" />
+    <Folder Include="routes\gateways" />
+    <Folder Include="routes\hardware" />
+    <Folder Include="routes\historics" />
+    <Folder Include="routes\hrr" />
+    <Folder Include="routes\sites" />
+    <Folder Include="routes\tableBss" />
+    <Folder Include="routes\users" />
+    <Folder Include="routes\version" />
+    <Folder Include="views" />
+    <Folder Include="views\backups" />
+    <Folder Include="views\historics" />
+    <Folder Include="views\services" />
+    <Folder Include="views\version" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
