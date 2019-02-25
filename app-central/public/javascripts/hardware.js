@@ -1632,6 +1632,8 @@ function AddResource(slaveId, col, fila, f) {
 
 /** 20170516 AGL. Validaciones  */
 function localValidateAtsNumber(num) {
+    if (num=="")
+        return true;
     var regx_atsval = /^[2-3][0-9]{5}$/;
     var matchVal = num.match(regx_atsval);
     return matchVal ? true : false;

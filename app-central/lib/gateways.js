@@ -178,7 +178,7 @@ exports.getAll = function getAll(configName, ipGtw, f) {
         multipleStatements: true
     });*/
 
-    logging.Error("(gateways).getAll " + configName + " " + ipGtw);
+    logging.Info("(gateways).getAll " + configName + " " + ipGtw);
 
     connection.connect(function(err) {
         if (err) {
