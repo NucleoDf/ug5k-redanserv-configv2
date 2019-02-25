@@ -374,6 +374,8 @@ CREATE TABLE `pasarelas` (
   `servidor_rtsp` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Dirección del servidor rtsp.',
   `servidor_rtspb` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Dirección del servidor rtsp 2 o B',
   `pendiente_actualizar` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Indica si está pendiente de aplicar cambios (1) o no (0) para poder actualizar la fecha ultima_actualizacion que se manda a la pasarela física',
+  `sppe` TINYINT(1) DEFAULT 0  NOT NULL  COMMENT 'Supervision de puerta de enlace. 0: No supervisa. 1..5: tiempo en segundos de la supervision',
+  `dvrrp` INT(6) DEFAULT 2000  NOT NULL  COMMENT 'Timeout de arranque VRRP (2000 .. 20000)',
   PRIMARY KEY (`idpasarela`),
   KEY `fk_emp_pasarela_idx` (`emplazamiento_id`),
   CONSTRAINT `fk_emp_pasarela` FOREIGN KEY (`emplazamiento_id`) REFERENCES `emplazamientos` (`idemplazamiento`) ON DELETE CASCADE ON UPDATE NO ACTION
@@ -530,6 +532,8 @@ CREATE TABLE `recursos_telefono` (
   `tiempo_supervision` int(2) NOT NULL DEFAULT '5' COMMENT 'Tiempo de supervisión en segundos. Rango min: 5, max: 30',
   `duracion_tono_interrup` int(2) NOT NULL DEFAULT '0' COMMENT 'Duración en segundos del tono de interrupción. Rango min: 5, max: 15.',
   `uri_telefonica` varchar(64) COLLATE latin1_spanish_ci DEFAULT NULL COMMENT 'Uri para el recurso telefónico.',
+  `ats_user` VARCHAR(64) NOT NULL  COMMENT 'Usuario ATS al que se le podria asignar un recurtso PP',
+  `det_inversion_pol` TINYINT(1) DEFAULT 0  NOT NULL  COMMENT 'Flag Deteccion de Inversion de polaridad (solo en AB)',
   PRIMARY KEY (`idrecurso_telefono`),
   KEY `fk_pasarela_tfno_idx` (`pasarela_id`),
   CONSTRAINT `fk_pasarela_tfno` FOREIGN KEY (`pasarela_id`) REFERENCES `pasarelas` (`idpasarela`) ON DELETE CASCADE ON UPDATE NO ACTION

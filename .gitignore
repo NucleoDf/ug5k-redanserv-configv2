@@ -46,7 +46,6 @@ hs_err_pid*
 /simulategw/ACC-GW-02/fs-win/home/serv/last_json_rec_2.json
 /simulategw/ACC-GW-02/fs-win/home/serv/last_json_rec_3.json
 /simulategw/ACC-GW-02/fs-win/home/serv/fatalerror_0.log
-
 /bin
 /uv5ki-nbx-webapp/bin
 /uv5ki-nbx-webapp/obj
@@ -92,3 +91,4 @@ nbproject
 /uv5ki-gw-cfg/*.soap
 .vs
 /uv5ki-gw-cfg/ng-app
+/Entregas
