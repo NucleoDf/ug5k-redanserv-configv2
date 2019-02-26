@@ -377,7 +377,7 @@
   "Numeracion": "Numeracion",
 
   "Supervisa GW?": "Supervisa Puerta de Enlace?",
-  "Tiempo Supervision GW (seg)": "Tiempo Supervision GW (seg)",
+  "Tiempo Supervision GW (seg)": "Tiempo Supervision Puerta de Enlace",
   "Id. RED": "Id. RED",
   "Id. Troncal": "Id. Troncal",
   "Tiempo maximo de llamada entrante en linea (sg)": "Tiempo maximo de llamada entrante en linea (sg)",
@@ -407,6 +407,8 @@
   "Error Formato TRAP": "Error Formato TRAP",
   "FID No Valido. Valores admitidos: ": "FID No Valido. Valores admitidos: ",
   "La IP de la URI debe ser: ": "La IP de la URI debe ser: ",
+
+  "Retardo Arranque VRRP": "Retardo activacion modo dual",
 
   "FINAL": "final"
 }

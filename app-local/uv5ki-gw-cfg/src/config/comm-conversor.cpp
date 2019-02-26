@@ -476,7 +476,12 @@ void CommConversor::RecursoRadio(CommResConfig *p_rec, struct cfgConfigGeneralRe
 
 	// 20160804. Este campo se utiliza para el SQH forzado...
 	// SetInt(&mrad->iNumPaquetesSqOff, jradio, "desactivacionSq", INCI_MPSW, "PAQUETES SQ-OFF");
-	SetInt(&mrad->iPttTimeOut, p_rec->radio.timeoutPtt, INCI_MPSW, "TIMEOUT PTT");
+	// 20190226. El valor depende si estamos en ULISES (tipo==1) o en REDAN (tipo==0)
+	if (p_cfg_in->tipo == 0) 
+		mrad->iPttTimeOut = 0;
+	else 
+		SetInt(&mrad->iPttTimeOut, p_rec->radio.timeoutPtt, INCI_MPSW, "TIMEOUT PTT");
+
 	SetInt(&mrad->iNumFlujosMezcla, p_rec->radio.numFlujosAudio, INCI_MPSW, "NUMERO DE FLUJOS EN MEZCLA");
 
 	mrad->iEyM = 0;

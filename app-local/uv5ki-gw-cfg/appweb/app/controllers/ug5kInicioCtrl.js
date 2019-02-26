@@ -143,8 +143,8 @@ function ug5kInicioCtrl($scope, $route, CfgService, authservice, ValidateService
                         Enable: authservice.global_enable([ADMIN_PROFILE, PCFG_PROFILE, ALM1_PROFILE]),
                         Input: 0,
                         Inputs: [],
-                        Show: function () { return vm.v_data[5].Value === "1" },
-                        Val: function (val) { return val >= 5 && val <= 30 ? "" : "El valor debe estar entre 5 y 30"; }
+                        Show: function () { return vm.v_data[5].Value === "1"; },
+                        Val: function (val) { return val >= 1 && val <= 8 ? "" : "El valor debe estar entre 1 y 8"; }
                     },
                     {
                         Name: transerv.translate('Retardo Arranque VRRP'),

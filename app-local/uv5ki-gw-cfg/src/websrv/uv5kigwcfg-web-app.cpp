@@ -363,12 +363,13 @@ void Uv5kiGwCfgWebApp::stCb_importexport(struct mg_connection *conn, string user
 		PLOG_INFO("Uv5kiGwCfgWebApp: Exportada Preconfiguracion %s. Usuario: %s", levels[2].c_str(), user.c_str());
 		RETURN_OK200_RESP(resp, exportada.data);
 	}
-	else if (string(conn->request_method)=="POST" )			// IMPORT... (Igual a salvar como, excepto por el nombre)...
+	else if (string(conn->request_method)=="POST" )			// IMPORT... 
 	{
 		string pcfg_name = levels[2]=="" ? Tools::FileUniqueName("IMPORT") : 
 			preconfs.Exist(levels[2]) ? Tools::FileUniqueName(levels[2]) : levels[2];
-		// Obtener la Configuracion activa...
-		CommPreconf activa(pcfg_name, Tools::Ahora(), P_WORKING_CONFIG->JConfig());
+
+		string data_in = string(conn->content, conn->content_len);
+		CommPreconf activa(pcfg_name, Tools::Ahora(), data_in);
 		bool res = preconfs.pos(pcfg_name, activa);
 		if (res == false) {
 			RETURN_IERROR_RESP(resp, webData_line("Error al Salvar Preconfiguracion: " + pcfg_name).JSerialize());

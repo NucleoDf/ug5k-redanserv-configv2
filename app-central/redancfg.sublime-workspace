@@ -39,33 +39,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "lib/configurations.js",
-			"settings":
-			{
-				"buffer_size": 109943,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/services/postResources.jade",
-			"settings":
-			{
-				"buffer_size": 3755,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascripts/externalResources.js",
-			"settings":
-			{
-				"buffer_size": 6451,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -104,12 +77,18 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views",
-		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/services"
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/lib"
 	],
 	"file_history":
 	[
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/lib/gateways.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/views/services/postParameters.jade",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/views/services/postGateway.jade",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/public/javascripts/hardware.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/lib/configurations.js",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/views/services/postResources.jade",
+		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/public/javascripts/externalResources.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/views/services/postParameters.jade",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/externalResources.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/LocalDev/redan-gw-config-v2/public/javascripts/hrr.js",
@@ -209,6 +188,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"/aliv",
+			"alive",
+			"onload",
+			"TbRemoteUri",
+			"textbox",
+			"ValidateAtsNumber",
+			"atsn",
 			"GetHRR",
 			"ListResources",
 			"Recursos Extern",
@@ -372,108 +358,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "lib/configurations.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 109943,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								84848,
-								84848
-							]
-						],
-						"settings":
-						{
-							"SL.13.region_keys":
-							[
-							],
-							"SL.28.region_keys":
-							[
-							],
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 27210.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "views/services/postResources.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3755,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								660,
-								660
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/javascripts/externalResources.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6451,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1804,
-								1804
-							]
-						],
-						"settings":
-						{
-							"SL.22.region_keys":
-							[
-							],
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

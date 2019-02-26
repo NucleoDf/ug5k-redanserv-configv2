@@ -107,7 +107,7 @@ function ug5kConfCtrl($scope, $route, dataservice, authservice, CfgService, tran
                     console.log("PUT: ", res);
                     CfgService.restore();
                     $("body").css("cursor", "default");
-                    /*alert*/alertify.success(name + ": " + res.res);
+                    /*alert*/alertify.success(transerv.translate('Preconfiguracion') + ": " + name + ", " + transerv.translate(' Activada'));
                 });
         });
     };
