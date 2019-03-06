@@ -179,7 +179,9 @@ var ShowCfg = function(cfg) {
 
 
     // Mostrar sus gateways
-    var lista = '#cfg-' + cfg.name;
+	var select_name = cfg.name.replace(".","\\.");
+    var lista = '#cfg-' + select_name/*cfg.name*/;
+	
     $('.gtwList').hide();
     $(lista).empty();
 
