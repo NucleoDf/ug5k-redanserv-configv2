@@ -29,7 +29,7 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
     /* Validador de IdRecurso. Actualiza a la ver la URI Local */
     vm.id_val = function (value) {
         var error = ValidateService.max_long_val(value);
-        if ( error != "") {
+        if ( error == "") {
             vm.rdata.IdRecurso = value;
             vm.vdata[4].Value = quitar_sip(CfgService.rec_uri_get(vm.rdata));   // jamp_no_sip == 1 ? CfgService.quitar_sip(CfgService.rec_uri_get(vm.rdata)) : CfgService.rec_uri_get(vm.rdata);
             return "";
