@@ -133,14 +133,16 @@ function ShowSite(site, id) {
     $('#hwGateway').hide();
 
     // Ocultar la lista de emplazamientos que estuviera abierta
-    var lista = '#site-' + $('#IdSite').data('idSite');
+    // Hay que eliminar los puntos del identificador de la lista...
+    var lista = ('#site-' + $('#IdSite').data('idSite')).replace(".","\\.");
     $(lista).hide();
 
     $('#IdSite').val(site);
     $('#IdSite').data('idSite', id);
 
     // Mostrar sus gateways
-    lista = '#site-' + id;
+    // Hay que eliminar los puntos del identificador de la lista...
+    lista = ('#site-' + id).replace(".","\\.");
     $(lista).empty()
         .show();
     $.ajax({

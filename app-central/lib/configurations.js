@@ -632,7 +632,7 @@ exports.copyConfiguration = function copyConfiguration(idSourceConfig, trgt, f) 
                                 ',' + oldGtwTfnoResData[i].umbral_vox + ',' + oldGtwTfnoResData[i].cola_vox + ',' + oldGtwTfnoResData[i].respuesta_automatica + '' +
                                 ',' + oldGtwTfnoResData[i].periodo_tonos + ',' + oldGtwTfnoResData[i].lado + ',"' + oldGtwTfnoResData[i].origen_test + '","' + oldGtwTfnoResData[i].destino_test + '"' +
                                 ',' + oldGtwTfnoResData[i].supervisa_colateral + ',' + oldGtwTfnoResData[i].tiempo_supervision + ',' + oldGtwTfnoResData[i].duracion_tono_interrup + '' +
-                                ',' + '"' + oldGtwTfnoResData[i].ats_user + '", ' + oldGtwTfnoResData[i].DetInversionPol + 
+                                ',' + '"' + oldGtwTfnoResData[i].ats_user + '", ' + oldGtwTfnoResData[i].det_inversion_pol + 
                                 ');';
                         }
                         else {
@@ -648,7 +648,7 @@ exports.copyConfiguration = function copyConfiguration(idSourceConfig, trgt, f) 
                                 ',' + oldGtwTfnoResData[i].umbral_vox + ',' + oldGtwTfnoResData[i].cola_vox + ',' + oldGtwTfnoResData[i].respuesta_automatica + '' +
                                 ',' + oldGtwTfnoResData[i].periodo_tonos + ',' + oldGtwTfnoResData[i].lado + ',"' + oldGtwTfnoResData[i].origen_test + '","' + oldGtwTfnoResData[i].destino_test + '"' +
                                 ',' + oldGtwTfnoResData[i].supervisa_colateral + ',' + oldGtwTfnoResData[i].tiempo_supervision + ',' + oldGtwTfnoResData[i].duracion_tono_interrup + '' +
-                                ',' + '"' + oldGtwTfnoResData[i].ats_user + '", ' + oldGtwTfnoResData[i].DetInversionPol + 
+                                ',' + '"' + oldGtwTfnoResData[i].ats_user + '", ' + oldGtwTfnoResData[i].det_inversion_pol + 
                                 ');';
                         }
                         res = await ug5kdb.QueryMultiInsertSync(query);
