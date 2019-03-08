@@ -123,6 +123,16 @@ public:
 	void dispose();
 
 	/** */
+	unsigned int WebPort() {
+		unsigned int wport = config.servicios.web.wport;
+		wport = wport <= 0 || wport > 32767 ? 8080 : wport;
+		return wport;
+	}
+	int WebSessionTime() {
+		int stime = config.servicios.web.stime;
+		stime = stime < 0 || stime > 120 ? 0 : stime;
+		return stime;
+	}
 
 protected:
 	void init();

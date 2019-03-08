@@ -57,7 +57,7 @@ public:
 			/** 20171016. Timeout maximo que acota posibles actualizaciones de RELOJ */
 			hangup_timeout_max = hangup_timeout_min + 60;
 #if defined (_WIN32)
-			bool mode = false;	/** false: REDAN, true: ULISES */
+			bool mode = true;	/** false: REDAN, true: ULISES */
 #else
 			bool mode = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoGlobal, "0")=="1"/*.ModoUlises()*/;
 #endif
@@ -78,14 +78,15 @@ public:
 				pipe_name
 				);
 #endif
-
-			pwebApp = new Uv5kiGwCfgWebApp();
+			/** 20190308. Poner la Configuracion al nivel ppal */
+			WorkingConfig *pcfg = InitialConfiguration(mode);
+			pwebApp = new Uv5kiGwCfgWebApp(pcfg);
 
 			/** Crearlo seg�n el entorno */
 			if (mode==false)
-				CfgProc::p_cfg_proc = new JsonClientProc();
+				CfgProc::p_cfg_proc = new JsonClientProc(pcfg);
 			else
-				CfgProc::p_cfg_proc = new SoapClientProc();
+				CfgProc::p_cfg_proc = new SoapClientProc(pcfg);
 
 			HistClient::p_hist = new HistClient();
 			ManProc::p_man = new ManProc();
@@ -365,6 +366,31 @@ private:
 	time_t hangup_timeout_min;
 	time_t hangup_timeout_max;
 	Uv5kiGwCfgWebApp *pwebApp;
+	/** 20190308. Poner la Configuracion al nivel ppal */
+	WorkingConfig *p_wcfg;
+	WorkingConfig *InitialConfiguration(bool mode) {
+		p_wcfg = new WorkingConfig(mode == false ? cfgRedan : cfgSoap);
+
+		string ipPropia, hwServer, hwName;
+		sistema::GetWorkingIpAddressAndName(ipPropia, hwServer, hwName);
+
+		/** Leer la ultima CFG recibida */
+		p_wcfg->load_from(LAST_CFG);
+		p_wcfg->config.tipo = 1;
+		PLOG_INFO("Leida LAST_CFG");
+
+		// Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
+		// y hay que obtener la configuracion del Servidor...
+		// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
+		if (p_wcfg->config.general.name != hwName) {
+			p_wcfg->set_to_default();
+			p_wcfg->config.general.name = hwName;
+			p_wcfg->ResetTimeStamp();
+			p_wcfg->save_to(LAST_CFG);
+			PLOG_INFO("Detectado Cambio de ID. Nuevo ID: %s", hwName.c_str());
+		}
+		return p_wcfg;
+	}
 };
 
 /** */

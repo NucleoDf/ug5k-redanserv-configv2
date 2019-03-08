@@ -61,7 +61,7 @@ class Uv5kiGwCfgWebApp :
 	public WebAppServer
 {
 public:
-	Uv5kiGwCfgWebApp(void);
+	Uv5kiGwCfgWebApp(void *pcfg);
 	~Uv5kiGwCfgWebApp(void);
 
 protected:
@@ -79,7 +79,7 @@ protected:
 	static bool stAccessControl(string name, string pwd, int *profile);
 
 	void GetHandlers();
-	void GetConfig();
+	void GetConfig(void *pvcfg);
 
 protected:
 	static void *DelayedReset(void* arg);

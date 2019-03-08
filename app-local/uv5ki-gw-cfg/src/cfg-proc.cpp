@@ -208,18 +208,19 @@ void JsonClientProc::Run()
 	_modo_redan = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoRedan);
 	_cntticks = 0;
 
-	p_working_config->load_from(LAST_CFG);
-	p_working_config->config.tipo = 0;
+	/** 20190308. Esto se ha realizado a nivel ppal */
+	//p_working_config->load_from(LAST_CFG);
+	//p_working_config->config.tipo = 0;
 
-	// Comprobar que _ip_propia es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
-	// y hay que obtener la configuracion del Servidor...
-	// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
-	if (p_working_config->ippropia() != _ip_propia) {
-		p_working_config->set_to_default();
-		p_working_config->ResetTimeStamp();				// Pone Fecha 01/01/1970, para que sea actualizado.
-		p_working_config->save_to(LAST_CFG);
-		PLOG_INFO("Detectado Cambio de IP-LOCAL. Nueva IP: %s", _ip_propia.c_str());
-	}
+	//// Comprobar que _ip_propia es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
+	//// y hay que obtener la configuracion del Servidor...
+	//// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
+	//if (p_working_config->ippropia() != _ip_propia) {
+	//	p_working_config->set_to_default();
+	//	p_working_config->ResetTimeStamp();				// Pone Fecha 01/01/1970, para que sea actualizado.
+	//	p_working_config->save_to(LAST_CFG);
+	//	PLOG_INFO("Detectado Cambio de IP-LOCAL. Nueva IP: %s", _ip_propia.c_str());
+	//}
 
 	AvisaChequearConfiguracion();
 	while (IsRunning()) {
@@ -422,25 +423,25 @@ void SoapClientProc::Run()
 	sistema::GetWorkingIpAddressAndName(_ip_propia, hwServer, hwName);
 	PLOG_INFO("SoapClientProc running. GetWorkingIpAddressAndName (%s-%s-%s).", _ip_propia.c_str(), hwServer.c_str(), hwName.c_str());
 	
-	// LocalConfig::p_cfg->set(strSection, strItemServidor, hwServer);
-
 	hwIp = _ip_propia;
-	/** Leer la ultima CFG recibida */
-	p_working_config->load_from(LAST_CFG);
-	p_working_config->config.tipo = 1;
 
-	PLOG_INFO("SoapClientProc running. Leida LAST_CFG");
+	/** 20190308. Esto se ha realizado a nivel ppal */
+	///** Leer la ultima CFG recibida */
+	//p_working_config->load_from(LAST_CFG);
+	//p_working_config->config.tipo = 1;
 
-	// Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
-	// y hay que obtener la configuracion del Servidor...
-	// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
-	if (p_working_config->config.general.name != hwName) {
-		p_working_config->set_to_default();
-		p_working_config->config.general.name = hwName;
-		p_working_config->ResetTimeStamp();
-		p_working_config->save_to(LAST_CFG);
-		PLOG_INFO("Detectado Cambio de ID. Nuevo ID: %s", hwName.c_str());
-	}
+	//PLOG_INFO("SoapClientProc running. Leida LAST_CFG");
+
+	//// Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
+	//// y hay que obtener la configuracion del Servidor...
+	//// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
+	//if (p_working_config->config.general.name != hwName) {
+	//	p_working_config->set_to_default();
+	//	p_working_config->config.general.name = hwName;
+	//	p_working_config->ResetTimeStamp();
+	//	p_working_config->save_to(LAST_CFG);
+	//	PLOG_INFO("Detectado Cambio de ID. Nuevo ID: %s", hwName.c_str());
+	//}
 
 	AvisaChequearConfiguracion();
 	while (IsRunning()) 

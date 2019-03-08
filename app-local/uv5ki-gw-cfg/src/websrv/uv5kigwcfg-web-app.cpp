@@ -19,10 +19,10 @@ void *Uv5kiGwCfgWebApp::file_version_load_thread_routine(void *arg)
 }
 
 /** */
-Uv5kiGwCfgWebApp::Uv5kiGwCfgWebApp(void)
+Uv5kiGwCfgWebApp::Uv5kiGwCfgWebApp(void *pcfg)
 {
 	GetHandlers();
-	GetConfig();
+	GetConfig(pcfg);
 }
 
 /** */
@@ -56,9 +56,12 @@ void Uv5kiGwCfgWebApp::GetHandlers()
 }
 
 /** */
-void Uv5kiGwCfgWebApp::GetConfig() 
+void Uv5kiGwCfgWebApp::GetConfig(void *pvcfg)
 {
-	_web_config.web_port = LocalConfig::p_cfg->get(strSection, strItemWebPort, "8080")/*.PuertoEscucha()*/;
+	WorkingConfig *pcfg = (WorkingConfig *)pvcfg;
+
+//	_web_config.web_port = LocalConfig::p_cfg->get(strSection, strItemWebPort, "8080")/*.PuertoEscucha()*/; 
+	_web_config.web_port = Tools::itoa(pcfg->WebPort());
 	_web_config.document_root = ON_WORKING_DIR("appweb");
 	_web_config.default_page = "ug5kweb-index.html";
 	_web_config.login_uri = "/login.html";
@@ -71,7 +74,8 @@ void Uv5kiGwCfgWebApp::GetConfig()
 	_web_config.enable_login = true;
 #endif
 	_web_config.enable_ssession = true;
-	_web_config.session_time = 0;
+	// _web_config.session_time = 0;					// TODO. Leer de la configuracion.
+	_web_config.session_time = pcfg->WebSessionTime();
 
 	_web_config.sec_uris.push_back("/styles/bootstrap/bootstrap.min.css");
 	_web_config.sec_uris.push_back("/styles/uv5ki-styles.css");

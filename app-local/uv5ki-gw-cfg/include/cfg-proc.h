@@ -103,8 +103,8 @@ protected:
 class JsonClientProc : public CfgProc
 {
 public:
-	JsonClientProc(void) {
-		p_working_config = new WorkingConfig(cfgRedan);
+	JsonClientProc(WorkingConfig *pcfg) {
+		p_working_config = pcfg;	//  new WorkingConfig(cfgRedan);
 		_modo_redan = "0";
 	}
 	~JsonClientProc(void)
@@ -129,8 +129,8 @@ private:
 class SoapClientProc : public CfgProc
 {
 public:
-	SoapClientProc() {
-		p_working_config = new WorkingConfig(cfgSoap);
+	SoapClientProc(WorkingConfig *pcfg) {
+		p_working_config = pcfg;	// new WorkingConfig(cfgSoap);
 		p_mcast_socket = NULL;
 	}
 	~SoapClientProc() {

@@ -195,7 +195,8 @@ vector<CommConvertEvent> *CommConversor::convierte(CommConfig &cfgIn, void *p_mc
 	{
 		ActualizaRecordIni();
 		ActualizaSnmpIni();
-		ActualizaWebIni();
+		/** 20190308. Ya no hace falta actualizar el ficheros INI */
+		//ActualizaWebIni();
 	}
 
 	return &eventos;
