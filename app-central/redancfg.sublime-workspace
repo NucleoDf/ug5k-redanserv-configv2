@@ -82,6 +82,8 @@
 	],
 	"file_history":
 	[
+		"/D/Datos/Empresa/_SharedPrj/redan-v/ulises-gw-config-v2/public/javascripts/sites.js",
+		"/D/Datos/Empresa/_SharedPrj/redan-v/ulises-gw-config-v2/public/javascripts/configurations.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/lib/gateways.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/views/services/postParameters.jade",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/views/services/postGateway.jade",
@@ -173,7 +175,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 28.0
 	},
 	"find_in_files":
 	{
@@ -188,6 +190,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"showcfg",
+			"$(",
 			"/aliv",
 			"alive",
 			"onload",
@@ -365,7 +369,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -410,7 +414,7 @@
 	"project": "redancfg.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 52.0
 	},
 	"save_all_on_build": true,
 	"select_file":
