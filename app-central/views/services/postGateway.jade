@@ -349,10 +349,12 @@ script.
 
 		function ValidateAtsNumber(element,label){
 			var regx_atsval = /^[2-3][0-9]{5}$/;
-
-			var matchVal = $(element).val().match(regx_atsval);
-			if ($(element).val()!='' && matchVal == null){
-				Fade(element,label)
+			if($(element).val()!=null)
+			{
+				var matchVal = $(element).val().match(regx_atsval);
+				if ($(element).val()!='' && matchVal == null){
+					Fade(element,label)
+				}
 			}
 		}
 		

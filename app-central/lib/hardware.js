@@ -80,7 +80,7 @@ exports.getResNamesInConfig = function(name, idCgw, idRes, f) {
                     'UNION ' +
                     'SELECT rt.nombre FROM recursos_telefono rt ' +
                     'WHERE rt.pasarela_id=' + idCgw + ' AND rt.nombre LIKE "' + name + '"' +
-                    'AND rt.idrecurso_radio <> ' + idRes + ' ';
+                    'AND rt.idrecurso_telefono <> ' + idRes + ' ';
             }
 
             query = connection.query(stringQuery, null, function(err, rows) {

@@ -510,9 +510,9 @@ exports.getAll = function getAll(configName, ipGtw, f) {
                             return callback(rows.length == 0 ? 'NO_DATA' : err);
                         }
                         else {
-                            var blancaCounter = 0, negraCounter = 0;
-                            for (var i = 0; i < rows.length; i++) {
-                                for (var j = 0; j < template.recursos.length; j++) {
+                            for (var j = 0; j < template.recursos.length; j++) {
+                                var blancaCounter = 0, negraCounter = 0;
+                                for (var i = 0; i < rows.length; i++) {
                                     var emplazamientosCounter = 0;
                                     if (rows[i].idrecurso_radio == template.recursos[j].idDBRadio) {
                                         if (rows[i].nivel_colateral == 1 || rows[i].nivel_colateral == 2)
@@ -561,10 +561,10 @@ exports.getAll = function getAll(configName, ipGtw, f) {
                             return callback(rows.length == 0 ? 'NO_DATA' : err);
                         }
                         else {
-                            var rangosDstCounter = 0;
-                            var rangosOrgCounter = 0;
-                            for (var i = 0; i < rows.length; i++) {
-                                for (var j = 0; j < template.recursos.length; j++) {
+                            for (var j = 0; j < template.recursos.length; j++) {
+                                var rangosDstCounter = 0;
+                                var rangosOrgCounter = 0;
+                                for (var i = 0; i < rows.length; i++) {
                                     if (rows[i].idrecurso_telefono == template.recursos[j].idDBTfno) {
                                         if (rows[i].tipo == 0) {
                                             template.recursos[j].telefonia.ats_rangos_org[rangosOrgCounter].inicial = rows[i].rango_ats_inicial;

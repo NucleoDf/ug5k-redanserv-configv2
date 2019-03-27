@@ -39,6 +39,15 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "20190214. TA Etiquetado para parche 6. Quitar del HMI el control de brillo. En URR si el monitor elegido no dispone de driver para conectar con el control de brillo de la aplicación HMI, tambien se puede eliminar de forma manual en configuracion a través de la version del control de brillo. Corregido error \"Durante una retransmisión realizada por la recepción de una comunicación RX, la señalización en las teclas de las frecuencias que re-transmiten dicha comunicación es incorrecta. La zona TX se pone con fondo rojo en lugar de azul\".\n20190214. Se habilita en la interfaz AURR un mecanismo para salir de la aplicacion. Una pulsacion LARGA sobre el boton de titulo, abre un menu emergente desde donde se confirma la salida\n20190226. Corregido error de contabilizacion de posiciones en PTT y/o SQH.\n20190227. Etiquetado TA\n20190227. TA. Modificacion del instalador para incluir los scripts para alto rendimiento y la opción MaxVolume=50 con nuevos valores para las salidas en winaudio.\n20190307. Se añade nueva version del servicio de grabacion...\n20190311. TA. Control de Brillo Maximo y Mínimo. TA. Simulador de Ráfagas de PTT en CMediaSim\n20190311. TA. Filtro PTT configurable...\n20190311. TA-INSTALADOR. Unificada en una la ejecucion de tareas al instalar y desinstalar.\n20190311. TA-INST. Cambio prioridad de tareas 7=>5, comando para no indexar nuevos archivos.\n20190313. Resolucion de Incidencia #3930. Tambien se han añadido trazas a modulo de supervision Tx RX...\n20190313. Resolucion de Incidencia #3930. No se consideran PTT externos que no sean de RTX para la supervision TX de los grupos RTX\n20190315. TA-BRILLO. Problema de arranque con ultimo brillo a CERO\n20190319. Se limpian las rutinas anteriores de recuperacion de estados de asignacion radio. En la presentacion de ASECNA estaban en 'paralelo' con las del Model Module.\n20190321. Revision de la generacion de tonos de Falsa Maniobra.\n20190321. TA. Revision de la Supervision TX/RX para incorporar las soluciones a la incidencia #3649.\n20190325. Se eliminan los rastros de los parametros \"CarrierDetectionTimeout\" y \"TxConfirmationTimeout\" de los ficheros config de la aplicacion...\n20190325. Sync. SVN a dia de la fecha.\n",
+			"settings":
+			{
+				"buffer_size": 2195,
+				"line_ending": "Windows",
+				"name": "20190214. TA Etiquetado para parche 6. Quitar del"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -362,8 +371,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2195,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2195,
+								2195
+							]
+						],
+						"settings":
+						{
+							"auto_name": "20190214. TA Etiquetado para parche 6. Quitar del",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -452,7 +490,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 227.0,
+	"side_bar_width": 250.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

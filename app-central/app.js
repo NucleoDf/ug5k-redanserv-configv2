@@ -524,5 +524,5 @@ app.listen(app.get('port'), function () {
 module.exports = app;
 
 process.on('uncaughtException', function (err) {
-    logging.Error('Caught exception: ', err);
+    logging.Error('Caught exception: ', err.message,err.stack);
 }); 
