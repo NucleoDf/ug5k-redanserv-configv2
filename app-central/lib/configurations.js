@@ -165,7 +165,7 @@ exports.getConfiguration = function getConfiguration(req, res, cfg) {
                 'e.idemplazamiento AS idEMPLAZAMIENTO, p.ultima_actualizacion ' +
                 'FROM configuraciones c LEFT JOIN emplazamientos e ON c.idconfiguracion = e.configuracion_id ' +
                 'LEFT JOIN (SELECT MAX( ultima_actualizacion ) ultima_actualizacion, emplazamiento_id FROM pasarelas GROUP BY emplazamiento_id) p ON e.idemplazamiento = p.emplazamiento_id ' +
-                'WHERE c.idconfiguracion = ? GROUP BY namesite ORDER BY ultima_actualizacion DESC;';
+                'WHERE c.idconfiguracion = ? GROUP BY namesite ORDER BY nameSite ASC;';
 
             var query = connection.query(strQuery, cfg, function(err, rows, fields) {
                 logging.Trace(query.sql);

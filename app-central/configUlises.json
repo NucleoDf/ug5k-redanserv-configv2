@@ -6,10 +6,10 @@
     "Region": "Región Centro",
     "BackupServiceDomain": "192.168.0.212:8082",
     "Version": "1.0",
-    "SubVersion": "7",
-    "Date": "31/01/2019",
+    "SubVersion": "7#01",
+    "Date": "1/04/2019",
     "NodeJS": "8.*.*",
-    "MySQL": "5.7.17",
+    "MySQL": "5.6",
     "Files": [
       {
         "Name": "app.js",
@@ -131,14 +131,14 @@
         "date": "15/2/2019"
       }
     ],
-    "dbhost": "192.168.0.212",
+    "dbhost": "localhost",
     "dbuser": "root",
-    "dbpassword": "cd40",
+    "dbpassword": "U5K-G",
     "dbdatabase": "ug5kv2",
     "log2file": "silly",
     "logfile_path": "./logs/ug5kserv.log",
-    "logfile_maxfiles": 4,
-    "logfile_sizefile": 1000000,
+    "logfile_maxfiles": 16,
+    "logfile_sizefile": 4000000,
     "log2con": "info",
     "dblogEnable": false,
     "morgan": false,
