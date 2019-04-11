@@ -256,7 +256,7 @@ function CfgService(dataservice, $q, $rootScope, transerv, authservice) {
             blanca: ["", "", "", "", "", "", "", ""],
             negra: ["", "", "", "", "", "", "", ""],
             iFlgUsarDiffServ: 0,
-            szDestino: "118.000"
+            szDestino: ""
         };
     }
 
