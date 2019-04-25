@@ -456,7 +456,9 @@ function ug5kServCtrl($scope, $route, authservice, CfgService, ValidateService, 
             }
             else {
                 AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
-                    CfgService.aplicar_cambios();
+					setTimeout(function(){
+						CfgService.aplicar_cambios();
+					},500);
                 });
             }
         }

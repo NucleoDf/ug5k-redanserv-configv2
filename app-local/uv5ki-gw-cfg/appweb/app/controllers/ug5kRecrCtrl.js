@@ -1209,7 +1209,9 @@ function ug5kRecrCtrl($scope, $routeParams, $route, authservice, CfgService, Val
             }
             else {
                 AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
-                    CfgService.aplicar_cambios();
+					setTimeout(function(){
+						CfgService.aplicar_cambios();
+					},500);
                 });
             }
         }

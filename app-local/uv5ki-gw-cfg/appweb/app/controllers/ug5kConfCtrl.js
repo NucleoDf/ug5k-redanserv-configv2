@@ -266,7 +266,9 @@ function ug5kConfCtrl($scope, $route, dataservice, authservice, CfgService, tran
         }
         else {
             AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
-                CfgService.aplicar_cambios();
+				setTimeout(function(){
+				CfgService.aplicar_cambios();
+				},500);
             });
         }
         //if (CfgService.test_ip_virtual() == true ||

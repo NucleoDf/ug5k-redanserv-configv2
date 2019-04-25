@@ -312,7 +312,9 @@ function ug5kMantCtrl($document, $scope, $q, $interval, transerv, dataservice, a
         }
         else {
             AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
-                CfgService.aplicar_cambios();
+				setTimeout(function(){
+					CfgService.aplicar_cambios();
+				},500);
             });
         }
     });

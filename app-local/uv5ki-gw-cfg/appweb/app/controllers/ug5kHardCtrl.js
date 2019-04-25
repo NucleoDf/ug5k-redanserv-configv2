@@ -88,7 +88,9 @@ function ug5kHardCtrl($scope, $location, $route, CfgService, authservice, transe
         }
         else {
             AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
-                CfgService.aplicar_cambios();
+				setTimeout(function(){
+					CfgService.aplicar_cambios();
+				},500);
             });
         }
     });

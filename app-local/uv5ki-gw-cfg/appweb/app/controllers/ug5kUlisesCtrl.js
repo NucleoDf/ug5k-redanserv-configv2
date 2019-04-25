@@ -121,7 +121,9 @@ function ug5kUlisesCtrl($scope, $route, dataservice, authservice, CfgService, tr
         }
         else {
             AltfyConfirm(authservice, transerv.translate('GCTRL_IPV_WARNING'), function () {
-                CfgService.aplicar_cambios();
+				setTimeout(function(){
+					CfgService.aplicar_cambios();
+				},500);
             });
         }
     });
