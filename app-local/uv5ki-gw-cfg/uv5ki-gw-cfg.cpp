@@ -376,18 +376,33 @@ private:
 
 		/** Leer la ultima CFG recibida */
 		p_wcfg->load_from(LAST_CFG);
-		p_wcfg->config.tipo = 1;
 		PLOG_INFO("Leida LAST_CFG");
-
-		// Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
-		// y hay que obtener la configuracion del Servidor...
-		// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
-		if (p_wcfg->config.general.name != hwName) {
-			p_wcfg->set_to_default();
-			p_wcfg->config.general.name = hwName;
-			p_wcfg->ResetTimeStamp();
-			p_wcfg->save_to(LAST_CFG);
-			PLOG_INFO("Detectado Cambio de ID. Nuevo ID: %s", hwName.c_str());
+		if (mode == false) {
+			/** MODO REDAN */
+			p_wcfg->config.tipo = 0;
+			// Comprobar que _ip_propia es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
+			// y hay que obtener la configuracion del Servidor...
+			// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
+			if (p_wcfg->ippropia() != ipPropia) {
+				p_wcfg->set_to_default();
+				p_wcfg->ResetTimeStamp();				// Pone Fecha 01/01/1970, para que sea actualizado.
+				p_wcfg->save_to(LAST_CFG);
+				PLOG_INFO("Detectado Cambio de IP-LOCAL. Nueva IP: %s", ipPropia.c_str());
+			}
+		}
+		else {
+			/** MODO ULISES */
+			p_wcfg->config.tipo = 1;
+			// Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
+			// y hay que obtener la configuracion del Servidor...
+			// Como la Configuracion actual no sirve para nada... se ponen a DEFAULT...
+			if (mode == true && p_wcfg->config.general.name != hwName) {
+				p_wcfg->set_to_default();
+				p_wcfg->config.general.name = hwName;
+				p_wcfg->ResetTimeStamp();
+				p_wcfg->save_to(LAST_CFG);
+				PLOG_INFO("Detectado Cambio de ID. Nuevo ID: %s", hwName.c_str());
+			}
 		}
 		return p_wcfg;
 	}
