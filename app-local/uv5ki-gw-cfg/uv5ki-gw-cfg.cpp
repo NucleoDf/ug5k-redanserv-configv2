@@ -379,10 +379,11 @@ private:
 		p_wcfg->config.tipo = 1;
 		PLOG_INFO("Leida LAST_CFG");
 
+		// 20190426. SOLO en ULISES...
 		// Comprobar que el NOMBRE es igual a la configurada en LAST_CFG. Si es diferente implica que ha habido algún cambio HW
 		// y hay que obtener la configuracion del Servidor...
-		// Como la Configuracion actual no sirve para nada... se poden a DEFAULT...
-		if (p_wcfg->config.general.name != hwName) {
+		// Como la Configuracion actual no sirve para nada... se ponen a DEFAULT...
+		if (mode==true && p_wcfg->config.general.name != hwName) {
 			p_wcfg->set_to_default();
 			p_wcfg->config.general.name = hwName;
 			p_wcfg->ResetTimeStamp();
