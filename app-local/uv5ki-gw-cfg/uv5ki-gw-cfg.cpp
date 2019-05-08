@@ -56,7 +56,7 @@ public:
 			hangup_timeout_min = LocalConfig::p_cfg->getint(strRuntime, strRuntimeItemThreadActiveTimeout, "180");
 			/** 20171016. Timeout maximo que acota posibles actualizaciones de RELOJ */
 			hangup_timeout_max = hangup_timeout_min + 60;
-#if defined (_WIN32)
+#if defined (_WIN32_)
 			bool mode = true;	/** false: REDAN, true: ULISES */
 #else
 			bool mode = LocalConfig::p_cfg->get(strRuntime, strRuntimeItemModoGlobal, "0")=="1"/*.ModoUlises()*/;

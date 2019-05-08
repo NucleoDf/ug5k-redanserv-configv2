@@ -39,15 +39,6 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "Problema de RESET en arranque REDAN si no coincide en nombre hw de la pasarela con el nombre de la misma en BDT",
-			"settings":
-			{
-				"buffer_size": 111,
-				"line_ending": "Windows",
-				"name": "Problema de RESET en arranque REDAN si no coincide"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -91,6 +82,7 @@
 	],
 	"file_history":
 	[
+		"/D/Datos/Empresa/_SharedPrj/UlisesV5000i-dev/dev/ulises-sgm/BaseDeDatos/EmptyBdt-2597-20190508.sql",
 		"/D/Datos/Empresa/_SharedPrj/redan-v/ulises-gw-config-v2/public/javascripts/sites.js",
 		"/D/Datos/Empresa/_SharedPrj/redan-v/ulises-gw-config-v2/public/javascripts/configurations.js",
 		"/D/Datos/Empresa/_SharedPrj/UlisesG5000-dev/local-dev/app-central/lib/gateways.js",
@@ -371,40 +363,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 111,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								111,
-								111
-							]
-						],
-						"settings":
-						{
-							"SL.19.region_keys":
-							[
-							],
-							"auto_name": "Problema de RESET en arranque REDAN si no coincide",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

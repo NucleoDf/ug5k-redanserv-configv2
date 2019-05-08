@@ -5,9 +5,9 @@
     "LoginSystemTrace": false,
     "Region": "Región Centro",
     "BackupServiceDomain": "192.168.0.212:8082",
-    "Version": "1.0",
-    "SubVersion": "7#02",
-    "Date": "30/04/2019",
+    "Version": "1.1",
+    "SubVersion": "0",
+    "Date": "20/12/2019",
     "NodeJS": "8.*.*",
     "MySQL": "5.6",
     "Files": [

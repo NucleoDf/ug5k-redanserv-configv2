@@ -246,8 +246,9 @@ router.route('/:gateway/testconfig')
         myLibGateways.getIpv2(req.params.gateway, function(result) {
             if (result.toLocal == -1) {
                 // No en BD
-                logging.Error(JSON.stringify({ idConf: result.ipv.toString(), fechaHora: '' }, null, '\t'));
-                res.json({ idConf: result.ipv.toString(), fechaHora: '' });
+                // logging.Error(JSON.stringify({ idConf: result.ipv.toString(), fechaHora: '' }, null, '\t'));
+                // 20190508. Debe retornar "-1"
+                res.json({ idConf: /*result.ipv.toString()*/'-1', fechaHora: '' });
             }
             else {
                 if (result.data.length == 1) {//La pasarela está en una sola config
@@ -261,9 +262,10 @@ router.route('/:gateway/testconfig')
                     else {//No Activa
                         updateSincGtws(aliveGtws, req.params.gateway, result.data[0].idGtw, 0, result.data[0].idconfiguracion, true, false);
                         // No en configurción activa
-                        logging.Error(JSON.stringify({ idConf: result.toLocal.toString(), fechaHora: '' }, null, '\t'));
-                        //myLibGateways.getTestConfig(result.ipv,function(data){
-                        res.json({ idConf: -2, fechaHora: '' });
+                        // logging.Error(JSON.stringify({ idConf: result.toLocal.toString(), fechaHora: '' }, null, '\t'));
+                        // myLibGateways.getTestConfig(result.ipv,function(data){
+                        // 20190508. Debe retornar "-2"
+                        res.json({ idConf: /*-2*/'-2', fechaHora: '' });
                     }
                 }
                 else {//La pasarela está en varias configuraciones
@@ -293,8 +295,10 @@ router.route('/:gateway/testconfig')
                     }
                     if (isActiveCfg)
                         res.json({ idConf: id2Send, fechaHora: date2Send });
-                    else
-                        res.json({ idConf: -2, fechaHora: date2Send });
+                    else {
+                        // 20190508. Debe retornar "-1"                            
+                        res.json({ idConf: /*-2*/'-2', fechaHora: date2Send });                        
+                    }
                 }
             }
         });
