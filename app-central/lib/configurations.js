@@ -1759,14 +1759,27 @@ exports.postConfigurationFromJsonFile = function(idcfg, idSite, newCgwData, f) {
                         res = await ug5kdb.QueryMultiInsertSync(queryString);
                     }
                 }
+                // 20190508. El array de TRAPS en JSON es de STRINGS y no tiene subcampos.
+                // for (i = 0; i < newCgwData.servicios.snmp.traps.length; i++) {
+                //     if (newCgwData.servicios.snmp.traps[i].ip != '') {
+                //         var version = 'TRPV1';
+                //         if (newCgwData.servicios.snmp.traps[i].substr(0, 1) == '2')
+                //             version = 'TRPV2';
+                //         queryString = 'INSERT INTO lista_ips (pasarela_id,ip,tipo,selected) ' +
+                //             'VALUES (' + newInsertCgwId + ',"' + newCgwData.servicios.snmp.traps[i].ip + '","' + version + '"' +
+                //             ',' + newCgwData.servicios.snmp.traps[i].selected + ')';
+                //         //Falta tabla_bss_id
+                //         res = await ug5kdb.QueryMultiInsertSync(queryString);
+                //     }
+                // }
                 for (i = 0; i < newCgwData.servicios.snmp.traps.length; i++) {
-                    if (newCgwData.servicios.snmp.traps[i].ip != '') {
+                    if (newCgwData.servicios.snmp.traps[i]/*.ip*/ != '') {
                         var version = 'TRPV1';
                         if (newCgwData.servicios.snmp.traps[i].substr(0, 1) == '2')
                             version = 'TRPV2';
                         queryString = 'INSERT INTO lista_ips (pasarela_id,ip,tipo,selected) ' +
-                            'VALUES (' + newInsertCgwId + ',"' + newCgwData.servicios.snmp.traps[i].ip + '","' + version + '"' +
-                            ',' + newCgwData.servicios.snmp.traps[i].selected + ')';
+                            'VALUES (' + newInsertCgwId + ',"' + newCgwData.servicios.snmp.traps[i]/*.ip*/ + '","' + version + '"' +
+                            ', 0 )';
                         //Falta tabla_bss_id
                         res = await ug5kdb.QueryMultiInsertSync(queryString);
                     }
