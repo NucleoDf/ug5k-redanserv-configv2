@@ -1794,43 +1794,52 @@ exports.updateTfnoRes4Gateway = function updateTfnoRes4Gateway(tr, resId, f) {
                                                 return f({ error: err.message });
                                             }
                                             else {
-                                                if (tr.ranks.length > 0) {
-                                                    //Ya que son varios y la unica manera de distinguirlos es con el id
-                                                    // Los borramos todos y los volvemos a insertar.
-                                                    var delQuery = connection.query('DELETE FROM rangos_ats WHERE recurso_telefonico_id=?',
-                                                        [resId],
-                                                        function(err, result) {
+
+                                                //Ya que son varios y la unica manera de distinguirlos es con el id
+                                                // Los borramos todos y los volvemos a insertar.
+                                                var delQuery = connection.query('DELETE FROM rangos_ats WHERE recurso_telefonico_id=?',
+                                                    [resId],
+                                                    function(err, result) {
+                                                        if (tr.ranks.length > 0) {
                                                             logging.Trace(delQuery.sql);
                                                             if (err == null) {
-                                                                var queries = '';
-                                                                tr.ranks.forEach(function(item) {
-                                                                    queries += mySql.format('INSERT INTO rangos_ats (recurso_telefonico_id,' +
-                                                                        'rango_ats_inicial,rango_ats_final,tipo) VALUES (?,?,?,?);',
-                                                                        [resId, item.inicial, item.final, item.tipo]);
-                                                                });
-                                                                connection.query(queries,
-                                                                    function(err, results) {
-                                                                        connection.end();
-                                                                        if (err) {
-                                                                            return f({ error: err.message });
-                                                                        }
-                                                                        else
-                                                                            return f({
-                                                                                result: 'OK',
-                                                                                error: null,
-                                                                                activa: activa
-                                                                            });
+                                                                if (tr.tipo_interfaz_tel == '3' || tr.tipo_interfaz_tel == '4') {
+                                                                    var queries = '';
+                                                                    tr.ranks.forEach(function (item) {
+                                                                        queries += mySql.format('INSERT INTO rangos_ats (recurso_telefonico_id,' +
+                                                                            'rango_ats_inicial,rango_ats_final,tipo) VALUES (?,?,?,?);',
+                                                                            [resId, item.inicial, item.final, item.tipo]);
+                                                                    });
+                                                                    connection.query(queries,
+                                                                        function (err, results) {
+                                                                            connection.end();
+                                                                            if (err) {
+                                                                                return f({error: err.message});
+                                                                            }
+                                                                            else
+                                                                                return f({
+                                                                                    result: 'OK',
+                                                                                    error: null,
+                                                                                    activa: activa
+                                                                                });
+                                                                        });
+                                                                }
+                                                                else
+                                                                    connection.end();
+                                                                    return f({
+                                                                        result: 'OK',
+                                                                        error: null,
+                                                                        activa: activa
                                                                     });
                                                             }
                                                             else {
                                                                 connection.end();
-                                                                return f({ error: err.message });
+                                                                return f({error: err.message});
                                                             }
-
-                                                        });
-                                                }
-                                                else//No se inserta ningun rango ats
-                                                    return f({ result: 'OK', error: null, activa: activa });
+                                                        }
+                                                        else//No se inserta ningun rango ats
+                                                            return f({ result: 'OK', error: null, activa: activa });
+                                                                    });
                                             }
                                         });
                                 }
