@@ -422,12 +422,12 @@ exports.copyService = function copyService(sourceService, targetServiceName, f) 
             var query = connection.query('INSERT INTO SERVICIOS (name,SIP_idSIP,WEB_idWEB,SNMP_idSNMP,GRAB_idGRAB,SINCR_idSINCR)' +
                 ' (SELECT ?,SIP_idSIP,WEB_idWEB,SNMP_idSNMP,GRAB_idGRAB,SINCR_idSINCR FROM SERVICIOS WHERE idSERVICIOS=?)',
                 [targetService, sourceService], function(err, result) {
-                    if (err) return f({ error: err });
-
+                    connection.end();
+                    if (err)
+                        return f({ error: err });
                     logging.Trace(query.sql);
                     f({ error: false, result: result.insertId });
                 });
-            connection.end();
         }
     });
 };

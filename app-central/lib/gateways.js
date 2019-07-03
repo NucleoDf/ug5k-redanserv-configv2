@@ -244,6 +244,7 @@ exports.getAll = function getAll(configName, ipGtw, f) {
                     function(err, rows) {
                         if (err) {
                             logging.Error(err);
+                            connection.end();
                             return f({ error: err.message });
                         }
                         else {
@@ -1788,7 +1789,7 @@ exports.updateTfnoRes4Gateway = function updateTfnoRes4Gateway(tr, resId, f) {
                                         'SET p.pendiente_actualizar=1 ' +
                                         'WHERE p.idpasarela=?', [tr.pasarela_id],
                                         function(err, result) {
-                                            logging.Trace(query.sql);
+                                            logging.Trace(query2.sql);
                                             if (err) {
                                                 connection.end();
                                                 return f({ error: err.message });
@@ -1820,7 +1821,6 @@ exports.updateTfnoRes4Gateway = function updateTfnoRes4Gateway(tr, resId, f) {
                                                                                 return f({
                                                                                     result: 'OK',
                                                                                     error: null,
-                                                                                    activa: activa
                                                                                 });
                                                                         });
                                                                 }
@@ -1838,6 +1838,7 @@ exports.updateTfnoRes4Gateway = function updateTfnoRes4Gateway(tr, resId, f) {
                                                             }
                                                         }
                                                         else//No se inserta ningun rango ats
+                                                            connection.end();
                                                             return f({ result: 'OK', error: null, activa: activa });
                                                                     });
                                             }
@@ -1885,8 +1886,10 @@ exports.updateRadioRes4Gateway = function updateRadioRes4Gateway(rr, resId, f) {
                 'LEFT JOIN configuraciones c ON e.configuracion_id=c.idconfiguracion ' +
                 'WHERE p.idpasarela=?', [rr.pasarela_id],
                 function(err, rows) {
-                    if (err)
-                        return f({ error: err.message });
+                    if (err) {
+                        connection.end();
+                        return f({error: err.message});
+                    }
                     else {
                         activa = rows[0].activa;
                         var query = connection.query('UPDATE recursos_radio SET nombre=?,clave_registro=?,frecuencia=?,ajuste_ad=?,' +

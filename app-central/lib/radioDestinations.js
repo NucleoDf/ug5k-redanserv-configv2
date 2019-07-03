@@ -27,14 +27,13 @@ exports.getRadioDestinations = function getRadioDestinations(f) {
 
             var query = connection.query('SELECT * FROM destinos ORDER BY name', function(err, rows, fields) {
 
+                connection.end();
                 if (err || rows.length == 0) {
                     return f({ err: (err ? err : 'NO_DATA'), destinations: null });
                 }
 
                 logging.Trace(query.sql);
                 f({ error: err, destinations: rows });
-
-                connection.end();
             });
         }
     });
@@ -61,14 +60,13 @@ exports.getRadioDestination = function getRadioDestination(dst, f) {
                 'LEFT JOIN recurso R on R.idRECURSO=C.RECURSO_idRECURSO ' +
                 'WHERE D.idDESTINOS=?', dst, function(err, rows, fields) {
 
+                    connection.end();
                     if (err || rows.length == 0) {
                         return f({ error: (err ? err : 'NO_DATA'), destination: null });
                     }
 
                     logging.Trace(query.sql);
                     f({ error: err, destination: rows[0] });
-
-                    connection.end();
                 });
         }
     });
@@ -330,16 +328,13 @@ exports.getDestinationUris = function getDestinationUris(dst, f) {
 
             var query = connection.query('SELECT * FROM ubicaciones WHERE DESTINOS_idDESTINOS=?', dst, function(err, rows, fields) {
 
+                connection.end();
                 if (err || rows.length == 0) {
-                    connection.end();
-
                     return f({ error: (err ? err : 'NO_DATA'), uris: null });
                 }
-
                 logging.Trace(query.sql);
                 f({ error: err, uris: rows });
 
-                connection.end();
             });
         }
     });
@@ -363,16 +358,14 @@ exports.putDestinationUris = function putDestinationUris(uri, f) {
 
             var query = connection.query('UPDATE ubicaciones SET ? WHERE idUBICACIONES=?', [uri, uri.idUBICACIONES], function(err, result) {
 
+                connection.end();
                 if (err) {
                     logging.Trace(query.sql);
-                    connection.end();
                     return f({ error: (err ? err : 'NO_DATA'), uris: null });
                 }
-
                 logging.Trace(query.sql);
                 f({ error: err, uris: uri });
 
-                connection.end();
             });
         }
     });
@@ -396,14 +389,12 @@ exports.deleteDestinationUris = function deleteDestinationUris(uri, f) {
 
             var query = connection.query('DELETE FROM ubicaciones WHERE idUBICACIONES=?', uri, function(err, result) {
 
+                connection.end();
                 if (err) {
                     return f({ error: (err ? err : 'NO_DATA'), uris: null });
                 }
-
                 logging.Trace(query.sql);
                 f({ error: err, uris: uri });
-
-                connection.end();
             });
         }
     });
@@ -427,17 +418,14 @@ exports.deleteUrisBelongingDestination = function deleteUrisBelongingDestination
 
             var query = connection.query('DELETE FROM ubicaciones WHERE DESTINOS_idDESTINOS=?', dest, function(err, result) {
 
+                connection.end();
                 if (err) {
                     logging.Trace(query.sql);
                     logging.Trace(err);
-                    connection.end();
                     return f({ error: (err ? err : 'NO_DATA'), uris: null });
                 }
-
                 logging.Trace(query.sql);
                 f({ error: err, uris: '' });
-
-                connection.end();
             });
         }
     });
@@ -461,14 +449,11 @@ exports.getDestinationByName = function getDestinationByName(name, f) {
 
             var query = connection.query('SELECT * FROM destinos WHERE name=?', name, function(err, rows, fields) {
 
+                connection.end();
                 if (err || rows.length == 0) {
-                    connection.end();
                     return f({ error: (err ? err : 'NO_DATA'), destination: null });
                 }
-
                 logging.Trace(query.sql);
-
-                connection.end();
                 f({ error: err, destination: rows[0] });
             });
         }

@@ -202,9 +202,8 @@ exports.postSlave = function postSlave(hw, f) {
 
                 logging.Trace(query.sql);
                 hw['idSLAVES'] = result.insertId;
-                f({ error: null, data: hw });
-
                 connection.end();
+                f({ error: null, data: hw });
             });
         }
     });
@@ -323,9 +322,8 @@ exports.putSlave = function putSlave(hw, f) {
                 }
 
                 logging.Trace(query.sql);
-                f({ error: null, data: hw });
-
                 connection.end();
+                f({ error: null, data: hw });
             });
         }
     });

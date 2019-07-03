@@ -228,10 +228,12 @@ exports.putSite = async function putSite(idSite, idCfg, nameSite, f) {
                 'SET p.pendiente_actualizar=1 ' +
                 'WHERE e.idemplazamiento=? and c.activa=1', [idSite]);
             if (!res.error) {
+                connection.end();
                 return f({ error: null, data: nameSite, aplicarcambios: res.data.affectedRows });
             }
         }
     }
+    connection.end();
     return f({ error: res.error });
 };
 

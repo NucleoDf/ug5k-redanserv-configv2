@@ -245,6 +245,7 @@ exports.putConfiguration_old = function putConfiguration(oldIdConf, cfg, f) {
             function(err, result) {
                 logging.Trace(query.sql);
                 if (err) {
+                    connection.end();
                     return f({ error: err.message, data: null });
                 }
                 else {
@@ -281,9 +282,11 @@ exports.putConfiguration = async function putConfiguration(oldIdConf, cfg, f) {
             'SET p.pendiente_actualizar=1 ' +
             'WHERE c.idconfiguracion=? and c.activa=1', [cfg.idCFG], false);
         if (!res.error) {
+            connection.end();
             return f({ error: null, data: cfg, aplicarcambios: res.data.affectedRows });
         }
     }
+    connection.end();
     return f({ error: err.message, data: null });
 };
 
@@ -811,6 +814,7 @@ exports.getFreeGateways = function getFreeGateways(cfg, f) {
                 ' WHERE a.CGW_idCGW IS NULL ORDER BY nameCfg,e.name,b.name', cfg, function(err, rows, fields) {
                     logging.Trace(query.sql);
                     if (err) {
+                        connection.end();
                         return f({ error: err.code, result: null });
                     }
 
