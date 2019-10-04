@@ -136,7 +136,7 @@ passport.deserializeUser(function (id, cb) {
 });
 /*****/
 
-console.log('DEBUG = ', debug);
+logging.Info('Program started. DEBUG = ', debug);
 var app = express();
 
 // view engine setup
@@ -552,7 +552,9 @@ setInterval(function(){
 			logging.Error('Program is running out of memory');		
 			if (moment().isBetween(moment(config.MemorySupervisor.ResetIntervalStart, "HH:mm a"), moment(config.MemorySupervisor.ResetIntervalEnd, "HH:mm a"))) {
 				logging.Error('Program exit because is running out of memory');
-				process.exit();
+				setTimeout(function() {
+					process.exit();
+				}, 1500, 'funky');
 			}
 		}
 	}
