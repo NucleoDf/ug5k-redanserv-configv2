@@ -1,3 +1,6 @@
+/** 20191003 Detecta si se ha arrancado en debug */
+var debug = typeof v8debug === 'object' 
+            || /--debug|--inspect/.test(process.execArgv.join(' '));
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -23,7 +26,8 @@ var historics = require('./routes/historics/historics');
 var version = require('./routes/version/version');
 // var logging = require('./lib/loggingDate.js');
 var logging = require('./lib/nu-log.js');
-var config = require('./configUlises.json');
+/** 20191003 Configuracion diferenciada en modo debug */
+var config = require(debug ? './configUlises-dev.json' : './configUlises.json');
 //var controlAccess=require('./routes/services/accessControl');
 var myLibHistorics = require('./lib/historics.js');
 var myLibConfig = require('./lib/configurations.js');
@@ -132,7 +136,7 @@ passport.deserializeUser(function (id, cb) {
 });
 /*****/
 
-
+console.log('DEBUG = ', debug);
 var app = express();
 
 // view engine setup
@@ -523,6 +527,37 @@ app.listen(app.get('port'), function () {
 
 module.exports = app;
 
-process.on('uncaughtException', function (err) {
+/** Supervidor de Memoria. Cuando la memoria utlizada supere en un 100% la inicial, y el intervalo horario sea de 20:00 a 06:00
+    se reinicia la aplicacion */
+logging.Info('Memory Supervisor started: ', config.MemorySupervisor);
+var heapInit = 0;
+setInterval(function(){	
+  try {
+    global.gc();
+  } catch (e) {
+    logging.Info("You must run program with 'node --expose-gc'");
+    process.exit();
+  }
+
+  //2. Output Heap stats
+	var heapUsed = process.memoryUsage().heapUsed;
+	if (heapInit===0){
+		heapInit = heapUsed;
+		logging.Info('Program started with ',  heapInit, " bytes allocated...");
+	}
+	else  {
+		var percent = ((heapUsed/heapInit)*100).toFixed(2);
+		logging.Info('The program is using ' + heapUsed + ' bytes of memory, ' + percent + '% of the memory used at startup');
+		if (percent > config.MemorySupervisor.PercentLimit) {
+			logging.Error('Program is running out of memory');		
+			if (moment().isBetween(moment(config.MemorySupervisor.ResetIntervalStart, "HH:mm a"), moment(config.MemorySupervisor.ResetIntervalEnd, "HH:mm a"))) {
+				logging.Error('Program exit because is running out of memory');
+				process.exit();
+			}
+		}
+	}
+  }, config.MemorySupervisor.Tick);
+
+  process.on('uncaughtException', function (err) {
     logging.Error('Caught exception: ', err.message,err.stack);
 }); 

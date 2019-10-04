@@ -150,5 +150,10 @@
     "morgan": false,
     "maxCycleTime": 30000,
     "refreshTime": 1000
-  }
-}
+  },
+	"MemorySupervisor": {
+		"Tick": 5000,
+		"PercentLimit": 115,
+		"ResetIntervalStart": "08:00 pm",
+		"ResetIntervalEnd": "06:00 am"
+	}}
